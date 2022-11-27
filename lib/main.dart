@@ -1,0 +1,35 @@
+import 'package:curvy_app/ui/screens/login.dart';
+import 'package:curvy_app/ui/screens/save_account.dart';
+import 'package:curvy_app/ui/screens/setup_birthdate.dart';
+import 'package:curvy_app/ui/screens/setup_interests.dart';
+import 'package:curvy_app/ui/screens/setup_name.dart';
+import 'package:curvy_app/ui/screens/setup_sex.dart';
+import 'package:curvy_app/ui/screens/setup_sexual_preference.dart';
+import 'package:curvy_app/ui/screens/setup_showme.dart';
+import 'package:curvy_app/ui/screens/validation_code.dart';
+import 'package:curvy_app/ui/screens/validation_mail.dart';
+import 'package:curvy_app/ui/screens/validation_number.dart';
+import 'package:curvy_app/ui/screens/welcome_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    
+    return GetMaterialApp(     
+      theme: ThemeData(
+        fontFamily: 'Gilroy'
+      ),    
+      debugShowCheckedModeBanner: false,
+      home: const LoginScreen(),
+    );
+  }
+}
