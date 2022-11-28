@@ -17,10 +17,16 @@ class Dimensions {
   static const double w11 = 360*0.0282;
   static const double w155 = 360*0.397;
   static const double w325 = 360*0.8333;
+  static const double w99 = 360*0.25;
+  static const double w31 = 360*0.0794;
+  static const double w17 = 360*0.0435;
+  static const double w120 = 360*0.307;
+  static const double w50 = 360*0.1682;
 
 
 
 
+  static const double h137 = 716*0.162;
   static const double h117 = 716*0.13;
   static const double h230 = 716*0.27;
   static const double h27 = 716*0.03;
@@ -39,6 +45,11 @@ class Dimensions {
   static const double h16 = 716*0.0189;
   static const double h45 = 716*0.0533;
   static const double h435 = 716*0.5154;
+  static const double h31 = 716*0.0367;
+  static const double h17 = 716*0.0201;
+  static const double h120 = 716*0.142;
+  static const double h87 = 716*0.103;
+
   
 
 }

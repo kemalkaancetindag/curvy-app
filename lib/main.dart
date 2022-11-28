@@ -1,6 +1,8 @@
 import 'package:curvy_app/ui/screens/login.dart';
 import 'package:curvy_app/ui/screens/save_account.dart';
+import 'package:curvy_app/ui/screens/setup_add_image.dart';
 import 'package:curvy_app/ui/screens/setup_birthdate.dart';
+import 'package:curvy_app/ui/screens/setup_image.dart';
 import 'package:curvy_app/ui/screens/setup_interests.dart';
 import 'package:curvy_app/ui/screens/setup_name.dart';
 import 'package:curvy_app/ui/screens/setup_sex.dart';
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Gilroy'
       ),    
       debugShowCheckedModeBanner: false,
-      home: const LoginScreen(),
+      home: const SetupAddImageScreen(),
     );
   }
 }
