@@ -1,4 +1,5 @@
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/setup_controller.dart';
 import 'package:curvy_app/ui/screens/setup_sexual_preference.dart';
 import 'package:curvy_app/ui/widgets/basic_button.dart';
 import 'package:curvy_app/ui/widgets/black_bold_header.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 
 class SetupSexScreen extends StatelessWidget {
   const SetupSexScreen({super.key});
@@ -33,18 +35,30 @@ class SetupSexScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             BlackBoldHeader(text: "Cinsiyetin"),
-            Column(
-              children: [
-                BasicButton(
-                  text: "KADIN",
-                  isSelected: false,
-                ),
-                BasicButton(
-                  text: "ERKEK",
-                  isSelected: true,
-                )
-              ],
-            ),
+            GetBuilder<SetupController>(builder: ((controller) {
+              return Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      controller.setSex(0);
+                    },
+                    child: BasicButton(
+                      text: "KADIN",
+                      isSelected: controller.sex == 0,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      controller.setSex(1);
+                    },
+                    child: BasicButton(
+                      text: "ERKEK",
+                      isSelected: controller.sex == 1,
+                    ),
+                  )
+                ],
+              );
+            })),
             Column(
               children: [
                 Container(
@@ -58,14 +72,27 @@ class SetupSexScreen extends StatelessWidget {
                             color: Colors.black.withOpacity(0.4),
                             fontWeight: FontWeight.bold),
                       ),
-                      CupertinoSwitch(
-                        value: false,
-                        onChanged: (value) {},
-                      ),
+                      GetBuilder<SetupController>(builder: ((controller) {
+                        return CupertinoSwitch(
+                          value: controller.showSex,
+                          onChanged: (value) {
+                            controller.setShowSex(value);
+                          },
+                        );
+                      }))
                     ],
                   ),
                 ),
-                GradientButton(text: "DEVAM ET", page: "setsexpref",)
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => SetupSexualPreferenceScreen());
+                  },
+                  child:  GradientButton(
+                  text: "DEVAM ET",
+                  page: "setsexpref",
+                ) ,
+                )
+              
               ],
             )
           ],

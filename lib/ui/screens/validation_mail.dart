@@ -1,13 +1,17 @@
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/setup_controller.dart';
 import 'package:curvy_app/ui/screens/welcome_screen.dart';
 import 'package:curvy_app/ui/widgets/black_bold_header.dart';
 import 'package:curvy_app/ui/widgets/gradient_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 
 class ValidationMailScreen extends StatelessWidget {
-  const ValidationMailScreen({super.key});
+  ValidationMailScreen({super.key});
+
+  final _emailFieldController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +58,7 @@ class ValidationMailScreen extends StatelessWidget {
                   height: Dimensions.h50,
                   child: Center(
                     child: TextField(
+                      controller: _emailFieldController,
                       cursorColor: Colors.black.withOpacity(0.4),
                       decoration: InputDecoration(
                           hintText: "E-posta",
@@ -65,7 +70,19 @@ class ValidationMailScreen extends StatelessWidget {
                 ),
               ],
             ),
-            GradientButton(text: "DEVAM ET", page: "welcome",)
+            GetBuilder<SetupController>(
+              builder: (controller){
+                return  GestureDetector(
+              onTap: (){
+                controller.addEmail(_emailFieldController.text);
+                Get.to(WelcomeScreen());  
+              },
+              child: GradientButton(text: "DEVAM ET", page: "welcome",),
+            );
+              } 
+            )
+           
+            
           ],
         ),
       ),

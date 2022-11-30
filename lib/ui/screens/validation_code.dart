@@ -1,22 +1,29 @@
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/setup_controller.dart';
 import 'package:curvy_app/ui/screens/validation_mail.dart';
 import 'package:curvy_app/ui/widgets/black_bold_header.dart';
 import 'package:curvy_app/ui/widgets/gradient_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 
 class ValidationCodeScreen extends StatelessWidget {
-  const ValidationCodeScreen({super.key});
 
+  ValidationCodeScreen({super.key});
+  
+  
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.back();
+          },
           icon: Icon(
             Icons.arrow_back_ios_new,
             color: Colors.black.withOpacity(0.3),
@@ -47,7 +54,9 @@ class ValidationCodeScreen extends StatelessWidget {
               Container(
                 width: Dimensions.w314,
                 margin: EdgeInsets.only(top: Dimensions.h66),
-                child: Row(
+                child: GetBuilder<SetupController>(
+                  builder: (controller){
+                    return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Container(
@@ -57,6 +66,7 @@ class ValidationCodeScreen extends StatelessWidget {
                               fontSize: Dimensions.h40,
                               fontWeight: FontWeight.w700),
                           onChanged: (value) {
+                            controller.addToValidationCode(value, 0);
                             if (value.length == 1) {
                               FocusScope.of(context).nextFocus();
                             }
@@ -78,6 +88,7 @@ class ValidationCodeScreen extends StatelessWidget {
                               fontSize: Dimensions.h40,
                               fontWeight: FontWeight.w700),
                           onChanged: (value) {
+                            controller.addToValidationCode(value, 1);
                             if (value.length == 1) {
                               FocusScope.of(context).nextFocus();
                             }
@@ -99,6 +110,7 @@ class ValidationCodeScreen extends StatelessWidget {
                               fontSize: Dimensions.h40,
                               fontWeight: FontWeight.w700),
                           onChanged: (value) {
+                            controller.addToValidationCode(value, 2);
                             if (value.length == 1) {
                               FocusScope.of(context).nextFocus();
                             }
@@ -120,6 +132,7 @@ class ValidationCodeScreen extends StatelessWidget {
                               fontSize: Dimensions.h40,
                               fontWeight: FontWeight.w700),
                           onChanged: (value) {
+                            controller.addToValidationCode(value, 3);
                             if (value.length == 1) {
                               FocusScope.of(context).nextFocus();
                             }
@@ -141,6 +154,7 @@ class ValidationCodeScreen extends StatelessWidget {
                               fontSize: Dimensions.h40,
                               fontWeight: FontWeight.w700),
                           onChanged: (value) {
+                            controller.addToValidationCode(value, 4);
                             if (value.length == 1) {
                               FocusScope.of(context).nextFocus();
                             }
@@ -158,6 +172,9 @@ class ValidationCodeScreen extends StatelessWidget {
                       Container(
                         width: Dimensions.w35,
                         child: TextField(
+                          onChanged: (value){
+                            controller.addToValidationCode(value, 5);
+                          },
                           style: TextStyle(
                               fontSize: Dimensions.h40,
                               fontWeight: FontWeight.w700),
@@ -171,11 +188,19 @@ class ValidationCodeScreen extends StatelessWidget {
                                       color: Colors.black.withOpacity(0.4)))),
                         ),
                       )
-                    ]),
+                    ]);
+                  },
+                )
               )
             ],
           ),
-          GradientButton(text: "DEVAM ET", page: "vmail",)
+          GestureDetector(
+            onTap: (){
+              Get.to(() => ValidationMailScreen());
+            },
+            child:GradientButton(text: "DEVAM ET", page: "vmail",),
+          )
+          
         ]),
       ),
     );

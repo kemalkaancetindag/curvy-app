@@ -1,10 +1,13 @@
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/setup_controller.dart';
+import 'package:curvy_app/ui/screens/setup_sex.dart';
 import 'package:curvy_app/ui/screens/setup_sexual_preference.dart';
 import 'package:curvy_app/ui/widgets/black_bold_header.dart';
 import 'package:curvy_app/ui/widgets/gradient_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 
 class SetupBirthdateScreen extends StatelessWidget {
   const SetupBirthdateScreen({super.key});
@@ -34,195 +37,215 @@ class SetupBirthdateScreen extends StatelessWidget {
               children: [
                 BlackBoldHeader(text: "Doğum günün"),
                 Container(
-                  width: Dimensions.w218,
-                  margin: EdgeInsets.only(top: Dimensions.h117),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: Dimensions.w25,
-                        child: TextField(
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: Dimensions.h27,
-                              fontWeight: FontWeight.w700),
-                          onChanged: (value) {
-                            if (value.length == 1) {
-                              FocusScope.of(context).nextFocus();
-                            }
-                          },
-                          cursorColor: Colors.black.withOpacity(0.4),
-                          decoration: InputDecoration(
-                              isDense: true,
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 0, vertical: 0),
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.black.withOpacity(0.4)))),
-                        ),
-                      ),
-                      Container(
-                        width: Dimensions.w25,
-                        child: TextField(
-                          style: TextStyle(
-                              fontSize: Dimensions.h27,
-                              fontWeight: FontWeight.w700),
-                          onChanged: (value) {
-                            if (value.length == 1) {
-                              FocusScope.of(context).nextFocus();
-                            }
-                          },
-                          cursorColor: Colors.black.withOpacity(0.4),
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                              isDense: true,
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 0, vertical: 0),
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.black.withOpacity(0.4)))),
-                        ),
-                      ),
-                      Text("/",
-                          style: TextStyle(
-                              fontSize: Dimensions.h27,
-                              fontWeight: FontWeight.w700)),
-                      Container(
-                        width: Dimensions.w25,
-                        child: TextField(
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: Dimensions.h27,
-                              fontWeight: FontWeight.w700),
-                          onChanged: (value) {
-                            if (value.length == 1) {
-                              FocusScope.of(context).nextFocus();
-                            }
-                          },
-                          cursorColor: Colors.black.withOpacity(0.4),
-                          decoration: InputDecoration(
-                              isDense: true,
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 0, vertical: 0),
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.black.withOpacity(0.4)))),
-                        ),
-                      ),
-                      Container(
-                        width: Dimensions.w25,
-                        child: TextField(
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: Dimensions.h27,
-                              fontWeight: FontWeight.w700),
-                          onChanged: (value) {
-                            if (value.length == 1) {
-                              FocusScope.of(context).nextFocus();
-                            }
-                          },
-                          cursorColor: Colors.black.withOpacity(0.4),
-                          decoration: InputDecoration(
-                              isDense: true,
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 0, vertical: 0),
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.black.withOpacity(0.4)))),
-                        ),
-                      ),
-                      Text("/",
-                          style: TextStyle(
-                              fontSize: Dimensions.h27,
-                              fontWeight: FontWeight.w700)),
-                      Container(
-                        width: Dimensions.w25,
-                        child: TextField(
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: Dimensions.h27,
-                              fontWeight: FontWeight.w700),
-                          onChanged: (value) {
-                            if (value.length == 1) {
-                              FocusScope.of(context).nextFocus();
-                            }
-                          },
-                          cursorColor: Colors.black.withOpacity(0.4),
-                          decoration: InputDecoration(
-                              isDense: true,
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 0, vertical: 0),
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.black.withOpacity(0.4)))),
-                        ),
-                      ),
-                      Container(
-                        width: Dimensions.w25,
-                        child: TextField(
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: Dimensions.h27,
-                              fontWeight: FontWeight.w700),
-                          onChanged: (value) {
-                            if (value.length == 1) {
-                              FocusScope.of(context).nextFocus();
-                            }
-                          },
-                          cursorColor: Colors.black.withOpacity(0.4),
-                          decoration: InputDecoration(
-                              isDense: true,
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 0, vertical: 0),
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.black.withOpacity(0.4)))),
-                        ),
-                      ),
-                      Container(
-                        width: Dimensions.w25,
-                        child: TextField(
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: Dimensions.h27,
-                              fontWeight: FontWeight.w700),
-                          onChanged: (value) {
-                            if (value.length == 1) {
-                              FocusScope.of(context).nextFocus();
-                            }
-                          },
-                          cursorColor: Colors.black.withOpacity(0.4),
-                          decoration: InputDecoration(
-                              isDense: true,
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 0, vertical: 0),
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.black.withOpacity(0.4)))),
-                        ),
-                      ),
-                      Container(
-                        width: Dimensions.w25,
-                        child: TextField(
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: Dimensions.h27,
-                              fontWeight: FontWeight.w700),
-                          onChanged: (value) {},
-                          cursorColor: Colors.black.withOpacity(0.4),
-                          decoration: InputDecoration(
-                              isDense: true,
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 0, vertical: 0),
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.black.withOpacity(0.4)))),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+                    width: Dimensions.w218,
+                    margin: EdgeInsets.only(top: Dimensions.h117),
+                    child: GetBuilder<SetupController>(
+                      builder: ((controller) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: Dimensions.w25,
+                              child: TextField(
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: Dimensions.h27,
+                                    fontWeight: FontWeight.w700),
+                                onChanged: (value) {
+                                  controller.addToBirthdate(value, 0);
+                                  if (value.length == 1) {
+                                    FocusScope.of(context).nextFocus();
+                                  }
+                                },
+                                cursorColor: Colors.black.withOpacity(0.4),
+                                decoration: InputDecoration(
+                                    isDense: true,
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 0, vertical: 0),
+                                    focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.black
+                                                .withOpacity(0.4)))),
+                              ),
+                            ),
+                            Container(
+                              width: Dimensions.w25,
+                              child: TextField(
+                                style: TextStyle(
+                                    fontSize: Dimensions.h27,
+                                    fontWeight: FontWeight.w700),
+                                onChanged: (value) {
+                                  controller.addToBirthdate(value, 1);
+                                  if (value.length == 1) {
+                                    FocusScope.of(context).nextFocus();
+                                  }
+                                },
+                                cursorColor: Colors.black.withOpacity(0.4),
+                                textAlign: TextAlign.center,
+                                decoration: InputDecoration(
+                                    isDense: true,
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 0, vertical: 0),
+                                    focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.black
+                                                .withOpacity(0.4)))),
+                              ),
+                            ),
+                            Text("/",
+                                style: TextStyle(
+                                    fontSize: Dimensions.h27,
+                                    fontWeight: FontWeight.w700)),
+                            Container(
+                              width: Dimensions.w25,
+                              child: TextField(
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: Dimensions.h27,
+                                    fontWeight: FontWeight.w700),
+                                onChanged: (value) {
+                                  controller.addToBirthdate(value, 2);
+                                  if (value.length == 1) {
+                                    FocusScope.of(context).nextFocus();
+                                  }
+                                },
+                                cursorColor: Colors.black.withOpacity(0.4),
+                                decoration: InputDecoration(
+                                    isDense: true,
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 0, vertical: 0),
+                                    focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.black
+                                                .withOpacity(0.4)))),
+                              ),
+                            ),
+                            Container(
+                              width: Dimensions.w25,
+                              child: TextField(
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: Dimensions.h27,
+                                    fontWeight: FontWeight.w700),
+                                onChanged: (value) {
+                                  controller.addToBirthdate(value, 3);
+                                  if (value.length == 1) {
+                                    FocusScope.of(context).nextFocus();
+                                  }
+                                },
+                                cursorColor: Colors.black.withOpacity(0.4),
+                                decoration: InputDecoration(
+                                    isDense: true,
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 0, vertical: 0),
+                                    focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.black
+                                                .withOpacity(0.4)))),
+                              ),
+                            ),
+                            Text("/",
+                                style: TextStyle(
+                                    fontSize: Dimensions.h27,
+                                    fontWeight: FontWeight.w700)),
+                            Container(
+                              width: Dimensions.w25,
+                              child: TextField(
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: Dimensions.h27,
+                                    fontWeight: FontWeight.w700),
+                                onChanged: (value) {
+                                  controller.addToBirthdate(value, 4);
+                                  if (value.length == 1) {
+                                    FocusScope.of(context).nextFocus();
+                                  }
+                                },
+                                cursorColor: Colors.black.withOpacity(0.4),
+                                decoration: InputDecoration(
+                                    isDense: true,
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 0, vertical: 0),
+                                    focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.black
+                                                .withOpacity(0.4)))),
+                              ),
+                            ),
+                            Container(
+                              width: Dimensions.w25,
+                              child: TextField(
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: Dimensions.h27,
+                                    fontWeight: FontWeight.w700),
+                                onChanged: (value) {
+                                  controller.addToBirthdate(value, 5);
+                                  if (value.length == 1) {
+                                    FocusScope.of(context).nextFocus();
+                                  }
+                                },
+                                cursorColor: Colors.black.withOpacity(0.4),
+                                decoration: InputDecoration(
+                                    isDense: true,
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 0, vertical: 0),
+                                    focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.black
+                                                .withOpacity(0.4)))),
+                              ),
+                            ),
+                            Container(
+                              width: Dimensions.w25,
+                              child: TextField(
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: Dimensions.h27,
+                                    fontWeight: FontWeight.w700),
+                                onChanged: (value) {
+                                  controller.addToBirthdate(value, 6);
+                                  if (value.length == 1) {
+                                    FocusScope.of(context).nextFocus();
+                                  }
+                                },
+                                cursorColor: Colors.black.withOpacity(0.4),
+                                decoration: InputDecoration(
+                                    isDense: true,
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 0, vertical: 0),
+                                    focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.black
+                                                .withOpacity(0.4)))),
+                              ),
+                            ),
+                            Container(
+                              width: Dimensions.w25,
+                              child: TextField(
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: Dimensions.h27,
+                                    fontWeight: FontWeight.w700),
+                                onChanged: (value) {
+                                  controller.addToBirthdate(value, 7);
+                                },
+                                cursorColor: Colors.black.withOpacity(0.4),
+                                decoration: InputDecoration(
+                                    isDense: true,
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 0, vertical: 0),
+                                    focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.black
+                                                .withOpacity(0.4)))),
+                              ),
+                            )
+                          ],
+                        );
+                      }),
+                    )),
                 Container(
                   margin: EdgeInsets.only(top: Dimensions.h7),
                   child: Text(
@@ -232,7 +255,14 @@ class SetupBirthdateScreen extends StatelessWidget {
                 )
               ],
             ),
-            GradientButton(text: "DEVAM ET", page: "setsex",)
+            GestureDetector(
+                onTap: (() {
+                  Get.to(() => SetupSexScreen());
+                }),
+                child: GradientButton(
+                  text: "DEVAM ET",
+                  page: "setsex",
+                ))
           ],
         ),
       ),

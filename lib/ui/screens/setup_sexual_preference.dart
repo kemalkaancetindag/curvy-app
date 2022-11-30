@@ -1,4 +1,5 @@
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/setup_controller.dart';
 import 'package:curvy_app/ui/screens/setup_showme.dart';
 import 'package:curvy_app/ui/widgets/black_bold_header.dart';
 import 'package:curvy_app/ui/widgets/gradient_button.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 
 class SetupSexualPreferenceScreen extends StatelessWidget {
   const SetupSexualPreferenceScreen({super.key});
@@ -58,47 +60,94 @@ class SetupSexualPreferenceScreen extends StatelessWidget {
                 ),
               ],
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SexualPreferenceSelect(
-                  text: "Heteroseksüel",
-                  isSelected: true,
-                ),
-                SexualPreferenceSelect(
-                  text: "Gey",
-                  isSelected: false,
-                ),
-                SexualPreferenceSelect(
-                  text: "Lezbiyen",
-                  isSelected: false,
-                ),
-                SexualPreferenceSelect(
-                  text: "Biseksüel",
-                  isSelected: false,
-                ),
-                SexualPreferenceSelect(
-                  text: "Aseksüel",
-                  isSelected: false,
-                ),
-                SexualPreferenceSelect(
-                  text: "Demiseksüel",
-                  isSelected: false,
-                ),
-                SexualPreferenceSelect(
-                  text: "Panseksüel",
-                  isSelected: true,
-                ),
-                SexualPreferenceSelect(
-                  text: "Heteroseksüel",
-                  isSelected: true,
-                ),
-                SexualPreferenceSelect(
-                  text: "Sorguluyor",
-                  isSelected: false,
-                )
-              ],
-            ),
+            GetBuilder<SetupController>(builder: ((controller) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      controller.controlSexPreference(0);
+                    },
+                    child: SexualPreferenceSelect(
+                      text: "Heteroseksüel",
+                      isSelected: controller.sexPreference.contains(0),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      controller.controlSexPreference(1);
+                    },
+                    child: SexualPreferenceSelect(
+                      text: "Gey",
+                      isSelected: controller.sexPreference.contains(1),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      controller.controlSexPreference(2);
+                    },
+                    child: SexualPreferenceSelect(
+                      text: "Lezbiyen",
+                      isSelected: controller.sexPreference.contains(2),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      controller.controlSexPreference(3);
+                    },
+                    child: SexualPreferenceSelect(
+                      text: "Biseksüel",
+                      isSelected: controller.sexPreference.contains(3),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      controller.controlSexPreference(4);
+                    },
+                    child: SexualPreferenceSelect(
+                      text: "Aseksüel",
+                      isSelected: controller.sexPreference.contains(4),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      controller.controlSexPreference(5);
+                    },
+                    child: SexualPreferenceSelect(
+                      text: "Demiseksüel",
+                      isSelected: controller.sexPreference.contains(5),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      controller.controlSexPreference(6);
+                    },
+                    child: SexualPreferenceSelect(
+                      text: "Panseksüel",
+                      isSelected: controller.sexPreference.contains(6),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      controller.controlSexPreference(7);
+                    },
+                    child: SexualPreferenceSelect(
+                      text: "Heteroseksüel",
+                      isSelected: controller.sexPreference.contains(7),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      controller.controlSexPreference(8);
+                    },
+                    child: SexualPreferenceSelect(
+                      text: "Sorguluyor",
+                      isSelected: controller.sexPreference.contains(8),
+                    ),
+                  )
+                ],
+              );
+            })),
             Column(
               children: [
                 Container(
@@ -112,14 +161,26 @@ class SetupSexualPreferenceScreen extends StatelessWidget {
                             color: Colors.black.withOpacity(0.4),
                             fontWeight: FontWeight.bold),
                       ),
-                      CupertinoSwitch(
-                        value: false,
-                        onChanged: (value) {},
-                      ),
+                      GetBuilder<SetupController>(builder: (controller) {
+                        return CupertinoSwitch(
+                          value: controller.showSexPreference,
+                          onChanged: (value) {
+                            controller.setShowSexPreference(value);
+                          },
+                        );
+                      })
                     ],
                   ),
                 ),
-                GradientButton(text: "DEVAM ET", page: "showme",)
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => SetupShowmeScreen());
+                  },
+                  child: GradientButton(
+                    text: "DEVAM ET",
+                    page: "showme",
+                  ),
+                )
               ],
             )
           ],

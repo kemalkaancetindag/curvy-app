@@ -1,3 +1,4 @@
+import 'package:curvy_app/controllers/setup_controller.dart';
 import 'package:curvy_app/ui/screens/setup_interests.dart';
 import 'package:curvy_app/ui/widgets/basic_button.dart';
 import 'package:curvy_app/ui/widgets/black_bold_header.dart';
@@ -5,6 +6,7 @@ import 'package:curvy_app/ui/widgets/gradient_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 
 class SetupShowmeScreen extends StatelessWidget {
   const SetupShowmeScreen({super.key});
@@ -33,16 +35,43 @@ class SetupShowmeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             BlackBoldHeader(text: "Bana göster"),
-
-            Column(
+            GetBuilder<SetupController>(
+              builder: (controller){
+                return  Column(
               children: [
-                BasicButton(text: "KADIN", isSelected: true),
-                BasicButton(text: "ERKEK", isSelected: false),
-                BasicButton(text: "Hepsi", isSelected: false)
+                GestureDetector(
+                  onTap: (){
+                    controller.setShowme(0);
+                  },
+                  child: BasicButton(text: "KADIN", isSelected: controller.showMe == 0),
+                ),
+                GestureDetector(
+                   onTap: (){
+                    controller.setShowme(1);
+                  },
+                  child:  BasicButton(text: "ERKEK", isSelected: controller.showMe == 1),
+                ),
+                GestureDetector(
+                   onTap: (){
+                    controller.setShowme(2);
+                  },
+                  child:  BasicButton(text: "Hepsi", isSelected: controller.showMe == 2),
+                )
+                
+              
+               
               ],
+            );
+              }
             ),
-
-            GradientButton(text: "DEVAM ET", page: "interests",)
+           
+            GestureDetector(
+              onTap: () {
+                Get.to(() => SetupInterestsScreen());
+              },
+              child:  GradientButton(text: "DEVAM ET", page: "interests",)
+            )
+           
           ],
         ),
       ),

@@ -5,6 +5,7 @@ import 'package:curvy_app/ui/widgets/welcome_screen_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -67,7 +68,14 @@ class WelcomeScreen extends StatelessWidget {
                 WelcomeScreenInfo(title:"Proaktif ol.", info: "Kötü davranışları mutlaka bize bildir.", isUnderlined: false,),
               ],
             ),
-            GradientButton(text: "ONAYLIYORUM", page: "setname",)
+            GestureDetector(
+              onTap: (){
+                Get.to(() => SetupNameScreen());
+              
+              },
+              child:GradientButton(text: "ONAYLIYORUM", page: "setname",),
+            )
+            
           ],
         ),
       ),

@@ -23,45 +23,7 @@ class GradientButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        switch(page){
-          case "login":
-            Get.to(() => LoginScreen());
-            break;
-          case "phone":
-            Get.to(() => ValidationNumberScreen());
-            break;
-          case "vcode":
-            Get.to(() => ValidationCodeScreen());
-            break;
-          case "vmail":
-            Get.to(() => ValidationMailScreen());
-            break;
-          case "welcome":
-            Get.to(() => WelcomeScreen());
-            break;
-          case "setname":
-            Get.to(() => SetupNameScreen());
-            break;
-          case "setbirth":
-            Get.to(() => SetupBirthdateScreen());
-            break;
-          case "setsex":
-            Get.to(() => SetupSexScreen());
-            break;
-          case "setsexpref":
-            Get.to(() => SetupSexualPreferenceScreen());
-            break;
-          case "showme":
-            Get.to(() => SetupShowmeScreen());
-            break;
-          case "interests":
-            Get.to(() => SetupInterestsScreen());
-            break;          
-        }
-      },
-      child: Container(
+    return Container(
         width: Dimensions.w320,
         height: Dimensions.h50,
         margin: EdgeInsets.only(bottom: Dimensions.h27),
@@ -72,7 +34,6 @@ class GradientButton extends StatelessWidget {
                 end: Alignment.centerRight,
                 colors: [Color(0xFFD51CFF), Color(0xFF00FFE1)]),
             borderRadius: BorderRadius.circular(25)),
-      ),
-    );
+      );
   }
 }

@@ -1,3 +1,5 @@
+import 'package:curvy_app/dependencies/controller_dependencies.dart';
+import 'package:curvy_app/ui/screens/index.dart';
 import 'package:curvy_app/ui/screens/login.dart';
 import 'package:curvy_app/ui/screens/save_account.dart';
 import 'package:curvy_app/ui/screens/setup_add_image.dart';
@@ -15,7 +17,9 @@ import 'package:curvy_app/ui/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-void main() {
+Future<void> main() async {
+  
+  await initControllers();
   runApp(const MyApp());
 }
 
@@ -31,7 +35,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Gilroy'
       ),    
       debugShowCheckedModeBanner: false,
-      home: const SetupAddImageScreen(),
+      home: const LoginScreen(),
     );
   }
 }

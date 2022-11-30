@@ -1,13 +1,17 @@
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/setup_controller.dart';
 import 'package:curvy_app/ui/screens/setup_birthdate.dart';
 import 'package:curvy_app/ui/widgets/black_bold_header.dart';
 import 'package:curvy_app/ui/widgets/gradient_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 
 class SetupNameScreen extends StatelessWidget {
-  const SetupNameScreen({super.key});
+  SetupNameScreen({super.key});
+
+  final _nameFieldController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +46,7 @@ class SetupNameScreen extends StatelessWidget {
                   margin: EdgeInsets.only(top: Dimensions.h117),
                   child: Center(
                     child: TextField(
+                      controller: _nameFieldController,
                       cursorColor: Colors.black.withOpacity(0.4),
                       decoration: InputDecoration(
                           hintText: "İsim",
@@ -63,7 +68,18 @@ class SetupNameScreen extends StatelessWidget {
                 )
               ],
             ),
-            GradientButton(text: "DEVAM ET", page: "setbirth",)
+            GetBuilder<SetupController>(builder: (controller) {
+              return GestureDetector(
+                onTap: () {
+                  controller.addName(_nameFieldController.text);
+                  Get.to(() => SetupBirthdateScreen());
+                },
+                child: GradientButton(
+                  text: "DEVAM ET",
+                  page: "setbirth",
+                ),
+              );
+            })
           ],
         ),
       ),
