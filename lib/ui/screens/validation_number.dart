@@ -77,6 +77,7 @@ class ValidationNumberScreen extends StatelessWidget {
                                     height: Dimensions.h50,
                                     child: Center(
                                       child: TextField(
+                                          
                                           controller:
                                               _phoneNumberFieldController,
                                           cursorColor:
@@ -126,7 +127,7 @@ class ValidationNumberScreen extends StatelessWidget {
                       onTap: () {
                         controller
                             .addPhoneNumber(_phoneNumberFieldController.text);
-                        Get.to(() => ValidationCodeScreen());
+                       
                       },
                       child: GradientButton(
                         text: "DEVAM ET",

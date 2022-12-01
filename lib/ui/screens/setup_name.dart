@@ -72,7 +72,7 @@ class SetupNameScreen extends StatelessWidget {
               return GestureDetector(
                 onTap: () {
                   controller.addName(_nameFieldController.text);
-                  Get.to(() => SetupBirthdateScreen());
+
                 },
                 child: GradientButton(
                   text: "DEVAM ET",

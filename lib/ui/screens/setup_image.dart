@@ -1,10 +1,14 @@
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/setup_controller.dart';
+import 'package:curvy_app/ui/screens/index.dart';
+import 'package:curvy_app/ui/screens/setup_add_image.dart';
 import 'package:curvy_app/ui/widgets/add_image_box.dart';
 import 'package:curvy_app/ui/widgets/black_bold_header.dart';
 import 'package:curvy_app/ui/widgets/gradient_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 
 class SetupImageScreen extends StatelessWidget {
   const SetupImageScreen({super.key});
@@ -16,7 +20,9 @@ class SetupImageScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.back();
+          },
           icon: Icon(
             Icons.arrow_back_ios_new,
             color: Colors.black.withOpacity(0.3),
@@ -41,35 +47,125 @@ class SetupImageScreen extends StatelessWidget {
                 ),
               ],
             ),
-            Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(top: Dimensions.h17),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [AddImageBox(), AddImageBox(), AddImageBox()],
+            GetBuilder<SetupController>(builder: ((controller) {
+              return Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(top: Dimensions.h17),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            controller.setCurrentImageIndex(0);
+                            Get.to(() => SetupAddImageScreen());
+                          },
+                          child: AddImageBox(
+                            index: 0,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            controller.setCurrentImageIndex(1);
+                            Get.to(() => SetupAddImageScreen());
+                          },
+                          child: AddImageBox(
+                            index: 1,
+                          ),
+                        ),
+                        GestureDetector(
+                            onTap: () {
+                              controller.setCurrentImageIndex(2);
+                              Get.to(() => SetupAddImageScreen());
+                            },
+                            child: AddImageBox(
+                              index: 2,
+                            ))
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: Dimensions.h17),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [AddImageBox(), AddImageBox(), AddImageBox()],
+                  Container(
+                    margin: EdgeInsets.only(top: Dimensions.h17),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            controller.setCurrentImageIndex(3);
+                            Get.to(() => SetupAddImageScreen());
+                          },
+                          child: AddImageBox(
+                            index: 3,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            controller.setCurrentImageIndex(4);
+                            Get.to(() => SetupAddImageScreen());
+                          },
+                          child: AddImageBox(
+                            index: 4,
+                          ),
+                        ),
+                        GestureDetector(
+                            onTap: () {
+                              controller.setCurrentImageIndex(5);
+                              Get.to(() => SetupAddImageScreen());
+                            },
+                            child: AddImageBox(
+                              index: 5,
+                            ))
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: Dimensions.h17),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [AddImageBox(), AddImageBox(), AddImageBox()],
+                  Container(
+                    margin: EdgeInsets.only(top: Dimensions.h17),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            controller.setCurrentImageIndex(6);
+                            Get.to(() => SetupAddImageScreen());
+                          },
+                          child: AddImageBox(
+                            index: 6,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            controller.setCurrentImageIndex(7);
+                            Get.to(() => SetupAddImageScreen());
+                          },
+                          child: AddImageBox(
+                            index: 7,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            controller.setCurrentImageIndex(8);
+                            Get.to(() => SetupAddImageScreen());
+                          },
+                          child: AddImageBox(
+                            index: 8,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-            GradientButton(text: "DEVAM ET")
+                ],
+              );
+            })),
+            GestureDetector(
+              onTap: () {
+                Get.find<SetupController>().createImageFiles();
+              },
+              child:   GradientButton(text: "DEVAM ET"),
+            )
+          
           ],
         ),
       ),

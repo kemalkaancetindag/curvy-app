@@ -1,6 +1,8 @@
 import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/controllers/setup_controller.dart';
 import 'package:curvy_app/ui/screens/login.dart';
+import 'package:curvy_app/ui/screens/setup_add_image.dart';
+import 'package:curvy_app/ui/screens/setup_image.dart';
 import 'package:curvy_app/ui/widgets/black_bold_header.dart';
 import 'package:curvy_app/ui/widgets/gradient_button.dart';
 import 'package:curvy_app/ui/widgets/interest_select.dart';
@@ -232,7 +234,13 @@ class SetupInterestsScreen extends StatelessWidget {
                     );
                   },
                 )),
-            GradientButton(text: "DEVAM ET")
+            GestureDetector(
+              onTap: (){
+                Get.to(SetupImageScreen());
+              },
+              child: GradientButton(text: "DEVAM ET"),
+            )
+            
           ],
         ),
       ),

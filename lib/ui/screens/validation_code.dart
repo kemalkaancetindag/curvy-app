@@ -194,9 +194,10 @@ class ValidationCodeScreen extends StatelessWidget {
               )
             ],
           ),
+          
           GestureDetector(
             onTap: (){
-              Get.to(() => ValidationMailScreen());
+              Get.find<SetupController>().createValidationCode();
             },
             child:GradientButton(text: "DEVAM ET", page: "vmail",),
           )

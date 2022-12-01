@@ -20,7 +20,9 @@ class ValidationMailScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.back();
+          },
           icon: Icon(
             Icons.arrow_back_ios_new,
             color: Colors.black.withOpacity(0.3),
@@ -74,8 +76,7 @@ class ValidationMailScreen extends StatelessWidget {
               builder: (controller){
                 return  GestureDetector(
               onTap: (){
-                controller.addEmail(_emailFieldController.text);
-                Get.to(WelcomeScreen());  
+                controller.addEmail(_emailFieldController.text);                
               },
               child: GradientButton(text: "DEVAM ET", page: "welcome",),
             );
