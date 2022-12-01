@@ -88,7 +88,17 @@ flutter:
     - assets/images/gallery_icon.png
     - assets/images/main_logo.png
     - assets/images/confirm_icon.png    
-
+    - assets/images/turbo_icon.png
+    - assets/images/chip_icon.png
+    - assets/images/like_icon.png        
+    - assets/images/edit_icon.png
+    - assets/images/settings_icon.png                    
+    - assets/images/platinium_logo.png   
+    - assets/images/nav_first.png
+    - assets/images/nav_second.png
+    - assets/images/nav_middle.png
+    - assets/images/nav_fourth.png
+    - assets/images/nav_last.png   
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

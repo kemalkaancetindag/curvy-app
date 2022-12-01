@@ -20,7 +20,7 @@ class LoginButton extends StatelessWidget {
       child: Container(
         width: Dimensions.w320,
         height: Dimensions.h50,
-        margin: const EdgeInsets.only(bottom: Dimensions.h21),
+        margin:  EdgeInsets.only(bottom: Dimensions.h21),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.white, width:Dimensions.w2 ),
           borderRadius: BorderRadius.circular(30)
@@ -32,7 +32,7 @@ class LoginButton extends StatelessWidget {
             Container(
               width: Dimensions.w22,
               height: Dimensions.h22,
-              margin: const EdgeInsets.only(left: Dimensions.w16),
+              margin:  EdgeInsets.only(left: Dimensions.w16),
               child: Center(
                 child: Image.asset(logo),
               ),

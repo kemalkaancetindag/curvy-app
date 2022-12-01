@@ -32,7 +32,7 @@ class LoginScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              margin: const EdgeInsets.only(top: Dimensions.h117),
+              margin:  EdgeInsets.only(top: Dimensions.h117),
               width: Dimensions.w200,
               height: Dimensions.h230,
               child: Center(
@@ -41,10 +41,10 @@ class LoginScreen extends StatelessWidget {
             ),
             Container(
               width: 284,
-              margin: const EdgeInsets.only(top: Dimensions.h27, bottom: Dimensions.h66),
+              margin:  EdgeInsets.only(top: Dimensions.h27, bottom: Dimensions.h66),
               child: RichText(
                 textAlign: TextAlign.center,
-                text:const TextSpan(
+                text: TextSpan(
                   text: "Hesap Oluştur veya Giriş Yap’a dokunarak,",
                   style: TextStyle(fontSize: Dimensions.h14),
                   children: <TextSpan>[

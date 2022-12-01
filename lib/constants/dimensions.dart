@@ -1,63 +1,83 @@
+import 'package:get/get.dart';
+
 class Dimensions {
-  static const double w200 = 360*0.51;
-  static const double w320 = 360*0.82;
-  static const double w2 = 360*0.005;
-  static const double w254 = 360*0.7;
-  static const double w22 = 360*0.061;
-  static const double w16 = 360*0.044; 
-  static const double w314 = 360*0.87;
-  static const double w300 = 360*0.83;
-  static const double w218 = 360*0.60;
-  static const double w35 = 360*0.097;
-  static const double w111 = 360*0.284;
-  static const double w270 = 360*0.692;
-  static const double w48 = 360*0.123;
-  static const double w25 = 360*0.0641;
-  static const double w180 = 360*0.461;
-  static const double w11 = 360*0.0282;
-  static const double w155 = 360*0.397;
-  static const double w325 = 360*0.8333;
-  static const double w99 = 360*0.25;
-  static const double w31 = 360*0.0794;
-  static const double w17 = 360*0.0435;
-  static const double w120 = 360*0.307;
-  static const double w50 = 360*0.1682;
-  static const double w1023 = 360*2.623;
-  static const double w316 = 360*0.81;
-  static const double w140 = 360*0.358;
-  static const double w160 = 360*0.410;
+
+
+  
+
+  static  double w200 = Get.width*0.51;
+  static  double w320 = Get.width*0.82;
+  static  double w2 = Get.width*0.005;
+  static  double w254 = Get.width*0.7;
+  static  double w22 = Get.width*0.061;
+  static  double w16 = Get.width*0.044; 
+  static  double w314 = Get.width*0.87;
+  static  double w300 = Get.width*0.83;
+  static  double w218 = Get.width*0.60;
+  static  double w35 = Get.width*0.097;
+  static  double w111 = Get.width*0.284;
+  static  double w270 = Get.width*0.692;
+  static  double w48 = Get.width*0.123;
+  static  double w25 = Get.width*0.0641;
+  static  double w180 = Get.width*0.461;
+  static  double w11 = Get.width*0.0282;
+  static  double w155 = Get.width*0.397;
+  static  double w325 = Get.width*0.8333;
+  static  double w99 = Get.width*0.25;
+  static  double w31 = Get.width*0.0794;
+  static  double w17 = Get.width*0.0435;
+  static  double w120 = Get.width*0.307;
+  static  double w50 = Get.width*0.1682;
+  static  double w1023 = Get.width*2.623;
+  static  double w316 = Get.width*0.81;
+  static  double w140 = Get.width*0.358;
+  static  double w160 = Get.width*0.410;
+  static double w8 = Get.width*0.02051;
+  static double w226 = Get.width*0.5794;
+  static double w209 = Get.width*0.5358;
+  static double w214 = Get.width*0.5487;
+  static double w9 = Get.width*0.02307692;
+  static double w42 = Get.width*0.10769231;
+  static double w310 = Get.width*0.79487;
+  static double w60 = Get.width*0.153846;
 
 
 
 
-  static const double h137 = 716*0.162;
-  static const double h117 = 716*0.13;
-  static const double h230 = 716*0.27;
-  static const double h27 = 716*0.03;
-  static const double h14 = 716*0.016;
-  static const double h50 = 716*0.06;
-  static const double h66 = 716*0.078;
-  static const double h21 = 716*0.025;
-  static const double h52 = 716*0.061;
-  static const double h22 = 716*0.0307;
-  static const double h40 = 716*0.047;
-  static const double h12 = 716*0.016;
-  static const double h209 = 716*0.247;
-  static const double h36 = 716*0.0426;
-  static const double h100 = 716*0.1184;
-  static const double h7 = 716*0.0082;
-  static const double h16 = 716*0.0189;
-  static const double h45 = 716*0.0533;
-  static const double h435 = 716*0.5154;
-  static const double h31 = 716*0.0367;
-  static const double h17 = 716*0.0201;
-  static const double h120 = 716*0.142;
-  static const double h87 = 716*0.103;
-  static const double h357 = 716*0.4986;
-  static const double h1023 = 716*1.212;
-  static const double h666 = 716*0.792;
-  static const double h140 = 716*0.195;
-  static const double h160 = 716*0.189;
+  static  double h137 = Get.height*0.162;
+  static  double h117 = Get.height*0.13;
+  static  double h230 = Get.height*0.27;
+  static  double h27 = Get.height*0.03;
+  static  double h14 = Get.height*0.016;
+  static  double h50 = Get.height*0.06;
+  static  double h66 = Get.height*0.078;
+  static  double h21 = Get.height*0.025;
+  static  double h52 = Get.height*0.061;
+  static  double h22 = Get.height*0.0307;
+  static  double h40 = Get.height*0.047;
+  static  double h12 = Get.height*0.016;
+  static  double h209 = Get.height*0.247;
+  static  double h36 = Get.height*0.0426;
+  static  double h100 = Get.height*0.1184;
+  static  double h7 = Get.height*0.0082;
+  static  double h16 = Get.height*0.0189;
+  static  double h45 = Get.height*0.0533;
+  static  double h435 = Get.height*0.5154;
+  static  double h31 = Get.height*0.0367;
+  static  double h17 = Get.height*0.0201;
+  static  double h120 = Get.height*0.142;
+  static  double h87 = Get.height*0.103;
+  static  double h357 = Get.height*0.4986;
+  static  double h1023 = Get.height*1.212;
+  static  double h666 = Get.height*0.792;
+  static  double h140 = Get.height*0.195;
+  static  double h160 = Get.height*0.189;
+  static double h58 = Get.height*0.06872;
+  static double h8 = Get.height*0.00947;
+  static double h9 = Get.height*0.01066351;
+  static double h90 = Get.height*0.10663;
+  static double h42 = Get.height*0.04976303;
+  static double h60 = Get.height*0.07109;
   
 
   
