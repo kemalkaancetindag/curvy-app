@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Gilroy'
       ),    
       debugShowCheckedModeBanner: false,
-      home:  IndexScreen(),
+      home:  LoginScreen(),
     );
   }
 }

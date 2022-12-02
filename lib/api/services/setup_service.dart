@@ -7,7 +7,7 @@ class SetupService extends GetxService{
   SetupService({required this.mobileApiClient});
 
 
-  Future<Response> getPopularCollections(String url, FormData data) async {
+  Future<Response> createUser(String url, FormData data) async {
     return await mobileApiClient.postData(data,url);
   }
 

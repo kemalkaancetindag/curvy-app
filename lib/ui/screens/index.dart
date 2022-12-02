@@ -120,27 +120,31 @@ class IndexScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Container(
-                              margin: EdgeInsets.only(top: Dimensions.h21),
-                              width: Dimensions.w222,
-                              height: Dimensions.h50,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      color: Colors.black.withOpacity(0.4),
-                                      width: Dimensions.w300 / 100),
-                                  borderRadius: BorderRadius.circular(
-                                      Dimensions.h50 / 2)),
-                              child: Center(
-                                child: Text(
-                                  "Belki daha sonra",
-                                  style: TextStyle(
-                                      color: Colors.black.withOpacity(0.4),
-                                      fontSize: Dimensions.h22,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            )
+                            GestureDetector(
+                                onTap: () {
+                                  Get.back();
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.only(top: Dimensions.h21),
+                                  width: Dimensions.w222,
+                                  height: Dimensions.h50,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border.all(
+                                          color: Colors.black.withOpacity(0.4),
+                                          width: Dimensions.w300 / 100),
+                                      borderRadius: BorderRadius.circular(
+                                          Dimensions.h50 / 2)),
+                                  child: Center(
+                                    child: Text(
+                                      "Belki daha sonra",
+                                      style: TextStyle(
+                                          color: Colors.black.withOpacity(0.4),
+                                          fontSize: Dimensions.h22,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ))
                           ],
                         ),
                       )
@@ -194,7 +198,7 @@ class IndexScreen extends StatelessWidget {
                             Container(
                               margin: EdgeInsets.only(bottom: 8),
                               width: Dimensions.w160,
-                              height: Dimensions.h165,
+                              height: Dimensions.h100*2,
                               child: Stack(
                                 children: [
                                   Positioned(
@@ -205,13 +209,16 @@ class IndexScreen extends StatelessWidget {
                                             height: Dimensions.h300,
                                             child: Center(
                                               child: Container(
-                                                width: Dimensions.w140,
-                                                height: Dimensions.h140,
+                                                width: 140,
+                                                height: 140,
                                                 decoration: BoxDecoration(
                                                     color: Colors.white,
+                                                    image: DecorationImage(
+                                                      image: AssetImage("assets/images/user_image.png")
+                                                    ),
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            Dimensions.w140 /
+                                                            140 /
                                                                 2)),
                                               ),
                                             ),
