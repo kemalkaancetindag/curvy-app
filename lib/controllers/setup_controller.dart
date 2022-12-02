@@ -31,10 +31,11 @@ class SetupController extends GetxController {
   String? _birthdateString;
   List<File> _imageFiles = <File>[];
 
+
   //TEMP
   List<String> _validationCode = <String>[];
   List<String> _birthdateList = <String>[];
-
+  bool _isAfterSetup = false;
   
 
   String? get phoneNumberAppendix => _phoneNumberAppendix;
@@ -58,6 +59,7 @@ class SetupController extends GetxController {
   //TEMP
   List<String> get validationCode => _validationCode;
   List<String> get birtdateList => _birthdateList;
+  bool get isAfterSetup => _isAfterSetup;
   
 
   @override
@@ -236,7 +238,12 @@ class SetupController extends GetxController {
       }
       
     });
+    _isAfterSetup = true;
 
     Get.offAll(()=>IndexScreen());
+  }
+
+  void setAfterSetup( bool isAfterSetup) {
+    _isAfterSetup = isAfterSetup;
   }
 }

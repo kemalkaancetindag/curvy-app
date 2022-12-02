@@ -40,6 +40,9 @@ class Dimensions {
   static double w42 = Get.width*0.10769231;
   static double w310 = Get.width*0.79487;
   static double w60 = Get.width*0.153846;
+  static double w267 = Get.width*0.68461;
+  static double w222 = Get.width*0.569230;
+
 
 
 
@@ -78,6 +81,14 @@ class Dimensions {
   static double h90 = Get.height*0.10663;
   static double h42 = Get.height*0.04976303;
   static double h60 = Get.height*0.07109;
+  static double h450 = Get.height*0.53317;
+  static double h148 = Get.height*0.17535;
+  static double h300 = Get.height*0.35545;
+  static double h165 = Get.height*0.195497;
+
+
+
+
   
 
   

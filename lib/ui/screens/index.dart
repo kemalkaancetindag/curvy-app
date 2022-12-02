@@ -1,4 +1,8 @@
+import 'package:camera/camera.dart';
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/setup_controller.dart';
+import 'package:curvy_app/ui/screens/confirm_me.dart';
+import 'package:curvy_app/ui/screens/settings.dart';
 import 'package:curvy_app/ui/widgets/bottom_nav_bar.dart';
 import 'package:curvy_app/ui/widgets/circle_progress.dart';
 import 'package:curvy_app/ui/widgets/main_action_button.dart';
@@ -6,12 +10,148 @@ import 'package:curvy_app/ui/widgets/main_boost_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 
 class IndexScreen extends StatelessWidget {
   const IndexScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    if (Get.find<SetupController>().isAfterSetup) {
+      print("sa");
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        showGeneralDialog(
+            context: context,
+            pageBuilder: (context, _, __) {
+              return Scaffold(
+                backgroundColor: Colors.transparent,
+                body: Container(
+                  width: double.maxFinite,
+                  height: double.maxFinite,
+                  color: Colors.black.withOpacity(0.8),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: Dimensions.w300,
+                        height: Dimensions.h450,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.h16)),
+                        child: Column(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(top: Dimensions.h21),
+                              child: Center(
+                                child: Image.asset(
+                                    "assets/images/confirm_me_icon.png"),
+                              ),
+                            ),
+                            Container(
+                              width: Dimensions.w267,
+                              height: Dimensions.h42,
+                              child: Center(
+                                child: Text(
+                                  "Nasıl Çalışır?",
+                                  style: TextStyle(
+                                      fontSize: Dimensions.h27,
+                                      color: Color(0xFF7B8491),
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: Dimensions.w267,
+                              height: Dimensions.h148,
+                              child: Center(
+                                child: RichText(
+                                  textAlign: TextAlign.center,
+                                  text: TextSpan(
+                                      style:
+                                          TextStyle(color: Color(0xFF7B8491)),
+                                      text:
+                                          "Yüz tanıma teknolojimiz, video selfinde bulunan yüzü profilindeki fotoğraflarla karşılaştırır. Doğrulama tamamlandıktan sonra, genellikle 24 saatten kısa bir süre içerisinde yüz tanıma bilgilerini sileriz.",
+                                      children: [
+                                        TextSpan(
+                                            text:
+                                                " Bunun nasıl çalıştığı hakkında daha fazla bilgi edin.",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                color: Color(0xFF7B8491)))
+                                      ]),
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () async {
+                                await availableCameras().then(((value) {
+                                  Get.find<SetupController>()
+                                      .setAfterSetup(false);
+                                  Get.back();
+                                  Get.to(() => ConfirmMePage(cameras: value));
+                                }));
+                              },
+                              child: Container(
+                                margin:
+                                    EdgeInsets.only(top: Dimensions.h50 / 2),
+                                width: Dimensions.w222,
+                                height: Dimensions.h50,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                        Dimensions.h50 / 2),
+                                    gradient: LinearGradient(
+                                        colors: [
+                                          Color(0xFFD51CFF),
+                                          Color(0xFF00FFE1)
+                                        ],
+                                        begin: Alignment.centerLeft,
+                                        end: Alignment.centerRight)),
+                                child: Center(
+                                  child: Text(
+                                    "Beni Doğrula",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: Dimensions.h22,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: Dimensions.h21),
+                              width: Dimensions.w222,
+                              height: Dimensions.h50,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(
+                                      color: Colors.black.withOpacity(0.4),
+                                      width: Dimensions.w300 / 100),
+                                  borderRadius: BorderRadius.circular(
+                                      Dimensions.h50 / 2)),
+                              child: Center(
+                                child: Text(
+                                  "Belki daha sonra",
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(0.4),
+                                      fontSize: Dimensions.h22,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              );
+            });
+      });
+    }
+
     return Scaffold(
       body: Container(
           width: MediaQuery.of(context).size.width,
@@ -20,8 +160,7 @@ class IndexScreen extends StatelessWidget {
             children: [
               Container(
                   width: double.maxFinite,
-                  height: Dimensions.h357-Dimensions.h40,
-
+                  height: Dimensions.h357 - Dimensions.h40,
                   child: Stack(
                     children: [
                       Positioned(
@@ -55,15 +194,15 @@ class IndexScreen extends StatelessWidget {
                             Container(
                               margin: EdgeInsets.only(bottom: 8),
                               width: Dimensions.w160,
-                              height: 165,
+                              height: Dimensions.h165,
                               child: Stack(
                                 children: [
                                   Positioned(
                                       child: CustomPaint(
                                           foregroundPainter: CircleProgress(),
                                           child: Container(
-                                            width: 300,
-                                            height: 300,
+                                            width: Dimensions.w300,
+                                            height: Dimensions.h300,
                                             child: Center(
                                               child: Container(
                                                 width: Dimensions.w140,
@@ -187,9 +326,14 @@ class IndexScreen extends StatelessWidget {
                       ),
                       Column(
                         children: [
-                          MainActionButton(
-                            text: "AYARLAR",
-                            icon: "assets/images/settings_icon.png",
+                          GestureDetector(
+                            onTap: () {
+                              Get.to(() => SettingsScreen());
+                            },
+                            child: MainActionButton(
+                              text: "AYARLAR",
+                              icon: "assets/images/settings_icon.png",
+                            ),
                           ),
                           MainActionButton(
                               text: "PROFİL DÜZENLE",
@@ -217,58 +361,50 @@ class IndexScreen extends StatelessWidget {
                           Container(
                             width: Dimensions.w310,
                             height: Dimensions.h60,
-                            margin: EdgeInsets.only(top: Dimensions.h16, bottom: Dimensions.h8),
+                            margin: EdgeInsets.only(
+                                top: Dimensions.h16, bottom: Dimensions.h8),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(Dimensions.h52),
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color(0xFFFF0000),
-                                  Color(0xFF0047FF)
-                                ],
-                                begin:  Alignment.centerLeft,
-                                end: Alignment.centerRight
-                              )
-                            ),
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.h52),
+                                gradient: LinearGradient(
+                                    colors: [
+                                      Color(0xFFFF0000),
+                                      Color(0xFF0047FF)
+                                    ],
+                                    begin: Alignment.centerLeft,
+                                    end: Alignment.centerRight)),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Container(
-                                  margin: EdgeInsets.only(right: Dimensions.w50/10),
+                                  margin: EdgeInsets.only(
+                                      right: Dimensions.w50 / 10),
                                   child: Center(
-                                    child:  Image.asset("assets/images/turbo_icon.png"),
+                                    child: Image.asset(
+                                        "assets/images/turbo_icon.png"),
                                   ),
                                 ),
-                               
                                 RichText(
-                                  text: TextSpan(
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: Dimensions.h27-3
-                                    ),
-                                    text: "Curvy",
-                                    children: [
-                                      TextSpan(
-                                        
-                                        text: "TURBO"
-                                      )
-                                    ]
-                                  )
-                                )
+                                    text: TextSpan(
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: Dimensions.h27 - 3),
+                                        text: "Curvy",
+                                        children: [TextSpan(text: "TURBO")]))
                               ],
                             ),
                           ),
                           Text(
                             "HEMEN SATIN AL",
                             style: TextStyle(
-                              color: Colors.white,
-                              fontSize: Dimensions.h21-1,
-                              fontWeight: FontWeight.bold
-                            ),
+                                color: Colors.white,
+                                fontSize: Dimensions.h21 - 1,
+                                fontWeight: FontWeight.bold),
                           )
                         ],
                       ),
                     ),
-                      Container(
+                    Container(
                       width: MediaQuery.of(context).size.width,
                       height: Dimensions.h117,
                       decoration: BoxDecoration(
@@ -281,56 +417,47 @@ class IndexScreen extends StatelessWidget {
                           Container(
                             width: Dimensions.w310,
                             height: Dimensions.h60,
-                            margin: EdgeInsets.only(top: Dimensions.h16, bottom: Dimensions.h8),
+                            margin: EdgeInsets.only(
+                                top: Dimensions.h16, bottom: Dimensions.h8),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(Dimensions.h52),
-                              gradient: LinearGradient(
-                                transform: GradientRotation(283),
-                                colors: [
-                                  Colors.black,
-                                  Color(0xFF2E2B2B),
-                                  Colors.black,
-
-                                ],                              
-                                begin:  Alignment(-1,0),
-                                end: Alignment(1,0)
-                              )
-                            ),
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.h52),
+                                gradient: LinearGradient(
+                                    transform: GradientRotation(283),
+                                    colors: [
+                                      Colors.black,
+                                      Color(0xFF2E2B2B),
+                                      Colors.black,
+                                    ],
+                                    begin: Alignment(-1, 0),
+                                    end: Alignment(1, 0))),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Container(
-                                  margin: EdgeInsets.only(right: Dimensions.w50/10),
+                                  margin: EdgeInsets.only(
+                                      right: Dimensions.w50 / 10),
                                   child: Center(
-                                    child:  Image.asset("assets/images/platinium_logo.png"),
+                                    child: Image.asset(
+                                        "assets/images/platinium_logo.png"),
                                   ),
                                 ),
-                               
                                 RichText(
-                                  text: TextSpan(
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: Dimensions.h27-3
-                                    ),
-                                    text: "Curvy",
-                                    children: [
-                                      TextSpan(
-                                        
-                                        text: "PLATINUM"
-                                      )
-                                    ]
-                                  )
-                                )
+                                    text: TextSpan(
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: Dimensions.h27 - 3),
+                                        text: "Curvy",
+                                        children: [TextSpan(text: "PLATINUM")]))
                               ],
                             ),
                           ),
                           Text(
                             "HEMEN SATIN AL",
                             style: TextStyle(
-                              color: Colors.white,
-                              fontSize: Dimensions.h21-1,
-                              fontWeight: FontWeight.bold
-                            ),
+                                color: Colors.white,
+                                fontSize: Dimensions.h21 - 1,
+                                fontWeight: FontWeight.bold),
                           )
                         ],
                       ),

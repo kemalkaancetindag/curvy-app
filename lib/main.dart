@@ -1,7 +1,11 @@
 import 'package:curvy_app/dependencies/controller_dependencies.dart';
+import 'package:curvy_app/ui/screens/delete_account_last_chance.dart';
+import 'package:curvy_app/ui/screens/delete_account_why.dart';
 import 'package:curvy_app/ui/screens/index.dart';
 import 'package:curvy_app/ui/screens/login.dart';
 import 'package:curvy_app/ui/screens/save_account.dart';
+import 'package:curvy_app/ui/screens/send_feedback.dart';
+import 'package:curvy_app/ui/screens/settings.dart';
 import 'package:curvy_app/ui/screens/setup_add_image.dart';
 import 'package:curvy_app/ui/screens/setup_birthdate.dart';
 import 'package:curvy_app/ui/screens/setup_image.dart';
@@ -20,6 +24,7 @@ import 'package:get/get.dart';
 Future<void> main() async {
   
   await initControllers();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -35,7 +40,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Gilroy'
       ),    
       debugShowCheckedModeBanner: false,
-      home: const LoginScreen(),
+      home:  IndexScreen(),
     );
   }
 }

@@ -22,6 +22,7 @@ class AddImageBox extends StatelessWidget {
                 : null,
             
             color: Color(0xFFF7F7F7),
+            borderRadius: BorderRadius.circular(Dimensions.h8)
           ),
           child: Stack(
             clipBehavior: Clip.none,

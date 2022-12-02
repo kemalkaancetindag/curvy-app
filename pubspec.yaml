@@ -38,6 +38,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   get:
   image_picker: ^0.8.6
+  camera:
+  permission_handler: ^10.2.0
+  dotted_border: ^2.0.0+3
 
 dev_dependencies:
   flutter_test:
@@ -99,6 +102,16 @@ flutter:
     - assets/images/nav_middle.png
     - assets/images/nav_fourth.png
     - assets/images/nav_last.png   
+    - assets/images/confirm_me_icon.png  
+    - assets/images/settings_tick_icon.png  
+    - assets/images/settings_logo.png  
+    - assets/images/pause_icon.png 
+    - assets/images/delete_account_reason_1.png 
+    - assets/images/delete_account_reason_2.png
+    - assets/images/delete_account_reason_3.png
+    - assets/images/delete_account_reason_4.png
+    - assets/images/delete_account_reason_5.png
+    - assets/images/delete_account_reason_6.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
