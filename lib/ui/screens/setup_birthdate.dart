@@ -232,6 +232,9 @@ class SetupBirthdateScreen extends StatelessWidget {
                                     fontWeight: FontWeight.w700),
                                 onChanged: (value) {
                                   controller.addToBirthdate(value, 7);
+                                   if(value.length == 1){
+                                FocusScope.of(context).unfocus();
+                            }
                                 },
                                 cursorColor: Colors.black.withOpacity(0.4),
                                 decoration: InputDecoration(
