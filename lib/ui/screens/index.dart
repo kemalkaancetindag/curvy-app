@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/controllers/setup_controller.dart';
 import 'package:curvy_app/ui/screens/confirm_me.dart';
+import 'package:curvy_app/ui/screens/edit_profile.dart';
 import 'package:curvy_app/ui/screens/settings.dart';
 import 'package:curvy_app/ui/widgets/bottom_nav_bar.dart';
 import 'package:curvy_app/ui/widgets/circle_progress.dart';
@@ -342,9 +343,15 @@ class IndexScreen extends StatelessWidget {
                               icon: "assets/images/settings_icon.png",
                             ),
                           ),
-                          MainActionButton(
+                          GestureDetector(
+                            onTap: () => {
+                              Get.to(() => EditProfileScreen())
+                            },
+                            child:   MainActionButton(
                               text: "PROFİL DÜZENLE",
-                              icon: "assets/images/edit_icon.png")
+                              icon: "assets/images/edit_icon.png"),
+                          )
+                        
                         ],
                       )
                     ],

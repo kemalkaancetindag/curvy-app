@@ -41,6 +41,7 @@ dependencies:
   camera:
   permission_handler: ^10.2.0
   dotted_border: ^2.0.0+3
+  dio: ^4.0.6
 
 dev_dependencies:
   flutter_test:

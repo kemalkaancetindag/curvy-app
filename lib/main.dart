@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Gilroy'
       ),    
       debugShowCheckedModeBanner: false,
-      home:  EditProfileScreen(),
+      home:  const SettingsScreen(),
     );
   }
 }

@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:curvy_app/api/services/setup_service.dart';
+import 'package:curvy_app/constants/mobile.api.routes.dart';
 import 'package:curvy_app/ui/screens/index.dart';
 import 'package:curvy_app/ui/screens/setup_birthdate.dart';
 import 'package:curvy_app/ui/screens/setup_image.dart';
@@ -7,12 +9,19 @@ import 'package:curvy_app/ui/screens/setup_sex.dart';
 import 'package:curvy_app/ui/screens/validation_code.dart';
 import 'package:curvy_app/ui/screens/validation_mail.dart';
 import 'package:curvy_app/ui/screens/welcome_screen.dart';
+import 'package:dio/dio.dart' as dio_package;
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:http_parser/http_parser.dart'; 
 
 class SetupController extends GetxController {
+
+  //SERVICES
+  SetupService setupService;
+
+
   String? _phoneNumberAppendix;
   String? _phoneNumber;
   String? _phoneConfirmationCode;
@@ -60,6 +69,8 @@ class SetupController extends GetxController {
   List<String> get validationCode => _validationCode;
   List<String> get birtdateList => _birthdateList;
   bool get isAfterSetup => _isAfterSetup;
+
+  SetupController({required this.setupService});
   
 
   @override
@@ -224,7 +235,9 @@ class SetupController extends GetxController {
   }
 
 
-  void createImageFiles() {
+  Future<void> createImageFiles() async {
+
+    
     _images.removeWhere((element) => element == "");
     if(_images.length == 0){
        Get.snackbar("Hata", "En az bir fotoğraf eklemelisiniz.", backgroundColor: Color(0xFFD446F4), colorText: Colors.white);
@@ -232,13 +245,39 @@ class SetupController extends GetxController {
        return;       
     }
 
-    _images.forEach((element) {
+
+      
+    dio_package.FormData data = dio_package.FormData.fromMap({
+      'email':_email,
+      'phone':_phoneNumber,
+      'name':_name,
+      'birthdate':_birthdateString,
+      'sex':_sex,
+      'sex_preference':_sexPrefenrence.toString(),
+      'show_me':_showMe,
+      'interests': _interests.toString(),
+      'show_sex':_showSex,
+      'show_sex_preference':_showSexPreference
+    });
+
+    _images.forEach((element) async {
       if(element != ""){
-        _imageFiles.add(File(element));
+        File imageFile = File(element);     
+        
+          
+        data.files.add(MapEntry("image", await dio_package.MultipartFile.fromFile(imageFile.path, filename: element.split("/").last, contentType: MediaType('image', element.split("/").last.split('.').last))));
+      
       }
       
     });
     _isAfterSetup = true;
+
+   
+    print("felaket");
+    var response = await setupService.createUser(Routes.createUser, data);
+
+    print(response.data);
+    print(response.statusMessage);
 
     Get.offAll(()=>IndexScreen());
   }

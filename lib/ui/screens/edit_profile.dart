@@ -1,4 +1,5 @@
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/edit_profile_controller.dart';
 import 'package:curvy_app/ui/widgets/edit_profile_image_box.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,6 +13,87 @@ class EditProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(EditProfileController());
+
+    selectImageModal() {
+      showDialog(
+          context: context,
+          builder: (builder) {
+            return SimpleDialog(backgroundColor: Colors.transparent, children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    width: Dimensions.w270,
+                    height: Dimensions.h209,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Dimensions.h22),
+                    ),
+                    child: Column(
+                      children: [
+                        Expanded(
+                            child: GestureDetector(
+                          onTap: () async {
+                            await Get.find<EditProfileController>().pickImage(0, 1);
+                            Get.back();
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(Dimensions.h22),
+                                    topRight: Radius.circular(Dimensions.h22)),
+                                color: Color(0xFFD446F4)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Image.asset("assets/images/camera_icon.png"),
+                                Text(
+                                  "Kameranla Çek",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: Dimensions.h21,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                          ),
+                        )),
+                        Expanded(
+                            child: GestureDetector(
+                          onTap: () {
+                            Get.find<EditProfileController>().pickImage(1, 1);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(Dimensions.h22),
+                                  bottomRight: Radius.circular(Dimensions.h22)),
+                              color: Colors.white,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Image.asset("assets/images/gallery_icon.png"),
+                                Text(
+                                  "Galerinden Seç",
+                                  style: TextStyle(
+                                      fontSize: Dimensions.h21,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                          ),
+                        ))
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ]);
+          });
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -46,132 +128,146 @@ class EditProfileScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                  margin: EdgeInsets.only(top: Dimensions.h50),
-                  padding: EdgeInsets.only(
-                      left: Dimensions.w200 / 10, right: Dimensions.w200 / 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      DottedBorder(
-                          borderType: BorderType.RRect,
-                          strokeWidth: 2,
-                          radius: Radius.circular(Dimensions.h16 / 2),
-                          color: Color(0xFFD2D3D4),
-                          child: ClipRRect(
-                            clipBehavior: Clip.none,
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(Dimensions.h8)),
-                            child: EditPorfileImageBox(),
-                          )),
-                      DottedBorder(
-                          borderType: BorderType.RRect,
-                          strokeWidth: 2,
-                          radius: Radius.circular(Dimensions.h16 / 2),
-                          color: Color(0xFFD2D3D4),
-                          child: ClipRRect(
-                            clipBehavior: Clip.none,
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(Dimensions.h8)),
-                            child: EditPorfileImageBox(),
-                          )),
-                      DottedBorder(
-                          borderType: BorderType.RRect,
-                          strokeWidth: 2,
-                          radius: Radius.circular(Dimensions.h16 / 2),
-                          color: Color(0xFFD2D3D4),
-                          child: ClipRRect(
-                            clipBehavior: Clip.none,
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(Dimensions.h8)),
-                            child: EditPorfileImageBox(),
-                          ))
-                    ],
-                  )),
-              Container(
-                  margin: EdgeInsets.only(top: Dimensions.h300 / 15),
-                  padding: EdgeInsets.only(
-                      left: Dimensions.w200 / 10, right: Dimensions.w200 / 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      DottedBorder(
-                          borderType: BorderType.RRect,
-                          strokeWidth: 2,
-                          radius: Radius.circular(Dimensions.h16 / 2),
-                          color: Color(0xFFD2D3D4),
-                          child: ClipRRect(
-                            clipBehavior: Clip.none,
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(Dimensions.h8)),
-                            child: EditPorfileImageBox(),
-                          )),
-                      DottedBorder(
-                          borderType: BorderType.RRect,
-                          strokeWidth: 2,
-                          radius: Radius.circular(Dimensions.h16 / 2),
-                          color: Color(0xFFD2D3D4),
-                          child: ClipRRect(
-                            clipBehavior: Clip.none,
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(Dimensions.h8)),
-                            child: EditPorfileImageBox(),
-                          )),
-                      DottedBorder(
-                          borderType: BorderType.RRect,
-                          strokeWidth: 2,
-                          radius: Radius.circular(Dimensions.h16 / 2),
-                          color: Color(0xFFD2D3D4),
-                          child: ClipRRect(
-                            clipBehavior: Clip.none,
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(Dimensions.h8)),
-                            child: EditPorfileImageBox(),
-                          ))
-                    ],
-                  )),
-              Container(
-                  margin: EdgeInsets.only(top: Dimensions.h300 / 15),
-                  padding: EdgeInsets.only(
-                      left: Dimensions.w200 / 10, right: Dimensions.w200 / 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      DottedBorder(
-                          borderType: BorderType.RRect,
-                          strokeWidth: 2,
-                          radius: Radius.circular(Dimensions.h16 / 2),
-                          color: Color(0xFFD2D3D4),
-                          child: ClipRRect(
-                            clipBehavior: Clip.none,
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(Dimensions.h8)),
-                            child: EditPorfileImageBox(),
-                          )),
-                      DottedBorder(
-                          borderType: BorderType.RRect,
-                          strokeWidth: 2,
-                          radius: Radius.circular(Dimensions.h16 / 2),
-                          color: Color(0xFFD2D3D4),
-                          child: ClipRRect(
-                            clipBehavior: Clip.none,
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(Dimensions.h8)),
-                            child: EditPorfileImageBox(),
-                          )),
-                      DottedBorder(
-                          borderType: BorderType.RRect,
-                          strokeWidth: 2,
-                          radius: Radius.circular(Dimensions.h16 / 2),
-                          color: Color(0xFFD2D3D4),
-                          child: ClipRRect(
-                            clipBehavior: Clip.none,
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(Dimensions.h8)),
-                            child: EditPorfileImageBox(),
-                          ))
-                    ],
-                  )),
+              GetBuilder<EditProfileController>(builder: (controller) {
+                return Container(
+                    margin: EdgeInsets.only(top: Dimensions.h50),
+                    padding: EdgeInsets.only(
+                        left: Dimensions.w200 / 10,
+                        right: Dimensions.w200 / 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            selectImageModal();
+                          },
+                          child: DottedBorder(
+                              borderType: BorderType.RRect,
+                              strokeWidth: 2,
+                              radius: Radius.circular(Dimensions.h16 / 2),
+                              color: Color(0xFFD2D3D4),
+                              child: ClipRRect(
+                                clipBehavior: Clip.none,
+                                borderRadius: BorderRadius.all(
+                                    Radius.circular(Dimensions.h8)),
+                                child: EditPorfileImageBox(image: controller.images.length < 1 ? null : controller.images[0]),
+                              )),
+                        ),
+                        DottedBorder(
+                            borderType: BorderType.RRect,
+                            strokeWidth: 2,
+                            radius: Radius.circular(Dimensions.h16 / 2),
+                            color: Color(0xFFD2D3D4),
+                            child: ClipRRect(
+                              clipBehavior: Clip.none,
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(Dimensions.h8)),
+                              child: EditPorfileImageBox(image: controller.images.length < 2 ? null : controller.images[1]),
+                            )),
+                        DottedBorder(
+                            borderType: BorderType.RRect,
+                            strokeWidth: 2,
+                            radius: Radius.circular(Dimensions.h16 / 2),
+                            color: Color(0xFFD2D3D4),
+                            child: ClipRRect(
+                              clipBehavior: Clip.none,
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(Dimensions.h8)),
+                              child: EditPorfileImageBox(image: controller.images.length < 3 ? null : controller.images[2]),
+                            ))
+                      ],
+                    ));
+              }),
+              GetBuilder<EditProfileController>(builder: (controller) {
+                return Container(
+                    margin: EdgeInsets.only(top: Dimensions.h300 / 15),
+                    padding: EdgeInsets.only(
+                        left: Dimensions.w200 / 10,
+                        right: Dimensions.w200 / 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        DottedBorder(
+                            borderType: BorderType.RRect,
+                            strokeWidth: 2,
+                            radius: Radius.circular(Dimensions.h16 / 2),
+                            color: Color(0xFFD2D3D4),
+                            child: ClipRRect(
+                              clipBehavior: Clip.none,
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(Dimensions.h8)),
+                              child: EditPorfileImageBox(image: controller.images.length < 4 ? null : controller.images[3]),
+                            )),
+                        DottedBorder(
+                            borderType: BorderType.RRect,
+                            strokeWidth: 2,
+                            radius: Radius.circular(Dimensions.h16 / 2),
+                            color: Color(0xFFD2D3D4),
+                            child: ClipRRect(
+                              clipBehavior: Clip.none,
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(Dimensions.h8)),
+                              child: EditPorfileImageBox(image: controller.images.length < 5 ? null : controller.images[4]),
+                            )),
+                        DottedBorder(
+                            borderType: BorderType.RRect,
+                            strokeWidth: 2,
+                            radius: Radius.circular(Dimensions.h16 / 2),
+                            color: Color(0xFFD2D3D4),
+                            child: ClipRRect(
+                              clipBehavior: Clip.none,
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(Dimensions.h8)),
+                              child: EditPorfileImageBox(image: controller.images.length < 6 ? null : controller.images[5]),
+                            ))
+                      ],
+                    ));
+              }),
+              GetBuilder<EditProfileController>(builder: (controller) {
+                return Container(
+                    margin: EdgeInsets.only(top: Dimensions.h300 / 15),
+                    padding: EdgeInsets.only(
+                        left: Dimensions.w200 / 10,
+                        right: Dimensions.w200 / 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        DottedBorder(
+                            borderType: BorderType.RRect,
+                            strokeWidth: 2,
+                            radius: Radius.circular(Dimensions.h16 / 2),
+                            color: Color(0xFFD2D3D4),
+                            child: ClipRRect(
+                              clipBehavior: Clip.none,
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(Dimensions.h8)),
+                              child: EditPorfileImageBox(image: controller.images.length < 7 ? null : controller.images[6]),
+                            )),
+                        DottedBorder(
+                            borderType: BorderType.RRect,
+                            strokeWidth: 2,
+                            radius: Radius.circular(Dimensions.h16 / 2),
+                            color: Color(0xFFD2D3D4),
+                            child: ClipRRect(
+                              clipBehavior: Clip.none,
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(Dimensions.h8)),
+                              child: EditPorfileImageBox(image: controller.images.length < 8 ? null : controller.images[7]),
+                            )),
+                        DottedBorder(
+                            borderType: BorderType.RRect,
+                            strokeWidth: 2,
+                            radius: Radius.circular(Dimensions.h16 / 2),
+                            color: Color(0xFFD2D3D4),
+                            child: ClipRRect(
+                              clipBehavior: Clip.none,
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(Dimensions.h8)),
+                              child: EditPorfileImageBox(image: controller.images.length < 9 ? null : controller.images[8]),
+                            ))
+                      ],
+                    ));
+              }),
               Container(
                 margin: EdgeInsets.only(top: Dimensions.h31),
                 width: Dimensions.w325,
