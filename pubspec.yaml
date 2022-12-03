@@ -113,6 +113,7 @@ flutter:
     - assets/images/delete_account_reason_5.png
     - assets/images/delete_account_reason_6.png
     - assets/images/user_image.png
+    - assets/images/edit_profile_logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
