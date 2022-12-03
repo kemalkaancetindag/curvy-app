@@ -174,6 +174,10 @@ class ValidationCodeScreen extends StatelessWidget {
                         child: TextField(
                           onChanged: (value){
                             controller.addToValidationCode(value, 5);
+                            if(value.length == 1){
+                                FocusScope.of(context).unfocus();
+                            }
+                            
                           },
                           style: TextStyle(
                               fontSize: Dimensions.h40,
