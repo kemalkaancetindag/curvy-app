@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Gilroy'
       ),    
       debugShowCheckedModeBanner: false,
-      home:  const SettingsScreen(),
+      home:  const LoginScreen(),
     );
   }
 }

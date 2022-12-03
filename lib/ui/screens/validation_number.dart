@@ -58,7 +58,7 @@ class ValidationNumberScreen extends StatelessWidget {
                                       child: Center(
                                         child: DropdownButton(
                                             itemHeight: 50,
-                                            value: "TR+90",
+                                            value: controller.phoneNumberAppendix,
                                             items: [
                                               DropdownMenuItem(
                                                 child: Text("TR+90"),

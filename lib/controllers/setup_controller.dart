@@ -22,7 +22,7 @@ class SetupController extends GetxController {
   SetupService setupService;
 
 
-  String? _phoneNumberAppendix;
+  String? _phoneNumberAppendix = "TR+90";
   String? _phoneNumber;
   String? _phoneConfirmationCode;
   String? _email;
