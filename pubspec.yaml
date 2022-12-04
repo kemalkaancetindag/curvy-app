@@ -115,6 +115,18 @@ flutter:
     - assets/images/delete_account_reason_6.png
     - assets/images/user_image.png
     - assets/images/edit_profile_logo.png
+    - assets/images/matcher_settings_icon.png
+    - assets/images/women.png
+    - assets/images/report.png
+    - assets/images/share.png
+    - assets/images/expand_icon.png
+    - assets/images/matcher_back.png
+    - assets/images/matcher_dislike.png
+    - assets/images/matcher_superlike.png
+    - assets/images/matcher_like.png
+    - assets/images/matcher_turbo.png
+    - assets/images/home_icon.png
+    - assets/images/location_icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

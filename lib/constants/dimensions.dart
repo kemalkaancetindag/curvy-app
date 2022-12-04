@@ -85,6 +85,7 @@ class Dimensions {
   static double h148 = Get.height*0.17535;
   static double h300 = Get.height*0.35545;
   static double h165 = Get.height*0.195497;
+  static double h520 = Get.height*0.616;
 
 
 

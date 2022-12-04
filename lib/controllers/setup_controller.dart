@@ -276,9 +276,8 @@ class SetupController extends GetxController {
     print("felaket");
     var response = await setupService.createUser(Routes.createUser, data);
 
-    print(response.data);
-    print(response.statusMessage);
-
+    
+    
     Get.offAll(()=>IndexScreen());
   }
 
