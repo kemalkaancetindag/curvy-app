@@ -1,6 +1,7 @@
 import 'package:curvy_app/dependencies/client_dependencies.dart';
 import 'package:curvy_app/dependencies/controller_dependencies.dart';
 import 'package:curvy_app/dependencies/service_dependencies.dart';
+import 'package:curvy_app/ui/screens/chat.dart';
 import 'package:curvy_app/ui/screens/delete_account_last_chance.dart';
 import 'package:curvy_app/ui/screens/delete_account_why.dart';
 import 'package:curvy_app/ui/screens/edit_profile.dart';
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Gilroy'
       ),    
       debugShowCheckedModeBanner: false,
-      home:  const MessagesScreen(),
+      home:  const ChatScreen(),
     );
   }
 }

@@ -134,6 +134,10 @@ flutter:
     - assets/images/chevron_up_white.png
     - assets/images/messages_report.png
     - assets/images/messages_delete.png
+    - assets/images/chevron_left_white.png
+    - assets/images/chat_add_white.png
+    - assets/images/chat_mic.png
+    - assets/images/chat_send.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
