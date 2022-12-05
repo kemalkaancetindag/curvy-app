@@ -7,6 +7,7 @@ import 'package:curvy_app/ui/screens/edit_profile.dart';
 import 'package:curvy_app/ui/screens/index.dart';
 import 'package:curvy_app/ui/screens/login.dart';
 import 'package:curvy_app/ui/screens/matching.dart';
+import 'package:curvy_app/ui/screens/messages.dart';
 import 'package:curvy_app/ui/screens/save_account.dart';
 import 'package:curvy_app/ui/screens/send_feedback.dart';
 import 'package:curvy_app/ui/screens/settings.dart';
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Gilroy'
       ),    
       debugShowCheckedModeBanner: false,
-      home:  const MatchingScreen(),
+      home:  const MessagesScreen(),
     );
   }
 }

@@ -132,6 +132,8 @@ flutter:
     - assets/images/matcher_chip.png
     - assets/images/close_small.png
     - assets/images/chevron_up_white.png
+    - assets/images/messages_report.png
+    - assets/images/messages_delete.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
