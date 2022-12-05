@@ -127,6 +127,11 @@ flutter:
     - assets/images/matcher_turbo.png
     - assets/images/home_icon.png
     - assets/images/location_icon.png
+    - assets/images/confirm_small.png
+    - assets/images/location_white.png
+    - assets/images/matcher_chip.png
+    - assets/images/close_small.png
+    - assets/images/chevron_up_white.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
