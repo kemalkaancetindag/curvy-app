@@ -6,6 +6,7 @@ import 'package:curvy_app/ui/screens/chat.dart';
 import 'package:curvy_app/ui/screens/delete_account_last_chance.dart';
 import 'package:curvy_app/ui/screens/delete_account_why.dart';
 import 'package:curvy_app/ui/screens/edit_profile.dart';
+import 'package:curvy_app/ui/screens/explore.dart';
 import 'package:curvy_app/ui/screens/index.dart';
 import 'package:curvy_app/ui/screens/login.dart';
 import 'package:curvy_app/ui/screens/matching.dart';
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Gilroy'
       ),    
       debugShowCheckedModeBanner: false,
-      home:  const ArchivesScreen(),
+      home:  const ExploreScreen(),
     );
   }
 }

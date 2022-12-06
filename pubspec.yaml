@@ -143,6 +143,8 @@ flutter:
     - assets/images/chat_chip.png
     - assets/images/archives_logo.png
     - assets/images/archives_superlike.png
+    - assets/images/explore_1.png
+    - assets/images/explore_3.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
