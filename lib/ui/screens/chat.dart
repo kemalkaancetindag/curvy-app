@@ -8,6 +8,8 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(double.maxFinite, Dimensions.h140),
@@ -23,7 +25,8 @@ class ChatScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                margin: EdgeInsets.only(right: Dimensions.w11),
+                margin: EdgeInsets.only(
+                    right: Dimensions.w11, left: Dimensions.w8 / 2),
                 child: Center(
                   child: Image.asset("assets/images/chevron_left_white.png"),
                 ),
@@ -44,7 +47,44 @@ class ChatScreen extends StatelessWidget {
                               borderRadius:
                                   BorderRadius.circular(Dimensions.h8 * 5)),
                           child: Row(
-                            children: [],
+                            children: [
+                              Container(
+                                width: Dimensions.h8,
+                                height: Dimensions.h8,
+                                margin: EdgeInsets.only(
+                                    left: Dimensions.w35,
+                                    right: Dimensions.w8 / 2),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                        Dimensions.h8 / 2),
+                                    color: Color(0xFF05ED00)),
+                              ),
+                              Container(
+                                margin:
+                                    EdgeInsets.only(right: Dimensions.w8 / 2),
+                                child: Center(
+                                    child: RichText(
+                                  text: TextSpan(
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: Dimensions.h16),
+                                      children: [
+                                        TextSpan(
+                                            text: "Gülçitay,",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            )),
+                                        TextSpan(text: "21")
+                                      ]),
+                                )),
+                              ),
+                              Container(
+                                child: Center(
+                                  child: Image.asset(
+                                      "assets/images/confirm_small.png"),
+                                ),
+                              )
+                            ],
                           ),
                         )),
                     Positioned(
@@ -59,7 +99,29 @@ class ChatScreen extends StatelessWidget {
                               border:
                                   Border.all(color: Colors.white, width: 2)),
                           child: Row(
-                            children: [],
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(left: Dimensions.w31),
+                                child: Center(
+                                  child: Image.asset(
+                                      "assets/images/chat_chip.png"),
+                                ),
+                              ),
+                              Container(
+                                margin:
+                                    EdgeInsets.only(right: Dimensions.w2 * 10),
+                                child: Center(
+                                  child: Text(
+                                    "124",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: Dimensions.h16),
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
                         )),
                     Positioned(
@@ -120,6 +182,90 @@ class ChatScreen extends StatelessWidget {
       ),
       body: Stack(
         children: [
+          Container(
+            width: double.maxFinite,
+            height: double.maxFinite,
+            padding: EdgeInsets.only(
+                left: Dimensions.w8 * 2, right: Dimensions.w8 * 2),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                      width: double.maxFinite,
+                      margin: EdgeInsets.only(top: Dimensions.h16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(
+                                top: Dimensions.h8,
+                                bottom: Dimensions.h8,
+                                right: Dimensions.w8,
+                                left: Dimensions.w8),
+                            width: Dimensions.w200,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.h16),
+                                color: Color(0xFFE4E4E4)),
+                            child: Center(
+                              child: Text(
+                                "Merhaba?",
+                                style: TextStyle(fontSize: Dimensions.h16),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(left: Dimensions.w11),
+                            child: Center(
+                              child: Image.asset("assets/images/chat_like.png"),
+                            ),
+                          )
+                        ],
+                      )),
+                  Container(
+                      width: double.maxFinite,
+                      margin: EdgeInsets.only(top: Dimensions.h16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(right: Dimensions.w11),
+                            child: Center(
+                              child:
+                                  Image.asset("assets/images/chat_unliked.png"),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(
+                                top: Dimensions.h8,
+                                bottom: Dimensions.h8,
+                                right: Dimensions.w8,
+                                left: Dimensions.w8),
+                            width: Dimensions.w200,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.h16),
+                                gradient: LinearGradient(colors: [
+                                  Color(0xFFD51CFF),
+                                  Color(0xFF6198EF)
+                                ])),
+                            child: Center(
+                              child: Text(
+                                "Teşekkür ederim? Mesainin bitmesi için vakit öldürüyorum. Sen?",
+                                textAlign: TextAlign.end,
+                                style: TextStyle(
+                                    fontSize: Dimensions.h16,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ))
+                ],
+              ),
+            ),
+          ),
           Positioned(
             bottom: 0,
             left: 0,
@@ -136,9 +282,14 @@ class ChatScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                    child: Center(
-                      child: Image.asset("assets/images/chat_add_white.png"),
+                  GestureDetector(
+                    onTap: () {
+                      
+                    },
+                    child: Container(
+                      child: Center(
+                        child: Image.asset("assets/images/chat_add_white.png"),
+                      ),
                     ),
                   ),
                   Container(
@@ -161,7 +312,8 @@ class ChatScreen extends StatelessWidget {
                             )),
                         Positioned(
                             child: Container(
-                              margin: EdgeInsets.only(left: Dimensions.w8, right: Dimensions.w8),
+                          margin: EdgeInsets.only(
+                              left: Dimensions.w8, right: Dimensions.w8),
                           child: TextField(
                             decoration: InputDecoration(
                               focusedBorder: InputBorder.none,
