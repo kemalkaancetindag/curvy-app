@@ -15,7 +15,7 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Get.to(() => ValidationNumberScreen());
+        Get.toNamed('/');
       },
       child: Container(
         width: Dimensions.w320,

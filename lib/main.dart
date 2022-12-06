@@ -1,3 +1,5 @@
+import 'package:curvy_app/constants/pages.dart';
+import 'package:curvy_app/constants/routes.dart';
 import 'package:curvy_app/dependencies/client_dependencies.dart';
 import 'package:curvy_app/dependencies/controller_dependencies.dart';
 import 'package:curvy_app/dependencies/service_dependencies.dart';
@@ -50,7 +52,8 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Gilroy'
       ),    
       debugShowCheckedModeBanner: false,
-      home:  const ExploreScreen(),
+      initialRoute: Routes.login,
+      getPages: pages,
     );
   }
 }

@@ -4,10 +4,8 @@ import 'package:get/get.dart';
 class NavController extends GetxController {
 
   int _currentIndex = 4; 
-  List<Widget> _pages = <Widget>[];
   
-
-  List<Widget> get pages => _pages;
+  
   int get currentIndex => _currentIndex;
 
   NavController();
@@ -15,6 +13,12 @@ class NavController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+  }
+
+  void setCurrentIndex(int index) {
+    _currentIndex = index;
+    update();
+
   }
 
 
