@@ -15,7 +15,7 @@ class EditProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(EditProfileController());
 
-    selectImageModal() {
+    void selectImageModal() {
       showDialog(
           context: context,
           builder: (builder) {
@@ -35,7 +35,8 @@ class EditProfileScreen extends StatelessWidget {
                         Expanded(
                             child: GestureDetector(
                           onTap: () async {
-                            await Get.find<EditProfileController>().pickImage(0, 1);
+                            await Get.find<EditProfileController>()
+                                .pickImage(0, 1);
                             Get.back();
                           },
                           child: Container(
@@ -94,6 +95,503 @@ class EditProfileScreen extends StatelessWidget {
           });
     }
 
+    void showZodiacSelectDialog() {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return Dialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
+              ),
+              child: Container(
+                height: Dimensions.h520,
+                width: Dimensions.w300,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.h16),
+                    gradient: LinearGradient(
+                        colors: [Color(0xFFD51CFF), Color(0xFF6198EF)])),
+                child: Column(
+                  children: [
+                    Container(
+                      width: Dimensions.w254,
+                      margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                      child: Center(
+                        child: Text(
+                          "Burç Seçimi",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: Dimensions.h36),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: Dimensions.w254,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                            width: Dimensions.w120,
+                            height: Dimensions.h300 / 10,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.h300 / 10),
+                                gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      Colors.white,
+                                      Colors.transparent,
+                                      Colors.transparent,
+                                      Colors.white
+                                    ])),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(right: Dimensions.w8),
+                                  child: Center(
+                                    child: Image.asset("assets/images/zodiac_1.png"),
+                                  ),
+                                ),
+                                Container(
+                                  child:  Center(
+                              child: Text(
+                                "KOÇ",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: Dimensions.h14,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                                )
+                              ],
+                            )
+                          ),
+                         Container(
+                            margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                            width: Dimensions.w120,
+                            height: Dimensions.h300 / 10,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.h300 / 10),
+                             ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(right: Dimensions.w8),
+                                  child: Center(
+                                    child: Image.asset("assets/images/zodiac_2.png"),
+                                  ),
+                                ),
+                                Container(
+                                  child:  Center(
+                              child: Text(
+                                "TERAZİ",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: Dimensions.h14,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                                )
+                              ],
+                            )
+                          ),
+                        ],
+                      ),
+                    ),
+                        Container(
+                      width: Dimensions.w254,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                            width: Dimensions.w120,
+                            height: Dimensions.h300 / 10,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.h300 / 10),
+                              ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(right: Dimensions.w8),
+                                  child: Center(
+                                    child: Image.asset("assets/images/zodiac_3.png"),
+                                  ),
+                                ),
+                                Container(
+                                  child:  Center(
+                              child: Text(
+                                "BOĞA",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: Dimensions.h14,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                                )
+                              ],
+                            )
+                          ),
+                         Container(
+                            margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                            width: Dimensions.w120,
+                            height: Dimensions.h300 / 10,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.h300 / 10),
+                             ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(right: Dimensions.w8),
+                                  child: Center(
+                                    child: Image.asset("assets/images/zodiac_4.png"),
+                                  ),
+                                ),
+                                Container(
+                                  child:  Center(
+                              child: Text(
+                                "AKREP",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: Dimensions.h14,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                                )
+                              ],
+                            )
+                          ),
+                        ],
+                      ),
+                    ),
+                        Container(
+                      width: Dimensions.w254,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                            width: Dimensions.w120,
+                            height: Dimensions.h300 / 10,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.h300 / 10),
+                                ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(right: Dimensions.w8),
+                                  child: Center(
+                                    child: Image.asset("assets/images/zodiac_5.png"),
+                                  ),
+                                ),
+                                Container(
+                                  child:  Center(
+                              child: Text(
+                                "İKİZLER",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: Dimensions.h14,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                                )
+                              ],
+                            )
+                          ),
+                         Container(
+                            margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                            width: Dimensions.w120,
+                            height: Dimensions.h300 / 10,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.h300 / 10),
+                             ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(right: Dimensions.w8),
+                                  child: Center(
+                                    child: Image.asset("assets/images/zodiac_6.png"),
+                                  ),
+                                ),
+                                Container(
+                                  child:  Center(
+                              child: Text(
+                                "YAY",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: Dimensions.h14,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                                )
+                              ],
+                            )
+                          ),
+                        ],
+                      ),
+                    ),
+                        Container(
+                      width: Dimensions.w254,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                            width: Dimensions.w120,
+                            height: Dimensions.h300 / 10,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.h300 / 10),
+                              ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(right: Dimensions.w8),
+                                  child: Center(
+                                    child: Image.asset("assets/images/zodiac_7.png"),
+                                  ),
+                                ),
+                                Container(
+                                  child:  Center(
+                              child: Text(
+                                "YENGEÇ",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: Dimensions.h14,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                                )
+                              ],
+                            )
+                          ),
+                         Container(
+                            margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                            width: Dimensions.w120,
+                            height: Dimensions.h300 / 10,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.h300 / 10),
+                             ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(right: Dimensions.w8),
+                                  child: Center(
+                                    child: Image.asset("assets/images/zodiac_8.png"),
+                                  ),
+                                ),
+                                Container(
+                                  child:  Center(
+                              child: Text(
+                                "OĞLAK",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: Dimensions.h14,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                                )
+                              ],
+                            )
+                          ),
+                        ],
+                      ),
+                    ),
+                        Container(
+                      width: Dimensions.w254,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                            width: Dimensions.w120,
+                            height: Dimensions.h300 / 10,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.h300 / 10),
+                              ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(right: Dimensions.w8),
+                                  child: Center(
+                                    child: Image.asset("assets/images/zodiac_9.png"),
+                                  ),
+                                ),
+                                Container(
+                                  child:  Center(
+                              child: Text(
+                                "ARSLAN",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: Dimensions.h14,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                                )
+                              ],
+                            )
+                          ),
+                         Container(
+                            margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                            width: Dimensions.w120,
+                            height: Dimensions.h300 / 10,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.h300 / 10),
+                             ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(right: Dimensions.w8),
+                                  child: Center(
+                                    child: Image.asset("assets/images/zodiac_10.png"),
+                                  ),
+                                ),
+                                Container(
+                                  child:  Center(
+                              child: Text(
+                                "KOVA",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: Dimensions.h14,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                                )
+                              ],
+                            )
+                          ),
+                        ],
+                      ),
+                    ),
+                        Container(
+                      width: Dimensions.w254,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                            width: Dimensions.w120,
+                            height: Dimensions.h300 / 10,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.h300 / 10),
+                               ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(right: Dimensions.w8),
+                                  child: Center(
+                                    child: Image.asset("assets/images/zodiac_11.png"),
+                                  ),
+                                ),
+                                Container(
+                                  child:  Center(
+                              child: Text(
+                                "BAŞAK",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: Dimensions.h14,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                                )
+                              ],
+                            )
+                          ),
+                         Container(
+                            margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                            width: Dimensions.w120,
+                            height: Dimensions.h300 / 10,
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.h300 / 10),
+                             ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(right: Dimensions.w8),
+                                  child: Center(
+                                    child: Image.asset("assets/images/zodiac_12.png"),
+                                  ),
+                                ),
+                                Container(
+                                  child:  Center(
+                              child: Text(
+                                "BALIK",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: Dimensions.h14,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                                )
+                              ],
+                            )
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 2,
+                      width: Dimensions.w254,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: Dimensions.w99,
+                      margin: EdgeInsets.only(top: Dimensions.h12*2, bottom: Dimensions.h12*2),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            child: Center(
+                              child: Image.asset("assets/images/settings_modal_cancel.png"),
+                            ),
+                          ), Container(
+                            child: Center(
+                              child: Image.asset("assets/images/settings_modal_check.png"),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            );
+          });
+    }
+
+
+    void showPetDialog() {
+      
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -150,7 +648,10 @@ class EditProfileScreen extends StatelessWidget {
                                 clipBehavior: Clip.none,
                                 borderRadius: BorderRadius.all(
                                     Radius.circular(Dimensions.h8)),
-                                child: EditPorfileImageBox(image: controller.images.length < 1 ? null : controller.images[0]),
+                                child: EditPorfileImageBox(
+                                    image: controller.images.length < 1
+                                        ? null
+                                        : controller.images[0]),
                               )),
                         ),
                         DottedBorder(
@@ -162,7 +663,10 @@ class EditProfileScreen extends StatelessWidget {
                               clipBehavior: Clip.none,
                               borderRadius: BorderRadius.all(
                                   Radius.circular(Dimensions.h8)),
-                              child: EditPorfileImageBox(image: controller.images.length < 2 ? null : controller.images[1]),
+                              child: EditPorfileImageBox(
+                                  image: controller.images.length < 2
+                                      ? null
+                                      : controller.images[1]),
                             )),
                         DottedBorder(
                             borderType: BorderType.RRect,
@@ -173,7 +677,10 @@ class EditProfileScreen extends StatelessWidget {
                               clipBehavior: Clip.none,
                               borderRadius: BorderRadius.all(
                                   Radius.circular(Dimensions.h8)),
-                              child: EditPorfileImageBox(image: controller.images.length < 3 ? null : controller.images[2]),
+                              child: EditPorfileImageBox(
+                                  image: controller.images.length < 3
+                                      ? null
+                                      : controller.images[2]),
                             ))
                       ],
                     ));
@@ -196,7 +703,10 @@ class EditProfileScreen extends StatelessWidget {
                               clipBehavior: Clip.none,
                               borderRadius: BorderRadius.all(
                                   Radius.circular(Dimensions.h8)),
-                              child: EditPorfileImageBox(image: controller.images.length < 4 ? null : controller.images[3]),
+                              child: EditPorfileImageBox(
+                                  image: controller.images.length < 4
+                                      ? null
+                                      : controller.images[3]),
                             )),
                         DottedBorder(
                             borderType: BorderType.RRect,
@@ -207,7 +717,10 @@ class EditProfileScreen extends StatelessWidget {
                               clipBehavior: Clip.none,
                               borderRadius: BorderRadius.all(
                                   Radius.circular(Dimensions.h8)),
-                              child: EditPorfileImageBox(image: controller.images.length < 5 ? null : controller.images[4]),
+                              child: EditPorfileImageBox(
+                                  image: controller.images.length < 5
+                                      ? null
+                                      : controller.images[4]),
                             )),
                         DottedBorder(
                             borderType: BorderType.RRect,
@@ -218,7 +731,10 @@ class EditProfileScreen extends StatelessWidget {
                               clipBehavior: Clip.none,
                               borderRadius: BorderRadius.all(
                                   Radius.circular(Dimensions.h8)),
-                              child: EditPorfileImageBox(image: controller.images.length < 6 ? null : controller.images[5]),
+                              child: EditPorfileImageBox(
+                                  image: controller.images.length < 6
+                                      ? null
+                                      : controller.images[5]),
                             ))
                       ],
                     ));
@@ -241,7 +757,10 @@ class EditProfileScreen extends StatelessWidget {
                               clipBehavior: Clip.none,
                               borderRadius: BorderRadius.all(
                                   Radius.circular(Dimensions.h8)),
-                              child: EditPorfileImageBox(image: controller.images.length < 7 ? null : controller.images[6]),
+                              child: EditPorfileImageBox(
+                                  image: controller.images.length < 7
+                                      ? null
+                                      : controller.images[6]),
                             )),
                         DottedBorder(
                             borderType: BorderType.RRect,
@@ -252,7 +771,10 @@ class EditProfileScreen extends StatelessWidget {
                               clipBehavior: Clip.none,
                               borderRadius: BorderRadius.all(
                                   Radius.circular(Dimensions.h8)),
-                              child: EditPorfileImageBox(image: controller.images.length < 8 ? null : controller.images[7]),
+                              child: EditPorfileImageBox(
+                                  image: controller.images.length < 8
+                                      ? null
+                                      : controller.images[7]),
                             )),
                         DottedBorder(
                             borderType: BorderType.RRect,
@@ -263,7 +785,10 @@ class EditProfileScreen extends StatelessWidget {
                               clipBehavior: Clip.none,
                               borderRadius: BorderRadius.all(
                                   Radius.circular(Dimensions.h8)),
-                              child: EditPorfileImageBox(image: controller.images.length < 9 ? null : controller.images[8]),
+                              child: EditPorfileImageBox(
+                                  image: controller.images.length < 9
+                                      ? null
+                                      : controller.images[8]),
                             ))
                       ],
                     ));
@@ -382,7 +907,9 @@ class EditProfileScreen extends StatelessWidget {
                               padding: EdgeInsets.zero,
                               primary: Colors.black.withOpacity(0.2),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              showZodiacSelectDialog();
+                            },
                             child: Container(
                               child: Row(
                                 mainAxisAlignment:

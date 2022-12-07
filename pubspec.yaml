@@ -148,6 +148,18 @@ flutter:
     - assets/images/settings_modal_check.png
     - assets/images/settings_modal_cancel.png
     - assets/images/settings_modal_chevron_right.png
+    - assets/images/zodiac_1.png
+    - assets/images/zodiac_2.png
+    - assets/images/zodiac_3.png
+    - assets/images/zodiac_4.png
+    - assets/images/zodiac_5.png
+    - assets/images/zodiac_6.png
+    - assets/images/zodiac_7.png
+    - assets/images/zodiac_8.png
+    - assets/images/zodiac_9.png
+    - assets/images/zodiac_10.png
+    - assets/images/zodiac_11.png
+    - assets/images/zodiac_12.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
