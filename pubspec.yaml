@@ -145,6 +145,9 @@ flutter:
     - assets/images/archives_superlike.png
     - assets/images/explore_1.png
     - assets/images/explore_3.png
+    - assets/images/settings_modal_check.png
+    - assets/images/settings_modal_cancel.png
+    - assets/images/settings_modal_chevron_right.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

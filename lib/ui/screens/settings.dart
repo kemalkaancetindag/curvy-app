@@ -4,6 +4,8 @@ import 'package:curvy_app/ui/screens/settings_header_text.dart';
 import 'package:curvy_app/ui/widgets/main_boost_button.dart';
 import 'package:curvy_app/ui/widgets/settings_boost_button.dart';
 import 'package:curvy_app/ui/widgets/settings_component_header.dart';
+import 'package:curvy_app/ui/widgets/settings_modal_switch_column.dart';
+import 'package:curvy_app/ui/widgets/settings_modal_switch_row.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -15,6 +17,1481 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void showBanPeopleDialog() {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return Dialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
+              ),
+              child: Container(
+                height: Dimensions.h520 + Dimensions.h50,
+                width: Dimensions.w300,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.h16),
+                    gradient: LinearGradient(
+                        colors: [Color(0xFFD51CFF), Color(0xFF6198EF)])),
+                child: Column(
+                  children: [
+                    Container(
+                      width: Dimensions.w254,
+                      margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                      child: Center(
+                        child: Text(
+                          "Curvy’de seni görmesini istemediğin biri mi var?",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: Dimensions.h36),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                          top: Dimensions.h8, bottom: Dimensions.h16),
+                      width: Dimensions.w254,
+                      child: Center(
+                        child: Text(
+                          "Çözümü çok basit. Seni görmesini istemediğin kişileri seçmek için. bu özelliği kullanırken cihazının kişilerini Curvy ile paylaş.",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(bottom: Dimensions.h16),
+                      width: Dimensions.w254,
+                      child: Center(
+                        child: Text(
+                          "Seçtiğin kişilerin bize verdiğin bilgilerle açtıkları bir Curvy hesabı varsa, birbirinizi görememeniz için engellenen kişilerini saklayacağız. Kişilerini bizimle paylaşmayı, ayarlarından kapatabilirsin.",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: Dimensions.w254,
+                      child: Center(
+                        child: Text(
+                          "Curvy’nin kişilerini nasıl işlediği de dahil olmak üzere ayrıntılı bilgiye Buradan Ulaşabilirsin.",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                      width: Dimensions.w254,
+                      height: Dimensions.h40,
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.h300 / 10),
+                          gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Colors.white,
+                                Colors.transparent,
+                                Colors.transparent,
+                                Colors.white
+                              ])),
+                      child: Center(
+                        child: Text(
+                          "DEVAM ET",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: Dimensions.h21,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            );
+          });
+    }
+
+    void selectLanguageDialog() {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return Dialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
+              ),
+              child: Container(
+                  height: Dimensions.h520 + Dimensions.h50,
+                  width: Dimensions.w300,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Dimensions.h16),
+                      gradient: LinearGradient(
+                          colors: [Color(0xFFD51CFF), Color(0xFF6198EF)])),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                          width: Dimensions.w254,
+                          height: Dimensions.h40,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.h300 / 10),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "LİSAN SEÇİMİ",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: Dimensions.h21,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                          width: Dimensions.w254,
+                          height: Dimensions.h40,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.h300 / 10),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Almanca",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: Dimensions.h21,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                          width: Dimensions.w254,
+                          height: Dimensions.h40,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.h300 / 10),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Arapça",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: Dimensions.h21,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                          width: Dimensions.w254,
+                          height: Dimensions.h40,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.h300 / 10),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Endonezce",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: Dimensions.h21,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                          width: Dimensions.w254,
+                          height: Dimensions.h40,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.h300 / 10),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Fransızca",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: Dimensions.h21,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                          width: Dimensions.w254,
+                          height: Dimensions.h40,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.h300 / 10),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Hintçe",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: Dimensions.h21,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                          width: Dimensions.w254,
+                          height: Dimensions.h40,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.h300 / 10),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "İngilizce",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: Dimensions.h21,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                          width: Dimensions.w254,
+                          height: Dimensions.h40,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.h300 / 10),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "İspanyolca",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: Dimensions.h21,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                          width: Dimensions.w254,
+                          height: Dimensions.h40,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.h300 / 10),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "İtalyanca",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: Dimensions.h21,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                          width: Dimensions.w254,
+                          height: Dimensions.h40,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.h300 / 10),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Rusça",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: Dimensions.h21,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: Dimensions.h300 / 10),
+                          width: Dimensions.w254,
+                          height: Dimensions.h40,
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.h300 / 10),
+                              gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    Colors.white,
+                                    Colors.transparent,
+                                    Colors.transparent,
+                                    Colors.white
+                                  ])),
+                          child: Center(
+                            child: Text(
+                              "Türkçe",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: Dimensions.h21,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        Container(
+                            margin: EdgeInsets.only(
+                                top: Dimensions.h22, bottom: Dimensions.h22),
+                            width: Dimensions.w99,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  child: Center(
+                                    child: Image.asset(
+                                        "assets/images/settings_modal_cancel.png"),
+                                  ),
+                                ),
+                                Container(
+                                  child: Center(
+                                    child: Image.asset(
+                                        "assets/images/settings_modal_check.png"),
+                                  ),
+                                )
+                              ],
+                            ))
+                      ],
+                    ),
+                  )),
+            );
+          });
+    }
+
+    void changeUsernameDialog() {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return Dialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
+              ),
+              child: Container(
+                height: Dimensions.h140,
+                width: Dimensions.w300,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
+                    gradient: LinearGradient(
+                        colors: [Color(0xFFD51CFF), Color(0xFF6198EF)])),
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(top: Dimensions.h27),
+                      child: Center(
+                        child: Text(
+                          "KULLANICI ADINI SEÇ",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: Dimensions.h16),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: Dimensions.h100 / 10),
+                      width: Dimensions.w267,
+                      height: Dimensions.h300 / 10,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(Dimensions.h16)),
+                      child: Stack(
+                        children: [
+                          Positioned(
+                              left: 0,
+                              top: Dimensions.h8 / 2,
+                              child: Container(
+                                width: Dimensions.h21,
+                                height: Dimensions.h21,
+                                child: Center(
+                                  child: Text(
+                                    "@",
+                                    style: TextStyle(
+                                        color: Color(0xFF7B8491),
+                                        fontSize: Dimensions.h16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              )),
+                          Positioned(
+                              left: Dimensions.h21,
+                              bottom: Dimensions.h8 / 2,
+                              top: 0,
+                              child: Container(
+                                width: Dimensions.w180,
+                                child: TextField(
+                                  style: TextStyle(color: Color(0xFF7B8491)),
+                                  cursorColor: Color(0xFF7B8491),
+                                  decoration: InputDecoration(
+                                      focusedBorder: InputBorder.none,
+                                      enabledBorder: InputBorder.none,
+                                      disabledBorder: InputBorder.none),
+                                ),
+                              )),
+                          Positioned(
+                              right: Dimensions.h8 / 2,
+                              top: Dimensions.h8 / 2,
+                              child: Container(
+                                width: Dimensions.h21,
+                                height: Dimensions.h21,
+                                child: Center(
+                                  child: Text(
+                                    "20",
+                                    style: TextStyle(
+                                        color: Color(0xFF7B8491),
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ))
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: Dimensions.h100 / 20),
+                      child: Center(
+                        child: Text(
+                          "X - bu kullanıcı adı daha önce alınmış",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: Dimensions.h16 / 2),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: Dimensions.h12),
+                      width: Dimensions.h100,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            child: Center(
+                              child: Image.asset(
+                                  "assets/images/settings_modal_cancel.png"),
+                            ),
+                          ),
+                          Container(
+                            child: Center(
+                              child: Image.asset(
+                                  "assets/images/settings_modal_check.png"),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            );
+          });
+    }
+
+    void showInstantNotificationsModal() {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return Dialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
+              ),
+              child: Container(
+                  height: Dimensions.h520 + Dimensions.h50,
+                  width: Dimensions.w300,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Dimensions.h16),
+                      gradient: LinearGradient(
+                          colors: [Color(0xFFD51CFF), Color(0xFF6198EF)])),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: Dimensions.h12,bottom: Dimensions.h12),
+                          child: Center(
+                            child: Text(
+                              "ANLIK BİLDİRİM AYARLARI",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: Dimensions.h100/5
+                              ),
+                            ),
+                          ),
+                        ),
+                        SettingsModalSwitchRow(
+                          title: "Yeni Eşleşmeler",
+                          text: "Yeni bir eşleşmen var.",
+                        ),
+                        SizedBox(
+                          height: 1,
+                          width: Dimensions.w270,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(color: Colors.white),
+                          ),
+                        ),
+                        SettingsModalSwitchRow(
+                          title: "Mesajlar",
+                          text: "Sana mesaj gönderen biri var.",
+                        ),
+                        SizedBox(
+                          height: 1,
+                          width: Dimensions.w270,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(color: Colors.white),
+                          ),
+                        ),
+                        SettingsModalSwitchRow(
+                          title: "Mesaj Beğenileri",
+                          text: "Mesajını beğenen biri var.",
+                        ),
+                        SizedBox(
+                          height: 1,
+                          width: Dimensions.w270,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(color: Colors.white),
+                          ),
+                        ),
+                        SettingsModalSwitchRow(
+                          title: "CurvyLIKE'lar",
+                          text: "Seni CurvyLIKE’layan biri var.",
+                        ),
+                        SizedBox(
+                          height: 1,
+                          width: Dimensions.w270,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(color: Colors.white),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: Dimensions.h12),
+                          padding: EdgeInsets.only(
+                              left: Dimensions.w2 * 10,
+                              right: Dimensions.w2 * 10),
+                          width: double.maxFinite,
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    child: Center(
+                                      child: Text(
+                                        "Yeni Beğeniler",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: Dimensions.h100 / 5),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Container(
+                                    margin:
+                                        EdgeInsets.only(bottom: Dimensions.h12),
+                                    child: Center(
+                                      child: Text(
+                                        "Seni beğenen yeni kişiler var",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 1,
+                                width: Dimensions.w200,
+                                child: DecoratedBox(
+                                  decoration:
+                                      BoxDecoration(color: Colors.white),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: Dimensions.h8/2, bottom: Dimensions.h8/2),
+                                width: Dimensions.w155,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      child: Center(
+                                        child: Text(
+                                          "1 Yeni Beğeni",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: Dimensions.h16),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 1,
+                                width: Dimensions.w200,
+                                child: DecoratedBox(
+                                  decoration:
+                                      BoxDecoration(color: Colors.white),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: Dimensions.h8/2, bottom: Dimensions.h8/2),
+                                width: Dimensions.w155,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      child: Center(
+                                        child: Text(
+                                          "3 Yeni Beğeni",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: Dimensions.h16),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 1,
+                                width: Dimensions.w200,
+                                child: DecoratedBox(
+                                  decoration:
+                                      BoxDecoration(color: Colors.white),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: Dimensions.h8/2, bottom: Dimensions.h8),
+                                width: Dimensions.w155,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      child: Center(
+                                        child: Text(
+                                          "10 Yeni Beğeni",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: Dimensions.h16),
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      child: Center(
+                                          child: Image.asset(
+                                              "assets/images/settings_modal_check.png")),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                         SizedBox(
+                          height: 1,
+                          width: Dimensions.w270,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(color: Colors.white),
+                          ),
+                        ),
+                         SettingsModalSwitchRow(
+                          title: "Titreşim",
+                          text: "Uygulama içi titreşimleri aç",
+                        ),
+                        SizedBox(
+                          height: 1,
+                          width: Dimensions.w270,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(color: Colors.white),
+                          ),
+                        ),
+                         SettingsModalSwitchRow(
+                          title: "Ses",
+                          text: "Uygulama içi sesleri aç",
+                        ),
+                        SizedBox(
+                          height: 1,
+                          width: Dimensions.w270,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(color: Colors.white),
+                          ),
+                        ),
+
+                        Container(
+                          margin: EdgeInsets.only(top: Dimensions.h12, bottom: Dimensions.h12),
+                          width: Dimensions.w99,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                child: Center(
+                                  child: Image.asset("assets/images/settings_modal_cancel.png"),
+                                ),
+                              ),
+                               Container(
+                                child: Center(
+                                  child: Image.asset("assets/images/settings_modal_check.png"),
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )),
+            );
+          });
+    }
+
+
+    void showEmailNotificationsModal() {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return Dialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
+              ),
+              child: Container(
+                height: Dimensions.h520 + Dimensions.h50,
+                width: Dimensions.w300,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.h16),
+                    gradient: LinearGradient(
+                        colors: [Color(0xFFD51CFF), Color(0xFF6198EF)])),
+                child: SingleChildScrollView(
+                  child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(top: Dimensions.h300/10, bottom: Dimensions.h100/10),
+                      child: Center(
+                        child: Text(
+                          "E-POSTA BİLDİRİMLERİ",
+                          style: TextStyle(
+                            fontSize: Dimensions.h100/5,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                       margin: EdgeInsets.only(bottom: Dimensions.h16/4),
+                      width: Dimensions.w270,                      
+                      height: Dimensions.h300/10,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(Dimensions.h300/20)
+                      ),
+                      child: TextField(
+                          textAlign: TextAlign.center,
+                          textAlignVertical: TextAlignVertical.center,
+                        cursorColor: Color(0xFF7B8491),
+                        decoration: InputDecoration(
+                         
+                          
+                          hintText: "E-Postanı yaz ve doğrula",
+                          focusedBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(bottom: Dimensions.h16/4),
+                      child: Center(
+                        child: Text(
+                          "Geçersiz bir mail adesi yazdınız",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: Dimensions.h16/2
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: Dimensions.w270,
+                      height: Dimensions.h300/10,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular( Dimensions.h300/10),
+                          gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Colors.white,
+                                Colors.transparent,
+                                Colors.transparent,
+                                Colors.white
+                              ])
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Doğrulama E-postası Gönder",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: Dimensions.h16,
+                            fontWeight: FontWeight.bold
+                          ),
+                        )
+                      ),
+                    ),
+                     Container(
+                       margin: EdgeInsets.only(top: Dimensions.h16/2, bottom: Dimensions.h16/2),
+                      width: Dimensions.w270,
+                      height: Dimensions.h300/10,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular( Dimensions.h300/10),
+                          gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Colors.white,
+                                Colors.transparent,
+                                Colors.transparent,
+                                Colors.white
+                              ])
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Yeniden Doğrulama E-postası Gönder",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: Dimensions.h16,
+                            fontWeight: FontWeight.bold
+                          ),
+                        )
+                      ),
+                    ),
+                     Container(
+                      margin: EdgeInsets.only(bottom: Dimensions.h12),
+                      child: Center(
+                        child: Text(
+                          "3 dakika içerisinde yanlızca bir kod isteyebilirsiniz",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: Dimensions.h16/2
+                          ),
+                        ),
+                      ),
+                    ),
+                     SizedBox(
+                          height: 1,
+                          width: Dimensions.w270,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(color: Colors.white),
+                          ),
+                        ),
+                      SettingsModalSwitchRow(
+                          title: "Yeni Eşleşmeler",
+                          text: "Yeni bir eşleşmen var.",
+                        ),
+                        SizedBox(
+                          height: 1,
+                          width: Dimensions.w270,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(color: Colors.white),
+                          ),
+                        ),
+                           SettingsModalSwitchRow(
+                          title: "Mesajlar",
+                          text: "Sana mesaj gönderen biri var.",
+                        ),
+                        SizedBox(
+                          height: 1,
+                          width: Dimensions.w270,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(color: Colors.white),
+                          ),
+                        ),
+                         Container(
+                          padding: EdgeInsets.only(left: Dimensions.w2*10, right: Dimensions.w2*10),
+                          child: Column(
+                            children: [
+                              Container(
+                                child:   Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                     margin: EdgeInsets.only(top: Dimensions.h12),
+                                    child: Center(
+                                      child: Text(
+                                    "Tanıtımlar",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: Dimensions.h100/5
+                                    ),
+                                  )
+                                    ),
+                                  ),
+                                  CupertinoSwitch(value: true, onChanged: (value){})
+                                  
+                                ],
+                              ),
+                                
+                              ),
+                            
+                              Container(
+                                margin: EdgeInsets.only(top: Dimensions.h8, bottom: Dimensions.h12),
+                                child: Center(
+                                  child: Text(
+                                    "Curvy’den haberler, güncellemeler ve teklifler almak istiyorum",
+                                    style: TextStyle(
+                                      color: Colors.white,
+
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                         ),
+                        SizedBox(
+                          height: 1,
+                          width: Dimensions.w270,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(color: Colors.white),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: Dimensions.h12, bottom: Dimensions.h12),
+                          padding: EdgeInsets.only(left: Dimensions.w31, right: Dimensions.w31),
+                          child: Center(
+                            child: Text(
+                              "Almak istediğin e-posta sayısını belirle. Bütün e-postaları, sadece önemli olanları veya istersen çok daha azını alabilirsin, Dilediğin zaman, herhangi bir e- postanın altındaki bölümü kullanarak abonelikten çıkabilirsin.",
+                              style: TextStyle(
+                                color: Colors.white,
+
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 1,
+                          width: Dimensions.w270,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(color: Colors.white),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: Dimensions.h12, bottom: Dimensions.h12),
+                          width: Dimensions.w99,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                child:Center(
+                                  child: Image.asset("assets/images/settings_modal_cancel.png"),
+                                )
+                              ),
+                                Container(
+                                child:Center(
+                                  child: Image.asset("assets/images/settings_modal_check.png"),
+                                )
+                              )
+                            ],
+                          ),
+                        )
+                  ],
+                ),
+                )
+              ),
+            );
+          });
+    }
+
+
+    void showPersonalizedMarketingPreferenecesModal() {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return Dialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
+              ),
+              child: Container(
+                height: Dimensions.h520 + Dimensions.h50,
+                width: Dimensions.w300,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.h16),
+                    gradient: LinearGradient(
+                        colors: [Color(0xFFD51CFF), Color(0xFF6198EF)])),
+                child: SingleChildScrollView(
+                  child: Column(
+                  children: [
+                    Container(
+                      width: Dimensions.w160,
+                      margin: EdgeInsets.only(top: Dimensions.h300/10, bottom: Dimensions.h8),
+                      child: Center(
+                        child: Text(
+                          "KİŞİSELLEŞTİRİLMİŞ PAZARLAMA İZİNLERİ",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: Dimensions.h100/5
+                          ),
+                        ),
+                      ),
+                    ),
+                     Container(        
+                       margin: EdgeInsets.only( bottom: Dimensions.h12),
+                      width: Dimensions.w270,              
+                      child: Center(
+                        child: Text(
+                          
+                          "Herhangi bir Pazarlama İzinleri seçneğini açıp kapatabilirsin. Zaman zaman yeni ortaklar ekleyebiliriz. Bunlar bu listeye eklenecektir. Ayarlarını istediğin zaman aşağıdan değiştirebilirsin.",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,                            
+                            
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 2,
+                      width: Dimensions.w270,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white
+                        ),
+                      ),
+                    ),    
+
+                    SettingsModalSwitchRow(
+                      title: "AppFlayer", 
+                      text: "Ayrıntıları Görüntüle"
+                    )  ,
+                      SizedBox(
+                      height: 2,
+                      width: Dimensions.w270,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white
+                        ),
+                      ),
+                    ),    
+
+                    SettingsModalSwitchRow(
+                      title: "Branch", 
+                      text: "Ayrıntıları Görüntüle"
+                    )  ,
+                    SizedBox(
+                      height: 2,
+                      width: Dimensions.w270,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white
+                        ),
+                      ),
+                    ),    
+                    SettingsModalSwitchColumn(
+                      title: "Yeni Pazarlama İzinleri’ne izin ver", 
+                      text: "Yeni araçlar ekleyebiliriz. Bu ayar, bu yeni araçların varsayılan olarak etkin mi yoksa devre dışı mı olacağını belirler.", 
+                      isSwitch: true
+                    ),
+                     SizedBox(
+                      height: 2,
+                      width: Dimensions.w270,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white
+                        ),
+                      ),
+                    ),    
+                    Container(
+                      width: Dimensions.w99,
+                      margin: EdgeInsets.only(top: Dimensions.h12*2, bottom: Dimensions.h12*2),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            child: Center(
+                              child: Image.asset("assets/images/settings_modal_cancel.png"),
+                            ),
+                          ),
+                          Container(
+                            child: Center(
+                              child: Image.asset("assets/images/settings_modal_check.png"),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+
+
+               
+                  ],
+                ),
+                )
+              ),
+            );
+          });
+    }
+
+    void showPersonalizedAdPreferenecesModal(){
+      showDialog(
+          context: context,
+          builder: (context) {
+            return Dialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
+              ),
+              child: Container(
+                height: Dimensions.h520 + Dimensions.h50,
+                width: Dimensions.w300,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.h16),
+                    gradient: LinearGradient(
+                        colors: [Color(0xFFD51CFF), Color(0xFF6198EF)])),
+                child: SingleChildScrollView(
+                  child: Column(
+                  children: [
+                    Container(
+                      width: Dimensions.w160,
+                      margin: EdgeInsets.only(top: Dimensions.h300/10, bottom: Dimensions.h8),
+                      child: Center(
+                        child: Text(
+                          "KİŞİSELLEŞTİRİLMİŞ REKLAM  İZİNLERİ",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: Dimensions.h100/5
+                          ),
+                        ),
+                      ),
+                    ),
+                     Container(        
+                       margin: EdgeInsets.only( bottom: Dimensions.h12),
+                      width: Dimensions.w270,              
+                      child: Center(
+                        child: Text(
+                          
+                          "Herhangi bir Reklam İzinleri seçneğini açıp kapatabilirsin. Zaman zaman yeni ortaklar ekleyebiliriz. Bunlar bu listeye eklenecektir. Ayarlarını istediğin zaman aşağıdan değiştirebilirsin.",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,                            
+                            
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 2,
+                      width: Dimensions.w270,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white
+                        ),
+                      ),
+                    ),    
+
+                    SettingsModalSwitchRow(
+                      title: "Curvy Direct Ads", 
+                      text: "Ayrıntıları Görüntüle"
+                    )  ,
+                      SizedBox(
+                      height: 2,
+                      width: Dimensions.w270,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white
+                        ),
+                      ),
+                    ),    
+
+                    SettingsModalSwitchRow(
+                      title: "Google Ads", 
+                      text: "Ayrıntıları Görüntüle"
+                    )  ,
+                    SizedBox(
+                      height: 2,
+                      width: Dimensions.w270,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white
+                        ),
+                      ),
+                    ),                   
+
+                    SettingsModalSwitchRow(
+                      title: "Facebook Ads", 
+                      text: "Ayrıntıları Görüntüle"
+                    )  ,
+                    SizedBox(
+                      height: 2,
+                      width: Dimensions.w270,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white
+                        ),
+                      ),
+                    ),    
+                    SettingsModalSwitchColumn(
+                      title: "Yeni Reklam İzinleri’ne izin ver", 
+                      text: "Yeni araçlar ekleyebiliriz. Bu ayar, bu yeni araçların varsayılan olarak etkin mi yoksa devre dışı mı olacağını belirler.", 
+                      isSwitch: true
+                    ),
+                     SizedBox(
+                      height: 2,
+                      width: Dimensions.w270,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white
+                        ),
+                      ),
+                    ),    
+                    Container(
+                      width: Dimensions.w99,
+                      margin: EdgeInsets.only(top: Dimensions.h12*2, bottom: Dimensions.h12*2),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            child: Center(
+                              child: Image.asset("assets/images/settings_modal_cancel.png"),
+                            ),
+                          ),
+                          Container(
+                            child: Center(
+                              child: Image.asset("assets/images/settings_modal_check.png"),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+
+
+               
+                  ],
+                ),
+                )
+              ),
+            );
+          });
+    }
+
+    void showPrivacyPreferencesModal() {
+            showDialog(
+          context: context,
+          builder: (context) {
+            return Dialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
+              ),
+              child: Container(
+                height: Dimensions.h520 + Dimensions.h50,
+                width: Dimensions.w300,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.h16),
+                    gradient: LinearGradient(
+                        colors: [Color(0xFFD51CFF), Color(0xFF6198EF)])),
+                child: SingleChildScrollView(
+                  child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(top: Dimensions.h300/10, bottom: Dimensions.h8),
+                      child: Center(
+                        child: Text(
+                          "GİZLİLİK TERCİHLERİ",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: Dimensions.h100/5
+                          ),
+                        ),
+                      ),
+                    ),
+                     Container(        
+                       margin: EdgeInsets.only( bottom: Dimensions.h12),
+                      width: Dimensions.w270,              
+                      child: Center(
+                        child: Text(
+                          
+                          "Tüm uygulamalarda olduğu gibi, Curvy’i de kullandığında da biz veya ortaklarımız tarafından işletilen araçlar vasıtasıyla cihazındaki bilgiler depolanır ve toplanır. Seçimlerini bu araçlarla ilgili olarak uygun gördüğün şekilde uyarlamanın basit bir yöntemini senin için hazırladık.Seçimlerini istediğin zaman bu ekrandan değiştirebilirsin.",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,                            
+                            
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 2,
+                      width: Dimensions.w270,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white
+                        ),
+                      ),
+                    ),      
+
+
+                    SettingsModalSwitchColumn(
+                      isSwitch: true,
+                      title: "Pazarlama izinleri’ne izin ver",
+                      text: "Şuan pazarlama izinleri’ne izin veriyorsun İstediğin zaman kapatabilirsin",
+                    ),
+                     SizedBox(
+                      height: 2,
+                      width: Dimensions.w270,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white
+                        ),
+                      ),
+                    ),      
+                      SettingsModalSwitchColumn(
+                        function:  showPersonalizedMarketingPreferenecesModal,
+                        isSwitch: false,
+                      title: "Pazarlama izinleri’ni kişiselleştir",
+                      text: "Bu izleyiciler, üçüncü taraf sitelerde veya uygulamalarda Curvy’nin pazarlama kampanyalarının etkinliğini ölçmek ve iyileştirmek için kullanılır. Bu çerezler, reklam ortaklarımız tarafından ilgili alanlarının bir profilini oluşturarak ve diğer sitelerde senin ilgi alanlarına uygun reklamlar göstermek için kullanılabilir.",
+                    ),
+                     SizedBox(
+                      height: 2,
+                      width: Dimensions.w270,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white
+                        ),
+                      ),
+                    ),      
+
+
+                    SettingsModalSwitchColumn(
+                      isSwitch: true,
+                      title: "Zorunlu İzinler",
+                      text: "Bu izleyiciler uygulamanın çalışması için gereklidir ve bu yüzden kapatılamaz. Genellikle senin tarafından yapılan ve gizlilik tercihlerini belirleme, oturum açma veya form doldurma gibi hizmet taleplerine karşılık gelen eylemlere yanıt olarak ayarlanır. ( Ayrıntıları Görüntüle )",
+                    ),
+                       SizedBox(
+                      height: 2,
+                      width: Dimensions.w270,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white
+                        ),
+                      ),
+                    ),      
+
+
+                    SettingsModalSwitchColumn(
+                      isSwitch: true,
+                      title: "Sosyal Medya İzinleri’ne izin ver",
+                      text: "Şuan pazarlama izinleri’ne izin veriyorsun İstediğin zaman kapatabilirsin",
+                    ),
+                     SizedBox(
+                      height: 2,
+                      width: Dimensions.w270,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white
+                        ),
+                      ),
+                    ),  
+                       SettingsModalSwitchColumn(
+                        isSwitch: false,
+                      title: "Sosyal Medya İzinleri’ni kişiselleştir",
+                      text: "Bu izleyiciler arkadaşlarınla ve sosyal ağınla içerik paylaşmanı sağlamak için uygulamaya eklediğimiz sosyal medya ve diğer hizmetler tarafından ayarlanır. Bu izleyicilere izin vermen durumunda bu sosyal özellikleri kullanamayabilir veya göremeyebilirsin.",
+                    ),
+                     SizedBox(
+                      height: 2,
+                      width: Dimensions.w270,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white
+                        ),
+                      ),
+                    ),          
+                    Container(
+                      padding: EdgeInsets.only(left: Dimensions.w2*10, right: Dimensions.w2*10),
+                      margin: EdgeInsets.only(top: Dimensions.h12, bottom: Dimensions.h12),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                             width: Dimensions.w120+Dimensions.w8,
+                            child: Center(
+                              child: Text(
+                                "Reklam İzinleri’ne İzin ver",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: Dimensions.h100/5
+                                ),
+
+                              ),
+                            ),
+                          ),
+                          CupertinoSwitch(value: true, onChanged: (value){})
+                      ]
+                    ),
+                    ),
+                     SizedBox(
+                      height: 2,
+                      width: Dimensions.w270,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white
+                        ),
+                      ),
+                    ),          
+                    SettingsModalSwitchColumn(
+                      function: showPersonalizedAdPreferenecesModal,
+                      isSwitch: false,
+                      title: "Reklam İzinleri’ni Kişiselleştir", 
+                      text: "Bu izleyiciler, reklam kampanyalarımızın etkinliğini ölçmek ve daha alakalı reklamlar sunmak için kullanılır. Bunlar, aynı reklamın sürekli olarak yeniden gösterilmesini önleme, reklamın doğru şekilde görüntülemesini sağlamai profilini temel alan reklamlar seçme ve görüntülenen reklam sayısını ve bunların belli bir reklama tıklayan kişi sayısı gibi yollardan performansını ölçme gibi işlevleri yerine getirir. Bu izleyiciler, reklam ortaklarımız tarafından ilgi alanlarının bir profilini oluşturmak ve diğer sitelerde senin ilgi alanlarına uygun reklamlar göstermek için kullanılabilir. bu izleyicilere izin vermen durumunda, göreceğin reklamlar seninle daha az alakalı olacaktır."
+                    ),
+                     SizedBox(
+                      height: 2,
+                      width: Dimensions.w270,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.white
+                        ),
+                      ),
+                    ),     
+                    Container(
+                      width: Dimensions.w99,
+                      margin: EdgeInsets.only(top: Dimensions.h12*2, bottom: Dimensions.h12*2),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            child: Center(
+                              child: Image.asset("assets/images/settings_modal_cancel.png")
+                            ),
+                          ),
+                           Container(
+                            child: Center(
+                              child: Image.asset("assets/images/settings_modal_check.png")
+                            ),
+                          )
+                        ]
+                      ),
+                    )     
+                  ],
+                ),
+                )
+              ),
+            );
+          });
+    }
+
+   
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -875,7 +2352,9 @@ class SettingsScreen extends StatelessWidget {
                                           primary:
                                               Colors.black.withOpacity(0.2),
                                         ),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          showBanPeopleDialog();
+                                        },
                                         child: Container(
                                           child: Row(
                                             mainAxisAlignment:
@@ -947,7 +2426,9 @@ class SettingsScreen extends StatelessWidget {
                                           primary:
                                               Colors.black.withOpacity(0.2),
                                         ),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          selectLanguageDialog();
+                                        },
                                         child: Container(
                                           child: Row(
                                             mainAxisAlignment:
@@ -1334,7 +2815,9 @@ class SettingsScreen extends StatelessWidget {
                                           primary:
                                               Colors.black.withOpacity(0.2),
                                         ),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          changeUsernameDialog();
+                                        },
                                         child: Container(
                                           child: Row(
                                             mainAxisAlignment:
@@ -1415,7 +2898,9 @@ class SettingsScreen extends StatelessWidget {
                                     shape: BeveledRectangleBorder(
                                         borderRadius: BorderRadius.zero),
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    showEmailNotificationsModal();
+                                  },
                                   child: Container(
                                     width: double.maxFinite,
                                     height: Dimensions.h50,
@@ -1458,7 +2943,9 @@ class SettingsScreen extends StatelessWidget {
                                     shape: BeveledRectangleBorder(
                                         borderRadius: BorderRadius.zero),
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    showInstantNotificationsModal();
+                                  },
                                   child: Container(
                                     width: double.maxFinite,
                                     height: Dimensions.h50,
@@ -1559,9 +3046,7 @@ class SettingsScreen extends StatelessWidget {
                                         color: Color(0xFFC5C5C7), width: 1))),
                             width: double.maxFinite,
                             margin: EdgeInsets.only(
-                              top: Dimensions.h7,
-                              bottom: Dimensions.h27
-                            ),
+                                top: Dimensions.h7, bottom: Dimensions.h27),
                             child: Column(
                               children: [
                                 Expanded(
@@ -1597,7 +3082,6 @@ class SettingsScreen extends StatelessWidget {
                                         ))),
                               ],
                             )),
-                       
                         Container(
                             height: Dimensions.h45,
                             decoration: BoxDecoration(
@@ -1655,9 +3139,7 @@ class SettingsScreen extends StatelessWidget {
                                         color: Color(0xFFC5C5C7), width: 1))),
                             width: double.maxFinite,
                             margin: EdgeInsets.only(
-                              top: Dimensions.h7,
-                              bottom: Dimensions.h27
-                            ),
+                                top: Dimensions.h7, bottom: Dimensions.h27),
                             child: Column(
                               children: [
                                 Expanded(
@@ -1693,7 +3175,6 @@ class SettingsScreen extends StatelessWidget {
                                                       right: Dimensions.w11),
                                                   child: Row(
                                                     children: [
-                                                    
                                                       Icon(Icons
                                                           .chevron_right_rounded)
                                                     ],
@@ -1953,7 +3434,9 @@ class SettingsScreen extends StatelessWidget {
                                     shape: BeveledRectangleBorder(
                                         borderRadius: BorderRadius.zero),
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    showPrivacyPreferencesModal();
+                                  },
                                   child: Container(
                                     width: double.maxFinite,
                                     height: Dimensions.h50,
@@ -2083,7 +3566,7 @@ class SettingsScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                      Container(
+                        Container(
                             height: Dimensions.h45,
                             decoration: BoxDecoration(
                                 border: Border(
@@ -2138,56 +3621,52 @@ class SettingsScreen extends StatelessWidget {
                   "Versiyon 01.00.0",
                   style: TextStyle(color: Color(0xFF7B8491)),
                 ),
-               Container(
-                            height: Dimensions.h45,
-                            decoration: BoxDecoration(
-                                border: Border(
-                                    top: BorderSide(
-                                        color: Color(0xFFC5C5C7), width: 1),
-                                    bottom: BorderSide(
-                                        color: Color(0xFFC5C5C7), width: 1))),
-                            width: double.maxFinite,
-                            margin: EdgeInsets.only(
-                              top: Dimensions.h36,
-                              bottom: Dimensions.h36,
-                            ),
-                            child: Column(
-                              children: [
-                                Expanded(
-                                    child: TextButton(
-                                        style: TextButton.styleFrom(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.zero),
-                                          padding: EdgeInsets.zero,
-                                          backgroundColor: Colors.white,
-                                          primary:
-                                              Colors.black.withOpacity(0.2),
-                                        ),
-                                        onPressed: () {
-                                          Get.to(() => DeleteAccountLastChanceScreen());
-                                        },
-                                        child: Container(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                  padding: EdgeInsets.only(
-                                                      left: Dimensions.w11),
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Hesabı Sil",
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  )),
-                                            ],
-                                          ),
-                                        ))),
-                              ],
-                            )),
+                Container(
+                    height: Dimensions.h45,
+                    decoration: BoxDecoration(
+                        border: Border(
+                            top: BorderSide(color: Color(0xFFC5C5C7), width: 1),
+                            bottom: BorderSide(
+                                color: Color(0xFFC5C5C7), width: 1))),
+                    width: double.maxFinite,
+                    margin: EdgeInsets.only(
+                      top: Dimensions.h36,
+                      bottom: Dimensions.h36,
+                    ),
+                    child: Column(
+                      children: [
+                        Expanded(
+                            child: TextButton(
+                                style: TextButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.zero),
+                                  padding: EdgeInsets.zero,
+                                  backgroundColor: Colors.white,
+                                  primary: Colors.black.withOpacity(0.2),
+                                ),
+                                onPressed: () {
+                                  Get.to(() => DeleteAccountLastChanceScreen());
+                                },
+                                child: Container(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                          padding: EdgeInsets.only(
+                                              left: Dimensions.w11),
+                                          child: Center(
+                                            child: Text(
+                                              "Hesabı Sil",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          )),
+                                    ],
+                                  ),
+                                ))),
+                      ],
+                    )),
               ],
             ),
           )),

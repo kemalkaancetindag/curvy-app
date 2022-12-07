@@ -18,12 +18,11 @@ abstract class Routes {
   static const  deleteAccountLastChance = '/delete-account-last-chance';
   static const  deleteAccountWhy = '/delete-account-why';
   static const  sendFeedback = '/send-feedback';
-  static const  editProfile = '/edit-profile';
-  static const  matching = '/matching';
-  static const  messages = '/messages';
+  static const  editProfile = '/edit-profile';  
+  
   static const  chat = '/chat';
-  static const  archives = '/archives';
-  static const  explore = '/explore';
+  
+  
 
 
 

@@ -126,20 +126,8 @@ final pages = [
       PageGuard()
     ]
   ),
-  GetPage(
-    name: Routes.matching,
-    page: () => MatchingScreen(),
-    middlewares: [
-      PageGuard()
-    ]
-  ),
-  GetPage(
-    name: Routes.messages,
-    page: () => MessagesScreen(),
-    middlewares: [
-      PageGuard()
-    ]
-  ),
+ 
+ 
   GetPage(
     name: Routes.chat,
     page: () => ChatScreen(),
@@ -147,18 +135,5 @@ final pages = [
       PageGuard()
     ]
   ),
-  GetPage(
-    name: Routes.archives,
-    page: () => ArchivesScreen(),
-    middlewares: [
-      PageGuard()
-    ]
-  ),
-  GetPage(
-    name: Routes.explore,
-    page: () => ExploreScreen(),
-    middlewares: [
-      PageGuard()
-    ]
-  ),
+  
 ];
