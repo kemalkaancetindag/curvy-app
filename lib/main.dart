@@ -11,6 +11,7 @@ import 'package:curvy_app/ui/screens/edit_profile.dart';
 import 'package:curvy_app/ui/screens/explore.dart';
 import 'package:curvy_app/ui/screens/index.dart';
 import 'package:curvy_app/ui/screens/login.dart';
+import 'package:curvy_app/ui/screens/main_screen.dart';
 import 'package:curvy_app/ui/screens/matching.dart';
 import 'package:curvy_app/ui/screens/messages.dart';
 import 'package:curvy_app/ui/screens/save_account.dart';
@@ -24,6 +25,7 @@ import 'package:curvy_app/ui/screens/setup_name.dart';
 import 'package:curvy_app/ui/screens/setup_sex.dart';
 import 'package:curvy_app/ui/screens/setup_sexual_preference.dart';
 import 'package:curvy_app/ui/screens/setup_showme.dart';
+
 import 'package:curvy_app/ui/screens/validation_code.dart';
 import 'package:curvy_app/ui/screens/validation_mail.dart';
 import 'package:curvy_app/ui/screens/validation_number.dart';
@@ -52,8 +54,9 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Gilroy'
       ),    
       debugShowCheckedModeBanner: false,
-      initialRoute: Routes.login,
-      getPages: pages,
+      //initialRoute: Routes.login,
+      //getPages: pages,
+      home:MainScreen(),
     );
   }
 }

@@ -21,8 +21,7 @@ class BottomNavBar extends StatelessWidget {
         children: [
           GestureDetector(
          
-            onTap: () {
-              Get.offAllNamed('/explore');   
+            onTap: () {              
               controller.setCurrentIndex(0);           
             },
             child: Container(
@@ -43,7 +42,7 @@ class BottomNavBar extends StatelessWidget {
           ),
           GestureDetector(
              onTap: () {
-              Get.offAllNamed('/archives');    
+              
                controller.setCurrentIndex(1);                
             },
             child: Container(
@@ -64,7 +63,7 @@ class BottomNavBar extends StatelessWidget {
           ),
           GestureDetector(
              onTap: () {
-              Get.offAllNamed('/matching');              
+                         
               controller.setCurrentIndex(2);
             },
             child: Container(
@@ -85,7 +84,7 @@ class BottomNavBar extends StatelessWidget {
           ),
           GestureDetector(
              onTap: () {
-              Get.offAllNamed('/messages'); 
+              
               controller.setCurrentIndex(3);             
             },
             child: Container(
@@ -106,7 +105,7 @@ class BottomNavBar extends StatelessWidget {
           ),
           GestureDetector(
              onTap: () {
-              Get.offAllNamed('/'); 
+              
               controller.setCurrentIndex(4);             
             },
             child: Container(

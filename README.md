@@ -1,5 +1,11 @@
 # TODOS
 
+* SHARED BOTTOM NAVIGATION
+* USER MODEL UPDATE
+* WEB OUTPUT
+* API DEPLOY
+* USER SETTING MODALS
+
 ## ISSUES
 
 * Settings elevated button borders

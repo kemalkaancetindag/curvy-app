@@ -135,8 +135,7 @@ class ArchivesScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: controller.pans[controller.currentIndex],
-        bottomNavigationBar: BottomNavBar(),
+        body: controller.pans[controller.currentIndex],        
       );
     });
   }

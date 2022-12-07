@@ -1,9 +1,15 @@
+import 'package:curvy_app/ui/screens/archives.dart';
+import 'package:curvy_app/ui/screens/explore.dart';
+import 'package:curvy_app/ui/screens/index.dart';
+import 'package:curvy_app/ui/screens/matching.dart';
+import 'package:curvy_app/ui/screens/messages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class NavController extends GetxController {
 
   int _currentIndex = 4; 
+  List<Widget> mainPages = [ExploreScreen(),ArchivesScreen(),MatchingScreen(),MessagesScreen(),IndexScreen()];
   
   
   int get currentIndex => _currentIndex;

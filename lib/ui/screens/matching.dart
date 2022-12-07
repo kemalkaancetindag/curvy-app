@@ -120,8 +120,7 @@ class MatchingScreen extends StatelessWidget {
 
           return MatcherStyle();
         },
-      ),
-      bottomNavigationBar: controller.isMatcherStyleExpanded ? null : BottomNavBar()
+      ),      
     );
       }
     );

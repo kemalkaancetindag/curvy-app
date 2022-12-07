@@ -425,7 +425,7 @@ class MessagesScreen extends StatelessWidget {
             ),
           ]),
         ),
-        bottomNavigationBar: BottomNavBar(),
+        
       );
     });
   }

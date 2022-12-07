@@ -481,7 +481,7 @@ class IndexScreen extends StatelessWidget {
               )
             ],
           )),
-      bottomNavigationBar: BottomNavBar(),
+      
     );
   }
 }

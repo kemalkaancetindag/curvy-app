@@ -106,8 +106,7 @@ class ExploreScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavBar(),
+      ),      
     );
   }
 }
