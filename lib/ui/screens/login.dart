@@ -1,4 +1,6 @@
+import 'package:curvy_app/api/services/auth_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/constants/routes.dart';
 import 'package:curvy_app/ui/screens/save_account.dart';
 import 'package:curvy_app/ui/widgets/login_button.dart';
 import 'package:flutter/material.dart';
@@ -58,9 +60,15 @@ class LoginScreen extends StatelessWidget {
                 )
               )
             ),
-            LoginButton(text: "APPLE İLE GİRİŞ YAP", logo: "assets/images/apple_logo.png",),
-            LoginButton(text: "FACEBOOK İLE KAYDOL", logo: "assets/images/facebook_logo.png",),
-            LoginButton(text: "TELEFON NUMARASI İLE GİRİŞ YAP", logo: "assets/images/phone_icon.png",),
+            LoginButton(text: "APPLE İLE GİRİŞ YAP", logo: "assets/images/apple_logo.png",loginMethod: ()async {
+             await  Get.find<AuthService>().googleAuth();
+            },),
+            LoginButton(text: "FACEBOOK İLE KAYDOL", logo: "assets/images/facebook_logo.png",loginMethod: () async {
+              await Get.find<AuthService>().facebookAuth();
+            },),
+            LoginButton(text: "TELEFON NUMARASI İLE GİRİŞ YAP", logo: "assets/images/phone_icon.png",loginMethod: (){
+              Get.toNamed(Routes.validationNumber);
+            },),
             GestureDetector(
               onTap: (){
                 Get.to(() => SaveAccountScreen());

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1028245020142",
+    "firebase_url": "https://curvy-app-test-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "curvy-app-test",
+    "storage_bucket": "curvy-app-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1028245020142:android:6326327fcc8db9c9c802ff",
+        "android_client_info": {
+          "package_name": "com.example.curvy_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1028245020142-9dspbopf2c7n0eg0k5pd0f651cbnqnaj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.curvy_app",
+            "certificate_hash": "bbc04e2d093563f001f57a7837548838d4664b21"
+          }
+        },
+        {
+          "client_id": "1028245020142-7ovr3mppip19pb644mb5625ljhd5uco0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqDCp5WxH3n_2GuG2d7ZRKluu0jY6MIlE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1028245020142-7ovr3mppip19pb644mb5625ljhd5uco0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

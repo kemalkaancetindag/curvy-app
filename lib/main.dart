@@ -30,15 +30,20 @@ import 'package:curvy_app/ui/screens/validation_code.dart';
 import 'package:curvy_app/ui/screens/validation_mail.dart';
 import 'package:curvy_app/ui/screens/validation_number.dart';
 import 'package:curvy_app/ui/screens/welcome_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 Future<void> main() async {
   
-  await initClients();
-  await initServices();
-  await initControllers();
+  
+  
+  
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await initClients();
+  await initServices();    
+  await initControllers();
   runApp(const MyApp());
 }
 
@@ -54,9 +59,9 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Gilroy'
       ),    
       debugShowCheckedModeBanner: false,
-      //initialRoute: Routes.login,
-      //getPages: pages,
-      home:MainScreen(),
+      initialRoute: Routes.login,
+      getPages: pages,
+      
     );
   }
 }

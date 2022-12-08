@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:curvy_app/api/services/auth_service.dart';
 import 'package:curvy_app/api/services/setup_service.dart';
 import 'package:curvy_app/constants/mobile.api.routes.dart';
 import 'package:curvy_app/ui/screens/index.dart';
@@ -82,7 +83,7 @@ class SetupController extends GetxController {
     _phoneNumberAppendix = appendix;
   }
 
-  void addPhoneNumber(String phoneNumber) {
+  void addPhoneNumber(String phoneNumber) async {
     
     if(phoneNumber == ""){
       Get.snackbar("Hata", "Telefon numarası boş olamaz.", backgroundColor: Color(0xFFD446F4), colorText: Colors.white);
@@ -94,7 +95,7 @@ class SetupController extends GetxController {
     }
     _phoneNumber = '$_phoneNumberAppendix$phoneNumber';
     
-    
+    await Get.find<AuthService>().phoneAuth(_phoneNumber!);
 
      Get.to(() => ValidationCodeScreen());
     

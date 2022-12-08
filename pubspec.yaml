@@ -42,6 +42,10 @@ dependencies:
   permission_handler: ^10.2.0
   dotted_border: ^2.0.0+3
   dio: ^4.0.6
+  firebase_auth:
+  google_sign_in:
+  firebase_core:
+  flutter_facebook_auth:
 
 dev_dependencies:
   flutter_test:

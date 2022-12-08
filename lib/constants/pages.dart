@@ -7,6 +7,7 @@ import 'package:curvy_app/ui/screens/edit_profile.dart';
 import 'package:curvy_app/ui/screens/explore.dart';
 import 'package:curvy_app/ui/screens/index.dart';
 import 'package:curvy_app/ui/screens/login.dart';
+import 'package:curvy_app/ui/screens/main_screen.dart';
 import 'package:curvy_app/ui/screens/matching.dart';
 import 'package:curvy_app/ui/screens/messages.dart';
 import 'package:curvy_app/ui/screens/save_account.dart';
@@ -86,7 +87,7 @@ final pages = [
   ),
   GetPage(
     name: Routes.index,
-    page: () => IndexScreen(),
+    page: () => MainScreen(),
     middlewares: [
       PageGuard()
     ]

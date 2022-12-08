@@ -1,4 +1,5 @@
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/constants/routes.dart';
 import 'package:curvy_app/ui/screens/validation_number.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,13 +10,15 @@ import 'package:get/get.dart';
 class LoginButton extends StatelessWidget {
   final String logo;
   final String text;
-  const LoginButton({super.key, required this.logo, required this.text});
+  final Function loginMethod;
+  const LoginButton({super.key, required this.logo, required this.text, required this.loginMethod});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Get.toNamed('/');
+      onTap: () async {
+        await loginMethod();       
+        
       },
       child: Container(
         width: Dimensions.w320,
