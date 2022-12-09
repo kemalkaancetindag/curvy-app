@@ -71,6 +71,7 @@ class LoginScreen extends StatelessWidget {
               await Get.find<AuthService>().facebookAuth();
             },),
             LoginButton(text: "TELEFON NUMARASI İLE GİRİŞ YAP", logo: "assets/images/phone_icon.png",loginMethod: (){
+              Get.find<SetupController>().seteLoginMethod(4);
               Get.toNamed(Routes.validationNumber);
             },),
             GestureDetector(

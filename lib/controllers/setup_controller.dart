@@ -138,12 +138,22 @@ class SetupController extends GetxController {
      var phoneCredentials = await Get.find<AuthService>().confirmPhoneCode(_validationCodeString!, _verificationId!);
      _userPhoneId = phoneCredentials.user!.uid;
 
+    var usersCollection = Get.find<FirestoreService>().getCollection('users');
+    var results = await usersCollection.where('userID', isEqualTo: _userPhoneId).get();
+
+    if(results.docs.isNotEmpty){
+      Get.toNamed(Routes.index);
+      return;
+    }
+
      if(_loginMethod == 0 || _loginMethod == 1 || _loginMethod == 2){
       
       Get.toNamed(Routes.welcome);
+      return;
      }
      else{
       Get.to(() => ValidationMailScreen());
+      return;
      }
      
   }
@@ -163,7 +173,7 @@ class SetupController extends GetxController {
       return;
     }
     _name = name;
-    print(_googleUser!.email);
+    
     
     Get.to(() => SetupBirthdateScreen());
   }
@@ -300,6 +310,29 @@ class SetupController extends GetxController {
       ).toJson();
 
       await Get.find<FirestoreService>().addToCollection(jsonUser, 'users');
+    }
+    else if(_loginMethod == 4){
+      var userImages = await Get.find<FirestoreService>().uploadImages(_images, _userPhoneId!);
+        var jsonUser = UserModel(
+        userID: _userPhoneId,
+        phone_number: _phoneNumber,
+        login_method: _loginMethod,
+        sex: _sex,
+        name: _name,
+        birthdate: _birthdateString,
+        email: _email,
+        images: userImages,
+        show_me: _showMe,
+        show_sex: _showSex,
+        show_sexual_preference: _showSexPreference,
+        email_confirmation: false,
+        phone_confirmation: true,
+        sexual_preference: _sexPrefenrence,
+        interests: _interests
+      ).toJson();
+
+      await Get.find<FirestoreService>().addToCollection(jsonUser, 'users');
+
     }
     
    

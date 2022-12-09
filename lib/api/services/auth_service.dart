@@ -62,17 +62,12 @@ class AuthService extends GetxService {
 
     await FirebaseAuth.instance.verifyPhoneNumber(
     phoneNumber: number,
-    verificationCompleted: (PhoneAuthCredential credential) async {
-    
-      print("complete");
-      print(credential);
+    verificationCompleted: (PhoneAuthCredential credential) async {                
     },
     verificationFailed: (FirebaseAuthException e) {
       print(e);
     },
-    codeSent: (String verificationId, int? resendToken) async {
-      print("sent");
-      print(verificationId);
+    codeSent: (String verificationId, int? resendToken) async {            
       callback(verificationId);           
     },
     codeAutoRetrievalTimeout: (String verificationId) {
