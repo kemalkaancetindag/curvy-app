@@ -1,4 +1,5 @@
-class User {
+class UserModel {
+  String? userID;
   int? login_method;
   String? phone_number;
   String? email;
@@ -23,21 +24,22 @@ class User {
   bool? show_sexual_preference;
   bool? show_age;
   bool? show_distance;
-  int? curvy_chip = 0;
-  int? curvy_turbo = 0;
-  int? curvy_like = 0;
-  bool? plus_member = false;
-  bool? platinum_member = false;
-  bool? email_confirmation = false;
-  bool? phone_confirmation = false;
-  bool? is_paused = false;
+  int? curvy_chip;
+  int? curvy_turbo;
+  int? curvy_like;
+  bool? plus_member;
+  bool? platinum_member;
+  bool? email_confirmation;
+  bool? phone_confirmation;
+  bool? is_paused;
   _Chat? chat;
-  List<String>? likes = [];
-  List<String>? likeds = [];
+  List<String>? likes;
+  List<String>? likeds;
   _Settings? settings;
 
-  User(
-      {this.login_method,
+  UserModel(
+      {this.userID,
+      this.login_method,
       this.phone_number,
       this.email,
       this.name,
@@ -75,6 +77,7 @@ class User {
       this.settings});
 
   fromJson(Map<String, dynamic> json) {
+    userID = json['userID'];
     login_method = json['login_method'];
     phone_number = json['phone_number'];
     email = json['email'];
@@ -115,7 +118,43 @@ class User {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-
+    data['userID'] = userID;
+    data['login_method'] = login_method;
+    data['phone_number'] = phone_number;
+    data['email'] = email;
+    data['name'] = name;
+    data['birthdate'] = birthdate;
+    data['sex'] = sex;
+    data['show_sex'] = show_sex;
+    data['show_me'] = show_me;
+    data['username'] = username;
+    data['images'] = images;
+    data['about'] = about;
+    data['interests'] = interests;
+    data['zodiac'] = zodiac;
+    data['person_type'] = person_type;
+    data['pet_preference'] = pet_preference;
+    data['smoke_preference'] = smoke_preference;
+    data['alchol_preference'] = alchol_preference;
+    data['job'] = job;
+    data['graduation'] = graduation;
+    data['city'] = city;
+    data['sexual_preference'] = sexual_preference;
+    data['show_sexual_preference'] = show_sexual_preference;
+    data['show_age'] = show_age ?? true;
+    data['show_distance'] = show_distance ?? true;
+    data['curvy_chip'] = curvy_chip ?? 0;
+    data['curvy_turbo'] = curvy_turbo ?? 0;
+    data['curvy_like'] = curvy_like ?? 0;
+    data['plus_member'] = plus_member ?? false;
+    data['platinum_member'] = platinum_member ?? false;
+    data['email_confirmation'] = email_confirmation ?? false;
+    data['phone_confirmation'] = phone_confirmation ?? false;
+    data['is_paused'] = is_paused ?? false;
+    data['chat'] = chat ?? _Chat().toJson();
+    data['likes'] = likes ?? [];
+    data['likeds'] = likeds ?? [];
+    data['settings'] = settings ?? _Settings().toJson();
     return data;
   }
 }
@@ -133,25 +172,25 @@ class _Chat {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['active_chats'] = active_chats;
-    data['trash_chats'] = trash_chats;
+    data['active_chats'] = active_chats ?? [];
+    data['trash_chats'] = trash_chats ?? [];
     return data;
   }
 }
 
 class _Settings {
-  List<String>? connected_accounts = [];
+  List<String>? connected_accounts;
   __Location? location;
   __DistancePreference? distance_preference;
-  bool? global = true;
-  int? recommendation_preference = 0;
-  int? viewer_preference = 0;
-  int? language = 0;
+  bool? global;
+  int? recommendation_preference;
+  int? viewer_preference;
+  int? language;
   __Visibility? visibility;
-  bool? close_reading_notifications = false;
-  bool? play_videos_automatically = true;
-  bool? hide_online_status = false;
-  bool? hide_last_online_status = false;
+  bool? close_reading_notifications;
+  bool? play_videos_automatically;
+  bool? hide_online_status;
+  bool? hide_last_online_status;
   __EmailNotifications? email_notifications;
   __InstantNotifications? instant_notifications;
   __PrivacyPreferences? privacy_preferences;
@@ -197,21 +236,21 @@ class _Settings {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['connected_accounts'] = connected_accounts;
-    data['location'] = location!.toJson();
-    data['distance_preference'] = distance_preference!.toJson();
-    data['global'] = global;
-    data['recommendation_preference'] = recommendation_preference;
-    data['viewer_preference'] = viewer_preference;
-    data['language'] = language;
-    data['visibility'] = visibility!.toJson();
-    data['close_reading_notifications'] = close_reading_notifications;
-    data['play_videos_automatically'] = play_videos_automatically;
-    data['hide_last_online_status'] = hide_last_online_status;
-    data['email_notifications'] = email_notifications!.toJson();
-    data['instant_notifications'] = instant_notifications!.toJson();
-    data['privacy_preferences'] = privacy_preferences!.toJson();
-    data['hide_online_status'] = hide_online_status;
+    data['connected_accounts'] = connected_accounts ?? [];
+    data['location'] = location ?? __Location().toJson();
+    data['distance_preference'] = distance_preference ?? __DistancePreference().toJson();
+    data['global'] = global ?? true;
+    data['recommendation_preference'] = recommendation_preference ?? 0;
+    data['viewer_preference'] = viewer_preference ?? 0;
+    data['language'] = language ?? 0;
+    data['visibility'] = visibility ?? __Visibility().toJson();
+    data['close_reading_notifications'] = close_reading_notifications ?? false;
+    data['play_videos_automatically'] = play_videos_automatically ?? true;
+    data['hide_last_online_status'] = hide_last_online_status ?? false;
+    data['email_notifications'] = email_notifications ?? __EmailNotifications().toJson();
+    data['instant_notifications'] = instant_notifications ?? __InstantNotifications().toJson();
+    data['privacy_preferences'] = privacy_preferences ?? __PrivacyPreferences().toJson();
+    data['hide_online_status'] = hide_online_status ?? false;
 
     return data;
   }
@@ -230,8 +269,8 @@ class __Location {
 }
 
 class __DistancePreference {
-  double? distance = 15.0;
-  bool? only_this_interval = false;
+  double? distance;
+  bool? only_this_interval;
 
   __DistancePreference({this.distance, this.only_this_interval});
 
@@ -242,18 +281,18 @@ class __DistancePreference {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['distance'] = distance;
-    data['only_this_interval'] = only_this_interval;
+    data['distance'] = distance ?? 15.0;
+    data['only_this_interval'] = only_this_interval ?? false;
 
     return data;
   }
 }
 
 class __Visibility {
-  bool? hide_me_on_vip = false;
-  bool? recommend_me_on_turbo = true;
-  bool? hide_me_on_freestyle = false;
-  bool? hide_me_on_matcherstyle = false;
+  bool? hide_me_on_vip;
+  bool? recommend_me_on_turbo;
+  bool? hide_me_on_freestyle;
+  bool? hide_me_on_matcherstyle;
 
   __Visibility(
       {this.hide_me_on_freestyle,
@@ -270,18 +309,18 @@ class __Visibility {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['hide_me_on_vip'] = hide_me_on_vip;
-    data['recommend_me_on_turbo'] = recommend_me_on_turbo;
-    data['hide_me_on_freestyle'] = hide_me_on_freestyle;
-    data['hide_me_on_matcherstyle'] = hide_me_on_matcherstyle;
+    data['hide_me_on_vip'] = hide_me_on_vip ?? false;
+    data['recommend_me_on_turbo'] = recommend_me_on_turbo ?? true;
+    data['hide_me_on_freestyle'] = hide_me_on_freestyle ?? false;
+    data['hide_me_on_matcherstyle'] = hide_me_on_matcherstyle ?? false;
     return data;
   }
 }
 
 class __EmailNotifications {
-  bool? on_match = true;
-  bool? on_message = true;
-  bool? on_marketing = true;
+  bool? on_match;
+  bool? on_message;
+  bool? on_marketing;
 
   __EmailNotifications({this.on_match, this.on_message, this.on_marketing});
 
@@ -293,22 +332,22 @@ class __EmailNotifications {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['on_match'] = on_match;
-    data['on_message'] = on_message;
-    data['on_marketing'] = on_marketing;
+    data['on_match'] = on_match ?? true;
+    data['on_message'] = on_message ?? true;
+    data['on_marketing'] = on_marketing ?? true;
 
     return data;
   }
 }
 
 class __InstantNotifications {
-  bool? on_match = true;
-  bool? on_message = true;
-  bool? on_message_like = true;
-  bool? on_curvy_like = true;
-  int? new_likes = 1;
-  bool? vibration = true;
-  bool? sound = true;
+  bool? on_match;
+  bool? on_message;
+  bool? on_message_like;
+  bool? on_curvy_like;
+  int? new_likes;
+  bool? vibration;
+  bool? sound;
 
   __InstantNotifications(
       {this.on_match,
@@ -331,21 +370,21 @@ class __InstantNotifications {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['on_match'] = on_match;
-    data['on_message'] = on_message;
-    data['on_message_like'] = on_message_like;
-    data['on_curvy_like'] = on_curvy_like;
-    data['new_likes'] = new_likes;
-    data['vibration'] = vibration;
-    data['sound'] = sound;
+    data['on_match'] = on_match ?? true;
+    data['on_message'] = on_message ?? true;
+    data['on_message_like'] = on_message_like ?? true;
+    data['on_curvy_like'] = on_curvy_like ?? true;
+    data['new_likes'] = new_likes ?? 1;
+    data['vibration'] = vibration ?? true;
+    data['sound'] = sound ?? true;
 
     return data;
   }
 }
 
 class __PrivacyPreferences {
-  bool? compulsory_permissions = true;
-  bool? curvy_team_promotions = true;
+  bool? compulsory_permissions;
+  bool? curvy_team_promotions;
   ____MarketingPermissions? marketing_permissons;
   ____SocialMediaPermissions? social_media_permissions;
   ____AdvertisingPermissions? advertising_permissions;
@@ -370,20 +409,20 @@ class __PrivacyPreferences {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['compulsory_permissions'] = compulsory_permissions;
-    data['curvy_team_promotions'] = curvy_team_promotions;
-    data['marketing_permissons'] = marketing_permissons!.toJson();
-    data['social_media_permissions'] = social_media_permissions!.toJson();
-    data['advertising_permissions'] = advertising_permissions!.toJson();
+    data['compulsory_permissions'] = compulsory_permissions ?? true;
+    data['curvy_team_promotions'] = curvy_team_promotions ?? true;
+    data['marketing_permissons'] = marketing_permissons ?? ____MarketingPermissions().toJson();
+    data['social_media_permissions'] = social_media_permissions ?? ____SocialMediaPermissions().toJson();
+    data['advertising_permissions'] = advertising_permissions ?? ____AdvertisingPermissions().toJson();
 
     return data;
   }
 }
 
 class ____MarketingPermissions {
-  bool? app_flayer = true;
-  bool? branch = true;
-  bool? new_marketing_permissions = true;
+  bool? app_flayer;
+  bool? branch;
+  bool? new_marketing_permissions;
 
   ____MarketingPermissions(
       {this.app_flayer, this.branch, this.new_marketing_permissions});
@@ -396,9 +435,9 @@ class ____MarketingPermissions {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['app_flayer'] = app_flayer;
-    data['branch'] = branch;
-    data['new_marketing_permissions'] = new_marketing_permissions;
+    data['app_flayer'] = app_flayer ?? true;
+    data['branch'] = branch ?? true;
+    data['new_marketing_permissions'] = new_marketing_permissions ?? true;
 
     return data;
   }
@@ -415,11 +454,11 @@ class ____SocialMediaPermissions {
 }
 
 class ____AdvertisingPermissions {
-  bool? curvy_direct_ads = true;
-  bool? google_ads = true;
-  bool? curvy_promotions = true;
-  bool? facebook_ads = true;
-  bool? new_advertising_permissions = true;
+  bool? curvy_direct_ads;
+  bool? google_ads;
+  bool? curvy_promotions;
+  bool? facebook_ads;
+  bool? new_advertising_permissions;
 
   ____AdvertisingPermissions(
       {this.curvy_direct_ads,
@@ -438,11 +477,11 @@ class ____AdvertisingPermissions {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['curvy_direct_ads'] = curvy_direct_ads;
-    data['google_ads'] = google_ads;
-    data['curvy_promotions'] = curvy_promotions;
-    data['facebook_ads'] = facebook_ads;
-    data['new_advertising_permissions'] = new_advertising_permissions;
+    data['curvy_direct_ads'] = curvy_direct_ads ?? true;
+    data['google_ads'] = google_ads ?? true;
+    data['curvy_promotions'] = curvy_promotions ?? true;
+    data['facebook_ads'] = facebook_ads ?? true;
+    data['new_advertising_permissions'] = new_advertising_permissions ?? true;
 
     return data;
   }

@@ -1,8 +1,11 @@
 import 'dart:io';
 
 import 'package:curvy_app/api/services/auth_service.dart';
+import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/setup_service.dart';
 import 'package:curvy_app/constants/mobile.api.routes.dart';
+import 'package:curvy_app/constants/routes.dart';
+import 'package:curvy_app/models/user.model.dart';
 import 'package:curvy_app/ui/screens/index.dart';
 import 'package:curvy_app/ui/screens/setup_birthdate.dart';
 import 'package:curvy_app/ui/screens/setup_image.dart';
@@ -11,7 +14,7 @@ import 'package:curvy_app/ui/screens/validation_code.dart';
 import 'package:curvy_app/ui/screens/validation_mail.dart';
 import 'package:curvy_app/ui/screens/welcome_screen.dart';
 import 'package:dio/dio.dart' as dio_package;
-import 'package:flutter/animation.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -21,8 +24,10 @@ class SetupController extends GetxController {
 
   //SERVICES
   SetupService setupService;
-
-
+  User?   _googleUser;  
+  String? _userPhoneId;
+  int? _loginMethod;
+  String? _verificationId;
   String? _phoneNumberAppendix = "TR+90";
   String? _phoneNumber;
   String? _phoneConfirmationCode;
@@ -79,8 +84,20 @@ class SetupController extends GetxController {
     super.onInit();
   }
 
+  void setGoogleUser(User user) {
+    _googleUser = user;
+  }
+  void seteLoginMethod(int loginMethod) {
+    _loginMethod = loginMethod;
+  }
+
   void setPhoneNumberAppendix(String? appendix) {
     _phoneNumberAppendix = appendix;
+  }
+
+
+  void _setVerificationId(String verificationId){
+    _verificationId = verificationId;
   }
 
   void addPhoneNumber(String phoneNumber) async {
@@ -95,7 +112,7 @@ class SetupController extends GetxController {
     }
     _phoneNumber = '$_phoneNumberAppendix$phoneNumber';
     
-    await Get.find<AuthService>().phoneAuth(_phoneNumber!);
+    await Get.find<AuthService>().phoneAuth(_phoneNumber!, _setVerificationId);
 
      Get.to(() => ValidationCodeScreen());
     
@@ -111,14 +128,24 @@ class SetupController extends GetxController {
     
   }
 
-  void createValidationCode() {
+  void createValidationCode() async {
     if(_validationCode.length != 6) {
       Get.snackbar("Hata", "Yanlış kod girdiniz.", backgroundColor: Color(0xFFD446F4), colorText: Colors.white);
       return;
     }
     _validationCodeString = _validationCode.join();
 
-     Get.to(() => ValidationMailScreen());
+     var phoneCredentials = await Get.find<AuthService>().confirmPhoneCode(_validationCodeString!, _verificationId!);
+     _userPhoneId = phoneCredentials.user!.uid;
+
+     if(_loginMethod == 0 || _loginMethod == 1 || _loginMethod == 2){
+      
+      Get.toNamed(Routes.welcome);
+     }
+     else{
+      Get.to(() => ValidationMailScreen());
+     }
+     
   }
 
   void addEmail(String email) {
@@ -136,6 +163,8 @@ class SetupController extends GetxController {
       return;
     }
     _name = name;
+    print(_googleUser!.email);
+    
     Get.to(() => SetupBirthdateScreen());
   }
 
@@ -237,7 +266,8 @@ class SetupController extends GetxController {
 
 
   Future<void> createImageFiles() async {
-
+    
+    
     
     _images.removeWhere((element) => element == "");
     if(_images.length == 0){
@@ -247,39 +277,38 @@ class SetupController extends GetxController {
     }
 
 
-      
-    dio_package.FormData data = dio_package.FormData.fromMap({
-      'email':_email,
-      'phone':_phoneNumber,
-      'name':_name,
-      'birthdate':_birthdateString,
-      'sex':_sex,
-      'sex_preference':_sexPrefenrence.toString(),
-      'show_me':_showMe,
-      'interests': _interests.toString(),
-      'show_sex':_showSex,
-      'show_sex_preference':_showSexPreference
-    });
+    
+    //_isAfterSetup = true;
+    if(_loginMethod == 0){
+      var userImages = await Get.find<FirestoreService>().uploadImages(_images, _googleUser!.uid);
+      var jsonUser = UserModel(
+        userID: _googleUser!.uid,
+        phone_number: _userPhoneId,
+        login_method: _loginMethod,
+        sex: _sex,
+        name: _name,
+        birthdate: _birthdateString,
+        email: _googleUser!.email,
+        images: userImages,
+        show_me: _showMe,
+        show_sex: _showSex,
+        show_sexual_preference: _showSexPreference,
+        email_confirmation: true,
+        phone_confirmation: true,
+        sexual_preference: _sexPrefenrence,
+        interests: _interests
+      ).toJson();
 
-    _images.forEach((element) async {
-      if(element != ""){
-        File imageFile = File(element);     
-        
-          
-        data.files.add(MapEntry("image", await dio_package.MultipartFile.fromFile(imageFile.path, filename: element.split("/").last, contentType: MediaType('image', element.split("/").last.split('.').last))));
-      
-      }
-      
-    });
-    _isAfterSetup = true;
-
+      await Get.find<FirestoreService>().addToCollection(jsonUser, 'users');
+    }
+    
    
-    print("felaket");
-    var response = await setupService.createUser(Routes.createUser, data);
+    
+    
 
     
     
-    Get.offAll(()=>IndexScreen());
+    Get.offAllNamed(Routes.index);
   }
 
   void setAfterSetup( bool isAfterSetup) {

@@ -1,3 +1,3 @@
-class Routes {
+class ApiRoutes {
   static String createUser = "/user/create";
 }

@@ -46,6 +46,8 @@ dependencies:
   google_sign_in:
   firebase_core:
   flutter_facebook_auth:
+  cloud_firestore:
+  firebase_storage:
 
 dev_dependencies:
   flutter_test:

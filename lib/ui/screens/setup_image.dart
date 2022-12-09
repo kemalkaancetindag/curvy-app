@@ -253,8 +253,8 @@ class SetupImageScreen extends StatelessWidget {
               );
             })),
             GestureDetector(
-              onTap: () async {
-                await Get.find<SetupController>().createImageFiles();
+              onTap: ()  {
+                Get.find<SetupController>().createImageFiles();
               },
               child: GradientButton(text: "DEVAM ET"),
             )
