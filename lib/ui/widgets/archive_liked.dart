@@ -5,7 +5,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class ArchiveLiked extends StatelessWidget {
-  const ArchiveLiked({super.key});
+  ArchiveLiked({super.key});
 
   @override
   Widget build(BuildContext context) {

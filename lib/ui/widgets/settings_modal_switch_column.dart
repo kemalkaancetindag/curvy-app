@@ -9,7 +9,7 @@ class SettingsModalSwitchColumn extends StatelessWidget {
   final String title;
   final String text;
   final bool isSwitch;
-  const SettingsModalSwitchColumn({super.key, required this.title, required this.text, required this.isSwitch, this.function});
+  SettingsModalSwitchColumn({super.key, required this.title, required this.text, required this.isSwitch, this.function});
 
   @override
   Widget build(BuildContext context) {

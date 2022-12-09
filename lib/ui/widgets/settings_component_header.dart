@@ -6,7 +6,7 @@ import 'package:flutter/src/widgets/framework.dart';
 
 class SettingsComponentHeader extends StatelessWidget {
   final String text;
-  const SettingsComponentHeader({super.key, required this.text});
+  SettingsComponentHeader({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {

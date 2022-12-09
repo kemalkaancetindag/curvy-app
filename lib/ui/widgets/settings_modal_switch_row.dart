@@ -7,7 +7,7 @@ import 'package:flutter/src/widgets/framework.dart';
 class SettingsModalSwitchRow extends StatelessWidget {
   final String title;
   final String text;
-  const SettingsModalSwitchRow({super.key, required this.title, required this.text});
+  SettingsModalSwitchRow({super.key, required this.title, required this.text});
 
 
   @override

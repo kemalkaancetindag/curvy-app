@@ -8,7 +8,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 class SaveAccountScreen extends StatelessWidget {
-  const SaveAccountScreen({super.key});
+  SaveAccountScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

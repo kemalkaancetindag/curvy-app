@@ -19,7 +19,7 @@ import 'package:get/get.dart';
 class GradientButton extends StatelessWidget {
   final String text;
   final String? page;
-  const GradientButton({super.key, required this.text,  this.page});
+  GradientButton({super.key, required this.text,  this.page});
 
   @override
   Widget build(BuildContext context) {

@@ -7,7 +7,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 class DeleteAccountWhyScreen extends StatelessWidget {
-  const DeleteAccountWhyScreen({super.key});
+  DeleteAccountWhyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

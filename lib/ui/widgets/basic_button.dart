@@ -7,7 +7,7 @@ import 'package:flutter/src/widgets/framework.dart';
 class BasicButton extends StatelessWidget {
   final String text;
   final bool isSelected;
-  const BasicButton({super.key, required this.text, required this.isSelected});
+  BasicButton({super.key, required this.text, required this.isSelected});
 
   @override
   Widget build(BuildContext context) {

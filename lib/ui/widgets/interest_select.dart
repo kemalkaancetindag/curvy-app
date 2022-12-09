@@ -9,7 +9,7 @@ class InterestSelect extends StatelessWidget {
   final String text;
   final bool isSelected;
 
-  const InterestSelect(
+  InterestSelect(
       {super.key,
       required this.text,
       required this.isSelected,

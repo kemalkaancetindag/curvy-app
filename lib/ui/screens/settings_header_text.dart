@@ -5,7 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 
 class SettingsHeaderText extends StatelessWidget {
   final String text;
-  const SettingsHeaderText({super.key, required this.text});
+  SettingsHeaderText({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class SettingsHeaderText extends StatelessWidget {
       child: Text(
           text,
           style: TextStyle(
-              color: const Color(0xFF7B8491),
+              color: Color(0xFF7B8491),
               fontSize: Dimensions.h14,
               fontWeight: FontWeight.bold),
         ),

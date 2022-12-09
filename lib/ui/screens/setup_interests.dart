@@ -12,7 +12,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 class SetupInterestsScreen extends StatelessWidget {
-  const SetupInterestsScreen({super.key});
+  SetupInterestsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

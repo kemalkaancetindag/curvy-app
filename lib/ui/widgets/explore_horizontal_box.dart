@@ -4,7 +4,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class ExploreHorizontalBox extends StatelessWidget {
-  const ExploreHorizontalBox({super.key});
+  ExploreHorizontalBox({super.key});
 
   @override
   Widget build(BuildContext context) {

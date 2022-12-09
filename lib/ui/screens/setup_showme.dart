@@ -9,7 +9,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 class SetupShowmeScreen extends StatelessWidget {
-  const SetupShowmeScreen({super.key});
+  SetupShowmeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

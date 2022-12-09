@@ -9,7 +9,7 @@ class WelcomeScreenInfo extends StatelessWidget {
   final String title;
   final String info;
   final bool isUnderlined; 
-  const WelcomeScreenInfo({super.key, required this.title, required this.info, required this.isUnderlined});
+  WelcomeScreenInfo({super.key, required this.title, required this.info, required this.isUnderlined});
 
   @override
   Widget build(BuildContext context) {

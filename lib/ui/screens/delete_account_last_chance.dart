@@ -6,7 +6,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 class DeleteAccountLastChanceScreen extends StatelessWidget {
-  const DeleteAccountLastChanceScreen({super.key});
+  DeleteAccountLastChanceScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

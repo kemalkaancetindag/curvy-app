@@ -10,7 +10,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 class ArchivesScreen extends StatelessWidget {
-  const ArchivesScreen({super.key});
+  ArchivesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -14,7 +14,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 class IndexScreen extends StatelessWidget {
-  const IndexScreen({super.key});
+  IndexScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

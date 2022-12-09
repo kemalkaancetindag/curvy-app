@@ -10,7 +10,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 class SetupBirthdateScreen extends StatelessWidget {
-  const SetupBirthdateScreen({super.key});
+  SetupBirthdateScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

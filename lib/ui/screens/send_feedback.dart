@@ -5,7 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 class SendFeedbackScreen extends StatelessWidget {
-  const SendFeedbackScreen({super.key});
+  SendFeedbackScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

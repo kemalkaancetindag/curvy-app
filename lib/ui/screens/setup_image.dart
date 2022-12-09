@@ -13,7 +13,7 @@ import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class SetupImageScreen extends StatelessWidget {
-  const SetupImageScreen({super.key});
+  SetupImageScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

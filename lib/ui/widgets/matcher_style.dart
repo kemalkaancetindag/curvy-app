@@ -7,7 +7,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 class MatcherStyle extends StatelessWidget {
-  const MatcherStyle({super.key});
+  MatcherStyle({super.key});
 
   @override
   Widget build(BuildContext context) {

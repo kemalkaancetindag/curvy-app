@@ -9,7 +9,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 class MatchingScreen extends StatelessWidget {
-  const MatchingScreen({super.key});
+  MatchingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

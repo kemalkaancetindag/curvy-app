@@ -10,7 +10,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class LoginScreen extends StatelessWidget {
       body: Container(        
         width: double.maxFinite,
         height: double.maxFinite,
-        decoration:const BoxDecoration(
+        decoration: BoxDecoration(
           gradient:  LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,

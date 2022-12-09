@@ -10,7 +10,7 @@ class MainBoostButton extends StatelessWidget {
   final String text;
   final int count;
   final LinearGradient background;
-  const MainBoostButton(
+  MainBoostButton(
       {super.key,
       required this.width,
       required this.icon,

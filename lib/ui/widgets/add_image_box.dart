@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'dart:io';
 class AddImageBox extends StatelessWidget {
   final int index;
-  const AddImageBox({super.key, required this.index});
+  AddImageBox({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {

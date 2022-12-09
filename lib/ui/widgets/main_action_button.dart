@@ -7,7 +7,7 @@ import 'package:flutter/src/widgets/framework.dart';
 class MainActionButton extends StatelessWidget {
   final String text;
   final String icon;
-  const MainActionButton({super.key, required this.text, required this.icon});
+  MainActionButton({super.key, required this.text, required this.icon});
 
   @override
   Widget build(BuildContext context) {

@@ -13,7 +13,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
+  SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -1838,8 +1838,8 @@ class SettingsScreen extends StatelessWidget {
                               SizedBox(
                                   width: 340,
                                   height: 1,
-                                  child: const DecoratedBox(
-                                    decoration: const BoxDecoration(
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
                                         color: Color(0xFFC5C5C7)),
                                   )),
                               Container(
@@ -1889,8 +1889,8 @@ class SettingsScreen extends StatelessWidget {
                               SizedBox(
                                   width: 340,
                                   height: 1,
-                                  child: const DecoratedBox(
-                                    decoration: const BoxDecoration(
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
                                         color: Color(0xFFC5C5C7)),
                                   )),
                               Expanded(
@@ -1942,8 +1942,8 @@ class SettingsScreen extends StatelessWidget {
                               SizedBox(
                                   width: 340,
                                   height: 1,
-                                  child: const DecoratedBox(
-                                    decoration: const BoxDecoration(
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
                                         color: Color(0xFFC5C5C7)),
                                   )),
                               Container(
@@ -1990,8 +1990,8 @@ class SettingsScreen extends StatelessWidget {
                               SizedBox(
                                   width: 340,
                                   height: 1,
-                                  child: const DecoratedBox(
-                                    decoration: const BoxDecoration(
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
                                         color: Color(0xFFC5C5C7)),
                                   )),
                               Container(
@@ -2119,8 +2119,8 @@ class SettingsScreen extends StatelessWidget {
                               SizedBox(
                                   width: 340,
                                   height: 1,
-                                  child: const DecoratedBox(
-                                    decoration: const BoxDecoration(
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
                                         color: Color(0xFFC5C5C7)),
                                   )),
                               ElevatedButton(
@@ -2249,8 +2249,8 @@ class SettingsScreen extends StatelessWidget {
                               SizedBox(
                                   width: 340,
                                   height: 1,
-                                  child: const DecoratedBox(
-                                    decoration: const BoxDecoration(
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
                                         color: Color(0xFFC5C5C7)),
                                   )),
                               ElevatedButton(
@@ -2747,8 +2747,8 @@ class SettingsScreen extends StatelessWidget {
                               SizedBox(
                                   width: 340,
                                   height: 1,
-                                  child: const DecoratedBox(
-                                    decoration: const BoxDecoration(
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
                                         color: Color(0xFFC5C5C7)),
                                   )),
                               ElevatedButton(
@@ -2932,8 +2932,8 @@ class SettingsScreen extends StatelessWidget {
                               SizedBox(
                                   width: 340,
                                   height: 1,
-                                  child: const DecoratedBox(
-                                    decoration: const BoxDecoration(
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
                                         color: Color(0xFFC5C5C7)),
                                   )),
                               ElevatedButton(
@@ -2977,8 +2977,8 @@ class SettingsScreen extends StatelessWidget {
                               SizedBox(
                                   width: 340,
                                   height: 1,
-                                  child: const DecoratedBox(
-                                    decoration: const BoxDecoration(
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
                                         color: Color(0xFFC5C5C7)),
                                   )),
                               ElevatedButton(
@@ -3239,8 +3239,8 @@ class SettingsScreen extends StatelessWidget {
                               SizedBox(
                                   width: 340,
                                   height: 1,
-                                  child: const DecoratedBox(
-                                    decoration: const BoxDecoration(
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
                                         color: Color(0xFFC5C5C7)),
                                   )),
                               ElevatedButton(
@@ -3282,8 +3282,8 @@ class SettingsScreen extends StatelessWidget {
                               SizedBox(
                                   width: 340,
                                   height: 1,
-                                  child: const DecoratedBox(
-                                    decoration: const BoxDecoration(
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
                                         color: Color(0xFFC5C5C7)),
                                   )),
                               ElevatedButton(
@@ -3380,8 +3380,8 @@ class SettingsScreen extends StatelessWidget {
                               SizedBox(
                                   width: 340,
                                   height: 1,
-                                  child: const DecoratedBox(
-                                    decoration: const BoxDecoration(
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
                                         color: Color(0xFFC5C5C7)),
                                   )),
                               ElevatedButton(
@@ -3423,8 +3423,8 @@ class SettingsScreen extends StatelessWidget {
                               SizedBox(
                                   width: 340,
                                   height: 1,
-                                  child: const DecoratedBox(
-                                    decoration: const BoxDecoration(
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
                                         color: Color(0xFFC5C5C7)),
                                   )),
                               ElevatedButton(
@@ -3523,8 +3523,8 @@ class SettingsScreen extends StatelessWidget {
                               SizedBox(
                                   width: 340,
                                   height: 1,
-                                  child: const DecoratedBox(
-                                    decoration: const BoxDecoration(
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
                                         color: Color(0xFFC5C5C7)),
                                   )),
                               ElevatedButton(
@@ -3677,7 +3677,7 @@ class SettingsScreen extends StatelessWidget {
 class GradientRectSliderTrackShape extends SliderTrackShape
     with BaseSliderTrackShape {
   /// Create a slider track that draws two rectangles with rounded outer edges.
-  const GradientRectSliderTrackShape();
+  GradientRectSliderTrackShape();
 
   @override
   void paint(
@@ -3711,7 +3711,7 @@ class GradientRectSliderTrackShape extends SliderTrackShape
       return;
     }
 
-    LinearGradient gradient = const LinearGradient(
+    LinearGradient gradient = LinearGradient(
       colors: [
         Color(0xFFD51CFF),
         Color(0xFF00FFE1),

@@ -7,7 +7,7 @@ import 'package:flutter/src/widgets/framework.dart';
 class PersonTypeDialogButton extends StatelessWidget {
   final String text;
   final bool isSelected;
-  const PersonTypeDialogButton(
+  PersonTypeDialogButton(
       {super.key, required this.text, required this.isSelected});
 
   @override

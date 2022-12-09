@@ -5,7 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 
 class BlackBoldHeader extends StatelessWidget {
   final String text;
-  const BlackBoldHeader({super.key, required this.text});
+  BlackBoldHeader({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {

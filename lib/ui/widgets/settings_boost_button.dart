@@ -8,7 +8,7 @@ class SettingsBoostButton extends StatelessWidget {
   final LinearGradient background;
   final String icon;
   final String text;
-  const SettingsBoostButton({super.key, required this.background, required this.icon, required this.text});
+  SettingsBoostButton({super.key, required this.background, required this.icon, required this.text});
 
   @override
   Widget build(BuildContext context) {

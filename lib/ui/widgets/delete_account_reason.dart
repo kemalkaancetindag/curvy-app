@@ -7,7 +7,7 @@ class DeleteAccountReason extends StatelessWidget {
   final String icon;
   final String text;
 
-  const DeleteAccountReason({super.key, required this.icon, required this.text});
+  DeleteAccountReason({super.key, required this.icon, required this.text});
 
   @override
   Widget build(BuildContext context) {

@@ -8,7 +8,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 class MessagesScreen extends StatelessWidget {
-  const MessagesScreen({super.key});
+  MessagesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

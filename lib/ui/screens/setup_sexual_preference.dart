@@ -11,7 +11,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 class SetupSexualPreferenceScreen extends StatelessWidget {
-  const SetupSexualPreferenceScreen({super.key});
+  SetupSexualPreferenceScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

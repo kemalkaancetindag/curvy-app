@@ -8,7 +8,7 @@ class SexualPreferenceSelect extends StatelessWidget {
   final String text;
   final bool isSelected;
 
-  const SexualPreferenceSelect({super.key, required this.text, required this.isSelected});
+  SexualPreferenceSelect({super.key, required this.text, required this.isSelected});
 
   @override
   Widget build(BuildContext context) {
