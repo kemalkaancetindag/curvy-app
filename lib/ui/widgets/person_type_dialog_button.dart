@@ -7,12 +7,18 @@ import 'package:flutter/src/widgets/framework.dart';
 class PersonTypeDialogButton extends StatelessWidget {
   final String text;
   final bool isSelected;
+  final int personalityType;
+  final Function(int) select;
   PersonTypeDialogButton(
-      {super.key, required this.text, required this.isSelected});
+      {super.key, required this.text, required this.isSelected, required this.personalityType, required this.select});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: (){
+        select(personalityType);
+      },
+      child: Container(
       margin: EdgeInsets.only(bottom: Dimensions.h90/5),
       width: Dimensions.w8 * 10,
       height: Dimensions.h50 / 2,
@@ -36,6 +42,7 @@ class PersonTypeDialogButton extends StatelessWidget {
           ),
         ),
       ),
+    ),
     );
   }
 }

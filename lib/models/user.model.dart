@@ -9,9 +9,9 @@ class UserModel {
   bool? show_sex;
   int? show_me;
   String? username;
-  List<String>? images;
+  List<dynamic>? images;
   String? about;
-  List<int>? interests;
+  List<dynamic>? interests;
   int? zodiac;
   int? person_type;
   int? pet_preference;
@@ -20,7 +20,7 @@ class UserModel {
   String? job;
   String? graduation;
   String? city;
-  List<int>? sexual_preference;
+  List<dynamic>? sexual_preference;
   bool? show_sexual_preference;
   bool? show_age;
   bool? show_distance;
@@ -33,8 +33,8 @@ class UserModel {
   bool? phone_confirmation;
   bool? is_paused;
   _Chat? chat;
-  List<String>? likes;
-  List<String>? likeds;
+  List<dynamic>? likes;
+  List<dynamic>? likeds;
   _Settings? settings;
 
   UserModel(
@@ -76,7 +76,7 @@ class UserModel {
       this.likeds,
       this.settings});
 
-  fromJson(Map<String, dynamic> json) {
+  UserModel.fromJson(Map<String, dynamic> json) {
     userID = json['userID'];
     login_method = json['login_method'];
     phone_number = json['phone_number'];
@@ -160,8 +160,8 @@ class UserModel {
 }
 
 class _Chat {
-  List<String>? active_chats = [];
-  List<String>? trash_chats = [];
+  List<dynamic>? active_chats = [];
+  List<dynamic>? trash_chats = [];
 
   _Chat({this.active_chats, this.trash_chats});
 
@@ -179,7 +179,7 @@ class _Chat {
 }
 
 class _Settings {
-  List<String>? connected_accounts;
+  List<dynamic>? connected_accounts;
   __Location? location;
   __DistancePreference? distance_preference;
   bool? global;

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:curvy_app/api/services/auth_service.dart';
 import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/setup_service.dart';
+import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/mobile.api.routes.dart';
 import 'package:curvy_app/constants/routes.dart';
 import 'package:curvy_app/models/user.model.dart';
@@ -310,6 +311,7 @@ class SetupController extends GetxController {
       ).toJson();
 
       await Get.find<FirestoreService>().addToCollection(jsonUser, 'users');
+      await Get.find<SharedPreferenceService>().saveUser(jsonUser);
     }
     else if(_loginMethod == 4){
       var userImages = await Get.find<FirestoreService>().uploadImages(_images, _userPhoneId!);
@@ -332,8 +334,11 @@ class SetupController extends GetxController {
       ).toJson();
 
       await Get.find<FirestoreService>().addToCollection(jsonUser, 'users');
+      await Get.find<SharedPreferenceService>().saveUser(jsonUser);
 
     }
+
+
     
    
     

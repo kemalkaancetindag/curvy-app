@@ -25,6 +25,7 @@ import 'package:curvy_app/ui/screens/validation_code.dart';
 import 'package:curvy_app/ui/screens/validation_mail.dart';
 import 'package:curvy_app/ui/screens/validation_number.dart';
 import 'package:curvy_app/ui/screens/welcome_screen.dart';
+import 'package:curvy_app/ui/util/login_bindings.dart';
 import 'package:curvy_app/ui/util/page_guard.dart';
 import 'package:get/get.dart';
 
@@ -32,6 +33,10 @@ final pages = [
   GetPage(
     name: Routes.login,
     page: () => LoginScreen(),
+    binding: LoginBindings(),
+    middlewares: [
+      PageGuard()
+    ]
   ),
   GetPage(
     name: Routes.saveAccount,

@@ -43,6 +43,8 @@ Future<void> main() async {
   await Firebase.initializeApp();
   await initClients();
   await initServices();    
+  
+  
   await initControllers();
   runApp(const MyApp());
 }

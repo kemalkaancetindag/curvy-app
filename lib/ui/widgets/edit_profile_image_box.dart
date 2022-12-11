@@ -16,7 +16,7 @@ class EditPorfileImageBox extends StatelessWidget {
       height: Dimensions.h137,
       decoration: BoxDecoration(
         image: image != null ? DecorationImage(
-          image: FileImage(File(image!))
+          image:  NetworkImage('https://firebasestorage.googleapis.com/v0/b/curvy-app-test.appspot.com/o/${Uri.encodeComponent(image!)}?alt=media')
         ) : null
       ),
       child: Stack(

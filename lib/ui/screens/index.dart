@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/pages/index_controller.dart';
 import 'package:curvy_app/controllers/setup_controller.dart';
 import 'package:curvy_app/ui/screens/confirm_me.dart';
 import 'package:curvy_app/ui/screens/edit_profile.dart';
@@ -158,7 +159,9 @@ class IndexScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      body: Container(
+      body: GetBuilder<IndexPageController>(
+        builder: (indexPageController){
+          return  Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: Column(
@@ -178,7 +181,7 @@ class IndexScreen extends StatelessWidget {
                                 borderRadius:
                                     BorderRadius.circular(Dimensions.h1023 / 2),
                                 gradient: LinearGradient(
-                                    colors: [Colors.white, Color(0xFFE2C1FC)],
+                                    colors: indexPageController.user != null ? ( indexPageController.user!.sex == 0 ? [Colors.white, Color(0xFFE2C1FC)] : [Colors.white, Color(0xFFABE6FF)]) : [Colors.white],
                                     begin: Alignment.topCenter,
                                     end: Alignment.bottomCenter)),
                           )),
@@ -214,9 +217,9 @@ class IndexScreen extends StatelessWidget {
                                                 height: 140,
                                                 decoration: BoxDecoration(
                                                     color: Colors.white,
-                                                    image: DecorationImage(
-                                                      image: AssetImage("assets/images/user_image.png")
-                                                    ),
+                                                    image: indexPageController.user != null ? DecorationImage(
+                                                      image: NetworkImage('https://firebasestorage.googleapis.com/v0/b/curvy-app-test.appspot.com/o/${Uri.encodeComponent(indexPageController.user!.images![0])}?alt=media')
+                                                    ) : null,
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             140 /
@@ -264,8 +267,9 @@ class IndexScreen extends StatelessWidget {
                                           Dimensions.w8 / 2)),
                                 ),
                                 Container(
+                                  
                                   child: Text(
-                                    "Gülçitay, 25",
+                                    indexPageController.user != null ? "${indexPageController.user!.name!.split(" ")[0]}, ${DateTime.now().year - int.parse(indexPageController.user!.birthdate!.split('/').last)}" : "",
                                     style: TextStyle(
                                         fontSize: Dimensions.h22,
                                         fontWeight: FontWeight.bold),
@@ -298,7 +302,7 @@ class IndexScreen extends StatelessWidget {
                               width: Dimensions.w226,
                               icon: "assets/images/turbo_icon.png",
                               text: "TURBO",
-                              count: 2,
+                              count: indexPageController.user != null ? indexPageController.user!.curvy_turbo! : 0,
                               background: LinearGradient(
                                   colors: [
                                     Color(0xFFFF0000),
@@ -310,7 +314,7 @@ class IndexScreen extends StatelessWidget {
                               width: Dimensions.w209,
                               icon: "assets/images/like_icon.png",
                               text: "LIKE",
-                              count: 2,
+                              count: indexPageController.user != null ? indexPageController.user!.curvy_like! : 0,
                               background: LinearGradient(
                                   colors: [
                                     Color(0xFF0095EC),
@@ -322,7 +326,7 @@ class IndexScreen extends StatelessWidget {
                               width: Dimensions.w226,
                               icon: "assets/images/chip_icon.png",
                               text: "CHIP",
-                              count: 2,
+                              count: indexPageController.user != null ? indexPageController.user!.curvy_chip! : 0,
                               background: LinearGradient(
                                   colors: [
                                     Color(0xFFEEB137),
@@ -480,7 +484,9 @@ class IndexScreen extends StatelessWidget {
                 ),
               )
             ],
-          )),
+          ));
+        },
+      )
       
     );
   }
