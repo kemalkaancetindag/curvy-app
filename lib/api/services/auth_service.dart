@@ -37,12 +37,15 @@ class AuthService extends GetxService {
     
     if(result.docs.isNotEmpty){
       Get.toNamed(Routes.index);
-      return;
+     
+    }
+    else{
+      Get.find<SetupController>().setGoogleUser(user);
+      Get.toNamed(Routes.validationNumber);
     }
     
-    Get.find<SetupController>().setGoogleUser(user);
-    Get.toNamed(Routes.validationNumber);
-    return;  
+
+    
   }
 
   Future<void> facebookAuth() async {

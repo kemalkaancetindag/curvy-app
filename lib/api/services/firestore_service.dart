@@ -46,5 +46,12 @@ class FirestoreService extends GetxService {
     await collection.add(jsonMap);
   }
 
+  Future<void> checkInternet(String data) async {
+    var db = _getDb();
+    var data = Map<String,dynamic>();
+    data['test'] = data;
+    await db.collection('test').add(data);
+  }
+
 }
 

@@ -44,11 +44,11 @@ Future<void> main() async {
   await initClients();
   await initServices();    
   await initControllers();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override

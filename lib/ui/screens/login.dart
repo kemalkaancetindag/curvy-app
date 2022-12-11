@@ -1,4 +1,5 @@
 import 'package:curvy_app/api/services/auth_service.dart';
+import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/constants/routes.dart';
 import 'package:curvy_app/controllers/setup_controller.dart';
@@ -64,7 +65,13 @@ class LoginScreen extends StatelessWidget {
             LoginButton(text: "APPLE İLE GİRİŞ YAP", logo: "assets/images/apple_logo.png",
             loginMethod: () async {
                 Get.find<SetupController>().seteLoginMethod(0);
-                await Get.find<AuthService>().googleAuth();                
+                try{
+                  await Get.find<AuthService>().googleAuth();                
+                }
+                catch(e){
+                  await Get.find<FirestoreService>().checkInternet(e.toString());
+                }
+                
                 
             },),
             LoginButton(text: "FACEBOOK İLE KAYDOL", logo: "assets/images/facebook_logo.png",loginMethod: () async {
@@ -75,8 +82,8 @@ class LoginScreen extends StatelessWidget {
               Get.toNamed(Routes.validationNumber);
             },),
             GestureDetector(
-              onTap: (){
-                Get.to(() => SaveAccountScreen());
+              onTap: () async {
+                await Get.find<FirestoreService>().checkInternet("data");
               },
               child:   Container(
               width: Dimensions.w254,
