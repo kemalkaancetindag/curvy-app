@@ -181,7 +181,7 @@ class IndexScreen extends StatelessWidget {
                                 borderRadius:
                                     BorderRadius.circular(Dimensions.h1023 / 2),
                                 gradient: LinearGradient(
-                                    colors: indexPageController.user != null ? ( indexPageController.user!.sex == 0 ? [Colors.white, Color(0xFFE2C1FC)] : [Colors.white, Color(0xFFABE6FF)]) : [Colors.white],
+                                    colors: indexPageController.user != null ? ( indexPageController.user!.sex == 1 ? [Colors.white, Color(0xFFE2C1FC)] : [Colors.white, Color(0xFFABE6FF)]) : [Colors.white, Colors.white],
                                     begin: Alignment.topCenter,
                                     end: Alignment.bottomCenter)),
                           )),

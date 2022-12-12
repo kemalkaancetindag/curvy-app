@@ -129,7 +129,7 @@ class EditProfileController extends GetxController {
     UserModel? userModel =
         await userService.getUser('SHmcTGDSV1f0HmPV7QBPOGEixcW2');
     _user = userModel;
-    print(userModel!.sexual_preference);
+    
     setInitialFields(
         userModel!.about,
         userModel.city,
@@ -138,7 +138,13 @@ class EditProfileController extends GetxController {
         userModel.sexual_preference,
         userModel.images,
         userModel.show_age,
-        userModel.show_distance);
+        userModel.show_distance,
+        userModel.sex,
+        userModel.zodiac,
+        userModel.person_type,
+        userModel.smoke_preference,
+        userModel.alchol_preference,
+        userModel.pet_preference);
     update();
   }
 
@@ -150,7 +156,13 @@ class EditProfileController extends GetxController {
       List<dynamic>? sexualPreferences,
       List<dynamic>? images,
       bool? showAge,
-      bool? showDistance) {
+      bool? showDistance,
+      int? sex,
+      int? zodiac,
+      int? personality,
+      int? smoke,
+      int? alcohol,
+      int? pet) {
     aboutFieldController.text = about ?? '';
     cityFieldController.text = city ?? '';
     graduationFieldController.text = graduation ?? '';
@@ -160,6 +172,13 @@ class EditProfileController extends GetxController {
     _images = images;
     _showAge = showAge;
     _showDistance = showDistance;
+    _sex = sex;
+    _zodiac = zodiac;
+    _personality = personality;
+    _smoke = smoke;
+    _alcohol = alcohol;
+    _pet = pet;
+
   }
 
   void setZodiac(int zodiac) {

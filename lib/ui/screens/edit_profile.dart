@@ -4076,7 +4076,7 @@ class EditProfileScreen extends StatelessWidget {
                                               left: Dimensions.w11),
                                           child: Center(
                                             child: Text(
-                                              Utils.getEnumValue(Enums.sex, editPageController.sex!),
+                                              editPageController.sex != null ? Utils.getEnumValue(Enums.sex, editPageController.sex!) : "",
                                               style: TextStyle(
                                                   color: Color(0xFF7B8491),
                                                   fontWeight: FontWeight.bold),
