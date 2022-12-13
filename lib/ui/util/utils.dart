@@ -108,6 +108,26 @@ class Utils {
       "Sorguluyor",
       "Belirtmek istemiyorum"
     ];
+
+    List<String> showme = [
+      "Kadın",
+      "Erkek",
+      "Hepsi"
+    ];
+
+    List<String> language = [
+      "Almanca",
+      "Arapça",
+      "Endonezce",
+      "Fransızca",
+      "Hintçe",
+      "İngilizce",
+      "İspanyolca",
+      "İtalyanca",
+      "Rusça",
+      "Türkçe"
+    ];
+    
     switch(enumType){
       case Enums.zodiac:
         return zodiacs[value];
@@ -123,6 +143,10 @@ class Utils {
         return sex[value];
       case Enums.sexualPreference:
         return sexualPreferences[value];
+      case Enums.showme:
+        return showme[value];
+      case Enums.language:
+        return language[value];
       
         
 

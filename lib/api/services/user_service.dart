@@ -20,7 +20,8 @@ class UserService extends GetxService {
     var userSnapshot = await firestoreService.getCollection('users').where('userID',isEqualTo: userId).get();
     if(userSnapshot.docs.isNotEmpty){
       var user = userSnapshot.docs[0].data();      
-      var userModel = UserModel.fromJson((user as Map<String,dynamic>));      
+      var userModel = UserModel.fromJson((user as Map<String,dynamic>));    
+      
       return userModel;
     }
 

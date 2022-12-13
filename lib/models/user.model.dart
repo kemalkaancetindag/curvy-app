@@ -2,6 +2,7 @@ class UserModel {
   String? userID;
   int? login_method;
   String? phone_number;
+  String? phone_id;
   String? email;
   String? name;
   String? birthdate;
@@ -39,6 +40,7 @@ class UserModel {
 
   UserModel(
       {this.userID,
+      this.phone_id,
       this.login_method,
       this.phone_number,
       this.email,
@@ -110,10 +112,10 @@ class UserModel {
     email_confirmation = json['email_confirmation'];
     phone_confirmation = json['phone_confirmation'];
     is_paused = json['is_paused'];
-    chat = _Chat().fromJson(json['chat']);
+    chat = _Chat.fromJson(json['chat']);
     likes = json['likes'];
     likeds = json['likeds'];
-    settings = _Settings().fromJson(json['settings']);
+    settings = _Settings.fromJson(json['settings']);
   }
 
   Map<String, dynamic> toJson() {
@@ -165,7 +167,7 @@ class _Chat {
 
   _Chat({this.active_chats, this.trash_chats});
 
-  fromJson(Map<String, dynamic> json) {
+  _Chat.fromJson(Map<String, dynamic> json) {
     active_chats = json['active_chats'];
     trash_chats = json['trash_chats'];
   }
@@ -194,6 +196,7 @@ class _Settings {
   __EmailNotifications? email_notifications;
   __InstantNotifications? instant_notifications;
   __PrivacyPreferences? privacy_preferences;
+  __AgePreference? age_preference;
 
   _Settings(
       {this.connected_accounts,
@@ -210,28 +213,30 @@ class _Settings {
       this.email_notifications,
       this.instant_notifications,
       this.privacy_preferences,
-      this.hide_online_status});
+      this.hide_online_status,
+      this.age_preference});
 
-  fromJson(Map<String, dynamic> json) {
+  _Settings.fromJson(Map<String, dynamic> json) {
     connected_accounts = json['connected_accounts'];
-    location = __Location().fromJson(json['location']);
+    location = __Location.fromJson(json['location']);
     distance_preference =
-        __DistancePreference().fromJson(json['distance_preference']);
+        __DistancePreference.fromJson(json['distance_preference']);
     global = json['global'];
     recommendation_preference = json['recommendation_preference'];
     viewer_preference = json['viewer_preference'];
     language = json['language'];
-    visibility = __Visibility().fromJson(json['visibility']);
+    visibility = __Visibility.fromJson(json['visibility']);
     close_reading_notifications = json['close_reading_notifications'];
     play_videos_automatically = json['play_videos_automatically'];
     hide_last_online_status = json['hide_last_online_status'];
     email_notifications =
-        __EmailNotifications().fromJson(json['email_notifications']);
+        __EmailNotifications.fromJson(json['email_notifications']);
     instant_notifications =
-        __InstantNotifications().fromJson(json['instant_notifications']);
+        __InstantNotifications.fromJson(json['instant_notifications']);
     privacy_preferences =
-        __PrivacyPreferences().fromJson(json['privacy_preferences']);
+        __PrivacyPreferences.fromJson(json['privacy_preferences']);
     hide_online_status = json['hide_online_status'];
+    age_preference = __AgePreference.fromJson(json['age_preference']);
   }
 
   Map<String, dynamic> toJson() {
@@ -259,7 +264,7 @@ class _Settings {
 class __Location {
   __Location();
 
-  fromJson(Map<String, dynamic> json) {}
+  __Location.fromJson(Map<String, dynamic> json) {}
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -268,13 +273,41 @@ class __Location {
   }
 }
 
+
+class __AgePreference {
+  int? min_age;
+  int? max_age;
+  bool? only_this_interval;
+
+  __AgePreference({
+    this.min_age,
+    this.max_age,
+    this.only_this_interval
+  });
+
+  __AgePreference.fromJson(Map<String,dynamic> json){
+    min_age = json['min_age'];
+    max_age = json['max_age'];
+    only_this_interval = json['only_this_interval'];
+  }
+
+  Map<String,dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['min_age'] = min_age ?? 18.0;
+    data['max_age'] = max_age ?? 30.0;
+    data['only_this_interval'] = only_this_interval ?? false;
+    return data;
+  }
+
+}
+
 class __DistancePreference {
   double? distance;
   bool? only_this_interval;
 
   __DistancePreference({this.distance, this.only_this_interval});
 
-  fromJson(Map<String, dynamic> json) {
+  __DistancePreference.fromJson(Map<String, dynamic> json) {
     distance = json['distance'];
     only_this_interval = json['only_this_interval'];
   }
@@ -300,7 +333,7 @@ class __Visibility {
       this.hide_me_on_matcherstyle,
       this.hide_me_on_vip});
 
-  fromJson(Map<String, dynamic> json) {
+  __Visibility.fromJson(Map<String, dynamic> json) {
     hide_me_on_vip = json['hide_me_on_vip'];
     recommend_me_on_turbo = json['recommend_me_on_turbo'];
     hide_me_on_freestyle = json['hide_me_on_freestyle'];
@@ -324,7 +357,7 @@ class __EmailNotifications {
 
   __EmailNotifications({this.on_match, this.on_message, this.on_marketing});
 
-  fromJson(Map<String, dynamic> json) {
+  __EmailNotifications.fromJson(Map<String, dynamic> json) {
     on_match = json['on_match'];
     on_message = json['on_message'];
     on_marketing = json['on_marketing'];
@@ -358,7 +391,7 @@ class __InstantNotifications {
       this.vibration,
       this.sound});
 
-  fromJson(Map<String, dynamic> json) {
+  __InstantNotifications.fromJson(Map<String, dynamic> json) {
     on_match = json['on_match'];
     on_message = json['on_message'];
     on_message_like = json['on_message_like'];
@@ -385,20 +418,26 @@ class __InstantNotifications {
 class __PrivacyPreferences {
   bool? compulsory_permissions;
   bool? curvy_team_promotions;
+  bool? enable_marketing;
+  bool? enable_advertising;
   ____MarketingPermissions? marketing_permissons;
   ____SocialMediaPermissions? social_media_permissions;
   ____AdvertisingPermissions? advertising_permissions;
 
   __PrivacyPreferences(
-      {this.compulsory_permissions,
+      {this.enable_advertising,
+      this.enable_marketing,
+      this.compulsory_permissions,
       this.curvy_team_promotions,
       this.marketing_permissons,
       this.social_media_permissions,
       this.advertising_permissions});
 
-  fromJson(Map<String, dynamic> json) {
+  __PrivacyPreferences.fromJson(Map<String, dynamic> json) {
     compulsory_permissions = json['compulsory_permissions'];
     curvy_team_promotions = json['curvy_team_promotions'];
+    enable_advertising = json['enable_advertising'];
+    enable_marketing = json['enable_marketing'];
     marketing_permissons =
         ____MarketingPermissions().fromJson(json['marketing_permissons']);
     social_media_permissions =
@@ -411,6 +450,8 @@ class __PrivacyPreferences {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['compulsory_permissions'] = compulsory_permissions ?? true;
     data['curvy_team_promotions'] = curvy_team_promotions ?? true;
+    data['enable_advertising'] = enable_advertising ?? true;
+    data['enable_marketing'] = enable_marketing ?? true;
     data['marketing_permissons'] = marketing_permissons ?? ____MarketingPermissions().toJson();
     data['social_media_permissions'] = social_media_permissions ?? ____SocialMediaPermissions().toJson();
     data['advertising_permissions'] = advertising_permissions ?? ____AdvertisingPermissions().toJson();

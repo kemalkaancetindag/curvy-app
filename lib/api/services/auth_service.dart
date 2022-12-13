@@ -88,5 +88,6 @@ class AuthService extends GetxService {
      UserCredential user = await auth.signInWithCredential(credential);
      return user;
   }
-  
+
+
 }

@@ -9,7 +9,10 @@ class SettingsModalSwitchColumn extends StatelessWidget {
   final String title;
   final String text;
   final bool isSwitch;
-  SettingsModalSwitchColumn({super.key, required this.title, required this.text, required this.isSwitch, this.function});
+  final bool? switchState;
+  final Function(bool)? switchOnChanged;
+
+  SettingsModalSwitchColumn({super.key, required this.title, required this.text, required this.isSwitch, this.function, this.switchOnChanged, this.switchState});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +42,16 @@ class SettingsModalSwitchColumn extends StatelessWidget {
                   ),
                   )
                 ),
-                isSwitch ? CupertinoSwitch(value: true, onChanged: (value){}) : Container(
+                isSwitch ? CupertinoSwitch(
+                  value: switchState ?? true, 
+                  onChanged: (value){
+                    if(switchOnChanged != null){
+                      switchOnChanged!(value);
+                    }
+                    
+                  }
+                  ) : 
+                  Container(
                   child: Center(
                     child: Image.asset("assets/images/settings_modal_chevron_right.png"),
                   ),

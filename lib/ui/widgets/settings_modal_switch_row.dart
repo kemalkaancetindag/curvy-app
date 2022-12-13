@@ -7,7 +7,9 @@ import 'package:flutter/src/widgets/framework.dart';
 class SettingsModalSwitchRow extends StatelessWidget {
   final String title;
   final String text;
-  SettingsModalSwitchRow({super.key, required this.title, required this.text});
+  final Function(bool) switchOnChange;
+  final bool switchState;
+  SettingsModalSwitchRow({super.key, required this.title, required this.text, required this.switchOnChange, required this.switchState});
 
 
   @override
@@ -55,9 +57,9 @@ class SettingsModalSwitchRow extends StatelessWidget {
           ),
           Container(
             child: CupertinoSwitch(
-              value: true,
+              value: switchState,
               onChanged: (value) {
-                
+                switchOnChange(value);
               },
             ),
           )

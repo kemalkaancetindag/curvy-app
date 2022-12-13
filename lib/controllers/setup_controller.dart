@@ -6,6 +6,7 @@ import 'package:curvy_app/api/services/setup_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/mobile.api.routes.dart';
 import 'package:curvy_app/constants/routes.dart';
+import 'package:curvy_app/enums/login_method_enums.dart';
 import 'package:curvy_app/models/user.model.dart';
 import 'package:curvy_app/ui/screens/index.dart';
 import 'package:curvy_app/ui/screens/setup_birthdate.dart';
@@ -290,11 +291,12 @@ class SetupController extends GetxController {
 
     
     //_isAfterSetup = true;
-    if(_loginMethod == 0){
+    if(_loginMethod == LoginMethod.google.value){
       var userImages = await Get.find<FirestoreService>().uploadImages(_images, _googleUser!.uid);
       var jsonUser = UserModel(
         userID: _googleUser!.uid,
-        phone_number: _userPhoneId,
+        phone_number: _phoneNumber,
+        phone_id: _userPhoneId,
         login_method: _loginMethod,
         sex: _sex,
         name: _name,
@@ -313,11 +315,12 @@ class SetupController extends GetxController {
       await Get.find<FirestoreService>().addToCollection(jsonUser, 'users');
       await Get.find<SharedPreferenceService>().saveUser(jsonUser);
     }
-    else if(_loginMethod == 4){
+    else if(_loginMethod == LoginMethod.phone.value){
       var userImages = await Get.find<FirestoreService>().uploadImages(_images, _userPhoneId!);
         var jsonUser = UserModel(
         userID: _userPhoneId,
         phone_number: _phoneNumber,
+        phone_id: null,
         login_method: _loginMethod,
         sex: _sex,
         name: _name,

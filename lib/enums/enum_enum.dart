@@ -6,6 +6,8 @@ class Enums {
   static const String sexualPreference = "sexual_preference";
   static const String smoke = "smoke";
   static const String zodiac = "zodiac";
+  static const String showme = "showme";
+  static const String language = "language";
 
 
 }
