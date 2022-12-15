@@ -10,7 +10,6 @@ class SettingsController extends GetxController {
   FirestoreService firestoreService;
   TextEditingController usernameFieldController = TextEditingController();
 
-
   UserModel? _user;
   UserModel? get user => _user;
 
@@ -18,7 +17,8 @@ class SettingsController extends GetxController {
   double? get distancePreferenceDistance => _distancePreferenceDistance;
 
   bool? _distancePreferenceOnlyThisInterval;
-  bool? get distancePreferenceOnlyThisInterval => _distancePreferenceOnlyThisInterval;
+  bool? get distancePreferenceOnlyThisInterval =>
+      _distancePreferenceOnlyThisInterval;
 
   int? _showme;
   int? get showme => _showme;
@@ -102,7 +102,6 @@ class SettingsController extends GetxController {
   bool? _privacyCompulsoryPermissions;
   bool? get privacyCompulsoryPermissions => _privacyCompulsoryPermissions;
 
-
   bool? _appFlayer;
   bool? get appFlayer => _appFlayer;
   bool? _branch;
@@ -121,26 +120,15 @@ class SettingsController extends GetxController {
   bool? _newAdvertisingPermissions;
   bool? get newAdvertisingPermissions => _newAdvertisingPermissions;
 
-  
-  
-
-
-
-
-
-  
-
-
-  SettingsController({
-    required this.userService,
-    required this.firestoreService
-
-  });
+  SettingsController(
+      {required this.userService, required this.firestoreService});
 
   @override
   Future<void> onInit() async {
     super.onInit();
     await setUser();
+    
+    print(_user!.settings!.privacy_preferences!.marketing_permissons!);
     setInitialSettings(
       _user!.settings!.distance_preference!.distance!,
       _user!.settings!.distance_preference!.only_this_interval!,
@@ -175,70 +163,67 @@ class SettingsController extends GetxController {
       _user!.settings!.privacy_preferences!.enable_marketing!,
       _user!.settings!.privacy_preferences!.marketing_permissons!.app_flayer!,
       _user!.settings!.privacy_preferences!.marketing_permissons!.branch!,
-      _user!.settings!.privacy_preferences!.marketing_permissons!.new_marketing_permissions!,
-      _user!.settings!.privacy_preferences!.advertising_permissions!.curvy_direct_ads!,
-      _user!.settings!.privacy_preferences!.advertising_permissions!.google_ads!,
-      _user!.settings!.privacy_preferences!.advertising_permissions!.curvy_promotions!,
-      _user!.settings!.privacy_preferences!.advertising_permissions!.facebook_ads!,
-      _user!.settings!.privacy_preferences!.advertising_permissions!.new_advertising_permissions!,
-
-
-
-      
-       
-      
-      
+      _user!.settings!.privacy_preferences!.marketing_permissons!
+          .new_marketing_permissions!,
+      _user!.settings!.privacy_preferences!.advertising_permissions!
+          .curvy_direct_ads!,
+      _user!
+          .settings!.privacy_preferences!.advertising_permissions!.google_ads!,
+      _user!.settings!.privacy_preferences!.advertising_permissions!
+          .curvy_promotions!,
+      _user!.settings!.privacy_preferences!.advertising_permissions!
+          .facebook_ads!,
+      _user!.settings!.privacy_preferences!.advertising_permissions!
+          .new_advertising_permissions!,
     );
-    
-   
   }
 
   Future<void> setUser() async {
-     UserModel? userModel = await userService.getUser('SHmcTGDSV1f0HmPV7QBPOGEixcW2');
-    _user = userModel;                
+    UserModel? userModel =
+        await userService.getUser('SHmcTGDSV1f0HmPV7QBPOGEixcW2');
+    _user = userModel;
   }
 
   void setInitialSettings(
-    double distancePreferenceDistance,
-    bool distancePreferenceOnlyThisInterval,
-    int showme,
-    int minAge,
-    int maxAge,
-    bool agePreferenceOnlyThisInterval,
-    bool global,
-    int viewerPreference,
-    int recommendationPreference,
-    int language,
-    bool hideMeOnVip,
-    bool hideMeOnMatcherStyle,
-    bool hideMeOnFreeStyle,
-    bool recommendMeOnTurbo,
-    bool closeReadingNotifications,
-    bool playVideosAutomatically,
-    bool hideOnlineStatus,
-    bool hideLastOnlineStatus,
-    String? username,
-    bool emailOnMatch,
-    bool emailOnMessage,
-    bool emailOnMarketing,
-    int instantNewLikes,
-    bool instantOnCurvyLike,
-    bool instantOnMatch,
-    bool instantOnMessage,
-    bool instantOnMessageLike,
-    bool instantSound,
-    bool instantVibration,
-    bool privacyEnableAdvertising,
-    bool privacyEnableMarketing,
-    bool appFlayer,
-    bool branch,
-    bool newMarketingPermissions,
-    bool curvyDirectAds,
-    bool googleAds,
-    bool curvyPromotions,
-    bool facebookAds,
-    bool newAdvertisingPermissions
-  )  {
+      double distancePreferenceDistance,
+      bool distancePreferenceOnlyThisInterval,
+      int showme,
+      int minAge,
+      int maxAge,
+      bool agePreferenceOnlyThisInterval,
+      bool global,
+      int viewerPreference,
+      int recommendationPreference,
+      int language,
+      bool hideMeOnVip,
+      bool hideMeOnMatcherStyle,
+      bool hideMeOnFreeStyle,
+      bool recommendMeOnTurbo,
+      bool closeReadingNotifications,
+      bool playVideosAutomatically,
+      bool hideOnlineStatus,
+      bool hideLastOnlineStatus,
+      String? username,
+      bool emailOnMatch,
+      bool emailOnMessage,
+      bool emailOnMarketing,
+      int instantNewLikes,
+      bool instantOnCurvyLike,
+      bool instantOnMatch,
+      bool instantOnMessage,
+      bool instantOnMessageLike,
+      bool instantSound,
+      bool instantVibration,
+      bool privacyEnableAdvertising,
+      bool privacyEnableMarketing,
+      bool appFlayer,
+      bool branch,
+      bool newMarketingPermissions,
+      bool curvyDirectAds,
+      bool googleAds,
+      bool curvyPromotions,
+      bool facebookAds,
+      bool newAdvertisingPermissions) {
     _distancePreferenceDistance = distancePreferenceDistance;
     _distancePreferenceOnlyThisInterval = distancePreferenceOnlyThisInterval;
     _showme = showme;
@@ -277,30 +262,26 @@ class SettingsController extends GetxController {
     _curvyPromotions = curvyPromotions;
     _facebookAds = facebookAds;
     _newAdvertisingPermissions = newAdvertisingPermissions;
-    
 
-    if(username != null){
+    if (username != null) {
       usernameFieldController.text = username;
-      _leftChar = _leftChar-username.length;
+      _leftChar = _leftChar - username.length;
     }
-    
-
-
   }
 
   void setDistance(double distance) {
-    _distancePreferenceDistance= distance;
+    _distancePreferenceDistance = distance;
     update();
   }
 
   void setOnlyThisInterval(bool value) {
     _distancePreferenceOnlyThisInterval = value;
     update();
-
   }
 
-  void setAgePreferenceRange(double min, double max){
-    if(max > min){
+  void setAgePreferenceRange(double min, double max) {
+    print(min);
+    if (max > min) {
       print('büyük');
       _minAge = min.toInt();
       _maxAge = max.toInt();
@@ -374,9 +355,9 @@ class SettingsController extends GetxController {
   }
 
   void setUsername(String value) {
-      _username = value;      
-      _leftChar = _maxChar - value.length;      
-      update();   
+    _username = value;
+    _leftChar = _maxChar - value.length;
+    update();
   }
 
   void setEmailOnMatch(bool value) {
@@ -384,22 +365,22 @@ class SettingsController extends GetxController {
     update();
   }
 
-  void setEmailOnMessage(bool value){
+  void setEmailOnMessage(bool value) {
     _emailOnMessage = value;
     update();
   }
 
-  void setEmailOnMarketing(bool value){
+  void setEmailOnMarketing(bool value) {
     _emailOnMarketing = value;
     update();
   }
 
-  void setInstantOnMatch(bool value){
+  void setInstantOnMatch(bool value) {
     _instantOnMatch = value;
     update();
   }
 
-  void setInstantOnMessage(bool value){
+  void setInstantOnMessage(bool value) {
     _instantOnMessage = value;
     update();
   }
@@ -409,12 +390,12 @@ class SettingsController extends GetxController {
     update();
   }
 
-  void setInstantOnCurvyLike(bool value){
+  void setInstantOnCurvyLike(bool value) {
     _instantOnCurvyLike = value;
     update();
   }
 
-  void setInstantNewLikes(int value){
+  void setInstantNewLikes(int value) {
     _instantNewLikes = value;
     update();
   }
@@ -429,7 +410,6 @@ class SettingsController extends GetxController {
     update();
   }
 
-
   void setCurvyTeamPromotions(bool value) {
     _curvyTeamPromotions = value;
     update();
@@ -438,15 +418,14 @@ class SettingsController extends GetxController {
   void setPrivacyEnableMarketing(bool value) {
     _privacyEnableMarketing = value;
     update();
-
   }
 
-  void setPrivacyEnableAdvertising(bool value){
+  void setPrivacyEnableAdvertising(bool value) {
     _privacyEnableAdvertising = value;
     update();
   }
 
-  void setPrivacyCompulsoryPermissions(bool value){
+  void setPrivacyCompulsoryPermissions(bool value) {
     _privacyCompulsoryPermissions = value;
     update();
   }
@@ -464,7 +443,7 @@ class SettingsController extends GetxController {
   void setNewMarketingPermissions(bool value) {
     _newMarketingPermissions = value;
     update();
-  } 
+  }
 
   void setCurvyDirectAds(bool value) {
     _curvyDirectAds = value;
@@ -491,9 +470,134 @@ class SettingsController extends GetxController {
     update();
   }
 
+  Future<void> updatePrivacyPreferences() async {
+    Map<String, dynamic> data = Map<String, dynamic>();
+
+    data['settings.privacy_preferences.enable_marketing'] =
+        _privacyEnableMarketing;
+    data['settings.privacy_preferences.compulsory_permissions'] =
+        _privacyCompulsoryPermissions;
+    data['settings.privacy_preferences.enable_advertising'] =
+        _privacyEnableAdvertising;
+
+    await firestoreService.updateUser(data, 'SHmcTGDSV1f0HmPV7QBPOGEixcW2');
+    Get.back();
+  }
+
+  Future<void> updatePrivacyPersonalizedMarketing() async {
+    Map<String, dynamic> data = Map<String, dynamic>();
+
+    data['settings.privacy_preferences.marketing_permissions.app_flayer'] =
+        _appFlayer;
+    data['settings.privacy_preferences.marketing_permissions.branch'] = _branch;
+    data['settings.privacy_preferences.marketing_permissions.new_marketing_permissions'] =
+        _newMarketingPermissions;
+
+    await firestoreService.updateUser(data, 'SHmcTGDSV1f0HmPV7QBPOGEixcW2');
+    Get.back();
+  }
+
+  Future<void> updatePrivacyPersonalizedAdvertising() async {
+    Map<String, dynamic> data = Map<String, dynamic>();
+
+    data['settings.privacy_preferences.advertising_permissions.curvy_direct_ads'] =
+        _curvyDirectAds;
+    data['settings.privacy_preferences.advertising_permissions.google_ads'] =
+        _googleAds;
+    data['settings.privacy_preferences.advertising_permissions.curvy_promotions'] =
+        _curvyPromotions;
+    data['settings.privacy_preferences.advertising_permissions.facebook_ads'] =
+        _facebookAds;
+    data['settings.privacy_preferences.advertising_permissions.new_advertising_permissions'] =
+        _newAdvertisingPermissions;
+
+    await firestoreService.updateUser(data, 'SHmcTGDSV1f0HmPV7QBPOGEixcW2');
+    Get.back();
+  }
+
+  Future<void> updateEmailNotifications() async {
+    Map<String, dynamic> data = Map<String, dynamic>();
+
+    data['settings.email_notifications.on_match'] = _emailOnMatch;
+    data['settings.email_notifications.on_marketing'] = _emailOnMarketing;
+    data['settings.email_notifications.on_message'] = _emailOnMessage;
+
+    await firestoreService.updateUser(data, 'SHmcTGDSV1f0HmPV7QBPOGEixcW2');
+    Get.back();
+  }
+
+  Future<void> updateInstantNotifications() async {
+    Map<String, dynamic> data = Map<String, dynamic>();
+
+    data['settings.instant_notifications.on_match'] = _instantOnMatch;
+    data['settings.instant_notifications.on_curvy_like'] = _instantOnCurvyLike;
+    data['settings.instant_notifications.on_message'] = _instantOnMessage;
+    data['settings.instant_notifications.on_message_like'] = _instantOnMessageLike;
+    data['settings.instant_notifications.sound'] = _instantSound;
+    data['settings.instant_notifications.vibration'] = _instantVibration;
+    data['settings.instant_notifications.new_likes'] = _instantNewLikes;
+    
+
+    await firestoreService.updateUser(data, 'SHmcTGDSV1f0HmPV7QBPOGEixcW2');
+    Get.back();
+  }
+
+  Future<void> updateUsername() async {
+    Map<String, dynamic> data = Map<String, dynamic>();
+
+    data['username'] = _username;  
+
+    await firestoreService.updateUser(data, 'SHmcTGDSV1f0HmPV7QBPOGEixcW2');
+    Get.back();
+  }
+
+  Future<void> updateLanguage() async {
+    Map<String, dynamic> data = Map<String, dynamic>();
+
+    data['settings.language'] = _language;  
+
+    await firestoreService.updateUser(data, 'SHmcTGDSV1f0HmPV7QBPOGEixcW2');
+    Get.back();
+  
+  }
+
+  Future<void> updateFieldsOnSettingsPage() async {
+    Map<String, dynamic> data = Map<String, dynamic>();
+
+    //DISTANCE PREFERENCE
+    data['settings.distance_preference.distance'] = _distancePreferenceDistance;
+    data['settings.distance_preference.only_this_interval'] = _distancePreferenceOnlyThisInterval;
+
+
+    //AGE PREFERENCE
+    data['settings.age_preference.min_age'] = _minAge;
+    data['settings.age_preference.max_age'] = _maxAge;
+    data['settings.age_preference.only_this_interval'] = _agePreferenceOnlyThisInterval;
+
+    data['settings.global'] = _global;
+
+    data['settings.recommendation_preference'] = _recommendationPreference;
+    data['settings.viewer_preference'] =  _viewerPreference;
+
+    //VISIBILITY
+    data['settings.visibility.hide_me_on_vip'] = _hideMeOnVip;
+    data['settings.visibility.hide_me_on_matcherstyle'] = _hideMeOnMatcherStyle;
+    data['settings.visibility.hide_me_on_freestyle'] = _hideMeOnFreeStyle;
+    data['settings.visibility.recommend_me_on_turbo'] = _recommendMeOnTurbo;
+
+
+    data['settings.close_reading_notifications'] = _closeReadingNotifications;
+
+    data['settings.play_videos_automatically'] = _playVideosAutomatically;
+
+    data['settings.hide_online_status'] = _hideOnlineStatus;
+    data['settings.hide_last_online_status'] = _hideLastOnlineStatus;
+
+    data['settings.privacy_preferences.curvy_team_promotions'] = _curvyTeamPromotions;
 
 
 
-
-
+    await firestoreService.updateUser(data, 'SHmcTGDSV1f0HmPV7QBPOGEixcW2');
+    Get.back();
+  }
 }

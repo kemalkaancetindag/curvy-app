@@ -439,11 +439,11 @@ class __PrivacyPreferences {
     enable_advertising = json['enable_advertising'];
     enable_marketing = json['enable_marketing'];
     marketing_permissons =
-        ____MarketingPermissions().fromJson(json['marketing_permissons']);
+        ____MarketingPermissions.fromJson(json['marketing_permissions']);
     social_media_permissions =
         ____SocialMediaPermissions().fromJson(json['social_media_permissions']);
     advertising_permissions =
-        ____AdvertisingPermissions().fromJson(json['advertising_permissions']);
+        ____AdvertisingPermissions.fromJson(json['advertising_permissions']);
   }
 
   Map<String, dynamic> toJson() {
@@ -468,7 +468,7 @@ class ____MarketingPermissions {
   ____MarketingPermissions(
       {this.app_flayer, this.branch, this.new_marketing_permissions});
 
-  fromJson(Map<String, dynamic> json) {
+  ____MarketingPermissions.fromJson(Map<String, dynamic> json) {
     app_flayer = json['app_flayer'];
     branch = json['branch'];
     new_marketing_permissions = json['new_marketing_permissions'];
@@ -508,7 +508,7 @@ class ____AdvertisingPermissions {
       this.facebook_ads,
       this.new_advertising_permissions});
 
-  fromJson(Map<String, dynamic> json) {
+  ____AdvertisingPermissions.fromJson(Map<String, dynamic> json) {
     curvy_direct_ads = json['curvy_direct_ads'];
     google_ads = json['google_ads'];
     curvy_promotions = json['curvy_promotions'];

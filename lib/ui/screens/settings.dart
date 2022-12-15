@@ -117,6 +117,7 @@ class SettingsScreen extends StatelessWidget {
 
     void selectLanguageDialog() {
       showDialog(
+        barrierDismissible: false,
           context: context,
           builder: (context) {
             return GetBuilder<SettingsController>(builder: (controller) {
@@ -520,18 +521,30 @@ class SettingsScreen extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Container(
+                                  GestureDetector(
+                                    onTap: (){
+                                      Get.back();
+                                    },
+                                    child:    Container(
                                     child: Center(
                                       child: Image.asset(
                                           "assets/images/settings_modal_cancel.png"),
                                     ),
                                   ),
-                                  Container(
+                                  ),
+                                  GestureDetector(
+                                    onTap: (){
+                                      controller.updateLanguage();
+                                    },
+                                    child:  Container(
                                     child: Center(
                                       child: Image.asset(
                                           "assets/images/settings_modal_check.png"),
                                     ),
+                                  ),
                                   )
+                               
+                                 
                                 ],
                               ))
                         ],
@@ -544,6 +557,7 @@ class SettingsScreen extends StatelessWidget {
 
     void changeUsernameDialog() {
       showDialog(
+        barrierDismissible: false,
           context: context,
           builder: (context) {
             return GetBuilder<SettingsController>(builder: (controller) {
@@ -676,18 +690,31 @@ class SettingsScreen extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
+                            GestureDetector(
+                              onTap: (){
+                                Get.back();
+                              },
+                              child:  Container(
                               child: Center(
                                 child: Image.asset(
                                     "assets/images/settings_modal_cancel.png"),
                               ),
+                            ) ,
                             ),
-                            Container(
+                            GestureDetector(
+                              onTap: (){
+                                controller.updateUsername();
+                              },
+                              child:   Container(
                               child: Center(
                                 child: Image.asset(
                                     "assets/images/settings_modal_check.png"),
                               ),
+                            ),
                             )
+
+                          
+                          
                           ],
                         ),
                       )
@@ -701,6 +728,7 @@ class SettingsScreen extends StatelessWidget {
 
     void showInstantNotificationsModal() {
       showDialog(
+        barrierDismissible: false,
           context: context,
           builder: (context) {
             return GetBuilder<SettingsController>(builder: (controller) {
@@ -1004,18 +1032,30 @@ class SettingsScreen extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Container(
+                                GestureDetector(
+                                  onTap: (){
+                                    Get.back();
+                                  },
+                                  child:   Container(
                                   child: Center(
                                     child: Image.asset(
                                         "assets/images/settings_modal_cancel.png"),
                                   ),
                                 ),
-                                Container(
+                                ),
+                                GestureDetector(
+                                  onTap: (){
+                                    controller.updateInstantNotifications();
+                                  },
+                                  child:   Container(
                                   child: Center(
                                     child: Image.asset(
                                         "assets/images/settings_modal_check.png"),
                                   ),
+                                ),
                                 )
+                              
+                              
                               ],
                             ),
                           )
@@ -1029,6 +1069,7 @@ class SettingsScreen extends StatelessWidget {
 
     void showEmailNotificationsModal() {
       showDialog(
+        barrierDismissible: false,
           context: context,
           builder: (context) {
             return GetBuilder<SettingsController>(builder: (controller) {
@@ -1270,16 +1311,28 @@ class SettingsScreen extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Container(
+                                GestureDetector(
+                                  onTap: (){
+                                    Get.back();
+                                  },
+                                  child:    Container(
                                     child: Center(
                                   child: Image.asset(
                                       "assets/images/settings_modal_cancel.png"),
                                 )),
-                                Container(
+                                ),
+                                GestureDetector(
+                                  onTap: (){
+                                    controller.updateEmailNotifications();
+                                  },
+                                  child:   Container(
                                     child: Center(
                                   child: Image.asset(
                                       "assets/images/settings_modal_check.png"),
-                                ))
+                                )),
+                                )
+                             
+                              
                               ],
                             ),
                           )
@@ -1293,6 +1346,7 @@ class SettingsScreen extends StatelessWidget {
 
     void showPersonalizedMarketingPreferenecesModal() {
       showDialog(
+        barrierDismissible: false,
           context: context,
           builder: (context) {
             return GetBuilder<SettingsController>(
@@ -1399,18 +1453,30 @@ class SettingsScreen extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Container(
+                                  GestureDetector(
+                                    onTap: (){
+                                      Get.back();
+                                    },
+                                    child:   Container(
                                     child: Center(
                                       child: Image.asset(
                                           "assets/images/settings_modal_cancel.png"),
                                     ),
                                   ),
-                                  Container(
+                                  ),
+                                  GestureDetector(
+                                    onTap: (){
+                                      controller.updatePrivacyPersonalizedMarketing();
+                                    },
+                                    child:  Container(
                                     child: Center(
                                       child: Image.asset(
                                           "assets/images/settings_modal_check.png"),
                                     ),
+                                  ),
                                   )
+                                
+                                 
                                 ],
                               ),
                             )
@@ -1425,6 +1491,7 @@ class SettingsScreen extends StatelessWidget {
 
     void showPersonalizedAdPreferenecesModal() {
       showDialog(
+        barrierDismissible: false,
           context: context,
           builder: (context) {
             return GetBuilder<SettingsController>(builder: (controller) {
@@ -1553,18 +1620,30 @@ class SettingsScreen extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Container(
+                                GestureDetector(
+                                  onTap: (){
+                                    Get.back();
+                                  },
+                                  child:   Container(
                                   child: Center(
                                     child: Image.asset(
                                         "assets/images/settings_modal_cancel.png"),
                                   ),
                                 ),
-                                Container(
+                                ),
+                                GestureDetector(
+                                  onTap: (){
+                                    controller.updatePrivacyPersonalizedAdvertising();
+                                  },
+                                  child:   Container(
                                   child: Center(
                                     child: Image.asset(
                                         "assets/images/settings_modal_check.png"),
                                   ),
+                                ),
                                 )
+                              
+                              
                               ],
                             ),
                           )
@@ -1578,6 +1657,7 @@ class SettingsScreen extends StatelessWidget {
 
     void showPrivacyPreferencesModal() {
       showDialog(
+        barrierDismissible: false,
           context: context,
           builder: (context) {
             return GetBuilder<SettingsController>(builder: (controller) {
@@ -1765,16 +1845,28 @@ class SettingsScreen extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Container(
+                                  GestureDetector(
+                                    onTap: (){
+                                      Get.back();
+                                    },
+                                    child:  Container(
                                     child: Center(
                                         child: Image.asset(
                                             "assets/images/settings_modal_cancel.png")),
                                   ),
-                                  Container(
+                                  ),
+                                  GestureDetector(
+                                    onTap: (){
+                                      controller.updatePrivacyPreferences();
+                                    },
+                                    child:     Container(
                                     child: Center(
                                         child: Image.asset(
                                             "assets/images/settings_modal_check.png")),
+                                  ),
                                   )
+                                
+                              
                                 ]),
                           )
                         ],
@@ -1796,7 +1888,7 @@ class SettingsScreen extends StatelessWidget {
           actions: [
             GestureDetector(
               onTap: () {
-                Get.back();
+                settingsPageController.updateFieldsOnSettingsPage();
               },
               child: Container(
                 margin: EdgeInsets.only(right: Dimensions.w16),
