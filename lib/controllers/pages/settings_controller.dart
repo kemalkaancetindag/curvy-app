@@ -129,7 +129,9 @@ class SettingsController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     _userID = await Get.find<SharedPreferenceService>().getUserID();
-    await setUser();        
+
+    await setUser();
+           
     setInitialSettings(
       _user!.settings!.distance_preference!.distance!,
       _user!.settings!.distance_preference!.only_this_interval!,
@@ -268,6 +270,8 @@ class SettingsController extends GetxController {
       usernameFieldController.text = username;
       _leftChar = _leftChar - username.length;
     }
+
+    update();
   }
 
   void setDistance(double distance) {

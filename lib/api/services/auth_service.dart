@@ -1,4 +1,5 @@
 import 'package:curvy_app/api/services/firestore_service.dart';
+import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/routes.dart';
 import 'package:curvy_app/controllers/setup_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -36,8 +37,10 @@ class AuthService extends GetxService {
     var result = await firestoreService.getCollection('users').where('userID', isEqualTo: user.uid).get();
     
     if(result.docs.isNotEmpty){
-      Get.toNamed(Routes.index);
-     
+
+      await Get.find<SharedPreferenceService>().saveUser(result.docs[0].data() as Map<String,dynamic>);
+    
+      Get.toNamed(Routes.index);     
     }
     else{
       Get.find<SetupController>().setGoogleUser(user);

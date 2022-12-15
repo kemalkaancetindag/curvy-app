@@ -89,7 +89,7 @@ class SetupController extends GetxController {
   void setGoogleUser(User user) {
     _googleUser = user;
   }
-  void seteLoginMethod(int loginMethod) {
+  void setLoginMethod(int loginMethod) {
     _loginMethod = loginMethod;
   }
 

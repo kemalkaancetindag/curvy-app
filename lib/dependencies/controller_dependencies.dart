@@ -20,9 +20,9 @@ Future<void> initControllers() async {
   Get.put(MessagesController());
   Get.put(MatcherController());
   Get.put(SetupController(setupService: Get.find()));
-  Get.put(IndexPageController(userService: Get.find()));
-  Get.put(EditProfileController(userService: Get.find(), firestoreService: Get.find()));
-  Get.put(SettingsController(userService: Get.find(), firestoreService: Get.find()));
+  Get.lazyPut(() => IndexPageController(userService: Get.find()));
+  Get.lazyPut(() => EditProfileController(userService: Get.find(), firestoreService: Get.find()));
+  Get.lazyPut(() => SettingsController(userService: Get.find(), firestoreService: Get.find()));
 
   
 }

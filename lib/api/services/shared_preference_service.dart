@@ -16,8 +16,8 @@ class SharedPreferenceService extends GetxService {
     sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  Future<void> saveUser(Map<String, dynamic> userData) async {
-    await loadSharedPreferences();
+  Future<void> saveUser(Map<String, dynamic> userData) async {    
+    print(userData);
     String jsonData = jsonEncode(userData);
     sharedPreferences.setString('user', jsonData);
   }

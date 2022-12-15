@@ -64,7 +64,7 @@ class LoginScreen extends StatelessWidget {
             ),
             LoginButton(text: "APPLE İLE GİRİŞ YAP", logo: "assets/images/apple_logo.png",
             loginMethod: () async {
-                Get.find<SetupController>().seteLoginMethod(0);
+                Get.find<SetupController>().setLoginMethod(0); 
                 try{
                   await Get.find<AuthService>().googleAuth();                
                 }
@@ -78,7 +78,7 @@ class LoginScreen extends StatelessWidget {
               await Get.find<AuthService>().facebookAuth();
             },),
             LoginButton(text: "TELEFON NUMARASI İLE GİRİŞ YAP", logo: "assets/images/phone_icon.png",loginMethod: (){
-              Get.find<SetupController>().seteLoginMethod(3);
+              Get.find<SetupController>().setLoginMethod(3);
               Get.toNamed(Routes.validationNumber);
             },),
             GestureDetector(

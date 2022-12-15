@@ -21,7 +21,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.find<SettingsController>().onInit();
+    Get.put(SettingsController(userService: Get.find(), firestoreService: Get.find()));
     void showBanPeopleDialog() {
       showDialog(
           context: context,
@@ -1878,6 +1878,7 @@ class SettingsScreen extends StatelessWidget {
     }
 
     return GetBuilder<SettingsController>(builder: (settingsPageController) {
+      print(settingsPageController.user);
       return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -1906,7 +1907,7 @@ class SettingsScreen extends StatelessWidget {
           centerTitle: true,
           elevation: 0,
         ),
-        body: Container(
+        body: settingsPageController.user != null ? Container(
             width: double.maxFinite,
             height: double.maxFinite,
             color: Color(0xFFF7F7F7),
@@ -4221,7 +4222,7 @@ class SettingsScreen extends StatelessWidget {
                       )),
                 ],
               ),
-            )),
+            )) : null,
       );
     });
   }

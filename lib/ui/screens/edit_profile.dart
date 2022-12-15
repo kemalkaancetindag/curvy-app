@@ -27,7 +27,7 @@ class EditProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.find<EditProfileController>().onInit();
+    Get.put(EditProfileController(firestoreService: Get.find(), userService: Get.find()));
     void selectImageModal() {
       showDialog(
           
@@ -3268,7 +3268,7 @@ class EditProfileScreen extends StatelessWidget {
           ],
         ),
         body: GetBuilder<EditProfileController>(builder: (editPageController) {
-          return Container(
+          return editPageController.user != null ? Container(
             height: double.maxFinite,
             width: double.maxFinite,
             child: SingleChildScrollView(
@@ -4262,7 +4262,7 @@ class EditProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
-          );
+          ) : Container();
         }));
   }
 }
