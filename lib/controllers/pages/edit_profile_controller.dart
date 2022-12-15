@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:curvy_app/api/services/firestore_service.dart';
+import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/api/services/user_service.dart';
 import 'package:curvy_app/enums/zodiac_enum.dart';
 import 'package:curvy_app/models/user.model.dart';
@@ -21,6 +22,7 @@ class EditProfileController extends GetxController {
   UserModel? get user => _user;
   List<dynamic>? _images;
   List<dynamic>? get images => _images;
+  String? _userID;
 
   int? _zodiac;
   int? get zodiac => _zodiac;
@@ -50,6 +52,7 @@ class EditProfileController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
+    _userID =  Get.find<SharedPreferenceService>().getUserID();
     await setUser();
   }
 
@@ -66,10 +69,10 @@ class EditProfileController extends GetxController {
         if (image == null) return;
 
         if (currentImageIndex! < _images!.length - 1) {
-          print("sa");
-          print(_images![currentImageIndex!]);
+          
+          
           String imageRef =
-              'user-images/SHmcTGDSV1f0HmPV7QBPOGEixcW2/${_images![currentImageIndex!].split('.')[0]}.${Utils.getMimetype(image.path)}';
+              'user-images/$_userID/${_images![currentImageIndex!].split('.')[0]}.${Utils.getMimetype(image.path)}';
           print(imageRef);
           await firestoreService.uploadImage(File(image.path), imageRef);
           Map<String, dynamic> newData = Map<String, dynamic>();
@@ -80,7 +83,7 @@ class EditProfileController extends GetxController {
 
           int randomInt = Random().nextInt(9999999);
           final imageRef =
-              'user-images/SHmcTGDSV1f0HmPV7QBPOGEixcW2/$randomInt.$mimeType';
+              'user-images/$_userID/$randomInt.$mimeType';
           print(imageRef);
           await firestoreService.uploadImage(File(image.path), imageRef);
           Map<String, dynamic> newData = Map<String, dynamic>();
@@ -88,7 +91,7 @@ class EditProfileController extends GetxController {
           _images!.add(imageRef);
           newData['images'] = _images;
           await firestoreService.updateUser(
-              newData, 'SHmcTGDSV1f0HmPV7QBPOGEixcW2');
+              newData, _userID!);
         }
 
         break;
@@ -99,7 +102,7 @@ class EditProfileController extends GetxController {
           print("sa");
           print(_images![currentImageIndex!]);
           String imageRef =
-              'user-images/SHmcTGDSV1f0HmPV7QBPOGEixcW2/${_images![currentImageIndex!].split('.')[0]}.${Utils.getMimetype(image.path)}';
+              'user-images/$_userID/${_images![currentImageIndex!].split('.')[0]}.${Utils.getMimetype(image.path)}';
           print(imageRef);
           await firestoreService.uploadImage(File(image.path), imageRef);
           Map<String, dynamic> newData = Map<String, dynamic>();
@@ -110,7 +113,7 @@ class EditProfileController extends GetxController {
 
           int randomInt = Random().nextInt(9999999);
           final imageRef =
-              'user-images/SHmcTGDSV1f0HmPV7QBPOGEixcW2/$randomInt.$mimeType';
+              'user-images/$_userID/$randomInt.$mimeType';
           print(imageRef);
           await firestoreService.uploadImage(File(image.path), imageRef);
           Map<String, dynamic> newData = Map<String, dynamic>();
@@ -118,7 +121,7 @@ class EditProfileController extends GetxController {
           _images!.add(imageRef);
           newData['images'] = _images;
           await firestoreService.updateUser(
-              newData, 'SHmcTGDSV1f0HmPV7QBPOGEixcW2');
+              newData, _userID!);
         }
         break;
     }
@@ -127,7 +130,7 @@ class EditProfileController extends GetxController {
 
   Future<void> setUser() async {
     UserModel? userModel =
-        await userService.getUser('SHmcTGDSV1f0HmPV7QBPOGEixcW2');
+        await userService.getUser(_userID!);
     _user = userModel;
     
     setInitialFields(
@@ -227,7 +230,7 @@ class EditProfileController extends GetxController {
     if (isUpdate) {
       Map<String, dynamic> data = Map<String, dynamic>();
       data[updateField!] = updateValue!;
-      await firestoreService.updateUser(data, 'SHmcTGDSV1f0HmPV7QBPOGEixcW2');
+      await firestoreService.updateUser(data, _userID!);
     }
 
     Get.back();
@@ -265,7 +268,7 @@ class EditProfileController extends GetxController {
     data['show_age'] = _showAge;
     data['show_distance'] = _showDistance;
 
-    await firestoreService.updateUser(data, 'SHmcTGDSV1f0HmPV7QBPOGEixcW2');
+    await firestoreService.updateUser(data, _userID!);
 
     Get.back();
     

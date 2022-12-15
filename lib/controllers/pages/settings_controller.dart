@@ -1,4 +1,5 @@
 import 'package:curvy_app/api/services/firestore_service.dart';
+import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/api/services/user_service.dart';
 import 'package:curvy_app/enums/login_method_enums.dart';
 import 'package:curvy_app/models/user.model.dart';
@@ -9,6 +10,7 @@ class SettingsController extends GetxController {
   UserService userService;
   FirestoreService firestoreService;
   TextEditingController usernameFieldController = TextEditingController();
+  String? _userID;
 
   UserModel? _user;
   UserModel? get user => _user;
@@ -126,9 +128,8 @@ class SettingsController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    await setUser();
-    
-    print(_user!.settings!.privacy_preferences!.marketing_permissons!);
+    _userID = await Get.find<SharedPreferenceService>().getUserID();
+    await setUser();        
     setInitialSettings(
       _user!.settings!.distance_preference!.distance!,
       _user!.settings!.distance_preference!.only_this_interval!,
@@ -180,7 +181,7 @@ class SettingsController extends GetxController {
 
   Future<void> setUser() async {
     UserModel? userModel =
-        await userService.getUser('SHmcTGDSV1f0HmPV7QBPOGEixcW2');
+        await userService.getUser(_userID!);
     _user = userModel;
   }
 
@@ -280,9 +281,9 @@ class SettingsController extends GetxController {
   }
 
   void setAgePreferenceRange(double min, double max) {
-    print(min);
+    
     if (max > min) {
-      print('büyük');
+      
       _minAge = min.toInt();
       _maxAge = max.toInt();
       update();
@@ -480,7 +481,7 @@ class SettingsController extends GetxController {
     data['settings.privacy_preferences.enable_advertising'] =
         _privacyEnableAdvertising;
 
-    await firestoreService.updateUser(data, 'SHmcTGDSV1f0HmPV7QBPOGEixcW2');
+    await firestoreService.updateUser(data, _userID!);
     Get.back();
   }
 
@@ -493,7 +494,7 @@ class SettingsController extends GetxController {
     data['settings.privacy_preferences.marketing_permissions.new_marketing_permissions'] =
         _newMarketingPermissions;
 
-    await firestoreService.updateUser(data, 'SHmcTGDSV1f0HmPV7QBPOGEixcW2');
+    await firestoreService.updateUser(data, _userID!);
     Get.back();
   }
 
@@ -511,7 +512,7 @@ class SettingsController extends GetxController {
     data['settings.privacy_preferences.advertising_permissions.new_advertising_permissions'] =
         _newAdvertisingPermissions;
 
-    await firestoreService.updateUser(data, 'SHmcTGDSV1f0HmPV7QBPOGEixcW2');
+    await firestoreService.updateUser(data, _userID!);
     Get.back();
   }
 
@@ -522,7 +523,7 @@ class SettingsController extends GetxController {
     data['settings.email_notifications.on_marketing'] = _emailOnMarketing;
     data['settings.email_notifications.on_message'] = _emailOnMessage;
 
-    await firestoreService.updateUser(data, 'SHmcTGDSV1f0HmPV7QBPOGEixcW2');
+    await firestoreService.updateUser(data, _userID!);
     Get.back();
   }
 
@@ -538,7 +539,7 @@ class SettingsController extends GetxController {
     data['settings.instant_notifications.new_likes'] = _instantNewLikes;
     
 
-    await firestoreService.updateUser(data, 'SHmcTGDSV1f0HmPV7QBPOGEixcW2');
+    await firestoreService.updateUser(data, _userID!);
     Get.back();
   }
 
@@ -547,7 +548,7 @@ class SettingsController extends GetxController {
 
     data['username'] = _username;  
 
-    await firestoreService.updateUser(data, 'SHmcTGDSV1f0HmPV7QBPOGEixcW2');
+    await firestoreService.updateUser(data, _userID!);
     Get.back();
   }
 
@@ -556,7 +557,7 @@ class SettingsController extends GetxController {
 
     data['settings.language'] = _language;  
 
-    await firestoreService.updateUser(data, 'SHmcTGDSV1f0HmPV7QBPOGEixcW2');
+    await firestoreService.updateUser(data, _userID!);
     Get.back();
   
   }
@@ -597,7 +598,7 @@ class SettingsController extends GetxController {
 
 
 
-    await firestoreService.updateUser(data, 'SHmcTGDSV1f0HmPV7QBPOGEixcW2');
+    await firestoreService.updateUser(data, _userID!);
     Get.back();
   }
 }

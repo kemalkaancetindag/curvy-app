@@ -1,3 +1,4 @@
+import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/pages.dart';
 import 'package:curvy_app/constants/routes.dart';
 import 'package:curvy_app/dependencies/client_dependencies.dart';
@@ -30,6 +31,7 @@ import 'package:curvy_app/ui/screens/validation_code.dart';
 import 'package:curvy_app/ui/screens/validation_mail.dart';
 import 'package:curvy_app/ui/screens/validation_number.dart';
 import 'package:curvy_app/ui/screens/welcome_screen.dart';
+import 'package:curvy_app/ui/util/login_bindings.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,7 +40,7 @@ Future<void> main() async {
   
   
   
-  
+  Get.put(SharedPreferenceService());
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await initClients();

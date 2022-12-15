@@ -33,4 +33,10 @@ class SharedPreferenceService extends GetxService {
 
   }
 
+  String getUserID()  {
+    var userData = (jsonDecode(sharedPreferences.getString('user')!) as Map<String,dynamic>);
+    
+    return userData["userID"];
+  }
+
 }
