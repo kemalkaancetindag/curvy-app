@@ -19,6 +19,7 @@ class IndexScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(IndexPageController(userService: Get.find()));
     if (Get.find<SetupController>().isAfterSetup) {
       print("sa");
       WidgetsBinding.instance.addPostFrameCallback((_) async {

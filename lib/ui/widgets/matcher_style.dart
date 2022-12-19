@@ -1,5 +1,7 @@
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/expanded_matcherstyle_controller.dart';
 import 'package:curvy_app/controllers/matcher_controller.dart';
+import 'package:curvy_app/ui/widgets/matcher_style_user_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -12,216 +14,11 @@ class MatcherStyle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MatcherController>(builder: (controller) {
-      if (!controller.isMatcherStyleExpanded) {
-        return Container(
-          height: double.maxFinite,
-          width: double.maxFinite,
-          decoration: BoxDecoration(
-            color: Colors.black,
-            image: DecorationImage(
-                image: AssetImage("assets/images/women.png"),
-                fit: BoxFit.cover),
-            borderRadius: BorderRadius.circular(Dimensions.h12),
-          ),
-          child: Stack(
-            children: [
-              Positioned(
-                  left: Dimensions.w31,
-                  top: Dimensions.h21 - 2,
-                  child: Container(
-                    width: Dimensions.w300,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                            width: Dimensions.w300 / 5,
-                            height: Dimensions.h60 / 10,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.h50 / 10)),
-                            child: Center(
-                              child: Container(
-                                height: Dimensions.h21 / 10,
-                                width: Dimensions.w300 / 5 / 1.1,
-                                decoration: BoxDecoration(
-                                    gradient: LinearGradient(colors: [
-                                  Color(0xFFD51CFF),
-                                  Color(0xFF6198EF)
-                                ])),
-                              ),
-                            )),
-                        Container(
-                          width: Dimensions.w300 / 5,
-                          height: Dimensions.h60 / 10,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.circular(Dimensions.h50 / 10)),
-                        ),
-                        Container(
-                          width: Dimensions.w300 / 5,
-                          height: Dimensions.h60 / 10,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.circular(Dimensions.h50 / 10)),
-                        ),
-                        Container(
-                          width: Dimensions.w300 / 5,
-                          height: Dimensions.h60 / 10,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.circular(Dimensions.h50 / 10)),
-                        )
-                      ],
-                    ),
-                  )),
-              Positioned(
-                  top: Dimensions.h50,
-                  left: Dimensions.w31,
-                  child: Column(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(bottom: Dimensions.h16),
-                        child: Center(
-                          child: Image.asset("assets/images/report.png"),
-                        ),
-                      ),
-                      Container(
-                          child: Center(
-                        child: Image.asset("assets/images/share.png"),
-                      ))
-                    ],
-                  )),
-              Positioned(
-                  child: Container(
-                      height: Dimensions.h42 + 2,
-                      width: Dimensions.w300,
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [],
-                          )
-                        ],
-                      ))),
-              Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    height: Dimensions.h209,
-                    width: double.maxFinite,
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            stops: [0.3, 0.7],
-                            colors: [Colors.transparent, Colors.black],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter)),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Container(
-                          width: Dimensions.w300,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    width: Dimensions.w120 / 10,
-                                    height: Dimensions.h12,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                            Dimensions.h12 / 2),
-                                        color: Color(0xFF05ED00)),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        left: Dimensions.w8 / 2),
-                                    child: Center(
-                                      child: Text(
-                                        "Gülçitay,21",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: Dimensions.h36,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    margin:
-                                        EdgeInsets.only(left: Dimensions.w8),
-                                    child: Center(
-                                      child: Image.asset(
-                                          "assets/images/confirm_icon.png"),
-                                    ),
-                                  )
-                                ],
-                              ),
-                              GestureDetector(
-                                  onTap: () {
-                                    controller.setExpansion(true);
-                                  },
-                                  child: Container(
-                                    width: Dimensions.w300 / 10,
-                                    height: Dimensions.h300 / 10,
-                                    child: Center(
-                                      child: Image.asset(
-                                          "assets/images/expand_icon.png"),
-                                    ),
-                                  ))
-                            ],
-                          ),
-                        ),
-                        Container(
-                            margin: EdgeInsets.only(
-                                top: Dimensions.h7, bottom: Dimensions.h17),
-                            width: Dimensions.w300,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  child: Center(
-                                    child: Image.asset(
-                                        "assets/images/matcher_back.png"),
-                                  ),
-                                ),
-                                Container(
-                                  child: Center(
-                                    child: Image.asset(
-                                        "assets/images/matcher_dislike.png"),
-                                  ),
-                                ),
-                                Container(
-                                  child: Center(
-                                    child: Image.asset(
-                                        "assets/images/matcher_superlike.png"),
-                                  ),
-                                ),
-                                Container(
-                                  child: Center(
-                                    child: Image.asset(
-                                        "assets/images/matcher_like.png"),
-                                  ),
-                                ),
-                                Container(
-                                  child: Center(
-                                    child: Image.asset(
-                                        "assets/images/matcher_turbo.png"),
-                                  ),
-                                )
-                              ],
-                            ))
-                      ],
-                    ),
-                  ))
-            ],
-          ),
-        );
+      if (Get.find<ExpandedMatcherStyleController>().user == null) {
+        return Stack(          
+              children: controller.cards ?? [],
+            );
+
       }
 
       return Container(
@@ -313,30 +110,27 @@ class MatcherStyle extends StatelessWidget {
                               ))
                             ],
                           )),
-                      
-                     
                       Positioned(
                           bottom: -25,
                           right: 25,
                           child: GestureDetector(
-                            
                             onTap: () {
-                              Get.find<MatcherController>().setExpansion(false);
+                              Get.find<MatcherController>().shrinkUser();
                             },
                             child: Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(25),
-                                gradient: LinearGradient(colors: [
-                                  Color(0xFFD51CFF),
-                                  Color(0xFF6198EF)
-                                ])),
-                            child: Center(
-                              child:
-                                  Image.asset("assets/images/expand_icon.png"),
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25),
+                                  gradient: LinearGradient(colors: [
+                                    Color(0xFFD51CFF),
+                                    Color(0xFF6198EF)
+                                  ])),
+                              child: Center(
+                                child: Image.asset(
+                                    "assets/images/expand_icon.png"),
+                              ),
                             ),
-                          ),
                           ))
                     ],
                   ),

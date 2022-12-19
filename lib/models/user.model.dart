@@ -236,7 +236,7 @@ class _Settings {
     privacy_preferences =
         __PrivacyPreferences.fromJson(json['privacy_preferences']);
     hide_online_status = json['hide_online_status'];
-    age_preference = __AgePreference.fromJson(json['age_preference']);
+    age_preference = json['age_preference'] != null ?  __AgePreference.fromJson(json['age_preference']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -308,7 +308,7 @@ class __DistancePreference {
   __DistancePreference({this.distance, this.only_this_interval});
 
   __DistancePreference.fromJson(Map<String, dynamic> json) {
-    distance = json['distance'];
+    distance = json['distance'].toDouble();
     only_this_interval = json['only_this_interval'];
   }
 
@@ -438,8 +438,8 @@ class __PrivacyPreferences {
     curvy_team_promotions = json['curvy_team_promotions'];
     enable_advertising = json['enable_advertising'];
     enable_marketing = json['enable_marketing'];
-    marketing_permissons =
-        ____MarketingPermissions.fromJson(json['marketing_permissions']);
+    marketing_permissons = json['marketing_permissions'] != null ?
+        ____MarketingPermissions.fromJson(json['marketing_permissions']) : null;
     social_media_permissions =
         ____SocialMediaPermissions().fromJson(json['social_media_permissions']);
     advertising_permissions =

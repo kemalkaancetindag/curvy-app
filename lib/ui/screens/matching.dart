@@ -1,4 +1,5 @@
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/expanded_matcherstyle_controller.dart';
 import 'package:curvy_app/controllers/matcher_controller.dart';
 import 'package:curvy_app/ui/widgets/bottom_nav_bar.dart';
 import 'package:curvy_app/ui/widgets/free_style.dart';
@@ -13,11 +14,12 @@ class MatchingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(MatcherController(firestoreService: Get.find()));
     return GetBuilder<MatcherController>(
       builder: (controller){
         return  Scaffold(
           backgroundColor: Colors.white,
-      appBar:controller.isMatcherStyleExpanded ? null : PreferredSize(
+          appBar:Get.find<ExpandedMatcherStyleController>().user != null ? null : PreferredSize(
           preferredSize:
               Size(double.maxFinite, Dimensions.h120 - Dimensions.h100 / 10),
           child: Container(
@@ -118,6 +120,7 @@ class MatchingScreen extends StatelessWidget {
             return FreeStyle();
           }
 
+          
           return MatcherStyle();
         },
       ),      
