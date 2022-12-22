@@ -65,12 +65,7 @@ class LoginScreen extends StatelessWidget {
             LoginButton(text: "APPLE İLE GİRİŞ YAP", logo: "assets/images/apple_logo.png",
             loginMethod: () async {
                 Get.find<SetupController>().setLoginMethod(0); 
-                try{
-                  await Get.find<AuthService>().googleAuth();                
-                }
-                catch(e){
-                  await Get.find<FirestoreService>().checkInternet(e.toString());
-                }
+               await Get.find<AuthService>().googleAuth();                
                 
                 
             },),

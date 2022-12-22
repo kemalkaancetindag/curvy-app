@@ -219,7 +219,7 @@ class IndexScreen extends StatelessWidget {
                                                 decoration: BoxDecoration(
                                                     color: Colors.white,
                                                     image: indexPageController.user != null ? DecorationImage(
-                                                      image: NetworkImage('https://firebasestorage.googleapis.com/v0/b/curvy-app-test.appspot.com/o/${Uri.encodeComponent(indexPageController.user!.images![0])}?alt=media')
+                                                      image: NetworkImage('https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(indexPageController.user!.images![0])}?alt=media')
                                                     ) : null,
                                                     borderRadius:
                                                         BorderRadius.circular(

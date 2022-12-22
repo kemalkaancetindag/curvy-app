@@ -1,39 +1,15 @@
+
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/pages.dart';
 import 'package:curvy_app/constants/routes.dart';
+import 'package:curvy_app/controllers/setup_controller.dart';
 import 'package:curvy_app/dependencies/client_dependencies.dart';
 import 'package:curvy_app/dependencies/controller_dependencies.dart';
 import 'package:curvy_app/dependencies/service_dependencies.dart';
-import 'package:curvy_app/ui/screens/archives.dart';
-import 'package:curvy_app/ui/screens/chat.dart';
-import 'package:curvy_app/ui/screens/delete_account_last_chance.dart';
-import 'package:curvy_app/ui/screens/delete_account_why.dart';
-import 'package:curvy_app/ui/screens/edit_profile.dart';
-import 'package:curvy_app/ui/screens/explore.dart';
-import 'package:curvy_app/ui/screens/index.dart';
-import 'package:curvy_app/ui/screens/login.dart';
-import 'package:curvy_app/ui/screens/main_screen.dart';
-import 'package:curvy_app/ui/screens/matching.dart';
-import 'package:curvy_app/ui/screens/messages.dart';
-import 'package:curvy_app/ui/screens/save_account.dart';
-import 'package:curvy_app/ui/screens/send_feedback.dart';
-import 'package:curvy_app/ui/screens/settings.dart';
-import 'package:curvy_app/ui/screens/setup_add_image.dart';
-import 'package:curvy_app/ui/screens/setup_birthdate.dart';
-import 'package:curvy_app/ui/screens/setup_image.dart';
-import 'package:curvy_app/ui/screens/setup_interests.dart';
-import 'package:curvy_app/ui/screens/setup_name.dart';
-import 'package:curvy_app/ui/screens/setup_sex.dart';
-import 'package:curvy_app/ui/screens/setup_sexual_preference.dart';
-import 'package:curvy_app/ui/screens/setup_showme.dart';
-
-import 'package:curvy_app/ui/screens/validation_code.dart';
-import 'package:curvy_app/ui/screens/validation_mail.dart';
-import 'package:curvy_app/ui/screens/validation_number.dart';
-import 'package:curvy_app/ui/screens/welcome_screen.dart';
-import 'package:curvy_app/ui/util/login_bindings.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
 Future<void> main() async {
@@ -45,9 +21,11 @@ Future<void> main() async {
   await Firebase.initializeApp();
   await initClients();
   await initServices();    
-  
-  
+
+  var token = await FirebaseMessaging.instance.getToken();  
   await initControllers();
+    
+  Get.find<SetupController>().setInstanceToken(token!);
   runApp(const MyApp());
 }
 

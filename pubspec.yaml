@@ -49,6 +49,9 @@ dependencies:
   cloud_firestore:
   firebase_storage:
   shared_preferences:
+  firebase_messaging: ^14.1.4
+  geolocator:
+  geocoding: 
 
 dev_dependencies:
   flutter_test:
@@ -172,6 +175,7 @@ flutter:
     - assets/images/curvy_dialog_send_icon.png
     - assets/images/curvy_dialog_add_icon.png
     - assets/images/curvy_dialog_mic_icon.png
+    - assets/images/match_dialog_logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:curvy_app/api/services/auth_service.dart';
 import 'package:curvy_app/api/services/firestore_service.dart';
-import 'package:curvy_app/api/services/setup_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/mobile.api.routes.dart';
 import 'package:curvy_app/constants/routes.dart';
@@ -18,14 +17,14 @@ import 'package:curvy_app/ui/screens/welcome_screen.dart';
 import 'package:dio/dio.dart' as dio_package;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http_parser/http_parser.dart'; 
 
 class SetupController extends GetxController {
 
-  //SERVICES
-  SetupService setupService;
+  //SERVICES  
   User?   _googleUser;  
   String? _userPhoneId;
   int? _loginMethod;
@@ -71,6 +70,8 @@ class SetupController extends GetxController {
   int get currentImageIndex => _currentImageIndex;
   String? get validationCodeString => _validationCodeString;
   String? get birthdateString => _birthdateString;
+  String? _instanceToken;
+  String? get instanceToken => _instanceToken;
 
 
   //TEMP
@@ -78,7 +79,7 @@ class SetupController extends GetxController {
   List<String> get birtdateList => _birthdateList;
   bool get isAfterSetup => _isAfterSetup;
 
-  SetupController({required this.setupService});
+  SetupController();
   
 
   @override
@@ -293,6 +294,10 @@ class SetupController extends GetxController {
     //_isAfterSetup = true;
     if(_loginMethod == LoginMethod.google.value){
       var userImages = await Get.find<FirestoreService>().uploadImages(_images, _googleUser!.uid);
+      var permission = await Geolocator.requestPermission();
+      var position = await GeolocatorPlatform.instance.getCurrentPosition(locationSettings: LocationSettings(accuracy: LocationAccuracy.high));
+      print(position.latitude);
+      print(position.longitude);
       var jsonUser = UserModel(
         userID: _googleUser!.uid,
         phone_number: _phoneNumber,
@@ -309,7 +314,9 @@ class SetupController extends GetxController {
         email_confirmation: true,
         phone_confirmation: true,
         sexual_preference: _sexPrefenrence,
-        interests: _interests
+        interests: _interests,
+        location: UserLocation(latitude: position.latitude, longitude: position.longitude),
+        instance_token: _instanceToken
       ).toJson();
 
       await Get.find<FirestoreService>().addToCollection(jsonUser, 'users');
@@ -317,6 +324,10 @@ class SetupController extends GetxController {
     }
     else if(_loginMethod == LoginMethod.phone.value){
       var userImages = await Get.find<FirestoreService>().uploadImages(_images, _userPhoneId!);
+      var permission = await Geolocator.requestPermission();      
+      var position = await GeolocatorPlatform.instance.getCurrentPosition(locationSettings: LocationSettings(accuracy: LocationAccuracy.high));
+            print(position.latitude);
+      print(position.longitude);
         var jsonUser = UserModel(
         userID: _userPhoneId,
         phone_number: _phoneNumber,
@@ -333,7 +344,9 @@ class SetupController extends GetxController {
         email_confirmation: false,
         phone_confirmation: true,
         sexual_preference: _sexPrefenrence,
-        interests: _interests
+        interests: _interests,
+        location: UserLocation(latitude: position.latitude, longitude: position.longitude),
+        instance_token: _instanceToken
       ).toJson();
 
       await Get.find<FirestoreService>().addToCollection(jsonUser, 'users');
@@ -354,5 +367,9 @@ class SetupController extends GetxController {
 
   void setAfterSetup( bool isAfterSetup) {
     _isAfterSetup = isAfterSetup;
+  }
+
+  void setInstanceToken(String token) {
+    _instanceToken = token;
   }
 }

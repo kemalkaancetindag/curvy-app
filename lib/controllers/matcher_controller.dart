@@ -24,6 +24,8 @@ class MatcherController extends GetxController {
 
   int currentUserIndex = 0;
 
+  List<String> _existingUsers = [];
+
   MatcherController({required this.firestoreService});
 
   @override
@@ -40,7 +42,9 @@ class MatcherController extends GetxController {
         .get();
     RxList<Widget> cardList = <Widget>[].obs;
     matches.docs.forEach((element) {
+      
       var user = UserModel.fromJson(element.data() as Map<String, dynamic>);
+      _existingUsers.add(user.userID!);
       Get.put(SliderController(), tag: user.userID);
       Get.put(SliderController(), tag: user.userID).setUser(user);
       Get.find<SliderController>(tag: user.userID)
@@ -59,19 +63,23 @@ class MatcherController extends GetxController {
   }
 
   Future<void> continousSlidingChecker(int index) async {
-    if(index == 8){      
+    if(index == 5){      
+      
        var matches = await firestoreService
         .getCollection('users')
-        .where('sex', isEqualTo: 0)
+        .where('sex', isEqualTo: 0,)              
+        .where('userID',whereNotIn: _existingUsers)
         .limit(10)
         .get();
     List<Widget> cardList = [];
-    matches.docs.forEach((element) {
+    matches.docs.forEach((element)  {
       
-      var user = UserModel.fromJson(element.data() as Map<String, dynamic>);
-      Get.put(SliderController(), tag: user.userID);
+      var user = UserModel.fromJson(element.data() as Map<String, dynamic>);      
+      Get.put(SliderController(), tag: user.userID);      
+      Get.put(SliderController(), tag: user.userID).setUser(user);
       Get.find<SliderController>(tag: user.userID)
           .createImageCarousel(user.images!, user.userID!);
+      
        
 
       cardList.add(GetBuilder<SliderController>(
@@ -80,18 +88,18 @@ class MatcherController extends GetxController {
           builder: (_) {
             return MatcherStyleUserCard(controllerTag: user.userID!);
           }));
-      
+    currentUserIndex = 0;  
     });
 
     
 
     _cards!.addAll(cardList);
-
+    print(_cards);
     
     
-    
-    update();
     }
+
+    update();
   }
 
   Future<void> controllCurrentUserIndex(bool isNext) async {

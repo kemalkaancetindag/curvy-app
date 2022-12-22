@@ -43,7 +43,9 @@ class AuthService extends GetxService {
       Get.toNamed(Routes.index);     
     }
     else{
+      print(user);
       Get.find<SetupController>().setGoogleUser(user);
+            
       Get.toNamed(Routes.validationNumber);
     }
     

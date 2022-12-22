@@ -1,5 +1,6 @@
 class UserModel {
   String? userID;
+  String? instance_token;
   int? login_method;
   String? phone_number;
   String? phone_id;
@@ -37,9 +38,12 @@ class UserModel {
   List<dynamic>? likes;
   List<dynamic>? likeds;
   _Settings? settings;
+  UserLocation? location;
 
   UserModel(
       {this.userID,
+      this.instance_token,
+      this.location,
       this.phone_id,
       this.login_method,
       this.phone_number,
@@ -116,6 +120,8 @@ class UserModel {
     likes = json['likes'];
     likeds = json['likeds'];
     settings = _Settings.fromJson(json['settings']);
+    instance_token = json['instance_token'];
+    location = json['location'] == null ? null : UserLocation.fromJson(json['location']);
   }
 
   Map<String, dynamic> toJson() {
@@ -157,6 +163,8 @@ class UserModel {
     data['likes'] = likes ?? [];
     data['likeds'] = likeds ?? [];
     data['settings'] = settings ?? _Settings().toJson();
+    data['instance_token'] = instance_token;
+    data['location'] = location!.toJson();
     return data;
   }
 }
@@ -181,8 +189,7 @@ class _Chat {
 }
 
 class _Settings {
-  List<dynamic>? connected_accounts;
-  __Location? location;
+  List<dynamic>? connected_accounts;  
   __DistancePreference? distance_preference;
   bool? global;
   int? recommendation_preference;
@@ -196,11 +203,10 @@ class _Settings {
   __EmailNotifications? email_notifications;
   __InstantNotifications? instant_notifications;
   __PrivacyPreferences? privacy_preferences;
-  __AgePreference? age_preference;
+  __AgePreference? age_preference;  
 
   _Settings(
-      {this.connected_accounts,
-      this.location,
+      {this.connected_accounts,      
       this.distance_preference,
       this.global,
       this.recommendation_preference,
@@ -217,8 +223,7 @@ class _Settings {
       this.age_preference});
 
   _Settings.fromJson(Map<String, dynamic> json) {
-    connected_accounts = json['connected_accounts'];
-    location = __Location.fromJson(json['location']);
+    connected_accounts = json['connected_accounts'];    
     distance_preference =
         __DistancePreference.fromJson(json['distance_preference']);
     global = json['global'];
@@ -241,8 +246,7 @@ class _Settings {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['connected_accounts'] = connected_accounts ?? [];
-    data['location'] = location ?? __Location().toJson();
+    data['connected_accounts'] = connected_accounts ?? [];    
     data['distance_preference'] = distance_preference ?? __DistancePreference().toJson();
     data['global'] = global ?? true;
     data['recommendation_preference'] = recommendation_preference ?? 0;
@@ -256,19 +260,30 @@ class _Settings {
     data['instant_notifications'] = instant_notifications ?? __InstantNotifications().toJson();
     data['privacy_preferences'] = privacy_preferences ?? __PrivacyPreferences().toJson();
     data['hide_online_status'] = hide_online_status ?? false;
+    data['age_preference'] = age_preference ?? __AgePreference().toJson();
 
     return data;
   }
 }
 
-class __Location {
-  __Location();
+class UserLocation {
+  double? longitude;
+  double? latitude;
 
-  __Location.fromJson(Map<String, dynamic> json) {}
+  UserLocation({
+    this.longitude,
+    this.latitude
+  });
+
+  UserLocation.fromJson(Map<String, dynamic> json) {
+    longitude = json['longitude'];
+    latitude = json['latitude'];
+  }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-
+    data['longitude'] = longitude;
+    data['latitude'] = latitude;
     return data;
   }
 }
@@ -286,8 +301,9 @@ class __AgePreference {
   });
 
   __AgePreference.fromJson(Map<String,dynamic> json){
-    min_age = json['min_age'];
-    max_age = json['max_age'];
+        
+    min_age = json['min_age'].toInt();
+    max_age = json['max_age'].toInt();
     only_this_interval = json['only_this_interval'];
   }
 

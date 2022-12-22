@@ -1,3 +1,5 @@
+import 'package:curvy_app/api/services/match_service.dart';
+import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/controllers/matcher_controller.dart';
 import 'package:curvy_app/models/user.model.dart';
@@ -46,6 +48,7 @@ class SliderController extends GetxController {
       right = Get.width;
       animationDuration = 250;
       await Get.find<MatcherController>().controllCurrentUserIndex(true);
+  
     } else if ((Get.width - (Get.width / 5)) < decideLocationX!) {
       bottom = -Get.height;
       top = Get.height;
@@ -53,6 +56,8 @@ class SliderController extends GetxController {
       right = -Get.width;
       animationDuration = 250;
       await Get.find<MatcherController>().controllCurrentUserIndex(true);
+      String? user1ID = Get.find<SharedPreferenceService>().getUserID();
+      Get.find<MatchService>().checkForMatch(user1ID, user!.userID!);  
     } else {
       resetPosition();
     }
@@ -431,6 +436,7 @@ class SliderController extends GetxController {
   }
 
   void createImageCarousel(List<dynamic> images, String controllerTag) {
+
     var tempImageWidgets = <Widget>[];
     var predefinedWidgets = <Widget>[
       Positioned(
@@ -489,6 +495,7 @@ class SliderController extends GetxController {
                   ),
                 ));
           }),
+      
       GetBuilder<SliderController>(
           init: Get.find<SliderController>(tag: controllerTag),
           global: false,
@@ -517,15 +524,15 @@ class SliderController extends GetxController {
                   ),
                 ));
           }),
-      Positioned(
+      GetBuilder<SliderController>(
+        init: Get.find<SliderController>(tag: controllerTag),
+        global: false,
+        builder: (controller){
+          return Positioned(
           bottom: 0,
           left: 0,
           right: 0,
-          child: GetBuilder<SliderController>(
-            init: Get.find<SliderController>(tag: controllerTag),
-            global: false,
-            builder: (controller) {
-              return Container(
+          child:Container(
                 height: Dimensions.h209,
                 width: double.maxFinite,
                 decoration: BoxDecoration(
@@ -558,7 +565,7 @@ class SliderController extends GetxController {
                                     EdgeInsets.only(left: Dimensions.w8 / 2),
                                 child: Center(
                                   child: Text(
-                                    "${user!.name!.split(" ")[0]},${(DateTime.now().year - int.parse(user!.birthdate!.split("/").last))}",
+                                    "${controller.user!.name!.split(" ")[0]},${(DateTime.now().year - int.parse(controller.user!.birthdate!.split("/").last))}",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: Dimensions.h36,
@@ -687,9 +694,10 @@ class SliderController extends GetxController {
                         ))
                   ],
                 ),
-              );
-            },
-          ))
+              ));
+        }
+      )
+      
     ];
 
     Widget indicatorRow = generateListIndicators(images, controllerTag);
@@ -781,6 +789,7 @@ class SliderController extends GetxController {
       if (confirmOpacity > 0.5) {
         confirmOpacity -= 0.5;
       }
+  
     }
 
     decideLocationX = globalX;
