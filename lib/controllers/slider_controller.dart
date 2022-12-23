@@ -50,11 +50,11 @@ class SliderController extends GetxController {
       animationDuration = 250;
       await Get.find<MatcherController>().controllCurrentUserIndex(true);
       String userID = Get.find<SharedPreferenceService>().getUserID();
-      var currentUser = await Get.find<FirestoreService>().getCurrentUser(userID);
+      var currentUser =
+          await Get.find<FirestoreService>().getCurrentUser(userID);
       List<dynamic> unLikedUsers = currentUser.un_liked_users!;
       unLikedUsers.add(_user!.userID);
       await Get.find<MatcherController>().updateUnLikedUsers(unLikedUsers);
-  
     } else if ((Get.width - (Get.width / 5)) < decideLocationX!) {
       bottom = -Get.height;
       top = Get.height;
@@ -63,7 +63,7 @@ class SliderController extends GetxController {
       animationDuration = 250;
       await Get.find<MatcherController>().controllCurrentUserIndex(true);
       String? user1ID = Get.find<SharedPreferenceService>().getUserID();
-      Get.find<MatchService>().checkForMatch(user1ID, user!.userID!);  
+      Get.find<MatchService>().checkForMatch(user1ID, user!.userID!);
     } else {
       resetPosition();
     }
@@ -441,8 +441,7 @@ class SliderController extends GetxController {
     return indicatorRow;
   }
 
-  void createImageCarousel(List<dynamic> images, String controllerTag) {
-
+  void createImageCarousel(List<dynamic> images, String controllerTag, int distance) {
     var tempImageWidgets = <Widget>[];
     var predefinedWidgets = <Widget>[
       Positioned(
@@ -501,7 +500,6 @@ class SliderController extends GetxController {
                   ),
                 ));
           }),
-      
       GetBuilder<SliderController>(
           init: Get.find<SliderController>(tag: controllerTag),
           global: false,
@@ -531,179 +529,179 @@ class SliderController extends GetxController {
                 ));
           }),
       GetBuilder<SliderController>(
-        init: Get.find<SliderController>(tag: controllerTag),
-        global: false,
-        builder: (controller){
-          return Positioned(
-          bottom: 0,
-          left: 0,
-          right: 0,
-          child:Container(
-                height: Dimensions.h209,
-                width: double.maxFinite,
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        stops: [0.3, 0.7],
-                        colors: [Colors.transparent, Colors.black],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      width: Dimensions.w300,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: Dimensions.w120 / 10,
-                                height: Dimensions.h12,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                        Dimensions.h12 / 2),
-                                    color: Color(0xFF05ED00)),
-                              ),
-                              Container(
-                                margin:
-                                    EdgeInsets.only(left: Dimensions.w8 / 2),
-                                child: Center(
-                                  child: Text(
-                                    "${controller.user!.name!.split(" ")[0]},${(DateTime.now().year - int.parse(controller.user!.birthdate!.split("/").last))}",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: Dimensions.h36,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(left: Dimensions.w8),
-                                child: Center(
-                                  child: Image.asset(
-                                      "assets/images/confirm_icon.png"),
-                                ),
-                              )
-                            ],
-                          ),
-                          GestureDetector(
-                              onTap: () {
-                                Get.find<MatcherController>().expandUser(user!);
-                              },
-                              child: Container(
-                                width: Dimensions.w300 / 10,
-                                height: Dimensions.h300 / 10,
-                                child: Center(
-                                  child: Image.asset(
-                                      "assets/images/expand_icon.png"),
-                                ),
-                              ))
-                        ],
-                      ),
-                    ),
-                    imageCurrentIndex == 0
-                        ? Container(
-                            width: Dimensions.w300,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
+          init: Get.find<SliderController>(tag: controllerTag),
+          global: false,
+          builder: (controller) {
+            return Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  height: Dimensions.h209,
+                  width: double.maxFinite,
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          stops: [0.3, 0.7],
+                          colors: [Colors.transparent, Colors.black],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        width: Dimensions.w300,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Container(
+                                  width: Dimensions.w120 / 10,
+                                  height: Dimensions.h12,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(
+                                          Dimensions.h12 / 2),
+                                      color: Color(0xFF05ED00)),
+                                ),
+                                Container(
+                                  margin:
+                                      EdgeInsets.only(left: Dimensions.w8 / 2),
                                   child: Center(
-                                    child: Image.asset(
-                                        "assets/images/location_white.png"),
+                                    child: Text(
+                                      "${controller.user!.name!.split(" ")[0]},${(DateTime.now().year - int.parse(controller.user!.birthdate!.split("/").last))}",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: Dimensions.h36,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   ),
                                 ),
                                 Container(
                                   margin: EdgeInsets.only(left: Dimensions.w8),
-                                  child: Text(
-                                    "6 km uzaklıkta",
-                                    style: TextStyle(color: Colors.white),
+                                  child: Center(
+                                    child: Image.asset(
+                                        "assets/images/confirm_icon.png"),
                                   ),
                                 )
                               ],
                             ),
-                          )
-                        : Container(),
-                    imageCurrentIndex == 1
-                        ? Container(
-                            width: Dimensions.w300,
-                            child: Text(
-                              user!.about ?? "",
-                              textAlign: TextAlign.start,
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          )
-                        : Container(),
-                    imageCurrentIndex == 2
-                        ? Container(
-                            width: Dimensions.w300,
-                            child: Wrap(
-                              children: [
-                                Container(
+                            GestureDetector(
+                                onTap: () {
+                                  Get.find<MatcherController>()
+                                      .expandUser(user!);
+                                },
+                                child: Container(
+                                  width: Dimensions.w300 / 10,
                                   height: Dimensions.h300 / 10,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(
-                                          Dimensions.h12 * 2),
-                                      color: Colors.white.withOpacity(0.25)),
                                   child: Center(
-                                    child: Text(
-                                      "Sosyal olarak aktif",
-                                      style: TextStyle(color: Colors.white),
+                                    child: Image.asset(
+                                        "assets/images/expand_icon.png"),
+                                  ),
+                                ))
+                          ],
+                        ),
+                      ),
+                      imageCurrentIndex == 0
+                          ? Container(
+                              width: Dimensions.w300,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    child: Center(
+                                      child: Image.asset(
+                                          "assets/images/location_white.png"),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          )
-                        : Container(),
-                    Container(
-                        margin: EdgeInsets.only(
-                            top: Dimensions.h7, bottom: Dimensions.h17),
-                        width: Dimensions.w300,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              child: Center(
-                                child: Image.asset(
-                                    "assets/images/matcher_back.png"),
-                              ),
-                            ),
-                            Container(
-                              child: Center(
-                                child: Image.asset(
-                                    "assets/images/matcher_dislike.png"),
-                              ),
-                            ),
-                            Container(
-                              child: Center(
-                                child: Image.asset(
-                                    "assets/images/matcher_superlike.png"),
-                              ),
-                            ),
-                            Container(
-                              child: Center(
-                                child: Image.asset(
-                                    "assets/images/matcher_like.png"),
-                              ),
-                            ),
-                            Container(
-                              child: Center(
-                                child: Image.asset(
-                                    "assets/images/matcher_turbo.png"),
+                                  Container(
+                                    margin:
+                                        EdgeInsets.only(left: Dimensions.w8),
+                                    child: Text(
+                                      "$distance km uzaklıkta",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  )
+                                ],
                               ),
                             )
-                          ],
-                        ))
-                  ],
-                ),
-              ));
-        }
-      )
-      
+                          : Container(),
+                      imageCurrentIndex == 1
+                          ? Container(
+                              width: Dimensions.w300,
+                              child: Text(
+                                user!.about ?? "",
+                                textAlign: TextAlign.start,
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            )
+                          : Container(),
+                      imageCurrentIndex == 2
+                          ? Container(
+                              width: Dimensions.w300,
+                              child: Wrap(
+                                children: [
+                                  Container(
+                                    height: Dimensions.h300 / 10,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(
+                                            Dimensions.h12 * 2),
+                                        color: Colors.white.withOpacity(0.25)),
+                                    child: Center(
+                                      child: Text(
+                                        "Sosyal olarak aktif",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          : Container(),
+                      Container(
+                          margin: EdgeInsets.only(
+                              top: Dimensions.h7, bottom: Dimensions.h17),
+                          width: Dimensions.w300,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                child: Center(
+                                  child: Image.asset(
+                                      "assets/images/matcher_back.png"),
+                                ),
+                              ),
+                              Container(
+                                child: Center(
+                                  child: Image.asset(
+                                      "assets/images/matcher_dislike.png"),
+                                ),
+                              ),
+                              Container(
+                                child: Center(
+                                  child: Image.asset(
+                                      "assets/images/matcher_superlike.png"),
+                                ),
+                              ),
+                              Container(
+                                child: Center(
+                                  child: Image.asset(
+                                      "assets/images/matcher_like.png"),
+                                ),
+                              ),
+                              Container(
+                                child: Center(
+                                  child: Image.asset(
+                                      "assets/images/matcher_turbo.png"),
+                                ),
+                              )
+                            ],
+                          ))
+                    ],
+                  ),
+                ));
+          })
     ];
 
     Widget indicatorRow = generateListIndicators(images, controllerTag);
@@ -795,7 +793,6 @@ class SliderController extends GetxController {
       if (confirmOpacity > 0.5) {
         confirmOpacity -= 0.5;
       }
-  
     }
 
     decideLocationX = globalX;
@@ -833,4 +830,6 @@ class SliderController extends GetxController {
       }
     }
   }
+
+
 }

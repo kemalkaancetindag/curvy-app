@@ -9,6 +9,7 @@ import 'package:curvy_app/ui/widgets/matcher_style.dart';
 import 'package:curvy_app/ui/widgets/matcher_style_user_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'dart:math' as math;
 
 class MatcherController extends GetxController {
   FirestoreService firestoreService;
@@ -37,6 +38,25 @@ class MatcherController extends GetxController {
     super.onInit();
     await getCards();
   }
+    Future<int> calculateDistance(double lat2, double lon2) async {
+    String userID = Get.find<SharedPreferenceService>().getUserID();
+    var currentUser = await Get.find<FirestoreService>().getCurrentUser(userID);
+    var lat1 = currentUser.location!.latitude!;
+    var lon1 = currentUser.location!.longitude!;
+    var dLat = (lat2 - lat1) * math.pi / 180.0;
+    var dLon = (lon2 - lon1) * math.pi / 180.0;
+    var latTimesPi1 = (lat1) * math.pi / 180.0;
+    var latTimesPi2 = (lat2) * math.pi / 180.0;
+
+    var a = (math.pow(math.sin(dLat / 2), 2) +
+        math.pow(math.sin(dLon / 2), 2) *
+            math.cos(latTimesPi1) *
+            math.cos(latTimesPi2));
+    var rad = 6371;
+    var c = 2 * math.asin(math.sqrt(a));
+
+    return (rad * c).toInt();
+  }
 
   Future<void> getCards() async {
     Map<String, dynamic> recommendationPostData = Map<String, dynamic>();
@@ -45,19 +65,21 @@ class MatcherController extends GetxController {
     recommendationPostData["userID"] = userID;
     var user = await firestoreService.getCurrentUser(userID);
     recommendationPostData["un_liked_users"] = user.un_liked_users;
+    
 
     var response =
         await goApiClient.postData(recommendationPostData, "/recommendations");
     var matches = response.body;
 
     RxList<Widget> cardList = <Widget>[].obs;
-    matches.forEach((element) {
+    matches.forEach((element) async {
       var user = UserModel.fromJson(element as Map<String, dynamic>);
+      int distance = await calculateDistance(user.location!.latitude!, user.location!.longitude!);
       _existingUsers.add(user.userID!);
       Get.put(SliderController(), tag: user.userID);
       Get.put(SliderController(), tag: user.userID).setUser(user);
       Get.find<SliderController>(tag: user.userID)
-          .createImageCarousel(user.images!, user.userID!);
+          .createImageCarousel(user.images!, user.userID!, distance);
 
       cardList.add(GetBuilder<SliderController>(
           init: Get.find<SliderController>(tag: user.userID),
@@ -84,12 +106,13 @@ class MatcherController extends GetxController {
       var matches = response.body;
 
       List<Widget> cardList = [];
-      matches.forEach((element) {
+      matches.forEach((element) async {
         var user = UserModel.fromJson(element as Map<String, dynamic>);
+        int distance = await calculateDistance(user.location!.latitude!, user.location!.longitude!);
         Get.put(SliderController(), tag: user.userID);
         Get.put(SliderController(), tag: user.userID).setUser(user);
         Get.find<SliderController>(tag: user.userID)
-            .createImageCarousel(user.images!, user.userID!);
+            .createImageCarousel(user.images!, user.userID!, distance);
 
         cardList.add(GetBuilder<SliderController>(
             init: Get.find<SliderController>(tag: user.userID),
