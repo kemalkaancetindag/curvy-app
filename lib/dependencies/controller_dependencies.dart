@@ -17,7 +17,7 @@ Future<void> initControllers() async {
   Get.put(NavController());
   Get.put(ArchivesController());
   Get.put(MessagesController());
-  Get.lazyPut(() => MatcherController(firestoreService: Get.find()));
+  Get.lazyPut(() => MatcherController(firestoreService: Get.find(), goApiClient: Get.find()));
   Get.put(SetupController());
   Get.lazyPut(() => IndexPageController(userService: Get.find()));
   Get.lazyPut(() => EditProfileController(userService: Get.find(), firestoreService: Get.find()));

@@ -39,6 +39,7 @@ class UserModel {
   List<dynamic>? likeds;
   _Settings? settings;
   UserLocation? location;
+  List<dynamic>? un_liked_users;
 
   UserModel(
       {this.userID,
@@ -80,7 +81,8 @@ class UserModel {
       this.chat,
       this.likes,
       this.likeds,
-      this.settings});
+      this.settings,
+      this.un_liked_users});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     userID = json['userID'];
@@ -122,6 +124,7 @@ class UserModel {
     settings = _Settings.fromJson(json['settings']);
     instance_token = json['instance_token'];
     location = json['location'] == null ? null : UserLocation.fromJson(json['location']);
+    un_liked_users = json['un_liked_users'];
   }
 
   Map<String, dynamic> toJson() {
@@ -165,6 +168,7 @@ class UserModel {
     data['settings'] = settings ?? _Settings().toJson();
     data['instance_token'] = instance_token;
     data['location'] = location!.toJson();
+    data['un_liked_users'] = un_liked_users;
     return data;
   }
 }

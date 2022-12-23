@@ -1,3 +1,4 @@
+import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/match_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
@@ -48,6 +49,11 @@ class SliderController extends GetxController {
       right = Get.width;
       animationDuration = 250;
       await Get.find<MatcherController>().controllCurrentUserIndex(true);
+      String userID = Get.find<SharedPreferenceService>().getUserID();
+      var currentUser = await Get.find<FirestoreService>().getCurrentUser(userID);
+      List<dynamic> unLikedUsers = currentUser.un_liked_users!;
+      unLikedUsers.add(_user!.userID);
+      await Get.find<MatcherController>().updateUnLikedUsers(unLikedUsers);
   
     } else if ((Get.width - (Get.width / 5)) < decideLocationX!) {
       bottom = -Get.height;

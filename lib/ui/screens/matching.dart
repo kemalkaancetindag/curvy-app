@@ -14,7 +14,7 @@ class MatchingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(MatcherController(firestoreService: Get.find()));
+    Get.put(MatcherController(firestoreService: Get.find(), goApiClient: Get.find()));
     return GetBuilder<MatcherController>(
       builder: (controller){
         return  Scaffold(

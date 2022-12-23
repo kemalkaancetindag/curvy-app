@@ -68,6 +68,12 @@ class FirestoreService extends GetxService {
     await db.collection('test').add(data);
   }
 
+  Future<UserModel> getCurrentUser(String userID) async {
+    var userSnapshot = await  getCollection('users').where('userID', isEqualTo: userID).get();
+    var user = UserModel.fromJson(userSnapshot.docs[0].data() as Map<String,dynamic>);
+    return user;
+  }
+
 
 
 }
