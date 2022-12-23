@@ -59,6 +59,7 @@ class MatcherController extends GetxController {
   }
 
   Future<void> getCards() async {
+    // FIRST LOAD DOESNT RENDERS
     Map<String, dynamic> recommendationPostData = Map<String, dynamic>();
 
     String userID = Get.find<SharedPreferenceService>().getUserID();

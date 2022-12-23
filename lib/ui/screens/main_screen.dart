@@ -1,3 +1,4 @@
+import 'package:curvy_app/controllers/expanded_matcherstyle_controller.dart';
 import 'package:curvy_app/controllers/nav_controller.dart';
 import 'package:curvy_app/ui/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class MainScreen extends StatelessWidget {
     return GetBuilder<NavController>(builder: (controller) {
       return Scaffold(
         body: controller.mainPages[controller.currentIndex],
-        bottomNavigationBar: BottomNavBar(),
+        bottomNavigationBar:  BottomNavBar()
       );
     });
   }

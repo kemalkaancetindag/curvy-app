@@ -20,120 +20,31 @@ class MatcherStyle extends StatelessWidget {
             ) : Container();
       }
 
-      return Container(
+      return GetBuilder<ExpandedMatcherStyleController>(
+        builder: (controller){
+          return Container(
           width: double.maxFinite,
           height: double.maxFinite,
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Container(
+               GestureDetector(                
+                onPanDown: (details){
+                  controller.carouselController(details.globalPosition.dx);
+                },
+                child:  Container(
                   margin: EdgeInsets.only(top: Dimensions.h42),
                   height: Dimensions.h520,
                   width: double.maxFinite,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(Dimensions.h16),
-                      image: DecorationImage(
-                          image: AssetImage("assets/images/women.png"),
-                          fit: BoxFit.cover)),
+                  ),
                   child: Stack(
                     clipBehavior: Clip.none,
-                    children: [
-                      Positioned(
-                          left: Dimensions.w31,
-                          top: Dimensions.h21 - 2,
-                          child: Container(
-                            width: Dimensions.w300,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Container(
-                                    width: Dimensions.w300 / 5,
-                                    height: Dimensions.h60 / 10,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(
-                                            Dimensions.h50 / 10)),
-                                    child: Center(
-                                      child: Container(
-                                        height: Dimensions.h21 / 10,
-                                        width: Dimensions.w300 / 5 / 1.1,
-                                        decoration: BoxDecoration(
-                                            gradient: LinearGradient(colors: [
-                                          Color(0xFFD51CFF),
-                                          Color(0xFF6198EF)
-                                        ])),
-                                      ),
-                                    )),
-                                Container(
-                                  width: Dimensions.w300 / 5,
-                                  height: Dimensions.h60 / 10,
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(
-                                          Dimensions.h50 / 10)),
-                                ),
-                                Container(
-                                  width: Dimensions.w300 / 5,
-                                  height: Dimensions.h60 / 10,
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(
-                                          Dimensions.h50 / 10)),
-                                ),
-                                Container(
-                                  width: Dimensions.w300 / 5,
-                                  height: Dimensions.h60 / 10,
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(
-                                          Dimensions.h50 / 10)),
-                                )
-                              ],
-                            ),
-                          )),
-                      Positioned(
-                          top: Dimensions.h50,
-                          left: Dimensions.w31,
-                          child: Column(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(bottom: Dimensions.h16),
-                                child: Center(
-                                  child:
-                                      Image.asset("assets/images/report.png"),
-                                ),
-                              ),
-                              Container(
-                                  child: Center(
-                                child: Image.asset("assets/images/share.png"),
-                              ))
-                            ],
-                          )),
-                      Positioned(
-                          bottom: -25,
-                          right: 25,
-                          child: GestureDetector(
-                            onTap: () {
-                              Get.find<MatcherController>().shrinkUser();
-                            },
-                            child: Container(
-                              width: 50,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(25),
-                                  gradient: LinearGradient(colors: [
-                                    Color(0xFFD51CFF),
-                                    Color(0xFF6198EF)
-                                  ])),
-                              child: Center(
-                                child: Image.asset(
-                                    "assets/images/expand_icon.png"),
-                              ),
-                            ),
-                          ))
-                    ],
+                    children: controller.imageCarousel ?? []
                   ),
                 ),
+               ),
                 Container(
                     margin: EdgeInsets.only(
                         top: Dimensions.h14, bottom: Dimensions.h16),
@@ -157,7 +68,7 @@ class MatcherStyle extends StatelessWidget {
                               margin: EdgeInsets.only(left: Dimensions.w8 / 2),
                               child: Center(
                                 child: Text(
-                                  "Gülçitay,21",
+                                  "${controller.user!.name!.split(" ")[0]},${DateTime.now().year - int.parse(controller.user!.birthdate!.split("/").last)}",
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontSize: Dimensions.h36,
@@ -212,7 +123,7 @@ class MatcherStyle extends StatelessWidget {
                                 Container(
                                   child: Center(
                                       child: Text(
-                                    "3 km uzaklıkta",
+                                    "${controller.distance ?? ""} km uzaklıkta",
                                     style: TextStyle(
                                         color: Color(0xFF7B8491),
                                         fontSize: Dimensions.h16),
@@ -232,7 +143,7 @@ class MatcherStyle extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.only(top: Dimensions.h8),
                           child: Text(
-                            "Samimi doğru dürüst bir birliktelik seviyeli bir ilişki arıyanlar uzak dursun fuckbuddy mantığını ve kültürünü çözmüş zaman mekan sıkıntısı olmayan en az 28 orjinal kendi dişi olan arkadaşlar yazsın. Bu tanımlamaya uymayanları direkt engellerim.",
+                            controller.user!.about!,
                             style: TextStyle(color: Color(0xFF7B8491)),
                           ),
                         )
@@ -472,6 +383,8 @@ class MatcherStyle extends StatelessWidget {
               ],
             ),
           ));
+        }
+      ) ;
     });
   }
 }

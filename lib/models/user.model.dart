@@ -440,7 +440,7 @@ class __PrivacyPreferences {
   bool? curvy_team_promotions;
   bool? enable_marketing;
   bool? enable_advertising;
-  ____MarketingPermissions? marketing_permissons;
+  ____MarketingPermissions? marketing_permissions;
   ____SocialMediaPermissions? social_media_permissions;
   ____AdvertisingPermissions? advertising_permissions;
 
@@ -449,7 +449,7 @@ class __PrivacyPreferences {
       this.enable_marketing,
       this.compulsory_permissions,
       this.curvy_team_promotions,
-      this.marketing_permissons,
+      this.marketing_permissions,
       this.social_media_permissions,
       this.advertising_permissions});
 
@@ -458,7 +458,7 @@ class __PrivacyPreferences {
     curvy_team_promotions = json['curvy_team_promotions'];
     enable_advertising = json['enable_advertising'];
     enable_marketing = json['enable_marketing'];
-    marketing_permissons = json['marketing_permissions'] != null ?
+    marketing_permissions = json['marketing_permissions'] != null ?
         ____MarketingPermissions.fromJson(json['marketing_permissions']) : null;
     social_media_permissions =
         ____SocialMediaPermissions().fromJson(json['social_media_permissions']);
@@ -472,7 +472,7 @@ class __PrivacyPreferences {
     data['curvy_team_promotions'] = curvy_team_promotions ?? true;
     data['enable_advertising'] = enable_advertising ?? true;
     data['enable_marketing'] = enable_marketing ?? true;
-    data['marketing_permissons'] = marketing_permissons ?? ____MarketingPermissions().toJson();
+    data['marketing_permissions'] = marketing_permissions ?? ____MarketingPermissions().toJson();
     data['social_media_permissions'] = social_media_permissions ?? ____SocialMediaPermissions().toJson();
     data['advertising_permissions'] = advertising_permissions ?? ____AdvertisingPermissions().toJson();
 

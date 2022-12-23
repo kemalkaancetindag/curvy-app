@@ -164,9 +164,9 @@ class SettingsController extends GetxController {
       _user!.settings!.instant_notifications!.vibration!,
       _user!.settings!.privacy_preferences!.enable_advertising!,
       _user!.settings!.privacy_preferences!.enable_marketing!,
-      _user!.settings!.privacy_preferences!.marketing_permissons!.app_flayer!,
-      _user!.settings!.privacy_preferences!.marketing_permissons!.branch!,
-      _user!.settings!.privacy_preferences!.marketing_permissons!
+      _user!.settings!.privacy_preferences!.marketing_permissions!.app_flayer!,
+      _user!.settings!.privacy_preferences!.marketing_permissions!.branch!,
+      _user!.settings!.privacy_preferences!.marketing_permissions!
           .new_marketing_permissions!,
       _user!.settings!.privacy_preferences!.advertising_permissions!
           .curvy_direct_ads!,
@@ -599,6 +599,8 @@ class SettingsController extends GetxController {
     data['settings.hide_last_online_status'] = _hideLastOnlineStatus;
 
     data['settings.privacy_preferences.curvy_team_promotions'] = _curvyTeamPromotions;
+
+    print(data);
 
 
 
