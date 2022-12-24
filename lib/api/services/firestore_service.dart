@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:curvy_app/models/chat.model.dart';
 import 'package:curvy_app/models/user.model.dart';
 import 'package:curvy_app/ui/util/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -73,6 +74,20 @@ class FirestoreService extends GetxService {
     var user = UserModel.fromJson(userSnapshot.docs[0].data() as Map<String,dynamic>);
     return user;
   }
+
+  Future<Chat> getChat(String chatID) async {
+    var chatSnapshot = await getCollection('chats').doc(chatID).get();
+    var chat =  Chat.fromJson(chatSnapshot.data() as Map<String,dynamic>);
+    return chat;
+  } 
+
+  Future<void> sendMessageToChat(Map<String,dynamic> data, String chatID) async {
+    print(data);
+    print(chatID);
+    await getCollection('chats').doc(chatID).update(data);
+  }
+
+
 
 
 

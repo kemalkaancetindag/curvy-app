@@ -5,6 +5,7 @@ import 'package:curvy_app/controllers/expanded_matcherstyle_controller.dart';
 import 'package:curvy_app/controllers/matcher_controller.dart';
 import 'package:curvy_app/controllers/messages_controller.dart';
 import 'package:curvy_app/controllers/nav_controller.dart';
+import 'package:curvy_app/controllers/pages/chat_controller.dart';
 import 'package:curvy_app/controllers/pages/edit_profile_controller.dart';
 import 'package:curvy_app/controllers/pages/index_controller.dart';
 import 'package:curvy_app/controllers/pages/settings_controller.dart';
@@ -23,6 +24,6 @@ Future<void> initControllers() async {
   Get.lazyPut(() => EditProfileController(userService: Get.find(), firestoreService: Get.find()));
   Get.lazyPut(() => SettingsController(userService: Get.find(), firestoreService: Get.find()));
   Get.put(ExpandedMatcherStyleController());
-
+  Get.lazyPut(() => ChatController(chatService: Get.find()));
   
 }
