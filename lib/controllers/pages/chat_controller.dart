@@ -60,8 +60,9 @@ class ChatController extends GetxController {
     _activeChats = activeChats;
     _unActiveChats = unActiveChats;
     _newMatches = newMatches;
-    
-    
+    print("BUM");
+    print(activeChats);
+      
     update();
   }
 
@@ -75,8 +76,7 @@ class ChatController extends GetxController {
       (sendingDate.month == currentDate.month)
       &&
       (sendingDate.year == currentDate.year)
-    ){
-      print("sa");
+    ){      
       
       return "${sendingDate.hour}:${sendingDate.minute}";
     }
@@ -103,6 +103,8 @@ class ChatController extends GetxController {
   }
 
   void setCurrentChat(String chatID) {
+    print("ssssssssssssssssssssssssssssssAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    print(chatID);
     if(_isActiveMessages){
       _currentChat = _activeChats!.where((chat) => chat.chatID == chatID).toList()[0];    
     }
@@ -119,6 +121,7 @@ class ChatController extends GetxController {
 
   Future likeMessage(int messageId) async {
     await chatService.likeMessage(_currentChat!.chatID!, messageId);
+    update();
   }
 
   void setIsActiveMessages(bool state){
@@ -129,6 +132,10 @@ class ChatController extends GetxController {
   Future startNewChatWithNewMatch(String chatID) async {
     await chatService.startNewChatWithNewMatch(chatID);
     setCurrentChat(chatID);
+    update();
+  }
+  void clearCurrentChat() {
+    _currentChat = null;
     update();
   }
 

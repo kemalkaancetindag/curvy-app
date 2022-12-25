@@ -184,14 +184,18 @@ class MessagesScreen extends StatelessWidget {
               return Container(
                 width: double.maxFinite,
                 height: double.maxFinite,
-                child: ListView.builder(
+                child: chatController.activeChats != null && chatController.unActiveChats != null  ? ListView.builder(
                   itemCount: chatController.isActiveMessages
-                      ? (  chatController.activeChats != null ? chatController.activeChats!.length : 0)
-                      : (chatController.unActiveChats != null ? chatController.unActiveChats!.length : 0),
+                      ? chatController.activeChats!.length
+                      : chatController.unActiveChats!.length,
                   itemBuilder: (context, index) {
+                    print("sa");
+                    print(chatController.activeChats![index].chatID!);
                     return GestureDetector(
                       onTap: () {
                         if (chatController.isActiveMessages) {
+                          chatController.activeChats!.forEach((element) {print(element.chatID!);});
+                          print(chatController.activeChats!);
                           chatController.setCurrentChat(
                               chatController.activeChats![index].chatID!);
                         } else {
@@ -254,7 +258,14 @@ class MessagesScreen extends StatelessWidget {
                                     }
                                     controller.lastDirection = details.delta.dx;
                                   },
-                                  child: Container(
+                                  child: GetBuilder<UserOnlineController>(
+                                    global: false,
+                                    init: chatController.isActiveMessages ? 
+                                    Get.find<UserOnlineController>(tag: chatController.currentUserID == chatController.activeChats![index].user1 ? chatController.activeChats![index].user2 : chatController.activeChats![index].user1)
+                                    :
+                                    Get.find<UserOnlineController>(tag: chatController.currentUserID == chatController.unActiveChats![index].user1 ? chatController.unActiveChats![index].user2 : chatController.unActiveChats![index].user1),
+                                    builder: (userOnlineController){
+                                      return   Container(
                                     height: Dimensions.h90,
                                     width: double.maxFinite,
                                     child: Row(
@@ -293,36 +304,7 @@ class MessagesScreen extends StatelessWidget {
                                             ],
                                           ),
                                         ),
-                                        GetBuilder<UserOnlineController>(
-                                            init: chatController
-                                                    .isActiveMessages
-                                                ? Get.find<UserOnlineController>(
-                                                    tag: chatController.activeChats![index].user1 ==
-                                                            chatController
-                                                                .currentUserID
-                                                        ? chatController
-                                                            .activeChats![index]
-                                                            .user2
-                                                        : chatController
-                                                            .activeChats![index]
-                                                            .user1)
-                                                : Get.find<UserOnlineController>(
-                                                    tag: chatController
-                                                                .unActiveChats![
-                                                                    index]
-                                                                .user1 ==
-                                                            chatController
-                                                                .currentUserID
-                                                        ? chatController
-                                                            .unActiveChats![
-                                                                index]
-                                                            .user2
-                                                        : chatController
-                                                            .unActiveChats![index]
-                                                            .user1),
-                                            global: false,
-                                            builder: (userOnlineController) {
-                                              return Container(
+                                     Container(
                                                 width: Dimensions.w8 * 10,
                                                 height: Dimensions.w8 * 10,
                                                 decoration: BoxDecoration(
@@ -339,8 +321,8 @@ class MessagesScreen extends StatelessWidget {
                                                                 'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(userOnlineController.user!.images![0])}?alt=media'),
                                                             fit: BoxFit.cover)
                                                         : null),
-                                              );
-                                            }),
+                                              ),
+
                                         Container(
                                           width: Dimensions.w267,
                                           height: Dimensions.h90,
@@ -354,32 +336,7 @@ class MessagesScreen extends StatelessWidget {
                                                       width: 1))),
                                           child: Column(
                                             children: [
-                                              GetBuilder<UserOnlineController>(
-                                                  init: chatController
-                                                          .isActiveMessages
-                                                      ? (chatController.activeChats![index].user1! ==
-                                                              chatController
-                                                                  .currentUserID
-                                                          ? Get.find<UserOnlineController>(
-                                                              tag: chatController
-                                                                  .activeChats![
-                                                                      index]
-                                                                  .user2!)
-                                                          : Get.find<UserOnlineController>(
-                                                              tag: chatController
-                                                                  .unActiveChats![
-                                                                      index]
-                                                                  .user1!))
-                                                      : (chatController.unActiveChats![index].user1! ==
-                                                              chatController
-                                                                  .currentUserID
-                                                          ? Get.find<UserOnlineController>(
-                                                              tag: chatController
-                                                                  .unActiveChats![index]
-                                                                  .user2!)
-                                                          : Get.find<UserOnlineController>(tag: chatController.activeChats![index].user1!)),
-                                                  builder: (userOnlineController) {
-                                                    return Row(
+                                              Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
                                                               .spaceBetween,
@@ -454,8 +411,7 @@ class MessagesScreen extends StatelessWidget {
                                                           ),
                                                         )
                                                       ],
-                                                    );
-                                                  }),
+                                                    ),
                                               Container(
                                                 margin: EdgeInsets.only(
                                                     top: Dimensions.h7),
@@ -515,7 +471,10 @@ class MessagesScreen extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                  ),
+                                  );
+                                    },
+                                  ) 
+                                ,
                                 )),
                             Positioned(
                                 top: Dimensions.h90,
@@ -556,7 +515,7 @@ class MessagesScreen extends StatelessWidget {
                       ),
                     );
                   },
-                ),
+                ) : null,
               );
             },
           ));

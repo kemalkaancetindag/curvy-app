@@ -14,6 +14,7 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
         appBar: PreferredSize(
             preferredSize: Size(double.maxFinite, Dimensions.h140),
@@ -31,8 +32,9 @@ class ChatScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       GestureDetector(
-                          onTap: () {
+                          onTap: () {                            
                             Get.back();
+                            controller.clearCurrentChat();
                           },
                           child: Container(
                             margin: EdgeInsets.only(
@@ -57,12 +59,13 @@ class ChatScreen extends StatelessWidget {
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(
                                           Dimensions.h8 * 5)),
-                                  child: GetBuilder<UserOnlineController>(
+                                  child: controller.currentChat != null ? GetBuilder<UserOnlineController>(
                                     init: Get.find<UserOnlineController>(tag: controller.currentChat!.user1 == controller.currentUserID ? controller.currentChat!.user2 : controller.currentChat!.user1),
                                     global: false,
                                     builder: (userOnlineController){
                                       return Row(
                                     children: [
+                                      userOnlineController.user!.online_status! ? 
                                      Container(
                                         width: Dimensions.h8,
                                         height: Dimensions.h8,
@@ -73,6 +76,9 @@ class ChatScreen extends StatelessWidget {
                                             borderRadius: BorderRadius.circular(
                                                 Dimensions.h8 / 2),
                                             color: Color(0xFF05ED00)),
+                                      ) : Container(
+                                          margin: EdgeInsets.only(
+                                            left: Dimensions.w35,)
                                       ),
                                      
                                       Container(
@@ -104,7 +110,7 @@ class ChatScreen extends StatelessWidget {
                                     ],
                                   );  
                                     },
-                                  )
+                                  ) : null
                                 )
                                 ),
                             Positioned(
@@ -149,7 +155,8 @@ class ChatScreen extends StatelessWidget {
                                 )),
 
                             GetBuilder<UserOnlineController>(
-                              init: Get.find<UserOnlineController>(tag: controller.currentChat!.user1 == controller.currentUserID ? controller.currentChat!.user2 : controller.currentChat!.user1),
+                              global: false,
+                              init:controller.currentChat != null ? Get.find<UserOnlineController>(tag: controller.currentChat!.user1 == controller.currentUserID ? controller.currentChat!.user2 : controller.currentChat!.user1) : null,
                               builder: (userOnlineController){
                                 
                                 return Positioned(
@@ -171,7 +178,7 @@ class ChatScreen extends StatelessWidget {
                             ),
 
                             GetBuilder<UserOnlineController>(
-                              init: Get.find<UserOnlineController>(tag: controller.currentChat!.user1 == controller.currentUserID ? controller.currentChat!.user2 : controller.currentChat!.user1),
+                              init: controller.currentChat != null ? Get.find<UserOnlineController>(tag: controller.currentChat!.user1 == controller.currentUserID ? controller.currentChat!.user2 : controller.currentChat!.user1) : null,
                               global: false,
                               builder: (userOnlineController){
                                 return   
@@ -236,7 +243,7 @@ class ChatScreen extends StatelessWidget {
                     padding: EdgeInsets.only(
                         left: Dimensions.w8 * 2, right: Dimensions.w8 * 2),
                     child: ListView.builder(
-                      itemCount: controller.currentChat!.messages!.length,
+                      itemCount: controller.currentChat != null ? controller.currentChat!.messages!.length : 0,
                       itemBuilder: (context, index) {
                         if (controller.currentChat!.messages![index].senderId ==
                             controller.currentUserID) {

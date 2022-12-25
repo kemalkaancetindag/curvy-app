@@ -9,6 +9,18 @@ class Chat {
   int? lastMessageDate;
   bool? isStarted;
 
+  Chat({
+    this.messages,
+    this.startingType,
+    this.user1,
+    this.user2,
+    this.isActive,
+    this.chatID,
+    this.lastMessage,
+    this.lastMessageDate,
+    this.isStarted
+  });
+
 
   Chat.fromJson(Map<String, dynamic> json){
     if(json['messages'] != null) {

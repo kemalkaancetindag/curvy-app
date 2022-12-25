@@ -1,8 +1,10 @@
+import 'package:curvy_app/api/services/chat_service.dart';
 import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/match_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/controllers/matcher_controller.dart';
+import 'package:curvy_app/controllers/pages/chat_controller.dart';
 import 'package:curvy_app/models/user.model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,10 @@ import 'package:get/get.dart';
 import 'dart:math' as math;
 
 class SliderController extends GetxController {
+
+  String _curvyLikeMessageText = "";
+  String _curvyChipMessageText = "";
+
   List<List<double>> imagePositions = [];
   List<Widget>? imageWidgets;
 
@@ -71,6 +77,7 @@ class SliderController extends GetxController {
   }
 
   void decideVerticalAction() {
+    
     if (Get.height / 2.5 > decideLocationY!) {
       showDialog(
           context: Get.context!,
@@ -97,7 +104,7 @@ class SliderController extends GetxController {
                             margin: EdgeInsets.only(right: Dimensions.w8 / 2),
                             child: Center(
                               child: Image.asset(
-                                  "assets/images/curvy_chip_dialog.png"),
+                                  "assets/images/curvy_like_dialog.png"),
                             ),
                           ),
                           Container(
@@ -166,6 +173,9 @@ class SliderController extends GetxController {
                                 borderRadius:
                                     BorderRadius.circular(Dimensions.h16)),
                             child: TextField(
+                              onChanged: (value) {
+                                _curvyLikeMessageText = value;
+                              },
                               cursorColor: Colors.black,
                               style: TextStyle(color: Colors.black),
                               maxLines: 10,
@@ -182,12 +192,20 @@ class SliderController extends GetxController {
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Container(
+                              GestureDetector(
+                                onTap: () async {
+                                  await Get.find<ChatService>().startNewChat(_curvyLikeMessageText, _user!.userID!, 1);
+                                  _curvyLikeMessageText = "";
+                                  Get.back();
+                                },
+                                child:Container(
                                 child: Center(
                                   child: Image.asset(
                                       "assets/images/curvy_dialog_send_icon.png"),
                                 ),
                               ),
+                              ),
+                              
                               Container(
                                 child: Center(
                                   child: Image.asset(
@@ -236,7 +254,7 @@ class SliderController extends GetxController {
                             margin: EdgeInsets.only(right: Dimensions.w8 / 2),
                             child: Center(
                               child: Image.asset(
-                                  "assets/images/curvy_like_dialog.png"),
+                                  "assets/images/curvy_chip_dialog.png"),
                             ),
                           ),
                           Container(
@@ -321,12 +339,20 @@ class SliderController extends GetxController {
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Container(
+                              GestureDetector(
+                                onTap: () async {
+                                  await Get.find<ChatService>().startNewChat(_curvyChipMessageText, _user!.userID!, 2);
+                                  _curvyChipMessageText = "";
+                                  Get.back();
+                                },
+                                child:     Container(
                                 child: Center(
                                   child: Image.asset(
                                       "assets/images/curvy_dialog_send_icon.png"),
                                 ),
                               ),
+                              ),
+                          
                               Container(
                                 child: Center(
                                   child: Image.asset(
