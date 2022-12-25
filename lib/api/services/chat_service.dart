@@ -15,7 +15,9 @@ class ChatService extends GetxService {
   Future getInitialChats() async {
     String userID = Get.find<SharedPreferenceService>().getUserID();
     UserModel user = await firestoreService.getCurrentUser(userID);
-    List<Chat> chats = [];
+    List<Chat> activeChats = [];
+    List<Chat> unActiveChats = [];
+    List<Chat> newMatches = [];
 
     await Future.forEach(user.chat!.active_chats!, (chatID) async {
       var chatSnapshot =
@@ -34,10 +36,39 @@ class ChatService extends GetxService {
             tag: chat.user1!);
       }
 
-      chats.add(chat);
+      if(chat.isStarted!){
+        activeChats.add(chat);
+      }
+      else{
+        newMatches.add(chat);
+      }
+
+      
     });
 
-    Get.find<ChatController>().setChats(chats);
+     await Future.forEach(user.chat!.trash_chats!, (chatID) async {
+      var chatSnapshot =
+          await firestoreService.getCollection('chats').doc(chatID).get();
+      var chat = Chat.fromJson(chatSnapshot.data() as Map<String, dynamic>);
+      if (userID == chat.user1) {
+        
+        Get.put(
+            UserOnlineController(
+                firestoreService: firestoreService, userID: chat.user2!),
+            tag: chat.user2!!);
+      } else {
+        Get.put(
+            UserOnlineController(
+                firestoreService: firestoreService, userID: chat.user1!),
+            tag: chat.user1!);
+      }
+
+
+
+      unActiveChats.add(chat);
+    });
+
+    Get.find<ChatController>().setChats(activeChats, unActiveChats, newMatches);
   }
 
   Future listenUserChats() async {
@@ -51,10 +82,13 @@ class ChatService extends GetxService {
       for (var change in event.docChanges) {
         switch (change.type) {
           case DocumentChangeType.modified:
-            List<Chat> updatedChats = [];
+            List<Chat> activeChats = [];
+            List<Chat> unActiveChats = [];
+            List<Chat> newMatches = [];
             event.docs.forEach((chatSnapshot) {
               var chat =
                   Chat.fromJson(chatSnapshot.data() as Map<String, dynamic>);
+
               if (userID == chat.user1!) {
                 Get.put(
                     UserOnlineController(
@@ -69,11 +103,22 @@ class ChatService extends GetxService {
                     tag: chat.user1!);
               }
 
-              updatedChats.add(chat);
+              if(chat.isActive!){
+                if(chat.isStarted!){
+                  activeChats.add(chat);
+                }else{
+                  newMatches.add(chat);
+                }
+                
+              }
+              else{
+                unActiveChats.add(chat);
+              }
+
+              
             });
-            Get.find<ChatController>().setChats(updatedChats);
-            Get.find<ChatController>().setCurrentChat(Get.find<ChatController>().currentChat!.chatID!);
-            updatedChats = [];
+            Get.find<ChatController>().setChats(activeChats,unActiveChats,newMatches);
+            Get.find<ChatController>().setCurrentChat(Get.find<ChatController>().currentChat!.chatID!);            
             break;
           case DocumentChangeType.added:
             break;
@@ -118,6 +163,15 @@ class ChatService extends GetxService {
     chat.messages![messageId].isLiked = !chat.messages![messageId].isLiked!;
     var chatData = chat.toJson();
     await firestoreService.sendMessageToChat(chatData, chatID);    
+
+  }
+
+  Future startNewChatWithNewMatch(String chatID) async {
+    var chat = await firestoreService.getChat(chatID);
+    chat.isStarted = true;
+    var chatData = chat.toJson();
+    await firestoreService.updateChat(chatData, chatID);
+    
 
   }
 }

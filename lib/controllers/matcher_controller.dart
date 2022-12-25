@@ -73,7 +73,7 @@ class MatcherController extends GetxController {
     var matches = response.body;
 
     RxList<Widget> cardList = <Widget>[].obs;
-    matches.forEach((element) async {
+    await Future.forEach(matches, (element) async {
       var user = UserModel.fromJson(element as Map<String, dynamic>);
       int distance = await calculateDistance(user.location!.latitude!, user.location!.longitude!);
       _existingUsers.add(user.userID!);
@@ -107,7 +107,7 @@ class MatcherController extends GetxController {
       var matches = response.body;
 
       List<Widget> cardList = [];
-      matches.forEach((element) async {
+      Future.forEach(matches, (element) async {
         var user = UserModel.fromJson(element as Map<String, dynamic>);
         int distance = await calculateDistance(user.location!.latitude!, user.location!.longitude!);
         Get.put(SliderController(), tag: user.userID);

@@ -82,8 +82,10 @@ class FirestoreService extends GetxService {
   } 
 
   Future<void> sendMessageToChat(Map<String,dynamic> data, String chatID) async {
-    print(data);
-    print(chatID);
+    await getCollection('chats').doc(chatID).update(data);
+  }
+
+   Future<void> updateChat(Map<String,dynamic> data, String chatID) async {
     await getCollection('chats').doc(chatID).update(data);
   }
 

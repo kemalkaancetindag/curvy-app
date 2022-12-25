@@ -10,8 +10,20 @@ class ChatController extends GetxController {
 
   ChatService chatService;
 
-  List<Chat>? _chats;
-  List<Chat>? get chats => _chats;
+  List<Chat>? _activeChats;
+  List<Chat>? get activeChats => _activeChats;
+
+  List<Chat>? _unActiveChats;
+  List<Chat>? get unActiveChats => _unActiveChats;
+
+  List<Chat>? _newMatches;
+  List<Chat>? get newMatches => _newMatches;
+
+
+
+  bool _isActiveMessages = true;
+  bool get isActiveMessages => _isActiveMessages;
+  
 
   String? _tappedChat;
   String? get tappedChat => _tappedChat;
@@ -44,8 +56,12 @@ class ChatController extends GetxController {
     _currentUser = await Get.find<FirestoreService>().getCurrentUser(currentUserID);
   }
 
-  void setChats(List<Chat> updatedChats) {    
-    _chats = updatedChats;
+  void setChats(List<Chat> activeChats, List<Chat> unActiveChats, List<Chat> newMatches) {   
+    _activeChats = activeChats;
+    _unActiveChats = unActiveChats;
+    _newMatches = newMatches;
+    
+    
     update();
   }
 
@@ -87,7 +103,13 @@ class ChatController extends GetxController {
   }
 
   void setCurrentChat(String chatID) {
-    _currentChat = _chats!.where((chat) => chat.chatID == chatID).toList()[0];    
+    if(_isActiveMessages){
+      _currentChat = _activeChats!.where((chat) => chat.chatID == chatID).toList()[0];    
+    }
+    else{
+      _currentChat = _unActiveChats!.where((chat) => chat.chatID == chatID).toList()[0];    
+    }
+    
     Get.toNamed(Routes.chat);    
   }
 
@@ -98,6 +120,19 @@ class ChatController extends GetxController {
   Future likeMessage(int messageId) async {
     await chatService.likeMessage(_currentChat!.chatID!, messageId);
   }
+
+  void setIsActiveMessages(bool state){
+    _isActiveMessages = state;
+    update();
+  }
+
+  Future startNewChatWithNewMatch(String chatID) async {
+    await chatService.startNewChatWithNewMatch(chatID);
+    setCurrentChat(chatID);
+    update();
+  }
+
+  
   
 
 
