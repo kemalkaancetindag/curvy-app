@@ -43,6 +43,8 @@ class ChatService extends GetxService {
         if (chat.isStarted!) {
           activeChats.add(chat);
         } else {
+          print("neeeeeeeeeeeeeeeeeeeeeeeeeee");
+          print(chat.chatID);
           newMatches.add(chat);
         }
       } else {
@@ -50,11 +52,14 @@ class ChatService extends GetxService {
       }
     });
 
-    chatIDS.forEach((element) {print(element);});
+    chatIDS.forEach((element) {
+      print(element);
+    });
     print("----------------------------------");
-    activeChats.forEach((element) {print(element.chatID!);});
+    activeChats.forEach((element) {
+      print(element.chatID!);
+    });
     print("----------------------------------");
-    
 
     Get.find<ChatController>().setChats(activeChats, unActiveChats, newMatches);
   }
@@ -69,17 +74,16 @@ class ChatService extends GetxService {
         .listen((userEvent) {
       var user = UserModel.fromJson(
           userEvent.docChanges[0].doc.data() as Map<String, dynamic>);
+          
       firestoreService
           .getCollection('chats')
           .where("chatID", whereIn: user.chat!.active_chats!)
           .snapshots()
           .listen((event) {
-            
         for (var change in event.docChanges) {
-          
           switch (change.type) {
             case DocumentChangeType.modified:
-            print("GELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
+              print("GELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
               List<Chat> activeChats = [];
               List<Chat> unActiveChats = [];
               List<Chat> newMatches = [];
@@ -121,7 +125,7 @@ class ChatService extends GetxService {
               }
               break;
             case DocumentChangeType.added:
-            print("GELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL2");
+              print("GELLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL2");
               List<Chat> activeChats = [];
               List<Chat> unActiveChats = [];
               List<Chat> newMatches = [];
@@ -130,6 +134,7 @@ class ChatService extends GetxService {
                     Chat.fromJson(chatSnapshot.data() as Map<String, dynamic>);
 
                 if (userID == chat.user1!) {
+                  print("neeeeeeeeeeeeeeeeeeeeeeeeeee1");
                   Get.put(
                       UserOnlineController(
                           firestoreService: firestoreService,
@@ -137,6 +142,7 @@ class ChatService extends GetxService {
                       tag: chat.user2!,
                       permanent: true);
                 } else {
+                  print("neeeeeeeeeeeeeeeeeeeeeeeeeee2");
                   Get.put(
                       UserOnlineController(
                           firestoreService: firestoreService,
@@ -149,6 +155,8 @@ class ChatService extends GetxService {
                   if (chat.isStarted!) {
                     activeChats.add(chat);
                   } else {
+                    
+                    print(chat.chatID);
                     newMatches.add(chat);
                   }
                 } else {

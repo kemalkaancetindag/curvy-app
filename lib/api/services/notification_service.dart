@@ -1,7 +1,16 @@
+import 'package:curvy_app/api/services/chat_service.dart';
+import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/constants/routes.dart';
+import 'package:curvy_app/controllers/pages/chat_controller.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  print("Handling a background message: ${message.messageId}");
+}
 
 class NotificationService extends GetxService {
   FirebaseMessaging messaging = FirebaseMessaging.instance;
@@ -35,8 +44,8 @@ class NotificationService extends GetxService {
         print('Message also contained a notification: ${message.notification}');
 
         showDialog(
-          barrierDismissible: false,
-          barrierColor: Colors.black.withOpacity(0.9),
+            barrierDismissible: false,
+            barrierColor: Colors.black.withOpacity(0.9),
             context: Get.context!,
             builder: (context) {
               return Dialog(
@@ -78,28 +87,33 @@ class NotificationService extends GetxService {
                           ),
                         ),
                         Container(
-                          width: Dimensions.w320 + Dimensions.w200/10,
+                          width: Dimensions.w320 + Dimensions.w200 / 10,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               CustomPaint(
                                 child: Container(
-                                  
                                   width: Dimensions.h16 * 10,
                                   height: Dimensions.h16 * 10,
                                   decoration: BoxDecoration(
-                                      color: Colors.white,
+                                      image: DecorationImage(
+                                          image: NetworkImage(
+                                              'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(message.data["user1Image"])}?alt=media'),
+                                          fit: BoxFit.fill),
                                       borderRadius: BorderRadius.circular(
                                           Dimensions.h16 * 10 / 2)),
                                 ),
                                 painter: StyleChangerContainer(),
                               ),
                               CustomPaint(
-                                child: Container(                                  
+                                child: Container(
                                   width: Dimensions.h16 * 10,
                                   height: Dimensions.h16 * 10,
                                   decoration: BoxDecoration(
-                                      color: Colors.white,
+                                      image: DecorationImage(
+                                          image: NetworkImage(
+                                              'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(message.data["user1Image"])}?alt=media'),
+                                          fit: BoxFit.fill),
                                       borderRadius: BorderRadius.circular(
                                           Dimensions.h16 * 10 / 2)),
                                 ),
@@ -112,7 +126,7 @@ class NotificationService extends GetxService {
                           margin: EdgeInsets.only(top: Dimensions.h12),
                           child: Center(
                             child: Text(
-                              "Sen & Andrei",
+                              "Sen & ${message.data["user1ID"] == Get.find<SharedPreferenceService>().getUserID() ? message.data["user2Name"] : message.data["user1Name"]}",
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: Dimensions.h100 / 5),
@@ -130,44 +144,31 @@ class NotificationService extends GetxService {
                             ),
                           ),
                         ),
-                        Container(
-                          margin: EdgeInsets.only(top: Dimensions.h21, bottom: Dimensions.h21),
-                          width: Dimensions.w320,
-                          height: Dimensions.h50,
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(Dimensions.h50 / 2),
-                              gradient: LinearGradient(colors: [
-                                Color(0xFFD51CFF),
-                                Color(0xFF00FFE1)
-                              ])),
-                          child: Center(
-                            child: Text(
-                              "HEMEN MESAJ GÖNDER",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: Dimensions.h36 / 2),
-                            ),
-                          ),
-                        ),
                         GestureDetector(
-                          onTap: () {
+                          onTap: () async {
+                            await Get.find<ChatService>()
+                                .startNewChatWithNewMatch(
+                                    message.data["chatID"]);
                             Get.back();
+                            Get.find<ChatController>()
+                                .setCurrentChat(message.data["chatID"]);
+                            Get.toNamed(Routes.chat);
                           },
-                          child:    CustomPaint(
-                          painter: ButtonBorder(),
-                          child: Container(                            
+                          child: Container(
+                            margin: EdgeInsets.only(
+                                top: Dimensions.h21, bottom: Dimensions.h21),
                             width: Dimensions.w320,
                             height: Dimensions.h50,
                             decoration: BoxDecoration(
-                              color: Colors.transparent,
-                              borderRadius:
-                                  BorderRadius.circular(Dimensions.h50 / 2),
-                            ),
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.h50 / 2),
+                                gradient: LinearGradient(colors: [
+                                  Color(0xFFD51CFF),
+                                  Color(0xFF00FFE1)
+                                ])),
                             child: Center(
                               child: Text(
-                                "KAYDIRMAYA DEVAM ET",
+                                "HEMEN MESAJ GÖNDER",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -176,20 +177,38 @@ class NotificationService extends GetxService {
                             ),
                           ),
                         ),
+                        GestureDetector(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: CustomPaint(
+                            painter: ButtonBorder(),
+                            child: Container(
+                              width: Dimensions.w320,
+                              height: Dimensions.h50,
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.h50 / 2),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "KAYDIRMAYA DEVAM ET",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: Dimensions.h36 / 2),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
-                     
                       ]),
                 ),
               );
             });
       }
     });
-  }
-
-  @pragma('vm:entry-point')
-  Future<void> _firebaseMessagingBackgroundHandler(
-      RemoteMessage message) async {
-    print("Handling a background message: ${message.messageId}");
   }
 }
 
@@ -219,14 +238,12 @@ class StyleChangerContainer extends CustomPainter {
   }
 }
 
-
-
 class ButtonBorder extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     var h = size.height;
     var w = size.width;
-    var r = Dimensions.h50/2;
+    var r = Dimensions.h50 / 2;
     RRect fullRect = RRect.fromRectAndRadius(
       Rect.fromCenter(center: Offset(w / 2, h / 2), width: w, height: h),
       Radius.circular(r),

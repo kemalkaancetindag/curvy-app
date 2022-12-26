@@ -390,14 +390,20 @@ class MessagesScreen extends StatelessWidget {
                                                             child: Text(
                                                               chatController
                                                                       .isActiveMessages
-                                                                  ? chatController.getLastMessageDate(chatController
+                                                                  ?chatController
                                                                       .activeChats![
                                                                           index]
-                                                                      .lastMessageDate!)
-                                                                  : chatController.getLastMessageDate(chatController
+                                                                      .lastMessageDate != null ? chatController.getLastMessageDate(chatController
+                                                                      .activeChats![
+                                                                          index]
+                                                                      .lastMessageDate!) : ""
+                                                                  :chatController
                                                                       .unActiveChats![
                                                                           index]
-                                                                      .lastMessageDate!),
+                                                                      .lastMessageDate != null ?  chatController.getLastMessageDate(chatController
+                                                                      .unActiveChats![
+                                                                          index]
+                                                                      .lastMessageDate!) : "",
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .black,

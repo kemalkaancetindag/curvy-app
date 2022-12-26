@@ -103,8 +103,7 @@ class ChatController extends GetxController {
   }
 
   void setCurrentChat(String chatID) {
-    print("ssssssssssssssssssssssssssssssAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-    print(chatID);
+    
     if(_isActiveMessages){
       _currentChat = _activeChats!.where((chat) => chat.chatID == chatID).toList()[0];    
     }

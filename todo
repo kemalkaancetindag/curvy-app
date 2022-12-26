@@ -1,0 +1,21 @@
+## FIX ##
+
+* 1 - FreeStyle Popup box radius
+* 2 - Chat inital message function indexing problem
+* 3 - Chat left right swipe actions 
+* 4 - Settings null fields when updating inital settings
+* 5 - MatcherStyle buttons implementation
+* 6 - MatcherStyle expanded buttons implementation
+* 7 - MatcherStyle expanded carousel logic fix
+* 8 - MatcherStyle carousel data UI fix
+* 9 - MatcherStyle CurvyCHIP message null fix
+* 10 - Firestore max length 10 error when whereIn query
+
+
+## FEATURES ##
+* 1 - Explore hub implementation
+* 2 - RevenueCat payment implementation
+* 3 - On message notification implementation
+* 4 - Archive page implementation
+* 5 - GOLang api batch logic implementation
+
