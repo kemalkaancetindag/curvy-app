@@ -1,3 +1,4 @@
+import 'package:curvy_app/api/services/archive_service.dart';
 import 'package:curvy_app/api/services/chat_service.dart';
 import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/match_service.dart';
@@ -70,6 +71,7 @@ class SliderController extends GetxController {
       await Get.find<MatcherController>().controllCurrentUserIndex(true);
       String? user1ID = Get.find<SharedPreferenceService>().getUserID();
       Get.find<MatchService>().checkForMatch(user1ID, user!.userID!);
+      await Get.find<ArchiveService>().addLikedUsers(user!.userID!);
     } else {
       resetPosition();
     }
@@ -753,7 +755,7 @@ class SliderController extends GetxController {
                     decoration: BoxDecoration(
                       image: DecorationImage(
                           image: NetworkImage(
-                              'https://firebasestorage.googleapis.com/v0/b/curvy-app-test.appspot.com/o/${Uri.encodeComponent(images[i])}?alt=media'),
+                              'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(images[i])}?alt=media'),
                           fit: BoxFit.cover),
                       borderRadius: BorderRadius.circular(Dimensions.h12),
                     ),
@@ -777,7 +779,7 @@ class SliderController extends GetxController {
                     decoration: BoxDecoration(
                       image: DecorationImage(
                           image: NetworkImage(
-                              'https://firebasestorage.googleapis.com/v0/b/curvy-app-test.appspot.com/o/${Uri.encodeComponent(images[i])}?alt=media'),
+                              'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(images[i])}?alt=media'),
                           fit: BoxFit.cover),
                       borderRadius: BorderRadius.circular(Dimensions.h12),
                     ),

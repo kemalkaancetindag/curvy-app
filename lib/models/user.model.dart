@@ -40,7 +40,10 @@ class UserModel {
   _Settings? settings;
   UserLocation? location;
   List<dynamic>? un_liked_users;
+  List<dynamic>? users_who_liked_me;
+  List<dynamic>? users_i_liked;
   bool? online_status;
+  int? like_count;
 
   UserModel(
       {this.userID,
@@ -84,7 +87,10 @@ class UserModel {
       this.likeds,
       this.settings,
       this.un_liked_users,
-      this.online_status});
+      this.online_status,
+      this.users_who_liked_me,
+      this.users_i_liked,
+      this.like_count});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     userID = json['userID'];
@@ -128,6 +134,9 @@ class UserModel {
     location = json['location'] == null ? null : UserLocation.fromJson(json['location']);
     un_liked_users = json['un_liked_users'];
     online_status = json['online_status'];
+    users_who_liked_me = json['users_who_liked_me'];
+    users_i_liked = json['users_i_liked'];
+    like_count = json['like_count'];
   }
 
   Map<String, dynamic> toJson() {
@@ -171,8 +180,11 @@ class UserModel {
     data['settings'] = settings ?? _Settings().toJson();
     data['instance_token'] = instance_token;
     data['location'] = location!.toJson();
-    data['un_liked_users'] = un_liked_users;
-    data['online_status'] = online_status;
+    data['un_liked_users'] = un_liked_users ?? [];
+    data['online_status'] = online_status ?? false;
+    data['users_who_liked_me'] = users_who_liked_me ?? [];
+    data['users_i_liked'] = users_i_liked ?? [];
+    data['like_count'] = like_count ?? 0;
     return data;
   }
 }

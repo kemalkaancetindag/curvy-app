@@ -316,7 +316,10 @@ class SetupController extends GetxController {
         sexual_preference: _sexPrefenrence,
         interests: _interests,
         location: UserLocation(latitude: position.latitude, longitude: position.longitude),
-        instance_token: _instanceToken
+        instance_token: _instanceToken,
+        users_who_liked_me: [],
+        users_i_liked: []
+
       ).toJson();
 
       await Get.find<FirestoreService>().addToCollection(jsonUser, 'users');
@@ -346,7 +349,9 @@ class SetupController extends GetxController {
         sexual_preference: _sexPrefenrence,
         interests: _interests,
         location: UserLocation(latitude: position.latitude, longitude: position.longitude),
-        instance_token: _instanceToken
+        instance_token: _instanceToken,
+        users_who_liked_me: [],
+        users_i_liked: []
       ).toJson();
 
       await Get.find<FirestoreService>().addToCollection(jsonUser, 'users');
