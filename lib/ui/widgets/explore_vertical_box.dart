@@ -5,17 +5,36 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class ExploreVerticalBox extends StatelessWidget {
-  ExploreVerticalBox({super.key});
+  String image;
+  String title;
+  String text;
+  String actionText;
+  double? marginLeft;
+  double? marginRight;
+  double? marginTop;
+
+
+  ExploreVerticalBox({
+    super.key,
+    required this.image,
+    required this.title,
+    required this.text,
+    required this.actionText,
+    this.marginLeft,
+    this.marginRight,
+    this.marginTop
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: Dimensions.w17 * 10,
       height: Dimensions.h22 * 10,
+      margin: marginLeft != null && marginRight != null && marginTop != null ? EdgeInsets.only(left: marginLeft!, right: marginRight!, top: marginTop!) : null,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(Dimensions.h16),
           image: DecorationImage(
-              image: AssetImage("assets/images/explore_1.png"),
+              image: NetworkImage('https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(image)}?alt=media'),
               fit: BoxFit.cover)),
       child: Stack(
         children: [
@@ -49,7 +68,7 @@ class ExploreVerticalBox extends StatelessWidget {
                           top: Dimensions.h87, bottom: Dimensions.h21),
                       child: Center(
                         child: Text(
-                          "Bu Gece Eğlenelim",
+                          title,
                           style: TextStyle(
                               fontSize: Dimensions.h31,
                               color: Colors.white,
@@ -59,18 +78,24 @@ class ExploreVerticalBox extends StatelessWidget {
                     ),
                     Container(
                       margin: EdgeInsets.only(bottom: Dimensions.h8),
-                      width: Dimensions.w120,
+                      width: Dimensions.w140,
                       child: Center(
                         child: Text(
-                          "Plansız takılmak isteyenler",
+                          text,
                           style: TextStyle(
                               fontSize: Dimensions.h14,
                               color: Colors.white,
                               fontWeight: FontWeight.bold),
                         ),
                       ),
-                    ),
-                    Container(
+                    ),                    
+                  ],
+                ),
+              )),
+              Positioned(
+                bottom: Dimensions.h100/10,
+                left: Dimensions.w17,
+                child: Container(
                       child: ShaderMask(
                         blendMode: BlendMode.srcIn,
                         shaderCallback: (bounds) => LinearGradient(
@@ -79,14 +104,12 @@ class ExploreVerticalBox extends StatelessWidget {
                           Rect.fromLTWH(0, 0, bounds.width, bounds.height),
                         ),
                         child: Text(
-                          "Göz at",
+                          actionText,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),
                     )
-                  ],
-                ),
-              ))
+              )
         ],
       ),
     );

@@ -2,6 +2,7 @@ import 'package:curvy_app/api/services/archive_service.dart';
 import 'package:curvy_app/api/services/auth_service.dart';
 import 'package:curvy_app/api/services/chat_service.dart';
 import 'package:curvy_app/api/services/firestore_service.dart';
+import 'package:curvy_app/api/services/hub_service.dart';
 import 'package:curvy_app/api/services/match_service.dart';
 import 'package:curvy_app/api/services/notification_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
@@ -17,6 +18,7 @@ Future<void> initServices() async {
   Get.put(AuthService(firestoreService: Get.find()));  
   Get.put(ChatService(firestoreService: Get.find()));
   Get.put(ArchiveService(firestoreService: Get.find()));
+  Get.put(HubService(firestoreService: Get.find()));
  
   
 }
