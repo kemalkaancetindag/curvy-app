@@ -5,6 +5,7 @@ import 'package:curvy_app/ui/screens/delete_account_last_chance.dart';
 import 'package:curvy_app/ui/screens/delete_account_why.dart';
 import 'package:curvy_app/ui/screens/edit_profile.dart';
 import 'package:curvy_app/ui/screens/explore.dart';
+import 'package:curvy_app/ui/screens/hub.dart';
 import 'package:curvy_app/ui/screens/index.dart';
 import 'package:curvy_app/ui/screens/login.dart';
 import 'package:curvy_app/ui/screens/main_screen.dart';
@@ -141,5 +142,10 @@ final pages = [
       PageGuard()
     ]
   ),
+
+  GetPage(
+    name: Routes.hub, 
+    page: () => HubScreen()
+  )
   
 ];

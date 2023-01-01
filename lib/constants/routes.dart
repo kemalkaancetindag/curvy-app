@@ -19,7 +19,7 @@ abstract class Routes {
   static const  deleteAccountWhy = '/delete-account-why';
   static const  sendFeedback = '/send-feedback';
   static const  editProfile = '/edit-profile';  
-  
+  static const hub = '/hub';
   static const  chat = '/chat';
   
   

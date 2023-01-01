@@ -1,4 +1,5 @@
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/constants/routes.dart';
 import 'package:curvy_app/controllers/pages/hub_controller.dart';
 import 'package:curvy_app/ui/widgets/bottom_nav_bar.dart';
 import 'package:curvy_app/ui/widgets/explore_horizontal_box.dart';
@@ -62,12 +63,17 @@ class ExploreScreen extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            ExploreVerticalBox(
+                            GestureDetector(
+                              onTap: (){
+                                Get.toNamed(Routes.hub);
+                              },
+                              child:   ExploreVerticalBox(
                               title: controller.storageHubs![0].hub_title ?? "",
                               text: controller.storageHubs![0].hub_text ?? "",
                               image: controller.storageHubs![0].hub_image ?? "",
                               actionText: controller.storageHubs![0].hub_action_text ?? "",
                             ),
+                            ),                          
                              ExploreVerticalBox(
                               title: controller.storageHubs![1].hub_title ?? "",
                               text: controller.storageHubs![1].hub_text ?? "",

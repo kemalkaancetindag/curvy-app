@@ -176,6 +176,8 @@ flutter:
     - assets/images/curvy_dialog_add_icon.png
     - assets/images/curvy_dialog_mic_icon.png
     - assets/images/match_dialog_logo.png
+    - assets/images/hub_close_icon.png
+    - assets/images/chevron_bottom.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
