@@ -1,3 +1,4 @@
+import 'package:curvy_app/api/services/hub_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/constants/routes.dart';
 import 'package:curvy_app/controllers/pages/hub_controller.dart';
@@ -65,7 +66,7 @@ class ExploreScreen extends StatelessWidget {
                           children: [
                             GestureDetector(
                               onTap: (){
-                                Get.toNamed(Routes.hub);
+                                Get.find<HubService>().joinHub(0);                                
                               },
                               child:   ExploreVerticalBox(
                               title: controller.storageHubs![0].hub_title ?? "",
@@ -73,13 +74,20 @@ class ExploreScreen extends StatelessWidget {
                               image: controller.storageHubs![0].hub_image ?? "",
                               actionText: controller.storageHubs![0].hub_action_text ?? "",
                             ),
-                            ),                          
-                             ExploreVerticalBox(
+                            ),   
+
+                            GestureDetector(
+                              onTap: (){
+                                Get.find<HubService>().joinHub(1);
+                              },
+                              child: ExploreVerticalBox(
                               title: controller.storageHubs![1].hub_title ?? "",
                               text: controller.storageHubs![1].hub_text ?? "",
                               image: controller.storageHubs![1].hub_image ?? "",
                               actionText: controller.storageHubs![1].hub_action_text ?? "",
                             ),
+                            )                       
+                             
                           ],
                         )),
                     ExploreHorizontalBox(),

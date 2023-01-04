@@ -1,5 +1,6 @@
 import 'package:curvy_app/api/services/hub_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/online_hub_controller.dart';
 import 'package:curvy_app/models/hub_storage.model.dart';
 import 'package:curvy_app/ui/widgets/explore_vertical_box.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,24 +30,28 @@ class HubController extends GetxController {
 
   void generateTiles() {
     _tiles = [];
-    
-    _storageHubs!.skip(3).forEach((hub) { 
-      _tiles!.add(
-        ExploreVerticalBox(
-          image: hub.hub_image!, 
-          title: hub.hub_title!, 
-          text: hub.hub_text!, 
-          actionText: hub.hub_action_text!,
+
+    for(int i = 3; i < _storageHubs!.length; i++){
+       _tiles!.add(
+        GestureDetector(
+          onTap: () {
+            Get.find<HubService>().joinHub(i);
+          },
+          child:  ExploreVerticalBox(
+          image: _storageHubs![i].hub_image!, 
+          title: _storageHubs![i].hub_title!, 
+          text: _storageHubs![i].hub_text!, 
+          actionText: _storageHubs![i].hub_action_text!,
           marginLeft: Dimensions.w8/2,
           marginRight: Dimensions.w8/2,
           marginTop: Dimensions.h16,
+        ),
         )
+       
       );
-    });
-
+    }
+    
   }
-
-
   
   
 

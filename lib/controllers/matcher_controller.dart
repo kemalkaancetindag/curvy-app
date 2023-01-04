@@ -65,7 +65,10 @@ class MatcherController extends GetxController {
     String userID = Get.find<SharedPreferenceService>().getUserID();
     recommendationPostData["userID"] = userID;
     var user = await firestoreService.getCurrentUser(userID);
-    recommendationPostData["un_liked_users"] = user.un_liked_users;
+    var unWantedUsers = user.un_liked_users;
+    unWantedUsers!.addAll(user.users_i_liked!);
+
+    recommendationPostData["un_liked_users"] = unWantedUsers;
     
 
     var response =

@@ -195,3 +195,15 @@ export const controlVipProfiles = functions.pubsub
       }
     });
 
+
+export const deleteUnUsedHubs = functions.firestore
+    .document("online_hubs/{hubID}")
+    .onUpdate(async (snapshot, context) => {
+      const {hubID} = context.params;
+      const hubData = snapshot.after.data();
+
+      if (hubData.users.length == 0) {
+        await db.collection("online_hubs").doc(hubID).delete();
+      }
+    });
+
