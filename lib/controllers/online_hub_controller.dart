@@ -18,15 +18,12 @@ class OnlineHubController extends GetxController {
   String hubId;
   OnlineHub? _hubData;
   OnlineHub? get hubData => _hubData;
-  
 
   HubStorageModel? _hubStorageData;
   HubStorageModel? get hubStorageData => _hubStorageData;
 
   int _remainingTime = 10;
   int get remainingTime => _remainingTime;
-
-  
 
   bool? _amIAlone = true;
   bool? get amIAlone => _amIAlone;
@@ -52,141 +49,120 @@ class OnlineHubController extends GetxController {
 
   Timer? _timer;
 
-
   UserModel? _currentUser;
   UserModel? get currentUser => _currentUser;
 
   bool isMessageAreaExpanded = false;
 
-  
+  bool stopTimer = false;
 
   OnlineHubController({required this.hubService, required this.hubId});
 
   @override
   Future<void> onInit() async {
     await hubService.listenHub(hubId);
-  
   }
 
-
-  Future<void> setInitialHubData(OnlineHub hubData, HubStorageModel storedHub) async {
+  Future<void> setInitialHubData(
+      OnlineHub hubData, HubStorageModel storedHub) async {
     String currentUserId = Get.find<SharedPreferenceService>().getUserID();
-    _currentUser = await Get.find<FirestoreService>().getCurrentUser(currentUserId);  
-    
+    _currentUser =
+        await Get.find<FirestoreService>().getCurrentUser(currentUserId);
+
     _hubData = hubData;
     _hubStorageData = storedHub;
 
-    
+    var onlineUserIDS =
+        hubData.users!.where((id) => id != currentUserId).toList();
 
-    var onlineUserIDS = hubData.users!.where((id) => id != currentUserId).toList();
-    
-        
-    onlineUserIDS = onlineUserIDS.where((id) => !_currentUser!.users_i_liked!.contains(id)).toList();
-    
-        
-    onlineUserIDS = onlineUserIDS.where((id) => !_currentUser!.un_liked_users!.contains(id)).toList();
+    onlineUserIDS = onlineUserIDS
+        .where((id) => !_currentUser!.users_i_liked!.contains(id))
+        .toList();
 
-    if(onlineUserIDS.isEmpty) {
-      
+    onlineUserIDS = onlineUserIDS
+        .where((id) => !_currentUser!.un_liked_users!.contains(id))
+        .toList();
+
+    if (onlineUserIDS.isEmpty) {
       _amIAlone = true;
-      _timer = Timer.periodic(Duration(seconds: 1), (timer) async { 
+      _timer = Timer.periodic(Duration(seconds: 1), (timer) {
         _remainingTime = _remainingTime - 1;
+        if (stopTimer) {
+          timer.cancel();
+        }
 
-        if(_remainingTime == 0){
+        if (_remainingTime == 0) {
           _timer!.cancel();
-          if(_hubData!.hub_type!+1 != 19){            
+          if (_hubData!.hub_type! + 1 != 19) {
             _remainingTime = 10;
-            await hubService.nextHub(_hubData!.hub_type!+1, _hubData!.hub_id!);
-          }                        
+            hubService.nextHub(_hubData!.hub_type! + 1, _hubData!.hub_id!);
+          }
         }
 
         update();
-
-
       });
-    }
-    else {
-      
+    } else {
       _amIAlone = false;
       _onlineUsers = [];
-      await Future.forEach(onlineUserIDS,(userID) async { 
-          var onlineUserModel = await Get.find<FirestoreService>().getUser(userID);
-          _onlineUsers!.add(onlineUserModel);
-      });      
+      await Future.forEach(onlineUserIDS, (userID) async {
+        var onlineUserModel =
+            await Get.find<FirestoreService>().getUser(userID);
+        _onlineUsers!.add(onlineUserModel);
+      });
       print(_onlineUsers!.length);
       generateFoundSlider();
       update();
     }
-
-    
-
-
   }
 
-
   Future<void> updateHubData(OnlineHub updatedData) async {
-    print("sa");
     String currentUserId = Get.find<SharedPreferenceService>().getUserID();
     _hubData = updatedData;
-    print(_hubData!.users!);
 
-    
-    var onlineUserIDS = updatedData.users!.where((id) => id != currentUserId).toList();
-    print("u1");
-    print(onlineUserIDS);
-    
-    
-    onlineUserIDS = onlineUserIDS.where((id) => !_currentUser!.users_i_liked!.contains(id)).toList();
-    print("u2");
-    print(onlineUserIDS);
-    
-    
-    onlineUserIDS = onlineUserIDS.where((id) => !_currentUser!.un_liked_users!.contains(id)).toList();
-    print("u3");
-    print(onlineUserIDS);
-    
+    var onlineUserIDS =
+        updatedData.users!.where((id) => id != currentUserId).toList();
 
+    onlineUserIDS = onlineUserIDS
+        .where((id) => !_currentUser!.users_i_liked!.contains(id))
+        .toList();
 
+    onlineUserIDS = onlineUserIDS
+        .where((id) => !_currentUser!.un_liked_users!.contains(id))
+        .toList();
 
-    if(onlineUserIDS.isEmpty) {
-      
+    if (onlineUserIDS.isEmpty) {
       _amIAlone = true;
-      _timer = Timer.periodic(Duration(seconds: 1), (timer) async { 
+      _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+        if (stopTimer) {
+          timer.cancel();
+        }
+
         _remainingTime = _remainingTime - 1;
 
-        if(_remainingTime == 0){
+        if (_remainingTime == 0) {
           _timer!.cancel();
-          if(_hubData!.hub_type!+1 != 19){            
+          if (_hubData!.hub_type! + 1 != 19) {
             _remainingTime = 10;
-            await hubService.nextHub(_hubData!.hub_type!+1, _hubData!.hub_id!);
-          }                        
+            hubService.nextHub(_hubData!.hub_type! + 1, _hubData!.hub_id!);
+          }
         }
 
         update();
-
-
       });
-    }
-    else {
+    } else {
       print("tekrar");
       _amIAlone = false;
       _onlineUsers = [];
-      await Future.forEach(onlineUserIDS,(userID) async { 
-          
-          var onlineUserModel = await Get.find<FirestoreService>().getUser(userID);
-          _onlineUsers!.add(onlineUserModel);
-      }); 
+      await Future.forEach(onlineUserIDS, (userID) async {
+        var onlineUserModel =
+            await Get.find<FirestoreService>().getUser(userID);
+        _onlineUsers!.add(onlineUserModel);
+      });
       print(_onlineUsers!.length);
       generateFoundSlider();
       update();
-      
     }
-
-
-
   }
-
- 
 
   void slidePopUp(double yChange) {
     _popUpBottomPosition = _popUpBottomPosition - yChange;
@@ -196,12 +172,10 @@ class OnlineHubController extends GetxController {
   void decidePopUpAction() {
     if (_popUpBottomPosition < -200) {
       _popUpBottomPosition = -Get.height;
-      _timer!.cancel();
-      _timer = null;
+      stopTimer = true;      
       _remainingTime = 10;
-      
     } else {
-      _popUpBottomPosition = Dimensions.h14;      
+      _popUpBottomPosition = Dimensions.h14;
     }
 
     update();
@@ -214,7 +188,6 @@ class OnlineHubController extends GetxController {
     _positions = [];
 
     _foundCurrentUserCarousel = [];
-    
 
     for (int i = 0; i < _onlineUsers![_currentUserIndex].images!.length; i++) {
       if (i == 0) {
@@ -222,8 +195,6 @@ class OnlineHubController extends GetxController {
       } else {
         _positions!.add([Get.width, -Get.width]);
       }
-
-      
 
       _foundCurrentUserCarousel!
           .add(GetBuilder<OnlineHubController>(builder: (controller) {
@@ -237,9 +208,10 @@ class OnlineHubController extends GetxController {
               width: double.maxFinite,
               height: double.maxFinite,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimensions.h16*2),
+                  borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
                   image: DecorationImage(
-                      image: NetworkImage('https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(controller.onlineUsers![controller.currentUserIndex].images![i])}?alt=media'),
+                      image: NetworkImage(
+                          'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(controller.onlineUsers![controller.currentUserIndex].images![i])}?alt=media'),
                       fit: BoxFit.fill)),
             ));
       }));
@@ -254,17 +226,17 @@ class OnlineHubController extends GetxController {
           height: Dimensions.h100,
           width: double.maxFinite,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(Dimensions.h16*2),
-              bottomRight: Radius.circular(Dimensions.h16*2),
-            ),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(Dimensions.h16 * 2),
+                bottomRight: Radius.circular(Dimensions.h16 * 2),
+              ),
               gradient: LinearGradient(
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
                   colors: [
-                Colors.black,
-                Colors.transparent,
-              ])),
+                    Colors.black,
+                    Colors.transparent,
+                  ])),
         ),
       ),
     );
@@ -284,17 +256,19 @@ class OnlineHubController extends GetxController {
                     Container(
                       child: Row(
                         children: [
-                          _onlineUsers![_currentUserIndex].online_status! ?
-                          Container(
-                            width: Dimensions.h8,
-                            height: Dimensions.h8,
-                            margin: EdgeInsets.only(
-                                left: Dimensions.w11, right: Dimensions.w9),
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.h8 / 2),
-                                color: Color(0xFF05ED00)),
-                          ) : Container(),
+                          _onlineUsers![_currentUserIndex].online_status!
+                              ? Container(
+                                  width: Dimensions.h8,
+                                  height: Dimensions.h8,
+                                  margin: EdgeInsets.only(
+                                      left: Dimensions.w11,
+                                      right: Dimensions.w9),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(
+                                          Dimensions.h8 / 2),
+                                      color: Color(0xFF05ED00)),
+                                )
+                              : Container(),
                           Container(
                             child: RichText(
                               text: TextSpan(
@@ -302,10 +276,12 @@ class OnlineHubController extends GetxController {
                                       color: Colors.white,
                                       fontSize: Dimensions.h16 * 2,
                                       fontWeight: FontWeight.bold),
-                                  text: "${_onlineUsers![_currentUserIndex].name!.split(" ").first},",
+                                  text:
+                                      "${_onlineUsers![_currentUserIndex].name!.split(" ").first},",
                                   children: [
                                     TextSpan(
-                                        text: "${DateTime.now().year - int.parse(_onlineUsers![_currentUserIndex].birthdate!.split("/").last)}",
+                                        text:
+                                            "${DateTime.now().year - int.parse(_onlineUsers![_currentUserIndex].birthdate!.split("/").last)}",
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: Dimensions.h230 / 10))
@@ -365,16 +341,15 @@ class OnlineHubController extends GetxController {
                   ),
                 ),
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     Get.find<OnlineHubController>().dislikeUser();
                   },
-                  child:  Container(
-                  child: Center(
-                    child: Image.asset("assets/images/matcher_dislike.png"),
+                  child: Container(
+                    child: Center(
+                      child: Image.asset("assets/images/matcher_dislike.png"),
+                    ),
                   ),
                 ),
-                ),
-               
                 Container(
                   child: Center(
                     child: Image.asset("assets/images/matcher_superlike.png"),
@@ -384,13 +359,12 @@ class OnlineHubController extends GetxController {
                   onTap: () {
                     Get.find<OnlineHubController>().likeUser();
                   },
-                  child:   Container(
-                  child: Center(
-                    child: Image.asset("assets/images/matcher_like.png"),
+                  child: Container(
+                    child: Center(
+                      child: Image.asset("assets/images/matcher_like.png"),
+                    ),
                   ),
                 ),
-                ),
-              
                 Container(
                   child: Center(
                     child: Image.asset("assets/images/matcher_turbo.png"),
@@ -401,34 +375,33 @@ class OnlineHubController extends GetxController {
           )),
     );
 
-    
     List<Widget> indicatorList = [];
 
-    for(int i = 0; i < _onlineUsers![_currentUserIndex].images!.length; i++){
-      indicatorList.add(
-        GetBuilder<OnlineHubController>(
-          builder: (controller){
-            return Container(
-                width: Dimensions.w300 / (_onlineUsers![_currentUserIndex].images!.length+0.5),
-                height: Dimensions.h7,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(Dimensions.h50 / 10)),
-                child: Center(
-                  child: Container(
-                    width: (Dimensions.w300 / (_onlineUsers![_currentUserIndex].images!.length+0.5)) / 1.1,
-                    height: Dimensions.h7 / 2,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(Dimensions.h8 / 4),
-                        gradient: controller.currentImageIndex == i ? LinearGradient(
-                            colors: [Color(0xFFD51CFF), Color(0xFF6198EF)]) : null),
-                  ),
-                ),
-              );
-          }
-        )
-          
-      );
+    for (int i = 0; i < _onlineUsers![_currentUserIndex].images!.length; i++) {
+      indicatorList.add(GetBuilder<OnlineHubController>(builder: (controller) {
+        return Container(
+          width: Dimensions.w300 /
+              (_onlineUsers![_currentUserIndex].images!.length + 0.5),
+          height: Dimensions.h7,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(Dimensions.h50 / 10)),
+          child: Center(
+            child: Container(
+              width: (Dimensions.w300 /
+                      (_onlineUsers![_currentUserIndex].images!.length + 0.5)) /
+                  1.1,
+              height: Dimensions.h7 / 2,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimensions.h8 / 4),
+                  gradient: controller.currentImageIndex == i
+                      ? LinearGradient(
+                          colors: [Color(0xFFD51CFF), Color(0xFF6198EF)])
+                      : null),
+            ),
+          ),
+        );
+      }));
     }
 
     _foundCurrentUserCarousel!.add(Positioned(
@@ -438,9 +411,8 @@ class OnlineHubController extends GetxController {
         child: Container(
           width: Dimensions.w300,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children:  indicatorList
-          ),
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: indicatorList),
         )));
   }
 
@@ -469,50 +441,47 @@ class OnlineHubController extends GetxController {
         _positions![beforeImageIndex!][0] = -Get.width;
         _positions![beforeImageIndex!][1] = Get.width;
       }
-    }    
+    }
 
     update();
   }
-
 
   void expandMessageArea() {
     isMessageAreaExpanded = !isMessageAreaExpanded;
     update();
   }
 
-  Future<void> leftHub() async{
+  Future<void> leftHub() async {
     _popUpBottomPosition = Dimensions.h14;
     _remainingTime = 10;
-    
-    _onlineUsers = null;    
+    stopTimer = true;
+
+    _onlineUsers = null;
     _currentUserIndex = 0;
     _foundCurrentUserCarousel = null;
     currentImageIndex = 0;
     nextImageIndex = 1;
     beforeImageIndex = null;
     await hubService.leftHub(hubId);
-    
   }
 
   Future<void> likeUser() async {
     print('bas');
     print(_onlineUsers!.length);
     await hubService.likeUser(_onlineUsers![_currentUserIndex].userID!);
-    if(_currentUserIndex < _onlineUsers!.length){
+    if (_currentUserIndex < _onlineUsers!.length) {
       print(_onlineUsers![_currentUserIndex].name);
       print("kes");
       _currentUserIndex += 1;
-      
+
       print(_onlineUsers![_currentUserIndex].name);
       generateFoundSlider();
-    }
-    else{
+    } else {
       print("sa");
       _amIAlone = true;
     }
 
     print("es");
-
 
     update();
   }
@@ -520,17 +489,17 @@ class OnlineHubController extends GetxController {
   Future<void> dislikeUser() async {
     await hubService.dislikeUser(_onlineUsers![_currentUserIndex].userID!);
 
-    _onlineUsers = _onlineUsers!.where((user) => user.userID != _onlineUsers![_currentUserIndex].userID!).toList();
+    _onlineUsers = _onlineUsers!
+        .where(
+            (user) => user.userID != _onlineUsers![_currentUserIndex].userID!)
+        .toList();
 
-    if(_onlineUsers!.isEmpty){
+    if (_onlineUsers!.isEmpty) {
       _amIAlone = true;
-    }
-    else{
+    } else {
       generateFoundSlider();
     }
 
     update();
-
   }
-
 }

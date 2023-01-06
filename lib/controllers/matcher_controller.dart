@@ -38,7 +38,8 @@ class MatcherController extends GetxController {
     super.onInit();
     await getCards();
   }
-    Future<int> calculateDistance(double lat2, double lon2) async {
+
+  Future<int> calculateDistance(double lat2, double lon2) async {
     String userID = Get.find<SharedPreferenceService>().getUserID();
     var currentUser = await Get.find<FirestoreService>().getCurrentUser(userID);
     var lat1 = currentUser.location!.latitude!;
@@ -69,7 +70,6 @@ class MatcherController extends GetxController {
     unWantedUsers!.addAll(user.users_i_liked!);
 
     recommendationPostData["un_liked_users"] = unWantedUsers;
-    
 
     var response =
         await goApiClient.postData(recommendationPostData, "/recommendations");
@@ -77,20 +77,23 @@ class MatcherController extends GetxController {
 
     RxList<Widget> cardList = <Widget>[].obs;
     await Future.forEach(matches, (element) async {
-      var user = UserModel.fromJson(element as Map<String, dynamic>);
-      int distance = await calculateDistance(user.location!.latitude!, user.location!.longitude!);
-      _existingUsers.add(user.userID!);
-      Get.put(SliderController(), tag: user.userID);
-      Get.put(SliderController(), tag: user.userID).setUser(user);
-      Get.find<SliderController>(tag: user.userID)
-          .createImageCarousel(user.images!, user.userID!, distance);
+      if (element != null) {
+        var user = UserModel.fromJson(element as Map<String, dynamic>);
+        int distance = await calculateDistance(
+            user.location!.latitude!, user.location!.longitude!);
+        _existingUsers.add(user.userID!);
+        Get.put(SliderController(), tag: user.userID);
+        Get.put(SliderController(), tag: user.userID).setUser(user);
+        Get.find<SliderController>(tag: user.userID)
+            .createImageCarousel(user.images!, user.userID!, distance);
 
-      cardList.add(GetBuilder<SliderController>(
-          init: Get.find<SliderController>(tag: user.userID),
-          global: false,
-          builder: (_) {
-            return MatcherStyleUserCard(controllerTag: user.userID!);
-          }));
+        cardList.add(GetBuilder<SliderController>(
+            init: Get.find<SliderController>(tag: user.userID),
+            global: false,
+            builder: (_) {
+              return MatcherStyleUserCard(controllerTag: user.userID!);
+            }));
+      }
     });
     _cards = cardList;
     update();
@@ -112,7 +115,8 @@ class MatcherController extends GetxController {
       List<Widget> cardList = [];
       Future.forEach(matches, (element) async {
         var user = UserModel.fromJson(element as Map<String, dynamic>);
-        int distance = await calculateDistance(user.location!.latitude!, user.location!.longitude!);
+        int distance = await calculateDistance(
+            user.location!.latitude!, user.location!.longitude!);
         Get.put(SliderController(), tag: user.userID);
         Get.put(SliderController(), tag: user.userID).setUser(user);
         Get.find<SliderController>(tag: user.userID)
@@ -145,7 +149,7 @@ class MatcherController extends GetxController {
   }
 
   Future<void> updateUnLikedUsers(List<dynamic> unLikedUsers) async {
-    var data = Map<String,dynamic>();
+    var data = Map<String, dynamic>();
     data["un_liked_users"] = unLikedUsers;
     String userID = Get.find<SharedPreferenceService>().getUserID();
     await firestoreService.updateUser(data, userID);

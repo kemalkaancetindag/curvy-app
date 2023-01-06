@@ -49,9 +49,10 @@ class HubEmptyWidget extends StatelessWidget {
                         ),
                       ),
                       GestureDetector(
-                        onTap: (){
+                        onTap: () async {
+                          await controller.leftHub();
                           Get.back();
-                          controller.leftHub();
+                          
                         },
                         child: Container(
                         margin: EdgeInsets.only(right: Dimensions.w200 / 10),

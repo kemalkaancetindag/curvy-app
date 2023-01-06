@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curvy_app/api/services/chat_service.dart';
 import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/routes.dart';
+import 'package:curvy_app/controllers/messages_controller.dart';
 import 'package:curvy_app/models/chat.model.dart';
 import 'package:curvy_app/models/user.model.dart';
 import 'package:get/get.dart';
@@ -18,6 +20,7 @@ class ChatController extends GetxController {
 
   List<Chat>? _newMatches;
   List<Chat>? get newMatches => _newMatches;
+
 
 
 
@@ -40,28 +43,43 @@ class ChatController extends GetxController {
   String? _typedMessage;
   String? get typedMessage => _typedMessage;
 
+  List<Chat>? _currentChats;
+  List<Chat>? get currentChats => _currentChats;
+
+
+
 
 
   @override
   Future<void> onInit() async {
-    super.onInit();    
+    super.onInit();  
 
     await setCurrentUser();
-    await chatService.getInitialChats();
-    await chatService.listenUserChats();
+    chatService.listenChats(); 
+    
     
   }
+
+  void setCurrentChats(List<Chat> currentChatsData) {
+      _currentChats = currentChatsData;
+      
+  }
+
+
+
+  
 
   Future setCurrentUser() async {
     _currentUser = await Get.find<FirestoreService>().getCurrentUser(currentUserID);
   }
 
-  void setChats(List<Chat> activeChats, List<Chat> unActiveChats, List<Chat> newMatches) {   
+  void setChats(List<Chat> activeChats, List<Chat> unActiveChats, List<Chat> newMatches) { 
+
+        
     _activeChats = activeChats;
     _unActiveChats = unActiveChats;
-    _newMatches = newMatches;
-    print("BUM");
-    print(activeChats);
+    _newMatches = newMatches;      
+    
       
     update();
   }
@@ -103,15 +121,21 @@ class ChatController extends GetxController {
   }
 
   void setCurrentChat(String chatID) {
+    chatService.listenCurrentChat(chatID);
     
     if(_isActiveMessages){
       _currentChat = _activeChats!.where((chat) => chat.chatID == chatID).toList()[0];    
     }
     else{
       _currentChat = _unActiveChats!.where((chat) => chat.chatID == chatID).toList()[0];    
-    }
+    }    
     
     Get.toNamed(Routes.chat);    
+  }
+
+  void updateCurrentChat(Chat updatedChat) {
+    _currentChat = updatedChat;
+    update();
   }
 
   void setTypedMessage(String message){
@@ -124,6 +148,8 @@ class ChatController extends GetxController {
   }
 
   void setIsActiveMessages(bool state){
+    var messagesController = Get.find<MessagesController>();
+    
     _isActiveMessages = state;
     update();
   }

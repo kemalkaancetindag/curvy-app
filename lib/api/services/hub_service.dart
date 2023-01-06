@@ -33,6 +33,7 @@ class HubService extends GetxService {
 
   Future<String?> joinHub(int hubType) async {
     String currentUserID = Get.find<SharedPreferenceService>().getUserID();
+    
     UserModel currentUser =
         await firestoreService.getCurrentUser(currentUserID);
 
@@ -65,7 +66,9 @@ class HubService extends GetxService {
             .doc(hub.id)
             .update(updateData);
         isFound = true;
+        
         Get.put(OnlineHubController(hubService: Get.find(), hubId: hub.id));
+        Get.find<OnlineHubController>().stopTimer = false;
         Get.find<OnlineHubController>().setInitialHubData(hubObject, hubStorageObject);
         Get.toNamed(Routes.hub);
         return hub.id;
@@ -100,6 +103,8 @@ class HubService extends GetxService {
   }
 
   Future<void> leftHub(String hubId) async {
+
+    
     
     var currentUserID = Get.find<SharedPreferenceService>().getUserID();
     
