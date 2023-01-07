@@ -79,7 +79,7 @@ class ChatController extends GetxController {
     _activeChats = activeChats;
     _unActiveChats = unActiveChats;
     _newMatches = newMatches;      
-    
+  
       
     update();
   }

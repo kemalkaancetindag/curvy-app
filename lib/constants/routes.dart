@@ -21,6 +21,7 @@ abstract class Routes {
   static const  editProfile = '/edit-profile';  
   static const hub = '/hub';
   static const  chat = '/chat';
+  static const userDetail = '/user-detail';
   
   
 

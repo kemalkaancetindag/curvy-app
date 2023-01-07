@@ -22,6 +22,7 @@ import 'package:curvy_app/ui/screens/setup_name.dart';
 import 'package:curvy_app/ui/screens/setup_sex.dart';
 import 'package:curvy_app/ui/screens/setup_sexual_preference.dart';
 import 'package:curvy_app/ui/screens/setup_showme.dart';
+import 'package:curvy_app/ui/screens/user_detail.dart';
 import 'package:curvy_app/ui/screens/validation_code.dart';
 import 'package:curvy_app/ui/screens/validation_mail.dart';
 import 'package:curvy_app/ui/screens/validation_number.dart';
@@ -145,7 +146,17 @@ final pages = [
 
   GetPage(
     name: Routes.hub, 
-    page: () => HubScreen()
+    page: () => HubScreen(),
+    middlewares: [
+      PageGuard()
+    ]
+  ),
+  GetPage(
+    name: Routes.userDetail, 
+    page: () => UserDetailScreen(),
+    middlewares: [
+      PageGuard()
+    ]
   )
   
 ];

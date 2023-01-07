@@ -1,4 +1,6 @@
 import 'package:curvy_app/api/services/archive_service.dart';
+import 'package:curvy_app/constants/routes.dart';
+import 'package:curvy_app/controllers/user_detail_controller.dart';
 import 'package:curvy_app/controllers/user_online_controller.dart';
 import 'package:curvy_app/ui/widgets/archive_vip_profile_box.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,7 +29,14 @@ class ArchiveVipProfilesController extends GetxController {
     _tiles = [];
     _vipProfiles!.forEach((userID) { 
       Get.put(UserOnlineController(firestoreService: Get.find(), userID: userID), permanent: true, tag: userID);
-      _tiles!.add(ArchiveVipProfileBox(userID: userID,));      
+      _tiles!.add(GestureDetector(
+        onTap: () async {
+          var userDetailController = Get.put(UserDetailController(firestoreService: Get.find(), userID: userID));          
+                    
+          Get.toNamed(Routes.userDetail);
+        },
+        child: ArchiveVipProfileBox(userID: userID,),
+      ));      
     });
   }
 

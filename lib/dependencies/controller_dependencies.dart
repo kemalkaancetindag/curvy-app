@@ -34,4 +34,5 @@ Future<void> initControllers() async {
   Get.put(ArchiveVipProfilesController(archiveService: Get.find()));
   Get.put(HubController(hubService: Get.find()));
   
+  
 }
