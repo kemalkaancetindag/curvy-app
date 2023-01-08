@@ -46,6 +46,7 @@ class ChatService extends GetxService {
         List<Chat> activeChats = [];
         List<Chat> unActiveChats = [];
         List<Chat> newMatches = [];
+        List<Chat> allChats = [];
         
         var filteredChats = chats.docs.where((chat) => userObject.chat!.active_chats!.contains(chat['chatID'])).toList();
         filteredChats.forEach((chatDoc) { 
@@ -54,7 +55,8 @@ class ChatService extends GetxService {
           if(currentChat.user1 == userID){
             Get.put(
               UserOnlineController(firestoreService: firestoreService, userID: currentChat.user2!),
-              tag: currentChat.user2!
+              tag: currentChat.user2!,
+              
             );
           }
           else{
@@ -63,6 +65,7 @@ class ChatService extends GetxService {
               tag: currentChat.user1!
             );
           }
+          allChats.add(currentChat);
 
           if(currentChat.isActive!){
                         
@@ -77,10 +80,15 @@ class ChatService extends GetxService {
             unActiveChats.add(currentChat);
           }          
         });
-        print(activeChats);
+        
+        
 
         messagesController.generatePositions(activeChats.length, true);
         messagesController.generatePositions(unActiveChats.length, false);
+
+        chatController.setAllChats(allChats);
+        chatController.setCurrentChats();
+        
         
         chatController.setChats(activeChats, unActiveChats, newMatches);
       }

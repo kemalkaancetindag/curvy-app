@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/hub_service.dart';
+import 'package:curvy_app/api/services/match_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/constants/routes.dart';
@@ -9,6 +10,7 @@ import 'package:curvy_app/models/hub_storage.model.dart';
 import 'package:curvy_app/models/online_hub.model.dart';
 import 'package:curvy_app/models/user.model.dart';
 import 'package:curvy_app/ui/screens/hub.dart';
+import 'package:curvy_app/ui/widgets/matcher_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -63,61 +65,13 @@ class OnlineHubController extends GetxController {
     await hubService.listenHub(hubId);
   }
 
-  Future<void> setInitialHubData(
-      OnlineHub hubData, HubStorageModel storedHub) async {
+  Future<void> updateHubData(OnlineHub updatedData, HubStorageModel storedHub) async {
     String currentUserId = Get.find<SharedPreferenceService>().getUserID();
-    _currentUser =
-        await Get.find<FirestoreService>().getCurrentUser(currentUserId);
+    _currentUser = await Get.find<FirestoreService>().getUser(currentUserId);
 
-    _hubData = hubData;
-    _hubStorageData = storedHub;
 
-    var onlineUserIDS =
-        hubData.users!.where((id) => id != currentUserId).toList();
-
-    onlineUserIDS = onlineUserIDS
-        .where((id) => !_currentUser!.users_i_liked!.contains(id))
-        .toList();
-
-    onlineUserIDS = onlineUserIDS
-        .where((id) => !_currentUser!.un_liked_users!.contains(id))
-        .toList();
-
-    if (onlineUserIDS.isEmpty) {
-      _amIAlone = true;
-      _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-        _remainingTime = _remainingTime - 1;
-        if (stopTimer) {
-          timer.cancel();
-        }
-
-        if (_remainingTime == 0) {
-          _timer!.cancel();
-          if (_hubData!.hub_type! + 1 != 19) {
-            _remainingTime = 10;
-            hubService.nextHub(_hubData!.hub_type! + 1, _hubData!.hub_id!);
-          }
-        }
-
-        update();
-      });
-    } else {
-      _amIAlone = false;
-      _onlineUsers = [];
-      await Future.forEach(onlineUserIDS, (userID) async {
-        var onlineUserModel =
-            await Get.find<FirestoreService>().getUser(userID);
-        _onlineUsers!.add(onlineUserModel);
-      });
-      print(_onlineUsers!.length);
-      generateFoundSlider();
-      update();
-    }
-  }
-
-  Future<void> updateHubData(OnlineHub updatedData) async {
-    String currentUserId = Get.find<SharedPreferenceService>().getUserID();
     _hubData = updatedData;
+    _hubStorageData = storedHub;
 
     var onlineUserIDS =
         updatedData.users!.where((id) => id != currentUserId).toList();
@@ -133,6 +87,7 @@ class OnlineHubController extends GetxController {
     if (onlineUserIDS.isEmpty) {
       _amIAlone = true;
       _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+        print('update');
         if (stopTimer) {
           timer.cancel();
         }
@@ -172,7 +127,7 @@ class OnlineHubController extends GetxController {
   void decidePopUpAction() {
     if (_popUpBottomPosition < -200) {
       _popUpBottomPosition = -Get.height;
-      stopTimer = true;      
+      stopTimer = true;
       _remainingTime = 10;
     } else {
       _popUpBottomPosition = Dimensions.h14;
@@ -335,11 +290,17 @@ class OnlineHubController extends GetxController {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Container(
+                GestureDetector(
+                  onTap: () async {
+                    await Get.find<OnlineHubController>().goBack();
+                  },
+                  child:  Container(
                   child: Center(
                     child: Image.asset("assets/images/matcher_back.png"),
                   ),
                 ),
+                ),
+               
                 GestureDetector(
                   onTap: () {
                     Get.find<OnlineHubController>().dislikeUser();
@@ -452,6 +413,7 @@ class OnlineHubController extends GetxController {
   }
 
   Future<void> leftHub() async {
+    _hubStorageData = null;
     _popUpBottomPosition = Dimensions.h14;
     _remainingTime = 10;
     stopTimer = true;
@@ -468,38 +430,98 @@ class OnlineHubController extends GetxController {
   Future<void> likeUser() async {
     print('bas');
     print(_onlineUsers!.length);
-    await hubService.likeUser(_onlineUsers![_currentUserIndex].userID!);
+    await Get.find<MatchService>()
+        .createMatch(_onlineUsers![_currentUserIndex].userID!);
+    _currentUserIndex += 1;
     if (_currentUserIndex < _onlineUsers!.length) {
-      print(_onlineUsers![_currentUserIndex].name);
-      print("kes");
-      _currentUserIndex += 1;
-
-      print(_onlineUsers![_currentUserIndex].name);
       generateFoundSlider();
     } else {
-      print("sa");
       _amIAlone = true;
     }
-
-    print("es");
 
     update();
   }
 
   Future<void> dislikeUser() async {
-    await hubService.dislikeUser(_onlineUsers![_currentUserIndex].userID!);
-
-    _onlineUsers = _onlineUsers!
-        .where(
-            (user) => user.userID != _onlineUsers![_currentUserIndex].userID!)
-        .toList();
-
-    if (_onlineUsers!.isEmpty) {
-      _amIAlone = true;
-    } else {
+    await Get.find<MatchService>()
+        .dislikeUser(_onlineUsers![_currentUserIndex].userID!);
+    _currentUserIndex += 1;
+    if (_currentUserIndex < _onlineUsers!.length) {
+      _currentUserIndex += 1;
       generateFoundSlider();
+    } else {
+      _amIAlone = true;
     }
 
+    update();
+  }
+
+  Future<void> goBack() async {
+    var firestoreService = Get.find<FirestoreService>();
+    var user = await firestoreService.getUser(_currentUser!.userID!);
+
+    if (user.remaining_daily_back_count! > 0) {
+      if (_currentUserIndex > 0) {
+        var matches = (await firestoreService
+                .getCollection('matches')
+                .where(
+                  'user1.id',
+                  isEqualTo: currentUser!.userID,
+                )
+                .where('user2.id',
+                    isEqualTo: _onlineUsers![_currentUserIndex].userID)
+                .get())
+            .docs;
+
+        if (matches.isNotEmpty) {
+          
+
+          var likedUser = await firestoreService
+              .getUser(_onlineUsers![_currentUserIndex].userID!);
+
+          var newUserILikedList = user.users_i_liked!
+              .where((id) => id != _onlineUsers![_currentUserIndex].userID!)
+              .toList();
+          var newLikeduserWhoLikedMeList = likedUser.users_who_liked_me!
+              .where((id) => id != currentUser!.userID)
+              .toList();
+
+          var userData = Map<String, dynamic>();
+          var likedUserData = Map<String, dynamic>();
+
+          userData['users_i_liked'] = newUserILikedList;
+          userData['remaining_daily_back_count'] =
+              user.remaining_daily_back_count! - 1;
+
+          likedUserData['users_who_liked_me'] = newLikeduserWhoLikedMeList;
+
+          await firestoreService.updateUser(userData, _currentUser!.userID!);
+          await firestoreService.updateUser(userData, _currentUser!.userID!);
+
+          await firestoreService.updateUser(
+              likedUserData, _onlineUsers![_currentUserIndex].userID!);
+
+          var match = matches[0];
+
+          await firestoreService.getCollection('matches').doc(match.id).delete();
+
+          _currentUserIndex -= 1;
+        }
+        else {
+          var newUserUnlikedList = user.un_liked_users!.where((id) => id != _onlineUsers![_currentUserIndex].userID).toList();
+
+          var userData = Map<String, dynamic>();
+          userData['un_liked_users'] = newUserUnlikedList;
+          userData['remaining_daily_back_count'] = user.remaining_daily_back_count! - 1;
+
+          await firestoreService.updateUser(userData, currentUser!.userID!);
+
+          _currentUserIndex -= 1;
+
+        }
+      }
+    }
+    generateFoundSlider();
     update();
   }
 }

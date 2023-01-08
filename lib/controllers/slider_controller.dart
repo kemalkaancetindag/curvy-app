@@ -13,7 +13,6 @@ import 'package:get/get.dart';
 import 'dart:math' as math;
 
 class SliderController extends GetxController {
-
   String _curvyLikeMessageText = "";
   String _curvyChipMessageText = "";
 
@@ -52,331 +51,336 @@ class SliderController extends GetxController {
     if (Get.width / 5 > decideLocationX!) {
       bottom = -Get.height;
       top = Get.height;
-      left = -Get.width;
-      right = Get.width;
-      animationDuration = 250;
-      await Get.find<MatcherController>().controllCurrentUserIndex(true);
-      String userID = Get.find<SharedPreferenceService>().getUserID();
-      var currentUser =
-          await Get.find<FirestoreService>().getCurrentUser(userID);
-      List<dynamic> unLikedUsers = currentUser.un_liked_users!;
-      unLikedUsers.add(_user!.userID);
-      await Get.find<MatcherController>().updateUnLikedUsers(unLikedUsers);
-    } else if ((Get.width - (Get.width / 5)) < decideLocationX!) {
-      bottom = -Get.height;
-      top = Get.height;
       left = Get.width;
       right = -Get.width;
       animationDuration = 250;
+      String userID = Get.find<SharedPreferenceService>().getUserID();
+      var currentUser = await Get.find<FirestoreService>().getUser(userID);
+      List<dynamic> unLikedUsers = currentUser.un_liked_users!;
+      unLikedUsers.add(_user!.userID);
+      await Get.find<MatcherController>().updateUnLikedUsers(unLikedUsers);
+
       await Get.find<MatcherController>().controllCurrentUserIndex(true);
-      String? user1ID = Get.find<SharedPreferenceService>().getUserID();
-      Get.find<MatchService>().checkForMatch(user1ID, user!.userID!);
-      await Get.find<ArchiveService>().addLikedUsers(user!.userID!);
+    } else if ((Get.width - (Get.width / 5)) < decideLocationX!) {
+      print("önceki");
+      print(_user!.userID);
+      bottom = -Get.height;
+      top = Get.height;
+      left = -Get.width;
+      right = Get.width;
+      animationDuration = 250;
+
+      await Get.find<MatcherController>().controllCurrentUserIndex(true);
+      Get.find<MatchService>().createMatch(user!.userID!);      
+
     } else {
       resetPosition();
     }
     update();
   }
 
-  void decideVerticalAction() {
-    
-    if (Get.height / 2.5 > decideLocationY!) {
-      showDialog(
-          context: Get.context!,
-          builder: (context) {
-            return Dialog(
-              backgroundColor: Colors.transparent,
-              child: Container(
-                width: Dimensions.w35 * 10,
-                height: Dimensions.h22 * 10,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
-                    gradient: LinearGradient(
-                        colors: [Color(0xFFD51CFF), Color(0xFF6198EF)])),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(top: Dimensions.h12),
-                      height: Dimensions.h36,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(right: Dimensions.w8 / 2),
-                            child: Center(
-                              child: Image.asset(
-                                  "assets/images/curvy_like_dialog.png"),
+  void showCurvyLikeDialog() {
+    showDialog(
+        context: Get.context!,
+        builder: (context) {
+          return Dialog(
+            backgroundColor: Colors.transparent,
+            child: Container(
+              width: Dimensions.w35 * 10,
+              height: Dimensions.h22 * 10,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
+                  gradient: LinearGradient(
+                      colors: [Color(0xFFD51CFF), Color(0xFF6198EF)])),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(top: Dimensions.h12),
+                    height: Dimensions.h36,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(right: Dimensions.w8 / 2),
+                          child: Center(
+                            child: Image.asset(
+                                "assets/images/curvy_like_dialog.png"),
+                          ),
+                        ),
+                        Container(
+                          child: Center(
+                            child: Text(
+                              "CurvyLIKE",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: Dimensions.h21),
                             ),
                           ),
-                          Container(
-                            child: Center(
-                              child: Text(
-                                "CurvyLIKE",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: Dimensions.h21),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.red,
-                                        borderRadius: BorderRadius.circular(
-                                            Dimensions.h12 / 2)),
-                                    child: Padding(
-                                      padding:
-                                          EdgeInsets.all(Dimensions.w9 / 3),
-                                      child: Center(
-                                        child: Text(
-                                          "168",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: Dimensions.h9),
-                                        ),
+                        ),
+                        Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.red,
+                                      borderRadius: BorderRadius.circular(
+                                          Dimensions.h12 / 2)),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(Dimensions.w9 / 3),
+                                    child: Center(
+                                      child: Text(
+                                        "168",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: Dimensions.h9),
                                       ),
-                                    ))
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
+                                    ),
+                                  ))
+                            ],
+                          ),
+                        )
+                      ],
                     ),
-                    Container(
-                      margin: EdgeInsets.only(top: Dimensions.h100 / 10),
-                      width: Dimensions.w320,
-                      height: Dimensions.h60,
-                      child: Text(
-                        "CurvyLIKE ile CurvyCHIP arasındaki fark CuvyLIKE ile gönderdiğiniz mesajın muhattabı sizinle sağa kaydırarak eşleşe bilir ve Premium hesabınızla sohbetinize devam edebilirsiniz CurvyCHIP ile yazdığınızda eşleşme şansınızı kaybedersiniz ve fakat muhatabınız sizi engellemediği sürece tüm mesajlarınız alıcısına ulaştırılır.",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: Dimensions.h100 / 10,
-                            fontWeight: FontWeight.bold),
-                      ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: Dimensions.h100 / 10),
+                    width: Dimensions.w320,
+                    height: Dimensions.h60,
+                    child: Text(
+                      "CurvyLIKE ile CurvyCHIP arasındaki fark CuvyLIKE ile gönderdiğiniz mesajın muhattabı sizinle sağa kaydırarak eşleşe bilir ve Premium hesabınızla sohbetinize devam edebilirsiniz CurvyCHIP ile yazdığınızda eşleşme şansınızı kaybedersiniz ve fakat muhatabınız sizi engellemediği sürece tüm mesajlarınız alıcısına ulaştırılır.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: Dimensions.h100 / 10,
+                          fontWeight: FontWeight.bold),
                     ),
-                    Container(
-                      width: Dimensions.w325,
-                      height: Dimensions.h90,
-                      margin: EdgeInsets.only(top: Dimensions.h12),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                            height: double.maxFinite,
-                            width: Dimensions.w270,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.h16)),
-                            child: TextField(
-                              onChanged: (value) {
-                                _curvyLikeMessageText = value;
+                  ),
+                  Container(
+                    width: Dimensions.w325,
+                    height: Dimensions.h90,
+                    margin: EdgeInsets.only(top: Dimensions.h12),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          height: double.maxFinite,
+                          width: Dimensions.w270,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.h16)),
+                          child: TextField(
+                            onChanged: (value) {
+                              _curvyLikeMessageText = value;
+                            },
+                            cursorColor: Colors.black,
+                            style: TextStyle(color: Colors.black),
+                            maxLines: 10,
+                            decoration: InputDecoration(
+                                contentPadding: EdgeInsets.all(Dimensions.w9),
+                                hintText: "Bir mesaj yaz",
+                                hintStyle: TextStyle(color: Color(0xFFC5C5C7)),
+                                border: InputBorder.none,
+                                enabledBorder: InputBorder.none,
+                                disabledBorder: InputBorder.none),
+                          ),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            GestureDetector(
+                              onTap: () async {
+                                await Get.find<ChatService>().startNewChat(
+                                    _curvyLikeMessageText, _user!.userID!, 1);
+                                _curvyLikeMessageText = "";
+                                Get.back();
                               },
-                              cursorColor: Colors.black,
-                              style: TextStyle(color: Colors.black),
-                              maxLines: 10,
-                              decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.all(Dimensions.w9),
-                                  hintText: "Bir mesaj yaz",
-                                  hintStyle:
-                                      TextStyle(color: Color(0xFFC5C5C7)),
-                                  border: InputBorder.none,
-                                  enabledBorder: InputBorder.none,
-                                  disabledBorder: InputBorder.none),
-                            ),
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              GestureDetector(
-                                onTap: () async {
-                                  await Get.find<ChatService>().startNewChat(_curvyLikeMessageText, _user!.userID!, 1);
-                                  _curvyLikeMessageText = "";
-                                  Get.back();
-                                },
-                                child:Container(
+                              child: Container(
                                 child: Center(
                                   child: Image.asset(
                                       "assets/images/curvy_dialog_send_icon.png"),
                                 ),
                               ),
+                            ),
+                            Container(
+                              child: Center(
+                                child: Image.asset(
+                                    "assets/images/curvy_dialog_mic_icon.png"),
                               ),
-                              
-                              Container(
-                                child: Center(
-                                  child: Image.asset(
-                                      "assets/images/curvy_dialog_mic_icon.png"),
-                                ),
+                            ),
+                            Container(
+                              child: Center(
+                                child: Image.asset(
+                                    "assets/images/curvy_dialog_add_icon.png"),
                               ),
-                              Container(
-                                child: Center(
-                                  child: Image.asset(
-                                      "assets/images/curvy_dialog_add_icon.png"),
-                                ),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  )
+                ],
               ),
-            );
-          });
-    } else if ((Get.height - (Get.height / 2.5)) < decideLocationY!) {
-      showDialog(
-          context: Get.context!,
-          builder: (context) {
-            return Dialog(
-              backgroundColor: Colors.transparent,
-              child: Container(
-                width: Dimensions.w35 * 10,
-                height: Dimensions.h22 * 10,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
-                    gradient: LinearGradient(
-                        colors: [Color(0xFFD51CFF), Color(0xFF6198EF)])),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(top: Dimensions.h12),
-                      height: Dimensions.h36,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(right: Dimensions.w8 / 2),
-                            child: Center(
-                              child: Image.asset(
-                                  "assets/images/curvy_chip_dialog.png"),
+            ),
+          );
+        });
+  }
+
+  void showCurvyChipDialog() {
+    showDialog(
+        context: Get.context!,
+        builder: (context) {
+          return Dialog(
+            backgroundColor: Colors.transparent,
+            child: Container(
+              width: Dimensions.w35 * 10,
+              height: Dimensions.h22 * 10,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
+                  gradient: LinearGradient(
+                      colors: [Color(0xFFD51CFF), Color(0xFF6198EF)])),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(top: Dimensions.h12),
+                    height: Dimensions.h36,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(right: Dimensions.w8 / 2),
+                          child: Center(
+                            child: Image.asset(
+                                "assets/images/curvy_chip_dialog.png"),
+                          ),
+                        ),
+                        Container(
+                          child: Center(
+                            child: Text(
+                              "CurvyCHIP",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: Dimensions.h21),
                             ),
                           ),
-                          Container(
-                            child: Center(
-                              child: Text(
-                                "CurvyCHIP",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: Dimensions.h21),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.red,
-                                        borderRadius: BorderRadius.circular(
-                                            Dimensions.h12 / 2)),
-                                    child: Padding(
-                                      padding:
-                                          EdgeInsets.all(Dimensions.w9 / 3),
-                                      child: Center(
-                                        child: Text(
-                                          "168",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: Dimensions.h9),
-                                        ),
+                        ),
+                        Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.red,
+                                      borderRadius: BorderRadius.circular(
+                                          Dimensions.h12 / 2)),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(Dimensions.w9 / 3),
+                                    child: Center(
+                                      child: Text(
+                                        "168",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: Dimensions.h9),
                                       ),
-                                    ))
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: Dimensions.h100 / 10),
-                      width: Dimensions.w320,
-                      height: Dimensions.h60,
-                      child: Text(
-                        "CurvyLIKE ile CurvyCHIP arasındaki fark CuvyLIKE ile gönderdiğiniz mesajın muhattabı sizinle sağa kaydırarak eşleşe bilir ve Premium hesabınızla sohbetinize devam edebilirsiniz CurvyCHIP ile yazdığınızda eşleşme şansınızı kaybedersiniz ve fakat muhatabınız sizi engellemediği sürece tüm mesajlarınız alıcısına ulaştırılır.",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: Dimensions.h100 / 10,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    Container(
-                      width: Dimensions.w325,
-                      height: Dimensions.h90,
-                      margin: EdgeInsets.only(top: Dimensions.h12),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                            height: double.maxFinite,
-                            width: Dimensions.w270,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.h16)),
-                            child: TextField(
-                              cursorColor: Colors.black,
-                              style: TextStyle(color: Colors.black),
-                              maxLines: 10,
-                              decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.all(Dimensions.w9),
-                                  hintText: "Bir mesaj yaz",
-                                  hintStyle:
-                                      TextStyle(color: Color(0xFFC5C5C7)),
-                                  border: InputBorder.none,
-                                  enabledBorder: InputBorder.none,
-                                  disabledBorder: InputBorder.none),
-                            ),
+                                    ),
+                                  ))
+                            ],
                           ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              GestureDetector(
-                                onTap: () async {
-                                  await Get.find<ChatService>().startNewChat(_curvyChipMessageText, _user!.userID!, 2);
-                                  _curvyChipMessageText = "";
-                                  Get.back();
-                                },
-                                child:     Container(
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: Dimensions.h100 / 10),
+                    width: Dimensions.w320,
+                    height: Dimensions.h60,
+                    child: Text(
+                      "CurvyLIKE ile CurvyCHIP arasındaki fark CuvyLIKE ile gönderdiğiniz mesajın muhattabı sizinle sağa kaydırarak eşleşe bilir ve Premium hesabınızla sohbetinize devam edebilirsiniz CurvyCHIP ile yazdığınızda eşleşme şansınızı kaybedersiniz ve fakat muhatabınız sizi engellemediği sürece tüm mesajlarınız alıcısına ulaştırılır.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: Dimensions.h100 / 10,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Container(
+                    width: Dimensions.w325,
+                    height: Dimensions.h90,
+                    margin: EdgeInsets.only(top: Dimensions.h12),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          height: double.maxFinite,
+                          width: Dimensions.w270,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.h16)),
+                          child: TextField(
+                            cursorColor: Colors.black,
+                            style: TextStyle(color: Colors.black),
+                            maxLines: 10,
+                            decoration: InputDecoration(
+                                contentPadding: EdgeInsets.all(Dimensions.w9),
+                                hintText: "Bir mesaj yaz",
+                                hintStyle: TextStyle(color: Color(0xFFC5C5C7)),
+                                border: InputBorder.none,
+                                enabledBorder: InputBorder.none,
+                                disabledBorder: InputBorder.none),
+                          ),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            GestureDetector(
+                              onTap: () async {
+                                await Get.find<ChatService>().startNewChat(
+                                    _curvyChipMessageText, _user!.userID!, 2);
+                                _curvyChipMessageText = "";
+                                Get.back();
+                              },
+                              child: Container(
                                 child: Center(
                                   child: Image.asset(
                                       "assets/images/curvy_dialog_send_icon.png"),
                                 ),
                               ),
+                            ),
+                            Container(
+                              child: Center(
+                                child: Image.asset(
+                                    "assets/images/curvy_dialog_mic_icon.png"),
                               ),
-                          
-                              Container(
-                                child: Center(
-                                  child: Image.asset(
-                                      "assets/images/curvy_dialog_mic_icon.png"),
-                                ),
+                            ),
+                            Container(
+                              child: Center(
+                                child: Image.asset(
+                                    "assets/images/curvy_dialog_add_icon.png"),
                               ),
-                              Container(
-                                child: Center(
-                                  child: Image.asset(
-                                      "assets/images/curvy_dialog_add_icon.png"),
-                                ),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  )
+                ],
               ),
-            );
-          });
+            ),
+          );
+        });
+  }
+
+  void decideVerticalAction() {
+    if (Get.height / 2.5 > decideLocationY!) {
+      showCurvyChipDialog();
+    } else if ((Get.height / 2.5) < decideLocationY!) {
+      showCurvyLikeDialog();
     }
   }
 
@@ -469,7 +473,8 @@ class SliderController extends GetxController {
     return indicatorRow;
   }
 
-  void createImageCarousel(List<dynamic> images, String controllerTag, int distance) {
+  void createImageCarousel(
+      List<dynamic> images, String controllerTag, int distance) {
     var tempImageWidgets = <Widget>[];
     var predefinedWidgets = <Widget>[
       Positioned(
@@ -694,28 +699,52 @@ class SliderController extends GetxController {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Container(
-                                child: Center(
-                                  child: Image.asset(
-                                      "assets/images/matcher_back.png"),
+                              GestureDetector(
+                                onTap: () async {
+                                  await Get.find<MatcherController>().goBack();
+                                },
+                                child: Container(
+                                  child: Center(
+                                    child: Image.asset(
+                                        "assets/images/matcher_back.png"),
+                                  ),
                                 ),
                               ),
-                              Container(
-                                child: Center(
-                                  child: Image.asset(
-                                      "assets/images/matcher_dislike.png"),
+                              GestureDetector(
+                                onTap: () async {
+                                  await Get.find<MatchService>()
+                                      .dislikeUser(user!.userID!);
+                                  autoSlide(false);
+                                },
+                                child: Container(
+                                  child: Center(
+                                    child: Image.asset(
+                                        "assets/images/matcher_dislike.png"),
+                                  ),
                                 ),
                               ),
-                              Container(
-                                child: Center(
-                                  child: Image.asset(
-                                      "assets/images/matcher_superlike.png"),
+                              GestureDetector(
+                                onTap: () {
+                                  showCurvyLikeDialog();
+                                },
+                                child: Container(
+                                  child: Center(
+                                    child: Image.asset(
+                                        "assets/images/matcher_superlike.png"),
+                                  ),
                                 ),
                               ),
-                              Container(
-                                child: Center(
-                                  child: Image.asset(
-                                      "assets/images/matcher_like.png"),
+                              GestureDetector(
+                                onTap: () async {
+                                  await Get.find<MatchService>()
+                                      .createMatch(user!.userID!);
+                                  autoSlide(true);
+                                },
+                                child: Container(
+                                  child: Center(
+                                    child: Image.asset(
+                                        "assets/images/matcher_like.png"),
+                                  ),
                                 ),
                               ),
                               Container(
@@ -859,5 +888,31 @@ class SliderController extends GetxController {
     }
   }
 
+  void autoSlide(bool isLiked) {
+    if (isLiked) {
+      bottom = -Get.height;
+      top = Get.height;
+      left = Get.width;
+      right = -Get.width;
+      animationDuration = 250;
+    } else {
+      bottom = -Get.height;
+      top = Get.height;
+      left = -Get.width;
+      right = Get.width;
+      animationDuration = 250;
+    }
+    update();
+  }
 
+  void returnBack() {
+    left = 0;
+    top = 0;
+    right = 0;
+    bottom = 0;
+    angle = 0;
+    rejectOpacity = 0;
+    confirmOpacity = 0;
+    update();
+  }
 }

@@ -12,7 +12,7 @@ class HubEmptyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<OnlineHubController>(builder: (controller) {
-      return Container(
+      return controller.hubStorageData != null ? Container(
         width: double.maxFinite,
         height: double.maxFinite,
         decoration: BoxDecoration(
@@ -224,7 +224,7 @@ class HubEmptyWidget extends StatelessWidget {
                 ) ),
           ],
         ),
-      );
+      ) : Container();
     });
   }
 }

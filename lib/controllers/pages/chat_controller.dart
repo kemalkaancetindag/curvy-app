@@ -46,6 +46,9 @@ class ChatController extends GetxController {
   List<Chat>? _currentChats;
   List<Chat>? get currentChats => _currentChats;
 
+  List<Chat>? _allChats;
+  List<Chat>? get allChats => _allChats;
+
 
 
 
@@ -56,15 +59,17 @@ class ChatController extends GetxController {
 
     await setCurrentUser();
     chatService.listenChats(); 
-    
-    
+        
   }
 
-  void setCurrentChats(List<Chat> currentChatsData) {
-      _currentChats = currentChatsData;
-      
+  void setAllChats(List<Chat> allChats) {
+    _allChats = allChats;
   }
 
+  void setCurrentChats() {
+    _currentChats = _allChats!.where((chat) => chat.isActive! == isActiveMessages).toList();
+    update();
+  }
 
 
   
@@ -147,10 +152,9 @@ class ChatController extends GetxController {
     update();
   }
 
-  void setIsActiveMessages(bool state){
-    var messagesController = Get.find<MessagesController>();
-    
+  void setIsActiveMessages(bool state){        
     _isActiveMessages = state;
+    _currentChats = _allChats!.where((chat) => chat.isActive! == state).toList();
     update();
   }
 

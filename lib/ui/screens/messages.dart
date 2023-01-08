@@ -190,393 +190,44 @@ class MessagesScreen extends StatelessWidget {
           ),
           body: GetBuilder<ChatController>(
             builder: (chatController) {
-              return Container(
-                width: double.maxFinite,
+              return chatController.currentChats != null ? Container(
                 height: double.maxFinite,
-                child: chatController.activeChats != null &&
-                        chatController.unActiveChats != null &&
-                        controller.activeChatPositions != null &&
-                        controller.unActiveChatPositions != null
-                    ? ListView.builder(
-                        itemCount: chatController.isActiveMessages
-                            ? chatController.activeChats!.length
-                            : chatController.unActiveChats!.length,
-                        itemBuilder: (context, index) {
-                          print("builded");
-
-                        
-
-                          return GestureDetector(
-                            onHorizontalDragUpdate: (details) {
-                              controller.slideMessageBox(
-                                  index,
-                                  details.delta.dx,
-                                  chatController.isActiveMessages);
-                            },
-                            onHorizontalDragEnd: (details) {
-                              controller.deactivateChat(
-                                  chatController.activeChats![index].chatID!,
-                                  index);
-                            },
-                            onTap: () {
-                              if (chatController.isActiveMessages) {
-                                
-                                chatController.setCurrentChat(
-                                    chatController.activeChats![index].chatID!);
-                              } else {
-
-                                chatController.setCurrentChat(chatController
-                                    .unActiveChats![index].chatID!);
-                              }
-                            },
-                            onPanDown: (details) {
-                              if (chatController.isActiveMessages) {
-                                chatController.setTappedChat(
-                                    chatController.activeChats![index].chatID!);
-                              } else {
-                                chatController.setTappedChat(chatController
-                                    .unActiveChats![index].chatID!);
-                              }
-                            },
-                            onPanCancel: () {
-                              chatController.setTappedChat(null);
-                            },
-                            child: AnimatedContainer(
-                              duration: Duration(milliseconds: 200),
-                              height: Dimensions.h90,
-                              width: double.maxFinite,
-                              color: chatController.isActiveMessages
-                                  ? (chatController.tappedChat ==
-                                          chatController
-                                              .activeChats![index].chatID!
-                                      ? Color(0xFFC5C5C7)
-                                      : null)
-                                  : (chatController.tappedChat ==
-                                          chatController
-                                              .unActiveChats![index].chatID!
-                                      ? Color(0xFFC5C5C7)
-                                      : null),
-                              child: Stack(
-                                children: [
-                                  Positioned(
-                                      left: chatController.isActiveMessages ? (
-                                        controller.activeChatPositions == null ? -118 : controller.activeChatPositions![index][0]
-                                      ) : (
-                                        controller.unActiveChatPositions == null ? -118 : controller.unActiveChatPositions![index][0]
-                                      ),
-                                      right: chatController.isActiveMessages ? (
-                                        controller.activeChatPositions == null ? -118 : controller.activeChatPositions![index][1]
-                                      ) : (
-                                        controller.unActiveChatPositions == null ? -118 : controller.unActiveChatPositions![index][1]
-                                      ),
-                                      child: GestureDetector(
-                                        child: GetBuilder<UserOnlineController>(
-                                          
-                                          global: false,
-                                          init: chatController.isActiveMessages
-                                              ? Get.find<UserOnlineController>(
-                                                  tag: chatController
-                                                              .currentUserID ==
-                                                          chatController
-                                                              .activeChats![
-                                                                  index]
-                                                              .user1!
-                                                      ? chatController
-                                                          .activeChats![index]
-                                                          .user2!
-                                                      : chatController
-                                                          .activeChats![index]
-                                                          .user1!)
-                                              : Get.find<UserOnlineController>(
-                                                  tag: chatController
-                                                              .currentUserID ==
-                                                          chatController
-                                                              .unActiveChats![
-                                                                  index]
-                                                              .user1!
-                                                      ? chatController
-                                                          .unActiveChats![index]
-                                                          .user2!
-                                                      : chatController
-                                                          .unActiveChats![index]
-                                                          .user1!),
-                                          builder: (userOnlineController) {
-                                            if(chatController.isActiveMessages){
-                                              print("controller");
-                                              print(userOnlineController.userID);
-                                              
-                                              if(chatController.currentUserID == chatController.activeChats![index].user1!){
-                                                print("chat");
-                                                print(chatController.activeChats![index].user2!);
-                                              }
-                                              else{
-                                                print("chat");
-                                                print(chatController.activeChats![index].user1!);
-                                              }
-                                            }
-                                            else{
-                                              print("controller3");
-                                              print(userOnlineController.userID);
-                                                   if(chatController.currentUserID == chatController.unActiveChats![index].user1!){
-                                                print("chat");
-                                                print(chatController.unActiveChats![index].user2!);
-                                              }
-                                              else{
-                                                print("chat");
-                                                print(chatController.unActiveChats![index].user1!);
-                                              }
-                                            }
-
-                                            print("controller builded");
-
-                                            return Container(
-                                              height: Dimensions.h90,
-                                              width: double.maxFinite,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Container(
-                                                    width: Dimensions.w111,
-                                                    height: Dimensions.h7 * 10,
-                                                    decoration: BoxDecoration(
-                                                        gradient:
-                                                            LinearGradient(
-                                                                colors: [
-                                                              Color(0xFF1FE9BB),
-                                                              Color(0xFF0D92E3)
-                                                            ]),
-                                                        borderRadius: BorderRadius.only(
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    Dimensions
-                                                                        .h40),
-                                                            bottomRight:
-                                                                Radius.circular(
-                                                                    Dimensions
-                                                                        .h40))),
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceAround,
-                                                      children: [
-                                                        Image.asset(
-                                                            "assets/images/messages_report.png"),
-                                                        Container(
-                                                          width: Dimensions.w50,
-                                                          child: Center(
-                                                            child: Text(
-                                                              "Profili Bildir",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .white),
-                                                            ),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    width: Dimensions.w8 * 10,
-                                                    height: Dimensions.w8 * 10,
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                Dimensions.w8 *
-                                                                    10 /
-                                                                    2),
-                                                        image: userOnlineController
-                                                                    .user !=
-                                                                null
-                                                            ? DecorationImage(
-                                                                image: NetworkImage(
-                                                                    'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(userOnlineController.user!.images![0])}?alt=media'),
-                                                                fit: BoxFit
-                                                                    .cover)
-                                                            : null),
-                                                  ),
-                                                  Container(
-                                                    width: Dimensions.w267,
-                                                    height: Dimensions.h90,
-                                                    decoration: BoxDecoration(
-                                                        border: Border(
-                                                            top: BorderSide(
-                                                                color: Color(
-                                                                    0xFFC5C5C7),
-                                                                width: 1),
-                                                            bottom: BorderSide(
-                                                                color: Color(
-                                                                    0xFFC5C5C7),
-                                                                width: 1))),
-                                                    child: Column(
-                                                      children: [
-                                                        Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            userOnlineController
-                                                                        .user !=
-                                                                    null
-                                                                ? Row(
-                                                                    children: [
-                                                                      userOnlineController
-                                                                              .user!
-                                                                              .online_status!
-                                                                          ? Container(
-                                                                              margin: EdgeInsets.only(top: Dimensions.h7, left: Dimensions.w8),
-                                                                              width: Dimensions.h7,
-                                                                              height: Dimensions.h7,
-                                                                              decoration: BoxDecoration(color: Color(0xFF05ED00), borderRadius: BorderRadius.circular(Dimensions.h7 / 2)),
-                                                                            )
-                                                                          : Container(),
-                                                                      Container(
-                                                                        width: Dimensions
-                                                                            .w99,
-                                                                        margin: EdgeInsets.only(
-                                                                            top:
-                                                                                Dimensions.h7),
-                                                                        child:
-                                                                            Center(
-                                                                          child:
-                                                                              Text(
-                                                                            "${userOnlineController.user!.name!.split(" ")[0]}, ${DateTime.now().year - int.parse(userOnlineController.user!.birthdate!.split("/").last)}",
-                                                                            style: TextStyle(
-                                                                                color: Colors.black,
-                                                                                fontWeight: FontWeight.bold,
-                                                                                fontSize: Dimensions.h100 / 5),
-                                                                          ),
-                                                                        ),
-                                                                      )
-                                                                    ],
-                                                                  )
-                                                                : Container(),
-                                                            Container(
-                                                              child: Center(
-                                                                child: Text(
-                                                                  chatController
-                                                                          .isActiveMessages
-                                                                      ? chatController.activeChats![index].lastMessageDate !=
-                                                                              null
-                                                                          ? chatController.getLastMessageDate(chatController
-                                                                              .activeChats![
-                                                                                  index]
-                                                                              .lastMessageDate!)
-                                                                          : ""
-                                                                      : chatController.unActiveChats![index].lastMessageDate !=
-                                                                              null
-                                                                          ? chatController.getLastMessageDate(chatController
-                                                                              .unActiveChats![index]
-                                                                              .lastMessageDate!)
-                                                                          : "",
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .black,
-                                                                      fontSize:
-                                                                          Dimensions
-                                                                              .h14,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                ),
-                                                              ),
-                                                            )
-                                                          ],
-                                                        ),
-                                                        Container(
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  top:
-                                                                      Dimensions
-                                                                          .h7),
-                                                          width:
-                                                              Dimensions.w226,
-                                                          child: Text(
-                                                            chatController
-                                                                    .isActiveMessages
-                                                                ? chatController
-                                                                    .activeChats![
-                                                                        index]
-                                                                    .lastMessage!
-                                                                : chatController
-                                                                    .unActiveChats![
-                                                                        index]
-                                                                    .lastMessage!,
-                                                            textAlign:
-                                                                TextAlign.start,
-                                                            style: TextStyle(
-                                                                color: Color(
-                                                                    0xFF7B8491),
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize:
-                                                                    Dimensions
-                                                                        .h14),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    width: Dimensions.w111,
-                                                    height: Dimensions.h7 * 10,
-                                                    decoration: BoxDecoration(
-                                                        gradient:
-                                                            LinearGradient(
-                                                                colors: [
-                                                              Color(0xFFFF0000),
-                                                              Color(0xFFFFB800)
-                                                            ]),
-                                                        borderRadius: BorderRadius.only(
-                                                            topLeft:
-                                                                Radius.circular(
-                                                                    Dimensions
-                                                                        .h40),
-                                                            bottomLeft:
-                                                                Radius.circular(
-                                                                    Dimensions
-                                                                        .h40))),
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceAround,
-                                                      children: [
-                                                        Container(
-                                                          width: Dimensions.w50,
-                                                          child: Center(
-                                                            child: Text(
-                                                              "Eşleşmeyi Bitir",
-                                                              textAlign:
-                                                                  TextAlign.end,
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .white),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        Image.asset(
-                                                            "assets/images/messages_delete.png"),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                      )),
-                                ],
+                width: double.maxFinite,
+                
+                child:  ListView.builder(
+              itemCount: chatController.currentChats!.length,
+              itemBuilder: (context, index) {
+                  return GetBuilder<UserOnlineController>(
+                    global: false,
+                    init: Get.find<UserOnlineController>(tag: chatController.currentUserID == chatController.currentChats![index].user1 ? chatController.currentChats![index].user2 : chatController.currentChats![index].user1),
+                    builder: (userController) {
+                      return  Stack(
+                    children: [
+                      Positioned(
+                        child: Container(
+                          color: Colors.black,
+                          width: Get.width,
+                          height: Dimensions.h100,
+                          child: Center(
+                            child: Text(
+                              "${userController.user!.name!}",
+                              style: TextStyle(
+                                color: Colors.white
                               ),
                             ),
-                          );
-                        },
+                          ),
+                        )
                       )
-                    : null,
-              );
+                    ],
+                  );
+                    }
+                  );
+              }),
+              ) : Container();
             },
-          ));
+          )
+          
+        );
     });
   }
 }

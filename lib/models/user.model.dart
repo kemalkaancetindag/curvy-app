@@ -44,6 +44,7 @@ class UserModel {
   List<dynamic>? users_i_liked;
   bool? online_status;
   int? like_count;
+  int? remaining_daily_back_count;
 
   UserModel(
       {this.userID,
@@ -90,7 +91,8 @@ class UserModel {
       this.online_status,
       this.users_who_liked_me,
       this.users_i_liked,
-      this.like_count});
+      this.like_count,
+      this.remaining_daily_back_count});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     userID = json['userID'];
@@ -137,6 +139,7 @@ class UserModel {
     users_who_liked_me = json['users_who_liked_me'];
     users_i_liked = json['users_i_liked'];
     like_count = json['like_count'];
+    remaining_daily_back_count = json['remaining_daily_back_count'];
   }
 
   Map<String, dynamic> toJson() {
@@ -185,6 +188,7 @@ class UserModel {
     data['users_who_liked_me'] = users_who_liked_me ?? [];
     data['users_i_liked'] = users_i_liked ?? [];
     data['like_count'] = like_count ?? 0;
+    data['remaining_daily_back_count'] = remaining_daily_back_count ?? 1;
     return data;
   }
 }

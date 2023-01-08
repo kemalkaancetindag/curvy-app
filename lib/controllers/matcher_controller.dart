@@ -28,6 +28,8 @@ class MatcherController extends GetxController {
 
   int currentUserIndex = 0;
 
+  List<String>? _users;
+
   List<String> _existingUsers = [];
 
   MatcherController(
@@ -60,7 +62,9 @@ class MatcherController extends GetxController {
   }
 
   Future<void> getCards() async {
-    // FIRST LOAD DOESNT RENDERS
+    _users = [];
+    _cards = [];
+
     Map<String, dynamic> recommendationPostData = Map<String, dynamic>();
 
     String userID = Get.find<SharedPreferenceService>().getUserID();
@@ -79,6 +83,7 @@ class MatcherController extends GetxController {
     await Future.forEach(matches, (element) async {
       if (element != null) {
         var user = UserModel.fromJson(element as Map<String, dynamic>);
+        _users!.add(user.userID!);
         int distance = await calculateDistance(
             user.location!.latitude!, user.location!.longitude!);
         _existingUsers.add(user.userID!);
@@ -173,5 +178,93 @@ class MatcherController extends GetxController {
   void shrinkUser() {
     Get.find<ExpandedMatcherStyleController>().removeUser();
     update();
+  }
+
+  Future<void> goBack() async {
+    String currentUserID = Get.find<SharedPreferenceService>().getUserID();
+    var currentUser = await firestoreService.getCurrentUser(currentUserID);
+
+    if (currentUser.remaining_daily_back_count! > 0) {
+      if (currentUserIndex != 0) {
+        //iJG5IuYK6Y2aNuxEcPjj
+
+        var matches = (await firestoreService
+                .getCollection('matches')
+                .where("user1.id", isEqualTo: currentUserID)
+                .where("user2.id",
+                    isEqualTo: _users![_users!.length - currentUserIndex])
+                .get())
+            .docs;
+
+        if (matches.isNotEmpty) {
+          var matchDoc = matches[0];
+
+          var likedUser = await firestoreService
+              .getUser(_users![_users!.length - currentUserIndex]);
+
+          var newLikedUserWhoLikedMeList = likedUser.users_who_liked_me!
+              .where((id) => id != currentUserID)
+              .toList();
+          var newCurrentUserILikedList = currentUser.users_i_liked!
+              .where((id) => id != _users![_users!.length - currentUserIndex])
+              .toList();
+
+          var currentUserData = Map<String, dynamic>();
+          var likedUserData = Map<String, dynamic>();
+
+          currentUserData['users_i_liked'] = newCurrentUserILikedList;
+          currentUserData['remaining_daily_back_count'] = currentUser.remaining_daily_back_count! - 1;
+          likedUserData['users_who_liked_me'] = newLikedUserWhoLikedMeList;
+
+          await firestoreService.updateUser(currentUserData, currentUserID);
+          await firestoreService.updateUser(
+              likedUserData, _users![_users!.length - currentUserIndex]);
+
+          await firestoreService
+              .getCollection('matches')
+              .doc(matchDoc.id)
+              .delete();
+
+          Get.find<SliderController>(
+                  tag: _users![_users!.length - currentUserIndex])
+              .returnBack();
+
+          currentUserIndex = currentUserIndex - 1;
+        } else {
+          var currentUser =
+              await firestoreService.getCurrentUser(currentUserID);
+
+          var newUnLikedUsersList = currentUser.un_liked_users!
+              .where((id) => id != _users![_users!.length - currentUserIndex])
+              .toList();
+
+          var data = Map<String, dynamic>();
+
+          data['un_liked_users'] = newUnLikedUsersList;
+          data['remaining_daily_back_count'] = currentUser.remaining_daily_back_count! - 1;
+
+          await firestoreService.updateUser(data, currentUserID);
+
+          Get.find<SliderController>(
+                  tag: _users![_users!.length - currentUserIndex])
+              .returnBack();
+
+          currentUserIndex = currentUserIndex - 1;
+        }
+        
+        
+
+
+
+      }
+    }
+  }
+
+  void setCurrentUserIndex(bool isNext) {
+    if (isNext) {
+      currentUserIndex = currentUserIndex + 1;
+    } else {
+      currentUserIndex = currentUserIndex - 1;
+    }
   }
 }

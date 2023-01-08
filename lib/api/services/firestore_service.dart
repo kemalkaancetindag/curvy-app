@@ -58,6 +58,8 @@ class FirestoreService extends GetxService {
     var userSnapshot = await  getCollection('users').where('userID', isEqualTo: userID).get();
     if(userSnapshot.docs.isNotEmpty){
       String documentId = userSnapshot.docs[0].reference.id;
+      print(documentId);
+      print(data);
       await getCollection('users').doc(documentId).update(data);
     }
   }

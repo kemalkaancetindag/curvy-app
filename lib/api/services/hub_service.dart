@@ -68,8 +68,7 @@ class HubService extends GetxService {
         isFound = true;
         
         Get.put(OnlineHubController(hubService: Get.find(), hubId: hub.id));
-        Get.find<OnlineHubController>().stopTimer = false;
-        Get.find<OnlineHubController>().setInitialHubData(hubObject, hubStorageObject);
+        Get.find<OnlineHubController>().stopTimer = false;        
         Get.toNamed(Routes.hub);
         return hub.id;
       }
@@ -93,8 +92,7 @@ class HubService extends GetxService {
       var newHubData = await newHubDocReference.set(newHubJsonData);
 
       Get.put(OnlineHubController(
-          hubService: Get.find(), hubId: newHubDocReference.id));
-      Get.find<OnlineHubController>().setInitialHubData(newHub, hubStorageObject);
+          hubService: Get.find(), hubId: newHubDocReference.id));      
       Get.toNamed(Routes.hub);
       return newHubDocReference.id;
     }
@@ -133,8 +131,11 @@ class HubService extends GetxService {
         .listen((event) async {
       if (event.data() != null) {
         var onlineHubObject =
-            OnlineHub.fromJson(event.data() as Map<String, dynamic>);      
-        Get.find<OnlineHubController>().updateHubData(onlineHubObject);
+            OnlineHub.fromJson(event.data() as Map<String, dynamic>);   
+        var storedHubDoc = (await firestoreService.getCollection('hub_storage').where('hub_type',isEqualTo: onlineHubObject.hub_type).get()).docs[0];
+        var storedHubData = HubStorageModel.fromJson(storedHubDoc.data() as Map<String,dynamic>);
+
+        Get.find<OnlineHubController>().updateHubData(onlineHubObject, storedHubData);
       }
     });
   }
@@ -167,50 +168,4 @@ class HubService extends GetxService {
     }
   }
 
-
-  Future<void> likeUser(String userID) async {
-    String currentUserID = Get.find<SharedPreferenceService>().getUserID();
-    var currentUser = await firestoreService.getCurrentUser(currentUserID);
-    var currentUserDocID =  (await firestoreService.getCollection('users').where('userID', isEqualTo: currentUserID).get()).docs[0].id;
-
-    var likedUserDoc = (await firestoreService.getCollection('users').where('userID', isEqualTo: userID).get()).docs[0];
-    
-    var likedUser =  UserModel.fromJson(likedUserDoc.data() as Map<String,dynamic>);
-
-    var newCurrentUserLikeList = currentUser.users_i_liked;    
-    newCurrentUserLikeList!.add(likedUser.userID);
-
-    var currentUserUpdateData = Map<String,dynamic>();
-
-    currentUserUpdateData['users_i_liked'] = newCurrentUserLikeList;
-
-    await firestoreService.getCollection('users').doc(currentUserDocID).update(currentUserUpdateData);
-
-    var newLikedUserWhoLikedList = likedUser.users_who_liked_me;
-    newLikedUserWhoLikedList!.add(currentUserID);
-
-    var likedUserUpdateData = Map<String,dynamic>();
-    likedUserUpdateData['users_who_liked_me'] = newLikedUserWhoLikedList;
-
-    await firestoreService.getCollection('users').doc(likedUserDoc.id).update(likedUserUpdateData);
-
-
-  }
-
-  Future<void> dislikeUser(String userID) async {
-    String currentUserId = Get.find<SharedPreferenceService>().getUserID();
-
-    var currentUser = await firestoreService.getCurrentUser(currentUserId);
-    var currentUserDoc =  (await firestoreService.getCollection('users').where('userID', isEqualTo: currentUserId).get()).docs[0];
-
-    var newUnLikedList = currentUser.un_liked_users!;
-    newUnLikedList.add(currentUserId);
-
-    var updateData = Map<String,dynamic>();
-
-    updateData['un_liked_users'] = newUnLikedList;
-    
-    await firestoreService.getCollection('users').doc(currentUserDoc.id).update(updateData);
-
-  }
 }

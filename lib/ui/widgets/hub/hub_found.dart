@@ -13,7 +13,7 @@ class HubFoundWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return  GetBuilder<OnlineHubController>(
       builder: (controller){
-        return controller.onlineUsers != null ? Container(
+        return  Container(
       width: Get.width,
       height: Get.height,
       padding: EdgeInsets.only(top: Dimensions.h50),
@@ -57,6 +57,7 @@ class HubFoundWidget extends StatelessWidget {
                       GestureDetector(
                         onTap: (){
                           Get.back();
+                          print("BURDAAAASAAAAAA");
                           controller.leftHub();
                         },
                         child:   Container(
@@ -276,7 +277,7 @@ class HubFoundWidget extends StatelessWidget {
         ],
       ),
       )
-    ): Container();
+    );
       }
     );
   }
