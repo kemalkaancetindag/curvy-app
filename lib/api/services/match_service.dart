@@ -88,6 +88,48 @@ class MatchService extends GetxService {
     
   }
 
+  Future<void> removeLastAction(String interractedUserID) async {
+    var currentUserID = Get.find<SharedPreferenceService>().getUserID();
+    var currentUserDoc = (await firestoreService.getCollection('users').where('userID', isEqualTo: currentUserID).get()).docs[0];
+    var currentUser = UserModel.fromJson(currentUserDoc.data() as Map<String,dynamic>);
+
+    var interractedUserDoc = (await firestoreService.getCollection('users').where('userID', isEqualTo: interractedUserID).get()).docs[0];
+    var interractedUser = UserModel.fromJson(interractedUserDoc.data() as Map<String,dynamic>);
+
+    var currentUserUpdateData = Map<String,dynamic>();
+    var interractedUserUpdateData = Map<String,dynamic>();
+
+    if(currentUser.remaining_daily_back_count! > 0){
+      var matches = (await firestoreService.getCollection('matches').where('user1.id',isEqualTo: currentUserID).where('user2.id',isEqualTo: interractedUserID).get()).docs;
+
+      if(matches.isNotEmpty){
+        var matchDoc = matches[0];        
+
+        var newCurrentUserLikedList = currentUser.users_i_liked!.where((id) => id != interractedUserID).toList();
+        var newInterractedUserWhoLikedList = interractedUser.users_who_liked_me!.where((id) => id != currentUserID).toList();
+
+
+
+        currentUserUpdateData['users_i_liked'] = newCurrentUserLikedList;
+        interractedUserUpdateData['users_i_liked'] = newInterractedUserWhoLikedList;
+
+        await firestoreService.updateUser(currentUserUpdateData, currentUserID);
+        await firestoreService.updateUser(interractedUserUpdateData, interractedUserID);
+
+        await firestoreService.getCollection('matches').doc(matchDoc.id).delete();
+      }
+      else {
+        var newCurrentUserUnlikedList = currentUser.un_liked_users!.where((id) => id != interractedUserID).toList();
+        currentUserUpdateData['un_liked_users'] = newCurrentUserUnlikedList;
+
+        await firestoreService.updateUser(currentUserUpdateData, currentUserID);
+      }
+
+
+    }
+
+  }
+
  
 
 }

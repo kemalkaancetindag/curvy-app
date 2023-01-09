@@ -378,7 +378,11 @@ class UserDetailScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Container(
+                      GestureDetector(
+                        onTap: (){
+                          controller.removeAction();
+                        },
+                        child:  Container(
                         width: Dimensions.h52,
                         height: Dimensions.h52,
                         decoration: BoxDecoration(
@@ -394,7 +398,13 @@ class UserDetailScreen extends StatelessWidget {
                           child: Image.asset("assets/images/matcher_back.png"),
                         ),
                       ),
-                      Container(
+                      ),
+                     
+                      GestureDetector(
+                        onTap: (){
+                          controller.dislikeUser();
+                        },
+                        child:    Container(
                         width: Dimensions.h7 * 10,
                         height: Dimensions.h7 * 10,
                         decoration: BoxDecoration(
@@ -411,7 +421,12 @@ class UserDetailScreen extends StatelessWidget {
                               Image.asset("assets/images/matcher_dislike.png"),
                         ),
                       ),
-                      Container(
+                      ),
+                      GestureDetector(
+                        onTap: (){
+                          controller.showCurvyLikeDialog();
+                        },
+                        child:    Container(
                         width: Dimensions.h60,
                         height: Dimensions.h60,
                         decoration: BoxDecoration(
@@ -428,7 +443,13 @@ class UserDetailScreen extends StatelessWidget {
                               "assets/images/matcher_superlike.png"),
                         ),
                       ),
-                      Container(
+                      ),
+                   
+                      GestureDetector(
+                        onTap: (){
+                          controller.likeUser();
+                        },
+                        child:  Container(
                         width: Dimensions.h7 * 10,
                         height: Dimensions.h7 * 10,
                         decoration: BoxDecoration(
@@ -444,6 +465,8 @@ class UserDetailScreen extends StatelessWidget {
                           child: Image.asset("assets/images/matcher_like.png"),
                         ),
                       ),
+                      ),
+                     
                       Container(
                         width: Dimensions.h52,
                         height: Dimensions.h52,

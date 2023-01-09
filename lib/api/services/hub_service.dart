@@ -105,10 +105,14 @@ class HubService extends GetxService {
     
     
     var currentUserID = Get.find<SharedPreferenceService>().getUserID();
+    var currentHubData = (await firestoreService.getCollection('online_hubs').doc(hubId).get()).data();
+    var currentHub = null;
+            
     
-    var currentHub =
-        (await firestoreService.getCollection('online_hubs').doc(hubId).get())
-            .data() as Map<String, dynamic>;
+    if(currentHubData != null){
+      currentHub = (currentHubData as Map<String,dynamic>);
+    }
+
     print(hubId);
     
     var onlineHubObject = OnlineHub.fromJson(currentHub);

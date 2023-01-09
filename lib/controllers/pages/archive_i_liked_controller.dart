@@ -1,4 +1,6 @@
 import 'package:curvy_app/api/services/archive_service.dart';
+import 'package:curvy_app/constants/routes.dart';
+import 'package:curvy_app/controllers/user_detail_controller.dart';
 import 'package:curvy_app/controllers/user_online_controller.dart';
 import 'package:curvy_app/models/user.model.dart';
 import 'package:curvy_app/ui/widgets/archive_liked_box.dart';
@@ -30,7 +32,16 @@ class ArchiveILikedController extends GetxController {
 
     _usersILiked!.forEach((user) {
       Get.put(UserOnlineController(firestoreService: Get.find(), userID: user), tag: user, permanent: true);
-      _tiles!.add(ArchiveLikedBox(userID: user));    
+      _tiles!.add(
+        GestureDetector(
+          onTap: (){
+            var userDetailController = Get.put(UserDetailController(firestoreService: Get.find(), userID: user));          
+                    
+            Get.toNamed(Routes.userDetail);
+          },
+          child: ArchiveLikedBox(userID: user),
+        )
+      );    
     });
     
   }

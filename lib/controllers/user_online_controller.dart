@@ -17,11 +17,14 @@ class UserOnlineController extends GetxController {
 
   @override
   Future<void> onInit() async {    
+
     super.onInit();
+    print("çağırdı");
     await setInitialOnlineStatus();
     _distance = await calculateDistance(_user!.location!.latitude!, _user!.location!.longitude!);
     update();
     await addUserListener();
+    
   }
 
   Future setInitialOnlineStatus() async {    
@@ -31,7 +34,7 @@ class UserOnlineController extends GetxController {
     .get();  
                 
     _user = UserModel.fromJson((userSnapshot.docs[0].data() as Map<String,dynamic>));
-    print(_user!.images);
+    
     update();
   }
 
@@ -45,6 +48,7 @@ class UserOnlineController extends GetxController {
         switch(change.type){
           case DocumentChangeType.modified:          
           _user = UserModel.fromJson((event.docs[0].data() as Map<String,dynamic>));
+          print(_user!.userID!);
           update();
           break;
           case DocumentChangeType.removed:

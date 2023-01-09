@@ -190,40 +190,13 @@ class MessagesScreen extends StatelessWidget {
           ),
           body: GetBuilder<ChatController>(
             builder: (chatController) {
-              return chatController.currentChats != null ? Container(
-                height: double.maxFinite,
-                width: double.maxFinite,
-                
-                child:  ListView.builder(
-              itemCount: chatController.currentChats!.length,
-              itemBuilder: (context, index) {
-                  return GetBuilder<UserOnlineController>(
-                    global: false,
-                    init: Get.find<UserOnlineController>(tag: chatController.currentUserID == chatController.currentChats![index].user1 ? chatController.currentChats![index].user2 : chatController.currentChats![index].user1),
-                    builder: (userController) {
-                      return  Stack(
-                    children: [
-                      Positioned(
-                        child: Container(
-                          color: Colors.black,
-                          width: Get.width,
-                          height: Dimensions.h100,
-                          child: Center(
-                            child: Text(
-                              "${userController.user!.name!}",
-                              style: TextStyle(
-                                color: Colors.white
-                              ),
-                            ),
-                          ),
-                        )
-                      )
-                    ],
-                  );
-                    }
-                  );
-              }),
-              ) : Container();
+              return chatController.currentChats != null ? 
+              SingleChildScrollView(
+                child: Column(
+                  children: chatController.tiles ?? []
+                ),
+              ) 
+              : Container();
             },
           )
           

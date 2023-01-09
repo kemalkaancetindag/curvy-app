@@ -52,19 +52,15 @@ class ChatService extends GetxService {
         filteredChats.forEach((chatDoc) { 
           var currentChat = Chat.fromJson(chatDoc.data() as Map<String,dynamic>);
 
-          if(currentChat.user1 == userID){
-            Get.put(
-              UserOnlineController(firestoreService: firestoreService, userID: currentChat.user2!),
-              tag: currentChat.user2!,
-              
-            );
+
+          if(currentChat.user1! == userID) {
+            Get.put(UserOnlineController(firestoreService: firestoreService, userID: currentChat.user2!), tag: currentChat.user2!);
           }
           else{
-             Get.put(
-              UserOnlineController(firestoreService: firestoreService, userID: currentChat.user1!),
-              tag: currentChat.user1!
-            );
+            Get.put(UserOnlineController(firestoreService: firestoreService, userID: currentChat.user1!), tag: currentChat.user1!);
           }
+
+          
           allChats.add(currentChat);
 
           if(currentChat.isActive!){

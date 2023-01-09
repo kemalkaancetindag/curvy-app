@@ -2,14 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curvy_app/api/services/chat_service.dart';
 import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
+import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/constants/routes.dart';
 import 'package:curvy_app/controllers/messages_controller.dart';
+import 'package:curvy_app/controllers/user_chat_controller.dart';
+import 'package:curvy_app/controllers/user_online_controller.dart';
 import 'package:curvy_app/models/chat.model.dart';
 import 'package:curvy_app/models/user.model.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ChatController extends GetxController {
-
   ChatService chatService;
 
   List<Chat>? _activeChats;
@@ -21,12 +25,8 @@ class ChatController extends GetxController {
   List<Chat>? _newMatches;
   List<Chat>? get newMatches => _newMatches;
 
-
-
-
   bool _isActiveMessages = true;
   bool get isActiveMessages => _isActiveMessages;
-  
 
   String? _tappedChat;
   String? get tappedChat => _tappedChat;
@@ -49,17 +49,294 @@ class ChatController extends GetxController {
   List<Chat>? _allChats;
   List<Chat>? get allChats => _allChats;
 
-
-
-
+  List<Widget>? _tiles;
+  List<Widget>? get tiles => _tiles;
 
   @override
   Future<void> onInit() async {
-    super.onInit();  
+    super.onInit();
 
     await setCurrentUser();
-    chatService.listenChats(); 
-        
+    chatService.listenChats();
+  }
+
+  void generateTiles() {
+    _tiles = [];
+
+    for (int i = 0; i < _currentChats!.length; i++) {
+      var currentUserControllerTag = _currentChats![i].user1 == currentUserID
+          ? _currentChats![i].user2
+          : _currentChats![i].user1;
+
+      Get.put<UserChatController>(
+          UserChatController(
+              firestoreService: Get.find(), userID: currentUserControllerTag!),
+          tag: currentUserControllerTag);
+
+      _tiles!.add(GetBuilder<UserChatController>(
+        key: Key(currentUserControllerTag),
+        tag: currentUserControllerTag,
+        global: false,
+        init: Get.find<UserChatController>(tag: currentUserControllerTag),
+        builder: (controller) {
+          return controller.user != null
+              ? GestureDetector(
+                  onPanDown: (details) {
+                    controller.setBackgroundColor(true);
+                  },
+                  onPanEnd: (details) {
+                    controller.setBackgroundColor(false);
+                  },
+                  onHorizontalDragUpdate: (details) {
+                    controller.slideTile(details.delta.dx, _currentChats![i].chatID!);
+                  },
+                  onHorizontalDragEnd: (details) {
+                    controller.resetPosition();
+                  },
+                  onPanCancel: () {
+                    controller.setBackgroundColor(false);
+                  },
+                  onTap: (){
+                    setCurrentChat(_currentChats![i].chatID!);
+                  },
+                  child: Container(
+                    width: Get.width,
+                    height: Dimensions.h100,
+                    color: controller.isTapping ? Color(0xFFC5C5C7) : null,
+                    child: Stack(
+                      children: [
+                        Positioned(
+                            left: controller.chatCurrentPosition![0],
+                            right: controller.chatCurrentPosition![1],
+                            child: Container(
+                                height: Dimensions.h100,
+                                width: Get.width + (Dimensions.w11 * 20),
+                                child: Stack(
+                                  children: [
+                                    Positioned(
+                                        left: 0,
+                                        top: 0,
+                                        bottom: 0,
+                                        child: Container(
+                                            height: double.maxFinite,
+                                            width: Dimensions.w11 * 10,
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.only(
+                                                    topRight: Radius.circular(
+                                                        Dimensions.w42),
+                                                    bottomRight:
+                                                        Radius.circular(
+                                                            Dimensions.w42)),
+                                                gradient: LinearGradient(
+                                                    colors: [
+                                                      Color(0xFF1FE9BB),
+                                                      Color(0xFF0D92E3)
+                                                    ])),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                Image.asset(
+                                                    "assets/images/messages_report.png"),
+                                                Container(
+                                                  width: Dimensions.w50,
+                                                  child: Text(
+                                                    isActiveMessages
+                                                        ? "Profili Bildir"
+                                                        : "Bir Şans Daha",
+                                                    textAlign: TextAlign.start,
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize:
+                                                            Dimensions.h14,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                              ],
+                                            ))),
+                                    Positioned(
+                                        child: Container(
+                                      margin: EdgeInsets.only(
+                                          left: Dimensions.w11 * 10,
+                                          right: Dimensions.w11 * 10),
+                                      width: double.maxFinite,
+                                      height: double.maxFinite,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Container(
+                                            margin: EdgeInsets.only(
+                                                left: Dimensions.w16),
+                                            width: Dimensions.h8 * 10,
+                                            height: Dimensions.h8 * 10,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        Dimensions.h8 / 2 * 10),
+                                                image: DecorationImage(
+                                                    image: NetworkImage(
+                                                        'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(controller.user!.images![0])}?alt=media'),
+                                                    fit: BoxFit.cover)),
+                                          ),
+                                          Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: Dimensions.w2 * 10),
+                                            margin: EdgeInsets.only(
+                                                right: Dimensions.w16),
+                                            width: Get.width -
+                                                Dimensions.h8 * 10 -
+                                                (Dimensions.w16 * 2),
+                                            height: double.maxFinite,
+                                            decoration: BoxDecoration(
+                                                border: Border(
+                                              top: BorderSide(
+                                                  width: 1,
+                                                  color: Color(0xFFC5C5C7)),
+                                              bottom: BorderSide(
+                                                  width: 1,
+                                                  color: Color(0xFFC5C5C7)),
+                                            )),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                    margin: EdgeInsets.only(
+                                                        top: Dimensions.h7),
+                                                    child: Row(
+                                                      children: [
+                                                        Row(
+                                                          children: [
+                                                            Container(
+                                                              margin: EdgeInsets.only(
+                                                                  right: Dimensions
+                                                                          .w8 /
+                                                                      2),
+                                                              width: Dimensions
+                                                                      .h60 /
+                                                                  10,
+                                                              height: Dimensions
+                                                                      .h60 /
+                                                                  10,
+                                                              decoration: BoxDecoration(
+                                                                  borderRadius:
+                                                                      BorderRadius.circular(
+                                                                          (Dimensions.h60 / 10) /
+                                                                              2),
+                                                                  color: controller
+                                                                          .user!
+                                                                          .online_status!
+                                                                      ? Color(
+                                                                          0xFF05ED00)
+                                                                      : Color(
+                                                                          0xFFFF0000)),
+                                                            ),
+                                                            Container(
+                                                              margin: EdgeInsets.only(
+                                                                  right: Dimensions
+                                                                          .w8 /
+                                                                      2),
+                                                              child: Text(
+                                                                "${controller.user!.name}, ${DateTime.now().year - int.parse(controller.user!.birthdate!.split("/").last)}",
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontSize:
+                                                                        Dimensions
+                                                                            .h21,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              child: Center(
+                                                                child: Image.asset(
+                                                                    "assets/images/confirm_small.png"),
+                                                              ),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    )),
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                      top: Dimensions.h60 / 20),
+                                                  width: double.maxFinite,
+                                                  child: Text(
+                                                    _currentChats![i]
+                                                            .lastMessage ??
+                                                        "",
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: TextStyle(
+                                                        color:
+                                                            Color(0xFF7B8491),
+                                                        fontSize:
+                                                            Dimensions.h14),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    )),
+                                    Positioned(
+                                        right: 0,
+                                        top: 0,
+                                        bottom: 0,
+                                        child: Container(
+                                            height: double.maxFinite,
+                                            width: Dimensions.w11 * 10,
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft: Radius.circular(
+                                                        Dimensions.w42),
+                                                    bottomLeft: Radius.circular(
+                                                        Dimensions.w42)),
+                                                gradient: LinearGradient(
+                                                    colors: [
+                                                      Color(0xFFFF0000),
+                                                      Color(0xFFFFB800)
+                                                    ])),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                Container(
+                                                  width: Dimensions.w50,
+                                                  child: Text(
+                                                    isActiveMessages
+                                                        ? "İlişkiyi Çöpe At"
+                                                        : "Eşleşmeyi Bitir",
+                                                    textAlign: TextAlign.end,
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize:
+                                                            Dimensions.h14,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                Image.asset(
+                                                    "assets/images/messages_delete.png"),
+                                              ],
+                                            ))),
+                                  ],
+                                ))),
+                      ],
+                    ),
+                  ),
+                )
+              : Container();
+        },
+      ));
+    }
+    
+    update();
   }
 
   void setAllChats(List<Chat> allChats) {
@@ -67,25 +344,24 @@ class ChatController extends GetxController {
   }
 
   void setCurrentChats() {
-    _currentChats = _allChats!.where((chat) => chat.isActive! == isActiveMessages).toList();
+    _currentChats =
+        _allChats!.where((chat) => chat.isActive! == isActiveMessages).toList();
+    generateTiles();
+
     update();
   }
 
-
-  
-
   Future setCurrentUser() async {
-    _currentUser = await Get.find<FirestoreService>().getCurrentUser(currentUserID);
+    _currentUser =
+        await Get.find<FirestoreService>().getCurrentUser(currentUserID);
   }
 
-  void setChats(List<Chat> activeChats, List<Chat> unActiveChats, List<Chat> newMatches) { 
-
-        
+  void setChats(
+      List<Chat> activeChats, List<Chat> unActiveChats, List<Chat> newMatches) {
     _activeChats = activeChats;
     _unActiveChats = unActiveChats;
-    _newMatches = newMatches;      
-  
-      
+    _newMatches = newMatches;
+
     update();
   }
 
@@ -93,17 +369,11 @@ class ChatController extends GetxController {
     var sendingDate = DateTime.fromMillisecondsSinceEpoch(messageDate);
     var currentDate = DateTime.now();
 
-    if(
-      (sendingDate.day == currentDate.day)
-      &&
-      (sendingDate.month == currentDate.month)
-      &&
-      (sendingDate.year == currentDate.year)
-    ){      
-      
+    if ((sendingDate.day == currentDate.day) &&
+        (sendingDate.month == currentDate.month) &&
+        (sendingDate.year == currentDate.year)) {
       return "${sendingDate.hour}:${sendingDate.minute}";
     }
-  
 
     return "";
   }
@@ -114,28 +384,27 @@ class ChatController extends GetxController {
   }
 
   void setTappedChat(String? chatID) {
-    if(chatID != null){
-      _tappedChat = chatID;  
-    }
-    else{
+    if (chatID != null) {
+      _tappedChat = chatID;
+    } else {
       _tappedChat = null;
     }
 
     update();
-    
   }
 
   void setCurrentChat(String chatID) {
     chatService.listenCurrentChat(chatID);
-    
-    if(_isActiveMessages){
-      _currentChat = _activeChats!.where((chat) => chat.chatID == chatID).toList()[0];    
+
+    if (_isActiveMessages) {
+      _currentChat =
+          _activeChats!.where((chat) => chat.chatID == chatID).toList()[0];
+    } else {
+      _currentChat =
+          _unActiveChats!.where((chat) => chat.chatID == chatID).toList()[0];
     }
-    else{
-      _currentChat = _unActiveChats!.where((chat) => chat.chatID == chatID).toList()[0];    
-    }    
-    
-    Get.toNamed(Routes.chat);    
+    generateTiles();
+    Get.toNamed(Routes.chat);
   }
 
   void updateCurrentChat(Chat updatedChat) {
@@ -143,8 +412,8 @@ class ChatController extends GetxController {
     update();
   }
 
-  void setTypedMessage(String message){
-    _typedMessage = message;    
+  void setTypedMessage(String message) {
+    _typedMessage = message;
   }
 
   Future likeMessage(int messageId) async {
@@ -152,9 +421,22 @@ class ChatController extends GetxController {
     update();
   }
 
-  void setIsActiveMessages(bool state){        
+  void deleteLastControllers() async {
+    await Future.forEach(_currentChats!, (chat) async {
+      if (currentUserID == chat.user1) {
+        await Get.delete<UserChatController>(tag: chat.user2!);
+      } else {
+        await Get.delete<UserChatController>(tag: chat.user1!);
+      }
+    });
+  }
+
+  void setIsActiveMessages(bool state) async {
     _isActiveMessages = state;
-    _currentChats = _allChats!.where((chat) => chat.isActive! == state).toList();
+    deleteLastControllers();
+    _currentChats =
+        _allChats!.where((chat) => chat.isActive! == state).toList();
+    generateTiles();
     update();
   }
 
@@ -163,13 +445,9 @@ class ChatController extends GetxController {
     setCurrentChat(chatID);
     update();
   }
+
   void clearCurrentChat() {
     _currentChat = null;
     update();
   }
-
-  
-  
-
-
 }
