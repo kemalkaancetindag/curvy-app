@@ -179,6 +179,7 @@ flutter:
     - assets/images/hub_close_icon.png
     - assets/images/chevron_bottom.png
     - assets/images/chat_mic_white.png
+    - assets/images/google_icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

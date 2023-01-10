@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'dart:io';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -62,7 +63,7 @@ class LoginScreen extends StatelessWidget {
                 )
               )
             ),
-            LoginButton(text: "APPLE İLE GİRİŞ YAP", logo: "assets/images/apple_logo.png",
+            LoginButton(text: Platform.isIOS ? "APPLE İLE GİRİŞ YAP" : "GOOGLE İLE GİRİŞ YAP", logo: Platform.isAndroid ? "assets/images/apple_logo.png" : "assets/images/google_icon.png",
             loginMethod: () async {
                 Get.find<SetupController>().setLoginMethod(0); 
                await Get.find<AuthService>().googleAuth();                

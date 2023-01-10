@@ -8,6 +8,7 @@ import 'package:curvy_app/models/chat.model.dart';
 import 'package:curvy_app/models/user.model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ChatService extends GetxService {
   FirestoreService firestoreService;
@@ -27,22 +28,24 @@ class ChatService extends GetxService {
     });
   }
 
-  void listenChats() async {
+  Future listenChats() async {
+    print("dinliyor");
     var chatController = Get.find<ChatController>();
     var messagesController = Get.find<MessagesController>();
+
     
 
     String userID = Get.find<SharedPreferenceService>().getUserID();
     var currentUserDoc =  (await firestoreService.getCollection('users').where('userID', isEqualTo: userID).get()).docs[0];
 
-    Stream<DocumentSnapshot> userStream = firestoreService.getCollection('users').doc(currentUserDoc.id).snapshots();
-    Stream<QuerySnapshot> chatStream = firestoreService.getCollection('chats').snapshots();
-    
-    await for(var user in userStream){
+    firestoreService.getCollection('users').doc(currentUserDoc.id).snapshots().listen((event) async {
+       print("listening");
+       var userObject = UserModel.fromJson(event.data() as Map<String,dynamic>);
+       Stream<QuerySnapshot> chatStream = firestoreService.getCollection('chats').snapshots();
       
-      var userObject = UserModel.fromJson(user.data() as Map<String,dynamic>);
 
       await for(var chats in chatStream) {
+        print("chatttt");
         List<Chat> activeChats = [];
         List<Chat> unActiveChats = [];
         List<Chat> newMatches = [];
@@ -88,12 +91,10 @@ class ChatService extends GetxService {
         
         chatController.setChats(activeChats, unActiveChats, newMatches);
       }
-
-
-
       
-    }
-
+     });
+    
+    
 
 
   }
@@ -186,8 +187,86 @@ class ChatService extends GetxService {
   }
 
   Future deactivateChat(String chatID) async {
+    var chat = await firestoreService.getChat(chatID);
+    var currentUserID = Get.find<SharedPreferenceService>().getUserID();
+    var deactivatedChatOpositeUserDoc;
+
+    if(chat.user1! == currentUserID) {
+      deactivatedChatOpositeUserDoc = (await firestoreService.getCollection('users').where('userID', isEqualTo: chat.user2!).get()).docs[0];      
+    } 
+    else{
+      deactivatedChatOpositeUserDoc = (await firestoreService.getCollection('users').where('userID', isEqualTo: chat.user1!).get()).docs[0];
+    }
+
+    var opositeUser = UserModel.fromJson(deactivatedChatOpositeUserDoc.data() as Map<String,dynamic>);
+
+    var newOpositeUserChats = opositeUser.chat!.active_chats!.where((id) => id != chatID).toList();
+
+    var opositeUserUpdateData = Map<String,dynamic>();
+
+    opositeUserUpdateData['chat.active_chats'] = newOpositeUserChats;
+
+    await firestoreService.updateUser(opositeUserUpdateData, opositeUser.userID!);
+
     var updateData = Map<String, dynamic>();
     updateData['isActive'] = false;
     await firestoreService.updateChat(updateData, chatID);
   }
+
+  
+  Future activateChat(String chatID) async {
+    var currentUserID = Get.find<SharedPreferenceService>().getUserID();
+    var chat = await firestoreService.getChat(chatID);
+    var activatedUserDoc;
+
+    if(chat.user1! == currentUserID) {
+      activatedUserDoc = (await firestoreService.getCollection('users').where('userID', isEqualTo: chat.user2!).get()).docs[0];      
+    } 
+    else{
+      activatedUserDoc = (await firestoreService.getCollection('users').where('userID', isEqualTo: chat.user1!).get()).docs[0];
+    }
+
+    var activatedUser = UserModel.fromJson(activatedUserDoc.data() as Map<String,dynamic>);
+
+    var newActivatedUserChatList = activatedUser.chat!.active_chats!;
+    newActivatedUserChatList.add(chatID);
+
+    var activatedUserUpdateData = Map<String,dynamic>();
+
+    activatedUserUpdateData['chat.active_chats'] = newActivatedUserChatList;
+
+    await firestoreService.updateUser(activatedUserUpdateData, activatedUser.userID!);
+
+    
+
+    var updateData = Map<String, dynamic>();
+    updateData['isActive'] = true;
+    await firestoreService.updateChat(updateData, chatID);
+  }
+
+  Future deleteChat(String chatID) async {
+    var chatDoc = await firestoreService.getCollection('chats').doc(chatID).get();
+    var chat = Chat.fromJson(chatDoc.data() as Map<String,dynamic>);
+
+    var user1 = await firestoreService.getUser(chat.user1!);
+    var user2 = await firestoreService.getUser(chat.user2!);
+
+    var newActiveChatListUser1 = user1.chat!.active_chats!.where((id) => id != chatID).toList();
+    var newActiveChatListUser2 = user2.chat!.active_chats!.where((id) => id != chatID).toList();
+
+    var user1UpdateData = Map<String,dynamic>();
+    var user2UpdateData = Map<String,dynamic>();
+
+    user1UpdateData['chat.active_chats'] = newActiveChatListUser1;
+    user2UpdateData['chat.active_chats'] = newActiveChatListUser2;
+
+    await firestoreService.updateUser(user1UpdateData, user1.userID!);
+    await firestoreService.updateUser(user2UpdateData, user2.userID!);
+
+    await firestoreService.getCollection('chats').doc(chatDoc.id).delete();
+
+
+  }
+
+  
 }

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curvy_app/api/services/chat_service.dart';
 import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/pages/chat_controller.dart';
 import 'package:curvy_app/models/user.model.dart';
 import 'package:get/get.dart';
 
@@ -76,6 +77,30 @@ class UserChatController extends GetxController {
     _chatCurrentPosition![0] = -Dimensions.w11*10;
     _chatCurrentPosition![1] = -Dimensions.w11*10;
     update();  
+  }
+
+  Future decideSlideAction(String chatID) async {
+    var chatController = Get.find<ChatController>();
+    var chatService = Get.find<ChatService>();
+    if(chatCurrentPosition![1] > -5){
+      if(chatController.isActiveMessages){
+        await chatService.deactivateChat(chatID);
+      }
+      else{
+        await chatService.deleteChat(chatID);
+      }
+      
+    }
+    else if(chatCurrentPosition![0] > -5){
+      if(chatController.isActiveMessages){
+
+      }
+      else{
+        await chatService.activateChat(chatID);
+      }
+      
+    }
+    
   }
 
  

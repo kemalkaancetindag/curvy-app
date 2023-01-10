@@ -1,4 +1,5 @@
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/pages/archive_vip_profiles_controller.dart';
 import 'package:curvy_app/controllers/user_online_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -129,7 +130,11 @@ class ArchiveVipProfileBox extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    Container(
+                                    GestureDetector(
+                                      onTap: (){
+                                        Get.find<ArchiveVipProfilesController>().showCurvyLikeDialog(userID);
+                                      },
+                                      child:Container(
                                       height: Dimensions.h31,
                                       width: Dimensions.h31,
                                       decoration: BoxDecoration(
@@ -143,7 +148,9 @@ class ArchiveVipProfileBox extends StatelessWidget {
                                         child: Image.asset(
                                             "assets/images/archives_superlike.png"),
                                       ),
+                                    ) ,
                                     )
+                                    
                                   ],
                                 ),
                               ),

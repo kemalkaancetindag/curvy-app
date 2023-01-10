@@ -56,9 +56,9 @@ class HubFoundWidget extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: (){
-                          Get.back();
-                          print("BURDAAAASAAAAAA");
+                          Get.back();                          
                           controller.leftHub();
+                          Get.delete<OnlineHubController>();
                         },
                         child:   Container(
                         margin: EdgeInsets.only(right: Dimensions.w300 / 10),

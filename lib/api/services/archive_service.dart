@@ -47,12 +47,16 @@ class ArchiveService extends GetxService {
   }
 
   Future<List<dynamic>> getVipProfiles() async {
+    var currentUserID = Get.find<SharedPreferenceService>().getUserID();
     List<dynamic> vipProfilesList = [];
 
     var vipProfiles = (await firestoreService.getCollection("vip_profiles").orderBy("like_count").get()).docs;
 
     vipProfiles.forEach((profile) { 
-      vipProfilesList.add((profile.data() as Map<String,dynamic>)["userID"]);
+      if((profile.data() as Map<String,dynamic>)["userID"] != currentUserID){
+        vipProfilesList.add((profile.data() as Map<String,dynamic>)["userID"]);
+      }      
+      
     });
     
     

@@ -2,6 +2,8 @@ import 'dart:math' as math;
 
 import 'package:curvy_app/api/services/archive_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/constants/routes.dart';
+import 'package:curvy_app/controllers/user_detail_controller.dart';
 import 'package:curvy_app/models/user.model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -56,15 +58,25 @@ class ArchiveWhoLikedMeController extends GetxController {
     _tiles!.add(Positioned(
         top: screenCenterY - maxRadius,
         left: screenCenterX - maxRadius,
-        child: Container(
-          width: maxRadius * 2,
-          height: maxRadius * 2,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: NetworkImage(
-                      'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(_usersWhoLikedMe![0].images![0])}?alt=media'),
-                  fit: BoxFit.fill),
-              borderRadius: BorderRadius.circular(maxRadius.toDouble())),
+        child: GestureDetector(
+          onTap: () {
+            
+            var userDetailController = Get.put(UserDetailController(
+                firestoreService: Get.find(),
+                userID: _usersWhoLikedMe![0].userID!));
+
+            Get.toNamed(Routes.userDetail);
+          },
+          child: Container(
+            width: maxRadius * 2,
+            height: maxRadius * 2,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: NetworkImage(
+                        'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(_usersWhoLikedMe![0].images![0])}?alt=media'),
+                    fit: BoxFit.fill),
+                borderRadius: BorderRadius.circular(maxRadius.toDouble())),
+          ),
         )));
 
     _positions!.add([screenCenterX, screenCenterY, maxRadius.toDouble()]);
@@ -110,19 +122,32 @@ class ArchiveWhoLikedMeController extends GetxController {
       }
 
       if (!overlapping) {
-        _tiles!.add(Positioned(
-            top: randomCenterY - randomRadius,
-            left: randomCenterX - randomRadius,
-            child: Container(
-              width: randomRadius * 2,
-              height: randomRadius * 2,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(_usersWhoLikedMe![currentUserIndex].images![0])}?alt=media'),
-                      fit: BoxFit.fill),
-                  borderRadius: BorderRadius.circular(randomRadius.toDouble())),
-            )));
+        _tiles!.add(
+          Positioned(
+              top: randomCenterY - randomRadius,
+              left: randomCenterX - randomRadius,
+              child: GestureDetector(
+                onTap: () {
+                  
+                  var userDetailController = Get.put(UserDetailController(
+                      firestoreService: Get.find(),
+                      userID: _usersWhoLikedMe![0].userID!));
+
+                  Get.toNamed(Routes.userDetail);
+                },
+                child: Container(
+                  width: randomRadius * 2,
+                  height: randomRadius * 2,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage(
+                              'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(_usersWhoLikedMe![currentUserIndex].images![0])}?alt=media'),
+                          fit: BoxFit.fill),
+                      borderRadius:
+                          BorderRadius.circular(randomRadius.toDouble())),
+                ),
+              )),
+        );
 
         totalCircleArea += math.pi * math.pow(randomRadius, 2);
         _positions!

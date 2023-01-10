@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/routes.dart';
@@ -10,6 +13,8 @@ import 'dart:math' as math;
 
 class HubService extends GetxService {
   FirestoreService firestoreService;
+  StreamSubscription<DocumentSnapshot>? _listener;
+
 
   HubService({required this.firestoreService});
 
@@ -32,6 +37,7 @@ class HubService extends GetxService {
   }
 
   Future<String?> joinHub(int hubType) async {
+    String? foundHubID; 
     String currentUserID = Get.find<SharedPreferenceService>().getUserID();
     
     UserModel currentUser =
@@ -66,11 +72,12 @@ class HubService extends GetxService {
             .doc(hub.id)
             .update(updateData);
         isFound = true;
+        foundHubID = hub.id;
         
         Get.put(OnlineHubController(hubService: Get.find(), hubId: hub.id));
         Get.find<OnlineHubController>().stopTimer = false;        
         Get.toNamed(Routes.hub);
-        return hub.id;
+        return;
       }
     });
 
@@ -94,10 +101,10 @@ class HubService extends GetxService {
       Get.put(OnlineHubController(
           hubService: Get.find(), hubId: newHubDocReference.id));      
       Get.toNamed(Routes.hub);
-      return newHubDocReference.id;
+      foundHubID = newHubDocReference.id;      
     }
 
-    return null;
+    return foundHubID;
   }
 
   Future<void> leftHub(String hubId) async {
@@ -128,7 +135,8 @@ class HubService extends GetxService {
   }
 
   Future listenHub(String hubId) async {
-    await firestoreService
+    print("GELİDEEEE");
+    var listener = firestoreService
         .getCollection('online_hubs')
         .doc(hubId)
         .snapshots()
@@ -142,6 +150,13 @@ class HubService extends GetxService {
         Get.find<OnlineHubController>().updateHubData(onlineHubObject, storedHubData);
       }
     });
+    print("ATADIM");
+    _listener = listener;
+  }
+
+  Future stopListeningHub() async {
+    await _listener!.cancel();
+    _listener = null;    
   }
 
   Future<int> _calculateDistance(dynamic lat2, dynamic lon2) async {
@@ -165,7 +180,10 @@ class HubService extends GetxService {
   }
 
   Future<void> nextHub(int hubType, String lastHubId) async {
+    print(hubType);
     var hubID = await joinHub(hubType);
+    print(hubID);
+    Get.find<OnlineHubController>().setHubID(hubID!);
     await leftHub(lastHubId);
     if (hubID != null) {
       await listenHub(hubID);

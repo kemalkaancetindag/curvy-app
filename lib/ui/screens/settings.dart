@@ -2410,7 +2410,16 @@ class SettingsScreen extends StatelessWidget {
                                         ],
                                       ),
                                       SliderTheme(
-                                          data: SliderTheme.of(context),
+                                          data: SliderTheme.of(context).copyWith(
+                                              trackShape:
+                                                  GradientRectSliderTrackShape(),
+                                              thumbColor: Colors.white,
+                                              thumbShape: RoundSliderThumbShape(
+                                                  elevation: 2),
+                                              inactiveTrackColor:
+                                                  Color(0xFFC5C5C7),
+                                                  activeTrackColor: Color(0xFFC5C5C7)
+                                            ),
                                           child: RangeSlider(
                                               onChanged: (value) {
                                                 settingsPageController

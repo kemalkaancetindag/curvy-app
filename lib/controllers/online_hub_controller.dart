@@ -62,12 +62,13 @@ class OnlineHubController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    await hubService.listenHub(hubId);
+    hubService.listenHub(hubId);
   }
 
   Future<void> updateHubData(OnlineHub updatedData, HubStorageModel storedHub) async {
     String currentUserId = Get.find<SharedPreferenceService>().getUserID();
     _currentUser = await Get.find<FirestoreService>().getUser(currentUserId);
+    print("geldi");
 
 
     _hubData = updatedData;
@@ -86,7 +87,14 @@ class OnlineHubController extends GetxController {
 
     if (onlineUserIDS.isEmpty) {
       _amIAlone = true;
-      _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if(_timer != null){
+        _timer!.cancel();
+      }
+      else{
+        print("NULLLL");
+      }
+      Timer.periodic(Duration(seconds: 1), (timer) {
+        _timer = timer;
         print('update');
         if (stopTimer) {
           timer.cancel();
@@ -413,10 +421,13 @@ class OnlineHubController extends GetxController {
   }
 
   Future<void> leftHub() async {
+    _timer!.cancel();
+    await hubService.stopListeningHub();
     _hubStorageData = null;
     _popUpBottomPosition = Dimensions.h14;
     _remainingTime = 10;
     stopTimer = true;
+    
 
     _onlineUsers = null;
     _currentUserIndex = 0;
@@ -523,5 +534,9 @@ class OnlineHubController extends GetxController {
     }
     generateFoundSlider();
     update();
+  }
+
+  void setHubID(String hubID) {
+    hubId = hubID;
   }
 }

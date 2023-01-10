@@ -19,11 +19,12 @@ class FreeStylePopup extends StatelessWidget {
         },
         child:  Container(
           width: Dimensions.w35 * 10,
-          height: Dimensions.h583,
+          height: controller.isPopupOn != null && controller.isPopupOn! ? Dimensions.h583 : Dimensions.h357,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(Dimensions.h16)),
           child: Stack(
             children: [
+              controller.isPopupOn != null &&  controller.isPopupOn! ? 
               Positioned(
                   bottom: Dimensions.h100 / 9,
                   left: 0,
@@ -82,11 +83,15 @@ class FreeStylePopup extends StatelessWidget {
                               ]),
                             ),
                           ),
-                        ),
+                        ),                       
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Container(
+                            GestureDetector(
+                              onTap: (){
+                                controller.turnOffPopUpInfo();
+                              },
+                              child:   Container(
                               margin:
                                   EdgeInsets.only(right: Dimensions.w60 / 10),
                               width: Dimensions.w155,
@@ -113,18 +118,26 @@ class FreeStylePopup extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            Container(
+                            ),
+                            GestureDetector(
+                              onTap: (){
+                                controller.setIsPopUpOn(false);
+                              },
+                              child:  Container(
                               margin: EdgeInsets.only(right: Dimensions.w16),
                               child: Center(
                                 child: Image.asset(
                                     "assets/images/chevron_up_white.png"),
                               ),
+                            ),
                             )
+                          
+                           
                           ],
                         )
                       ],
                     ),
-                  )),
+                  )) : Container(),
               Positioned(
                   child: Container(
                 width: double.maxFinite,

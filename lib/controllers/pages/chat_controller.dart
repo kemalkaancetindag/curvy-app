@@ -57,7 +57,7 @@ class ChatController extends GetxController {
     super.onInit();
 
     await setCurrentUser();
-    chatService.listenChats();
+    await chatService.listenChats();
   }
 
   void generateTiles() {
@@ -91,6 +91,7 @@ class ChatController extends GetxController {
                     controller.slideTile(details.delta.dx, _currentChats![i].chatID!);
                   },
                   onHorizontalDragEnd: (details) {
+                    controller.decideSlideAction(_currentChats![i].chatID!);
                     controller.resetPosition();
                   },
                   onPanCancel: () {
