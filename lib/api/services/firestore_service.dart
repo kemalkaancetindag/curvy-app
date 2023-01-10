@@ -42,11 +42,12 @@ class FirestoreService extends GetxService {
   
   }
 
-  Future<void> addToCollection(Map<String, dynamic> jsonMap, String collectionName) async {
+  Future<String> addToCollection(Map<String, dynamic> jsonMap, String collectionName) async {
     FirebaseFirestore db = _getDb();
     CollectionReference collection = db.collection(collectionName);
 
-    await collection.add(jsonMap);
+    var collectionRef = await collection.add(jsonMap);
+    return collectionRef.id;
   }
 
   Future<void> uploadImage(File image, String imageRef) async {

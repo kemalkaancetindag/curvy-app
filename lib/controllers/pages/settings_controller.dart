@@ -1,6 +1,7 @@
 import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/api/services/user_service.dart';
+import 'package:curvy_app/constants/routes.dart';
 import 'package:curvy_app/enums/login_method_enums.dart';
 import 'package:curvy_app/models/user.model.dart';
 import 'package:flutter/cupertino.dart';
@@ -686,5 +687,10 @@ class SettingsController extends GetxController {
 
     await firestoreService.updateUser(data, _userID!);
     Get.back();
+  }
+
+  void logout() async {
+    await Get.find<SharedPreferenceService>().deleteUser();
+    Get.offAllNamed(Routes.login);
   }
 }

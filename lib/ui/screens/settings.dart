@@ -4148,7 +4148,9 @@ class SettingsScreen extends StatelessWidget {
                                             primary:
                                                 Colors.black.withOpacity(0.2),
                                           ),
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            settingsPageController.logout();
+                                          },
                                           child: Container(
                                             child: Row(
                                               mainAxisAlignment:

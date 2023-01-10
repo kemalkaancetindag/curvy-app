@@ -12,6 +12,7 @@ import 'package:curvy_app/ui/screens/main_screen.dart';
 import 'package:curvy_app/ui/screens/matching.dart';
 import 'package:curvy_app/ui/screens/messages.dart';
 import 'package:curvy_app/ui/screens/save_account.dart';
+import 'package:curvy_app/ui/screens/second_login.dart';
 import 'package:curvy_app/ui/screens/send_feedback.dart';
 import 'package:curvy_app/ui/screens/settings.dart';
 import 'package:curvy_app/ui/screens/setup_add_image.dart';
@@ -31,7 +32,7 @@ import 'package:curvy_app/ui/util/login_bindings.dart';
 import 'package:curvy_app/ui/util/page_guard.dart';
 import 'package:get/get.dart';
 
-final pages = [
+final pages = [  
   GetPage(
     name: Routes.login,
     page: () => LoginScreen(),
@@ -39,6 +40,11 @@ final pages = [
     middlewares: [
       PageGuard()
     ]
+  ),
+  GetPage(
+    name: Routes.secondLogin,
+    page: () => SecondLoginScreen(),
+    binding: LoginBindings()   
   ),
   GetPage(
     name: Routes.saveAccount,

@@ -10,7 +10,7 @@ class ArchiveLiked extends StatelessWidget {
   ArchiveLiked({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {    
     Get.find<ArchiveILikedController>().onInit();
     return GetBuilder<ArchiveILikedController>(
       builder: (controller){

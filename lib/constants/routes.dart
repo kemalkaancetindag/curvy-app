@@ -22,6 +22,7 @@ abstract class Routes {
   static const hub = '/hub';
   static const  chat = '/chat';
   static const userDetail = '/user-detail';
+  static const secondLogin = '/second-login';
   
   
 

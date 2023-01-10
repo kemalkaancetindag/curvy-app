@@ -1,3 +1,4 @@
+import 'package:curvy_app/api/services/archive_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/controllers/archives_controller.dart';
 import 'package:curvy_app/ui/widgets/archive_liked.dart';
@@ -14,7 +15,9 @@ class ArchivesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(ArchiveService(firestoreService: Get.find()));
     return GetBuilder<ArchivesController>(builder: (controller) {
+      
       return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size(double.maxFinite, Dimensions.h165),

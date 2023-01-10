@@ -294,7 +294,7 @@ class SetupController extends GetxController {
     //_isAfterSetup = true;
     if(_loginMethod == LoginMethod.google.value){
       var userImages = await Get.find<FirestoreService>().uploadImages(_images, _googleUser!.uid);
-      var permission = await Geolocator.requestPermission();
+      await Geolocator.requestPermission();
       var position = await GeolocatorPlatform.instance.getCurrentPosition(locationSettings: LocationSettings(accuracy: LocationAccuracy.high));
       print(position.latitude);
       print(position.longitude);
@@ -327,7 +327,9 @@ class SetupController extends GetxController {
     }
     else if(_loginMethod == LoginMethod.phone.value){
       var userImages = await Get.find<FirestoreService>().uploadImages(_images, _userPhoneId!);
-      var permission = await Geolocator.requestPermission();      
+      
+      
+      await Geolocator.requestPermission();   
       var position = await GeolocatorPlatform.instance.getCurrentPosition(locationSettings: LocationSettings(accuracy: LocationAccuracy.high));
             print(position.latitude);
       print(position.longitude);
@@ -354,8 +356,11 @@ class SetupController extends GetxController {
         users_i_liked: []
       ).toJson();
 
-      await Get.find<FirestoreService>().addToCollection(jsonUser, 'users');
+      var userDocID = await Get.find<FirestoreService>().addToCollection(jsonUser, 'users');
+
       await Get.find<SharedPreferenceService>().saveUser(jsonUser);
+
+      await Get.find<SharedPreferenceService>().setLastUserID(userDocID);
 
     }
 

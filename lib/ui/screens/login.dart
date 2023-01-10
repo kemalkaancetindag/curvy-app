@@ -63,7 +63,7 @@ class LoginScreen extends StatelessWidget {
                 )
               )
             ),
-            LoginButton(text: Platform.isIOS ? "APPLE İLE GİRİŞ YAP" : "GOOGLE İLE GİRİŞ YAP", logo: Platform.isAndroid ? "assets/images/apple_logo.png" : "assets/images/google_icon.png",
+            LoginButton(text: Platform.isIOS ? "APPLE İLE GİRİŞ YAP" : "GOOGLE İLE GİRİŞ YAP", logo: !Platform.isAndroid ? "assets/images/apple_logo.png" : "assets/images/google_icon.png",
             loginMethod: () async {
                 Get.find<SetupController>().setLoginMethod(0); 
                await Get.find<AuthService>().googleAuth();                
