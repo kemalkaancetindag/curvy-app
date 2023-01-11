@@ -16,14 +16,15 @@ class SharedPreferenceService extends GetxService {
     sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  Future<void> saveUser(Map<String, dynamic> userData) async {    
-    print(userData);
+  Future<void> saveUser(Map<String, dynamic> userData) async {        
     String jsonData = jsonEncode(userData);
     sharedPreferences.setString('user', jsonData);
   }
 
   bool checkIsUserLoggedIn()  {    
     String? user = sharedPreferences.getString('user');
+    print("USERRRRRRRRRR");
+    print(user);
 
     if(user != null){
       return true;      

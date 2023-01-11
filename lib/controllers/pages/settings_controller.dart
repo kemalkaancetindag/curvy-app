@@ -690,6 +690,7 @@ class SettingsController extends GetxController {
   }
 
   void logout() async {
+    print("SAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     await Get.find<SharedPreferenceService>().deleteUser();
     Get.offAllNamed(Routes.login);
   }

@@ -81,6 +81,7 @@ export const sendNotifications =
                     user2ID: user2Data.userID,
                     user2Image: user2Data.images[0],
                     user2Name: user2Data.name,
+                    notificationType: "ON_MATCH",
                   },
                   notification: {
                     title: "Yeni bir eşleşmeniz var",
@@ -103,6 +104,7 @@ export const sendNotifications =
                     user2ID: user2Data.userID,
                     user2Image: user2Data.images[0],
                     user2Name: user2Data.name,
+                    notificationType: "ON_MATCH",
                   },
                   notification: {
                     title: "Yeni bir eşleşmeniz var",
@@ -206,4 +208,94 @@ export const deleteUnUsedHubs = functions.firestore
         await db.collection("online_hubs").doc(hubID).delete();
       }
     });
+
+export const sendMessageNotififaction = functions.firestore
+    .document("chats/{chatID}")
+    .onUpdate(async (snapshot, context) => {
+      const beforeChatData = snapshot.before.data();
+      const afterChatData = snapshot.after.data();
+
+      if (beforeChatData.messages.length < afterChatData.messages.length) {
+        const lastMessage = afterChatData
+            .messages[afterChatData.messages.length-1];
+        const senderUser = lastMessage.senderId;
+        let userToSendNotification;
+
+        if (senderUser != afterChatData.user1) {
+          userToSendNotification = (await db.collection("users")
+              .where("userID", "==", afterChatData.user1).get()).docs[0].data();
+        } else {
+          userToSendNotification = (await db.collection("users")
+              .where("userID", "==", afterChatData.user2).get()).docs[0].data();
+        }
+
+        if (!userToSendNotification.settings.instant_notifications.on_message) {
+          return;
+        }
+
+        if (userToSendNotification.online_status) {
+          return;
+        }
+        console.log(userToSendNotification);
+
+        await admin.messaging()
+            .sendToDevice(userToSendNotification.instance_token, {
+              data: {
+                userName: userToSendNotification.name,
+                message: lastMessage.content,
+                notificationType: "ON_MESSAGE",
+              },
+              notification: {
+                title: "Yeni bir mesajınız var",
+                body: lastMessage.content,
+              },
+            });
+      }
+    });
+
+export const sendMessageLikeNotification = functions.firestore
+    .document("chats/{chatID}")
+    .onUpdate(async (snapshot, context) => {
+      const {chatID} = context.params;
+      const afterChatData = snapshot.after.data();
+      const beforeChatData = snapshot.before.data();
+      let senderId;
+      let userToSendNotification;
+
+      for (let i = 0; i < beforeChatData.messages.length; i++) {
+        const afterMessage = afterChatData.messages[i];
+        const beforeMessage = beforeChatData.messages[i];
+
+        if (afterMessage.isLiked && !beforeMessage.isLiked) {
+          senderId = afterMessage.senderId;
+          break;
+        }
+      }
+
+      if (afterChatData.user1 == senderId) {
+        userToSendNotification = (await db.collection("users")
+            .where("userID", "==", afterChatData.user1).get()).docs[0].data();
+      } else {
+        userToSendNotification = (await db.collection("users")
+            .where("userID", "==", afterChatData.user1).get()).docs[0].data();
+      }
+
+      if (!userToSendNotification.settings.instant_notifications
+          .on_message_like) {
+        return;
+      }
+
+      await admin.messaging()
+          .sendToDevice(userToSendNotification.instance_token, {
+            data: {
+              chatID: chatID,
+              notificationType: "ON_MESSAGE_LIKE",
+            },
+            notification: {
+              title: "Bir mesajınız beğenildi",
+              body: `${userToSendNotification.name} bir mesajınızı beğendi`,
+            },
+          });
+    });
+
 

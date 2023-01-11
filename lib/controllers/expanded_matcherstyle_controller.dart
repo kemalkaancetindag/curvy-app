@@ -106,9 +106,10 @@ class ExpandedMatcherStyleController extends GetxController {
               bottom: 0,
               right: controller.imagePositions[i][0],
               left: controller.imagePositions[i][1],
+              
               child: FittedBox(
                 child: Image.network(
-                    'https://firebasestorage.googleapis.com/v0/b/curvy-app-test.appspot.com/o/${Uri.encodeComponent(_user!.images![i])}?alt=media'),
+                    'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(_user!.images![i])}?alt=media'),
                 fit: BoxFit.fill,
               ));
             }
@@ -127,7 +128,7 @@ class ExpandedMatcherStyleController extends GetxController {
               left: imagePositions[i][1],
               child: FittedBox(
                 child: Image.network(
-                    'https://firebasestorage.googleapis.com/v0/b/curvy-app-test.appspot.com/o/${Uri.encodeComponent(_user!.images![i])}?alt=media'),
+                    'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(_user!.images![i])}?alt=media'),
                 fit: BoxFit.fill,
               ));
             }
@@ -167,17 +168,17 @@ class ExpandedMatcherStyleController extends GetxController {
         )));
 
     tempImageWidgets.add(Positioned(
-        bottom: -25,
-        right: 25,
+        bottom: -Dimensions.h50/2,
+        right: Dimensions.h50/2,
         child: GestureDetector(
           onTap: () {
             Get.find<MatcherController>().shrinkUser();
           },
           child: Container(
-            width: 50,
-            height: 50,
+            width: Dimensions.h50,
+            height: Dimensions.h50,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
+                borderRadius: BorderRadius.circular(Dimensions.h50/2),
                 gradient: LinearGradient(
                     colors: [Color(0xFFD51CFF), Color(0xFF6198EF)])),
             child: Center(

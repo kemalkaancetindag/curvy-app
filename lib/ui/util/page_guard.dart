@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PageGuard extends GetMiddleware {
-  final isUserLoggedIn = Get.find<SharedPreferenceService>().checkIsUserLoggedIn();
- 
+   
   @override
   RouteSettings? redirect(String? route) {
+    var isUserLoggedIn = Get.find<SharedPreferenceService>().checkIsUserLoggedIn();
     print(isUserLoggedIn);
     print(route);
     print('bilinen');

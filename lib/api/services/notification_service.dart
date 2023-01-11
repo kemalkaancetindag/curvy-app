@@ -41,9 +41,10 @@ class NotificationService extends GetxService {
       print('Message data: ${message.data}');
 
       if (message.notification != null) {
-        print('Message also contained a notification: ${message.notification}');
-
-        showDialog(
+        if(message.data["notificationType"] == "ON_MATCH") {
+            print("GİRDİ");
+            print(message.data);
+             showDialog(
             barrierDismissible: false,
             barrierColor: Colors.black.withOpacity(0.9),
             context: Get.context!,
@@ -207,6 +208,9 @@ class NotificationService extends GetxService {
                 ),
               );
             });
+        }
+
+       
       }
     });
   }
