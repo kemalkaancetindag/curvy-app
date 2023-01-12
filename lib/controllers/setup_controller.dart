@@ -20,12 +20,11 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:http_parser/http_parser.dart'; 
+import 'package:http_parser/http_parser.dart';
 
 class SetupController extends GetxController {
-
-  //SERVICES  
-  User?   _googleUser;  
+  //SERVICES
+  User? _googleUser;
   String? _userPhoneId;
   int? _loginMethod;
   String? _verificationId;
@@ -41,18 +40,16 @@ class SetupController extends GetxController {
   bool _showSexPreference = false;
   int? _showMe;
   List<int> _interests = <int>[];
-  List<String> _images = <String>["","","","","","","","",""];
+  List<String> _images = <String>["", "", "", "", "", "", "", "", ""];
   int _currentImageIndex = 0;
   String? _validationCodeString;
   String? _birthdateString;
   List<File> _imageFiles = <File>[];
 
-
   //TEMP
   List<String> _validationCode = <String>[];
   List<String> _birthdateList = <String>[];
   bool _isAfterSetup = false;
-  
 
   String? get phoneNumberAppendix => _phoneNumberAppendix;
   String? get phoneNumber => _phoneNumber;
@@ -73,14 +70,12 @@ class SetupController extends GetxController {
   String? _instanceToken;
   String? get instanceToken => _instanceToken;
 
-
   //TEMP
   List<String> get validationCode => _validationCode;
   List<String> get birtdateList => _birthdateList;
   bool get isAfterSetup => _isAfterSetup;
 
   SetupController();
-  
 
   @override
   void onInit() {
@@ -90,6 +85,7 @@ class SetupController extends GetxController {
   void setGoogleUser(User user) {
     _googleUser = user;
   }
+
   void setLoginMethod(int loginMethod) {
     _loginMethod = loginMethod;
   }
@@ -98,27 +94,26 @@ class SetupController extends GetxController {
     _phoneNumberAppendix = appendix;
   }
 
-
-  void _setVerificationId(String verificationId){
+  void _setVerificationId(String verificationId) {
     _verificationId = verificationId;
   }
 
   void addPhoneNumber(String phoneNumber) async {
-    
-    if(phoneNumber == ""){
-      Get.snackbar("Hata", "Telefon numarası boş olamaz.", backgroundColor: Color(0xFFD446F4), colorText: Colors.white);
+    if (phoneNumber == "") {
+      Get.snackbar("Hata", "Telefon numarası boş olamaz.",
+          backgroundColor: Color(0xFFD446F4), colorText: Colors.white);
       return;
     }
-    if(_phoneNumberAppendix == null){
-     Get.snackbar("Hata", "Alan kodu boş olamaz.", backgroundColor: Color(0xFFD446F4), colorText: Colors.white);
+    if (_phoneNumberAppendix == null) {
+      Get.snackbar("Hata", "Alan kodu boş olamaz.",
+          backgroundColor: Color(0xFFD446F4), colorText: Colors.white);
       return;
     }
     _phoneNumber = '$_phoneNumberAppendix$phoneNumber';
-    
+
     await Get.find<AuthService>().phoneAuth(_phoneNumber!, _setVerificationId);
 
-     Get.to(() => ValidationCodeScreen());
-    
+    Get.to(() => ValidationCodeScreen());
   }
 
   void addToValidationCode(String codePiece, int index) {
@@ -127,43 +122,42 @@ class SetupController extends GetxController {
     } else {
       _validationCode[index] = codePiece;
     }
-
-    
   }
 
   void createValidationCode() async {
-    if(_validationCode.length != 6) {
-      Get.snackbar("Hata", "Yanlış kod girdiniz.", backgroundColor: Color(0xFFD446F4), colorText: Colors.white);
+    if (_validationCode.length != 6) {
+      Get.snackbar("Hata", "Yanlış kod girdiniz.",
+          backgroundColor: Color(0xFFD446F4), colorText: Colors.white);
       return;
     }
     _validationCodeString = _validationCode.join();
 
-     var phoneCredentials = await Get.find<AuthService>().confirmPhoneCode(_validationCodeString!, _verificationId!);
-     _userPhoneId = phoneCredentials.user!.uid;
+    var phoneCredentials = await Get.find<AuthService>()
+        .confirmPhoneCode(_validationCodeString!, _verificationId!);
+    _userPhoneId = phoneCredentials.user!.uid;
 
     var usersCollection = Get.find<FirestoreService>().getCollection('users');
-    var results = await usersCollection.where('userID', isEqualTo: _userPhoneId).get();
+    var results =
+        await usersCollection.where('userID', isEqualTo: _userPhoneId).get();
 
-    if(results.docs.isNotEmpty){
+    if (results.docs.isNotEmpty) {
       Get.toNamed(Routes.index);
       return;
     }
 
-     if(_loginMethod == 0 || _loginMethod == 1 || _loginMethod == 2){
-      
+    if (_loginMethod == 0 || _loginMethod == 1 || _loginMethod == 2) {
       Get.toNamed(Routes.welcome);
       return;
-     }
-     else{
+    } else {
       Get.to(() => ValidationMailScreen());
       return;
-     }
-     
+    }
   }
 
   void addEmail(String email) {
-    if(email == ""){
-      Get.snackbar("Hata", "E-mail alanı boş olamaz.", backgroundColor: Color(0xFFD446F4), colorText: Colors.white);
+    if (email == "") {
+      Get.snackbar("Hata", "E-mail alanı boş olamaz.",
+          backgroundColor: Color(0xFFD446F4), colorText: Colors.white);
       return;
     }
     _email = email;
@@ -171,13 +165,13 @@ class SetupController extends GetxController {
   }
 
   void addName(String name) {
-     if(name == ""){
-      Get.snackbar("Hata", "İsim alanı boş olamaz.", backgroundColor: Color(0xFFD446F4), colorText: Colors.white);
+    if (name == "") {
+      Get.snackbar("Hata", "İsim alanı boş olamaz.",
+          backgroundColor: Color(0xFFD446F4), colorText: Colors.white);
       return;
     }
     _name = name;
-    
-    
+
     Get.to(() => SetupBirthdateScreen());
   }
 
@@ -190,21 +184,19 @@ class SetupController extends GetxController {
   }
 
   void createBirthdate() {
-    
-    if(_birthdateList.length != 8){
-      Get.snackbar("Hata", "Hatalı doğum tarihi girdiniz.", backgroundColor: Color(0xFFD446F4), colorText: Colors.white);
+    if (_birthdateList.length != 8) {
+      Get.snackbar("Hata", "Hatalı doğum tarihi girdiniz.",
+          backgroundColor: Color(0xFFD446F4), colorText: Colors.white);
       _birthdateList.removeWhere((element) => element == "/");
       return;
     }
     _birthdateList.insert(2, "/");
     _birthdateList.insert(5, "/");
-    
+
     _birthdateString = _birthdateList.join();
     _birthdateList.removeWhere((element) => element == "/");
-    
-    Get.to(() => SetupSexScreen());
-    
 
+    Get.to(() => SetupSexScreen());
   }
 
   void setSex(int sex) {
@@ -234,22 +226,19 @@ class SetupController extends GetxController {
     update();
   }
 
-
-  void setShowme(int preference){
-      _showMe = preference;
-      update();
-  } 
+  void setShowme(int preference) {
+    _showMe = preference;
+    update();
+  }
 
   void controlInterests(int interest) {
-    if(_interests.contains(interest)) {
+    if (_interests.contains(interest)) {
       _interests.removeWhere((element) => element == interest);
-    }
-    else {
+    } else {
       _interests.add(interest);
     }
     update();
   }
-
 
   void setCurrentImageIndex(int index) {
     _currentImageIndex = index;
@@ -257,125 +246,108 @@ class SetupController extends GetxController {
 
   Future pickImage(int imageSource, int index) async {
     ImagePicker imagePicker = ImagePicker();
-    
-    switch(imageSource){
+
+    switch (imageSource) {
       case 0:
-
-          XFile? image = await imagePicker.pickImage(source: ImageSource.camera);
-          if(image == null) return;
-          _images[index] = image.path;
-          break;
+        XFile? image = await imagePicker.pickImage(source: ImageSource.camera);
+        if (image == null) return;
+        _images[index] = image.path;
+        break;
       case 1:
-          XFile? image = await imagePicker.pickImage(source: ImageSource.gallery);
-          if(image == null) return;
-          _images[index] = image.path;
-          break;
-
+        XFile? image = await imagePicker.pickImage(source: ImageSource.gallery);
+        if (image == null) return;
+        _images[index] = image.path;
+        break;
     }
 
     Get.to(() => SetupImageScreen());
-
   }
 
-
   Future<void> createImageFiles() async {
-    
-    
-    
     _images.removeWhere((element) => element == "");
-    if(_images.length == 0){
-       Get.snackbar("Hata", "En az bir fotoğraf eklemelisiniz.", backgroundColor: Color(0xFFD446F4), colorText: Colors.white);
-       _images = <String>["","","","","","","","",""];
-       return;       
+    if (_images.length == 0) {
+      Get.snackbar("Hata", "En az bir fotoğraf eklemelisiniz.",
+          backgroundColor: Color(0xFFD446F4), colorText: Colors.white);
+      _images = <String>["", "", "", "", "", "", "", "", ""];
+      return;
     }
 
-
-    
     //_isAfterSetup = true;
-    if(_loginMethod == LoginMethod.google.value){
-      var userImages = await Get.find<FirestoreService>().uploadImages(_images, _googleUser!.uid);
+    if (_loginMethod == LoginMethod.google.value) {
+      var userImages = await Get.find<FirestoreService>()
+          .uploadImages(_images, _googleUser!.uid);
       await Geolocator.requestPermission();
-      var position = await GeolocatorPlatform.instance.getCurrentPosition(locationSettings: LocationSettings(accuracy: LocationAccuracy.high));
-      print(position.latitude);
-      print(position.longitude);
-      var jsonUser = UserModel(
-        userID: _googleUser!.uid,
-        phone_number: _phoneNumber,
-        phone_id: _userPhoneId,
-        login_method: _loginMethod,
-        sex: _sex,
-        name: _name,
-        birthdate: _birthdateString,
-        email: _googleUser!.email,
-        images: userImages,
-        show_me: _showMe,
-        show_sex: _showSex,
-        show_sexual_preference: _showSexPreference,
-        email_confirmation: true,
-        phone_confirmation: true,
-        sexual_preference: _sexPrefenrence,
-        interests: _interests,
-        location: UserLocation(latitude: position.latitude, longitude: position.longitude),
-        instance_token: _instanceToken,
-        users_who_liked_me: [],
-        users_i_liked: []
+      var position = await GeolocatorPlatform.instance.getCurrentPosition(
+          locationSettings: LocationSettings(accuracy: LocationAccuracy.high));
 
-      ).toJson();
+      var jsonUser = UserModel(
+          userID: _googleUser!.uid,
+          phone_number: _phoneNumber,
+          phone_id: _userPhoneId,
+          login_method: _loginMethod,
+          sex: _sex,
+          name: _name,
+          birthdate: _birthdateString,
+          email: _googleUser!.email,
+          images: userImages,
+          show_me: _showMe,
+          show_sex: _showSex,
+          show_sexual_preference: _showSexPreference,
+          email_confirmation: true,
+          phone_confirmation: true,
+          sexual_preference: _sexPrefenrence,
+          interests: _interests,
+          location: UserLocation(
+              latitude: position.latitude, longitude: position.longitude),
+          instance_token: _instanceToken,
+          users_who_liked_me: [],
+          users_i_liked: []).toJson();
 
       await Get.find<FirestoreService>().addToCollection(jsonUser, 'users');
       await Get.find<SharedPreferenceService>().saveUser(jsonUser);
-    }
-    else if(_loginMethod == LoginMethod.phone.value){
-      var userImages = await Get.find<FirestoreService>().uploadImages(_images, _userPhoneId!);
-      
-      
-      await Geolocator.requestPermission();   
-      var position = await GeolocatorPlatform.instance.getCurrentPosition(locationSettings: LocationSettings(accuracy: LocationAccuracy.high));
-            print(position.latitude);
-      print(position.longitude);
-        var jsonUser = UserModel(
-        userID: _userPhoneId,
-        phone_number: _phoneNumber,
-        phone_id: null,
-        login_method: _loginMethod,
-        sex: _sex,
-        name: _name,
-        birthdate: _birthdateString,
-        email: _email,
-        images: userImages,
-        show_me: _showMe,
-        show_sex: _showSex,
-        show_sexual_preference: _showSexPreference,
-        email_confirmation: false,
-        phone_confirmation: true,
-        sexual_preference: _sexPrefenrence,
-        interests: _interests,
-        location: UserLocation(latitude: position.latitude, longitude: position.longitude),
-        instance_token: _instanceToken,
-        users_who_liked_me: [],
-        users_i_liked: []
-      ).toJson();
+    } else if (_loginMethod == LoginMethod.phone.value) {
+      var userImages = await Get.find<FirestoreService>()
+          .uploadImages(_images, _userPhoneId!);
 
-      var userDocID = await Get.find<FirestoreService>().addToCollection(jsonUser, 'users');
+      await Geolocator.requestPermission();
+      var position = await GeolocatorPlatform.instance.getCurrentPosition(
+          locationSettings: LocationSettings(accuracy: LocationAccuracy.high));
+
+      var jsonUser = UserModel(
+          userID: _userPhoneId,
+          phone_number: _phoneNumber,
+          phone_id: null,
+          login_method: _loginMethod,
+          sex: _sex,
+          name: _name,
+          birthdate: _birthdateString,
+          email: _email,
+          images: userImages,
+          show_me: _showMe,
+          show_sex: _showSex,
+          show_sexual_preference: _showSexPreference,
+          email_confirmation: false,
+          phone_confirmation: true,
+          sexual_preference: _sexPrefenrence,
+          interests: _interests,
+          location: UserLocation(
+              latitude: position.latitude, longitude: position.longitude),
+          instance_token: _instanceToken,
+          users_who_liked_me: [],
+          users_i_liked: []).toJson();
+
+      var userDocID =
+          await Get.find<FirestoreService>().addToCollection(jsonUser, 'users');
 
       await Get.find<SharedPreferenceService>().saveUser(jsonUser);
 
       await Get.find<SharedPreferenceService>().setLastUserID(userDocID);
-
     }
 
-
-    
-   
-    
-    
-
-    
-    
     Get.offAllNamed(Routes.index);
   }
 
-  void setAfterSetup( bool isAfterSetup) {
+  void setAfterSetup(bool isAfterSetup) {
     _isAfterSetup = isAfterSetup;
   }
 

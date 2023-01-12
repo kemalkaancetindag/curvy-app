@@ -1,4 +1,7 @@
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/matcher_controller.dart';
+import 'package:curvy_app/controllers/pages/matcher_settings_controller.dart';
+import 'package:curvy_app/enums/showme_enum.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -8,9 +11,187 @@ import 'dart:math' as math;
 
 class MatcherSettingsScreen extends StatelessWidget {
   const MatcherSettingsScreen({super.key});
+  
 
   @override
   Widget build(BuildContext context) {
+
+    Get.put(MatcherSettingsController(firestoreService: Get.find()));
+
+    showShowmeDialog() {
+      showDialog(
+        barrierDismissible: false,
+        context: context, 
+        builder: (context) {
+            return Dialog(
+              
+              backgroundColor: Colors.transparent,
+              child: GetBuilder<MatcherSettingsController>(
+                builder: (controller) {
+                  return Container(
+                width: Dimensions.w300,
+                height: Dimensions.h300,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimensions.h300/10),
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xFFD51CFF),
+                      Color(0xFF6198EF)
+                    ]
+                  )
+                ),
+                child: Column(
+                  children: [
+                    Container(    
+                      margin: EdgeInsets.only(top: Dimensions.h16),                  
+                      child: Text(
+                        "Bana Göster",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: Dimensions.h22,
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: (){
+                        controller.setShowMe(Showme.women.value);
+                      },
+                      child:    Container(
+                      margin: EdgeInsets.only(top: Dimensions.h22),
+                      width: Dimensions.w111,
+                      height: Dimensions.h300/10,                      
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(Dimensions.h16),
+                        gradient: controller.showmePreference == Showme.women.value ?  LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Colors.white,
+                                Colors.transparent,
+                                Colors.transparent,
+                                Colors.white
+                              ]) : null
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Kadın",  
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: Dimensions.h16,
+                            fontWeight: FontWeight.bold
+                          ),                        
+                        ),
+                      ),
+                    ),
+                    ),
+                    GestureDetector(
+                      onTap: (){
+                        controller.setShowMe(Showme.men.value);
+                      },
+                      child:    Container(
+                      margin: EdgeInsets.only(top: Dimensions.h16),
+                      width: Dimensions.w111,
+                      height: Dimensions.h300/10,                      
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(Dimensions.h16),
+                        gradient: controller.showmePreference == Showme.men.value ? LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Colors.white,
+                                Colors.transparent,
+                                Colors.transparent,
+                                Colors.white
+                              ]) : null
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Erkek",  
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: Dimensions.h16,
+                            fontWeight: FontWeight.bold
+                          ),                        
+                        ),
+                      ),
+                    ),
+                    ),
+
+                    GestureDetector(
+                      onTap: (){
+                        controller.setShowMe(Showme.all.value);
+                      },
+                      child:        Container(
+                      margin: EdgeInsets.only(top: Dimensions.h16),
+                      width: Dimensions.w111,
+                      height: Dimensions.h300/10,                      
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(Dimensions.h16),
+                        gradient: controller.showmePreference == Showme.all.value ? LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Colors.white,
+                                Colors.transparent,
+                                Colors.transparent,
+                                Colors.white
+                              ]) : null
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Hepsi",  
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: Dimensions.h16,
+                            fontWeight: FontWeight.bold
+                          ),                        
+                        ),
+                      ),
+                    ),
+                    ),
+                 
+                  
+              
+                    Container(
+                      margin: EdgeInsets.only(top: Dimensions.h40),
+                      width: double.maxFinite,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            onTap: (){
+                              Get.back();
+                            },
+                            child:  Container(
+                            margin: EdgeInsets.only(right: Dimensions.h8),
+                            child: Image.asset("assets/images/settings_modal_cancel.png"),
+                          ),
+                          ),
+                          GestureDetector(
+                            onTap: (){
+                              controller.updateShowme();
+                            },
+                            child: Container(
+                            margin: EdgeInsets.only(left: Dimensions.h8),
+                            child: Image.asset("assets/images/settings_modal_check.png"),
+                          ),
+                          )
+                         
+                          
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              );
+                },
+              ) 
+            );
+        }
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -38,7 +219,9 @@ class MatcherSettingsScreen extends StatelessWidget {
                 overlayColor: MaterialStateColor.resolveWith(
                     (states) => Colors.black.withOpacity(0.4)),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Get.find<MatcherSettingsController>().updateMatcherSettings();
+              },
               child: Center(
                 child: Text(
                   "Tamam",
@@ -50,7 +233,9 @@ class MatcherSettingsScreen extends StatelessWidget {
               ))
         ],
       ),
-      body: Container(
+      body: GetBuilder<MatcherSettingsController>(
+        builder: (controller) {
+          return controller.isEveryThingSet ? Container(
         width: double.maxFinite,
         height: double.maxFinite,
         color: Colors.white,
@@ -163,11 +348,13 @@ class MatcherSettingsScreen extends StatelessWidget {
                               
                             ),
                         ),
-                        child: Slider(
+                        child: Slider(    
                           min: 0,
-                          max: 10,
-                          value: 2,
-                          onChanged: (double value) {},
+                          max: 100,                     
+                          value: controller.distancePreference!,
+                          onChanged: (double value) {
+                            controller.setDistancePreference(value);
+                          },
                         )),
                   ),
                   Container(
@@ -183,9 +370,9 @@ class MatcherSettingsScreen extends StatelessWidget {
                           ),
                         ),
                         CupertinoSwitch(
-                          value: true, 
+                          value: controller.distanceOnlyThisInterval!, 
                           onChanged: (value){
-
+                            controller.setDistanceOnlyThisInterval(value);
                           }
                         )
                       ],
@@ -200,15 +387,30 @@ class MatcherSettingsScreen extends StatelessWidget {
                 child: DecoratedBox(
                   decoration: BoxDecoration(color: Color(0xFFC5C5C7)),
                 )),
-
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: Dimensions.h100/10),
-              margin: EdgeInsets.symmetric(vertical: Dimensions.h16),
+            GestureDetector(
+              onTap: (){
+                showShowmeDialog();
+              },
+              onPanDown: (details){
+                controller.setIsTapped(true);
+              },              
+              onPanEnd:(details) {
+                controller.setIsTapped(false);
+              } ,
+              onPanCancel: (){
+                controller.setIsTapped(false);
+              },
+              child:  Container(                     
+                height: Dimensions.h45,
+                width: double.maxFinite,                      
+              color: controller.isTapped ? Colors.black.withOpacity(0.4) : null,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
+                  Container(
+                    margin: EdgeInsets.only(left: Dimensions.h100/10),
+                    child:  Text(
                     "Bana Göster",
                     style: TextStyle(
                       color: Colors.black,
@@ -216,6 +418,8 @@ class MatcherSettingsScreen extends StatelessWidget {
                       fontWeight: FontWeight.bold
                     ),
                   ),
+                  ),
+                 
                   Row(
                    children: [
                     Text(
@@ -236,6 +440,8 @@ class MatcherSettingsScreen extends StatelessWidget {
                 ],
               ),
             ),
+            ),
+           
              SizedBox(
                 height: 1,
                 width: Dimensions.w35 * 10,
@@ -256,14 +462,14 @@ class MatcherSettingsScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Mesafe Tercihi",
+                          "Yaş Tercihi",
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: Dimensions.h16,
                               fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          "22-90+",
+                          "${(controller.minAgePreference!)}-${(controller.maxAgePreference!)}+",
                           style: TextStyle(
                              color: Color(0xFF7B8491),
                               fontSize: Dimensions.h16,
@@ -289,18 +495,17 @@ class MatcherSettingsScreen extends StatelessWidget {
                             ),
                         ),
                         child: RangeSlider(
-
-                          values: RangeValues(0.2,0.5),
+                          min: 0,
+                          max: 1,
+                          values: RangeValues(controller.minAgePreference!/100,controller.maxAgePreference!/100),                          
                           onChanged: (value) {
                             
+                              controller.setAgePreference(value.start, value.end);       
+                             
                           },
+                        
                           
-                          onChangeEnd: (value) {
-                            
-                          },
-                          onChangeStart: (value) {
-                            
-                          },
+                       
                         )),
                   ),
                   Container(
@@ -316,9 +521,9 @@ class MatcherSettingsScreen extends StatelessWidget {
                           ),
                         ),
                         CupertinoSwitch(
-                          value: true, 
+                          value: controller.ageOnlyThisInterval!, 
                           onChanged: (value){
-
+                            controller.setAgeOnlyThisInterval(value);
                           }
                         )
                       ],
@@ -351,9 +556,9 @@ class MatcherSettingsScreen extends StatelessWidget {
                       ),
 
                       CupertinoSwitch(
-                        value: true, 
+                        value: controller.globalPreference!, 
                         onChanged: (value){
-                          
+                          controller.setGlobal(value);
                         }
                       )
                     ],
@@ -381,7 +586,7 @@ class MatcherSettingsScreen extends StatelessWidget {
                       ),
 
                       CupertinoSwitch(
-                        value: true, 
+                        value: controller.onlyConfirmedProfiles!, 
                         onChanged: (value){
                           
                         }
@@ -397,7 +602,9 @@ class MatcherSettingsScreen extends StatelessWidget {
                 )),
           ],
         ),
-      ),
+      ) : Container();
+        },
+      ) 
     );
   }
 }

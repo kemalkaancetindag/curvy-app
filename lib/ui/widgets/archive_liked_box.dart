@@ -20,7 +20,7 @@ class ArchiveLikedBox extends StatelessWidget {
       init: Get.find<UserOnlineController>(tag: userID),
       global: false,
       builder: (controller) { 
-      return Container(
+      return controller.user != null ? Container(
         width: Dimensions.w111,
         height: Dimensions.h148,
         margin: EdgeInsets.only(left: Dimensions.w16/2, right: Dimensions.w16/2, top: Dimensions.w11),
@@ -113,6 +113,14 @@ class ArchiveLikedBox extends StatelessWidget {
                   ),
                 )),
           ],
+        ),
+      ) :Container(
+        width: double.maxFinite,
+        height: double.maxFinite,
+        child: Center(
+          child: CircularProgressIndicator(
+            color: Color(0xFFD51CFF),
+          ),
         ),
       );
     });

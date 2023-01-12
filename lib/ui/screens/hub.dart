@@ -28,9 +28,6 @@ class HubScreen  extends StatelessWidget {
       ) ,
     ), 
       onWillPop: () async {
-        print("sa");
-        print("çalıştı");
-        
         await Get.find<OnlineHubController>().leftHub();
         
         

@@ -29,7 +29,7 @@ class ExpandedMatcherStyleController extends GetxController {
       imagePositions[imageCurrentIndex][1] = 0;
       imagePositions[imageBeforeIndex!][0] = -Get.width;
       imagePositions[imageBeforeIndex!][1] = Get.width;    
-      print(imagePositions);  
+      
       update();
     }
   }
@@ -54,7 +54,7 @@ class ExpandedMatcherStyleController extends GetxController {
       next();
     }
     else if(globalX < Get.width/2){
-      print("sa");
+      
       before();
     }
   }

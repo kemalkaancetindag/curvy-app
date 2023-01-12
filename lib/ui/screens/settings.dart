@@ -21,7 +21,8 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(SettingsController(userService: Get.find(), firestoreService: Get.find()));
+    Get.put(SettingsController(
+        userService: Get.find(), firestoreService: Get.find()));
     void showBanPeopleDialog() {
       showDialog(
           context: context,
@@ -117,7 +118,7 @@ class SettingsScreen extends StatelessWidget {
 
     void selectLanguageDialog() {
       showDialog(
-        barrierDismissible: false,
+          barrierDismissible: false,
           context: context,
           builder: (context) {
             return GetBuilder<SettingsController>(builder: (controller) {
@@ -522,29 +523,27 @@ class SettingsScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   GestureDetector(
-                                    onTap: (){
+                                    onTap: () {
                                       Get.back();
                                     },
-                                    child:    Container(
-                                    child: Center(
-                                      child: Image.asset(
-                                          "assets/images/settings_modal_cancel.png"),
+                                    child: Container(
+                                      child: Center(
+                                        child: Image.asset(
+                                            "assets/images/settings_modal_cancel.png"),
+                                      ),
                                     ),
-                                  ),
                                   ),
                                   GestureDetector(
-                                    onTap: (){
+                                    onTap: () {
                                       controller.updateLanguage();
                                     },
-                                    child:  Container(
-                                    child: Center(
-                                      child: Image.asset(
-                                          "assets/images/settings_modal_check.png"),
+                                    child: Container(
+                                      child: Center(
+                                        child: Image.asset(
+                                            "assets/images/settings_modal_check.png"),
+                                      ),
                                     ),
-                                  ),
                                   )
-                               
-                                 
                                 ],
                               ))
                         ],
@@ -557,7 +556,7 @@ class SettingsScreen extends StatelessWidget {
 
     void changeUsernameDialog() {
       showDialog(
-        barrierDismissible: false,
+          barrierDismissible: false,
           context: context,
           builder: (context) {
             return GetBuilder<SettingsController>(builder: (controller) {
@@ -691,30 +690,27 @@ class SettingsScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             GestureDetector(
-                              onTap: (){
+                              onTap: () {
                                 Get.back();
                               },
-                              child:  Container(
-                              child: Center(
-                                child: Image.asset(
-                                    "assets/images/settings_modal_cancel.png"),
+                              child: Container(
+                                child: Center(
+                                  child: Image.asset(
+                                      "assets/images/settings_modal_cancel.png"),
+                                ),
                               ),
-                            ) ,
                             ),
                             GestureDetector(
-                              onTap: (){
+                              onTap: () {
                                 controller.updateUsername();
                               },
-                              child:   Container(
-                              child: Center(
-                                child: Image.asset(
-                                    "assets/images/settings_modal_check.png"),
+                              child: Container(
+                                child: Center(
+                                  child: Image.asset(
+                                      "assets/images/settings_modal_check.png"),
+                                ),
                               ),
-                            ),
                             )
-
-                          
-                          
                           ],
                         ),
                       )
@@ -728,7 +724,7 @@ class SettingsScreen extends StatelessWidget {
 
     void showInstantNotificationsModal() {
       showDialog(
-        barrierDismissible: false,
+          barrierDismissible: false,
           context: context,
           builder: (context) {
             return GetBuilder<SettingsController>(builder: (controller) {
@@ -1033,29 +1029,27 @@ class SettingsScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 GestureDetector(
-                                  onTap: (){
+                                  onTap: () {
                                     Get.back();
                                   },
-                                  child:   Container(
-                                  child: Center(
-                                    child: Image.asset(
-                                        "assets/images/settings_modal_cancel.png"),
+                                  child: Container(
+                                    child: Center(
+                                      child: Image.asset(
+                                          "assets/images/settings_modal_cancel.png"),
+                                    ),
                                   ),
-                                ),
                                 ),
                                 GestureDetector(
-                                  onTap: (){
+                                  onTap: () {
                                     controller.updateInstantNotifications();
                                   },
-                                  child:   Container(
-                                  child: Center(
-                                    child: Image.asset(
-                                        "assets/images/settings_modal_check.png"),
+                                  child: Container(
+                                    child: Center(
+                                      child: Image.asset(
+                                          "assets/images/settings_modal_check.png"),
+                                    ),
                                   ),
-                                ),
                                 )
-                              
-                              
                               ],
                             ),
                           )
@@ -1069,7 +1063,7 @@ class SettingsScreen extends StatelessWidget {
 
     void showEmailNotificationsModal() {
       showDialog(
-        barrierDismissible: false,
+          barrierDismissible: false,
           context: context,
           builder: (context) {
             return GetBuilder<SettingsController>(builder: (controller) {
@@ -1312,27 +1306,25 @@ class SettingsScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 GestureDetector(
-                                  onTap: (){
+                                  onTap: () {
                                     Get.back();
                                   },
-                                  child:    Container(
-                                    child: Center(
-                                  child: Image.asset(
-                                      "assets/images/settings_modal_cancel.png"),
-                                )),
+                                  child: Container(
+                                      child: Center(
+                                    child: Image.asset(
+                                        "assets/images/settings_modal_cancel.png"),
+                                  )),
                                 ),
                                 GestureDetector(
-                                  onTap: (){
+                                  onTap: () {
                                     controller.updateEmailNotifications();
                                   },
-                                  child:   Container(
-                                    child: Center(
-                                  child: Image.asset(
-                                      "assets/images/settings_modal_check.png"),
-                                )),
+                                  child: Container(
+                                      child: Center(
+                                    child: Image.asset(
+                                        "assets/images/settings_modal_check.png"),
+                                  )),
                                 )
-                             
-                              
                               ],
                             ),
                           )
@@ -1346,7 +1338,7 @@ class SettingsScreen extends StatelessWidget {
 
     void showPersonalizedMarketingPreferenecesModal() {
       showDialog(
-        barrierDismissible: false,
+          barrierDismissible: false,
           context: context,
           builder: (context) {
             return GetBuilder<SettingsController>(
@@ -1454,29 +1446,28 @@ class SettingsScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   GestureDetector(
-                                    onTap: (){
+                                    onTap: () {
                                       Get.back();
                                     },
-                                    child:   Container(
-                                    child: Center(
-                                      child: Image.asset(
-                                          "assets/images/settings_modal_cancel.png"),
+                                    child: Container(
+                                      child: Center(
+                                        child: Image.asset(
+                                            "assets/images/settings_modal_cancel.png"),
+                                      ),
                                     ),
-                                  ),
                                   ),
                                   GestureDetector(
-                                    onTap: (){
-                                      controller.updatePrivacyPersonalizedMarketing();
+                                    onTap: () {
+                                      controller
+                                          .updatePrivacyPersonalizedMarketing();
                                     },
-                                    child:  Container(
-                                    child: Center(
-                                      child: Image.asset(
-                                          "assets/images/settings_modal_check.png"),
+                                    child: Container(
+                                      child: Center(
+                                        child: Image.asset(
+                                            "assets/images/settings_modal_check.png"),
+                                      ),
                                     ),
-                                  ),
                                   )
-                                
-                                 
                                 ],
                               ),
                             )
@@ -1491,7 +1482,7 @@ class SettingsScreen extends StatelessWidget {
 
     void showPersonalizedAdPreferenecesModal() {
       showDialog(
-        barrierDismissible: false,
+          barrierDismissible: false,
           context: context,
           builder: (context) {
             return GetBuilder<SettingsController>(builder: (controller) {
@@ -1546,10 +1537,10 @@ class SettingsScreen extends StatelessWidget {
                             ),
                           ),
                           SettingsModalSwitchRow(
-                              title: "Curvy Direct Ads",
-                              text: "Ayrıntıları Görüntüle",
-                              switchState: controller.curvyDirectAds ?? true,
-                              switchOnChange: controller.setCurvyDirectAds,
+                            title: "Curvy Direct Ads",
+                            text: "Ayrıntıları Görüntüle",
+                            switchState: controller.curvyDirectAds ?? true,
+                            switchOnChange: controller.setCurvyDirectAds,
                           ),
                           SizedBox(
                             height: 2,
@@ -1559,23 +1550,10 @@ class SettingsScreen extends StatelessWidget {
                             ),
                           ),
                           SettingsModalSwitchRow(
-                              title: "Google Ads",
-                              text: "Ayrıntıları Görüntüle",
-                              switchState: controller.googleAds ?? true,
-                              switchOnChange: controller.setGoogleAds,
-                          ),
-                          SizedBox(
-                            height: 2,
-                            width: Dimensions.w270,
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(color: Colors.white),
-                            ),
-                          ),
-                              SettingsModalSwitchRow(
-                              title: "Curvy Promotions",
-                              text: "Ayrıntıları Görüntüle",
-                              switchState: controller.curvyPromotions ?? true,
-                              switchOnChange: controller.setCurvyPromotions,
+                            title: "Google Ads",
+                            text: "Ayrıntıları Görüntüle",
+                            switchState: controller.googleAds ?? true,
+                            switchOnChange: controller.setGoogleAds,
                           ),
                           SizedBox(
                             height: 2,
@@ -1585,10 +1563,23 @@ class SettingsScreen extends StatelessWidget {
                             ),
                           ),
                           SettingsModalSwitchRow(
-                              title: "Facebook Ads",
-                              text: "Ayrıntıları Görüntüle",
-                              switchState: controller.facebookAds ?? true,
-                              switchOnChange: controller.setFacebookAds,
+                            title: "Curvy Promotions",
+                            text: "Ayrıntıları Görüntüle",
+                            switchState: controller.curvyPromotions ?? true,
+                            switchOnChange: controller.setCurvyPromotions,
+                          ),
+                          SizedBox(
+                            height: 2,
+                            width: Dimensions.w270,
+                            child: DecoratedBox(
+                              decoration: BoxDecoration(color: Colors.white),
+                            ),
+                          ),
+                          SettingsModalSwitchRow(
+                            title: "Facebook Ads",
+                            text: "Ayrıntıları Görüntüle",
+                            switchState: controller.facebookAds ?? true,
+                            switchOnChange: controller.setFacebookAds,
                           ),
                           SizedBox(
                             height: 2,
@@ -1598,13 +1589,14 @@ class SettingsScreen extends StatelessWidget {
                             ),
                           ),
                           SettingsModalSwitchColumn(
-                              title: "Yeni Reklam İzinleri’ne izin ver",
-                              text:
-                                  "Yeni araçlar ekleyebiliriz. Bu ayar, bu yeni araçların varsayılan olarak etkin mi yoksa devre dışı mı olacağını belirler.",
-                              isSwitch: true,
-                              switchState: controller.newAdvertisingPermissions,
-                              switchOnChanged: controller.setNewAdvertisingPermissions,
-                            ),
+                            title: "Yeni Reklam İzinleri’ne izin ver",
+                            text:
+                                "Yeni araçlar ekleyebiliriz. Bu ayar, bu yeni araçların varsayılan olarak etkin mi yoksa devre dışı mı olacağını belirler.",
+                            isSwitch: true,
+                            switchState: controller.newAdvertisingPermissions,
+                            switchOnChanged:
+                                controller.setNewAdvertisingPermissions,
+                          ),
                           SizedBox(
                             height: 2,
                             width: Dimensions.w270,
@@ -1621,29 +1613,28 @@ class SettingsScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 GestureDetector(
-                                  onTap: (){
+                                  onTap: () {
                                     Get.back();
                                   },
-                                  child:   Container(
-                                  child: Center(
-                                    child: Image.asset(
-                                        "assets/images/settings_modal_cancel.png"),
+                                  child: Container(
+                                    child: Center(
+                                      child: Image.asset(
+                                          "assets/images/settings_modal_cancel.png"),
+                                    ),
                                   ),
-                                ),
                                 ),
                                 GestureDetector(
-                                  onTap: (){
-                                    controller.updatePrivacyPersonalizedAdvertising();
+                                  onTap: () {
+                                    controller
+                                        .updatePrivacyPersonalizedAdvertising();
                                   },
-                                  child:   Container(
-                                  child: Center(
-                                    child: Image.asset(
-                                        "assets/images/settings_modal_check.png"),
+                                  child: Container(
+                                    child: Center(
+                                      child: Image.asset(
+                                          "assets/images/settings_modal_check.png"),
+                                    ),
                                   ),
-                                ),
                                 )
-                              
-                              
                               ],
                             ),
                           )
@@ -1657,7 +1648,7 @@ class SettingsScreen extends StatelessWidget {
 
     void showPrivacyPreferencesModal() {
       showDialog(
-        barrierDismissible: false,
+          barrierDismissible: false,
           context: context,
           builder: (context) {
             return GetBuilder<SettingsController>(builder: (controller) {
@@ -1846,27 +1837,25 @@ class SettingsScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   GestureDetector(
-                                    onTap: (){
+                                    onTap: () {
                                       Get.back();
                                     },
-                                    child:  Container(
-                                    child: Center(
-                                        child: Image.asset(
-                                            "assets/images/settings_modal_cancel.png")),
-                                  ),
+                                    child: Container(
+                                      child: Center(
+                                          child: Image.asset(
+                                              "assets/images/settings_modal_cancel.png")),
+                                    ),
                                   ),
                                   GestureDetector(
-                                    onTap: (){
+                                    onTap: () {
                                       controller.updatePrivacyPreferences();
                                     },
-                                    child:     Container(
-                                    child: Center(
-                                        child: Image.asset(
-                                            "assets/images/settings_modal_check.png")),
-                                  ),
+                                    child: Container(
+                                      child: Center(
+                                          child: Image.asset(
+                                              "assets/images/settings_modal_check.png")),
+                                    ),
                                   )
-                                
-                              
                                 ]),
                           )
                         ],
@@ -1878,7 +1867,6 @@ class SettingsScreen extends StatelessWidget {
     }
 
     return GetBuilder<SettingsController>(builder: (settingsPageController) {
-      print(settingsPageController.user);
       return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -1907,321 +1895,120 @@ class SettingsScreen extends StatelessWidget {
           centerTitle: true,
           elevation: 0,
         ),
-        body: settingsPageController.user != null ? Container(
-            width: double.maxFinite,
-            height: double.maxFinite,
-            color: Color(0xFFF7F7F7),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SettingsBoostButton(
-                      background: LinearGradient(
-                          transform: GradientRotation(283),
-                          colors: [
-                            Colors.black,
-                            Color(0xFF2E2B2B),
-                            Colors.black,
-                          ],
-                          begin: Alignment(-1, 0),
-                          end: Alignment(1, 0)),
-                      icon: "assets/images/platinium_logo.png",
-                      text: "PLATINUM"),
-                  SettingsBoostButton(
-                      background: LinearGradient(colors: [
-                        Color(0xFFD51CFF),
-                        Color(0xFF6198EF),
-                      ], begin: Alignment(-1, 0), end: Alignment(1, 0)),
-                      icon: "assets/images/platinium_logo.png",
-                      text: "PLUS"),
-                  SettingsBoostButton(
-                      background: LinearGradient(colors: [
-                        Color(0xFFFF0000),
-                        Color(0xFF0047FF),
-                      ], begin: Alignment(-1, 0), end: Alignment(1, 0)),
-                      icon: "assets/images/turbo_icon.png",
-                      text: "TURBO"),
-                  SettingsBoostButton(
-                      background: LinearGradient(colors: [
-                        Color(0xFF0095EC),
-                        Color(0xFF47C1B3),
-                      ], begin: Alignment(-1, 0), end: Alignment(1, 0)),
-                      icon: "assets/images/like_icon.png",
-                      text: "LIKE"),
-                  SettingsBoostButton(
-                      background: LinearGradient(colors: [
-                        Color(0xFFEEB137),
-                        Color(0xFFD99000),
-                      ], begin: Alignment(-1, 0), end: Alignment(1, 0)),
-                      icon: "assets/images/chip_icon.png",
-                      text: "CHIP"),
-                  Container(
-                      width: double.maxFinite,
-                      margin: EdgeInsets.only(top: Dimensions.h27),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SettingsHeaderText(text: "HESAP AYARLARI"),
-                          Container(
-                            width: double.maxFinite,
-                            height: Dimensions.h165,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border(
-                                    bottom: BorderSide(
-                                        color: Color(0xFFC5C5C7), width: 1),
-                                    top: BorderSide(
-                                        color: Color(0xFFC5C5C7), width: 1))),
-                            child: Column(
-                              children: [
-                                Expanded(
-                                    child: TextButton(
-                                        style: TextButton.styleFrom(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.zero),
-                                          padding: EdgeInsets.zero,
-                                          primary:
-                                              Colors.black.withOpacity(0.2),
-                                        ),
-                                        onPressed: () {},
-                                        child: Container(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Container(
-                                                  padding: EdgeInsets.only(
-                                                      left: Dimensions.w11),
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Telefon Numarası",
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  )),
-                                              Container(
-                                                  padding: EdgeInsets.only(
-                                                      right: Dimensions.w11),
-                                                  child: Row(
-                                                    children: [
-                                                      Text(
-                                                        settingsPageController
-                                                                    .user!
-                                                                    .phone_number !=
-                                                                null
-                                                            ? settingsPageController
-                                                                .user!
-                                                                .phone_number!
-                                                            : "",
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                      Icon(Icons
-                                                          .chevron_right_rounded)
-                                                    ],
-                                                  ))
-                                            ],
-                                          ),
-                                        ))),
-                                SizedBox(
-                                  width: 340,
-                                  height: 1,
-                                  child: DecoratedBox(
-                                    decoration:
-                                        BoxDecoration(color: Color(0xFFC5C5C7)),
-                                  ),
-                                ),
-                                Expanded(
-                                    child: TextButton(
-                                        style: TextButton.styleFrom(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.zero),
-                                          padding: EdgeInsets.zero,
-                                          primary:
-                                              Colors.black.withOpacity(0.2),
-                                        ),
-                                        onPressed: () {},
-                                        child: Container(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Container(
-                                                  padding: EdgeInsets.only(
-                                                      left: Dimensions.w11),
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Bağlantılı Hesaplar",
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  )),
-                                              Container(
-                                                  padding: EdgeInsets.only(
-                                                      right: Dimensions.w11),
-                                                  child: Row(
-                                                    children: [
-                                                      Icon(Icons
-                                                          .chevron_right_rounded)
-                                                    ],
-                                                  ))
-                                            ],
-                                          ),
-                                        ))),
-                                SizedBox(
-                                  width: 340,
-                                  height: 1,
-                                  child: DecoratedBox(
-                                    decoration:
-                                        BoxDecoration(color: Color(0xFFC5C5C7)),
-                                  ),
-                                ),
-                                Expanded(
-                                    child: TextButton(
-                                        style: TextButton.styleFrom(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.zero),
-                                          padding: EdgeInsets.zero,
-                                          primary:
-                                              Colors.black.withOpacity(0.2),
-                                        ),
-                                        onPressed: () {},
-                                        child: Container(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Container(
-                                                  padding: EdgeInsets.only(
-                                                      left: Dimensions.w11),
-                                                  child: Center(
-                                                    child: Text(
-                                                      "E-posta",
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  )),
-                                              Container(
-                                                  padding: EdgeInsets.only(
-                                                      right: Dimensions.w11),
-                                                  child: Row(
-                                                    children: [
-                                                      Text(
-                                                        settingsPageController
-                                                                    .user!
-                                                                    .email !=
-                                                                null
-                                                            ? settingsPageController
-                                                                .user!.email!
-                                                            : "",
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                      Icon(Icons
-                                                          .chevron_right_rounded)
-                                                    ],
-                                                  ))
-                                            ],
-                                          ),
-                                        ))),
+        body: settingsPageController.user != null
+            ? Container(
+                width: double.maxFinite,
+                height: double.maxFinite,
+                color: Color(0xFFF7F7F7),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SettingsBoostButton(
+                          background: LinearGradient(
+                              transform: GradientRotation(283),
+                              colors: [
+                                Colors.black,
+                                Color(0xFF2E2B2B),
+                                Colors.black,
                               ],
-                            ),
-                          ),
-                          Container(
-                              margin: EdgeInsets.only(
-                                  top: Dimensions.h100 / 10,
-                                  bottom: Dimensions.h100 / 4),
-                              width: double.maxFinite,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: settingsPageController
-                                                .user!.email_confirmation !=
-                                            null &&
-                                        !settingsPageController
-                                            .user!.email_confirmation!
-                                    ? [
-                                        Container(
-                                          width: 340,
-                                          child: Text(
-                                            "Hesabının güvence altına alınmasına yardımcı olmak için E-postanı doğrula.",
-                                            style: TextStyle(
-                                                fontSize: Dimensions.h14,
-                                                color: Color(0xFFFF0000)),
-                                          ),
-                                        )
-                                      ]
-                                    : [],
-                              )),
-                          SettingsHeaderText(text: "KEŞFET"),
-                          Container(
-                            height: Dimensions.h40 * 12,
-                            margin: EdgeInsets.only(top: Dimensions.h7),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border(
-                                    top: BorderSide(
-                                        width: 1, color: Color(0xFFC5C5C7)),
-                                    bottom: BorderSide(
-                                        width: 1, color: Color(0xFFC5C5C7)))),
-                            child: Column(
-                              children: [
-                                Expanded(
-                                    child: TextButton(
-                                        style: TextButton.styleFrom(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.zero),
-                                          padding: EdgeInsets.zero,
-                                          primary:
-                                              Colors.black.withOpacity(0.2),
-                                        ),
-                                        onPressed: () {},
-                                        child: Container(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.end,
+                              begin: Alignment(-1, 0),
+                              end: Alignment(1, 0)),
+                          icon: "assets/images/platinium_logo.png",
+                          text: "PLATINUM"),
+                      SettingsBoostButton(
+                          background: LinearGradient(colors: [
+                            Color(0xFFD51CFF),
+                            Color(0xFF6198EF),
+                          ], begin: Alignment(-1, 0), end: Alignment(1, 0)),
+                          icon: "assets/images/platinium_logo.png",
+                          text: "PLUS"),
+                      SettingsBoostButton(
+                          background: LinearGradient(colors: [
+                            Color(0xFFFF0000),
+                            Color(0xFF0047FF),
+                          ], begin: Alignment(-1, 0), end: Alignment(1, 0)),
+                          icon: "assets/images/turbo_icon.png",
+                          text: "TURBO"),
+                      SettingsBoostButton(
+                          background: LinearGradient(colors: [
+                            Color(0xFF0095EC),
+                            Color(0xFF47C1B3),
+                          ], begin: Alignment(-1, 0), end: Alignment(1, 0)),
+                          icon: "assets/images/like_icon.png",
+                          text: "LIKE"),
+                      SettingsBoostButton(
+                          background: LinearGradient(colors: [
+                            Color(0xFFEEB137),
+                            Color(0xFFD99000),
+                          ], begin: Alignment(-1, 0), end: Alignment(1, 0)),
+                          icon: "assets/images/chip_icon.png",
+                          text: "CHIP"),
+                      Container(
+                          width: double.maxFinite,
+                          margin: EdgeInsets.only(top: Dimensions.h27),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SettingsHeaderText(text: "HESAP AYARLARI"),
+                              Container(
+                                width: double.maxFinite,
+                                height: Dimensions.h165,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border(
+                                        bottom: BorderSide(
+                                            color: Color(0xFFC5C5C7), width: 1),
+                                        top: BorderSide(
+                                            color: Color(0xFFC5C5C7),
+                                            width: 1))),
+                                child: Column(
+                                  children: [
+                                    Expanded(
+                                        child: TextButton(
+                                            style: TextButton.styleFrom(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.zero),
+                                              padding: EdgeInsets.zero,
+                                              primary:
+                                                  Colors.black.withOpacity(0.2),
+                                            ),
+                                            onPressed: () {},
+                                            child: Container(
+                                              child: Row(
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment.center,
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: [
                                                   Container(
-                                                    padding: EdgeInsets.only(
-                                                        left: Dimensions.w17),
-                                                    child: Text(
-                                                      "Konum",
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Container(
-                                                  padding: EdgeInsets.only(
-                                                      right: Dimensions.w11),
-                                                  child: Row(
-                                                    children: [
-                                                      Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
+                                                      padding: EdgeInsets.only(
+                                                          left: Dimensions.w11),
+                                                      child: Center(
+                                                        child: Text(
+                                                          "Telefon Numarası",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      )),
+                                                  Container(
+                                                      padding: EdgeInsets.only(
+                                                          right:
+                                                              Dimensions.w11),
+                                                      child: Row(
                                                         children: [
                                                           Text(
-                                                            "Şu Anki Konumum",
+                                                            settingsPageController
+                                                                        .user!
+                                                                        .phone_number !=
+                                                                    null
+                                                                ? settingsPageController
+                                                                    .user!
+                                                                    .phone_number!
+                                                                : "",
                                                             style: TextStyle(
                                                                 color: Colors
                                                                     .black,
@@ -2229,8 +2016,378 @@ class SettingsScreen extends StatelessWidget {
                                                                     FontWeight
                                                                         .bold),
                                                           ),
+                                                          Icon(Icons
+                                                              .chevron_right_rounded)
+                                                        ],
+                                                      ))
+                                                ],
+                                              ),
+                                            ))),
+                                    SizedBox(
+                                      width: 340,
+                                      height: 1,
+                                      child: DecoratedBox(
+                                        decoration: BoxDecoration(
+                                            color: Color(0xFFC5C5C7)),
+                                      ),
+                                    ),
+                                    Expanded(
+                                        child: TextButton(
+                                            style: TextButton.styleFrom(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.zero),
+                                              padding: EdgeInsets.zero,
+                                              primary:
+                                                  Colors.black.withOpacity(0.2),
+                                            ),
+                                            onPressed: () {},
+                                            child: Container(
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Container(
+                                                      padding: EdgeInsets.only(
+                                                          left: Dimensions.w11),
+                                                      child: Center(
+                                                        child: Text(
+                                                          "Bağlantılı Hesaplar",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      )),
+                                                  Container(
+                                                      padding: EdgeInsets.only(
+                                                          right:
+                                                              Dimensions.w11),
+                                                      child: Row(
+                                                        children: [
+                                                          Icon(Icons
+                                                              .chevron_right_rounded)
+                                                        ],
+                                                      ))
+                                                ],
+                                              ),
+                                            ))),
+                                    SizedBox(
+                                      width: 340,
+                                      height: 1,
+                                      child: DecoratedBox(
+                                        decoration: BoxDecoration(
+                                            color: Color(0xFFC5C5C7)),
+                                      ),
+                                    ),
+                                    Expanded(
+                                        child: TextButton(
+                                            style: TextButton.styleFrom(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.zero),
+                                              padding: EdgeInsets.zero,
+                                              primary:
+                                                  Colors.black.withOpacity(0.2),
+                                            ),
+                                            onPressed: () {},
+                                            child: Container(
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Container(
+                                                      padding: EdgeInsets.only(
+                                                          left: Dimensions.w11),
+                                                      child: Center(
+                                                        child: Text(
+                                                          "E-posta",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      )),
+                                                  Container(
+                                                      padding: EdgeInsets.only(
+                                                          right:
+                                                              Dimensions.w11),
+                                                      child: Row(
+                                                        children: [
                                                           Text(
-                                                            "Muratpaşa, Antalya",
+                                                            settingsPageController
+                                                                        .user!
+                                                                        .email !=
+                                                                    null
+                                                                ? settingsPageController
+                                                                    .user!
+                                                                    .email!
+                                                                : "",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                          Icon(Icons
+                                                              .chevron_right_rounded)
+                                                        ],
+                                                      ))
+                                                ],
+                                              ),
+                                            ))),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                  margin: EdgeInsets.only(
+                                      top: Dimensions.h100 / 10,
+                                      bottom: Dimensions.h100 / 4),
+                                  width: double.maxFinite,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: settingsPageController
+                                                    .user!.email_confirmation !=
+                                                null &&
+                                            !settingsPageController
+                                                .user!.email_confirmation!
+                                        ? [
+                                            Container(
+                                              width: 340,
+                                              child: Text(
+                                                "Hesabının güvence altına alınmasına yardımcı olmak için E-postanı doğrula.",
+                                                style: TextStyle(
+                                                    fontSize: Dimensions.h14,
+                                                    color: Color(0xFFFF0000)),
+                                              ),
+                                            )
+                                          ]
+                                        : [],
+                                  )),
+                              SettingsHeaderText(text: "KEŞFET"),
+                              Container(
+                                height: Dimensions.h40 * 12,
+                                margin: EdgeInsets.only(top: Dimensions.h7),
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border(
+                                        top: BorderSide(
+                                            width: 1, color: Color(0xFFC5C5C7)),
+                                        bottom: BorderSide(
+                                            width: 1,
+                                            color: Color(0xFFC5C5C7)))),
+                                child: Column(
+                                  children: [
+                                    Expanded(
+                                        child: TextButton(
+                                            style: TextButton.styleFrom(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.zero),
+                                              padding: EdgeInsets.zero,
+                                              primary:
+                                                  Colors.black.withOpacity(0.2),
+                                            ),
+                                            onPressed: () {},
+                                            child: Container(
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.end,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Container(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: Dimensions
+                                                                    .w17),
+                                                        child: Text(
+                                                          "Konum",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Container(
+                                                      padding: EdgeInsets.only(
+                                                          right:
+                                                              Dimensions.w11),
+                                                      child: Row(
+                                                        children: [
+                                                          Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Text(
+                                                                "Şu Anki Konumum",
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              ),
+                                                              Text(
+                                                                "Muratpaşa, Antalya",
+                                                                style: TextStyle(
+                                                                    color: Color(
+                                                                        0xFF7B8491),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Icon(Icons
+                                                              .chevron_right_rounded)
+                                                        ],
+                                                      )),
+                                                ],
+                                              ),
+                                            ))),
+                                    SizedBox(
+                                        width: 340,
+                                        height: 1,
+                                        child: DecoratedBox(
+                                          decoration: BoxDecoration(
+                                              color: Color(0xFFC5C5C7)),
+                                        )),
+                                    Container(
+                                      width: double.maxFinite,
+                                      height: Dimensions.h160,
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                              padding: EdgeInsets.only(
+                                                  top: Dimensions.h17,
+                                                  bottom: Dimensions.h17,
+                                                  right: Dimensions.w17,
+                                                  left: Dimensions.w17),
+                                              width: double.maxFinite,
+                                              child: SettingsComponentHeader(
+                                                  text: "Mesafe Tercihi")),
+                                          SliderTheme(
+                                              data: SliderTheme.of(context)
+                                                  .copyWith(
+                                                      trackShape:
+                                                          GradientRectSliderTrackShape(),
+                                                      thumbColor: Colors.white,
+                                                      thumbShape:
+                                                          RoundSliderThumbShape(
+                                                              elevation: 2),
+                                                      inactiveTrackColor:
+                                                          Color(0xFFC5C5C7),
+                                                      activeTrackColor:
+                                                          Color(0xFFC5C5C7)),
+                                              child: Slider(
+                                                value: settingsPageController
+                                                            .distancePreferenceDistance !=
+                                                        null
+                                                    ? settingsPageController
+                                                            .distancePreferenceDistance! /
+                                                        100
+                                                    : 0.2,
+                                                onChanged: (value) {
+                                                  settingsPageController
+                                                      .setDistance(value * 100);
+                                                },
+                                              )),
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Text(
+                                                  "Sadece bu aralıktaki kişileri göster"),
+                                              CupertinoSwitch(
+                                                  value: settingsPageController
+                                                          .distancePreferenceOnlyThisInterval ??
+                                                      false,
+                                                  onChanged: (value) {
+                                                    settingsPageController
+                                                        .setOnlyThisInterval(
+                                                            value);
+                                                  })
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                        width: 340,
+                                        height: 1,
+                                        child: DecoratedBox(
+                                          decoration: BoxDecoration(
+                                              color: Color(0xFFC5C5C7)),
+                                        )),
+                                    Expanded(
+                                        child: TextButton(
+                                            style: TextButton.styleFrom(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.zero),
+                                              padding: EdgeInsets.zero,
+                                              primary:
+                                                  Colors.black.withOpacity(0.2),
+                                            ),
+                                            onPressed: () {},
+                                            child: Container(
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Container(
+                                                      padding: EdgeInsets.only(
+                                                          left: Dimensions.w17),
+                                                      child: Center(
+                                                        child: Text(
+                                                          "Bana Göster",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      )),
+                                                  Container(
+                                                      padding: EdgeInsets.only(
+                                                          right:
+                                                              Dimensions.w11),
+                                                      child: Row(
+                                                        children: [
+                                                          Text(
+                                                            settingsPageController
+                                                                        .showme !=
+                                                                    null
+                                                                ? Utils.getEnumValue(
+                                                                    Enums
+                                                                        .showme,
+                                                                    settingsPageController
+                                                                        .showme!)
+                                                                : "",
                                                             style: TextStyle(
                                                                 color: Color(
                                                                     0xFF7B8491),
@@ -2238,2002 +2395,1969 @@ class SettingsScreen extends StatelessWidget {
                                                                     FontWeight
                                                                         .bold),
                                                           ),
+                                                          Icon(Icons
+                                                              .chevron_right_rounded)
                                                         ],
-                                                      ),
-                                                      Icon(Icons
-                                                          .chevron_right_rounded)
-                                                    ],
-                                                  )),
-                                            ],
-                                          ),
-                                        ))),
-                                SizedBox(
-                                    width: 340,
-                                    height: 1,
-                                    child: DecoratedBox(
-                                      decoration: BoxDecoration(
-                                          color: Color(0xFFC5C5C7)),
-                                    )),
-                                Container(
-                                  width: double.maxFinite,
-                                  height: Dimensions.h160,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                          padding: EdgeInsets.only(
-                                              top: Dimensions.h17,
-                                              bottom: Dimensions.h17,
-                                              right: Dimensions.w17,
-                                              left: Dimensions.w17),
-                                          width: double.maxFinite,
-                                          child: SettingsComponentHeader(
-                                              text: "Mesafe Tercihi")),
-                                      SliderTheme(
-                                          data: SliderTheme.of(context).copyWith(
-                                              trackShape:
-                                                  GradientRectSliderTrackShape(),
-                                              thumbColor: Colors.white,
-                                              thumbShape: RoundSliderThumbShape(
-                                                  elevation: 2),
-                                              inactiveTrackColor:
-                                                  Color(0xFFC5C5C7),
-                                              activeTrackColor:
-                                                  Color(0xFFC5C5C7)),
-                                          child: Slider(
-                                            value: settingsPageController
-                                                        .distancePreferenceDistance !=
-                                                    null
-                                                ? settingsPageController
-                                                        .distancePreferenceDistance! /
-                                                    100
-                                                : 0.2,
-                                            onChanged: (value) {
-                                              settingsPageController
-                                                  .setDistance(value * 100);
-                                            },
-                                          )),
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
+                                                      ))
+                                                ],
+                                              ),
+                                            ))),
+                                    SizedBox(
+                                        width: 340,
+                                        height: 1,
+                                        child: DecoratedBox(
+                                          decoration: BoxDecoration(
+                                              color: Color(0xFFC5C5C7)),
+                                        )),
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                          right: Dimensions.w17,
+                                          left: Dimensions.w17,
+                                          top: Dimensions.h17,
+                                          bottom: Dimensions.h17),
+                                      child: Column(
                                         children: [
-                                          Text(
-                                              "Sadece bu aralıktaki kişileri göster"),
-                                          CupertinoSwitch(
-                                              value: settingsPageController
-                                                      .distancePreferenceOnlyThisInterval ??
-                                                  false,
-                                              onChanged: (value) {
-                                                settingsPageController
-                                                    .setOnlyThisInterval(value);
-                                              })
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                    width: 340,
-                                    height: 1,
-                                    child: DecoratedBox(
-                                      decoration: BoxDecoration(
-                                          color: Color(0xFFC5C5C7)),
-                                    )),
-                                Expanded(
-                                    child: TextButton(
-                                        style: TextButton.styleFrom(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.zero),
-                                          padding: EdgeInsets.zero,
-                                          primary:
-                                              Colors.black.withOpacity(0.2),
-                                        ),
-                                        onPressed: () {},
-                                        child: Container(
-                                          child: Row(
+                                          Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Container(
-                                                  padding: EdgeInsets.only(
-                                                      left: Dimensions.w17),
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Bana Göster",
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  )),
-                                              Container(
-                                                  padding: EdgeInsets.only(
-                                                      right: Dimensions.w11),
-                                                  child: Row(
-                                                    children: [
-                                                      Text(
+                                              SettingsComponentHeader(
+                                                  text: "Yaş Tercihi"),
+                                              Text(
+                                                settingsPageController.minAge !=
+                                                            null &&
                                                         settingsPageController
-                                                                    .showme !=
-                                                                null
-                                                            ? Utils.getEnumValue(
-                                                                Enums.showme,
-                                                                settingsPageController
-                                                                    .showme!)
-                                                            : "",
-                                                        style: TextStyle(
-                                                            color: Color(
-                                                                0xFF7B8491),
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                      Icon(Icons
-                                                          .chevron_right_rounded)
-                                                    ],
-                                                  ))
+                                                                .maxAge !=
+                                                            null
+                                                    ? "${settingsPageController.minAge!}-${settingsPageController.maxAge!}"
+                                                    : "",
+                                                style: TextStyle(
+                                                    color: Color(0xFF7B8491)),
+                                              )
                                             ],
                                           ),
-                                        ))),
-                                SizedBox(
-                                    width: 340,
-                                    height: 1,
-                                    child: DecoratedBox(
-                                      decoration: BoxDecoration(
-                                          color: Color(0xFFC5C5C7)),
-                                    )),
-                                Container(
-                                  padding: EdgeInsets.only(
-                                      right: Dimensions.w17,
-                                      left: Dimensions.w17,
-                                      top: Dimensions.h17,
-                                      bottom: Dimensions.h17),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          SettingsComponentHeader(
-                                              text: "Yaş Tercihi"),
-                                          Text(
-                                            settingsPageController.minAge !=
-                                                        null &&
+                                          SliderTheme(
+                                              data: SliderTheme.of(context)
+                                                  .copyWith(
+                                                      trackShape:
+                                                          GradientRectSliderTrackShape(),
+                                                      thumbColor: Colors.white,
+                                                      thumbShape:
+                                                          RoundSliderThumbShape(
+                                                              elevation: 2),
+                                                      inactiveTrackColor: Color(
+                                                          0xFFC5C5C7),
+                                                      activeTrackColor:
+                                                          Color(0xFFC5C5C7)),
+                                              child: RangeSlider(
+                                                  onChanged: (value) {
                                                     settingsPageController
-                                                            .maxAge !=
-                                                        null
-                                                ? "${settingsPageController.minAge!}-${settingsPageController.maxAge!}"
-                                                : "",
-                                            style: TextStyle(
-                                                color: Color(0xFF7B8491)),
+                                                        .setAgePreferenceRange(
+                                                            value.start * 100,
+                                                            value.end * 100);
+                                                  },
+                                                  values: settingsPageController
+                                                                  .minAge !=
+                                                              null &&
+                                                          settingsPageController
+                                                                  .maxAge !=
+                                                              null
+                                                      ? RangeValues(
+                                                          settingsPageController
+                                                                  .minAge!
+                                                                  .toDouble() /
+                                                              100,
+                                                          settingsPageController
+                                                                  .maxAge!
+                                                                  .toDouble() /
+                                                              100)
+                                                      : RangeValues(0.0, 0.0))),
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                  "Sadece bu aralıktaki kişileri göster"),
+                                              CupertinoSwitch(
+                                                  value: settingsPageController
+                                                          .agePreferenceOnlyThisInterval ??
+                                                      false,
+                                                  onChanged: (value) {
+                                                    settingsPageController
+                                                        .setAgePreferenceOnlyThisInterval(
+                                                            value);
+                                                  })
+                                            ],
                                           )
                                         ],
                                       ),
-                                      SliderTheme(
-                                          data: SliderTheme.of(context).copyWith(
-                                              trackShape:
-                                                  GradientRectSliderTrackShape(),
-                                              thumbColor: Colors.white,
-                                              thumbShape: RoundSliderThumbShape(
-                                                  elevation: 2),
-                                              inactiveTrackColor:
-                                                  Color(0xFFC5C5C7),
-                                                  activeTrackColor: Color(0xFFC5C5C7)
-                                            ),
-                                          child: RangeSlider(
-                                              onChanged: (value) {
-                                                settingsPageController
-                                                    .setAgePreferenceRange(
-                                                        value.start * 100,
-                                                        value.end * 100);
-                                              },
-                                              values: settingsPageController
-                                                              .minAge !=
-                                                          null &&
-                                                      settingsPageController
-                                                              .maxAge !=
-                                                          null
-                                                  ? RangeValues(
-                                                      settingsPageController
-                                                              .minAge!
-                                                              .toDouble() /
-                                                          100,
-                                                      settingsPageController
-                                                              .maxAge!
-                                                              .toDouble() /
-                                                          100)
-                                                  : RangeValues(0.0, 0.0))),
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                              "Sadece bu aralıktaki kişileri göster"),
-                                          CupertinoSwitch(
-                                              value: settingsPageController
-                                                      .agePreferenceOnlyThisInterval ??
-                                                  false,
-                                              onChanged: (value) {
-                                                settingsPageController
-                                                    .setAgePreferenceOnlyThisInterval(
-                                                        value);
-                                              })
-                                        ],
+                                    ),
+                                    SizedBox(
+                                        width: 340,
+                                        height: 1,
+                                        child: DecoratedBox(
+                                          decoration: BoxDecoration(
+                                              color: Color(0xFFC5C5C7)),
+                                        )),
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                        right: Dimensions.w17,
+                                        left: Dimensions.w17,
+                                      ),
+                                      width: double.maxFinite,
+                                      height: Dimensions.h50,
+                                      child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            SettingsComponentHeader(
+                                                text: "Küresel"),
+                                            CupertinoSwitch(
+                                                value: settingsPageController
+                                                        .global ??
+                                                    false,
+                                                onChanged: (value) {
+                                                  settingsPageController
+                                                      .setGlobal(value);
+                                                })
+                                          ]),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                  width: double.maxFinite,
+                                  margin: EdgeInsets.only(top: Dimensions.h8),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        width: 340,
+                                        child: Text(
+                                          "Dünyaya açılmak, hem çevrendeki hem de dünyanın dört bir yanındaki insanları görmeni sağlar.",
+                                          style: TextStyle(
+                                              color: Color(0xFF7B8491)),
+                                        ),
                                       )
                                     ],
-                                  ),
-                                ),
-                                SizedBox(
-                                    width: 340,
-                                    height: 1,
-                                    child: DecoratedBox(
+                                  )),
+                              Container(
+                                padding: EdgeInsets.only(
+                                    left: Dimensions.w17,
+                                    right: Dimensions.w17),
+                                margin: EdgeInsets.only(top: Dimensions.h14),
+                                width: double.maxFinite,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "KİMLERİ GÖREBİLDİĞİNİ KONTROL ET",
+                                      style: TextStyle(
+                                          color: Color(0xFF7B8491),
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Container(
+                                      width: Dimensions.w111,
+                                      height: Dimensions.h31,
                                       decoration: BoxDecoration(
-                                          color: Color(0xFFC5C5C7)),
+                                          borderRadius: BorderRadius.circular(
+                                              Dimensions.h52),
+                                          gradient: LinearGradient(
+                                              colors: [
+                                                Color(0xFFD51CFF),
+                                                Color(0xFF6198EF)
+                                              ],
+                                              begin: Alignment.centerLeft,
+                                              end: Alignment.centerRight)),
+                                      child: Center(
+                                        child: Text(
+                                          "CurvyPLUS",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: Dimensions.h16),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: Dimensions.h8),
+                                height: Dimensions.h120 + 5,
+                                width: double.maxFinite,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border(
+                                      top: BorderSide(
+                                          color: Color(0xFFC5C5C7), width: 1),
+                                      bottom: BorderSide(
+                                          color: Color(0xFFC5C5C7), width: 1),
                                     )),
-                                Container(
+                                child: Column(
+                                  children: [
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          elevation: 0,
+                                          primary: Colors.white,
+                                          shape: BeveledRectangleBorder(
+                                              borderRadius: BorderRadius.zero),
+                                        ),
+                                        onPressed: () {
+                                          settingsPageController
+                                              .setRecommendationPreference(0);
+                                        },
+                                        child: Container(
+                                            width: double.maxFinite,
+                                            height: Dimensions.h60,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    SettingsComponentHeader(
+                                                        text:
+                                                            "Dengelenmiş Öneriler"),
+                                                    Text(
+                                                      "Sana en uygun insanları gör ( varsayılan ayar )",
+                                                      style: TextStyle(
+                                                          color: Color(
+                                                              0xFF7B8491)),
+                                                    )
+                                                  ],
+                                                ),
+                                                Container(
+                                                  child: Center(
+                                                    child: settingsPageController
+                                                                    .recommendationPreference !=
+                                                                null &&
+                                                            settingsPageController
+                                                                    .recommendationPreference ==
+                                                                0
+                                                        ? Image.asset(
+                                                            "assets/images/settings_tick_icon.png")
+                                                        : null,
+                                                  ),
+                                                )
+                                              ],
+                                            ))),
+                                    SizedBox(
+                                        width: 340,
+                                        height: 1,
+                                        child: DecoratedBox(
+                                          decoration: BoxDecoration(
+                                              color: Color(0xFFC5C5C7)),
+                                        )),
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          elevation: 0,
+                                          primary: Colors.white,
+                                          shape: BeveledRectangleBorder(
+                                              borderRadius: BorderRadius.zero),
+                                        ),
+                                        onPressed: () {
+                                          settingsPageController
+                                              .setRecommendationPreference(1);
+                                        },
+                                        child: Container(
+                                            width: double.maxFinite,
+                                            height: Dimensions.h60,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    SettingsComponentHeader(
+                                                        text:
+                                                            "Son Zamanda Aktif"),
+                                                    Text(
+                                                      "En son aktif olan insanları en önce gör",
+                                                      style: TextStyle(
+                                                          color: Color(
+                                                              0xFF7B8491)),
+                                                    )
+                                                  ],
+                                                ),
+                                                Container(
+                                                  child: Center(
+                                                    child: settingsPageController
+                                                                    .recommendationPreference !=
+                                                                null &&
+                                                            settingsPageController
+                                                                    .recommendationPreference ==
+                                                                1
+                                                        ? Image.asset(
+                                                            "assets/images/settings_tick_icon.png")
+                                                        : null,
+                                                  ),
+                                                )
+                                              ],
+                                            ))),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(
+                                    left: Dimensions.w17,
+                                    right: Dimensions.w17),
+                                margin: EdgeInsets.only(top: Dimensions.h14),
+                                width: double.maxFinite,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "SENİ KİMLER GÖREBİLİR KONTROL ET",
+                                      style: TextStyle(
+                                          color: Color(0xFF7B8491),
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Container(
+                                      width: Dimensions.w111,
+                                      height: Dimensions.h31,
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                              Dimensions.h52),
+                                          gradient: LinearGradient(
+                                              colors: [
+                                                Color(0xFFD51CFF),
+                                                Color(0xFF6198EF)
+                                              ],
+                                              begin: Alignment.centerLeft,
+                                              end: Alignment.centerRight)),
+                                      child: Center(
+                                        child: Text(
+                                          "CurvyPLUS",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: Dimensions.h16),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: Dimensions.h8),
+                                height: Dimensions.h120 + 5,
+                                width: double.maxFinite,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border(
+                                      top: BorderSide(
+                                          color: Color(0xFFC5C5C7), width: 1),
+                                      bottom: BorderSide(
+                                          color: Color(0xFFC5C5C7), width: 1),
+                                    )),
+                                child: Column(
+                                  children: [
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          elevation: 0,
+                                          primary: Colors.white,
+                                          shape: BeveledRectangleBorder(
+                                              borderRadius: BorderRadius.zero),
+                                        ),
+                                        onPressed: () {
+                                          settingsPageController
+                                              .setViewerPreference(0);
+                                        },
+                                        child: Container(
+                                            width: double.maxFinite,
+                                            height: Dimensions.h60,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    SettingsComponentHeader(
+                                                        text: "Standart"),
+                                                    Text(
+                                                      "Sana özel öneriler için sadece belirli insanlara görün",
+                                                      style: TextStyle(
+                                                          color: Color(
+                                                              0xFF7B8491)),
+                                                    )
+                                                  ],
+                                                ),
+                                                Container(
+                                                  child: Center(
+                                                    child: settingsPageController
+                                                                    .viewerPreference !=
+                                                                null &&
+                                                            settingsPageController
+                                                                    .viewerPreference ==
+                                                                0
+                                                        ? Image.asset(
+                                                            "assets/images/settings_tick_icon.png")
+                                                        : null,
+                                                  ),
+                                                )
+                                              ],
+                                            ))),
+                                    SizedBox(
+                                        width: 340,
+                                        height: 1,
+                                        child: DecoratedBox(
+                                          decoration: BoxDecoration(
+                                              color: Color(0xFFC5C5C7)),
+                                        )),
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          elevation: 0,
+                                          primary: Colors.white,
+                                          shape: BeveledRectangleBorder(
+                                              borderRadius: BorderRadius.zero),
+                                        ),
+                                        onPressed: () {
+                                          settingsPageController
+                                              .setViewerPreference(1);
+                                        },
+                                        child: Container(
+                                            width: double.maxFinite,
+                                            height: Dimensions.h60,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    SettingsComponentHeader(
+                                                        text:
+                                                            "Sadece Beğendiğim İnsanlar"),
+                                                    Text(
+                                                      "Sadece sağa kaydırdıklarım beni görsün",
+                                                      style: TextStyle(
+                                                          color: Color(
+                                                              0xFF7B8491)),
+                                                    )
+                                                  ],
+                                                ),
+                                                Container(
+                                                  child: Center(
+                                                    child: settingsPageController
+                                                                    .viewerPreference !=
+                                                                null &&
+                                                            settingsPageController
+                                                                    .viewerPreference ==
+                                                                1
+                                                        ? Image.asset(
+                                                            "assets/images/settings_tick_icon.png")
+                                                        : null,
+                                                  ),
+                                                )
+                                              ],
+                                            ))),
+                                  ],
+                                ),
+                              ),
+                              SettingsHeaderText(text: "CONNECTIONS"),
+                              Container(
+                                  height: Dimensions.h45,
+                                  width: double.maxFinite,
+                                  margin: EdgeInsets.only(top: Dimensions.h7),
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border(
+                                          top: BorderSide(
+                                              color: Color(0xFFC5C5C7),
+                                              width: 1),
+                                          bottom: BorderSide(
+                                              color: Color(0xFFC5C5C7),
+                                              width: 1))),
+                                  child: Column(
+                                    children: [
+                                      Expanded(
+                                          child: TextButton(
+                                              style: TextButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.zero),
+                                                padding: EdgeInsets.zero,
+                                                primary: Colors.black
+                                                    .withOpacity(0.2),
+                                              ),
+                                              onPressed: () {
+                                                showBanPeopleDialog();
+                                              },
+                                              child: Container(
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Container(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: Dimensions
+                                                                    .w11),
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Kişileri Engelle",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        )),
+                                                    Container(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                right:
+                                                                    Dimensions
+                                                                        .w11),
+                                                        child: Row(
+                                                          children: [
+                                                            Icon(Icons
+                                                                .chevron_right_rounded)
+                                                          ],
+                                                        ))
+                                                  ],
+                                                ),
+                                              ))),
+                                    ],
+                                  )),
+                              Container(
+                                  width: double.maxFinite,
+                                  margin: EdgeInsets.only(
+                                      top: Dimensions.h8,
+                                      bottom: Dimensions.h27),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        width: 340,
+                                        child: Text(
+                                          "Curvy’de görmek veya görünmek istemediğin kişileri,kişiler listesinden seç.",
+                                          style: TextStyle(
+                                              color: Color(0xFF7B8491)),
+                                        ),
+                                      )
+                                    ],
+                                  )),
+                              SettingsHeaderText(text: "LİSAN SEÇİMİ"),
+                              Container(
+                                  width: double.maxFinite,
+                                  height: Dimensions.h45,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border(
+                                          top: BorderSide(
+                                              color: Color(0xFFC5C5C7),
+                                              width: 1),
+                                          bottom: BorderSide(
+                                              color: Color(0xFFC5C5C7),
+                                              width: 1))),
+                                  margin: EdgeInsets.only(
+                                      top: Dimensions.h7,
+                                      bottom: Dimensions.h31),
+                                  child: Column(
+                                    children: [
+                                      Expanded(
+                                          child: TextButton(
+                                              style: TextButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.zero),
+                                                padding: EdgeInsets.zero,
+                                                primary: Colors.black
+                                                    .withOpacity(0.2),
+                                              ),
+                                              onPressed: () {
+                                                selectLanguageDialog();
+                                              },
+                                              child: Container(
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Container(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: Dimensions
+                                                                    .w11),
+                                                        child: Center(
+                                                          child: Text(
+                                                            settingsPageController
+                                                                        .language !=
+                                                                    null
+                                                                ? "${Utils.getEnumValue(Enums.language, settingsPageController.language!)} Olarak Seçildi"
+                                                                : "",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        )),
+                                                    Container(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                right:
+                                                                    Dimensions
+                                                                        .w11),
+                                                        child: Row(
+                                                          children: [
+                                                            Text(
+                                                              "Değiştir",
+                                                              style: TextStyle(
+                                                                  color: Color(
+                                                                      0xFF7B8491),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
+                                                            Icon(Icons
+                                                                .chevron_right_rounded)
+                                                          ],
+                                                        ))
+                                                  ],
+                                                ),
+                                              ))),
+                                    ],
+                                  )),
+                              SettingsHeaderText(text: "GÖRÜNÜRLÜK"),
+                              Container(
+                                height: Dimensions.h27 * 13,
+                                width: double.maxFinite,
+                                margin: EdgeInsets.only(bottom: Dimensions.h31),
+                                decoration: BoxDecoration(
+                                    border: Border(
+                                  bottom: BorderSide(color: Color(0xFFC5C5C7)),
+                                )),
+                                child: Column(
+                                  children: [
+                                    Expanded(
+                                        child: Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border: Border(
+                                              top: BorderSide(
+                                                  color: Color(0xFFC5C5C7)))),
+                                      padding: EdgeInsets.only(
+                                          right: Dimensions.w17,
+                                          left: Dimensions.w17),
+                                      child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            SettingsComponentHeader(
+                                                text: "Beni VIP'de Gizle"),
+                                            CupertinoSwitch(
+                                                value: settingsPageController
+                                                        .hideMeOnVip ??
+                                                    false,
+                                                onChanged: (value) {
+                                                  settingsPageController
+                                                      .setHideMeOnVip(value);
+                                                })
+                                          ]),
+                                    )),
+                                    Expanded(
+                                        child: Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border: Border(
+                                              top: BorderSide(
+                                                  color: Color(0xFFC5C5C7)))),
+                                      padding: EdgeInsets.only(
+                                          right: Dimensions.w17,
+                                          left: Dimensions.w17),
+                                      child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            SettingsComponentHeader(
+                                                text:
+                                                    "Beni CurvyTURBO'da Öner"),
+                                            CupertinoSwitch(
+                                                value: settingsPageController
+                                                        .recommendMeOnTurbo ??
+                                                    false,
+                                                onChanged: (value) {
+                                                  settingsPageController
+                                                      .setRecommendMeOnTurbo(
+                                                          value);
+                                                })
+                                          ]),
+                                    )),
+                                    Expanded(
+                                        child: Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border: Border(
+                                              top: BorderSide(
+                                                  color: Color(0xFFC5C5C7)))),
+                                      padding: EdgeInsets.only(
+                                          right: Dimensions.w17,
+                                          left: Dimensions.w17),
+                                      child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            SettingsComponentHeader(
+                                                text:
+                                                    "Beni FreeStyle'da Gizle"),
+                                            CupertinoSwitch(
+                                                value: settingsPageController
+                                                        .hideMeOnFreeStyle ??
+                                                    false,
+                                                onChanged: (value) {
+                                                  settingsPageController
+                                                      .setHideMeOnFreeStyle(
+                                                          value);
+                                                })
+                                          ]),
+                                    )),
+                                    Expanded(
+                                        flex: 2,
+                                        child: Container(
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                border: Border(
+                                                    top: BorderSide(
+                                                        color: Color(
+                                                            0xFFC5C5C7)))),
+                                            padding: EdgeInsets.only(
+                                                right: Dimensions.w17,
+                                                left: Dimensions.w17),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      SettingsComponentHeader(
+                                                          text:
+                                                              "Beni MatcherStyle'da Gizle"),
+                                                      CupertinoSwitch(
+                                                          value: settingsPageController
+                                                                  .hideMeOnMatcherStyle ??
+                                                              false,
+                                                          onChanged: (value) {
+                                                            settingsPageController
+                                                                .setHideMeOnMatcherStyle(
+                                                                    value);
+                                                          })
+                                                    ]),
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                      top: Dimensions.h8),
+                                                  child: Center(
+                                                      child: Text(
+                                                    "Kapılıyken, kart destesinde gösterilmeyeceksin. Yine de beğenmiş olduğun kişiler profilini görebilir ve seninle eşleşebilir. Eşleşmelerini görmeye ve onlara sohbet etmeye devam edebilirsin.",
+                                                    style: TextStyle(
+                                                        color:
+                                                            Color(0xFF7B8491)),
+                                                  )),
+                                                )
+                                              ],
+                                            ))),
+                                  ],
+                                ),
+                              ),
+                              SettingsHeaderText(text: "OKUNMA BİLDİRİMLERİ"),
+                              Container(
+                                  margin: EdgeInsets.only(
+                                      top: Dimensions.h8,
+                                      bottom: Dimensions.h21),
                                   padding: EdgeInsets.only(
                                     right: Dimensions.w17,
                                     left: Dimensions.w17,
                                   ),
                                   width: double.maxFinite,
-                                  height: Dimensions.h50,
-                                  child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        SettingsComponentHeader(
-                                            text: "Küresel"),
-                                        CupertinoSwitch(
-                                            value:
-                                                settingsPageController.global ??
+                                  height: Dimensions.h50 * 2.27,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border(
+                                          top: BorderSide(
+                                              color: Color(0xFFC5C5C7),
+                                              width: 1),
+                                          bottom: BorderSide(
+                                              color: Color(0xFFC5C5C7),
+                                              width: 1))),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            SettingsComponentHeader(
+                                                text:
+                                                    "Okunma Bildirimlerini Kapat"),
+                                            CupertinoSwitch(
+                                                value: settingsPageController
+                                                        .closeReadingNotifications ??
                                                     false,
-                                            onChanged: (value) {
-                                              settingsPageController
-                                                  .setGlobal(value);
-                                            })
-                                      ]),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                              width: double.maxFinite,
-                              margin: EdgeInsets.only(top: Dimensions.h8),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    width: 340,
-                                    child: Text(
-                                      "Dünyaya açılmak, hem çevrendeki hem de dünyanın dört bir yanındaki insanları görmeni sağlar.",
-                                      style:
-                                          TextStyle(color: Color(0xFF7B8491)),
-                                    ),
-                                  )
-                                ],
-                              )),
-                          Container(
-                            padding: EdgeInsets.only(
-                                left: Dimensions.w17, right: Dimensions.w17),
-                            margin: EdgeInsets.only(top: Dimensions.h14),
-                            width: double.maxFinite,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "KİMLERİ GÖREBİLDİĞİNİ KONTROL ET",
-                                  style: TextStyle(
-                                      color: Color(0xFF7B8491),
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Container(
-                                  width: Dimensions.w111,
-                                  height: Dimensions.h31,
-                                  decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.circular(Dimensions.h52),
-                                      gradient: LinearGradient(
-                                          colors: [
-                                            Color(0xFFD51CFF),
-                                            Color(0xFF6198EF)
-                                          ],
-                                          begin: Alignment.centerLeft,
-                                          end: Alignment.centerRight)),
-                                  child: Center(
-                                    child: Text(
-                                      "CurvyPLUS",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: Dimensions.h16),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: Dimensions.h8),
-                            height: Dimensions.h120 + 5,
-                            width: double.maxFinite,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border(
-                                  top: BorderSide(
-                                      color: Color(0xFFC5C5C7), width: 1),
-                                  bottom: BorderSide(
-                                      color: Color(0xFFC5C5C7), width: 1),
-                                )),
-                            child: Column(
-                              children: [
-                                ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      elevation: 0,
-                                      primary: Colors.white,
-                                      shape: BeveledRectangleBorder(
-                                          borderRadius: BorderRadius.zero),
-                                    ),
-                                    onPressed: () {
-                                      settingsPageController
-                                          .setRecommendationPreference(0);
-                                    },
-                                    child: Container(
-                                        width: double.maxFinite,
-                                        height: Dimensions.h60,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                SettingsComponentHeader(
-                                                    text:
-                                                        "Dengelenmiş Öneriler"),
-                                                Text(
-                                                  "Sana en uygun insanları gör ( varsayılan ayar )",
+                                                onChanged: (value) {
+                                                  settingsPageController
+                                                      .setCloseReadingNotifications(
+                                                          value);
+                                                })
+                                          ]),
+                                      Container(
+                                          width: double.maxFinite,
+                                          margin: EdgeInsets.only(
+                                              top: Dimensions.h8,
+                                              bottom: Dimensions.h27),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                width: 340,
+                                                child: Text(
+                                                  "Bu ayar kapalı olduğunda, eşleşmelerin sohbetinizdeki okunma bildirimlerini etkinleştiremez.",
                                                   style: TextStyle(
                                                       color: Color(0xFF7B8491)),
-                                                )
-                                              ],
-                                            ),
-                                            Container(
-                                              child: Center(
-                                                child: settingsPageController
-                                                                .recommendationPreference !=
-                                                            null &&
-                                                        settingsPageController
-                                                                .recommendationPreference ==
-                                                            0
-                                                    ? Image.asset(
-                                                        "assets/images/settings_tick_icon.png")
-                                                    : null,
-                                              ),
-                                            )
-                                          ],
-                                        ))),
-                                SizedBox(
-                                    width: 340,
-                                    height: 1,
-                                    child: DecoratedBox(
-                                      decoration: BoxDecoration(
-                                          color: Color(0xFFC5C5C7)),
-                                    )),
-                                ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      elevation: 0,
-                                      primary: Colors.white,
-                                      shape: BeveledRectangleBorder(
-                                          borderRadius: BorderRadius.zero),
-                                    ),
-                                    onPressed: () {
-                                      settingsPageController
-                                          .setRecommendationPreference(1);
-                                    },
-                                    child: Container(
-                                        width: double.maxFinite,
-                                        height: Dimensions.h60,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                SettingsComponentHeader(
-                                                    text: "Son Zamanda Aktif"),
-                                                Text(
-                                                  "En son aktif olan insanları en önce gör",
-                                                  style: TextStyle(
-                                                      color: Color(0xFF7B8491)),
-                                                )
-                                              ],
-                                            ),
-                                            Container(
-                                              child: Center(
-                                                child: settingsPageController
-                                                                .recommendationPreference !=
-                                                            null &&
-                                                        settingsPageController
-                                                                .recommendationPreference ==
-                                                            1
-                                                    ? Image.asset(
-                                                        "assets/images/settings_tick_icon.png")
-                                                    : null,
-                                              ),
-                                            )
-                                          ],
-                                        ))),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(
-                                left: Dimensions.w17, right: Dimensions.w17),
-                            margin: EdgeInsets.only(top: Dimensions.h14),
-                            width: double.maxFinite,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "SENİ KİMLER GÖREBİLİR KONTROL ET",
-                                  style: TextStyle(
-                                      color: Color(0xFF7B8491),
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Container(
-                                  width: Dimensions.w111,
-                                  height: Dimensions.h31,
-                                  decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.circular(Dimensions.h52),
-                                      gradient: LinearGradient(
-                                          colors: [
-                                            Color(0xFFD51CFF),
-                                            Color(0xFF6198EF)
-                                          ],
-                                          begin: Alignment.centerLeft,
-                                          end: Alignment.centerRight)),
-                                  child: Center(
-                                    child: Text(
-                                      "CurvyPLUS",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: Dimensions.h16),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: Dimensions.h8),
-                            height: Dimensions.h120 + 5,
-                            width: double.maxFinite,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border(
-                                  top: BorderSide(
-                                      color: Color(0xFFC5C5C7), width: 1),
-                                  bottom: BorderSide(
-                                      color: Color(0xFFC5C5C7), width: 1),
-                                )),
-                            child: Column(
-                              children: [
-                                ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      elevation: 0,
-                                      primary: Colors.white,
-                                      shape: BeveledRectangleBorder(
-                                          borderRadius: BorderRadius.zero),
-                                    ),
-                                    onPressed: () {
-                                      settingsPageController
-                                          .setViewerPreference(0);
-                                    },
-                                    child: Container(
-                                        width: double.maxFinite,
-                                        height: Dimensions.h60,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                SettingsComponentHeader(
-                                                    text: "Standart"),
-                                                Text(
-                                                  "Sana özel öneriler için sadece belirli insanlara görün",
-                                                  style: TextStyle(
-                                                      color: Color(0xFF7B8491)),
-                                                )
-                                              ],
-                                            ),
-                                            Container(
-                                              child: Center(
-                                                child: settingsPageController
-                                                                .viewerPreference !=
-                                                            null &&
-                                                        settingsPageController
-                                                                .viewerPreference ==
-                                                            0
-                                                    ? Image.asset(
-                                                        "assets/images/settings_tick_icon.png")
-                                                    : null,
-                                              ),
-                                            )
-                                          ],
-                                        ))),
-                                SizedBox(
-                                    width: 340,
-                                    height: 1,
-                                    child: DecoratedBox(
-                                      decoration: BoxDecoration(
-                                          color: Color(0xFFC5C5C7)),
-                                    )),
-                                ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      elevation: 0,
-                                      primary: Colors.white,
-                                      shape: BeveledRectangleBorder(
-                                          borderRadius: BorderRadius.zero),
-                                    ),
-                                    onPressed: () {
-                                      settingsPageController
-                                          .setViewerPreference(1);
-                                    },
-                                    child: Container(
-                                        width: double.maxFinite,
-                                        height: Dimensions.h60,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                SettingsComponentHeader(
-                                                    text:
-                                                        "Sadece Beğendiğim İnsanlar"),
-                                                Text(
-                                                  "Sadece sağa kaydırdıklarım beni görsün",
-                                                  style: TextStyle(
-                                                      color: Color(0xFF7B8491)),
-                                                )
-                                              ],
-                                            ),
-                                            Container(
-                                              child: Center(
-                                                child: settingsPageController
-                                                                .viewerPreference !=
-                                                            null &&
-                                                        settingsPageController
-                                                                .viewerPreference ==
-                                                            1
-                                                    ? Image.asset(
-                                                        "assets/images/settings_tick_icon.png")
-                                                    : null,
-                                              ),
-                                            )
-                                          ],
-                                        ))),
-                              ],
-                            ),
-                          ),
-                          SettingsHeaderText(text: "CONNECTIONS"),
-                          Container(
-                              height: Dimensions.h45,
-                              width: double.maxFinite,
-                              margin: EdgeInsets.only(top: Dimensions.h7),
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border(
-                                      top: BorderSide(
-                                          color: Color(0xFFC5C5C7), width: 1),
-                                      bottom: BorderSide(
-                                          color: Color(0xFFC5C5C7), width: 1))),
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                      child: TextButton(
-                                          style: TextButton.styleFrom(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.zero),
-                                            padding: EdgeInsets.zero,
-                                            primary:
-                                                Colors.black.withOpacity(0.2),
-                                          ),
-                                          onPressed: () {
-                                            showBanPeopleDialog();
-                                          },
-                                          child: Container(
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Container(
-                                                    padding: EdgeInsets.only(
-                                                        left: Dimensions.w11),
-                                                    child: Center(
-                                                      child: Text(
-                                                        "Kişileri Engelle",
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                    )),
-                                                Container(
-                                                    padding: EdgeInsets.only(
-                                                        right: Dimensions.w11),
-                                                    child: Row(
-                                                      children: [
-                                                        Icon(Icons
-                                                            .chevron_right_rounded)
-                                                      ],
-                                                    ))
-                                              ],
-                                            ),
-                                          ))),
-                                ],
-                              )),
-                          Container(
-                              width: double.maxFinite,
-                              margin: EdgeInsets.only(
-                                  top: Dimensions.h8, bottom: Dimensions.h27),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    width: 340,
-                                    child: Text(
-                                      "Curvy’de görmek veya görünmek istemediğin kişileri,kişiler listesinden seç.",
-                                      style:
-                                          TextStyle(color: Color(0xFF7B8491)),
-                                    ),
-                                  )
-                                ],
-                              )),
-                          SettingsHeaderText(text: "LİSAN SEÇİMİ"),
-                          Container(
-                              width: double.maxFinite,
-                              height: Dimensions.h45,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border(
-                                      top: BorderSide(
-                                          color: Color(0xFFC5C5C7), width: 1),
-                                      bottom: BorderSide(
-                                          color: Color(0xFFC5C5C7), width: 1))),
-                              margin: EdgeInsets.only(
-                                  top: Dimensions.h7, bottom: Dimensions.h31),
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                      child: TextButton(
-                                          style: TextButton.styleFrom(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.zero),
-                                            padding: EdgeInsets.zero,
-                                            primary:
-                                                Colors.black.withOpacity(0.2),
-                                          ),
-                                          onPressed: () {
-                                            selectLanguageDialog();
-                                          },
-                                          child: Container(
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Container(
-                                                    padding: EdgeInsets.only(
-                                                        left: Dimensions.w11),
-                                                    child: Center(
-                                                      child: Text(
-                                                        settingsPageController
-                                                                    .language !=
-                                                                null
-                                                            ? "${Utils.getEnumValue(Enums.language, settingsPageController.language!)} Olarak Seçildi"
-                                                            : "",
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                    )),
-                                                Container(
-                                                    padding: EdgeInsets.only(
-                                                        right: Dimensions.w11),
-                                                    child: Row(
-                                                      children: [
-                                                        Text(
-                                                          "Değiştir",
-                                                          style: TextStyle(
-                                                              color: Color(
-                                                                  0xFF7B8491),
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ),
-                                                        Icon(Icons
-                                                            .chevron_right_rounded)
-                                                      ],
-                                                    ))
-                                              ],
-                                            ),
-                                          ))),
-                                ],
-                              )),
-                          SettingsHeaderText(text: "GÖRÜNÜRLÜK"),
-                          Container(
-                            height: Dimensions.h27 * 13,
-                            width: double.maxFinite,
-                            margin: EdgeInsets.only(bottom: Dimensions.h31),
-                            decoration: BoxDecoration(
-                                border: Border(
-                              bottom: BorderSide(color: Color(0xFFC5C5C7)),
-                            )),
-                            child: Column(
-                              children: [
-                                Expanded(
-                                    child: Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border(
-                                          top: BorderSide(
-                                              color: Color(0xFFC5C5C7)))),
-                                  padding: EdgeInsets.only(
-                                      right: Dimensions.w17,
-                                      left: Dimensions.w17),
-                                  child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        SettingsComponentHeader(
-                                            text: "Beni VIP'de Gizle"),
-                                        CupertinoSwitch(
-                                            value: settingsPageController
-                                                    .hideMeOnVip ??
-                                                false,
-                                            onChanged: (value) {
-                                              settingsPageController
-                                                  .setHideMeOnVip(value);
-                                            })
-                                      ]),
-                                )),
-                                Expanded(
-                                    child: Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border(
-                                          top: BorderSide(
-                                              color: Color(0xFFC5C5C7)))),
-                                  padding: EdgeInsets.only(
-                                      right: Dimensions.w17,
-                                      left: Dimensions.w17),
-                                  child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        SettingsComponentHeader(
-                                            text: "Beni CurvyTURBO'da Öner"),
-                                        CupertinoSwitch(
-                                            value: settingsPageController
-                                                    .recommendMeOnTurbo ??
-                                                false,
-                                            onChanged: (value) {
-                                              settingsPageController
-                                                  .setRecommendMeOnTurbo(value);
-                                            })
-                                      ]),
-                                )),
-                                Expanded(
-                                    child: Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border(
-                                          top: BorderSide(
-                                              color: Color(0xFFC5C5C7)))),
-                                  padding: EdgeInsets.only(
-                                      right: Dimensions.w17,
-                                      left: Dimensions.w17),
-                                  child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        SettingsComponentHeader(
-                                            text: "Beni FreeStyle'da Gizle"),
-                                        CupertinoSwitch(
-                                            value: settingsPageController
-                                                    .hideMeOnFreeStyle ??
-                                                false,
-                                            onChanged: (value) {
-                                              settingsPageController
-                                                  .setHideMeOnFreeStyle(value);
-                                            })
-                                      ]),
-                                )),
-                                Expanded(
-                                    flex: 2,
-                                    child: Container(
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            border: Border(
-                                                top: BorderSide(
-                                                    color: Color(0xFFC5C5C7)))),
-                                        padding: EdgeInsets.only(
-                                            right: Dimensions.w17,
-                                            left: Dimensions.w17),
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  SettingsComponentHeader(
-                                                      text:
-                                                          "Beni MatcherStyle'da Gizle"),
-                                                  CupertinoSwitch(
-                                                      value: settingsPageController
-                                                              .hideMeOnMatcherStyle ??
-                                                          false,
-                                                      onChanged: (value) {
-                                                        settingsPageController
-                                                            .setHideMeOnMatcherStyle(
-                                                                value);
-                                                      })
-                                                ]),
-                                            Container(
-                                              margin: EdgeInsets.only(
-                                                  top: Dimensions.h8),
-                                              child: Center(
-                                                  child: Text(
-                                                "Kapılıyken, kart destesinde gösterilmeyeceksin. Yine de beğenmiş olduğun kişiler profilini görebilir ve seninle eşleşebilir. Eşleşmelerini görmeye ve onlara sohbet etmeye devam edebilirsin.",
-                                                style: TextStyle(
-                                                    color: Color(0xFF7B8491)),
-                                              )),
-                                            )
-                                          ],
-                                        ))),
-                              ],
-                            ),
-                          ),
-                          SettingsHeaderText(text: "OKUNMA BİLDİRİMLERİ"),
-                          Container(
-                              margin: EdgeInsets.only(
-                                  top: Dimensions.h8, bottom: Dimensions.h21),
-                              padding: EdgeInsets.only(
-                                right: Dimensions.w17,
-                                left: Dimensions.w17,
-                              ),
-                              width: double.maxFinite,
-                              height: Dimensions.h50 * 2.27,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border(
-                                      top: BorderSide(
-                                          color: Color(0xFFC5C5C7), width: 1),
-                                      bottom: BorderSide(
-                                          color: Color(0xFFC5C5C7), width: 1))),
-                              child: Column(
-                                children: [
-                                  Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        SettingsComponentHeader(
-                                            text:
-                                                "Okunma Bildirimlerini Kapat"),
-                                        CupertinoSwitch(
-                                            value: settingsPageController
-                                                    .closeReadingNotifications ??
-                                                false,
-                                            onChanged: (value) {
-                                              settingsPageController
-                                                  .setCloseReadingNotifications(
-                                                      value);
-                                            })
-                                      ]),
-                                  Container(
-                                      width: double.maxFinite,
-                                      margin: EdgeInsets.only(
-                                          top: Dimensions.h8,
-                                          bottom: Dimensions.h27),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            width: 340,
-                                            child: Text(
-                                              "Bu ayar kapalı olduğunda, eşleşmelerin sohbetinizdeki okunma bildirimlerini etkinleştiremez.",
-                                              style: TextStyle(
-                                                  color: Color(0xFF7B8491)),
-                                            ),
-                                          )
-                                        ],
-                                      )),
-                                ],
-                              )),
-                          SettingsHeaderText(text: "VERİ KULLANIMI"),
-                          Container(
-                              width: double.maxFinite,
-                              height: Dimensions.h45,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border(
-                                      top: BorderSide(
-                                          width: 1, color: Color(0xFFC5C5C7)),
-                                      bottom: BorderSide(
-                                          width: 1, color: Color(0xFFC5C5C7)))),
-                              margin: EdgeInsets.only(
-                                  top: Dimensions.h7, bottom: Dimensions.h36),
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                      child: Container(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Container(
-                                            padding: EdgeInsets.only(
-                                                left: Dimensions.w11),
-                                            child: Center(
-                                              child: Text(
-                                                "Videoları Otomatik Oynat",
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            )),
-                                        Container(
-                                            padding: EdgeInsets.only(
-                                                right: Dimensions.w11),
-                                            child: Row(
-                                              children: [
-                                                CupertinoSwitch(
-                                                    value: settingsPageController
-                                                            .playVideosAutomatically ??
-                                                        false,
-                                                    onChanged: (value) {
-                                                      settingsPageController
-                                                          .setPlayVideosAutomatically(
-                                                              value);
-                                                    })
-                                              ],
-                                            ))
-                                      ],
-                                    ),
+                                                ),
+                                              )
+                                            ],
+                                          )),
+                                    ],
                                   )),
-                                ],
-                              )),
-                          SettingsHeaderText(text: "ETKİNLİK DURUMU"),
-                          Container(
-                            margin: EdgeInsets.only(
-                                top: Dimensions.h8, bottom: Dimensions.h31),
-                            height: Dimensions.h100 + 7,
-                            width: double.maxFinite,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border(
-                                  top: BorderSide(
-                                      color: Color(0xFFC5C5C7), width: 1),
-                                  bottom: BorderSide(
-                                      color: Color(0xFFC5C5C7), width: 1),
-                                )),
-                            child: Column(
-                              children: [
-                                Container(
+                              SettingsHeaderText(text: "VERİ KULLANIMI"),
+                              Container(
                                   width: double.maxFinite,
-                                  height: Dimensions.h50,
-                                  padding: EdgeInsets.only(
-                                      left: Dimensions.w11,
-                                      right: Dimensions.w11),
+                                  height: Dimensions.h45,
                                   decoration: BoxDecoration(
+                                      color: Colors.white,
                                       border: Border(
+                                          top: BorderSide(
+                                              width: 1,
+                                              color: Color(0xFFC5C5C7)),
                                           bottom: BorderSide(
                                               width: 1,
                                               color: Color(0xFFC5C5C7)))),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                  margin: EdgeInsets.only(
+                                      top: Dimensions.h7,
+                                      bottom: Dimensions.h36),
+                                  child: Column(
                                     children: [
-                                      Text(
-                                        "Şu An Çevrim İçi Durumunu Gizle",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Row(
+                                      Expanded(
+                                          child: Container(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Container(
+                                                padding: EdgeInsets.only(
+                                                    left: Dimensions.w11),
+                                                child: Center(
+                                                  child: Text(
+                                                    "Videoları Otomatik Oynat",
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                )),
+                                            Container(
+                                                padding: EdgeInsets.only(
+                                                    right: Dimensions.w11),
+                                                child: Row(
+                                                  children: [
+                                                    CupertinoSwitch(
+                                                        value: settingsPageController
+                                                                .playVideosAutomatically ??
+                                                            false,
+                                                        onChanged: (value) {
+                                                          settingsPageController
+                                                              .setPlayVideosAutomatically(
+                                                                  value);
+                                                        })
+                                                  ],
+                                                ))
+                                          ],
+                                        ),
+                                      )),
+                                    ],
+                                  )),
+                              SettingsHeaderText(text: "ETKİNLİK DURUMU"),
+                              Container(
+                                margin: EdgeInsets.only(
+                                    top: Dimensions.h8, bottom: Dimensions.h31),
+                                height: Dimensions.h100 + 7,
+                                width: double.maxFinite,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border(
+                                      top: BorderSide(
+                                          color: Color(0xFFC5C5C7), width: 1),
+                                      bottom: BorderSide(
+                                          color: Color(0xFFC5C5C7), width: 1),
+                                    )),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      width: double.maxFinite,
+                                      height: Dimensions.h50,
+                                      padding: EdgeInsets.only(
+                                          left: Dimensions.w11,
+                                          right: Dimensions.w11),
+                                      decoration: BoxDecoration(
+                                          border: Border(
+                                              bottom: BorderSide(
+                                                  width: 1,
+                                                  color: Color(0xFFC5C5C7)))),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          CupertinoSwitch(
-                                              value: settingsPageController
-                                                      .hideOnlineStatus ??
-                                                  false,
-                                              onChanged: (value) {
-                                                settingsPageController
-                                                    .setHideOnlineStatus(value);
-                                              })
+                                          Text(
+                                            "Şu An Çevrim İçi Durumunu Gizle",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              CupertinoSwitch(
+                                                  value: settingsPageController
+                                                          .hideOnlineStatus ??
+                                                      false,
+                                                  onChanged: (value) {
+                                                    settingsPageController
+                                                        .setHideOnlineStatus(
+                                                            value);
+                                                  })
+                                            ],
+                                          )
                                         ],
-                                      )
-                                    ],
-                                  ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: double.maxFinite,
+                                      height: Dimensions.h50,
+                                      padding: EdgeInsets.only(
+                                          left: Dimensions.w11,
+                                          right: Dimensions.w11),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            "En Son Aktif Olma Durumunu Gizle",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              CupertinoSwitch(
+                                                  value: settingsPageController
+                                                          .hideLastOnlineStatus ??
+                                                      false,
+                                                  onChanged: (value) {
+                                                    settingsPageController
+                                                        .setHideLastOnlineStatus(
+                                                            value);
+                                                  })
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ],
                                 ),
-                                Container(
+                              ),
+                              SettingsHeaderText(text: "WEB PROFİLİ"),
+                              Container(
+                                  height: Dimensions.h45,
+                                  decoration: BoxDecoration(
+                                      border: Border(
+                                          top: BorderSide(
+                                              color: Color(0xFFC5C5C7),
+                                              width: 1),
+                                          bottom: BorderSide(
+                                              color: Color(0xFFC5C5C7),
+                                              width: 1))),
                                   width: double.maxFinite,
-                                  height: Dimensions.h50,
-                                  padding: EdgeInsets.only(
-                                      left: Dimensions.w11,
-                                      right: Dimensions.w11),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                  margin: EdgeInsets.only(
+                                    top: Dimensions.h7,
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Expanded(
+                                          child: TextButton(
+                                              style: TextButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.zero),
+                                                padding: EdgeInsets.zero,
+                                                backgroundColor: Colors.white,
+                                                primary: Colors.black
+                                                    .withOpacity(0.2),
+                                              ),
+                                              onPressed: () {
+                                                changeUsernameDialog();
+                                              },
+                                              child: Container(
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Container(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: Dimensions
+                                                                    .w11),
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Kullanıcı Adı",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        )),
+                                                    Container(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                right:
+                                                                    Dimensions
+                                                                        .w11),
+                                                        child: Row(
+                                                          children: [
+                                                            Text(
+                                                              "Hemen Al",
+                                                              style: TextStyle(
+                                                                  color: Color(
+                                                                      0xFF7B8491),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
+                                                            Icon(Icons
+                                                                .chevron_right_rounded)
+                                                          ],
+                                                        ))
+                                                  ],
+                                                ),
+                                              ))),
+                                    ],
+                                  )),
+                              Container(
+                                  width: double.maxFinite,
+                                  margin: EdgeInsets.only(
+                                      top: Dimensions.h8,
+                                      bottom: Dimensions.h27),
+                                  child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      Text(
-                                        "En Son Aktif Olma Durumunu Gizle",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          CupertinoSwitch(
-                                              value: settingsPageController
-                                                      .hideLastOnlineStatus ??
-                                                  false,
-                                              onChanged: (value) {
-                                                settingsPageController
-                                                    .setHideLastOnlineStatus(
-                                                        value);
-                                              })
-                                        ],
+                                      Container(
+                                        width: 340,
+                                        child: Text(
+                                          "Herkese açık Kullanıcı Adı oluştur ve onu paylaş.Dünya genelinde insanların seni Curvy’de görmesini sağla.",
+                                          style: TextStyle(
+                                              color: Color(0xFF7B8491)),
+                                        ),
                                       )
                                     ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          SettingsHeaderText(text: "WEB PROFİLİ"),
-                          Container(
-                              height: Dimensions.h45,
-                              decoration: BoxDecoration(
-                                  border: Border(
+                                  )),
+                              SettingsHeaderText(text: "BİLDİRİMLER"),
+                              Container(
+                                margin: EdgeInsets.only(
+                                  top: Dimensions.h8,
+                                ),
+                                height: Dimensions.h160,
+                                width: double.maxFinite,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border(
                                       top: BorderSide(
                                           color: Color(0xFFC5C5C7), width: 1),
                                       bottom: BorderSide(
-                                          color: Color(0xFFC5C5C7), width: 1))),
-                              width: double.maxFinite,
-                              margin: EdgeInsets.only(
-                                top: Dimensions.h7,
-                              ),
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                      child: TextButton(
-                                          style: TextButton.styleFrom(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.zero),
-                                            padding: EdgeInsets.zero,
-                                            backgroundColor: Colors.white,
-                                            primary:
-                                                Colors.black.withOpacity(0.2),
-                                          ),
-                                          onPressed: () {
-                                            changeUsernameDialog();
-                                          },
-                                          child: Container(
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Container(
-                                                    padding: EdgeInsets.only(
-                                                        left: Dimensions.w11),
-                                                    child: Center(
-                                                      child: Text(
-                                                        "Kullanıcı Adı",
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                    )),
-                                                Container(
-                                                    padding: EdgeInsets.only(
-                                                        right: Dimensions.w11),
-                                                    child: Row(
-                                                      children: [
-                                                        Text(
-                                                          "Hemen Al",
-                                                          style: TextStyle(
-                                                              color: Color(
-                                                                  0xFF7B8491),
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ),
-                                                        Icon(Icons
-                                                            .chevron_right_rounded)
-                                                      ],
-                                                    ))
-                                              ],
-                                            ),
-                                          ))),
-                                ],
-                              )),
-                          Container(
-                              width: double.maxFinite,
-                              margin: EdgeInsets.only(
-                                  top: Dimensions.h8, bottom: Dimensions.h27),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    width: 340,
-                                    child: Text(
-                                      "Herkese açık Kullanıcı Adı oluştur ve onu paylaş.Dünya genelinde insanların seni Curvy’de görmesini sağla.",
-                                      style:
-                                          TextStyle(color: Color(0xFF7B8491)),
-                                    ),
-                                  )
-                                ],
-                              )),
-                          SettingsHeaderText(text: "BİLDİRİMLER"),
-                          Container(
-                            margin: EdgeInsets.only(
-                              top: Dimensions.h8,
-                            ),
-                            height: Dimensions.h160,
-                            width: double.maxFinite,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border(
-                                  top: BorderSide(
-                                      color: Color(0xFFC5C5C7), width: 1),
-                                  bottom: BorderSide(
-                                      color: Color(0xFFC5C5C7), width: 1),
-                                )),
-                            child: Column(
-                              children: [
-                                ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      elevation: 0,
-                                      primary: Colors.white,
-                                      shape: BeveledRectangleBorder(
-                                          borderRadius: BorderRadius.zero),
-                                    ),
-                                    onPressed: () {
-                                      showEmailNotificationsModal();
-                                    },
-                                    child: Container(
-                                      width: double.maxFinite,
-                                      height: Dimensions.h50,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            "E-posta",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.chevron_right,
-                                                color: Color(0xFF7B8491),
-                                              )
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    )),
-                                SizedBox(
-                                    width: 340,
-                                    height: 1,
-                                    child: DecoratedBox(
-                                      decoration: BoxDecoration(
-                                          color: Color(0xFFC5C5C7)),
-                                    )),
-                                ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      elevation: 0,
-                                      primary: Colors.white,
-                                      shape: BeveledRectangleBorder(
-                                          borderRadius: BorderRadius.zero),
-                                    ),
-                                    onPressed: () {
-                                      showInstantNotificationsModal();
-                                    },
-                                    child: Container(
-                                      width: double.maxFinite,
-                                      height: Dimensions.h50,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            "Anlık Bildirimler",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.chevron_right,
-                                                color: Color(0xFF7B8491),
-                                              )
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    )),
-                                SizedBox(
-                                    width: 340,
-                                    height: 1,
-                                    child: DecoratedBox(
-                                      decoration: BoxDecoration(
-                                          color: Color(0xFFC5C5C7)),
-                                    )),
-                                Container(
-                                  padding: EdgeInsets.only(
-                                      left: Dimensions.w11,
-                                      right: Dimensions.w11),
-                                  width: double.maxFinite,
-                                  height: Dimensions.h50,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "Curvy Team Tekliflerini Kapat",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          CupertinoSwitch(
-                                              value: settingsPageController
-                                                      .curvyTeamPromotions ??
-                                                  false,
-                                              onChanged: (value) {
-                                                settingsPageController
-                                                    .setCurvyTeamPromotions(
-                                                        value);
-                                              })
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          Container(
-                              width: double.maxFinite,
-                              margin: EdgeInsets.only(
-                                  top: Dimensions.h8, bottom: Dimensions.h27),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    width: 340,
-                                    child: Text(
-                                      "Uygulamada hangi bildirimleri görmek istediğini seç.",
-                                      style:
-                                          TextStyle(color: Color(0xFF7B8491)),
-                                    ),
-                                  )
-                                ],
-                              )),
-                          Container(
-                              height: Dimensions.h45,
-                              decoration: BoxDecoration(
-                                  border: Border(
-                                      top: BorderSide(
                                           color: Color(0xFFC5C5C7), width: 1),
-                                      bottom: BorderSide(
-                                          color: Color(0xFFC5C5C7), width: 1))),
-                              width: double.maxFinite,
-                              margin: EdgeInsets.only(
-                                  top: Dimensions.h7, bottom: Dimensions.h27),
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                      child: TextButton(
-                                          style: TextButton.styleFrom(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.zero),
-                                            padding: EdgeInsets.zero,
-                                            backgroundColor: Colors.white,
-                                            primary:
-                                                Colors.black.withOpacity(0.2),
-                                          ),
-                                          onPressed: () {},
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                gradient: LinearGradient(
-                                                    colors: [
-                                                  Color(0xFFD51CFF),
-                                                  Color(0xFF6198EF)
-                                                ])),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Container(
-                                                    padding: EdgeInsets.only(
-                                                        left: Dimensions.w11),
-                                                    child: Center(
-                                                      child: Text(
-                                                        "Satın Alınanları Geri Yükle",
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                    )),
-                                              ],
-                                            ),
-                                          ))),
-                                ],
-                              )),
-                          Container(
-                              height: Dimensions.h45,
-                              decoration: BoxDecoration(
-                                  border: Border(
-                                      top: BorderSide(
-                                          color: Color(0xFFC5C5C7), width: 1),
-                                      bottom: BorderSide(
-                                          color: Color(0xFFC5C5C7), width: 1))),
-                              width: double.maxFinite,
-                              margin: EdgeInsets.only(
-                                  top: Dimensions.h7, bottom: Dimensions.h27),
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                      child: TextButton(
-                                          style: TextButton.styleFrom(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.zero),
-                                            padding: EdgeInsets.zero,
-                                            backgroundColor: Colors.white,
-                                            primary:
-                                                Colors.black.withOpacity(0.2),
-                                          ),
-                                          onPressed: () {},
-                                          child: Container(
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Container(
-                                                    padding: EdgeInsets.only(
-                                                        left: Dimensions.w11),
-                                                    child: Center(
-                                                      child: Text(
-                                                        "Curvy'i Paylaş",
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                    )),
-                                              ],
-                                            ),
-                                          ))),
-                                ],
-                              )),
-                          SettingsHeaderText(text: "BİZE ULAŞ"),
-                          Container(
-                              height: Dimensions.h45,
-                              decoration: BoxDecoration(
-                                  border: Border(
-                                      top: BorderSide(
-                                          color: Color(0xFFC5C5C7), width: 1),
-                                      bottom: BorderSide(
-                                          color: Color(0xFFC5C5C7), width: 1))),
-                              width: double.maxFinite,
-                              margin: EdgeInsets.only(
-                                  top: Dimensions.h7, bottom: Dimensions.h27),
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                      child: TextButton(
-                                          style: TextButton.styleFrom(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.zero),
-                                            padding: EdgeInsets.zero,
-                                            backgroundColor: Colors.white,
-                                            primary:
-                                                Colors.black.withOpacity(0.2),
-                                          ),
-                                          onPressed: () {},
-                                          child: Container(
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Container(
-                                                    padding: EdgeInsets.only(
-                                                        left: Dimensions.w11),
-                                                    child: Center(
-                                                      child: Text(
-                                                        "Yardım ve Destek",
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                    )),
-                                                Container(
-                                                    padding: EdgeInsets.only(
-                                                        right: Dimensions.w11),
-                                                    child: Row(
-                                                      children: [
-                                                        Icon(Icons
-                                                            .chevron_right_rounded)
-                                                      ],
-                                                    ))
-                                              ],
-                                            ),
-                                          ))),
-                                ],
-                              )),
-                          SettingsHeaderText(text: "TOPLULUK"),
-                          Container(
-                            margin: EdgeInsets.only(
-                                top: Dimensions.h8, bottom: Dimensions.h31),
-                            height: Dimensions.h160,
-                            width: double.maxFinite,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border(
-                                  top: BorderSide(
-                                      color: Color(0xFFC5C5C7), width: 1),
-                                  bottom: BorderSide(
-                                      color: Color(0xFFC5C5C7), width: 1),
-                                )),
-                            child: Column(
-                              children: [
-                                ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      elevation: 0,
-                                      primary: Colors.white,
-                                      shape: BeveledRectangleBorder(
-                                          borderRadius: BorderRadius.zero),
-                                    ),
-                                    onPressed: () {},
-                                    child: Container(
-                                      width: double.maxFinite,
-                                      height: Dimensions.h50,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            "Topluluk Kuralları",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Row(
+                                    )),
+                                child: Column(
+                                  children: [
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          elevation: 0,
+                                          primary: Colors.white,
+                                          shape: BeveledRectangleBorder(
+                                              borderRadius: BorderRadius.zero),
+                                        ),
+                                        onPressed: () {
+                                          showEmailNotificationsModal();
+                                        },
+                                        child: Container(
+                                          width: double.maxFinite,
+                                          height: Dimensions.h50,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.center,
                                             children: [
-                                              Icon(
-                                                Icons.chevron_right,
-                                                color: Color(0xFF7B8491),
-                                              )
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    )),
-                                SizedBox(
-                                    width: 340,
-                                    height: 1,
-                                    child: DecoratedBox(
-                                      decoration: BoxDecoration(
-                                          color: Color(0xFFC5C5C7)),
-                                    )),
-                                ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      elevation: 0,
-                                      primary: Colors.white,
-                                      shape: BeveledRectangleBorder(
-                                          borderRadius: BorderRadius.zero),
-                                    ),
-                                    onPressed: () {},
-                                    child: Container(
-                                      width: double.maxFinite,
-                                      height: Dimensions.h50,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            "Güvenlik İpuçları",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.chevron_right,
-                                                color: Color(0xFF7B8491),
-                                              )
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    )),
-                                SizedBox(
-                                    width: 340,
-                                    height: 1,
-                                    child: DecoratedBox(
-                                      decoration: BoxDecoration(
-                                          color: Color(0xFFC5C5C7)),
-                                    )),
-                                ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      elevation: 0,
-                                      primary: Colors.white,
-                                      shape: BeveledRectangleBorder(
-                                          borderRadius: BorderRadius.zero),
-                                    ),
-                                    onPressed: () {},
-                                    child: Container(
-                                      width: double.maxFinite,
-                                      height: Dimensions.h50,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            "Güvenlik Merkezi",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.chevron_right,
-                                                color: Color(0xFF7B8491),
-                                              )
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    )),
-                              ],
-                            ),
-                          ),
-                          SettingsHeaderText(text: "GİZLİLİK"),
-                          Container(
-                            margin: EdgeInsets.only(
-                                top: Dimensions.h8, bottom: Dimensions.h36),
-                            height: Dimensions.h160,
-                            width: double.maxFinite,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border(
-                                  top: BorderSide(
-                                      color: Color(0xFFC5C5C7), width: 1),
-                                  bottom: BorderSide(
-                                      color: Color(0xFFC5C5C7), width: 1),
-                                )),
-                            child: Column(
-                              children: [
-                                ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      elevation: 0,
-                                      primary: Colors.white,
-                                      shape: BeveledRectangleBorder(
-                                          borderRadius: BorderRadius.zero),
-                                    ),
-                                    onPressed: () {},
-                                    child: Container(
-                                      width: double.maxFinite,
-                                      height: Dimensions.h50,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            "Çerez Politikası",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.chevron_right,
-                                                color: Color(0xFF7B8491),
-                                              )
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    )),
-                                SizedBox(
-                                    width: 340,
-                                    height: 1,
-                                    child: DecoratedBox(
-                                      decoration: BoxDecoration(
-                                          color: Color(0xFFC5C5C7)),
-                                    )),
-                                ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      elevation: 0,
-                                      primary: Colors.white,
-                                      shape: BeveledRectangleBorder(
-                                          borderRadius: BorderRadius.zero),
-                                    ),
-                                    onPressed: () {},
-                                    child: Container(
-                                      width: double.maxFinite,
-                                      height: Dimensions.h50,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            "Gizlilik Politikası",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.chevron_right,
-                                                color: Color(0xFF7B8491),
-                                              )
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    )),
-                                SizedBox(
-                                    width: 340,
-                                    height: 1,
-                                    child: DecoratedBox(
-                                      decoration: BoxDecoration(
-                                          color: Color(0xFFC5C5C7)),
-                                    )),
-                                ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      elevation: 0,
-                                      primary: Colors.white,
-                                      shape: BeveledRectangleBorder(
-                                          borderRadius: BorderRadius.zero),
-                                    ),
-                                    onPressed: () {
-                                      showPrivacyPreferencesModal();
-                                    },
-                                    child: Container(
-                                      width: double.maxFinite,
-                                      height: Dimensions.h50,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            "Gizlilik Tercihleri",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.chevron_right,
-                                                color: Color(0xFF7B8491),
-                                              )
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    )),
-                              ],
-                            ),
-                          ),
-                          SettingsHeaderText(text: "YASAL"),
-                          Container(
-                            margin: EdgeInsets.only(
-                              top: Dimensions.h8,
-                            ),
-                            width: double.maxFinite,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border(
-                                  top: BorderSide(
-                                      color: Color(0xFFC5C5C7), width: 1),
-                                  bottom: BorderSide(
-                                      color: Color(0xFFC5C5C7), width: 1),
-                                )),
-                            child: Column(
-                              children: [
-                                ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      elevation: 0,
-                                      primary: Colors.white,
-                                      shape: BeveledRectangleBorder(
-                                          borderRadius: BorderRadius.zero),
-                                    ),
-                                    onPressed: () {},
-                                    child: Container(
-                                      width: double.maxFinite,
-                                      height: Dimensions.h50,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            "Lisanslar",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.chevron_right,
-                                                color: Color(0xFF7B8491),
-                                              )
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    )),
-                                SizedBox(
-                                    width: 340,
-                                    height: 1,
-                                    child: DecoratedBox(
-                                      decoration: BoxDecoration(
-                                          color: Color(0xFFC5C5C7)),
-                                    )),
-                                ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      elevation: 0,
-                                      primary: Colors.white,
-                                      shape: BeveledRectangleBorder(
-                                          borderRadius: BorderRadius.zero),
-                                    ),
-                                    onPressed: () {},
-                                    child: Container(
-                                      width: double.maxFinite,
-                                      height: Dimensions.h50,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            "Hizmet Koşulları",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.chevron_right,
-                                                color: Color(0xFF7B8491),
-                                              )
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    )),
-                              ],
-                            ),
-                          ),
-                          Container(
-                              height: Dimensions.h45,
-                              decoration: BoxDecoration(
-                                  border: Border(
-                                      top: BorderSide(
-                                          color: Color(0xFFC5C5C7), width: 1),
-                                      bottom: BorderSide(
-                                          color: Color(0xFFC5C5C7), width: 1))),
-                              width: double.maxFinite,
-                              margin: EdgeInsets.only(
-                                top: Dimensions.h36,
-                                bottom: Dimensions.h36,
-                              ),
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                      child: TextButton(
-                                          style: TextButton.styleFrom(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.zero),
-                                            padding: EdgeInsets.zero,
-                                            backgroundColor: Colors.white,
-                                            primary:
-                                                Colors.black.withOpacity(0.2),
-                                          ),
-                                          onPressed: () {
-                                            settingsPageController.logout();
-                                          },
-                                          child: Container(
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Container(
-                                                    padding: EdgeInsets.only(
-                                                        left: Dimensions.w11),
-                                                    child: Center(
-                                                      child: Text(
-                                                        "Çıkış",
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                    )),
-                                              ],
-                                            ),
-                                          ))),
-                                ],
-                              )),
-                        ],
-                      )),
-                  Image.asset("assets/images/settings_logo.png"),
-                  Text(
-                    "Versiyon 01.00.0",
-                    style: TextStyle(color: Color(0xFF7B8491)),
-                  ),
-                  Container(
-                      height: Dimensions.h45,
-                      decoration: BoxDecoration(
-                          border: Border(
-                              top: BorderSide(
-                                  color: Color(0xFFC5C5C7), width: 1),
-                              bottom: BorderSide(
-                                  color: Color(0xFFC5C5C7), width: 1))),
-                      width: double.maxFinite,
-                      margin: EdgeInsets.only(
-                        top: Dimensions.h36,
-                        bottom: Dimensions.h36,
-                      ),
-                      child: Column(
-                        children: [
-                          Expanded(
-                              child: TextButton(
-                                  style: TextButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.zero),
-                                    padding: EdgeInsets.zero,
-                                    backgroundColor: Colors.white,
-                                    primary: Colors.black.withOpacity(0.2),
-                                  ),
-                                  onPressed: () {
-                                    Get.to(
-                                        () => DeleteAccountLastChanceScreen());
-                                  },
-                                  child: Container(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                            padding: EdgeInsets.only(
-                                                left: Dimensions.w11),
-                                            child: Center(
-                                              child: Text(
-                                                "Hesabı Sil",
+                                              Text(
+                                                "E-posta",
                                                 style: TextStyle(
                                                     color: Colors.black,
                                                     fontWeight:
                                                         FontWeight.bold),
                                               ),
-                                            )),
-                                      ],
-                                    ),
-                                  ))),
-                        ],
-                      )),
-                ],
-              ),
-            )) : null,
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    Icons.chevron_right,
+                                                    color: Color(0xFF7B8491),
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        )),
+                                    SizedBox(
+                                        width: 340,
+                                        height: 1,
+                                        child: DecoratedBox(
+                                          decoration: BoxDecoration(
+                                              color: Color(0xFFC5C5C7)),
+                                        )),
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          elevation: 0,
+                                          primary: Colors.white,
+                                          shape: BeveledRectangleBorder(
+                                              borderRadius: BorderRadius.zero),
+                                        ),
+                                        onPressed: () {
+                                          showInstantNotificationsModal();
+                                        },
+                                        child: Container(
+                                          width: double.maxFinite,
+                                          height: Dimensions.h50,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "Anlık Bildirimler",
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    Icons.chevron_right,
+                                                    color: Color(0xFF7B8491),
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        )),
+                                    SizedBox(
+                                        width: 340,
+                                        height: 1,
+                                        child: DecoratedBox(
+                                          decoration: BoxDecoration(
+                                              color: Color(0xFFC5C5C7)),
+                                        )),
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                          left: Dimensions.w11,
+                                          right: Dimensions.w11),
+                                      width: double.maxFinite,
+                                      height: Dimensions.h50,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            "Curvy Team Tekliflerini Kapat",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              CupertinoSwitch(
+                                                  value: settingsPageController
+                                                          .curvyTeamPromotions ??
+                                                      false,
+                                                  onChanged: (value) {
+                                                    settingsPageController
+                                                        .setCurvyTeamPromotions(
+                                                            value);
+                                                  })
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                  width: double.maxFinite,
+                                  margin: EdgeInsets.only(
+                                      top: Dimensions.h8,
+                                      bottom: Dimensions.h27),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        width: 340,
+                                        child: Text(
+                                          "Uygulamada hangi bildirimleri görmek istediğini seç.",
+                                          style: TextStyle(
+                                              color: Color(0xFF7B8491)),
+                                        ),
+                                      )
+                                    ],
+                                  )),
+                              Container(
+                                  height: Dimensions.h45,
+                                  decoration: BoxDecoration(
+                                      border: Border(
+                                          top: BorderSide(
+                                              color: Color(0xFFC5C5C7),
+                                              width: 1),
+                                          bottom: BorderSide(
+                                              color: Color(0xFFC5C5C7),
+                                              width: 1))),
+                                  width: double.maxFinite,
+                                  margin: EdgeInsets.only(
+                                      top: Dimensions.h7,
+                                      bottom: Dimensions.h27),
+                                  child: Column(
+                                    children: [
+                                      Expanded(
+                                          child: TextButton(
+                                              style: TextButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.zero),
+                                                padding: EdgeInsets.zero,
+                                                backgroundColor: Colors.white,
+                                                primary: Colors.black
+                                                    .withOpacity(0.2),
+                                              ),
+                                              onPressed: () {},
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                    gradient: LinearGradient(
+                                                        colors: [
+                                                      Color(0xFFD51CFF),
+                                                      Color(0xFF6198EF)
+                                                    ])),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Container(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: Dimensions
+                                                                    .w11),
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Satın Alınanları Geri Yükle",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        )),
+                                                  ],
+                                                ),
+                                              ))),
+                                    ],
+                                  )),
+                              Container(
+                                  height: Dimensions.h45,
+                                  decoration: BoxDecoration(
+                                      border: Border(
+                                          top: BorderSide(
+                                              color: Color(0xFFC5C5C7),
+                                              width: 1),
+                                          bottom: BorderSide(
+                                              color: Color(0xFFC5C5C7),
+                                              width: 1))),
+                                  width: double.maxFinite,
+                                  margin: EdgeInsets.only(
+                                      top: Dimensions.h7,
+                                      bottom: Dimensions.h27),
+                                  child: Column(
+                                    children: [
+                                      Expanded(
+                                          child: TextButton(
+                                              style: TextButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.zero),
+                                                padding: EdgeInsets.zero,
+                                                backgroundColor: Colors.white,
+                                                primary: Colors.black
+                                                    .withOpacity(0.2),
+                                              ),
+                                              onPressed: () {},
+                                              child: Container(
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Container(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: Dimensions
+                                                                    .w11),
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Curvy'i Paylaş",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        )),
+                                                  ],
+                                                ),
+                                              ))),
+                                    ],
+                                  )),
+                              SettingsHeaderText(text: "BİZE ULAŞ"),
+                              Container(
+                                  height: Dimensions.h45,
+                                  decoration: BoxDecoration(
+                                      border: Border(
+                                          top: BorderSide(
+                                              color: Color(0xFFC5C5C7),
+                                              width: 1),
+                                          bottom: BorderSide(
+                                              color: Color(0xFFC5C5C7),
+                                              width: 1))),
+                                  width: double.maxFinite,
+                                  margin: EdgeInsets.only(
+                                      top: Dimensions.h7,
+                                      bottom: Dimensions.h27),
+                                  child: Column(
+                                    children: [
+                                      Expanded(
+                                          child: TextButton(
+                                              style: TextButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.zero),
+                                                padding: EdgeInsets.zero,
+                                                backgroundColor: Colors.white,
+                                                primary: Colors.black
+                                                    .withOpacity(0.2),
+                                              ),
+                                              onPressed: () {},
+                                              child: Container(
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Container(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: Dimensions
+                                                                    .w11),
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Yardım ve Destek",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        )),
+                                                    Container(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                right:
+                                                                    Dimensions
+                                                                        .w11),
+                                                        child: Row(
+                                                          children: [
+                                                            Icon(Icons
+                                                                .chevron_right_rounded)
+                                                          ],
+                                                        ))
+                                                  ],
+                                                ),
+                                              ))),
+                                    ],
+                                  )),
+                              SettingsHeaderText(text: "TOPLULUK"),
+                              Container(
+                                margin: EdgeInsets.only(
+                                    top: Dimensions.h8, bottom: Dimensions.h31),
+                                height: Dimensions.h160,
+                                width: double.maxFinite,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border(
+                                      top: BorderSide(
+                                          color: Color(0xFFC5C5C7), width: 1),
+                                      bottom: BorderSide(
+                                          color: Color(0xFFC5C5C7), width: 1),
+                                    )),
+                                child: Column(
+                                  children: [
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          elevation: 0,
+                                          primary: Colors.white,
+                                          shape: BeveledRectangleBorder(
+                                              borderRadius: BorderRadius.zero),
+                                        ),
+                                        onPressed: () {},
+                                        child: Container(
+                                          width: double.maxFinite,
+                                          height: Dimensions.h50,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "Topluluk Kuralları",
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    Icons.chevron_right,
+                                                    color: Color(0xFF7B8491),
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        )),
+                                    SizedBox(
+                                        width: 340,
+                                        height: 1,
+                                        child: DecoratedBox(
+                                          decoration: BoxDecoration(
+                                              color: Color(0xFFC5C5C7)),
+                                        )),
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          elevation: 0,
+                                          primary: Colors.white,
+                                          shape: BeveledRectangleBorder(
+                                              borderRadius: BorderRadius.zero),
+                                        ),
+                                        onPressed: () {},
+                                        child: Container(
+                                          width: double.maxFinite,
+                                          height: Dimensions.h50,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "Güvenlik İpuçları",
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    Icons.chevron_right,
+                                                    color: Color(0xFF7B8491),
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        )),
+                                    SizedBox(
+                                        width: 340,
+                                        height: 1,
+                                        child: DecoratedBox(
+                                          decoration: BoxDecoration(
+                                              color: Color(0xFFC5C5C7)),
+                                        )),
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          elevation: 0,
+                                          primary: Colors.white,
+                                          shape: BeveledRectangleBorder(
+                                              borderRadius: BorderRadius.zero),
+                                        ),
+                                        onPressed: () {},
+                                        child: Container(
+                                          width: double.maxFinite,
+                                          height: Dimensions.h50,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "Güvenlik Merkezi",
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    Icons.chevron_right,
+                                                    color: Color(0xFF7B8491),
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        )),
+                                  ],
+                                ),
+                              ),
+                              SettingsHeaderText(text: "GİZLİLİK"),
+                              Container(
+                                margin: EdgeInsets.only(
+                                    top: Dimensions.h8, bottom: Dimensions.h36),
+                                height: Dimensions.h160,
+                                width: double.maxFinite,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border(
+                                      top: BorderSide(
+                                          color: Color(0xFFC5C5C7), width: 1),
+                                      bottom: BorderSide(
+                                          color: Color(0xFFC5C5C7), width: 1),
+                                    )),
+                                child: Column(
+                                  children: [
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          elevation: 0,
+                                          primary: Colors.white,
+                                          shape: BeveledRectangleBorder(
+                                              borderRadius: BorderRadius.zero),
+                                        ),
+                                        onPressed: () {},
+                                        child: Container(
+                                          width: double.maxFinite,
+                                          height: Dimensions.h50,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "Çerez Politikası",
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    Icons.chevron_right,
+                                                    color: Color(0xFF7B8491),
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        )),
+                                    SizedBox(
+                                        width: 340,
+                                        height: 1,
+                                        child: DecoratedBox(
+                                          decoration: BoxDecoration(
+                                              color: Color(0xFFC5C5C7)),
+                                        )),
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          elevation: 0,
+                                          primary: Colors.white,
+                                          shape: BeveledRectangleBorder(
+                                              borderRadius: BorderRadius.zero),
+                                        ),
+                                        onPressed: () {},
+                                        child: Container(
+                                          width: double.maxFinite,
+                                          height: Dimensions.h50,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "Gizlilik Politikası",
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    Icons.chevron_right,
+                                                    color: Color(0xFF7B8491),
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        )),
+                                    SizedBox(
+                                        width: 340,
+                                        height: 1,
+                                        child: DecoratedBox(
+                                          decoration: BoxDecoration(
+                                              color: Color(0xFFC5C5C7)),
+                                        )),
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          elevation: 0,
+                                          primary: Colors.white,
+                                          shape: BeveledRectangleBorder(
+                                              borderRadius: BorderRadius.zero),
+                                        ),
+                                        onPressed: () {
+                                          showPrivacyPreferencesModal();
+                                        },
+                                        child: Container(
+                                          width: double.maxFinite,
+                                          height: Dimensions.h50,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "Gizlilik Tercihleri",
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    Icons.chevron_right,
+                                                    color: Color(0xFF7B8491),
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        )),
+                                  ],
+                                ),
+                              ),
+                              SettingsHeaderText(text: "YASAL"),
+                              Container(
+                                margin: EdgeInsets.only(
+                                  top: Dimensions.h8,
+                                ),
+                                width: double.maxFinite,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border(
+                                      top: BorderSide(
+                                          color: Color(0xFFC5C5C7), width: 1),
+                                      bottom: BorderSide(
+                                          color: Color(0xFFC5C5C7), width: 1),
+                                    )),
+                                child: Column(
+                                  children: [
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          elevation: 0,
+                                          primary: Colors.white,
+                                          shape: BeveledRectangleBorder(
+                                              borderRadius: BorderRadius.zero),
+                                        ),
+                                        onPressed: () {},
+                                        child: Container(
+                                          width: double.maxFinite,
+                                          height: Dimensions.h50,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "Lisanslar",
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    Icons.chevron_right,
+                                                    color: Color(0xFF7B8491),
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        )),
+                                    SizedBox(
+                                        width: 340,
+                                        height: 1,
+                                        child: DecoratedBox(
+                                          decoration: BoxDecoration(
+                                              color: Color(0xFFC5C5C7)),
+                                        )),
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          elevation: 0,
+                                          primary: Colors.white,
+                                          shape: BeveledRectangleBorder(
+                                              borderRadius: BorderRadius.zero),
+                                        ),
+                                        onPressed: () {},
+                                        child: Container(
+                                          width: double.maxFinite,
+                                          height: Dimensions.h50,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "Hizmet Koşulları",
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    Icons.chevron_right,
+                                                    color: Color(0xFF7B8491),
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        )),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                  height: Dimensions.h45,
+                                  decoration: BoxDecoration(
+                                      border: Border(
+                                          top: BorderSide(
+                                              color: Color(0xFFC5C5C7),
+                                              width: 1),
+                                          bottom: BorderSide(
+                                              color: Color(0xFFC5C5C7),
+                                              width: 1))),
+                                  width: double.maxFinite,
+                                  margin: EdgeInsets.only(
+                                    top: Dimensions.h36,
+                                    bottom: Dimensions.h36,
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Expanded(
+                                          child: TextButton(
+                                              style: TextButton.styleFrom(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.zero),
+                                                padding: EdgeInsets.zero,
+                                                backgroundColor: Colors.white,
+                                                primary: Colors.black
+                                                    .withOpacity(0.2),
+                                              ),
+                                              onPressed: () {
+                                                settingsPageController.logout();
+                                              },
+                                              child: Container(
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Container(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: Dimensions
+                                                                    .w11),
+                                                        child: Center(
+                                                          child: Text(
+                                                            "Çıkış",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        )),
+                                                  ],
+                                                ),
+                                              ))),
+                                    ],
+                                  )),
+                            ],
+                          )),
+                      Image.asset("assets/images/settings_logo.png"),
+                      Text(
+                        "Versiyon 01.00.0",
+                        style: TextStyle(color: Color(0xFF7B8491)),
+                      ),
+                      Container(
+                          height: Dimensions.h45,
+                          decoration: BoxDecoration(
+                              border: Border(
+                                  top: BorderSide(
+                                      color: Color(0xFFC5C5C7), width: 1),
+                                  bottom: BorderSide(
+                                      color: Color(0xFFC5C5C7), width: 1))),
+                          width: double.maxFinite,
+                          margin: EdgeInsets.only(
+                            top: Dimensions.h36,
+                            bottom: Dimensions.h36,
+                          ),
+                          child: Column(
+                            children: [
+                              Expanded(
+                                  child: TextButton(
+                                      style: TextButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.zero),
+                                        padding: EdgeInsets.zero,
+                                        backgroundColor: Colors.white,
+                                        primary: Colors.black.withOpacity(0.2),
+                                      ),
+                                      onPressed: () {
+                                        Get.to(() =>
+                                            DeleteAccountLastChanceScreen());
+                                      },
+                                      child: Container(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                                padding: EdgeInsets.only(
+                                                    left: Dimensions.w11),
+                                                child: Center(
+                                                  child: Text(
+                                                    "Hesabı Sil",
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                )),
+                                          ],
+                                        ),
+                                      ))),
+                            ],
+                          )),
+                    ],
+                  ),
+                ))
+            : null,
       );
     });
   }

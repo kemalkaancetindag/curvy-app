@@ -266,84 +266,7 @@ class SettingsController extends GetxController {
     _curvyPromotions = curvyPromotions;
     _facebookAds = facebookAds;
     _newAdvertisingPermissions = newAdvertisingPermissions;
-    print("distancePreferenceDistance");
-    print(distancePreferenceDistance);
-    print("distancePreferenceOnlyThisInterval");
-    print(distancePreferenceOnlyThisInterval);
-
-    print("showme");
-    print(showme);
-
-    print("minAge");
-    print(minAge);
-    print("maxAge");
-    print(maxAge);
-    print("agePreferenceOnlyThisInterval");
-    print(agePreferenceOnlyThisInterval);
-    print("global");
-    print(global);
-    print("viewerPreference");
-    print(viewerPreference);
-    print("recommendationPreference");
-    print(recommendationPreference);
-    print("language");
-    print(language);
-    print("hideMeOnVip");
-    print(hideMeOnVip);
-    print("hideMeOnFreeStyle");
-    print(hideMeOnFreeStyle);
-    print("recommendMeOnTurbo");
-    print(recommendMeOnTurbo);
-    print("closeReadingNotifications");
-    print(closeReadingNotifications);
-    print("playVideosAutomatically");
-    print(playVideosAutomatically);
-    print("hideOnlineStatus");
-    print(hideOnlineStatus);
-    print("hideLastOnlineStatus");
-    print(hideLastOnlineStatus);
-    print("emailOnMatch");
-    print(emailOnMatch);
-    print("emailOnMessage");
-    print(emailOnMessage);
-    print("emailOnMarketing");
-    print(emailOnMarketing);
-    print("instantNewLikes");
-    print(instantNewLikes);
-    print("instantOnCurvyLike");
-    print(instantOnCurvyLike);
-    print("instantOnMatch");
-    print(instantOnMatch);
-    print("instantOnMessage");
-    print(instantOnMessage);
-    print("instantOnMessageLike");
-    print(instantOnMessageLike);
-    print("instantSound");
-    print(instantSound);
-    print("instantVibration");
-    print(instantVibration);
-    print("privacyEnableAdvertising");
-    print(privacyEnableAdvertising);
-    print("newAdvertisingPermissions");
-    print(newAdvertisingPermissions);
-    print("facebookAds");
-    print(facebookAds);
-    print("curvyPromotions");
-    print(curvyPromotions);
-    print("googleAds");
-    print(googleAds);
-    print("curvyDirectAds");
-    print(curvyDirectAds);
-    print("newMarketingPermissions");
-    print(newMarketingPermissions);
-    print("branch");
-    print(branch);
-    print("appFlayer");
-    print(appFlayer);
-    print("privacyEnableMarketing");
-    print(privacyEnableMarketing);
-    print("privacyEnableAdvertising");
-    print(privacyEnableAdvertising);
+   
 
 
 
@@ -681,16 +604,13 @@ class SettingsController extends GetxController {
 
     data['settings.privacy_preferences.curvy_team_promotions'] = _curvyTeamPromotions;
 
-    print(data);
-
-
 
     await firestoreService.updateUser(data, _userID!);
     Get.back();
   }
 
   void logout() async {
-    print("SAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    
     await Get.find<SharedPreferenceService>().deleteUser();
     Get.offAllNamed(Routes.login);
   }

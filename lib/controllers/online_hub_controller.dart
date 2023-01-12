@@ -68,7 +68,7 @@ class OnlineHubController extends GetxController {
   Future<void> updateHubData(OnlineHub updatedData, HubStorageModel storedHub) async {
     String currentUserId = Get.find<SharedPreferenceService>().getUserID();
     _currentUser = await Get.find<FirestoreService>().getUser(currentUserId);
-    print("geldi");
+    
 
 
     _hubData = updatedData;
@@ -91,11 +91,11 @@ class OnlineHubController extends GetxController {
         _timer!.cancel();
       }
       else{
-        print("NULLLL");
+        
       }
       Timer.periodic(Duration(seconds: 1), (timer) {
         _timer = timer;
-        print('update');
+        
         if (stopTimer) {
           timer.cancel();
         }
@@ -113,7 +113,7 @@ class OnlineHubController extends GetxController {
         update();
       });
     } else {
-      print("tekrar");
+      
       _amIAlone = false;
       _onlineUsers = [];
       await Future.forEach(onlineUserIDS, (userID) async {
@@ -121,7 +121,7 @@ class OnlineHubController extends GetxController {
             await Get.find<FirestoreService>().getUser(userID);
         _onlineUsers!.add(onlineUserModel);
       });
-      print(_onlineUsers!.length);
+      
       generateFoundSlider();
       update();
     }
@@ -439,8 +439,7 @@ class OnlineHubController extends GetxController {
   }
 
   Future<void> likeUser() async {
-    print('bas');
-    print(_onlineUsers!.length);
+
     await Get.find<MatchService>()
         .createMatch(_onlineUsers![_currentUserIndex].userID!);
     _currentUserIndex += 1;

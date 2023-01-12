@@ -14,10 +14,20 @@ class MatcherStyle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MatcherController>(builder: (controller) {
-      if (Get.find<ExpandedMatcherStyleController>().user == null) {        
+      if (Get.find<ExpandedMatcherStyleController>().user == null) {
+        controller.onInit();
+        
         return controller.cards != null ?  Stack(          
               children: controller.cards!,
-            ) : Container();
+            ) : Container(
+              width: double.maxFinite,
+              height: double.maxFinite,
+              child: Center(
+                child: CircularProgressIndicator(
+                  color: Color(0xFFD51CFF),
+                ),
+              ),
+            );
       }
 
       return GetBuilder<ExpandedMatcherStyleController>(

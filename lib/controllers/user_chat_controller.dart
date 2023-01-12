@@ -19,50 +19,45 @@ class UserChatController extends GetxController {
   bool _isTapping = false;
   bool get isTapping => _isTapping;
 
-
-
   UserChatController({required this.firestoreService, required this.userID});
 
   @override
-  Future<void> onInit() async {  
-    _chatCurrentPosition = [-Dimensions.w11*10, -Dimensions.w11*10];    
+  Future<void> onInit() async {
+    _chatCurrentPosition = [-Dimensions.w11 * 10, -Dimensions.w11 * 10];
     startListening();
   }
 
-
-
-
   void startListening() async {
-    var userDoc = (await firestoreService.getCollection('users').where('userID', isEqualTo: userID).get()).docs[0];
+    var userDoc = (await firestoreService
+            .getCollection('users')
+            .where('userID', isEqualTo: userID)
+            .get())
+        .docs[0];
 
-    Stream<DocumentSnapshot> userStream = firestoreService.getCollection('users').doc(userDoc.id).snapshots();
+    Stream<DocumentSnapshot> userStream =
+        firestoreService.getCollection('users').doc(userDoc.id).snapshots();
 
-    await for(var user in userStream) {
-      _user = UserModel.fromJson(user.data() as Map<String,dynamic>);
-            
+    await for (var user in userStream) {
+      _user = UserModel.fromJson(user.data() as Map<String, dynamic>);
+
       update();
     }
-
   }
 
   void slideTile(double xChange, String chatID) async {
-    
-    if(xChange < 0){      
+    if (xChange < 0) {
       var nextRightPosition = _chatCurrentPosition![1] - xChange;
 
-      if(nextRightPosition < 0){
+      if (nextRightPosition < 0) {
         _chatCurrentPosition![0] = _chatCurrentPosition![0] + xChange;
         _chatCurrentPosition![1] = _chatCurrentPosition![1] - xChange;
-      }      
-
-    }
-    else if(xChange > 0){
-      var nexLeftPosition =  _chatCurrentPosition![0] + xChange;
-      if(nexLeftPosition < 0){
+      }
+    } else if (xChange > 0) {
+      var nexLeftPosition = _chatCurrentPosition![0] + xChange;
+      if (nexLeftPosition < 0) {
         _chatCurrentPosition![0] = _chatCurrentPosition![0] + xChange;
         _chatCurrentPosition![1] = _chatCurrentPosition![1] - xChange;
-      }    
-
+      }
     }
 
     update();
@@ -74,34 +69,25 @@ class UserChatController extends GetxController {
   }
 
   void resetPosition() {
-    _chatCurrentPosition![0] = -Dimensions.w11*10;
-    _chatCurrentPosition![1] = -Dimensions.w11*10;
-    update();  
+    _chatCurrentPosition![0] = -Dimensions.w11 * 10;
+    _chatCurrentPosition![1] = -Dimensions.w11 * 10;
+    update();
   }
 
   Future decideSlideAction(String chatID) async {
     var chatController = Get.find<ChatController>();
     var chatService = Get.find<ChatService>();
-    if(chatCurrentPosition![1] > -5){
-      if(chatController.isActiveMessages){
+    if (chatCurrentPosition![1] > -5) {
+      if (chatController.isActiveMessages) {
         await chatService.deactivateChat(chatID);
-      }
-      else{
+      } else {
         await chatService.deleteChat(chatID);
       }
-      
-    }
-    else if(chatCurrentPosition![0] > -5){
-      if(chatController.isActiveMessages){
-
-      }
-      else{
+    } else if (chatCurrentPosition![0] > -5) {
+      if (chatController.isActiveMessages) {
+      } else {
         await chatService.activateChat(chatID);
       }
-      
     }
-    
   }
-
- 
 }

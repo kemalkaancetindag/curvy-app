@@ -33,30 +33,28 @@ class UserDetailController extends GetxController {
 
   String _curvyLikeMessageText = "";
 
-
   int? _distance;
   int? get distance => _distance;
-
 
   String userID;
   int? userIndex;
 
-  UserDetailController({required this.firestoreService, required this.userID, this.userIndex});
+  UserDetailController(
+      {required this.firestoreService, required this.userID, this.userIndex});
 
   @override
   Future<void> onInit() async {
-
-    print("INDEXXXX");
-    print(userIndex);
     await getInitialUser();
     listenUser(userID);
   }
 
   Future<void> getInitialUser() async {
-    print(userID);
     _user = await firestoreService.getUser(userID);
-    print(_user);
-    _distance = await calculateDistance(_user!.location!.latitude!, _user!.location!.longitude!,);   
+
+    _distance = await calculateDistance(
+      _user!.location!.latitude!,
+      _user!.location!.longitude!,
+    );
     createPage();
     update();
   }
@@ -74,15 +72,13 @@ class UserDetailController extends GetxController {
         .snapshots();
 
     await for (var user in currentUserStream) {
-      print("degisti");
       var userObject = UserModel.fromJson(user.data() as Map<String, dynamic>);
       _user = userObject;
-      _distance = await calculateDistance(userObject.location!.latitude!, userObject.location!.longitude!);
+      _distance = await calculateDistance(
+          userObject.location!.latitude!, userObject.location!.longitude!);
       createPage();
       update();
-
     }
-   
   }
 
   void createPage() {
@@ -90,39 +86,31 @@ class UserDetailController extends GetxController {
     _imageIndicators = [];
     _imagePositions = [];
 
-
     for (int i = 0; i < _user!.images!.length; i++) {
-      print(i);
       if (i == 0) {
         _imagePositions.add([0, 0]);
       } else {
         _imagePositions.add([Get.width, -Get.width]);
-
-      
       }
-        _imageCarousel.add(
-          GetBuilder<UserDetailController>(
-            builder: (controller){
-                return AnimatedPositioned(
-                  duration: Duration(milliseconds: 200),
-              left: controller.imagePositions[i][0],
-              top: 0,
-              bottom: 0,
-              right: controller.imagePositions[i][1],
-              child: Container(
-                width: double.maxFinite,
-                height: double.maxFinite,
-                decoration: BoxDecoration(
+      _imageCarousel
+          .add(GetBuilder<UserDetailController>(builder: (controller) {
+        return AnimatedPositioned(
+            duration: Duration(milliseconds: 200),
+            left: controller.imagePositions[i][0],
+            top: 0,
+            bottom: 0,
+            right: controller.imagePositions[i][1],
+            child: Container(
+              width: double.maxFinite,
+              height: double.maxFinite,
+              decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Dimensions.h16),
-                    image: DecorationImage(
-                        image: NetworkImage(
-                            'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(_user!.images![i])}?alt=media'),
-                        fit: BoxFit.fill)),
-              ));
-            }
-          )
-        
-        );
+                  image: DecorationImage(
+                      image: NetworkImage(
+                          'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(_user!.images![i])}?alt=media'),
+                      fit: BoxFit.fill)),
+            ));
+      }));
 
       _imageIndicators
           .add(GetBuilder<UserDetailController>(builder: (controller) {
@@ -148,8 +136,7 @@ class UserDetailController extends GetxController {
       }));
     }
 
-    _imageCarousel.add(
-      Positioned(
+    _imageCarousel.add(Positioned(
         top: Dimensions.h17,
         child: Container(
           width: Get.width,
@@ -157,9 +144,7 @@ class UserDetailController extends GetxController {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: _imageIndicators,
           ),
-        )
-      )
-    );
+        )));
 
     _imageCarousel.add(
       Positioned(
@@ -184,47 +169,43 @@ class UserDetailController extends GetxController {
         right: Dimensions.w270 / 10,
         bottom: -Dimensions.h50 / 2,
         child: GestureDetector(
-          onTap: (){
-            Get.back();            
+          onTap: () {
+            Get.back();
             clearState();
             Get.delete<UserDetailController>();
           },
           child: Container(
-          width: Dimensions.h50,
-          height: Dimensions.h50,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimensions.h50 / 2),
-              gradient: LinearGradient(
-                  colors: [Color(0xFFD51CFF), Color(0xFF6198EF)])),
-          child: Center(
-            child: Image.asset("assets/images/expand_icon.png"),
+            width: Dimensions.h50,
+            height: Dimensions.h50,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimensions.h50 / 2),
+                gradient: LinearGradient(
+                    colors: [Color(0xFFD51CFF), Color(0xFF6198EF)])),
+            child: Center(
+              child: Image.asset("assets/images/expand_icon.png"),
+            ),
           ),
-        ),
         )));
-  
 
     update();
   }
 
   void controllCarousel(double localX, double localY) {
+    if (localY < Dimensions.h520 - (Dimensions.h50 / 2)) {
+      if (localX < (Get.width / 2)) {
+        if (beforeImageIndex >= 0) {
+          currentImageIndex = currentImageIndex - 1;
+          nextImageIndex = currentImageIndex + 1;
+          beforeImageIndex = currentImageIndex - 1;
 
-    if(localY < Dimensions.h520 - (Dimensions.h50/2)){
-      if(localX < (Get.width/2)){        
-        if(beforeImageIndex >= 0){
-            currentImageIndex = currentImageIndex - 1;
-            nextImageIndex = currentImageIndex + 1;
-            beforeImageIndex = currentImageIndex - 1;
+          _imagePositions[currentImageIndex][0] = 0;
+          _imagePositions[currentImageIndex][1] = 0;
 
-            _imagePositions[currentImageIndex][0] = 0;
-            _imagePositions[currentImageIndex][1] = 0;
-
-            _imagePositions[nextImageIndex][0] = Get.width;
-            _imagePositions[nextImageIndex][1] = -Get.width;
+          _imagePositions[nextImageIndex][0] = Get.width;
+          _imagePositions[nextImageIndex][1] = -Get.width;
         }
-
-      }
-      else if(localX > (Get.width/2)) {
-        if(nextImageIndex < _user!.images!.length){
+      } else if (localX > (Get.width / 2)) {
+        if (nextImageIndex < _user!.images!.length) {
           currentImageIndex = currentImageIndex + 1;
           nextImageIndex = currentImageIndex + 1;
           beforeImageIndex = currentImageIndex - 1;
@@ -239,11 +220,9 @@ class UserDetailController extends GetxController {
     }
 
     update();
-
   }
 
-
- Future<int> calculateDistance(double lat2, double lon2) async {
+  Future<int> calculateDistance(double lat2, double lon2) async {
     String userID = Get.find<SharedPreferenceService>().getUserID();
     var currentUser = await Get.find<FirestoreService>().getCurrentUser(userID);
     var lat1 = currentUser.location!.latitude!;
@@ -271,44 +250,42 @@ class UserDetailController extends GetxController {
     _user = null;
     _imagePositions = [];
     _imageCarousel = [];
-    _imageIndicators = [];    
+    _imageIndicators = [];
   }
 
-
-  Future<void> likeUser() async {    
-    
+  Future<void> likeUser() async {
     await Get.find<MatchService>().createMatch(_user!.userID!);
-    if(userIndex != null) {
+    if (userIndex != null) {
       Get.find<MatcherController>().controllCurrentUserIndex(true);
       Get.find<SliderController>(tag: _user!.userID!).autoSlide(true);
-    }
-    Get.back();    
-  }
-
-  Future<void> dislikeUser() async {
-    await Get.find<MatchService>().dislikeUser(_user!.userID!);
-     if(userIndex != null) {
-      Get.find<MatcherController>().controllCurrentUserIndex(true);
-      Get.find<SliderController>(tag: _user!.userID!).autoSlide(false);
-    }
-    Get.back();    
-  }
-
-  Future<void> removeAction() async {
-    var matcherController = Get.find<MatcherController>();
-    await Get.find<MatchService>().removeLastAction(matcherController.users![matcherController.users!.length - userIndex!]);
-    if(userIndex != null && userIndex! != 0) {
-      print("USER ID");
-      print(matcherController.users![matcherController.users!.length - userIndex!]);
-      print(userIndex! - 1);
-      matcherController.controllCurrentUserIndex(false);
-
-      Get.find<SliderController>(tag: matcherController.users![matcherController.users!.length - userIndex!]).returnBack();
     }
     Get.back();
   }
 
-  
+  Future<void> dislikeUser() async {
+    await Get.find<MatchService>().dislikeUser(_user!.userID!);
+    if (userIndex != null) {
+      Get.find<MatcherController>().controllCurrentUserIndex(true);
+      Get.find<SliderController>(tag: _user!.userID!).autoSlide(false);
+    }
+    Get.back();
+  }
+
+  Future<void> removeAction() async {
+    var matcherController = Get.find<MatcherController>();
+    await Get.find<MatchService>().removeLastAction(
+        matcherController.users![matcherController.users!.length - userIndex!]);
+    if (userIndex != null && userIndex! != 0) {
+      matcherController.controllCurrentUserIndex(false);
+
+      Get.find<SliderController>(
+              tag: matcherController
+                  .users![matcherController.users!.length - userIndex!])
+          .returnBack();
+    }
+    Get.back();
+  }
+
   void showCurvyLikeDialog() {
     showDialog(
         context: Get.context!,
@@ -425,12 +402,15 @@ class UserDetailController extends GetxController {
                               onTap: () async {
                                 await Get.find<ChatService>().startNewChat(
                                     _curvyLikeMessageText, _user!.userID!, 1);
-                                _curvyLikeMessageText = "";    
-                                await Get.find<MatchService>().createMatch(_user!.userID!);
-                                Get.find<MatcherController>().controllCurrentUserIndex(true);
+                                _curvyLikeMessageText = "";
+                                await Get.find<MatchService>()
+                                    .createMatch(_user!.userID!);
+                                Get.find<MatcherController>()
+                                    .controllCurrentUserIndex(true);
                                 Get.back();
                                 Get.back();
-                                Get.find<SliderController>(tag: _user!.userID!).autoSlide(true);
+                                Get.find<SliderController>(tag: _user!.userID!)
+                                    .autoSlide(true);
                               },
                               child: Container(
                                 child: Center(
@@ -462,5 +442,4 @@ class UserDetailController extends GetxController {
           );
         });
   }
-
 }

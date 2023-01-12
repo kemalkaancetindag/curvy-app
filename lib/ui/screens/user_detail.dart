@@ -18,7 +18,7 @@ class UserDetailScreen extends StatelessWidget {
         color: Colors.white,
         child: SingleChildScrollView(child: GetBuilder<UserDetailController>(
           builder: (controller) {
-            return Column(
+            return controller.user != null ? Column(
               children: [
                 GestureDetector(
                   onPanDown: (details){
@@ -487,7 +487,7 @@ class UserDetailScreen extends StatelessWidget {
                   ),
                 )
               ],
-            );
+            ) : Container();
           },
         )),
       ),

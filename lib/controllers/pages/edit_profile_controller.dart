@@ -72,8 +72,7 @@ class EditProfileController extends GetxController {
           
           
           String imageRef =
-              'user-images/$_userID/${_images![currentImageIndex!].split('.')[0]}.${Utils.getMimetype(image.path)}';
-          print(imageRef);
+              'user-images/$_userID/${_images![currentImageIndex!].split('.')[0]}.${Utils.getMimetype(image.path)}';          
           await firestoreService.uploadImage(File(image.path), imageRef);
           Map<String, dynamic> newData = Map<String, dynamic>();
 
@@ -84,7 +83,7 @@ class EditProfileController extends GetxController {
           int randomInt = Random().nextInt(9999999);
           final imageRef =
               'user-images/$_userID/$randomInt.$mimeType';
-          print(imageRef);
+          
           await firestoreService.uploadImage(File(image.path), imageRef);
           Map<String, dynamic> newData = Map<String, dynamic>();
 
@@ -99,11 +98,11 @@ class EditProfileController extends GetxController {
         XFile? image = await imagePicker.pickImage(source: ImageSource.gallery);
         if (image == null) return;
         if (currentImageIndex! < _images!.length - 1) {
-          print("sa");
-          print(_images![currentImageIndex!]);
+          
+          
           String imageRef =
               'user-images/$_userID/${_images![currentImageIndex!].split('.')[0]}.${Utils.getMimetype(image.path)}';
-          print(imageRef);
+          
           await firestoreService.uploadImage(File(image.path), imageRef);
           Map<String, dynamic> newData = Map<String, dynamic>();
 
@@ -114,7 +113,7 @@ class EditProfileController extends GetxController {
           int randomInt = Random().nextInt(9999999);
           final imageRef =
               'user-images/$_userID/$randomInt.$mimeType';
-          print(imageRef);
+          
           await firestoreService.uploadImage(File(image.path), imageRef);
           Map<String, dynamic> newData = Map<String, dynamic>();
 

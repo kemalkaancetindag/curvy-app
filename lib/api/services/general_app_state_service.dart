@@ -38,4 +38,14 @@ class GeneralAppStateService extends GetxService {
     await firestoreService.updateUser(updatedToken, userID);
   }
 
+  Future setUserStatusOnline() async {
+    var userID = sharedPreferenceService.getUserID();
+
+    var data = Map<String,dynamic>();
+
+    data['online_status'] = true;
+
+    await firestoreService.updateUser(data, userID);
+  }
+
 }

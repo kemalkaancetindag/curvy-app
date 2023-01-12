@@ -9,56 +9,55 @@ class UserOnlineController extends GetxController {
   FirestoreService firestoreService;
   String userID;
   UserModel? _user;
-  UserModel? get user =>  _user;
+  UserModel? get user => _user;
   int? _distance;
   int? get distance => _distance;
 
   UserOnlineController({required this.firestoreService, required this.userID});
 
   @override
-  Future<void> onInit() async {    
-
+  Future<void> onInit() async {
     super.onInit();
-    print("çağırdı");
+
     await setInitialOnlineStatus();
-    _distance = await calculateDistance(_user!.location!.latitude!, _user!.location!.longitude!);
+    _distance = await calculateDistance(
+        _user!.location!.latitude!, _user!.location!.longitude!);
     update();
     await addUserListener();
-    
   }
 
-  Future setInitialOnlineStatus() async {    
+  Future setInitialOnlineStatus() async {
     var userSnapshot = await firestoreService
-    .getCollection('users')
-    .where("userID", isEqualTo: userID)
-    .get();  
-                
-    _user = UserModel.fromJson((userSnapshot.docs[0].data() as Map<String,dynamic>));
-    
+        .getCollection('users')
+        .where("userID", isEqualTo: userID)
+        .get();
+
+    _user = UserModel.fromJson(
+        (userSnapshot.docs[0].data() as Map<String, dynamic>));
+
     update();
   }
 
   Future addUserListener() async {
     firestoreService
-    .getCollection('users')
-    .where("userID", isEqualTo: userID)
-    .snapshots()
-    .listen((event) {       
-      for(var change in event.docChanges){
-        switch(change.type){
-          case DocumentChangeType.modified:          
-          _user = UserModel.fromJson((event.docs[0].data() as Map<String,dynamic>));
-          print(_user!.userID!);
-          update();
-          break;
+        .getCollection('users')
+        .where("userID", isEqualTo: userID)
+        .snapshots()
+        .listen((event) {
+      for (var change in event.docChanges) {
+        switch (change.type) {
+          case DocumentChangeType.modified:
+            _user = UserModel.fromJson(
+                (event.docs[0].data() as Map<String, dynamic>));
+
+            update();
+            break;
           case DocumentChangeType.removed:
-          break;
+            break;
           case DocumentChangeType.added:
-          break;
-          
+            break;
         }
       }
-      
     });
   }
 
@@ -81,10 +80,4 @@ class UserOnlineController extends GetxController {
 
     return (rad * c).toInt();
   }
-
-  
-
-
-
-
 }

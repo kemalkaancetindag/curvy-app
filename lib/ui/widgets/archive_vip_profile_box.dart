@@ -17,7 +17,7 @@ class ArchiveVipProfileBox extends StatelessWidget {
         init: Get.find<UserOnlineController>(tag: userID),
         global: false,
         builder: (controller) {
-          return Container(
+          return controller.user != null ? Container(
               width: Dimensions.w17 * 10,
               height: Dimensions.h230,
               margin: EdgeInsets.only(left: Dimensions.w16, top: Dimensions.h100/10),
@@ -157,7 +157,13 @@ class ArchiveVipProfileBox extends StatelessWidget {
                             ],
                           ))),
                 ],
-              ));
+              )) : Container(
+                width: double.maxFinite,
+                height: double.maxFinite,
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
         });
   }
 }

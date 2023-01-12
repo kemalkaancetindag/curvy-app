@@ -14,7 +14,7 @@ class FreeStyle extends StatelessWidget {
     Get.put(FreestyleController(goApiClient: Get.find()));
     return GetBuilder<FreestyleController>(
       builder: (controller){
-        return Container(
+        return controller.recommendedUsersWidget != null && controller.selectedUser != null ? Container(
       width: double.maxFinite,
       height: double.maxFinite,      
       child: SingleChildScrollView(
@@ -29,6 +29,14 @@ class FreeStyle extends StatelessWidget {
               children: controller.recommendedUsersWidget ?? [],
             )
           ],
+        ),
+      ),
+    ) : Container(
+      width: double.maxFinite,
+      height: double.maxFinite,
+      child: Center(
+        child: CircularProgressIndicator(
+          color: Color(0xFFD51CFF),
         ),
       ),
     );

@@ -81,8 +81,7 @@ class MatcherController extends GetxController {
     var response =
         await goApiClient.postData(recommendationPostData, "/recommendations");
     var matches = response.body;
-    print("MATCHES");
-    print(matches);
+
     
 
     RxList<Widget> cardList = <Widget>[].obs;
@@ -123,8 +122,7 @@ class MatcherController extends GetxController {
   }
 
   Future<void> continuousSliding(int slideCount) async {
-    print("COUNT");
-    print(slideCount);
+
     if (slideCount == 5) {
       List<Widget> newCards = [];
       Map<String, dynamic> recommendationPostData = Map<String, dynamic>();
@@ -201,9 +199,8 @@ class MatcherController extends GetxController {
   Future<void> goBack() async {
     String currentUserID = Get.find<SharedPreferenceService>().getUserID();
     var currentUser = await firestoreService.getCurrentUser(currentUserID);
-    print("daily back");
-    print(currentUser.remaining_daily_back_count);
-    print(currentUserIndex);
+
+
 
     if (currentUser.remaining_daily_back_count! > 0) {
       if (currentUserIndex != 0) {

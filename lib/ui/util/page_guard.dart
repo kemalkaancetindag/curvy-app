@@ -5,30 +5,24 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PageGuard extends GetMiddleware {
-   
   @override
   RouteSettings? redirect(String? route) {
-    var isUserLoggedIn = Get.find<SharedPreferenceService>().checkIsUserLoggedIn();
-    print(isUserLoggedIn);
-    print(route);
-    print('bilinen');
-    print(Routes.login);
-    if(route == Routes.login && isUserLoggedIn){
+    var isUserLoggedIn =
+        Get.find<SharedPreferenceService>().checkIsUserLoggedIn();
+
+    if (route == Routes.login && isUserLoggedIn) {
       return const RouteSettings(name: Routes.index);
-    }
-    else if(route != Routes.login && isUserLoggedIn){
+    } else if (route != Routes.login && isUserLoggedIn) {
       return null;
-    }
-    else if(Routes.login == route  && !isUserLoggedIn){
-      var sharedPreferenceService =  Get.find<SharedPreferenceService>();
+    } else if (Routes.login == route && !isUserLoggedIn) {
+      var sharedPreferenceService = Get.find<SharedPreferenceService>();
       var lastUserId = sharedPreferenceService.getLastUserID();
 
-      if(lastUserId != null){
+      if (lastUserId != null) {
         return const RouteSettings(name: Routes.secondLogin);
       }
-      
+
       return null;
     }
- 
   }
 }
