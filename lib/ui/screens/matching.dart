@@ -1,4 +1,5 @@
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/constants/routes.dart';
 import 'package:curvy_app/controllers/expanded_matcherstyle_controller.dart';
 import 'package:curvy_app/controllers/matcher_controller.dart';
 import 'package:curvy_app/ui/widgets/bottom_nav_bar.dart';
@@ -14,119 +15,130 @@ class MatchingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(MatcherController(firestoreService: Get.find(), goApiClient: Get.find()));
-    return GetBuilder<MatcherController>(
-      builder: (controller){
-        return  Scaffold(
-          backgroundColor: Colors.white,
-          appBar:Get.find<ExpandedMatcherStyleController>().user != null ? null : PreferredSize(
-          preferredSize:
-              Size(double.maxFinite, Dimensions.h120 - Dimensions.h100 / 10),
-          child: Container(
-              margin: EdgeInsets.only(top: Dimensions.h50/2),
-              width: double.maxFinite,
-              height: double.maxFinite,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                      width: 320,
-                      height: 50,
-                      child: CustomPaint(
-                          painter: StyleChangerContainer(),
-                          child: GetBuilder<MatcherController>(
-                            builder: (controller) {
-                              return Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      controller.setStyle(true);
-                                    },
-                                    child: Container(
-                                      width: controller.isFreeStyle
-                                          ? controller.selectedWidth
-                                          : controller.unSelectedWidth,
-                                      height: Dimensions.h36,
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(
-                                              Dimensions.h27),
-                                          gradient: controller.isFreeStyle
-                                              ? LinearGradient(colors: [
-                                                  Color(0xFFD51CFF),
-                                                  Color(0xFF00FFE1)
-                                                ])
-                                              : null,
-                                          color: controller.isFreeStyle
-                                              ? null
-                                              : Color(0xFFC5C5C7)),
-                                      child: Center(
-                                        child: Text(
-                                          "FreeStyle",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  GestureDetector(
-                                      onTap: () {
-                                        controller.setStyle(false);
-                                      },
-                                      child: Container(
-                                        width: controller.isFreeStyle
-                                            ? controller.unSelectedWidth
-                                            : controller.selectedWidth,
-                                        height: Dimensions.h36,
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(
-                                                Dimensions.h27),
-                                            gradient: !controller.isFreeStyle
-                                                ? LinearGradient(colors: [
-                                                    Color(0xFFD51CFF),
-                                                    Color(0xFF00FFE1)
-                                                  ])
-                                                : null,
-                                            color: !controller.isFreeStyle
-                                                ? null
-                                                : Color(0xFFC5C5C7)),
-                                        child: Center(
-                                          child: Text(
-                                            "MatcherStyle",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold),
+    Get.put(MatcherController(
+        firestoreService: Get.find(), goApiClient: Get.find()));
+    return GetBuilder<MatcherController>(builder: (controller) {
+      return Scaffold(
+        backgroundColor: Colors.white,
+        appBar: Get.find<ExpandedMatcherStyleController>().user != null
+            ? null
+            : PreferredSize(
+                preferredSize: Size(
+                    double.maxFinite, Dimensions.h120 - Dimensions.h100 / 10),
+                child: Container(
+                    margin: EdgeInsets.only(top: Dimensions.h50 / 2),
+                    width: double.maxFinite,
+                    height: double.maxFinite,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                            width: 320,
+                            height: 50,
+                            child: CustomPaint(
+                                painter: StyleChangerContainer(),
+                                child: GetBuilder<MatcherController>(
+                                  builder: (controller) {
+                                    return Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            controller.setStyle(true);
+                                          },
+                                          child: Container(
+                                            width: controller.isFreeStyle
+                                                ? controller.selectedWidth
+                                                : controller.unSelectedWidth,
+                                            height: Dimensions.h36,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        Dimensions.h27),
+                                                gradient: controller.isFreeStyle
+                                                    ? LinearGradient(colors: [
+                                                        Color(0xFFD51CFF),
+                                                        Color(0xFF00FFE1)
+                                                      ])
+                                                    : null,
+                                                color: controller.isFreeStyle
+                                                    ? null
+                                                    : Color(0xFFC5C5C7)),
+                                            child: Center(
+                                              child: Text(
+                                                "FreeStyle",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ))
-                                ],
-                              );
-                            },
-                          ))),
-                  Container(
-                    child: Center(
-                      child: Image.asset(
-                          "assets/images/matcher_settings_icon.png"),
-                    ),
-                  )
-                ],
-              ))),
-      body: GetBuilder<MatcherController>(
-        builder: (controller) {
-          if (controller.isFreeStyle) {
-            return FreeStyle();
-          }
+                                        GestureDetector(
+                                            onTap: () {
+                                              controller.setStyle(false);
+                                            },
+                                            child: Container(
+                                              width: controller.isFreeStyle
+                                                  ? controller.unSelectedWidth
+                                                  : controller.selectedWidth,
+                                              height: Dimensions.h36,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          Dimensions.h27),
+                                                  gradient: !controller
+                                                          .isFreeStyle
+                                                      ? LinearGradient(colors: [
+                                                          Color(0xFFD51CFF),
+                                                          Color(0xFF00FFE1)
+                                                        ])
+                                                      : null,
+                                                  color: !controller.isFreeStyle
+                                                      ? null
+                                                      : Color(0xFFC5C5C7)),
+                                              child: Center(
+                                                child: Text(
+                                                  "MatcherStyle",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                            ))
+                                      ],
+                                    );
+                                  },
+                                ))),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(Routes.matcherSettings);
+                          },
+                          child: Container(
+                            child: Center(
+                              child: Image.asset(
+                                  "assets/images/matcher_settings_icon.png"),
+                            ),
+                          ),
+                        )
+                      ],
+                    ))),
+        body: GetBuilder<MatcherController>(
+          builder: (controller) {
+            if (controller.isFreeStyle) {
+              return FreeStyle();
+            }
 
-          
-          return MatcherStyle();
-        },
-      ),      
-    );
-      }
-    );
+            return MatcherStyle();
+          },
+        ),
+      );
+    });
   }
 }
 

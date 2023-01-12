@@ -9,6 +9,7 @@ import 'package:curvy_app/ui/screens/hub.dart';
 import 'package:curvy_app/ui/screens/index.dart';
 import 'package:curvy_app/ui/screens/login.dart';
 import 'package:curvy_app/ui/screens/main_screen.dart';
+import 'package:curvy_app/ui/screens/matcher_settings.dart';
 import 'package:curvy_app/ui/screens/matching.dart';
 import 'package:curvy_app/ui/screens/messages.dart';
 import 'package:curvy_app/ui/screens/save_account.dart';
@@ -111,6 +112,13 @@ final pages = [
     middlewares: [
       PageGuard()
     ]
+  ),
+  GetPage(
+    name: Routes.matcherSettings
+  , page: () => MatcherSettingsScreen(),
+  middlewares: [
+    PageGuard()
+  ]
   ),
   GetPage(
     name: Routes.deleteAccountLastChance,

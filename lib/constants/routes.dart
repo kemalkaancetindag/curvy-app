@@ -23,6 +23,7 @@ abstract class Routes {
   static const  chat = '/chat';
   static const userDetail = '/user-detail';
   static const secondLogin = '/second-login';
+  static const matcherSettings = '/matcher-settings';
   
   
 
