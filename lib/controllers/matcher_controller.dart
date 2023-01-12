@@ -29,6 +29,7 @@ class MatcherController extends GetxController {
   int currentUserIndex = 0;
 
   List<String>? _users;
+  List<String>? get users => _users;
 
   List<String> _existingUsers = [];
 
@@ -38,7 +39,9 @@ class MatcherController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    await getCards();
+    if (_cards == null) {
+      await getCards();
+    }
   }
 
   Future<int> calculateDistance(double lat2, double lon2) async {
@@ -78,17 +81,21 @@ class MatcherController extends GetxController {
     var response =
         await goApiClient.postData(recommendationPostData, "/recommendations");
     var matches = response.body;
+    print("MATCHES");
+    print(matches);
+    
 
     RxList<Widget> cardList = <Widget>[].obs;
-    await Future.forEach(matches, (element) async {
-      if (element != null) {
-        var user = UserModel.fromJson(element as Map<String, dynamic>);
+    for (int i = (matches as List<dynamic>).length - 1; i >= 0; i--) {
+      if (matches[i] != null) {
+        var user = UserModel.fromJson(matches[i] as Map<String, dynamic>);
         _users!.add(user.userID!);
         int distance = await calculateDistance(
             user.location!.latitude!, user.location!.longitude!);
         _existingUsers.add(user.userID!);
-        Get.put(SliderController(), tag: user.userID);
-        Get.put(SliderController(), tag: user.userID).setUser(user);
+        var sliderController =
+            Get.put(SliderController(userIndex: i), tag: user.userID);
+        sliderController.setUser(user);
         Get.find<SliderController>(tag: user.userID)
             .createImageCarousel(user.images!, user.userID!, distance);
 
@@ -99,47 +106,9 @@ class MatcherController extends GetxController {
               return MatcherStyleUserCard(controllerTag: user.userID!);
             }));
       }
-    });
-    _cards = cardList;
-    update();
-  }
-
-  Future<void> continousSlidingChecker(int index) async {
-    if (index == 5) {
-      Map<String, dynamic> recommendationPostData = Map<String, dynamic>();
-      String userID = Get.find<SharedPreferenceService>().getUserID();
-      recommendationPostData["userID"] = userID;
-      var user = await firestoreService.getCurrentUser(userID);
-
-      recommendationPostData["un_liked_users"] = user.un_liked_users;
-
-      var response = await goApiClient.postData(
-          recommendationPostData, "/recommendations");
-      var matches = response.body;
-
-      List<Widget> cardList = [];
-      Future.forEach(matches, (element) async {
-        var user = UserModel.fromJson(element as Map<String, dynamic>);
-        int distance = await calculateDistance(
-            user.location!.latitude!, user.location!.longitude!);
-        Get.put(SliderController(), tag: user.userID);
-        Get.put(SliderController(), tag: user.userID).setUser(user);
-        Get.find<SliderController>(tag: user.userID)
-            .createImageCarousel(user.images!, user.userID!, distance);
-
-        cardList.add(GetBuilder<SliderController>(
-            init: Get.find<SliderController>(tag: user.userID),
-            global: false,
-            builder: (_) {
-              return MatcherStyleUserCard(controllerTag: user.userID!);
-            }));
-        currentUserIndex = 0;
-      });
-
-      _cards!.addAll(cardList);
-      print(_cards);
     }
 
+    _cards = cardList;
     update();
   }
 
@@ -149,7 +118,56 @@ class MatcherController extends GetxController {
     } else {
       currentUserIndex -= 1;
     }
-    await continousSlidingChecker(currentUserIndex);
+    await continuousSliding(currentUserIndex);
+    update();
+  }
+
+  Future<void> continuousSliding(int slideCount) async {
+    print("COUNT");
+    print(slideCount);
+    if (slideCount == 5) {
+      List<Widget> newCards = [];
+      Map<String, dynamic> recommendationPostData = Map<String, dynamic>();
+
+      String userID = Get.find<SharedPreferenceService>().getUserID();
+      recommendationPostData["userID"] = userID;
+      var user = await firestoreService.getCurrentUser(userID);
+      var unWantedUsers = user.un_liked_users;
+      unWantedUsers!.addAll(user.users_i_liked!);
+
+      recommendationPostData["un_liked_users"] = unWantedUsers;
+
+      var response = await goApiClient.postData(
+          recommendationPostData, "/recommendations");
+      var matches = response.body;
+
+      for (int i = (matches as List<dynamic>).length - 1; i >= 0; i--) {
+        if (matches[i] != null) {
+          var user = UserModel.fromJson(matches[i] as Map<String, dynamic>);
+          _users!.add(user.userID!);
+          int distance = await calculateDistance(
+              user.location!.latitude!, user.location!.longitude!);
+          _existingUsers.add(user.userID!);
+          var sliderController = Get.put(
+              SliderController(userIndex: _users!.length + i),
+              tag: user.userID);
+          sliderController.setUser(user);
+          Get.find<SliderController>(tag: user.userID)
+              .createImageCarousel(user.images!, user.userID!, distance);
+
+          newCards.add(GetBuilder<SliderController>(
+              init: Get.find<SliderController>(tag: user.userID),
+              global: false,
+              builder: (_) {
+                return MatcherStyleUserCard(controllerTag: user.userID!);
+              }));
+        }
+      }
+
+      _cards!.addAll(newCards);
+      currentUserIndex = 0;
+    }
+
     update();
   }
 
@@ -183,6 +201,9 @@ class MatcherController extends GetxController {
   Future<void> goBack() async {
     String currentUserID = Get.find<SharedPreferenceService>().getUserID();
     var currentUser = await firestoreService.getCurrentUser(currentUserID);
+    print("daily back");
+    print(currentUser.remaining_daily_back_count);
+    print(currentUserIndex);
 
     if (currentUser.remaining_daily_back_count! > 0) {
       if (currentUserIndex != 0) {
@@ -199,6 +220,19 @@ class MatcherController extends GetxController {
         if (matches.isNotEmpty) {
           var matchDoc = matches[0];
 
+          var chats = (await firestoreService
+                  .getCollection('chats')
+                  .where('user1', isEqualTo: currentUserID)
+                  .get())
+              .docs;
+
+          if (chats.isNotEmpty) {
+            await firestoreService
+                .getCollection('chats')
+                .doc(chats[0].id)
+                .delete();
+          }
+
           var likedUser = await firestoreService
               .getUser(_users![_users!.length - currentUserIndex]);
 
@@ -213,7 +247,8 @@ class MatcherController extends GetxController {
           var likedUserData = Map<String, dynamic>();
 
           currentUserData['users_i_liked'] = newCurrentUserILikedList;
-          currentUserData['remaining_daily_back_count'] = currentUser.remaining_daily_back_count! - 1;
+          currentUserData['remaining_daily_back_count'] =
+              currentUser.remaining_daily_back_count! - 1;
           likedUserData['users_who_liked_me'] = newLikedUserWhoLikedMeList;
 
           await firestoreService.updateUser(currentUserData, currentUserID);
@@ -241,7 +276,8 @@ class MatcherController extends GetxController {
           var data = Map<String, dynamic>();
 
           data['un_liked_users'] = newUnLikedUsersList;
-          data['remaining_daily_back_count'] = currentUser.remaining_daily_back_count! - 1;
+          data['remaining_daily_back_count'] =
+              currentUser.remaining_daily_back_count! - 1;
 
           await firestoreService.updateUser(data, currentUserID);
 
@@ -251,11 +287,6 @@ class MatcherController extends GetxController {
 
           currentUserIndex = currentUserIndex - 1;
         }
-        
-        
-
-
-
       }
     }
   }

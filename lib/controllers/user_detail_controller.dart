@@ -4,6 +4,8 @@ import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/match_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/matcher_controller.dart';
+import 'package:curvy_app/controllers/slider_controller.dart';
 import 'package:curvy_app/models/user.model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,12 +37,17 @@ class UserDetailController extends GetxController {
   int? _distance;
   int? get distance => _distance;
 
-  String userID;
 
-  UserDetailController({required this.firestoreService, required this.userID});
+  String userID;
+  int? userIndex;
+
+  UserDetailController({required this.firestoreService, required this.userID, this.userIndex});
 
   @override
   Future<void> onInit() async {
+
+    print("INDEXXXX");
+    print(userIndex);
     await getInitialUser();
     listenUser(userID);
   }
@@ -257,6 +264,7 @@ class UserDetailController extends GetxController {
   }
 
   void clearState() {
+    userIndex = null;
     currentImageIndex = 0;
     nextImageIndex = 1;
     beforeImageIndex = -1;
@@ -268,17 +276,35 @@ class UserDetailController extends GetxController {
 
 
   Future<void> likeUser() async {    
+    
     await Get.find<MatchService>().createMatch(_user!.userID!);
+    if(userIndex != null) {
+      Get.find<MatcherController>().controllCurrentUserIndex(true);
+      Get.find<SliderController>(tag: _user!.userID!).autoSlide(true);
+    }
     Get.back();    
   }
 
   Future<void> dislikeUser() async {
     await Get.find<MatchService>().dislikeUser(_user!.userID!);
+     if(userIndex != null) {
+      Get.find<MatcherController>().controllCurrentUserIndex(true);
+      Get.find<SliderController>(tag: _user!.userID!).autoSlide(false);
+    }
     Get.back();    
   }
 
   Future<void> removeAction() async {
-    await Get.find<MatchService>().removeLastAction(_user!.userID!);
+    var matcherController = Get.find<MatcherController>();
+    await Get.find<MatchService>().removeLastAction(matcherController.users![matcherController.users!.length - userIndex!]);
+    if(userIndex != null && userIndex! != 0) {
+      print("USER ID");
+      print(matcherController.users![matcherController.users!.length - userIndex!]);
+      print(userIndex! - 1);
+      matcherController.controllCurrentUserIndex(false);
+
+      Get.find<SliderController>(tag: matcherController.users![matcherController.users!.length - userIndex!]).returnBack();
+    }
     Get.back();
   }
 
@@ -399,8 +425,12 @@ class UserDetailController extends GetxController {
                               onTap: () async {
                                 await Get.find<ChatService>().startNewChat(
                                     _curvyLikeMessageText, _user!.userID!, 1);
-                                _curvyLikeMessageText = "";
+                                _curvyLikeMessageText = "";    
+                                await Get.find<MatchService>().createMatch(_user!.userID!);
+                                Get.find<MatcherController>().controllCurrentUserIndex(true);
                                 Get.back();
+                                Get.back();
+                                Get.find<SliderController>(tag: _user!.userID!).autoSlide(true);
                               },
                               child: Container(
                                 child: Center(

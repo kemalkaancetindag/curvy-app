@@ -4,8 +4,10 @@ import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/match_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/constants/routes.dart';
 import 'package:curvy_app/controllers/matcher_controller.dart';
 import 'package:curvy_app/controllers/pages/chat_controller.dart';
+import 'package:curvy_app/controllers/user_detail_controller.dart';
 import 'package:curvy_app/models/user.model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +43,12 @@ class SliderController extends GetxController {
 
   double rejectOpacity = 0;
   double confirmOpacity = 0;
+
+  int userIndex;
+
+  SliderController({
+    required this.userIndex
+  });
 
   void setUser(UserModel user) {
     _user = user;
@@ -195,8 +203,11 @@ class SliderController extends GetxController {
                               onTap: () async {
                                 await Get.find<ChatService>().startNewChat(
                                     _curvyLikeMessageText, _user!.userID!, 1);
-                                _curvyLikeMessageText = "";
+                                await Get.find<MatchService>().createMatch(_user!.userID!);
+                                _curvyLikeMessageText = "";                  
+                                Get.find<MatcherController>().controllCurrentUserIndex(true);              
                                 Get.back();
+                                autoSlide(true);
                               },
                               child: Container(
                                 child: Center(
@@ -342,8 +353,10 @@ class SliderController extends GetxController {
                               onTap: () async {
                                 await Get.find<ChatService>().startNewChat(
                                     _curvyChipMessageText, _user!.userID!, 2);
-                                _curvyChipMessageText = "";
+                                await Get.find<MatchService>().createMatch(_user!.userID!);
+                                _curvyChipMessageText = "";                                
                                 Get.back();
+                                autoSlide(true);
                               },
                               child: Container(
                                 child: Center(
@@ -621,8 +634,10 @@ class SliderController extends GetxController {
                             ),
                             GestureDetector(
                                 onTap: () {
-                                  Get.find<MatcherController>()
-                                      .expandUser(user!);
+                                   var userDetailController = Get.put(UserDetailController(firestoreService: Get.find(), userID: user!.userID!, userIndex: userIndex));          
+                    
+                                  Get.toNamed(Routes.userDetail);
+
                                 },
                                 child: Container(
                                   width: Dimensions.w300 / 10,
@@ -713,7 +728,8 @@ class SliderController extends GetxController {
                               GestureDetector(
                                 onTap: () async {
                                   await Get.find<MatchService>()
-                                      .dislikeUser(user!.userID!);
+                                      .dislikeUser(user!.userID!);                                  
+                                  Get.find<MatcherController>().controllCurrentUserIndex(true);                                  
                                   autoSlide(false);
                                 },
                                 child: Container(
@@ -738,6 +754,9 @@ class SliderController extends GetxController {
                                 onTap: () async {
                                   await Get.find<MatchService>()
                                       .createMatch(user!.userID!);
+                                      print("LIKED");
+                                      print(user!.userID!);
+                                    Get.find<MatcherController>().controllCurrentUserIndex(true);  
                                   autoSlide(true);
                                 },
                                 child: Container(
@@ -766,6 +785,7 @@ class SliderController extends GetxController {
     predefinedWidgets.insert(0, indicatorRow);
 
     for (int i = 0; i < images.length; i++) {
+            
       if (i == 0) {
         imagePositions.add([0.0, 0.0]);
         tempImageWidgets.add(GetBuilder<SliderController>(
@@ -784,7 +804,7 @@ class SliderController extends GetxController {
                     decoration: BoxDecoration(
                       image: DecorationImage(
                           image: NetworkImage(
-                              'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(images[i])}?alt=media'),
+                              'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(images[i])}?alt=media') ,
                           fit: BoxFit.cover),
                       borderRadius: BorderRadius.circular(Dimensions.h12),
                     ),
@@ -906,6 +926,7 @@ class SliderController extends GetxController {
   }
 
   void returnBack() {
+    print("DONDUM");
     left = 0;
     top = 0;
     right = 0;

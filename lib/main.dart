@@ -2,6 +2,7 @@
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/pages.dart';
 import 'package:curvy_app/constants/routes.dart';
+import 'package:curvy_app/controllers/matcher_controller.dart';
 import 'package:curvy_app/controllers/setup_controller.dart';
 import 'package:curvy_app/dependencies/client_dependencies.dart';
 import 'package:curvy_app/dependencies/controller_dependencies.dart';
@@ -26,6 +27,7 @@ Future<void> main() async {
   await initControllers();
     
   Get.find<SetupController>().setInstanceToken(token!);
+  Get.find<MatcherController>().onInit();
   runApp(const MyApp());
 }
 
