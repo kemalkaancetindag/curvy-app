@@ -31,7 +31,7 @@ class ChatController extends GetxController {
   String? _tappedChat;
   String? get tappedChat => _tappedChat;
 
-  String currentUserID = Get.find<SharedPreferenceService>().getUserID();
+  String currentUserID = Get.find<SharedPreferenceService>().getUserID()!;
   UserModel? _currentUser;
   UserModel? get currentUser => _currentUser;
 

@@ -1,4 +1,3 @@
-
 import 'package:curvy_app/api/services/general_app_state_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/pages.dart';
@@ -28,8 +27,8 @@ Future<void> main() async {
   await initControllers();
     
   Get.find<SetupController>().setInstanceToken(token!);
-  await Get.find<GeneralAppStateService>().setUserStatusOnline();
-  Get.find<MatcherController>().onInit();
+  
+  
   runApp(const MyApp());
 }
 

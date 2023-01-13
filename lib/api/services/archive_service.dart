@@ -11,7 +11,7 @@ class ArchiveService extends GetxService {
 
   Future<List<UserModel>> getUsersWhoLikedMe() async {
     List<UserModel> usersWhoLikedMe = [];
-    String userID = Get.find<SharedPreferenceService>().getUserID();
+    String userID = Get.find<SharedPreferenceService>().getUserID()!;
     var currentUser = await firestoreService.getCurrentUser(userID);
     await Future.forEach(currentUser.users_who_liked_me!,(loopUserID) async { 
       var user = await firestoreService.getUser(loopUserID);
@@ -24,7 +24,7 @@ class ArchiveService extends GetxService {
   Future<void> addLikedUsers(String likedUserId) async {
     Map<String,dynamic> data = Map<String,dynamic>();
 
-    String userID = Get.find<SharedPreferenceService>().getUserID();
+    String userID = Get.find<SharedPreferenceService>().getUserID()!;
     UserModel user = await firestoreService.getCurrentUser(userID);
     print(user.users_i_liked);
 
@@ -40,7 +40,7 @@ class ArchiveService extends GetxService {
 
   Future<List<dynamic>> getUsersILiked() async {
     List<UserModel> usersILiked = [];
-    String userID = Get.find<SharedPreferenceService>().getUserID();
+    String userID = Get.find<SharedPreferenceService>().getUserID()!;
     var currentUser = await firestoreService.getCurrentUser(userID);
     
     return currentUser.users_i_liked!;

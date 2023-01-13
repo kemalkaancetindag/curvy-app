@@ -35,7 +35,7 @@ class ChatService extends GetxService {
 
     
 
-    String userID = Get.find<SharedPreferenceService>().getUserID();
+    String userID = Get.find<SharedPreferenceService>().getUserID()!;
     var currentUserDoc =  (await firestoreService.getCollection('users').where('userID', isEqualTo: userID).get()).docs[0];
 
     firestoreService.getCollection('users').doc(currentUserDoc.id).snapshots().listen((event) async {
@@ -102,7 +102,7 @@ class ChatService extends GetxService {
  
 
   Future sendMessageToChat(String chatID, String message) async {
-    String userID = Get.find<SharedPreferenceService>().getUserID();
+    String userID = Get.find<SharedPreferenceService>().getUserID()!;
     var currentDate = DateTime.now().millisecondsSinceEpoch;
     var chat = await firestoreService.getChat(chatID);
 
@@ -168,7 +168,7 @@ class ChatService extends GetxService {
 
     var updateData = Map<String, dynamic>();
 
-    var currentUser = await firestoreService.getCurrentUser(userID);
+    var currentUser = await firestoreService.getCurrentUser(userID!);
     var currentUserActiveChats = currentUser.chat!.active_chats!;
 
     currentUserActiveChats.add(documentRef.id);

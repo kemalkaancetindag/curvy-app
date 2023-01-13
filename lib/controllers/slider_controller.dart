@@ -60,7 +60,7 @@ class SliderController extends GetxController {
       left = Get.width;
       right = -Get.width;
       animationDuration = 250;
-      String userID = Get.find<SharedPreferenceService>().getUserID();
+      String userID = Get.find<SharedPreferenceService>().getUserID()!;
       var currentUser = await Get.find<FirestoreService>().getUser(userID);
       List<dynamic> unLikedUsers = currentUser.un_liked_users!;
       unLikedUsers.add(_user!.userID);
@@ -331,6 +331,9 @@ class SliderController extends GetxController {
                               borderRadius:
                                   BorderRadius.circular(Dimensions.h16)),
                           child: TextField(
+                            onChanged: (value) {
+                              _curvyChipMessageText = value;
+                            },
                             cursorColor: Colors.black,
                             style: TextStyle(color: Colors.black),
                             maxLines: 10,
@@ -341,6 +344,7 @@ class SliderController extends GetxController {
                                 border: InputBorder.none,
                                 enabledBorder: InputBorder.none,
                                 disabledBorder: InputBorder.none),
+                            
                           ),
                         ),
                         Column(

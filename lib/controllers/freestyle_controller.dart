@@ -83,7 +83,7 @@ class FreestyleController extends GetxController {
     await getRecommendedUsers();
     distance = await calculateDistance(selectedUser!.location!.latitude!, selectedUser!.location!.longitude!);
     var currentUserID = Get.find<SharedPreferenceService>().getUserID();
-    _user = await Get.find<FirestoreService>().getUser(currentUserID);
+    _user = await Get.find<FirestoreService>().getUser(currentUserID!);
     _isPopupOn = _user!.show_freestyle_pop_up!;
     
     await generatePopup();
@@ -97,7 +97,7 @@ class FreestyleController extends GetxController {
   Future<void> getRecommendedUsers() async {
     List<UserModel> tempRecommendedUsers = [];
 
-    String userID = Get.find<SharedPreferenceService>().getUserID();
+    String userID = Get.find<SharedPreferenceService>().getUserID()!;
     var currentUser = await Get.find<FirestoreService>().getCurrentUser(userID);
 
     var data = Map<String, dynamic>();
@@ -353,7 +353,7 @@ class FreestyleController extends GetxController {
     }
   }
    Future<int> calculateDistance(double lat2, double lon2) async {
-    String userID = Get.find<SharedPreferenceService>().getUserID();
+    String userID = Get.find<SharedPreferenceService>().getUserID()!;
     var currentUser = await Get.find<FirestoreService>().getCurrentUser(userID);
     var lat1 = currentUser.location!.latitude!;
     var lon1 = currentUser.location!.longitude!;
@@ -392,7 +392,7 @@ class FreestyleController extends GetxController {
 
     data['show_freestyle_pop_up'] = false;
 
-    await firestoreService.updateUser(data, currentUserID);
+    await firestoreService.updateUser(data, currentUserID!);
 
     _isPopupOn = false;
     update();

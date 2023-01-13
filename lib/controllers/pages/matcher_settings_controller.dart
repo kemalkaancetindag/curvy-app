@@ -45,7 +45,7 @@ class MatcherSettingsController extends GetxController {
   }
 
   Future setInitialValues() async {
-    String userID = Get.find<SharedPreferenceService>().getUserID();
+    String userID = Get.find<SharedPreferenceService>().getUserID()!;
     var user = await firestoreService.getUser(userID);
 
     _distancePreference = user.settings!.distance_preference!.distance!;
@@ -108,7 +108,7 @@ class MatcherSettingsController extends GetxController {
 
   Future updateMatcherSettings() async {
     
-    String userID = Get.find<SharedPreferenceService>().getUserID();
+    String userID = Get.find<SharedPreferenceService>().getUserID()!;
     var data = Map<String,dynamic>();
     data['settings.distance_preference.distance'] = _distancePreference;
     data['settings.distance_preference.only_this_interval'] = _distanceOnlyThisInterval;
@@ -124,7 +124,7 @@ class MatcherSettingsController extends GetxController {
   }
 
   Future updateShowme() async {
-    String userID = Get.find<SharedPreferenceService>().getUserID();
+    String userID = Get.find<SharedPreferenceService>().getUserID()!;
     var data = Map<String,dynamic>();
 
     data['show_me']  = _showmePreference;

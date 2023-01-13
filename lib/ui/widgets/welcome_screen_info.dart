@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:curvy_app/constants/dimensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/widgets/container.dart';

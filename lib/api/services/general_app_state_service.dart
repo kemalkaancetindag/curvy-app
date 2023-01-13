@@ -22,7 +22,7 @@ class GeneralAppStateService extends GetxService {
     updatedLocation['location.longitude'] = position.longitude;
     updatedLocation['location.latitude'] = position.latitude;
 
-    await firestoreService.updateUser(updatedLocation, userID);
+    await firestoreService.updateUser(updatedLocation, userID!);
 
   }
 
@@ -35,7 +35,7 @@ class GeneralAppStateService extends GetxService {
 
     updatedToken['instance_token'] = token;
 
-    await firestoreService.updateUser(updatedToken, userID);
+    await firestoreService.updateUser(updatedToken, userID!);
   }
 
   Future setUserStatusOnline() async {
@@ -45,7 +45,7 @@ class GeneralAppStateService extends GetxService {
 
     data['online_status'] = true;
 
-    await firestoreService.updateUser(data, userID);
+    await firestoreService.updateUser(data, userID!);
   }
 
 }

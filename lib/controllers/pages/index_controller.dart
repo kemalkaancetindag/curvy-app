@@ -1,6 +1,7 @@
 import 'package:curvy_app/api/services/general_app_state_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/api/services/user_service.dart';
+import 'package:curvy_app/controllers/matcher_controller.dart';
 import 'package:curvy_app/models/user.model.dart';
 import 'package:get/get.dart';
 
@@ -19,6 +20,8 @@ class IndexPageController extends GetxController {
   Future<void> onInit() async {    
     super.onInit();
     _userID = Get.find<SharedPreferenceService>().getUserID();
+    await Get.find<GeneralAppStateService>().setUserStatusOnline();
+    Get.find<MatcherController>().onInit();
     await setUser();
     await Get.find<GeneralAppStateService>().updateLocation();
     await Get.find<GeneralAppStateService>().updateInstanceToken();

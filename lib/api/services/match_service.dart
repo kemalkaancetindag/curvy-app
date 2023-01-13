@@ -14,7 +14,7 @@ class MatchService extends GetxService {
   }
 
   Future<void> createMatch(String likedUserID) async {
-    String currentUserID = Get.find<SharedPreferenceService>().getUserID();
+    String currentUserID = Get.find<SharedPreferenceService>().getUserID()!;
     var matchCheckSnapshot = await firestoreService.getCollection('matches')
     .where('user1.id', isEqualTo: currentUserID)
     .where('user2.id', isEqualTo: likedUserID)
@@ -74,7 +74,7 @@ class MatchService extends GetxService {
   }
 
   Future<void> dislikeUser(String dislikedUserID) async {
-    String currenUserID = Get.find<SharedPreferenceService>().getUserID();
+    String currenUserID = Get.find<SharedPreferenceService>().getUserID()!;
     var currentUserDoc = (await firestoreService.getCollection('users').where('userID',isEqualTo: currenUserID).get()).docs[0];
     var user = UserModel.fromJson(currentUserDoc.data() as Map<String,dynamic>);
 
@@ -113,7 +113,7 @@ class MatchService extends GetxService {
         currentUserUpdateData['users_i_liked'] = newCurrentUserLikedList;
         interractedUserUpdateData['users_i_liked'] = newInterractedUserWhoLikedList;
 
-        await firestoreService.updateUser(currentUserUpdateData, currentUserID);
+        await firestoreService.updateUser(currentUserUpdateData, currentUserID!);
         await firestoreService.updateUser(interractedUserUpdateData, interractedUserID);
 
         await firestoreService.getCollection('matches').doc(matchDoc.id).delete();
@@ -122,7 +122,7 @@ class MatchService extends GetxService {
         var newCurrentUserUnlikedList = currentUser.un_liked_users!.where((id) => id != interractedUserID).toList();
         currentUserUpdateData['un_liked_users'] = newCurrentUserUnlikedList;
 
-        await firestoreService.updateUser(currentUserUpdateData, currentUserID);
+        await firestoreService.updateUser(currentUserUpdateData, currentUserID!);
       }
 
 

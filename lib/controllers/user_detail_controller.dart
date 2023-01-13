@@ -223,7 +223,7 @@ class UserDetailController extends GetxController {
   }
 
   Future<int> calculateDistance(double lat2, double lon2) async {
-    String userID = Get.find<SharedPreferenceService>().getUserID();
+    String userID = Get.find<SharedPreferenceService>().getUserID()!;
     var currentUser = await Get.find<FirestoreService>().getCurrentUser(userID);
     var lat1 = currentUser.location!.latitude!;
     var lon1 = currentUser.location!.longitude!;

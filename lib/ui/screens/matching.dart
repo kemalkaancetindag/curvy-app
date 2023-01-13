@@ -33,8 +33,8 @@ class MatchingScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Container(
-                            width: 320,
-                            height: 50,
+                            width: Dimensions.w320,
+                            height: Dimensions.h50,
                             child: CustomPaint(
                                 painter: StyleChangerContainer(),
                                 child: GetBuilder<MatcherController>(
@@ -81,6 +81,7 @@ class MatchingScreen extends StatelessWidget {
                                         GestureDetector(
                                             onTap: () {
                                               controller.setStyle(false);
+                                              controller.getCards();
                                             },
                                             child: Container(
                                               width: controller.isFreeStyle

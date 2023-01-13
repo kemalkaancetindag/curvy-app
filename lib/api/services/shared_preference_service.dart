@@ -34,10 +34,14 @@ class SharedPreferenceService extends GetxService {
 
   }
 
-  String getUserID()  {
-    var userData = (jsonDecode(sharedPreferences.getString('user')!) as Map<String,dynamic>);
+  String? getUserID()  {
+    var userJsonData = sharedPreferences.getString('user');
+    if(userJsonData != null){
+      var userData = (jsonDecode(userJsonData) as Map<String,dynamic>);
+      return userData["userID"];
+    }    
     
-    return userData["userID"];
+    return null;
   }
 
   Future<void> setLastUserID(String userID) async {

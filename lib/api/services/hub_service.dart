@@ -38,7 +38,7 @@ class HubService extends GetxService {
 
   Future<String?> joinHub(int hubType) async {
     String? foundHubID; 
-    String currentUserID = Get.find<SharedPreferenceService>().getUserID();
+    String currentUserID = Get.find<SharedPreferenceService>().getUserID()!;
     
     UserModel currentUser =
         await firestoreService.getCurrentUser(currentUserID);
@@ -160,7 +160,7 @@ class HubService extends GetxService {
   }
 
   Future<int> _calculateDistance(dynamic lat2, dynamic lon2) async {
-    String userID = Get.find<SharedPreferenceService>().getUserID();
+    String userID = Get.find<SharedPreferenceService>().getUserID()!;
     var currentUser = await Get.find<FirestoreService>().getCurrentUser(userID);
     var lat1 = currentUser.location!.latitude!;
     var lon1 = currentUser.location!.longitude!;

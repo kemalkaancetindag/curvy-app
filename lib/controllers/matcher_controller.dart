@@ -15,6 +15,9 @@ class MatcherController extends GetxController {
   FirestoreService firestoreService;
   GoApiClient goApiClient;
 
+  UserModel? _notFoundCurrentUser;
+  UserModel? get notFoundCurrentUser => _notFoundCurrentUser;
+
   bool _isFreeStyle = false;
   bool _isMatcherStyleExpanded = false;
   double unSelectedWidth = Dimensions.w120 - Dimensions.w8;
@@ -33,19 +36,25 @@ class MatcherController extends GetxController {
 
   List<String> _existingUsers = [];
 
+  double? _userDistancePreference;
+  double? get userDistancePreference => _userDistancePreference;
+
   MatcherController(
       {required this.firestoreService, required this.goApiClient});
 
   @override
   Future<void> onInit() async {
     super.onInit();
+    String currentUserID = Get.find<SharedPreferenceService>().getUserID()!;    
+    _notFoundCurrentUser = await firestoreService.getUser(currentUserID);
+    _userDistancePreference = _notFoundCurrentUser!.settings!.distance_preference!.distance!;
     if (_cards == null) {
       await getCards();
     }
   }
 
   Future<int> calculateDistance(double lat2, double lon2) async {
-    String userID = Get.find<SharedPreferenceService>().getUserID();
+    String userID = Get.find<SharedPreferenceService>().getUserID()!;
     var currentUser = await Get.find<FirestoreService>().getCurrentUser(userID);
     var lat1 = currentUser.location!.latitude!;
     var lon1 = currentUser.location!.longitude!;
@@ -64,13 +73,14 @@ class MatcherController extends GetxController {
     return (rad * c).toInt();
   }
 
-  Future<void> getCards() async {
+  Future<void> getCards() async {   
+
     _users = [];
     _cards = [];
 
     Map<String, dynamic> recommendationPostData = Map<String, dynamic>();
 
-    String userID = Get.find<SharedPreferenceService>().getUserID();
+    String userID = Get.find<SharedPreferenceService>().getUserID()!;
     recommendationPostData["userID"] = userID;
     var user = await firestoreService.getCurrentUser(userID);
     var unWantedUsers = user.un_liked_users;
@@ -85,6 +95,8 @@ class MatcherController extends GetxController {
     
 
     RxList<Widget> cardList = <Widget>[].obs;
+    print("MATCHES");
+    print(matches);
     for (int i = (matches as List<dynamic>).length - 1; i >= 0; i--) {
       if (matches[i] != null) {
         var user = UserModel.fromJson(matches[i] as Map<String, dynamic>);
@@ -127,7 +139,7 @@ class MatcherController extends GetxController {
       List<Widget> newCards = [];
       Map<String, dynamic> recommendationPostData = Map<String, dynamic>();
 
-      String userID = Get.find<SharedPreferenceService>().getUserID();
+      String userID = Get.find<SharedPreferenceService>().getUserID()!;
       recommendationPostData["userID"] = userID;
       var user = await firestoreService.getCurrentUser(userID);
       var unWantedUsers = user.un_liked_users;
@@ -172,7 +184,7 @@ class MatcherController extends GetxController {
   Future<void> updateUnLikedUsers(List<dynamic> unLikedUsers) async {
     var data = Map<String, dynamic>();
     data["un_liked_users"] = unLikedUsers;
-    String userID = Get.find<SharedPreferenceService>().getUserID();
+    String userID = Get.find<SharedPreferenceService>().getUserID()!;
     await firestoreService.updateUser(data, userID);
   }
 
@@ -197,7 +209,7 @@ class MatcherController extends GetxController {
   }
 
   Future<void> goBack() async {
-    String currentUserID = Get.find<SharedPreferenceService>().getUserID();
+    String currentUserID = Get.find<SharedPreferenceService>().getUserID()!;
     var currentUser = await firestoreService.getCurrentUser(currentUserID);
 
 
@@ -294,5 +306,25 @@ class MatcherController extends GetxController {
     } else {
       currentUserIndex = currentUserIndex - 1;
     }
+  }
+
+  void setDistancePreference(double distance) {
+
+    _userDistancePreference = distance;
+    print(_userDistancePreference);
+    update();
+  }
+
+  Future updateDistancePreference() async {
+    
+    var data = Map<String,dynamic>();
+    String userID = Get.find<SharedPreferenceService>().getUserID()!;
+    print("sa");
+    print(_userDistancePreference);
+    print(userID);
+    data['settings.distance_preference.distance'] = _userDistancePreference;
+    await firestoreService.updateUser(data, userID);
+    await onInit();
+    update();
   }
 }

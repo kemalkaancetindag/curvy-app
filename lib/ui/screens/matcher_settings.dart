@@ -735,6 +735,11 @@ class GradientRectSliderTrackShape extends SliderTrackShape
   }
 }
 
+
+
+
+
+
 class GradientRectRangeSliderTrackShape extends RangeSliderTrackShape {
   const GradientRectRangeSliderTrackShape({
     this.gradient = const LinearGradient(

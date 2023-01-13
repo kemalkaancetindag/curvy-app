@@ -66,7 +66,7 @@ class OnlineHubController extends GetxController {
   }
 
   Future<void> updateHubData(OnlineHub updatedData, HubStorageModel storedHub) async {
-    String currentUserId = Get.find<SharedPreferenceService>().getUserID();
+    String currentUserId = Get.find<SharedPreferenceService>().getUserID()!;
     _currentUser = await Get.find<FirestoreService>().getUser(currentUserId);
     
 
