@@ -24,6 +24,10 @@ abstract class Routes {
   static const userDetail = '/user-detail';
   static const secondLogin = '/second-login';
   static const matcherSettings = '/matcher-settings';
+  static const buyCurvyChip = '/buy-curvy-chip';
+  static const buyPlusPremium = '/buy-plus-premium';
+  static const buyCurvyTurbo = '/buy-curvy-turbo';
+  static const buyCurvyLike = '/buy-curvy-like';
   
   
 

@@ -111,9 +111,29 @@ class SetupController extends GetxController {
     }
     _phoneNumber = '$_phoneNumberAppendix$phoneNumber';
 
-    await Get.find<AuthService>().phoneAuth(_phoneNumber!, _setVerificationId);
+    var user = await Get.find<FirestoreService>().getUserByPhoneNumber(_phoneNumber!);
 
-    Get.to(() => ValidationCodeScreen());
+    if(user != null) {
+      if(_loginMethod == LoginMethod.google.value){
+        Get.snackbar("Hata", "Bu numaraya kayıtlı bir hesap var lütfen telefon numarası ile giriş yapınız yada farklı bir telefon numarası deneyiniz.");      
+        return;
+      }
+
+      if(_loginMethod == LoginMethod.phone.value) {
+        Get.find<AuthService>().phoneAuth(_phoneNumber!, _setVerificationId);
+        Get.toNamed(Routes.validationCode);
+        return;
+      }
+            
+    }
+    else {
+      Get.find<AuthService>().phoneAuth(_phoneNumber!, _setVerificationId);
+      Get.toNamed(Routes.validationCode);
+    }
+
+    
+
+    
   }
 
   void addToValidationCode(String codePiece, int index) {
@@ -125,6 +145,7 @@ class SetupController extends GetxController {
   }
 
   void createValidationCode() async {
+    
     if (_validationCode.length != 6) {
       Get.snackbar("Hata", "Yanlış kod girdiniz.",
           backgroundColor: Color(0xFFD446F4), colorText: Colors.white);
@@ -141,11 +162,13 @@ class SetupController extends GetxController {
         await usersCollection.where('userID', isEqualTo: _userPhoneId).get();
 
     if (results.docs.isNotEmpty) {
+      await Get.find<SharedPreferenceService>().saveUser(results.docs[0].data() as Map<String,dynamic>);
+      await Get.find<SharedPreferenceService>().setLastUserID(_userPhoneId!);
       Get.toNamed(Routes.index);
       return;
     }
 
-    if (_loginMethod == 0 || _loginMethod == 1 || _loginMethod == 2) {
+    if (_loginMethod == LoginMethod.google.value || _loginMethod == LoginMethod.apple.value || _loginMethod == LoginMethod.facebook.value) {
       Get.toNamed(Routes.welcome);
       return;
     } else {

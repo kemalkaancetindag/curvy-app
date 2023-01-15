@@ -1,5 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/constants/routes.dart';
+import 'package:curvy_app/controllers/pages/buy_plus_premium_controller.dart';
 import 'package:curvy_app/controllers/pages/index_controller.dart';
 import 'package:curvy_app/controllers/setup_controller.dart';
 import 'package:curvy_app/ui/screens/confirm_me.dart';
@@ -313,7 +315,11 @@ class IndexScreen extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            MainBoostButton(
+                            GestureDetector(
+                              onTap: (){
+                                Get.toNamed(Routes.buyCurvyTurbo);
+                              },
+                              child:    MainBoostButton(
                                 width: Dimensions.w226,
                                 icon: "assets/images/turbo_icon.png",
                                 text: "TURBO",
@@ -327,7 +333,12 @@ class IndexScreen extends StatelessWidget {
                                     ],
                                     begin: Alignment.centerLeft,
                                     end: Alignment.centerRight)),
-                            MainBoostButton(
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Get.toNamed(Routes.buyCurvyLike);
+                              },
+                              child:   MainBoostButton(
                                 width: Dimensions.w209,
                                 icon: "assets/images/like_icon.png",
                                 text: "LIKE",
@@ -341,7 +352,14 @@ class IndexScreen extends StatelessWidget {
                                     ],
                                     begin: Alignment.centerLeft,
                                     end: Alignment.centerRight)),
-                            MainBoostButton(
+                            ),
+                         
+                          
+                            GestureDetector(
+                              onTap: (){
+                                Get.toNamed(Routes.buyCurvyChip);
+                              },
+                              child:                             MainBoostButton(
                                 width: Dimensions.w226,
                                 icon: "assets/images/chip_icon.png",
                                 text: "CHIP",
@@ -355,6 +373,8 @@ class IndexScreen extends StatelessWidget {
                                     ],
                                     begin: Alignment.centerLeft,
                                     end: Alignment.centerRight)),
+                            ),
+
                           ],
                         ),
                         Column(
@@ -384,7 +404,11 @@ class IndexScreen extends StatelessWidget {
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
-                      Container(
+                      GestureDetector(
+                        onTap: (){   
+                          Get.toNamed(Routes.buyCurvyTurbo);                     
+                        },
+                        child:   Container(
                         width: MediaQuery.of(context).size.width,
                         height: Dimensions.h117,
                         decoration: BoxDecoration(
@@ -440,7 +464,13 @@ class IndexScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Container(
+                      ),
+                      GestureDetector(
+                        onTap: (){
+                          Get.put(BuyPlusPremiumController(isPlus: false));
+                          Get.toNamed(Routes.buyPlusPremium);
+                        },
+                        child:   Container(
                         width: MediaQuery.of(context).size.width,
                         height: Dimensions.h117,
                         decoration: BoxDecoration(
@@ -500,6 +530,9 @@ class IndexScreen extends StatelessWidget {
                           ],
                         ),
                       )
+                      )
+                    
+                    
                     ],
                   ),
                 )

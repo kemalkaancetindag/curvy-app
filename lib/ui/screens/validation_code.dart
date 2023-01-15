@@ -9,13 +9,10 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 class ValidationCodeScreen extends StatelessWidget {
-
   ValidationCodeScreen({super.key});
-  
-  
+
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -35,178 +32,210 @@ class ValidationCodeScreen extends StatelessWidget {
         height: double.maxFinite,
         decoration: BoxDecoration(color: Colors.white),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              BlackBoldHeader(text: "Doğrulama"),
-              Text(
-                "905365083366",
-                style: TextStyle(color: Colors.black.withOpacity(0.4)),
+              Column(
+                children: [
+                  BlackBoldHeader(text: "Doğrulama"),
+                  GetBuilder<SetupController>(
+                    builder: (controller) {
+                      return  Text(
+                    controller.phoneNumber ?? "",
+                    style: TextStyle(color: Colors.black.withOpacity(0.4)),
+                  );
+                    }
+                  ),
+                 
+                  GestureDetector(
+                    onTap: () {},
+                    child: Text(
+                      "Tekrar Gönder",
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  Container(
+                      width: Dimensions.w314,
+                      margin: EdgeInsets.only(top: Dimensions.h66),
+                      child: GetBuilder<SetupController>(
+                        builder: (controller) {
+                          return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Container(
+                                  width: Dimensions.w35,
+                                  child: TextField(
+                                    style: TextStyle(
+                                        fontSize: Dimensions.h40,
+                                        fontWeight: FontWeight.w700),
+                                    onChanged: (value) {
+                                      controller.addToValidationCode(value, 0);
+                                      if (value.length == 1) {
+                                        FocusScope.of(context).nextFocus();
+                                      }
+                                    },
+                                    cursorColor: Colors.black.withOpacity(0.4),
+                                    decoration: InputDecoration(
+                                        isDense: true,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 0, vertical: 0),
+                                        focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: Colors.black
+                                                    .withOpacity(0.4)))),
+                                  ),
+                                ),
+                                Container(
+                                  width: Dimensions.w35,
+                                  child: TextField(
+                                    style: TextStyle(
+                                        fontSize: Dimensions.h40,
+                                        fontWeight: FontWeight.w700),
+                                    onChanged: (value) {
+                                      controller.addToValidationCode(value, 1);
+
+                                      if (value.length == 1) {
+                                        FocusScope.of(context).nextFocus();
+                                      }
+
+                                      if (value.length == 0) {
+                                        FocusScope.of(context).previousFocus();
+                                      }
+                                    },
+                                    cursorColor: Colors.black.withOpacity(0.4),
+                                    decoration: InputDecoration(
+                                        isDense: true,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 0, vertical: 0),
+                                        focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: Colors.black
+                                                    .withOpacity(0.4)))),
+                                  ),
+                                ),
+                                Container(
+                                  width: Dimensions.w35,
+                                  child: TextField(
+                                    style: TextStyle(
+                                        fontSize: Dimensions.h40,
+                                        fontWeight: FontWeight.w700),
+                                    onChanged: (value) {
+                                      controller.addToValidationCode(value, 2);
+                                      if (value.length == 1) {
+                                        FocusScope.of(context).nextFocus();
+                                      }
+
+                                      if (value.length == 0) {
+                                        FocusScope.of(context).previousFocus();
+                                      }
+                                    },
+                                    cursorColor: Colors.black.withOpacity(0.4),
+                                    decoration: InputDecoration(
+                                        isDense: true,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 0, vertical: 0),
+                                        focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: Colors.black
+                                                    .withOpacity(0.4)))),
+                                  ),
+                                ),
+                                Container(
+                                  width: Dimensions.w35,
+                                  child: TextField(
+                                    style: TextStyle(
+                                        fontSize: Dimensions.h40,
+                                        fontWeight: FontWeight.w700),
+                                    onChanged: (value) {
+                                      controller.addToValidationCode(value, 3);
+                                      if (value.length == 1) {
+                                        FocusScope.of(context).nextFocus();
+                                      }
+
+                                      if (value.length == 0) {
+                                        FocusScope.of(context).previousFocus();
+                                      }
+                                    },
+                                    cursorColor: Colors.black.withOpacity(0.4),
+                                    decoration: InputDecoration(
+                                        isDense: true,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 0, vertical: 0),
+                                        focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: Colors.black
+                                                    .withOpacity(0.4)))),
+                                  ),
+                                ),
+                                Container(
+                                  width: Dimensions.w35,
+                                  child: TextField(
+                                    style: TextStyle(
+                                        fontSize: Dimensions.h40,
+                                        fontWeight: FontWeight.w700),
+                                    onChanged: (value) {
+                                      controller.addToValidationCode(value, 4);
+                                      if (value.length == 1) {
+                                        FocusScope.of(context).nextFocus();
+                                      }
+
+                                      if (value.length == 0) {
+                                        FocusScope.of(context).previousFocus();
+                                      }
+                                    },
+                                    cursorColor: Colors.black.withOpacity(0.4),
+                                    decoration: InputDecoration(
+                                        isDense: true,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 0, vertical: 0),
+                                        focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: Colors.black
+                                                    .withOpacity(0.4)))),
+                                  ),
+                                ),
+                                Container(
+                                  width: Dimensions.w35,
+                                  child: TextField(
+                                    onChanged: (value) {
+                                      controller.addToValidationCode(value, 5);
+                                      if (value.length == 1) {
+                                        FocusScope.of(context).unfocus();
+                                      }
+
+                                      if (value.length == 0) {
+                                        print("sa");
+                                        FocusScope.of(context).previousFocus();
+                                      }
+                                    },
+                                    style: TextStyle(
+                                        fontSize: Dimensions.h40,
+                                        fontWeight: FontWeight.w700),
+                                    cursorColor: Colors.black.withOpacity(0.4),
+                                    decoration: InputDecoration(
+                                        isDense: true,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 0, vertical: 0),
+                                        focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: Colors.black
+                                                    .withOpacity(0.4)))),
+                                  ),
+                                )
+                              ]);
+                        },
+                      ))
+                ],
               ),
               GestureDetector(
-                onTap: () {},
-                child: Text(
-                  "Tekrar Gönder",
-                  style: TextStyle(fontWeight: FontWeight.w600),
+                onTap: () {
+                  Get.find<SetupController>().createValidationCode();
+                },
+                child: GradientButton(
+                  text: "DEVAM ET",
+                  page: "vmail",
                 ),
-              ),
-              Container(
-                width: Dimensions.w314,
-                margin: EdgeInsets.only(top: Dimensions.h66),
-                child: GetBuilder<SetupController>(
-                  builder: (controller){
-                    return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        width: Dimensions.w35,
-                        child: TextField(
-                          style: TextStyle(
-                              fontSize: Dimensions.h40,
-                              fontWeight: FontWeight.w700),
-                          onChanged: (value) {
-                            controller.addToValidationCode(value, 0);
-                            if (value.length == 1) {
-                              FocusScope.of(context).nextFocus();
-                            }
-                          },
-                          cursorColor: Colors.black.withOpacity(0.4),
-                          decoration:  InputDecoration(
-                              isDense: true,
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 0, vertical: 0),
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.black.withOpacity(0.4)))),
-                        ),
-                      ),
-                      Container(
-                        width: Dimensions.w35,
-                        child: TextField(
-                          style: TextStyle(
-                              fontSize: Dimensions.h40,
-                              fontWeight: FontWeight.w700),
-                          onChanged: (value) {
-                            controller.addToValidationCode(value, 1);
-                            if (value.length == 1) {
-                              FocusScope.of(context).nextFocus();
-                            }
-                          },
-                          cursorColor: Colors.black.withOpacity(0.4),
-                          decoration: InputDecoration(
-                              isDense: true,
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 0, vertical: 0),
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.black.withOpacity(0.4)))),
-                        ),
-                      ),
-                      Container(
-                        width: Dimensions.w35,
-                        child: TextField(
-                          style: TextStyle(
-                              fontSize: Dimensions.h40,
-                              fontWeight: FontWeight.w700),
-                          onChanged: (value) {
-                            controller.addToValidationCode(value, 2);
-                            if (value.length == 1) {
-                              FocusScope.of(context).nextFocus();
-                            }
-                          },
-                          cursorColor: Colors.black.withOpacity(0.4),
-                          decoration:  InputDecoration(
-                              isDense: true,
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 0, vertical: 0),
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.black.withOpacity(0.4)))),
-                        ),
-                      ),
-                      Container(
-                        width: Dimensions.w35,
-                        child: TextField(
-                          style: TextStyle(
-                              fontSize: Dimensions.h40,
-                              fontWeight: FontWeight.w700),
-                          onChanged: (value) {
-                            controller.addToValidationCode(value, 3);
-                            if (value.length == 1) {
-                              FocusScope.of(context).nextFocus();
-                            }
-                          },
-                          cursorColor: Colors.black.withOpacity(0.4),
-                          decoration: InputDecoration(
-                              isDense: true,
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 0, vertical: 0),
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.black.withOpacity(0.4)))),
-                        ),
-                      ),
-                      Container(
-                        width: Dimensions.w35,
-                        child: TextField(
-                          style: TextStyle(
-                              fontSize: Dimensions.h40,
-                              fontWeight: FontWeight.w700),
-                          onChanged: (value) {
-                            controller.addToValidationCode(value, 4);
-                            if (value.length == 1) {
-                              FocusScope.of(context).nextFocus();
-                            }
-                          },
-                          cursorColor: Colors.black.withOpacity(0.4),
-                          decoration: InputDecoration(
-                              isDense: true,
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 0, vertical: 0),
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.black.withOpacity(0.4)))),
-                        ),
-                      ),
-                      Container(
-                        width: Dimensions.w35,
-                        child: TextField(
-                          onChanged: (value){
-                            controller.addToValidationCode(value, 5);
-                            if(value.length == 1){
-                                FocusScope.of(context).unfocus();
-                            }
-                            
-                          },
-                          style: TextStyle(
-                              fontSize: Dimensions.h40,
-                              fontWeight: FontWeight.w700),
-                          cursorColor: Colors.black.withOpacity(0.4),
-                          decoration: InputDecoration(
-                              isDense: true,
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 0, vertical: 0),
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.black.withOpacity(0.4)))),
-                        ),
-                      )
-                    ]);
-                  },
-                )
               )
-            ],
-          ),
-          
-          GestureDetector(
-            onTap: (){
-              Get.find<SetupController>().createValidationCode();
-            },
-            child:GradientButton(text: "DEVAM ET", page: "vmail",),
-          )
-          
-        ]),
+            ]),
       ),
     );
   }

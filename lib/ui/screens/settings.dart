@@ -1,4 +1,6 @@
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/constants/routes.dart';
+import 'package:curvy_app/controllers/pages/buy_plus_premium_controller.dart';
 import 'package:curvy_app/enums/enum_enum.dart';
 import 'package:curvy_app/enums/language_enum.dart';
 import 'package:curvy_app/ui/screens/delete_account_last_chance.dart';
@@ -1903,7 +1905,12 @@ class SettingsScreen extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      SettingsBoostButton(
+                      GestureDetector(
+                        onTap: (){
+                            Get.put(BuyPlusPremiumController(isPlus: false));
+                          Get.toNamed(Routes.buyPlusPremium);
+                        },
+                        child: SettingsBoostButton(
                           background: LinearGradient(
                               transform: GradientRotation(283),
                               colors: [
@@ -1915,34 +1922,65 @@ class SettingsScreen extends StatelessWidget {
                               end: Alignment(1, 0)),
                           icon: "assets/images/platinium_logo.png",
                           text: "PLATINUM"),
-                      SettingsBoostButton(
+                      ),
+                     
+
+                      GestureDetector(
+                        onTap:(){
+                          Get.put(BuyPlusPremiumController(isPlus: true));
+                          Get.toNamed(Routes.buyPlusPremium);
+                        },
+                        child: SettingsBoostButton(
                           background: LinearGradient(colors: [
                             Color(0xFFD51CFF),
                             Color(0xFF6198EF),
                           ], begin: Alignment(-1, 0), end: Alignment(1, 0)),
                           icon: "assets/images/platinium_logo.png",
                           text: "PLUS"),
-                      SettingsBoostButton(
+                      ),
+                     
+
+                      GestureDetector(
+                        onTap: () {
+                          Get.toNamed(Routes.buyCurvyTurbo);
+                        },
+                        child: SettingsBoostButton(
                           background: LinearGradient(colors: [
                             Color(0xFFFF0000),
                             Color(0xFF0047FF),
                           ], begin: Alignment(-1, 0), end: Alignment(1, 0)),
                           icon: "assets/images/turbo_icon.png",
                           text: "TURBO"),
-                      SettingsBoostButton(
+                      ),
+                     
+                      GestureDetector(
+                        onTap: () {
+                          Get.toNamed(Routes.buyCurvyLike);
+                        },
+                        child: SettingsBoostButton(
                           background: LinearGradient(colors: [
                             Color(0xFF0095EC),
                             Color(0xFF47C1B3),
                           ], begin: Alignment(-1, 0), end: Alignment(1, 0)),
                           icon: "assets/images/like_icon.png",
                           text: "LIKE"),
-                      SettingsBoostButton(
+                      ),
+                     
+                      GestureDetector(
+                        onTap: (){
+                          Get.toNamed(Routes.buyCurvyChip);
+                        },
+                        child: SettingsBoostButton(
                           background: LinearGradient(colors: [
                             Color(0xFFEEB137),
                             Color(0xFFD99000),
                           ], begin: Alignment(-1, 0), end: Alignment(1, 0)),
                           icon: "assets/images/chip_icon.png",
                           text: "CHIP"),
+
+
+                      ),
+                     
                       Container(
                           width: double.maxFinite,
                           margin: EdgeInsets.only(top: Dimensions.h27),

@@ -3,6 +3,7 @@ import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/constants/routes.dart';
 import 'package:curvy_app/controllers/setup_controller.dart';
+import 'package:curvy_app/enums/login_method_enums.dart';
 import 'package:curvy_app/ui/screens/save_account.dart';
 import 'package:curvy_app/ui/widgets/login_button.dart';
 import 'package:flutter/material.dart';
@@ -65,8 +66,15 @@ class LoginScreen extends StatelessWidget {
             ),
             LoginButton(text: Platform.isIOS ? "APPLE İLE GİRİŞ YAP" : "GOOGLE İLE GİRİŞ YAP", logo: !Platform.isAndroid ? "assets/images/apple_logo.png" : "assets/images/google_icon.png",
             loginMethod: () async {
-                Get.find<SetupController>().setLoginMethod(0); 
-               await Get.find<AuthService>().googleAuth();                
+              if(Platform.isAndroid){
+                Get.find<SetupController>().setLoginMethod(LoginMethod.google.value); 
+                await Get.find<AuthService>().googleAuth();
+              }
+              else{
+                Get.find<SetupController>().setLoginMethod(LoginMethod.apple.value); 
+              }
+                
+               
                 
                 
             },),
@@ -74,7 +82,8 @@ class LoginScreen extends StatelessWidget {
               await Get.find<AuthService>().facebookAuth();
             },),
             LoginButton(text: "TELEFON NUMARASI İLE GİRİŞ YAP", logo: "assets/images/phone_icon.png",loginMethod: (){
-              Get.find<SetupController>().setLoginMethod(3);
+
+              Get.find<SetupController>().setLoginMethod(LoginMethod.phone.value);
               Get.toNamed(Routes.validationNumber);
             },),
             GestureDetector(

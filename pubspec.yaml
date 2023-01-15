@@ -182,6 +182,21 @@ flutter:
     - assets/images/google_icon.png
     - assets/images/second_login_logo.png
     - assets/images/chevron_right.png
+    - assets/images/chevron_right_white.png
+    - assets/images/chip_buy_icon.png
+    - assets/images/bpp_0_plus.png
+    - assets/images/bpp_2_plus.png
+    - assets/images/bpp_3_plus.png
+    - assets/images/bpp_4_plus.png
+    - assets/images/bpp_0_plat.png
+    - assets/images/bpp_1_plat.png
+    - assets/images/bpp_2_plat.png
+    - assets/images/bpp_3_plat.png
+    - assets/images/bpp_4_plat.png
+    - assets/images/bpp_5_plat.png
+    - assets/images/turbo_buy_icon.png
+    - assets/images/like_buy_icon.png
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

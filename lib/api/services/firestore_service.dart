@@ -99,6 +99,17 @@ class FirestoreService extends GetxService {
     return user;
   }
 
+  Future<Map<String,dynamic>?> getUserByPhoneNumber(String phoneNumber) async {
+    var users = (await getCollection('users').where("phone_number", isEqualTo: phoneNumber).get()).docs;
+
+    if(users.isEmpty){
+      return null;
+    }
+    else {
+      return (users[0].data() as Map<String,dynamic>);
+    }
+  }
+
 
 
 

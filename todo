@@ -26,6 +26,8 @@
 * 2 - User Detail page connection
 * 3 - Auto slide on curvy like and curvy chip messages
 
+giriş methodu google ise telefon doğrulama ekranında kayıtlı kullanıcı checki yap eğer kullanıcı varsa telefon numarası ile giriş yapın de geri gönder
+telefon numarası ile girişte kayıtlı kullanıcı varsa kod gönder indexe at yoksa kayıda devam et
 
 
 

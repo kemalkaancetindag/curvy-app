@@ -1,5 +1,9 @@
 import 'package:curvy_app/constants/routes.dart';
 import 'package:curvy_app/ui/screens/archives.dart';
+import 'package:curvy_app/ui/screens/buy_curvy_chip.dart';
+import 'package:curvy_app/ui/screens/buy_curvy_like.dart';
+import 'package:curvy_app/ui/screens/buy_curvy_turbo.dart';
+import 'package:curvy_app/ui/screens/buy_plus_premium.dart';
 import 'package:curvy_app/ui/screens/chat.dart';
 import 'package:curvy_app/ui/screens/delete_account_last_chance.dart';
 import 'package:curvy_app/ui/screens/delete_account_why.dart';
@@ -168,6 +172,34 @@ final pages = [
   GetPage(
     name: Routes.userDetail, 
     page: () => UserDetailScreen(),
+    middlewares: [
+      PageGuard()
+    ]
+  ),
+  GetPage(
+    name: Routes.buyCurvyChip, 
+    page: () => BuyCurvyChipScreen(),
+    middlewares: [
+      PageGuard()
+    ]
+  ),
+   GetPage(
+    name: Routes.buyCurvyTurbo, 
+    page: () => BuyCurvyTurboScreen(),
+    middlewares: [
+      PageGuard()
+    ]
+  ),
+  GetPage(
+    name: Routes.buyCurvyLike, 
+    page: () => BuyCurvyLikeScreen(),
+    middlewares: [
+      PageGuard()
+    ]
+  ),
+  GetPage(
+    name: Routes.buyPlusPremium, 
+    page: () => BuyPlusPremiumScreen(),
     middlewares: [
       PageGuard()
     ]
