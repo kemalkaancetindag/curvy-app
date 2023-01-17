@@ -1,4 +1,6 @@
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/buy_curvy_like_controller.dart';
+import 'package:curvy_app/ui/widgets/buy_boost_package_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -89,37 +91,96 @@ class BuyCurvyLikeScreen extends StatelessWidget {
             ],
           ),
         ),
-        preferredSize: Size(double.maxFinite, Dimensions.h137),
+        preferredSize: Size(double.maxFinite, Dimensions.h120),
       ),
-      body: Container(
+      body: GetBuilder<BuyCurvyLikeController>(
+        builder: (controller) {
+          return Container(
         width: double.maxFinite,
         height: double.maxFinite,
         color: Colors.white,
         child: Column(
           children: [
             Container(
-              height: Dimensions.h27*11,
+              height: Dimensions.h27*12,
               width: Get.width,
-              child: PageView.builder(
-            itemCount: 10,
-            controller: PageController(viewportFraction: 0.5),
-            itemBuilder: (_, i) {
-              return Transform.scale(
-                scale: 1,
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: Dimensions.w11),
-                  child: Container(
-                    width: double.maxFinite,
-                    height: double.maxFinite,
-                    color: Colors.black,
-                  )
-                ),
-              );
+              child: controller.passiveImage != null && controller.activeImage != null ?  PageView(
+            
+            controller: PageController(viewportFraction: 0.5, initialPage: 1),
+            onPageChanged: (value) {
+              controller.setCurrentPage(value.toInt());
             },
-          ),
+            children: [
+              BuyBoostPackageCard(
+                title: "EN POPÜLER", 
+                mainImage: "assets/images/curvy_like_popular.png", 
+                amount: 3, 
+                packageName: "CurvyLIKE", 
+                cost: "19,99", 
+                withBorder: true, 
+                packageCustomBorderActiveImage: controller.activeImage!,
+                packageCustomBorderPassiveImage: controller.passiveImage!, 
+                currentPage: controller.currentPage, 
+                pageIndex: 0,
+                borderGradient: LinearGradient(
+                  colors: [
+                    Color(0xFF0095EC),
+                    Color(0xFF47C1B3)
+                  ]
+                ),
+              borderWithImageGradient: [
+                 Color(0xFF0095EC),
+                    Color(0xFF47C1B3)
+              ],
+              ),
+               BuyBoostPackageCard(
+                title: "EN POPÜLER", 
+                mainImage: "assets/images/curvy_like_popular.png", 
+                amount: 3, 
+                packageName: "CurvyLIKE", 
+                cost: "19,99", 
+                withBorder: true, 
+                packageCustomBorderActiveImage: controller.activeImage!,
+                packageCustomBorderPassiveImage: controller.passiveImage!, 
+                currentPage: controller.currentPage, 
+                pageIndex: 1,
+                borderWithImageGradient: [
+                 Color(0xFF0095EC),
+                    Color(0xFF47C1B3)
+              ],
+                borderGradient: LinearGradient(
+                  colors: [
+                    Color(0xFF0095EC),
+                    Color(0xFF47C1B3)
+                  ]
+                ),
+              ), BuyBoostPackageCard(
+                title: "EN POPÜLER", 
+                mainImage: "assets/images/curvy_like_popular.png", 
+                amount: 3, 
+                packageName: "CurvyLIKE", 
+                cost: "19,99", 
+                withBorder: true, 
+                packageCustomBorderActiveImage: controller.activeImage!,
+                packageCustomBorderPassiveImage: controller.passiveImage!, 
+                currentPage: controller.currentPage, 
+                pageIndex: 2,
+                borderWithImageGradient: [
+                 Color(0xFF0095EC),
+                    Color(0xFF47C1B3)
+              ],
+                borderGradient: LinearGradient(
+                  colors: [
+                    Color(0xFF0095EC),
+                    Color(0xFF47C1B3)
+                  ]
+                ),
+              )
+            ],
+          ) : null,
             ),
             Container(
-              margin: EdgeInsets.only(top: Dimensions.h21),
+              margin: EdgeInsets.only(top: Dimensions.h100/10),
               width: Dimensions.w35*10,
               height: Dimensions.h21*10,
               decoration: BoxDecoration(
@@ -200,7 +261,9 @@ class BuyCurvyLikeScreen extends StatelessWidget {
             )
           ],
         ),
-      ),
+      );
+        },
+      )
     );
   }
 }

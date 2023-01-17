@@ -1,4 +1,6 @@
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/buy_curvy_turbo_controller.dart';
+import 'package:curvy_app/ui/widgets/buy_boost_package_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -9,6 +11,7 @@ class BuyCurvyTurboScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: PreferredSize(
         child: Container(
@@ -88,34 +91,88 @@ class BuyCurvyTurboScreen extends StatelessWidget {
             ],
           ),
         ),
-        preferredSize: Size(double.maxFinite, Dimensions.h137),
+        preferredSize: Size(double.maxFinite, Dimensions.h120),
       ),
-      body: Container(
+      body: GetBuilder<BuyCurvyTurboCotroller>(
+        builder: (controller) {
+          return Container(
         width: double.maxFinite,
         height: double.maxFinite,
         color: Colors.white,
         child: Column(
           children: [
             Container(
-              height: Dimensions.h27*11,
+              height: Dimensions.h27*12,
               width: Get.width,
-              child: PageView.builder(
-            itemCount: 10,
-            controller: PageController(viewportFraction: 0.5),
-            itemBuilder: (_, i) {
-              return Transform.scale(
-                scale: 1,
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: Dimensions.w11),
-                  child: Container(
-                    width: double.maxFinite,
-                    height: double.maxFinite,
-                    color: Colors.black,
-                  )
-                ),
-              );
-            },
-          ),
+              child: controller.passiveImage != null && controller.activeImage != null ? PageView(            
+              onPageChanged: (value) {
+                  controller.setCurrentPage(value.toInt());
+              },  
+            controller: PageController(viewportFraction: 0.5, initialPage: 1),
+            children: [
+              BuyBoostPackageCard(
+                pageIndex: 0,
+                currentPage: controller.currentPage,
+                title: "EN İYİ FİYAT", 
+                mainImage: "assets/images/curvy_turbo_bestdeal.png", 
+                amount: 9, 
+                packageName: "CurvyTURBO",                                 
+                cost: "19,99", 
+                withBorder: true,
+                 borderWithImageGradient: [
+                  Color(0xFFFF0000),
+                  Color(0xFF0047FF )
+                ],
+                borderGradient: LinearGradient(colors: [
+                  Color(0xFFFF0000),
+                  Color(0xFF0047FF )
+                ]),
+                packageCustomBorderActiveImage: controller.activeImage!,
+                packageCustomBorderPassiveImage: controller.passiveImage!,
+              ),
+               BuyBoostPackageCard(
+                pageIndex: 1,
+                currentPage: controller.currentPage,
+                title: "EN POPÜLER", 
+                mainImage: "assets/images/curvy_turbo_popular.png", 
+                amount: 3, 
+                packageName: "CurvyTURBO",                                 
+                cost: "49,99", 
+                withBorder: true,
+                
+                borderGradient: LinearGradient(colors: [
+                  Color(0xFFFF0000),
+                  Color(0xFF0047FF )
+                ]),
+                packageCustomBorderActiveImage: controller.activeImage!,
+                packageCustomBorderPassiveImage: controller.passiveImage!,
+                borderWithImageGradient: [
+                  Color(0xFFFF0000),
+                  Color(0xFF0047FF )
+                ],
+              ),
+               BuyBoostPackageCard(
+                pageIndex: 2,
+                currentPage: controller.currentPage,
+                title: "STANDART", 
+                mainImage: "assets/images/curvy_turbo_standart.png", 
+                amount: 1, 
+                packageName: "CurvyTURBO",                                 
+                cost: "19,99", 
+                withBorder: true,
+                 borderWithImageGradient: [
+                  Color(0xFFFF0000),
+                  Color(0xFF0047FF )
+                ],
+                borderGradient: LinearGradient(colors: [
+                  Color(0xFFFF0000),
+                  Color(0xFF0047FF )
+                ]),
+                packageCustomBorderActiveImage: controller.activeImage!,
+                packageCustomBorderPassiveImage: controller.passiveImage!,
+              )
+            ],
+          ) : null,
             ),
             Container(
               margin: EdgeInsets.only(top: Dimensions.h21),
@@ -199,7 +256,9 @@ class BuyCurvyTurboScreen extends StatelessWidget {
             )
           ],
         ),
-      ),
+      );
+        },
+      )
     );
   }
 }

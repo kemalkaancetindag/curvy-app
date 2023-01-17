@@ -1,4 +1,6 @@
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/buy_curvy_chip_controller.dart';
+import 'package:curvy_app/ui/widgets/buy_boost_package_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -89,37 +91,67 @@ class BuyCurvyChipScreen extends StatelessWidget {
             ],
           ),
         ),
-        preferredSize: Size(double.maxFinite, Dimensions.h137),
+        preferredSize: Size(double.maxFinite, Dimensions.h120),
       ),
-      body: Container(
+      body: GetBuilder<BuyCurvyChipController>(
+        builder:(controller) {
+          return  Container(
         width: double.maxFinite,
         height: double.maxFinite,
         color: Colors.white,
         child: Column(
           children: [
             Container(
-              height: Dimensions.h27*11,
+              height: Dimensions.h27*12,
               width: Get.width,
-              child: PageView.builder(
-            itemCount: 10,
-            controller: PageController(viewportFraction: 0.5),
-            itemBuilder: (_, i) {
-              return Transform.scale(
-                scale: 1,
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: Dimensions.w11),
-                  child: Container(
-                    width: double.maxFinite,
-                    height: double.maxFinite,
-                    color: Colors.black,
-                  )
-                ),
-              );
+              child: controller.activeImage != null ?  PageView(
+           
+            controller: PageController(viewportFraction: 0.5, initialPage: 1),
+            onPageChanged: (value) {
+              controller.setCurrentPage(value.toInt());
             },
-          ),
+            children: [
+              BuyBoostPackageCard(
+                title: "EN POPÜLER", 
+                mainImage: "assets/images/curvy_chip_popular.png", 
+                amount: 3, 
+                packageName: "CurvyCHIP", 
+                cost: "19,99", 
+                withBorder: false, 
+                packageCustomBorderActiveImage: controller.activeImage!, 
+                currentPage: controller.currentPage, 
+                pageIndex: 0,
+                borderWithImageColor: Color(0xFFCC9933)
+              ),
+               BuyBoostPackageCard(
+                title: "EN POPÜLER", 
+                mainImage: "assets/images/curvy_chip_popular.png", 
+                amount: 3, 
+                packageName: "CurvyCHIP", 
+                cost: "19,99", 
+                withBorder: false, 
+                packageCustomBorderActiveImage: controller.activeImage!, 
+                currentPage: controller.currentPage, 
+                pageIndex: 1,
+                borderWithImageColor: Color(0xFFCC9933)
+              ), BuyBoostPackageCard(
+                title: "EN POPÜLER", 
+                mainImage: "assets/images/curvy_chip_popular.png", 
+                amount: 3, 
+                packageName: "CurvyCHIP", 
+                cost: "19,99", 
+                withBorder: false, 
+                packageCustomBorderActiveImage: controller.activeImage!, 
+                currentPage: controller.currentPage, 
+                pageIndex: 2,
+                borderWithImageColor: Color(0xFFCC9933)
+              )
+            ],
+           
+          ) : null,
             ),
             Container(
-              margin: EdgeInsets.only(top: Dimensions.h21),
+              margin: EdgeInsets.only(top: Dimensions.h100/10),
               width: Dimensions.w35*10,
               height: Dimensions.h21*10,
               decoration: BoxDecoration(
@@ -202,7 +234,9 @@ class BuyCurvyChipScreen extends StatelessWidget {
             )
           ],
         ),
-      ),
+      );
+        },
+      )
     );
   }
 }

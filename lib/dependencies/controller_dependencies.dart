@@ -1,6 +1,9 @@
 
 
 import 'package:curvy_app/controllers/archives_controller.dart';
+import 'package:curvy_app/controllers/buy_curvy_chip_controller.dart';
+import 'package:curvy_app/controllers/buy_curvy_like_controller.dart';
+import 'package:curvy_app/controllers/buy_curvy_turbo_controller.dart';
 import 'package:curvy_app/controllers/expanded_matcherstyle_controller.dart';
 import 'package:curvy_app/controllers/matcher_controller.dart';
 import 'package:curvy_app/controllers/messages_controller.dart';
@@ -35,6 +38,9 @@ Future<void> initControllers() async {
   Get.lazyPut(() => ArchiveVipProfilesController(archiveService: Get.find()));
   Get.put(HubController(hubService: Get.find()));
   Get.lazyPut(() => SecondLoginController(firestoreService: Get.find(), sharedPreferenceService: Get.find()));
+  Get.put(BuyCurvyTurboCotroller());
+  Get.put(BuyCurvyLikeController());
+  Get.put(BuyCurvyChipController());
   
   
 }

@@ -196,6 +196,21 @@ flutter:
     - assets/images/bpp_5_plat.png
     - assets/images/turbo_buy_icon.png
     - assets/images/like_buy_icon.png
+    - assets/images/curvy_turbo_active_image.png
+    - assets/images/curvy_turbo_passive_image.png
+    - assets/images/curvy_like_active_image.png
+    - assets/images/curvy_like_passive_image.png
+    - assets/images/curvy_turbo_popular.png
+    - assets/images/curvy_turbo_standart.png
+    - assets/images/curvy_turbo_bestdeal.png
+    - assets/images/curvy_like_popular.png
+    - assets/images/curvy_like_standart.png
+    - assets/images/curvy_like_bestdeal.png
+    - assets/images/curvy_chip_border_image.png
+    - assets/images/curvy_chip_bestdeal.png
+    - assets/images/curvy_chip_standart.png
+    - assets/images/curvy_chip_popular.png
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
