@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'dart:ui' as ui;
+import 'package:curvy_app/constants/dimensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +30,7 @@ class CircleProgress extends CustomPainter {
       ..shader = gradient.createShader(rect);
 
     Offset center = Offset(size.width / 2, size.height / 2);
-    double radius = 80;
+    double radius = Dimensions.h9*10;
 
     canvas.drawCircle(center, radius, circle);
 

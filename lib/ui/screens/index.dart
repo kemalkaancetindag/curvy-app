@@ -211,21 +211,21 @@ class IndexScreen extends StatelessWidget {
                                 ),
                               ),
                               Container(
-                                margin: EdgeInsets.only(bottom: 8),
+                                margin: EdgeInsets.only(bottom: Dimensions.h8),
                                 width: Dimensions.w160,
                                 height: Dimensions.h100 * 2,
                                 child: Stack(
                                   children: [
                                     Positioned(
                                         child: CustomPaint(
-                                            foregroundPainter: CircleProgress(),
+                                            painter: CircleProgress(),
                                             child: Container(
-                                              width: Dimensions.w300,
+                                              width: Dimensions.h300,
                                               height: Dimensions.h300,
                                               child: Center(
                                                 child: Container(
-                                                  width: 140,
-                                                  height: 140,
+                                                  width: Dimensions.h140,
+                                                  height: Dimensions.h140,
                                                   decoration: BoxDecoration(
                                                       color: Colors.white,
                                                       image: indexPageController
@@ -237,7 +237,7 @@ class IndexScreen extends StatelessWidget {
                                                           : null,
                                                       borderRadius:
                                                           BorderRadius.circular(
-                                                              140 / 2)),
+                                                              Dimensions.h140/ 2)),
                                                 ),
                                               ),
                                             ))),
