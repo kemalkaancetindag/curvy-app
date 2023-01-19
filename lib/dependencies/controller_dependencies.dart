@@ -30,7 +30,7 @@ Future<void> initControllers() async {
   Get.put(SetupController());
   Get.lazyPut(() => IndexPageController(userService: Get.find()));
   Get.lazyPut(() => EditProfileController(userService: Get.find(), firestoreService: Get.find()));
-  Get.lazyPut(() => SettingsController(userService: Get.find(), firestoreService: Get.find()));
+  Get.put(SettingsController(firestoreService: Get.find()));
   Get.put(ExpandedMatcherStyleController());
   Get.lazyPut(() => ChatController(chatService: Get.find()));
   Get.lazyPut(() => ArchiveWhoLikedMeController(archiveService: Get.find()));

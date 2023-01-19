@@ -7,11 +7,13 @@ import 'package:flutter/src/widgets/framework.dart';
 class BasicInlineSwitch extends StatelessWidget {
   String settingName;
   bool switchState;
+  Function(bool state) actionFunction;
 
   BasicInlineSwitch({
     super.key,
     required this.settingName,
-    required this.switchState
+    required this.switchState,
+    required this.actionFunction
   });
 
   @override
@@ -33,7 +35,7 @@ class BasicInlineSwitch extends StatelessWidget {
           CupertinoSwitch(
             value: switchState, 
             onChanged: (value){
-
+              actionFunction(value);
             }
           )
         ],

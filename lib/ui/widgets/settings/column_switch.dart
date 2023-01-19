@@ -8,11 +8,13 @@ class ColumnSwitch extends StatelessWidget {
   String settingName;
   bool switchState;
   String settingInfo;
+  Function(bool state) actionFunction;
   ColumnSwitch({
     super.key,
     required this.settingName,
     required this.settingInfo,
-    required this.switchState
+    required this.switchState,
+    required this.actionFunction
   });
 
   @override
@@ -37,7 +39,7 @@ class ColumnSwitch extends StatelessWidget {
                 CupertinoSwitch(
                   value: switchState,
                    onChanged: (value){
-
+                    actionFunction(value);
                    }
                 )
               ],

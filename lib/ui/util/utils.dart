@@ -1,4 +1,5 @@
  import 'package:curvy_app/enums/enum_enum.dart';
+import 'package:flutter/cupertino.dart';
 
 class Utils {
   static String getMimetype(String fileName) {
@@ -154,4 +155,29 @@ class Utils {
 
     return "";
   }
+  
+  static dynamic getNestedMapData(String keys, Map<String,dynamic> data) {
+
+    List<String> keyList = keys.split(".");
+    String wantedKey = keyList.last;
+    keyList = keyList.sublist(0, keyList.length-1);
+
+    dynamic wantedData;
+    print(wantedData);
+    
+
+    for(int i = 0; i < keyList.length; i++){
+      var tempMap = data[keyList[i]] as Map<String,dynamic>;
+
+      if(i == keyList.length-1){
+        wantedData = tempMap[wantedKey];
+      }
+
+    }
+
+    return wantedData;
+
+    
+  }
+ 
  }

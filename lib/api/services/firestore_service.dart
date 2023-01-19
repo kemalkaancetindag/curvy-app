@@ -56,11 +56,11 @@ class FirestoreService extends GetxService {
   }
 
   Future<void> updateUser(Map<String,dynamic> data, String userID) async{
+    print("SEDDDDDD");
+    print(data);
     var userSnapshot = await  getCollection('users').where('userID', isEqualTo: userID).get();
     if(userSnapshot.docs.isNotEmpty){
-      String documentId = userSnapshot.docs[0].reference.id;
-      print(documentId);
-      print(data);
+      String documentId = userSnapshot.docs[0].reference.id;     
       await getCollection('users').doc(documentId).update(data);
     }
   }
@@ -110,6 +110,16 @@ class FirestoreService extends GetxService {
     else {
       return (users[0].data() as Map<String,dynamic>);
     }
+  }
+
+  Future<Map<String,dynamic>?> getUserAsMap(String userID) async {
+     var userDocs = (await getCollection('users').where("userID", isEqualTo: userID).get()).docs;
+
+     if(userDocs.isNotEmpty){
+      return (userDocs[0].data() as Map<String,dynamic>);
+     }
+
+     return null;
   }
 
 

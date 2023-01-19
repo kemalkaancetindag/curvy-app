@@ -17,7 +17,7 @@ class SettingsModalSwitchRow extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(top: Dimensions.h12, bottom: Dimensions.h12),
       width: double.maxFinite,
-      height: Dimensions.h50,
+      
       padding: EdgeInsets.only(left: Dimensions.w2*10,right: Dimensions.w2*10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -41,8 +41,8 @@ class SettingsModalSwitchRow extends StatelessWidget {
                   ),
                 ),
                  Container(
-                  child: Center(
-                    child: Text(
+                  width: Dimensions.w11*10,
+                  child: Text(
                       text,
                        style: TextStyle(
                         color: Colors.white,
@@ -50,7 +50,6 @@ class SettingsModalSwitchRow extends StatelessWidget {
                        
                       ),
                     ),
-                  ),
                 )
               ],
             ),

@@ -334,7 +334,7 @@ class BuyPlusPremiumScreen extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: (){
-                            print(_pageViewController.page);
+                            
                             if((_pageViewController.page! - 1).toInt() != -1) {
                               _pageViewController.animateToPage((_pageViewController.page!-1).toInt(), duration: Duration(milliseconds: 200), curve: Curves.ease);
                             }
@@ -346,7 +346,7 @@ class BuyPlusPremiumScreen extends StatelessWidget {
                         ),
                         GestureDetector(                        
                           onTap: (){
-                            print(_pageViewController.page);
+                            
                             if(controller.isPlus!){
                               if((_pageViewController.page! + 1).toInt() != 5) {
                               _pageViewController.animateToPage((_pageViewController.page!+1).toInt(), duration: Duration(milliseconds: 200), curve: Curves.ease);

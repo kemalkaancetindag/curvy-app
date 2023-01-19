@@ -1,4 +1,5 @@
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -106,7 +107,16 @@ class BuyBoostPackageCard extends StatelessWidget {
                     child: Column(
                       children: [
                         Container(
-                          child: Image.asset(mainImage),
+                          margin: EdgeInsets.only(top: Dimensions.h100/10,bottom: Dimensions.h100/10),
+                          width: Dimensions.h117,
+                          height: Dimensions.h117,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(mainImage),
+                              fit: BoxFit.contain
+                            )
+                          ),
+                          
                         ),
                         Container(
                           child: currentPage == pageIndex

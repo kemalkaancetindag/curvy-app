@@ -10,6 +10,10 @@ class BasicInlineButton extends StatelessWidget {
   Color? buttonTextColor;
   Color? valueTextColor;
   bool? isValueTextBold;
+  Function(int? buttonID) setTappedButton;
+  Function? actionFunction;
+  int buttonID;
+  int? tappedButton;
 
   BasicInlineButton({
     super.key,
@@ -17,13 +21,31 @@ class BasicInlineButton extends StatelessWidget {
     this.valueText,
     this.buttonTextColor,
     this.valueTextColor,
-    this.isValueTextBold
+    this.isValueTextBold,
+    required this.setTappedButton,
+    required this.buttonID,
+    required this.tappedButton,
+    this.actionFunction
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child:  Container(
+      behavior: HitTestBehavior.translucent,
+      onPanDown: (details){        
+        setTappedButton(buttonID);
+      },    
+      onPanCancel: (){
+        setTappedButton(null);
+      },
+      onTap: (){
+        if(actionFunction != null){
+          actionFunction!();  
+        }
+        
+      },
+      child:  Container(        
+        color: tappedButton == buttonID ? Colors.black.withOpacity(0.4) : null,
       height: Dimensions.h50,
       width: double.maxFinite,
       child: Row(

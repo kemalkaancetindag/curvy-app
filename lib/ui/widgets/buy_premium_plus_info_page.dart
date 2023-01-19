@@ -40,8 +40,15 @@ class BuyPremiumPlusInfoPage extends StatelessWidget {
         children: [
           isWithImage ?
           Container(
+            width: Dimensions.h50,
+            height: Dimensions.h50,
             margin: EdgeInsets.only(top: Dimensions.h16, bottom: Dimensions.h9),
-            child: Image.asset(image),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(image),
+                fit: BoxFit.contain
+              )
+            ),            
           ) : 
           Container(
             width: Dimensions.w60,

@@ -3,6 +3,8 @@ import 'package:curvy_app/constants/routes.dart';
 import 'package:curvy_app/controllers/pages/buy_plus_premium_controller.dart';
 import 'package:curvy_app/enums/enum_enum.dart';
 import 'package:curvy_app/enums/language_enum.dart';
+import 'package:curvy_app/enums/settings_enum.dart';
+import 'package:curvy_app/enums/showme_enum.dart';
 import 'package:curvy_app/ui/screens/delete_account_last_chance.dart';
 import 'package:curvy_app/ui/screens/settings_header_text.dart';
 import 'package:curvy_app/ui/util/utils.dart';
@@ -33,9 +35,7 @@ class SettingsScreen extends StatelessWidget {
   SettingsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    Get.put(SettingsController(
-        userService: Get.find(), firestoreService: Get.find()));
+  Widget build(BuildContext context) {    
     void showBanPeopleDialog() {
       showDialog(
           context: context,
@@ -44,8 +44,7 @@ class SettingsScreen extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
               ),
-              child: Container(
-                height: Dimensions.h520 + Dimensions.h50,
+              child: Container(                
                 width: Dimensions.w300,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(Dimensions.h16),
@@ -130,8 +129,7 @@ class SettingsScreen extends StatelessWidget {
     }
 
     void selectLanguageDialog() {
-      showDialog(
-          barrierDismissible: false,
+      showDialog(          
           context: context,
           builder: (context) {
             return GetBuilder<SettingsController>(builder: (controller) {
@@ -169,7 +167,7 @@ class SettingsScreen extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              controller.setLanguage(Language.german.value);
+                              
                             },
                             child: Container(
                               margin:
@@ -178,7 +176,7 @@ class SettingsScreen extends StatelessWidget {
                               height: Dimensions.h40,
                               decoration: BoxDecoration(
                                 gradient:
-                                    controller.language == Language.german.value
+                                     1 == Language.german.value
                                         ? LinearGradient(
                                             begin: Alignment.topCenter,
                                             end: Alignment.bottomCenter,
@@ -205,7 +203,7 @@ class SettingsScreen extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              controller.setLanguage(Language.arabic.value);
+                        
                             },
                             child: Container(
                               margin:
@@ -214,7 +212,7 @@ class SettingsScreen extends StatelessWidget {
                               height: Dimensions.h40,
                               decoration: BoxDecoration(
                                 gradient:
-                                    controller.language == Language.arabic.value
+                                    1 == Language.arabic.value
                                         ? LinearGradient(
                                             begin: Alignment.topCenter,
                                             end: Alignment.bottomCenter,
@@ -241,7 +239,7 @@ class SettingsScreen extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              controller.setLanguage(Language.endonesia.value);
+                              
                             },
                             child: Container(
                               margin:
@@ -249,7 +247,7 @@ class SettingsScreen extends StatelessWidget {
                               width: Dimensions.w254,
                               height: Dimensions.h40,
                               decoration: BoxDecoration(
-                                gradient: controller.language ==
+                                gradient: 1 ==
                                         Language.endonesia.value
                                     ? LinearGradient(
                                         begin: Alignment.topCenter,
@@ -277,7 +275,7 @@ class SettingsScreen extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              controller.setLanguage(Language.french.value);
+                            
                             },
                             child: Container(
                               margin:
@@ -286,7 +284,7 @@ class SettingsScreen extends StatelessWidget {
                               height: Dimensions.h40,
                               decoration: BoxDecoration(
                                 gradient:
-                                    controller.language == Language.french.value
+                                    1 == Language.french.value
                                         ? LinearGradient(
                                             begin: Alignment.topCenter,
                                             end: Alignment.bottomCenter,
@@ -313,7 +311,7 @@ class SettingsScreen extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              controller.setLanguage(Language.hindu.value);
+                             
                             },
                             child: Container(
                               margin:
@@ -322,7 +320,7 @@ class SettingsScreen extends StatelessWidget {
                               height: Dimensions.h40,
                               decoration: BoxDecoration(
                                 gradient:
-                                    controller.language == Language.hindu.value
+                                    1 == Language.hindu.value
                                         ? LinearGradient(
                                             begin: Alignment.topCenter,
                                             end: Alignment.bottomCenter,
@@ -349,7 +347,7 @@ class SettingsScreen extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              controller.setLanguage(Language.english.value);
+                              
                             },
                             child: Container(
                               margin:
@@ -357,7 +355,7 @@ class SettingsScreen extends StatelessWidget {
                               width: Dimensions.w254,
                               height: Dimensions.h40,
                               decoration: BoxDecoration(
-                                gradient: controller.language ==
+                                gradient: 1 ==
                                         Language.english.value
                                     ? LinearGradient(
                                         begin: Alignment.topCenter,
@@ -385,7 +383,7 @@ class SettingsScreen extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              controller.setLanguage(Language.spanish.value);
+                              
                             },
                             child: Container(
                               margin:
@@ -393,7 +391,7 @@ class SettingsScreen extends StatelessWidget {
                               width: Dimensions.w254,
                               height: Dimensions.h40,
                               decoration: BoxDecoration(
-                                gradient: controller.language ==
+                                gradient: 1 ==
                                         Language.spanish.value
                                     ? LinearGradient(
                                         begin: Alignment.topCenter,
@@ -421,7 +419,7 @@ class SettingsScreen extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              controller.setLanguage(Language.italian.value);
+                              
                             },
                             child: Container(
                               margin:
@@ -429,7 +427,7 @@ class SettingsScreen extends StatelessWidget {
                               width: Dimensions.w254,
                               height: Dimensions.h40,
                               decoration: BoxDecoration(
-                                gradient: controller.language ==
+                                gradient: 1 ==
                                         Language.italian.value
                                     ? LinearGradient(
                                         begin: Alignment.topCenter,
@@ -457,7 +455,7 @@ class SettingsScreen extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              controller.setLanguage(Language.russian.value);
+                              
                             },
                             child: Container(
                               margin:
@@ -465,7 +463,7 @@ class SettingsScreen extends StatelessWidget {
                               width: Dimensions.w254,
                               height: Dimensions.h40,
                               decoration: BoxDecoration(
-                                gradient: controller.language ==
+                                gradient: 1 ==
                                         Language.russian.value
                                     ? LinearGradient(
                                         begin: Alignment.topCenter,
@@ -493,7 +491,7 @@ class SettingsScreen extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              controller.setLanguage(Language.turkish.value);
+                              
                             },
                             child: Container(
                               margin:
@@ -503,7 +501,7 @@ class SettingsScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                 borderRadius:
                                     BorderRadius.circular(Dimensions.h300 / 10),
-                                gradient: controller.language ==
+                                gradient: 1 ==
                                         Language.turkish.value
                                     ? LinearGradient(
                                         begin: Alignment.topCenter,
@@ -548,7 +546,7 @@ class SettingsScreen extends StatelessWidget {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      controller.updateLanguage();
+                                      
                                     },
                                     child: Container(
                                       child: Center(
@@ -568,8 +566,7 @@ class SettingsScreen extends StatelessWidget {
     }
 
     void changeUsernameDialog() {
-      showDialog(
-          barrierDismissible: false,
+      showDialog(          
           context: context,
           builder: (context) {
             return GetBuilder<SettingsController>(builder: (controller) {
@@ -632,32 +629,10 @@ class SettingsScreen extends StatelessWidget {
                                   width: Dimensions.w180 + 10,
                                   child: TextField(
                                     maxLines: 1,
-                                    controller:
-                                        controller.usernameFieldController,
+                                    
+                                        
                                     onChanged: (value) {
-                                      if (value.length <
-                                          controller.maxChar + 1) {
-                                        controller.setUsername(value);
-                                        controller.usernameFieldController
-                                                .selection =
-                                            TextSelection.fromPosition(
-                                                TextPosition(
-                                                    offset: controller
-                                                        .usernameFieldController
-                                                        .text
-                                                        .length));
-                                      } else {
-                                        controller.usernameFieldController
-                                            .text = controller.username!;
-                                        controller.usernameFieldController
-                                                .selection =
-                                            TextSelection.fromPosition(
-                                                TextPosition(
-                                                    offset: controller
-                                                        .usernameFieldController
-                                                        .text
-                                                        .length));
-                                      }
+                                   
                                     },
                                     style: TextStyle(color: Color(0xFF7B8491)),
                                     cursorColor: Color(0xFF7B8491),
@@ -675,7 +650,7 @@ class SettingsScreen extends StatelessWidget {
                                   height: Dimensions.h21,
                                   child: Center(
                                     child: Text(
-                                      controller.leftChar.toString(),
+                                     "",
                                       style: TextStyle(
                                           color: Color(0xFF7B8491),
                                           fontWeight: FontWeight.bold),
@@ -715,7 +690,7 @@ class SettingsScreen extends StatelessWidget {
                             ),
                             GestureDetector(
                               onTap: () {
-                                controller.updateUsername();
+                                
                               },
                               child: Container(
                                 child: Center(
@@ -736,8 +711,7 @@ class SettingsScreen extends StatelessWidget {
     }
 
     void showInstantNotificationsModal() {
-      showDialog(
-          barrierDismissible: false,
+      showDialog(          
           context: context,
           builder: (context) {
             return GetBuilder<SettingsController>(builder: (controller) {
@@ -771,8 +745,8 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Yeni Eşleşmeler",
                             text: "Yeni bir eşleşmen var.",
-                            switchState: controller.instantOnMatch ?? true,
-                            switchOnChange: controller.setInstantOnMatch,
+                            switchState:  true,
+                            switchOnChange: (bool value){},
                           ),
                           SizedBox(
                             height: 1,
@@ -784,8 +758,8 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Mesajlar",
                             text: "Sana mesaj gönderen biri var.",
-                            switchState: controller.instantOnMessage ?? true,
-                            switchOnChange: controller.setInstantOnMessage,
+                            switchState: true,
+                            switchOnChange: (bool value){},
                           ),
                           SizedBox(
                             height: 1,
@@ -798,8 +772,8 @@ class SettingsScreen extends StatelessWidget {
                             title: "Mesaj Beğenileri",
                             text: "Mesajını beğenen biri var.",
                             switchState:
-                                controller.instantOnMessageLike ?? true,
-                            switchOnChange: controller.setInstantOnMessageLike,
+                              true,
+                            switchOnChange:(bool value){},
                           ),
                           SizedBox(
                             height: 1,
@@ -811,8 +785,8 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "CurvyLIKE'lar",
                             text: "Seni CurvyLIKE’layan biri var.",
-                            switchState: controller.instantOnCurvyLike ?? true,
-                            switchOnChange: controller.setInstantOnCurvyLike,
+                            switchState:  true,
+                            switchOnChange:(bool value){},
                           ),
                           SizedBox(
                             height: 1,
@@ -870,7 +844,7 @@ class SettingsScreen extends StatelessWidget {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    controller.setInstantNewLikes(1);
+                                   
                                   },
                                   child: Container(
                                     margin: EdgeInsets.only(
@@ -893,14 +867,10 @@ class SettingsScreen extends StatelessWidget {
                                           ),
                                         ),
                                         Container(
-                                          child: controller.instantNewLikes !=
-                                                      null &&
-                                                  controller.instantNewLikes ==
-                                                      1
-                                              ? Center(
+                                          child: Center(
                                                   child: Image.asset(
                                                       "assets/images/settings_modal_check.png"))
-                                              : null,
+                                              ,
                                         )
                                       ],
                                     ),
@@ -916,7 +886,7 @@ class SettingsScreen extends StatelessWidget {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    controller.setInstantNewLikes(3);
+                                  
                                   },
                                   child: Container(
                                     margin: EdgeInsets.only(
@@ -939,14 +909,7 @@ class SettingsScreen extends StatelessWidget {
                                           ),
                                         ),
                                         Container(
-                                          child: controller.instantNewLikes !=
-                                                      null &&
-                                                  controller.instantNewLikes ==
-                                                      3
-                                              ? Center(
-                                                  child: Image.asset(
-                                                      "assets/images/settings_modal_check.png"))
-                                              : null,
+                                          child: null,
                                         )
                                       ],
                                     ),
@@ -962,7 +925,7 @@ class SettingsScreen extends StatelessWidget {
                                 ),
                                 GestureDetector(
                                     onTap: () {
-                                      controller.setInstantNewLikes(10);
+                                   
                                     },
                                     child: Container(
                                       margin: EdgeInsets.only(
@@ -985,15 +948,7 @@ class SettingsScreen extends StatelessWidget {
                                             ),
                                           ),
                                           Container(
-                                            child: controller.instantNewLikes !=
-                                                        null &&
-                                                    controller
-                                                            .instantNewLikes ==
-                                                        10
-                                                ? Center(
-                                                    child: Image.asset(
-                                                        "assets/images/settings_modal_check.png"))
-                                                : null,
+                                            child: null,
                                           )
                                         ],
                                       ),
@@ -1011,8 +966,8 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Titreşim",
                             text: "Uygulama içi titreşimleri aç",
-                            switchOnChange: controller.setInstantVibration,
-                            switchState: controller.instantVibration ?? true,
+                            switchOnChange:(bool state){},
+                            switchState:  true,
                           ),
                           SizedBox(
                             height: 1,
@@ -1024,8 +979,8 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Ses",
                             text: "Uygulama içi sesleri aç",
-                            switchState: controller.instantSound ?? true,
-                            switchOnChange: controller.setInstantSound,
+                            switchState: true,
+                            switchOnChange: (bool state){},
                           ),
                           SizedBox(
                             height: 1,
@@ -1054,7 +1009,7 @@ class SettingsScreen extends StatelessWidget {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    controller.updateInstantNotifications();
+                                    
                                   },
                                   child: Container(
                                     child: Center(
@@ -1075,8 +1030,7 @@ class SettingsScreen extends StatelessWidget {
     }
 
     void showEmailNotificationsModal() {
-      showDialog(
-          barrierDismissible: false,
+      showDialog(          
           context: context,
           builder: (context) {
             return GetBuilder<SettingsController>(builder: (controller) {
@@ -1211,8 +1165,8 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Yeni Eşleşmeler",
                             text: "Yeni bir eşleşmen var.",
-                            switchOnChange: controller.setEmailOnMatch,
-                            switchState: controller.emailOnMatch ?? false,
+                            switchOnChange:(bool state){},
+                            switchState:  false,
                           ),
                           SizedBox(
                             height: 1,
@@ -1224,8 +1178,8 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Mesajlar",
                             text: "Sana mesaj gönderen biri var.",
-                            switchOnChange: controller.setEmailOnMessage,
-                            switchState: controller.emailOnMessage ?? false,
+                            switchOnChange: (bool state){},
+                            switchState:  false,
                           ),
                           SizedBox(
                             height: 1,
@@ -1258,11 +1212,10 @@ class SettingsScreen extends StatelessWidget {
                                         )),
                                       ),
                                       CupertinoSwitch(
-                                          value: controller.emailOnMarketing ??
+                                          value: 
                                               false,
                                           onChanged: (value) {
-                                            controller
-                                                .setEmailOnMarketing(value);
+                                            
                                           })
                                     ],
                                   ),
@@ -1330,7 +1283,7 @@ class SettingsScreen extends StatelessWidget {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    controller.updateEmailNotifications();
+                                   
                                   },
                                   child: Container(
                                       child: Center(
@@ -1409,8 +1362,8 @@ class SettingsScreen extends StatelessWidget {
                             SettingsModalSwitchRow(
                               title: "AppFlayer",
                               text: "Ayrıntıları Görüntüle",
-                              switchState: controller.appFlayer ?? true,
-                              switchOnChange: controller.setAppFlayer,
+                              switchState:  true,
+                              switchOnChange: (bool state){},
                             ),
                             SizedBox(
                               height: 2,
@@ -1422,8 +1375,8 @@ class SettingsScreen extends StatelessWidget {
                             SettingsModalSwitchRow(
                               title: "Branch",
                               text: "Ayrıntıları Görüntüle",
-                              switchState: controller.branch ?? true,
-                              switchOnChange: controller.setBranch,
+                              switchState:  true,
+                              switchOnChange: (bool state){},
                             ),
                             SizedBox(
                               height: 2,
@@ -1438,9 +1391,9 @@ class SettingsScreen extends StatelessWidget {
                                   "Yeni araçlar ekleyebiliriz. Bu ayar, bu yeni araçların varsayılan olarak etkin mi yoksa devre dışı mı olacağını belirler.",
                               isSwitch: true,
                               switchState:
-                                  controller.newMarketingPermissions ?? true,
+                                  true,
                               switchOnChanged:
-                                  controller.setNewMarketingPermissions,
+                                  (bool state){},
                             ),
                             SizedBox(
                               height: 2,
@@ -1471,8 +1424,7 @@ class SettingsScreen extends StatelessWidget {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      controller
-                                          .updatePrivacyPersonalizedMarketing();
+                                     
                                     },
                                     child: Container(
                                       child: Center(
@@ -1552,8 +1504,8 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Curvy Direct Ads",
                             text: "Ayrıntıları Görüntüle",
-                            switchState: controller.curvyDirectAds ?? true,
-                            switchOnChange: controller.setCurvyDirectAds,
+                            switchState:  true,
+                            switchOnChange: (bool state){},
                           ),
                           SizedBox(
                             height: 2,
@@ -1565,8 +1517,8 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Google Ads",
                             text: "Ayrıntıları Görüntüle",
-                            switchState: controller.googleAds ?? true,
-                            switchOnChange: controller.setGoogleAds,
+                            switchState:  true,
+                            switchOnChange: (bool state){},
                           ),
                           SizedBox(
                             height: 2,
@@ -1578,8 +1530,8 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Curvy Promotions",
                             text: "Ayrıntıları Görüntüle",
-                            switchState: controller.curvyPromotions ?? true,
-                            switchOnChange: controller.setCurvyPromotions,
+                            switchState:  true,
+                            switchOnChange: (bool state){},
                           ),
                           SizedBox(
                             height: 2,
@@ -1591,8 +1543,8 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Facebook Ads",
                             text: "Ayrıntıları Görüntüle",
-                            switchState: controller.facebookAds ?? true,
-                            switchOnChange: controller.setFacebookAds,
+                            switchState:  true,
+                            switchOnChange:(bool state){},
                           ),
                           SizedBox(
                             height: 2,
@@ -1606,9 +1558,8 @@ class SettingsScreen extends StatelessWidget {
                             text:
                                 "Yeni araçlar ekleyebiliriz. Bu ayar, bu yeni araçların varsayılan olarak etkin mi yoksa devre dışı mı olacağını belirler.",
                             isSwitch: true,
-                            switchState: controller.newAdvertisingPermissions,
-                            switchOnChanged:
-                                controller.setNewAdvertisingPermissions,
+                            switchState: true,
+                            switchOnChanged:(bool state){},
                           ),
                           SizedBox(
                             height: 2,
@@ -1638,8 +1589,7 @@ class SettingsScreen extends StatelessWidget {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    controller
-                                        .updatePrivacyPersonalizedAdvertising();
+                               
                                   },
                                   child: Container(
                                     child: Center(
@@ -1660,8 +1610,7 @@ class SettingsScreen extends StatelessWidget {
     }
 
     void showPrivacyPreferencesModal() {
-      showDialog(
-          barrierDismissible: false,
+      showDialog(          
           context: context,
           builder: (context) {
             return GetBuilder<SettingsController>(builder: (controller) {
@@ -1719,9 +1668,9 @@ class SettingsScreen extends StatelessWidget {
                             text:
                                 "Şuan pazarlama izinleri’ne izin veriyorsun İstediğin zaman kapatabilirsin",
                             switchState:
-                                controller.privacyEnableMarketing ?? false,
+                               false,
                             switchOnChanged:
-                                controller.setPrivacyEnableMarketing,
+                                (bool state){},
                           ),
                           SizedBox(
                             height: 2,
@@ -1751,9 +1700,9 @@ class SettingsScreen extends StatelessWidget {
                             text:
                                 "Bu izleyiciler uygulamanın çalışması için gereklidir ve bu yüzden kapatılamaz. Genellikle senin tarafından yapılan ve gizlilik tercihlerini belirleme, oturum açma veya form doldurma gibi hizmet taleplerine karşılık gelen eylemlere yanıt olarak ayarlanır. ( Ayrıntıları Görüntüle )",
                             switchState:
-                                controller.privacyCompulsoryPermissions ?? true,
+                                true,
                             switchOnChanged:
-                                controller.setPrivacyCompulsoryPermissions,
+                                (bool state){},
                           ),
                           SizedBox(
                             height: 2,
@@ -1812,11 +1761,10 @@ class SettingsScreen extends StatelessWidget {
                                   ),
                                   CupertinoSwitch(
                                       value:
-                                          controller.privacyEnableAdvertising ??
+                                         
                                               false,
                                       onChanged: (value) {
-                                        controller
-                                            .setPrivacyEnableAdvertising(value);
+                                       
                                       })
                                 ]),
                           ),
@@ -1861,7 +1809,7 @@ class SettingsScreen extends StatelessWidget {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      controller.updatePrivacyPreferences();
+                                     
                                     },
                                     child: Container(
                                       child: Center(
@@ -1879,7 +1827,7 @@ class SettingsScreen extends StatelessWidget {
           });
     }
 
-    return GetBuilder<SettingsController>(builder: (settingsPageController) {
+    return GetBuilder<SettingsController>(builder: (controller) {
       return Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
@@ -1890,8 +1838,8 @@ class SettingsScreen extends StatelessWidget {
             ),
             actions: [
               GestureDetector(
-                onTap: () {
-                  settingsPageController.updateFieldsOnSettingsPage();
+                onTap: ()  {
+                   controller.updatePage();
                 },
                 child: Container(
                   margin: EdgeInsets.only(right: Dimensions.w16),
@@ -1909,7 +1857,7 @@ class SettingsScreen extends StatelessWidget {
             centerTitle: true,
             elevation: 0,
           ),
-          body: Container(
+          body: controller.user != null && controller.settings != null ?  Container(
             width: double.maxFinite,
             height: double.maxFinite,
             child: SingleChildScrollView(
@@ -1925,31 +1873,43 @@ class SettingsScreen extends StatelessWidget {
                         ]),
                         packageName: "CurvyPLATINUM",
                         packageIcon: "assets/images/platinium_logo.png",
-                        marginTop: Dimensions.h16),
+                        marginTop: Dimensions.h16,
+                        route: Routes.buyPlusPremium,
+                        isPlus: false,
+                      ),
                     BoostButtons(
                         backgroundGradient: LinearGradient(
                             colors: [Color(0xFFD51CFF), Color(0xFF6198EF)]),
                         packageName: "CurvyPLUS",
                         packageIcon: "assets/images/platinium_logo.png",
-                        marginTop: Dimensions.h9),
+                        marginTop: Dimensions.h9,
+                        route: Routes.buyPlusPremium,
+                        isPlus: true,
+                      ),
                     BoostButtons(
                         backgroundGradient: LinearGradient(
                             colors: [Color(0xFFFF0000), Color(0xFF0047FF)]),
                         packageName: "CurvyTURBO",
                         packageIcon: "assets/images/turbo_icon.png",
-                        marginTop: Dimensions.h9),
+                        marginTop: Dimensions.h9,
+                        route: Routes.buyCurvyTurbo,
+                      ),
                     BoostButtons(
                         backgroundGradient: LinearGradient(
                             colors: [Color(0xFF0095EC), Color(0xFF47C1B3)]),
                         packageName: "CurvyLIKE",
                         packageIcon: "assets/images/like_icon.png",
-                        marginTop: Dimensions.h9),
+                        marginTop: Dimensions.h9,
+                        route: Routes.buyCurvyLike,
+                      ),
                     BoostButtons(
                         backgroundGradient: LinearGradient(
                             colors: [Color(0xFFEEB137), Color(0xFFD99000)]),
                         packageName: "CurvyCHIP",
                         packageIcon: "assets/images/chip_icon.png",
-                        marginTop: Dimensions.h9)
+                        marginTop: Dimensions.h9,
+                        route: Routes.buyCurvyChip
+                      )
                   ],
                 ),
                 SettingHeader(settingName: "HESAP AYARLARI"),
@@ -1965,13 +1925,19 @@ class SettingsScreen extends StatelessWidget {
                     children: [
                       BasicInlineButton(
                         buttonText: "Telefon Numarası",
-                        valueText: "+905305303212",
+                        valueText: controller.user!.phone_number,
                         isValueTextBold: true,
                         valueTextColor: Colors.black,
+                        setTappedButton: controller.setTappedButton,
+                        buttonID: 0,
+                        tappedButton: controller.tappedButton,
                       ),
                       SettingsDivider(),
                       BasicInlineButton(
                         buttonText: "Bağlantılı Hesaplar",
+                         setTappedButton: controller.setTappedButton,
+                        buttonID: 1,
+                        tappedButton: controller.tappedButton,
                       ),
                       SettingsDivider(),
                       Container(
@@ -1993,7 +1959,7 @@ class SettingsScreen extends StatelessWidget {
                             Container(
                               margin: EdgeInsets.only(right: Dimensions.w17),
                               child: Text(
-                                "email@email.com",
+                                controller.user!.email!,
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: Dimensions.h16,
@@ -2006,11 +1972,12 @@ class SettingsScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+                !controller.user!.email_confirmation! ?
                 InfoErrorText(
                   text:
                       "Hesabının güvence altına alınmasına yardımcı olmak için E-postanı doğrula.",
                   textColor: Colors.red,
-                ),
+                ) : Container(),
                 SettingHeader(settingName: "KEŞFET"),
                 Container(
                   width: double.maxFinite,
@@ -2125,8 +2092,10 @@ class SettingsScreen extends StatelessWidget {
                                   child: Slider(
                                     min: 0,
                                     max: 100,
-                                    value: 20,
-                                    onChanged: (double value) {},
+                                    value: Utils.getNestedMapData(Settings.distancePreferenceDistance.value, controller.settings!).toDouble(),
+                                    onChanged: (double value) {
+                                      controller.updateDistancePreferenceDistance(value.toInt());
+                                    },
                                   )),
                             ),
                             Container(
@@ -2142,7 +2111,10 @@ class SettingsScreen extends StatelessWidget {
                                         fontWeight: FontWeight.bold),
                                   ),
                                   CupertinoSwitch(
-                                      value: true, onChanged: (value) {})
+                                      value: Utils.getNestedMapData(Settings.distancePreferenceOnlyThisInterval.value, controller.settings!), 
+                                      onChanged: (value) {
+                                        controller.updateDistancePreferenceOnlyThisInterval(value);
+                                      })
                                 ],
                               ),
                             ),
@@ -2152,8 +2124,11 @@ class SettingsScreen extends StatelessWidget {
                       SettingsDivider(),
                       BasicInlineButton(
                         buttonText: "Bana Göster",
-                        valueText: "Kadınlar",
+                        valueText: Utils.getEnumValue(Enums.showme, controller.user!.show_me!),
                         isValueTextBold: false,
+                         setTappedButton: controller.setTappedButton,
+                        buttonID: 2,
+                        tappedButton: controller.tappedButton,                        
                       ),
                       SettingsDivider(),
                       Container(
@@ -2179,7 +2154,7 @@ class SettingsScreen extends StatelessWidget {
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Text(
-                                    "20-60+",
+                                    "${Utils.getNestedMapData(Settings.agePreferenceMinAge.value, controller.settings!)}-${Utils.getNestedMapData(Settings.agePreferenceMaxAge.value, controller.settings!)}+",
                                     style: TextStyle(
                                         color: Color(0xFF7B8491),
                                         fontSize: Dimensions.h16,
@@ -2202,10 +2177,16 @@ class SettingsScreen extends StatelessWidget {
                                     ),
                                   ),
                                   child: RangeSlider(
-                                    min: 0,
+                                    min: 0.18,
                                     max: 1,
-                                    values: RangeValues(0.18, 0.5),
-                                    onChanged: (value) {},
+                                    values: RangeValues(
+                                      Utils.getNestedMapData(Settings.agePreferenceMinAge.value, controller.settings!)/100
+                                      , 
+                                      Utils.getNestedMapData(Settings.agePreferenceMaxAge.value, controller.settings!)/100
+                                    ),
+                                    onChanged: (value) {
+                                      controller.updateAgePreferenceAge(value.start, value.end);
+                                    },
                                   )),
                             ),
                             Container(
@@ -2221,7 +2202,10 @@ class SettingsScreen extends StatelessWidget {
                                         fontWeight: FontWeight.bold),
                                   ),
                                   CupertinoSwitch(
-                                      value: true, onChanged: (value) {})
+                                      value: Utils.getNestedMapData(Settings.agePreferenceOnlyThisInterval.value, controller.settings!), 
+                                      onChanged: (value) {
+                                        controller.updateAgePreferenceOnlyThisInterval(value);
+                                      })
                                 ],
                               ),
                             ),
@@ -2231,7 +2215,8 @@ class SettingsScreen extends StatelessWidget {
                       SettingsDivider(),
                       BasicInlineSwitch(
                         settingName: "Küresel", 
-                        switchState: true
+                        switchState: controller.settings!["global"],
+                        actionFunction: controller.updateGlobal,
                       )
                     ],
                   ),
@@ -2253,14 +2238,18 @@ class SettingsScreen extends StatelessWidget {
                       
                       CurvyPlusSelect(
                         text: "Dengelenmiş Öneriler", 
-                        selectState: true, 
-                        infoText: "Sana en uygun insanları gör ( varsayılan ayar )"
+                        selectState: controller.settings![Settings.recommendationPreference.value] == 0, 
+                        infoText: "Sana en uygun insanları gör ( varsayılan ayar )",
+                        value: 0,                        
+                        actionFunction: controller.updateRecommendationPreference,
                       ),
                       SettingsDivider(),
                        CurvyPlusSelect(
                         text: "Son Zamanda Aktif", 
-                        selectState: false, 
-                        infoText: "En son aktif olan insanları en önce gör "
+                        selectState: controller.settings![Settings.recommendationPreference.value] == 1, 
+                        infoText: "En son aktif olan insanları en önce gör ",
+                        value: 1,                        
+                        actionFunction: controller.updateRecommendationPreference,
                       )
 
                   ]
@@ -2281,14 +2270,18 @@ class SettingsScreen extends StatelessWidget {
                       
                       CurvyPlusSelect(
                         text: "Dengelenmiş Öneriler", 
-                        selectState: true, 
-                        infoText: "Sana en uygun insanları gör ( varsayılan ayar )"
+                        selectState: controller.settings![Settings.viewerPreference.value] == 0, 
+                        infoText: "Sana en uygun insanları gör ( varsayılan ayar )",
+                        value: 0,
+                        actionFunction: controller.updateViewerPreference,
                       ),
                       SettingsDivider(),
                        CurvyPlusSelect(
                         text: "Sadece Beğendiğim İnsanlar", 
-                        selectState: false, 
-                        infoText: "Sadece sağa kaydırdıklarım beni görsün"
+                        selectState: controller.settings![Settings.viewerPreference.value] == 1, 
+                        infoText: "Sadece sağa kaydırdıklarım beni görsün",
+                        value: 1,
+                        actionFunction: controller.updateViewerPreference,
                       )
 
                   ]
@@ -2308,6 +2301,10 @@ class SettingsScreen extends StatelessWidget {
                     children: [
                       BasicInlineButton(
                         buttonText: "Kişileri Engelle",
+                         setTappedButton: controller.setTappedButton,
+                        buttonID: 3,
+                        tappedButton: controller.tappedButton,
+                        actionFunction: showBanPeopleDialog,
 
                       )
                     ]
@@ -2326,9 +2323,13 @@ class SettingsScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       BasicInlineButton(
-                        buttonText: "Türkçe Olarak Seçildi",
+                        buttonText: "${Utils.getEnumValue(Enums.language, controller.settings![Settings.language.value])} Olarak Seçildi",
                         valueText: "Değiştir",
                         isValueTextBold: true,
+                         setTappedButton: controller.setTappedButton,
+                        buttonID: 4,
+                        tappedButton: controller.tappedButton,
+                        actionFunction: selectLanguageDialog
                       )
                     ],
                   ),
@@ -2346,23 +2347,27 @@ class SettingsScreen extends StatelessWidget {
                     children: [
                       BasicInlineSwitch(
                         settingName: "Beni VIP'de Gizle", 
-                        switchState: false
+                        switchState: Utils.getNestedMapData(Settings.visibilityHideMeOnVIP.value, controller.settings!),
+                        actionFunction: controller.updateHideMeOnVIP,
                       ),
                       SettingsDivider(isFull: true,),
                         BasicInlineSwitch(
                         settingName: "Beni CurvyTURBO’da Önerme", 
-                        switchState: false
+                        switchState: Utils.getNestedMapData(Settings.visibilityRecommendMeOnTurbo.value, controller.settings!),
+                        actionFunction: controller.updateRecommendMeOnTurbo,
                       ),
                       SettingsDivider(isFull: true,),
                        BasicInlineSwitch(
                         settingName: "Beni FreeStyle’da Gizle", 
-                        switchState: false
+                        switchState: Utils.getNestedMapData(Settings.visibilityHideMeOnFreestyle.value, controller.settings!),
+                        actionFunction: controller.updateHideMeOnFreestyle,
                       ),
                       SettingsDivider(isFull: true,),
                       ColumnSwitch(
                         settingName: "Beni MatcherStyle’de Gizle", 
                         settingInfo: "Kapılıyken, kart destesinde gösterilmeyeceksin. Yine de beğenmiş olduğun kişiler profilini görebilir ve seninle eşleşebilir. Eşleşmelerini görmeye ve onlara sohbet etmeye devam edebilirsin.", 
-                        switchState: false
+                        switchState: Utils.getNestedMapData(Settings.visibilityHideMeOnMatcherstyle.value, controller.settings!),    
+                        actionFunction: controller.updateHideMeOnMatcherStyle,                    
                       )
 
                     ]
@@ -2382,7 +2387,8 @@ class SettingsScreen extends StatelessWidget {
                       ColumnSwitch(
                         settingName: "Okunma Bildirimlerini Kapat", 
                         settingInfo: "Bu ayar kapalı olduğunda, eşleşmelerin sohbetinizdeki okunma bildirimlerini etkinleştiremez.", 
-                        switchState: false
+                        switchState: controller.settings![Settings.closeReadingNotifications.value],
+                        actionFunction: controller.updateCloseReadingNotifications,
                       )
                     ],
                   ),
@@ -2400,7 +2406,8 @@ class SettingsScreen extends StatelessWidget {
                     children: [
                      BasicInlineSwitch(
                       settingName: "Videoları Otomatik Oynat", 
-                      switchState: true
+                      switchState:  controller.settings![Settings.playVideosAutomatically.value],
+                      actionFunction: controller.updatePlayVideosAutomatically,
                     )
                     ],
                   ),
@@ -2418,12 +2425,14 @@ class SettingsScreen extends StatelessWidget {
                     children: [
                      BasicInlineSwitch(
                       settingName: "Şu An Çevrim İçi Durumunu Gizle", 
-                      switchState: true
+                      switchState:  controller.settings![Settings.hideOnlineStatus.value],
+                      actionFunction: controller.updateHideOnlineStatus,
                     ),
                     SettingsDivider(),
                       BasicInlineSwitch(
                       settingName: "En Son Aktif Olma Durumunu Gizle", 
-                      switchState: true
+                      switchState: controller.settings![Settings.hideLastOnlineStatus.value],
+                      actionFunction: controller.updateHideLastOnlineStatus,
                     ),
                     ],
                   ),
@@ -2443,6 +2452,10 @@ class SettingsScreen extends StatelessWidget {
                         valueText: "Hemen Al",
                         buttonText: "Kullanıcı Adı",
                         isValueTextBold: true,
+                         setTappedButton: controller.setTappedButton,
+                        buttonID: 5,
+                        tappedButton: controller.tappedButton,
+                        actionFunction: changeUsernameDialog,
                       )
                     ],
                   ),
@@ -2464,17 +2477,27 @@ class SettingsScreen extends StatelessWidget {
                         valueText: "Ayarla",
                         buttonText: "E-pasta Bildirimlerini Kapat",
                         isValueTextBold: true,
+                         setTappedButton: controller.setTappedButton,
+                        buttonID: 6,
+                        tappedButton: controller.tappedButton,
+                        actionFunction: showEmailNotificationsModal
                       ),
                       SettingsDivider(),
                         BasicInlineButton(
                         valueText: "Ayarla",
                         buttonText: "Anlık Bildirimleri Kapat",
                         isValueTextBold: true,
+                         setTappedButton: controller.setTappedButton,
+                        buttonID: 7,
+                        tappedButton: controller.tappedButton,
+                        actionFunction: showInstantNotificationsModal,
                       ),
                       SettingsDivider(),
                       BasicInlineSwitch(
                         settingName: "Curvy Team Tekliflerini Kapat", 
-                        switchState: false
+                        switchState: Utils.getNestedMapData(Settings.closeCurvyTeamPromotions.value, controller.settings!),
+                        actionFunction: controller.updateCloseCurvyTeamPromotions,
+                        
                       )
                     ],
                   ),
@@ -2506,7 +2529,10 @@ class SettingsScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       BasicInlineButton(                     
-                        buttonText: "Yardım ve Destek",                     
+                        buttonText: "Yardım ve Destek",   
+                         setTappedButton: controller.setTappedButton,
+                        buttonID: 8,                  
+                        tappedButton: controller.tappedButton,
                       ),
                      
                     ],
@@ -2524,7 +2550,10 @@ class SettingsScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       BasicInlineButton(                     
-                        buttonText: "Topluluk Kuralları",                     
+                        buttonText: "Topluluk Kuralları",         
+                         setTappedButton: controller.setTappedButton,
+                        buttonID: 9,            
+                        tappedButton: controller.tappedButton,
                       ),
                      
                     ],
@@ -2542,17 +2571,27 @@ class SettingsScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       BasicInlineButton(                     
-                        buttonText: "Çerez Politikası",                     
+                        buttonText: "Çerez Politikası",      
+                         setTappedButton: controller.setTappedButton,
+                        buttonID: 10,         
+                        tappedButton: controller.tappedButton,      
                       ),
                       SettingsDivider(),
                        BasicInlineButton(                     
-                        buttonText: "Gizlilik Politikası",                     
+                        buttonText: "Gizlilik Politikası",    
+                         setTappedButton: controller.setTappedButton,
+                        buttonID: 11,                 
+                        tappedButton: controller.tappedButton,
                       ),
                       SettingsDivider(),
                         BasicInlineButton(                     
                         buttonText: "Gizlilik Tercihleri",                     
                         valueText: "Ayarla",
                         isValueTextBold: true,
+                         setTappedButton: controller.setTappedButton,
+                        buttonID: 12,
+                        tappedButton: controller.tappedButton,
+                        actionFunction: showPrivacyPreferencesModal,
                       ),
                      
                     ],
@@ -2636,7 +2675,16 @@ class SettingsScreen extends StatelessWidget {
 
               ],
             )),
-          ));
+          ) : Container(
+            width: double.maxFinite,
+            height: double.maxFinite,
+            child: Center(
+              child: CircularProgressIndicator(
+                color: Color(0xFFD51CFF),
+              )
+            ),
+          )
+        );
     });
   }
 }
