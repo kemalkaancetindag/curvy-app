@@ -1,4 +1,5 @@
  import 'package:curvy_app/enums/enum_enum.dart';
+import 'package:curvy_app/enums/settings_enum.dart';
 import 'package:flutter/cupertino.dart';
 
 class Utils {
@@ -161,15 +162,33 @@ class Utils {
     List<String> keyList = keys.split(".");
     String wantedKey = keyList.last;
     keyList = keyList.sublist(0, keyList.length-1);
+     if(keys == Settings.privacyPreferencesMarketingAppFlayer.value) {      
+          print(keyList);
+          print(wantedKey);
+      }
 
     dynamic wantedData;
-    print(wantedData);
+    
+    
     
 
     for(int i = 0; i < keyList.length; i++){
-      var tempMap = data[keyList[i]] as Map<String,dynamic>;
+   
+         if(keys == Settings.privacyPreferencesMarketingAppFlayer.value) {      
+          print(keyList[i]);
+          }
+     
+      var tempMap = (data[keyList[i]] as Map<String,dynamic>);
+      if(keys == Settings.privacyPreferencesMarketingAppFlayer.value) {       
+       print("AĞAĞAĞAĞAĞĞAĞAĞĞAĞAĞĞAĞAĞ");
+       print(i);
+      print(keyList[i]);    
+      print(tempMap);
+       print(tempMap["marketing_permissions"]);
+    }
 
-      if(i == keyList.length-1){
+
+      if(i == keyList.length-1){     
         wantedData = tempMap[wantedKey];
       }
 

@@ -17,6 +17,7 @@ import 'package:curvy_app/ui/widgets/settings/curvy_plus_row.dart';
 import 'package:curvy_app/ui/widgets/settings/curvy_plus_select.dart';
 import 'package:curvy_app/ui/widgets/settings/divider.dart';
 import 'package:curvy_app/ui/widgets/settings/info_error_text.dart';
+import 'package:curvy_app/ui/widgets/settings/language_select.dart';
 import 'package:curvy_app/ui/widgets/settings/setting_header.dart';
 import 'package:curvy_app/ui/widgets/settings/simple_button.dart';
 import 'package:curvy_app/ui/widgets/settings_boost_button.dart';
@@ -35,7 +36,7 @@ class SettingsScreen extends StatelessWidget {
   SettingsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {    
+  Widget build(BuildContext context) {
     void showBanPeopleDialog() {
       showDialog(
           context: context,
@@ -44,7 +45,7 @@ class SettingsScreen extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
               ),
-              child: Container(                
+              child: Container(
                 width: Dimensions.w300,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(Dimensions.h16),
@@ -129,7 +130,7 @@ class SettingsScreen extends StatelessWidget {
     }
 
     void selectLanguageDialog() {
-      showDialog(          
+      showDialog(
           context: context,
           builder: (context) {
             return GetBuilder<SettingsController>(builder: (controller) {
@@ -137,436 +138,160 @@ class SettingsScreen extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
                 ),
-                child: Container(
-                    height: Dimensions.h520 + Dimensions.h50,
-                    width: Dimensions.w300,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(Dimensions.h16),
-                        gradient: LinearGradient(
-                            colors: [Color(0xFFD51CFF), Color(0xFF6198EF)])),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(top: Dimensions.h300 / 10),
-                            width: Dimensions.w254,
-                            height: Dimensions.h40,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(Dimensions.h300 / 10),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "LİSAN SEÇİMİ",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: Dimensions.h21,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              
-                            },
-                            child: Container(
-                              margin:
-                                  EdgeInsets.only(top: Dimensions.h300 / 10),
-                              width: Dimensions.w254,
-                              height: Dimensions.h40,
-                              decoration: BoxDecoration(
-                                gradient:
-                                     1 == Language.german.value
-                                        ? LinearGradient(
-                                            begin: Alignment.topCenter,
-                                            end: Alignment.bottomCenter,
-                                            colors: [
-                                                Colors.white,
-                                                Colors.transparent,
-                                                Colors.transparent,
-                                                Colors.white
-                                              ])
-                                        : null,
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.h300 / 10),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "Almanca",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: Dimensions.h21,
-                                      fontWeight: FontWeight.bold),
+                child: controller.settings != null
+                    ? Container(
+                        height: Dimensions.h520 + Dimensions.h50,
+                        width: Dimensions.w300,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(Dimensions.h16),
+                            gradient: LinearGradient(colors: [
+                              Color(0xFFD51CFF),
+                              Color(0xFF6198EF)
+                            ])),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              Container(
+                                margin:
+                                    EdgeInsets.only(top: Dimensions.h300 / 10),
+                                width: Dimensions.w254,
+                                height: Dimensions.h40,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                      Dimensions.h300 / 10),
                                 ),
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                        
-                            },
-                            child: Container(
-                              margin:
-                                  EdgeInsets.only(top: Dimensions.h300 / 10),
-                              width: Dimensions.w254,
-                              height: Dimensions.h40,
-                              decoration: BoxDecoration(
-                                gradient:
-                                    1 == Language.arabic.value
-                                        ? LinearGradient(
-                                            begin: Alignment.topCenter,
-                                            end: Alignment.bottomCenter,
-                                            colors: [
-                                                Colors.white,
-                                                Colors.transparent,
-                                                Colors.transparent,
-                                                Colors.white
-                                              ])
-                                        : null,
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.h300 / 10),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "Arapça",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: Dimensions.h21,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              
-                            },
-                            child: Container(
-                              margin:
-                                  EdgeInsets.only(top: Dimensions.h300 / 10),
-                              width: Dimensions.w254,
-                              height: Dimensions.h40,
-                              decoration: BoxDecoration(
-                                gradient: 1 ==
-                                        Language.endonesia.value
-                                    ? LinearGradient(
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                        colors: [
-                                            Colors.white,
-                                            Colors.transparent,
-                                            Colors.transparent,
-                                            Colors.white
-                                          ])
-                                    : null,
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.h300 / 10),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "Endonezce",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: Dimensions.h21,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                            
-                            },
-                            child: Container(
-                              margin:
-                                  EdgeInsets.only(top: Dimensions.h300 / 10),
-                              width: Dimensions.w254,
-                              height: Dimensions.h40,
-                              decoration: BoxDecoration(
-                                gradient:
-                                    1 == Language.french.value
-                                        ? LinearGradient(
-                                            begin: Alignment.topCenter,
-                                            end: Alignment.bottomCenter,
-                                            colors: [
-                                                Colors.white,
-                                                Colors.transparent,
-                                                Colors.transparent,
-                                                Colors.white
-                                              ])
-                                        : null,
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.h300 / 10),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "Fransızca",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: Dimensions.h21,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                             
-                            },
-                            child: Container(
-                              margin:
-                                  EdgeInsets.only(top: Dimensions.h300 / 10),
-                              width: Dimensions.w254,
-                              height: Dimensions.h40,
-                              decoration: BoxDecoration(
-                                gradient:
-                                    1 == Language.hindu.value
-                                        ? LinearGradient(
-                                            begin: Alignment.topCenter,
-                                            end: Alignment.bottomCenter,
-                                            colors: [
-                                                Colors.white,
-                                                Colors.transparent,
-                                                Colors.transparent,
-                                                Colors.white
-                                              ])
-                                        : null,
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.h300 / 10),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "Hintçe",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: Dimensions.h21,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              
-                            },
-                            child: Container(
-                              margin:
-                                  EdgeInsets.only(top: Dimensions.h300 / 10),
-                              width: Dimensions.w254,
-                              height: Dimensions.h40,
-                              decoration: BoxDecoration(
-                                gradient: 1 ==
-                                        Language.english.value
-                                    ? LinearGradient(
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                        colors: [
-                                            Colors.white,
-                                            Colors.transparent,
-                                            Colors.transparent,
-                                            Colors.white
-                                          ])
-                                    : null,
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.h300 / 10),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "İngilizce",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: Dimensions.h21,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              
-                            },
-                            child: Container(
-                              margin:
-                                  EdgeInsets.only(top: Dimensions.h300 / 10),
-                              width: Dimensions.w254,
-                              height: Dimensions.h40,
-                              decoration: BoxDecoration(
-                                gradient: 1 ==
-                                        Language.spanish.value
-                                    ? LinearGradient(
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                        colors: [
-                                            Colors.white,
-                                            Colors.transparent,
-                                            Colors.transparent,
-                                            Colors.white
-                                          ])
-                                    : null,
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.h300 / 10),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "İspanyolca",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: Dimensions.h21,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              
-                            },
-                            child: Container(
-                              margin:
-                                  EdgeInsets.only(top: Dimensions.h300 / 10),
-                              width: Dimensions.w254,
-                              height: Dimensions.h40,
-                              decoration: BoxDecoration(
-                                gradient: 1 ==
-                                        Language.italian.value
-                                    ? LinearGradient(
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                        colors: [
-                                            Colors.white,
-                                            Colors.transparent,
-                                            Colors.transparent,
-                                            Colors.white
-                                          ])
-                                    : null,
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.h300 / 10),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "İtalyanca",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: Dimensions.h21,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              
-                            },
-                            child: Container(
-                              margin:
-                                  EdgeInsets.only(top: Dimensions.h300 / 10),
-                              width: Dimensions.w254,
-                              height: Dimensions.h40,
-                              decoration: BoxDecoration(
-                                gradient: 1 ==
-                                        Language.russian.value
-                                    ? LinearGradient(
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                        colors: [
-                                            Colors.white,
-                                            Colors.transparent,
-                                            Colors.transparent,
-                                            Colors.white
-                                          ])
-                                    : null,
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.h300 / 10),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "Rusça",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: Dimensions.h21,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              
-                            },
-                            child: Container(
-                              margin:
-                                  EdgeInsets.only(top: Dimensions.h300 / 10),
-                              width: Dimensions.w254,
-                              height: Dimensions.h40,
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.h300 / 10),
-                                gradient: 1 ==
-                                        Language.turkish.value
-                                    ? LinearGradient(
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                        colors: [
-                                            Colors.white,
-                                            Colors.transparent,
-                                            Colors.transparent,
-                                            Colors.white
-                                          ])
-                                    : null,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "Türkçe",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: Dimensions.h21,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                              margin: EdgeInsets.only(
-                                  top: Dimensions.h22, bottom: Dimensions.h22),
-                              width: Dimensions.w99,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Get.back();
-                                    },
-                                    child: Container(
-                                      child: Center(
-                                        child: Image.asset(
-                                            "assets/images/settings_modal_cancel.png"),
-                                      ),
-                                    ),
+                                child: Center(
+                                  child: Text(
+                                    "LİSAN SEÇİMİ",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: Dimensions.h21,
+                                        fontWeight: FontWeight.bold),
                                   ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      
-                                    },
-                                    child: Container(
-                                      child: Center(
-                                        child: Image.asset(
-                                            "assets/images/settings_modal_check.png"),
+                                ),
+                              ),
+                              LanguageSelect(
+                                language: "Almanca",
+                                value: Language.german.value,
+                                isSelected: Language.german.value ==
+                                    controller
+                                        .settings![Settings.language.value],
+                                actionFunction: controller.updateLanguage,
+                              ),
+                              LanguageSelect(
+                                language: "Arapça",
+                                value: Language.arabic.value,
+                                isSelected: Language.arabic.value ==
+                                    controller
+                                        .settings![Settings.language.value],
+                                actionFunction: controller.updateLanguage,
+                              ),
+                              LanguageSelect(
+                                language: "Endonezce",
+                                value: Language.endonesia.value,
+                                isSelected: Language.endonesia.value ==
+                                    controller
+                                        .settings![Settings.language.value],
+                                actionFunction: controller.updateLanguage,
+                              ),
+                              LanguageSelect(
+                                language: "Fransızca",
+                                value: Language.french.value,
+                                isSelected: Language.french.value ==
+                                    controller
+                                        .settings![Settings.language.value],
+                                actionFunction: controller.updateLanguage,
+                              ),
+                              LanguageSelect(
+                                language: "Hintçe",
+                                value: Language.hindu.value,
+                                isSelected: Language.hindu.value ==
+                                    controller
+                                        .settings![Settings.language.value],
+                                actionFunction: controller.updateLanguage,
+                              ),
+                              LanguageSelect(
+                                language: "İngilizce",
+                                value: Language.english.value,
+                                isSelected: Language.english.value ==
+                                    controller
+                                        .settings![Settings.language.value],
+                                actionFunction: controller.updateLanguage,
+                              ),
+                              LanguageSelect(
+                                language: "İspanyolca",
+                                value: Language.spanish.value,
+                                isSelected: Language.spanish.value ==
+                                    controller
+                                        .settings![Settings.language.value],
+                                actionFunction: controller.updateLanguage,
+                              ),
+                              LanguageSelect(
+                                language: "İtalyanca",
+                                value: Language.italian.value,
+                                isSelected: Language.italian.value ==
+                                    controller
+                                        .settings![Settings.language.value],
+                                actionFunction: controller.updateLanguage,
+                              ),
+                              LanguageSelect(
+                                language: "Rusça",
+                                value: Language.russian.value,
+                                isSelected: Language.russian.value ==
+                                    controller
+                                        .settings![Settings.language.value],
+                                actionFunction: controller.updateLanguage,
+                              ),
+                              LanguageSelect(
+                                language: "Türkçe",
+                                value: Language.turkish.value,
+                                isSelected: Language.turkish.value ==
+                                    controller
+                                        .settings![Settings.language.value],
+                                actionFunction: controller.updateLanguage,
+                              ),
+                              Container(
+                                  margin: EdgeInsets.only(
+                                      top: Dimensions.h22,
+                                      bottom: Dimensions.h22),
+                                  width: Dimensions.w99,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          Get.back();
+                                        },
+                                        child: Container(
+                                          child: Center(
+                                            child: Image.asset(
+                                                "assets/images/settings_modal_cancel.png"),
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  )
-                                ],
-                              ))
-                        ],
-                      ),
-                    )),
+                                      GestureDetector(
+                                        onTap: () {},
+                                        child: Container(
+                                          child: Center(
+                                            child: Image.asset(
+                                                "assets/images/settings_modal_check.png"),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ))
+                            ],
+                          ),
+                        ))
+                    : null,
               );
             });
           });
     }
 
     void changeUsernameDialog() {
-      showDialog(          
+      showDialog(
           context: context,
           builder: (context) {
             return GetBuilder<SettingsController>(builder: (controller) {
@@ -596,81 +321,48 @@ class SettingsScreen extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: Dimensions.h100 / 10),
-                        width: Dimensions.w267,
-                        height: Dimensions.h300 / 10,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius:
-                                BorderRadius.circular(Dimensions.h16)),
-                        child: Stack(
-                          children: [
-                            Positioned(
-                                left: 0,
-                                top: Dimensions.h8 / 2,
-                                child: Container(
-                                  width: Dimensions.h21,
-                                  height: Dimensions.h21,
-                                  child: Center(
-                                    child: Text(
-                                      "@",
-                                      style: TextStyle(
-                                          color: Color(0xFF7B8491),
-                                          fontSize: Dimensions.h16,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                )),
-                            Positioned(
-                                left: Dimensions.h21,
-                                bottom: Dimensions.h8 / 2,
-                                top: 0,
-                                child: Container(
-                                  width: Dimensions.w180 + 10,
-                                  child: TextField(
-                                    maxLines: 1,
-                                    
-                                        
-                                    onChanged: (value) {
-                                   
-                                    },
-                                    style: TextStyle(color: Color(0xFF7B8491)),
-                                    cursorColor: Color(0xFF7B8491),
-                                    decoration: InputDecoration(
-                                        focusedBorder: InputBorder.none,
-                                        enabledBorder: InputBorder.none,
-                                        disabledBorder: InputBorder.none),
-                                  ),
-                                )),
-                            Positioned(
-                                right: Dimensions.h8 / 2,
-                                top: Dimensions.h8 / 2,
-                                child: Container(
-                                  width: Dimensions.h21,
-                                  height: Dimensions.h21,
-                                  child: Center(
-                                    child: Text(
-                                     "",
-                                      style: TextStyle(
-                                          color: Color(0xFF7B8491),
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ))
-                          ],
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: Dimensions.h100 / 20),
-                        child: Center(
-                          child: Text(
-                            "X - bu kullanıcı adı daha önce alınmış",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: Dimensions.h16 / 2),
-                          ),
-                        ),
-                      ),
+                          margin: EdgeInsets.only(top: Dimensions.h100 / 10),
+                          width: Dimensions.w267,
+                          height: Dimensions.h300 / 10,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.h16)),
+                          child: TextField(
+                            maxLines: 1,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(
+                                  top: 0, bottom: Dimensions.h9),
+                              prefixIcon: Container(
+                                width: Dimensions.h21,
+                                height: Dimensions.h21,
+                                child: Text(
+                                  "@",
+                                  style: TextStyle(
+                                      color: Color(0xFF7B8491),
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              focusedBorder: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              disabledBorder: InputBorder.none,
+                              errorBorder: InputBorder.none,
+                            ),
+                          )),
+                      controller.isUserNameTaken
+                          ? Container(
+                              margin:
+                                  EdgeInsets.only(top: Dimensions.h100 / 20),
+                              child: Center(
+                                child: Text(
+                                  "X - bu kullanıcı adı daha önce alınmış",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: Dimensions.h16 / 2),
+                                ),
+                              ),
+                            )
+                          : Container(),
                       Container(
                         margin: EdgeInsets.only(top: Dimensions.h12),
                         width: Dimensions.h100,
@@ -689,9 +381,7 @@ class SettingsScreen extends StatelessWidget {
                               ),
                             ),
                             GestureDetector(
-                              onTap: () {
-                                
-                              },
+                              onTap: () {},
                               child: Container(
                                 child: Center(
                                   child: Image.asset(
@@ -711,7 +401,7 @@ class SettingsScreen extends StatelessWidget {
     }
 
     void showInstantNotificationsModal() {
-      showDialog(          
+      showDialog(
           context: context,
           builder: (context) {
             return GetBuilder<SettingsController>(builder: (controller) {
@@ -745,8 +435,14 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Yeni Eşleşmeler",
                             text: "Yeni bir eşleşmen var.",
-                            switchState:  true,
-                            switchOnChange: (bool value){},
+                            switchState: Utils.getNestedMapData(
+                                Settings.instantNotificationsOnMatch.value,
+                                controller.settings!),
+                            switchOnChange: (bool value) {
+                              controller.updateInstantNotifications(
+                                  Settings.instantNotificationsOnMatch.value,
+                                  value);
+                            },
                           ),
                           SizedBox(
                             height: 1,
@@ -758,8 +454,14 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Mesajlar",
                             text: "Sana mesaj gönderen biri var.",
-                            switchState: true,
-                            switchOnChange: (bool value){},
+                            switchState: Utils.getNestedMapData(
+                                Settings.instantNotificationsOnMessage.value,
+                                controller.settings!),
+                            switchOnChange: (bool value) {
+                              controller.updateInstantNotifications(
+                                  Settings.instantNotificationsOnMessage.value,
+                                  value);
+                            },
                           ),
                           SizedBox(
                             height: 1,
@@ -771,9 +473,16 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Mesaj Beğenileri",
                             text: "Mesajını beğenen biri var.",
-                            switchState:
-                              true,
-                            switchOnChange:(bool value){},
+                            switchState: Utils.getNestedMapData(
+                                Settings
+                                    .instantNotificationsOnMessageLike.value,
+                                controller.settings!),
+                            switchOnChange: (bool value) {
+                              controller.updateInstantNotifications(
+                                  Settings
+                                      .instantNotificationsOnMessageLike.value,
+                                  value);
+                            },
                           ),
                           SizedBox(
                             height: 1,
@@ -785,8 +494,15 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "CurvyLIKE'lar",
                             text: "Seni CurvyLIKE’layan biri var.",
-                            switchState:  true,
-                            switchOnChange:(bool value){},
+                            switchState: Utils.getNestedMapData(
+                                Settings.instantNotificationsOnCurvyLike.value,
+                                controller.settings!),
+                            switchOnChange: (bool value) {
+                              controller.updateInstantNotifications(
+                                  Settings
+                                      .instantNotificationsOnCurvyLike.value,
+                                  value);
+                            },
                           ),
                           SizedBox(
                             height: 1,
@@ -843,8 +559,12 @@ class SettingsScreen extends StatelessWidget {
                                   ),
                                 ),
                                 GestureDetector(
+                                  behavior: HitTestBehavior.translucent,
                                   onTap: () {
-                                   
+                                    controller.updateInstantNotifications(
+                                        Settings
+                                            .instantNotificationsNewLikes.value,
+                                        1);
                                   },
                                   child: Container(
                                     margin: EdgeInsets.only(
@@ -866,12 +586,18 @@ class SettingsScreen extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                        Container(
-                                          child: Center(
-                                                  child: Image.asset(
-                                                      "assets/images/settings_modal_check.png"))
-                                              ,
-                                        )
+                                        Utils.getNestedMapData(
+                                                    Settings
+                                                        .instantNotificationsNewLikes
+                                                        .value,
+                                                    controller.settings!) ==
+                                                1
+                                            ? Container(
+                                                child: Center(
+                                                    child: Image.asset(
+                                                        "assets/images/settings_modal_check.png")),
+                                              )
+                                            : Container()
                                       ],
                                     ),
                                   ),
@@ -885,8 +611,12 @@ class SettingsScreen extends StatelessWidget {
                                   ),
                                 ),
                                 GestureDetector(
+                                  behavior: HitTestBehavior.translucent,
                                   onTap: () {
-                                  
+                                    controller.updateInstantNotifications(
+                                        Settings
+                                            .instantNotificationsNewLikes.value,
+                                        3);
                                   },
                                   child: Container(
                                     margin: EdgeInsets.only(
@@ -908,9 +638,18 @@ class SettingsScreen extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                        Container(
-                                          child: null,
-                                        )
+                                           Utils.getNestedMapData(
+                                                    Settings
+                                                        .instantNotificationsNewLikes
+                                                        .value,
+                                                    controller.settings!) ==
+                                                3
+                                            ? Container(
+                                                child: Center(
+                                                    child: Image.asset(
+                                                        "assets/images/settings_modal_check.png")),
+                                              )
+                                            : Container()
                                       ],
                                     ),
                                   ),
@@ -924,8 +663,12 @@ class SettingsScreen extends StatelessWidget {
                                   ),
                                 ),
                                 GestureDetector(
+                                  behavior: HitTestBehavior.translucent,
                                     onTap: () {
-                                   
+                                      controller.updateInstantNotifications(
+                                          Settings.instantNotificationsNewLikes
+                                              .value,
+                                          10);
                                     },
                                     child: Container(
                                       margin: EdgeInsets.only(
@@ -947,9 +690,18 @@ class SettingsScreen extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          Container(
-                                            child: null,
-                                          )
+                                          Utils.getNestedMapData(
+                                                    Settings
+                                                        .instantNotificationsNewLikes
+                                                        .value,
+                                                    controller.settings!) ==
+                                                10
+                                            ? Container(
+                                                child: Center(
+                                                    child: Image.asset(
+                                                        "assets/images/settings_modal_check.png")),
+                                              )
+                                            : Container()
                                         ],
                                       ),
                                     )),
@@ -966,8 +718,10 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Titreşim",
                             text: "Uygulama içi titreşimleri aç",
-                            switchOnChange:(bool state){},
-                            switchState:  true,
+                            switchOnChange: (bool state) {
+                              controller.updateInstantNotifications(Settings.instantNotificationsVibration.value, state);
+                            },
+                            switchState: Utils.getNestedMapData(Settings.instantNotificationsVibration.value, controller.settings!),
                           ),
                           SizedBox(
                             height: 1,
@@ -979,8 +733,10 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Ses",
                             text: "Uygulama içi sesleri aç",
-                            switchState: true,
-                            switchOnChange: (bool state){},
+                            switchState: Utils.getNestedMapData(Settings.instantNotificationsSound.value, controller.settings!),
+                            switchOnChange: (bool state) {
+                              controller.updateInstantNotifications(Settings.instantNotificationsSound.value, state);
+                            },
                           ),
                           SizedBox(
                             height: 1,
@@ -1009,7 +765,7 @@ class SettingsScreen extends StatelessWidget {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    
+                                    controller.sendInstantNotifications();
                                   },
                                   child: Container(
                                     child: Center(
@@ -1030,7 +786,7 @@ class SettingsScreen extends StatelessWidget {
     }
 
     void showEmailNotificationsModal() {
-      showDialog(          
+      showDialog(
           context: context,
           builder: (context) {
             return GetBuilder<SettingsController>(builder: (controller) {
@@ -1165,8 +921,14 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Yeni Eşleşmeler",
                             text: "Yeni bir eşleşmen var.",
-                            switchOnChange:(bool state){},
-                            switchState:  false,
+                            switchOnChange: (bool state) {
+                              controller.updateEmailNotifications(
+                                  Settings.emailNotificationOnMatch.value,
+                                  state);
+                            },
+                            switchState: Utils.getNestedMapData(
+                                Settings.emailNotificationOnMatch.value,
+                                controller.settings!),
                           ),
                           SizedBox(
                             height: 1,
@@ -1178,8 +940,14 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Mesajlar",
                             text: "Sana mesaj gönderen biri var.",
-                            switchOnChange: (bool state){},
-                            switchState:  false,
+                            switchOnChange: (bool state) {
+                              controller.updateEmailNotifications(
+                                  Settings.emailNotificationOnMessage.value,
+                                  state);
+                            },
+                            switchState: Utils.getNestedMapData(
+                                Settings.emailNotificationOnMessage.value,
+                                controller.settings!),
                           ),
                           SizedBox(
                             height: 1,
@@ -1212,10 +980,17 @@ class SettingsScreen extends StatelessWidget {
                                         )),
                                       ),
                                       CupertinoSwitch(
-                                          value: 
-                                              false,
+                                          value: Utils.getNestedMapData(
+                                              Settings
+                                                  .emailNotificationOnMarketing
+                                                  .value,
+                                              controller.settings!),
                                           onChanged: (value) {
-                                            
+                                            controller.updateEmailNotifications(
+                                                Settings
+                                                    .emailNotificationOnMarketing
+                                                    .value,
+                                                value);
                                           })
                                     ],
                                   ),
@@ -1283,7 +1058,7 @@ class SettingsScreen extends StatelessWidget {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                   
+                                    controller.sendEmailNotifications();
                                   },
                                   child: Container(
                                       child: Center(
@@ -1362,8 +1137,10 @@ class SettingsScreen extends StatelessWidget {
                             SettingsModalSwitchRow(
                               title: "AppFlayer",
                               text: "Ayrıntıları Görüntüle",
-                              switchState:  true,
-                              switchOnChange: (bool state){},
+                              switchState: Utils.getNestedMapData(Settings.privacyPreferencesMarketingAppFlayer.value, controller.settings!),
+                              switchOnChange: (bool state) {
+                                controller.updatePrivacyPreferences(Settings.privacyPreferencesMarketingAppFlayer.value, state);
+                              },
                             ),
                             SizedBox(
                               height: 2,
@@ -1375,8 +1152,10 @@ class SettingsScreen extends StatelessWidget {
                             SettingsModalSwitchRow(
                               title: "Branch",
                               text: "Ayrıntıları Görüntüle",
-                              switchState:  true,
-                              switchOnChange: (bool state){},
+                              switchState: Utils.getNestedMapData(Settings.privacyPreferencesMarketingBranch.value, controller.settings!),
+                              switchOnChange: (bool state) {
+                                 controller.updatePrivacyPreferences(Settings.privacyPreferencesMarketingBranch.value, state);
+                              },
                             ),
                             SizedBox(
                               height: 2,
@@ -1390,10 +1169,10 @@ class SettingsScreen extends StatelessWidget {
                               text:
                                   "Yeni araçlar ekleyebiliriz. Bu ayar, bu yeni araçların varsayılan olarak etkin mi yoksa devre dışı mı olacağını belirler.",
                               isSwitch: true,
-                              switchState:
-                                  true,
-                              switchOnChanged:
-                                  (bool state){},
+                              switchState:  Utils.getNestedMapData(Settings.privacyPreferencesMarketingNewMarketingPermissions.value, controller.settings!),
+                              switchOnChanged: (bool state) {
+                                 controller.updatePrivacyPreferences(Settings.privacyPreferencesMarketingNewMarketingPermissions.value, state);
+                              },
                             ),
                             SizedBox(
                               height: 2,
@@ -1423,9 +1202,7 @@ class SettingsScreen extends StatelessWidget {
                                     ),
                                   ),
                                   GestureDetector(
-                                    onTap: () {
-                                     
-                                    },
+                                    onTap: () {},
                                     child: Container(
                                       child: Center(
                                         child: Image.asset(
@@ -1504,8 +1281,8 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Curvy Direct Ads",
                             text: "Ayrıntıları Görüntüle",
-                            switchState:  true,
-                            switchOnChange: (bool state){},
+                            switchState: Utils.getNestedMapData(Settings.privacyPreferencesAdvertisingCurvyDirectAds.value, controller.settings!),
+                            switchOnChange: (bool state) {},
                           ),
                           SizedBox(
                             height: 2,
@@ -1517,8 +1294,8 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Google Ads",
                             text: "Ayrıntıları Görüntüle",
-                            switchState:  true,
-                            switchOnChange: (bool state){},
+                            switchState: true,
+                            switchOnChange: (bool state) {},
                           ),
                           SizedBox(
                             height: 2,
@@ -1530,8 +1307,8 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Curvy Promotions",
                             text: "Ayrıntıları Görüntüle",
-                            switchState:  true,
-                            switchOnChange: (bool state){},
+                            switchState: true,
+                            switchOnChange: (bool state) {},
                           ),
                           SizedBox(
                             height: 2,
@@ -1543,8 +1320,8 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Facebook Ads",
                             text: "Ayrıntıları Görüntüle",
-                            switchState:  true,
-                            switchOnChange:(bool state){},
+                            switchState: true,
+                            switchOnChange: (bool state) {},
                           ),
                           SizedBox(
                             height: 2,
@@ -1559,7 +1336,7 @@ class SettingsScreen extends StatelessWidget {
                                 "Yeni araçlar ekleyebiliriz. Bu ayar, bu yeni araçların varsayılan olarak etkin mi yoksa devre dışı mı olacağını belirler.",
                             isSwitch: true,
                             switchState: true,
-                            switchOnChanged:(bool state){},
+                            switchOnChanged: (bool state) {},
                           ),
                           SizedBox(
                             height: 2,
@@ -1588,9 +1365,7 @@ class SettingsScreen extends StatelessWidget {
                                   ),
                                 ),
                                 GestureDetector(
-                                  onTap: () {
-                               
-                                  },
+                                  onTap: () {},
                                   child: Container(
                                     child: Center(
                                       child: Image.asset(
@@ -1610,7 +1385,7 @@ class SettingsScreen extends StatelessWidget {
     }
 
     void showPrivacyPreferencesModal() {
-      showDialog(          
+      showDialog(
           context: context,
           builder: (context) {
             return GetBuilder<SettingsController>(builder: (controller) {
@@ -1667,10 +1442,10 @@ class SettingsScreen extends StatelessWidget {
                             title: "Pazarlama izinleri’ne izin ver",
                             text:
                                 "Şuan pazarlama izinleri’ne izin veriyorsun İstediğin zaman kapatabilirsin",
-                            switchState:
-                               false,
-                            switchOnChanged:
-                                (bool state){},
+                            switchState: Utils.getNestedMapData(Settings.privacyPreferencesEnableMarketing.value, controller.settings!),
+                            switchOnChanged: (bool state) {
+                              controller.updatePrivacyPreferences(Settings.privacyPreferencesEnableMarketing.value, state);
+                            },
                           ),
                           SizedBox(
                             height: 2,
@@ -1699,10 +1474,10 @@ class SettingsScreen extends StatelessWidget {
                             title: "Zorunlu İzinler",
                             text:
                                 "Bu izleyiciler uygulamanın çalışması için gereklidir ve bu yüzden kapatılamaz. Genellikle senin tarafından yapılan ve gizlilik tercihlerini belirleme, oturum açma veya form doldurma gibi hizmet taleplerine karşılık gelen eylemlere yanıt olarak ayarlanır. ( Ayrıntıları Görüntüle )",
-                            switchState:
-                                true,
-                            switchOnChanged:
-                                (bool state){},
+                            switchState: Utils.getNestedMapData(Settings.privacyPreferencesCompulsoryPermissions.value, controller.settings!),
+                            switchOnChanged: (bool state) {
+                              controller.updatePrivacyPreferences(Settings.privacyPreferencesCompulsoryPermissions.value, state);
+                            },
                           ),
                           SizedBox(
                             height: 2,
@@ -1760,11 +1535,9 @@ class SettingsScreen extends StatelessWidget {
                                     ),
                                   ),
                                   CupertinoSwitch(
-                                      value:
-                                         
-                                              false,
+                                      value: Utils.getNestedMapData(Settings.privacyPreferencesEnableAdvertising.value, controller.settings!), 
                                       onChanged: (value) {
-                                       
+                                        controller.updatePrivacyPreferences(Settings.privacyPreferencesEnableAdvertising.value, value);
                                       })
                                 ]),
                           ),
@@ -1808,9 +1581,7 @@ class SettingsScreen extends StatelessWidget {
                                     ),
                                   ),
                                   GestureDetector(
-                                    onTap: () {
-                                     
-                                    },
+                                    onTap: () {},
                                     child: Container(
                                       child: Center(
                                           child: Image.asset(
@@ -1838,8 +1609,8 @@ class SettingsScreen extends StatelessWidget {
             ),
             actions: [
               GestureDetector(
-                onTap: ()  {
-                   controller.updatePage();
+                onTap: () {
+                  controller.updatePage();
                 },
                 child: Container(
                   margin: EdgeInsets.only(right: Dimensions.w16),
@@ -1857,834 +1628,893 @@ class SettingsScreen extends StatelessWidget {
             centerTitle: true,
             elevation: 0,
           ),
-          body: controller.user != null && controller.settings != null ?  Container(
-            width: double.maxFinite,
-            height: double.maxFinite,
-            child: SingleChildScrollView(
-                child: Column(
-              children: [
-                Column(
-                  children: [
-                    BoostButtons(
-                        backgroundGradient: LinearGradient(colors: [
-                          Colors.black,
-                          Color(0xFF2E2B2B),
-                          Colors.black
-                        ]),
-                        packageName: "CurvyPLATINUM",
-                        packageIcon: "assets/images/platinium_logo.png",
-                        marginTop: Dimensions.h16,
-                        route: Routes.buyPlusPremium,
-                        isPlus: false,
-                      ),
-                    BoostButtons(
-                        backgroundGradient: LinearGradient(
-                            colors: [Color(0xFFD51CFF), Color(0xFF6198EF)]),
-                        packageName: "CurvyPLUS",
-                        packageIcon: "assets/images/platinium_logo.png",
-                        marginTop: Dimensions.h9,
-                        route: Routes.buyPlusPremium,
-                        isPlus: true,
-                      ),
-                    BoostButtons(
-                        backgroundGradient: LinearGradient(
-                            colors: [Color(0xFFFF0000), Color(0xFF0047FF)]),
-                        packageName: "CurvyTURBO",
-                        packageIcon: "assets/images/turbo_icon.png",
-                        marginTop: Dimensions.h9,
-                        route: Routes.buyCurvyTurbo,
-                      ),
-                    BoostButtons(
-                        backgroundGradient: LinearGradient(
-                            colors: [Color(0xFF0095EC), Color(0xFF47C1B3)]),
-                        packageName: "CurvyLIKE",
-                        packageIcon: "assets/images/like_icon.png",
-                        marginTop: Dimensions.h9,
-                        route: Routes.buyCurvyLike,
-                      ),
-                    BoostButtons(
-                        backgroundGradient: LinearGradient(
-                            colors: [Color(0xFFEEB137), Color(0xFFD99000)]),
-                        packageName: "CurvyCHIP",
-                        packageIcon: "assets/images/chip_icon.png",
-                        marginTop: Dimensions.h9,
-                        route: Routes.buyCurvyChip
-                      )
-                  ],
-                ),
-                SettingHeader(settingName: "HESAP AYARLARI"),
-                Container(
+          body: controller.user != null && controller.settings != null
+              ? Container(
                   width: double.maxFinite,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border(
-                          top: BorderSide(color: Color(0xFFC5C5C7), width: 1),
-                          bottom:
-                              BorderSide(color: Color(0xFFC5C5C7), width: 1))),
-                  child: Column(
+                  height: double.maxFinite,
+                  child: SingleChildScrollView(
+                      child: Column(
                     children: [
-                      BasicInlineButton(
-                        buttonText: "Telefon Numarası",
-                        valueText: controller.user!.phone_number,
-                        isValueTextBold: true,
-                        valueTextColor: Colors.black,
-                        setTappedButton: controller.setTappedButton,
-                        buttonID: 0,
-                        tappedButton: controller.tappedButton,
+                      Column(
+                        children: [
+                          BoostButtons(
+                            backgroundGradient: LinearGradient(colors: [
+                              Colors.black,
+                              Color(0xFF2E2B2B),
+                              Colors.black
+                            ]),
+                            packageName: "CurvyPLATINUM",
+                            packageIcon: "assets/images/platinium_logo.png",
+                            marginTop: Dimensions.h16,
+                            route: Routes.buyPlusPremium,
+                            isPlus: false,
+                          ),
+                          BoostButtons(
+                            backgroundGradient: LinearGradient(
+                                colors: [Color(0xFFD51CFF), Color(0xFF6198EF)]),
+                            packageName: "CurvyPLUS",
+                            packageIcon: "assets/images/platinium_logo.png",
+                            marginTop: Dimensions.h9,
+                            route: Routes.buyPlusPremium,
+                            isPlus: true,
+                          ),
+                          BoostButtons(
+                            backgroundGradient: LinearGradient(
+                                colors: [Color(0xFFFF0000), Color(0xFF0047FF)]),
+                            packageName: "CurvyTURBO",
+                            packageIcon: "assets/images/turbo_icon.png",
+                            marginTop: Dimensions.h9,
+                            route: Routes.buyCurvyTurbo,
+                          ),
+                          BoostButtons(
+                            backgroundGradient: LinearGradient(
+                                colors: [Color(0xFF0095EC), Color(0xFF47C1B3)]),
+                            packageName: "CurvyLIKE",
+                            packageIcon: "assets/images/like_icon.png",
+                            marginTop: Dimensions.h9,
+                            route: Routes.buyCurvyLike,
+                          ),
+                          BoostButtons(
+                              backgroundGradient: LinearGradient(colors: [
+                                Color(0xFFEEB137),
+                                Color(0xFFD99000)
+                              ]),
+                              packageName: "CurvyCHIP",
+                              packageIcon: "assets/images/chip_icon.png",
+                              marginTop: Dimensions.h9,
+                              route: Routes.buyCurvyChip)
+                        ],
                       ),
-                      SettingsDivider(),
-                      BasicInlineButton(
-                        buttonText: "Bağlantılı Hesaplar",
-                         setTappedButton: controller.setTappedButton,
-                        buttonID: 1,
-                        tappedButton: controller.tappedButton,
-                      ),
-                      SettingsDivider(),
+                      SettingHeader(settingName: "HESAP AYARLARI"),
                       Container(
                         width: double.maxFinite,
-                        height: Dimensions.h50,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border(
+                                top: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1),
+                                bottom: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1))),
+                        child: Column(
                           children: [
-                            Container(
-                              margin: EdgeInsets.only(left: Dimensions.w17),
-                              child: Text(
-                                "E-posta",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: Dimensions.h16,
-                                    fontWeight: FontWeight.bold),
-                              ),
+                            BasicInlineButton(
+                              buttonText: "Telefon Numarası",
+                              valueText: controller.user!.phone_number,
+                              isValueTextBold: true,
+                              valueTextColor: Colors.black,
+                              setTappedButton: controller.setTappedButton,
+                              buttonID: 0,
+                              tappedButton: controller.tappedButton,
                             ),
+                            SettingsDivider(),
+                            BasicInlineButton(
+                              buttonText: "Bağlantılı Hesaplar",
+                              setTappedButton: controller.setTappedButton,
+                              buttonID: 1,
+                              tappedButton: controller.tappedButton,
+                            ),
+                            SettingsDivider(),
                             Container(
-                              margin: EdgeInsets.only(right: Dimensions.w17),
-                              child: Text(
-                                controller.user!.email!,
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: Dimensions.h16,
-                                    fontWeight: FontWeight.bold),
+                              width: double.maxFinite,
+                              height: Dimensions.h50,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    margin:
+                                        EdgeInsets.only(left: Dimensions.w17),
+                                    child: Text(
+                                      "E-posta",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: Dimensions.h16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Container(
+                                    margin:
+                                        EdgeInsets.only(right: Dimensions.w17),
+                                    child: Text(
+                                      controller.user!.email!,
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: Dimensions.h16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  )
+                                ],
                               ),
                             )
                           ],
                         ),
-                      )
-                    ],
-                  ),
-                ),
-                !controller.user!.email_confirmation! ?
-                InfoErrorText(
-                  text:
-                      "Hesabının güvence altına alınmasına yardımcı olmak için E-postanı doğrula.",
-                  textColor: Colors.red,
-                ) : Container(),
-                SettingHeader(settingName: "KEŞFET"),
-                Container(
-                  width: double.maxFinite,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border(
-                          top: BorderSide(color: Color(0xFFC5C5C7), width: 1),
-                          bottom:
-                              BorderSide(color: Color(0xFFC5C5C7), width: 1))),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
+                      ),
+                      !controller.user!.email_confirmation!
+                          ? InfoErrorText(
+                              text:
+                                  "Hesabının güvence altına alınmasına yardımcı olmak için E-postanı doğrula.",
+                              textColor: Colors.red,
+                            )
+                          : Container(),
+                      SettingHeader(settingName: "KEŞFET"),
                       Container(
-                        margin: EdgeInsets.only(bottom: Dimensions.h17),
                         width: double.maxFinite,
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(
-                                    left: Dimensions.w17, top: Dimensions.h17),
-                                child: Text(
-                                  "Konum",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: Dimensions.h16,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(
-                                    right: Dimensions.w17, top: Dimensions.h17),
-                                child: Row(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border(
+                                top: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1),
+                                bottom: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1))),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(bottom: Dimensions.h17),
+                              width: double.maxFinite,
+                              child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(
-                                        margin: EdgeInsets.only(
-                                            right: Dimensions.w11),
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              child: Text(
-                                                "Şu Anki Konumum",
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: Dimensions.h16,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            ),
-                                            Container(
-                                              margin: EdgeInsets.only(
-                                                  top: Dimensions.h9 / 2),
-                                              child: Text(
-                                                "Muratpaşa, Antalya",
-                                                style: TextStyle(
-                                                    color: Color(0xFF7B8491),
-                                                    fontSize: Dimensions.h16,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            )
-                                          ],
-                                        )),
+                                      margin: EdgeInsets.only(
+                                          left: Dimensions.w17,
+                                          top: Dimensions.h17),
+                                      child: Text(
+                                        "Konum",
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: Dimensions.h16,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
                                     Container(
                                       margin: EdgeInsets.only(
                                           right: Dimensions.w17,
-                                          left: Dimensions.w9),
-                                      child: Image.asset(
-                                          "assets/images/chevron_right.png"),
+                                          top: Dimensions.h17),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                              margin: EdgeInsets.only(
+                                                  right: Dimensions.w11),
+                                              child: Column(
+                                                children: [
+                                                  Container(
+                                                    child: Text(
+                                                      "Şu Anki Konumum",
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize:
+                                                              Dimensions.h16,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        top: Dimensions.h9 / 2),
+                                                    child: Text(
+                                                      "Muratpaşa, Antalya",
+                                                      style: TextStyle(
+                                                          color:
+                                                              Color(0xFF7B8491),
+                                                          fontSize:
+                                                              Dimensions.h16,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  )
+                                                ],
+                                              )),
+                                          Container(
+                                            margin: EdgeInsets.only(
+                                                right: Dimensions.w17,
+                                                left: Dimensions.w9),
+                                            child: Image.asset(
+                                                "assets/images/chevron_right.png"),
+                                          )
+                                        ],
+                                      ),
                                     )
-                                  ],
-                                ),
-                              )
-                            ]),
-                      ),
-                      SettingsDivider(),
-                      Container(
-                        width: double.maxFinite,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: Dimensions.w17),
-                        margin: EdgeInsets.only(bottom: Dimensions.h16),
-                        child: Column(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(
-                                  top: Dimensions.h21,
-                                  bottom: Dimensions.h100 / 10),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    "Mesafe Tercihi",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: Dimensions.h16,
-                                        fontWeight: FontWeight.bold),
-                                  )
-                                ],
-                              ),
+                                  ]),
                             ),
+                            SettingsDivider(),
                             Container(
-                              child: SliderTheme(
-                                  data: SliderThemeData(
-                                    inactiveTrackColor: Color(0xFFC5C5C7),
-                                    thumbColor: Colors.white,
-                                    trackShape: GradientRectSliderTrackShape(
-                                      gradient: LinearGradient(colors: [
-                                        Color(0xFFD51CFF),
-                                        Color(0xFF00FFE1)
-                                      ]),
+                              width: double.maxFinite,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: Dimensions.w17),
+                              margin: EdgeInsets.only(bottom: Dimensions.h16),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                        top: Dimensions.h21,
+                                        bottom: Dimensions.h100 / 10),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Mesafe Tercihi",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: Dimensions.h16,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      ],
                                     ),
                                   ),
-                                  child: Slider(
-                                    min: 0,
-                                    max: 100,
-                                    value: Utils.getNestedMapData(Settings.distancePreferenceDistance.value, controller.settings!).toDouble(),
-                                    onChanged: (double value) {
-                                      controller.updateDistancePreferenceDistance(value.toInt());
-                                    },
-                                  )),
-                            ),
-                            Container(
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Sadece bu aralıktaki kişileri göster",
-                                    style: TextStyle(
-                                        color: Color(0xFF7B8491),
-                                        fontSize: Dimensions.h16,
-                                        fontWeight: FontWeight.bold),
+                                  Container(
+                                    child: SliderTheme(
+                                        data: SliderThemeData(
+                                          inactiveTrackColor: Color(0xFFC5C5C7),
+                                          thumbColor: Colors.white,
+                                          trackShape:
+                                              GradientRectSliderTrackShape(
+                                            gradient: LinearGradient(colors: [
+                                              Color(0xFFD51CFF),
+                                              Color(0xFF00FFE1)
+                                            ]),
+                                          ),
+                                        ),
+                                        child: Slider(
+                                          min: 0,
+                                          max: 100,
+                                          value: Utils.getNestedMapData(
+                                                  Settings
+                                                      .distancePreferenceDistance
+                                                      .value,
+                                                  controller.settings!)
+                                              .toDouble(),
+                                          onChanged: (double value) {
+                                            controller
+                                                .updateDistancePreferenceDistance(
+                                                    value.toInt());
+                                          },
+                                        )),
                                   ),
-                                  CupertinoSwitch(
-                                      value: Utils.getNestedMapData(Settings.distancePreferenceOnlyThisInterval.value, controller.settings!), 
-                                      onChanged: (value) {
-                                        controller.updateDistancePreferenceOnlyThisInterval(value);
-                                      })
+                                  Container(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Sadece bu aralıktaki kişileri göster",
+                                          style: TextStyle(
+                                              color: Color(0xFF7B8491),
+                                              fontSize: Dimensions.h16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        CupertinoSwitch(
+                                            value: Utils.getNestedMapData(
+                                                Settings
+                                                    .distancePreferenceOnlyThisInterval
+                                                    .value,
+                                                controller.settings!),
+                                            onChanged: (value) {
+                                              controller
+                                                  .updateDistancePreferenceOnlyThisInterval(
+                                                      value);
+                                            })
+                                      ],
+                                    ),
+                                  ),
                                 ],
                               ),
+                            ),
+                            SettingsDivider(),
+                            BasicInlineButton(
+                              buttonText: "Bana Göster",
+                              valueText: Utils.getEnumValue(
+                                  Enums.showme, controller.user!.show_me!),
+                              isValueTextBold: false,
+                              setTappedButton: controller.setTappedButton,
+                              buttonID: 2,
+                              tappedButton: controller.tappedButton,
+                            ),
+                            SettingsDivider(),
+                            Container(
+                              width: double.maxFinite,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: Dimensions.w17),
+                              margin: EdgeInsets.only(bottom: Dimensions.h16),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                        top: Dimensions.h21,
+                                        bottom: Dimensions.h100 / 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Yaş Tercihi",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: Dimensions.h16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Text(
+                                          "${Utils.getNestedMapData(Settings.agePreferenceMinAge.value, controller.settings!)}-${Utils.getNestedMapData(Settings.agePreferenceMaxAge.value, controller.settings!)}+",
+                                          style: TextStyle(
+                                              color: Color(0xFF7B8491),
+                                              fontSize: Dimensions.h16,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    child: SliderTheme(
+                                        data: SliderThemeData(
+                                          inactiveTrackColor: Color(0xFFC5C5C7),
+                                          thumbColor: Colors.white,
+                                          rangeTrackShape:
+                                              GradientRectRangeSliderTrackShape(
+                                            gradient: LinearGradient(colors: [
+                                              Color(0xFFD51CFF),
+                                              Color(0xFF00FFE1)
+                                            ]),
+                                          ),
+                                        ),
+                                        child: RangeSlider(
+                                          min: 0.18,
+                                          max: 1,
+                                          values: RangeValues(
+                                              Utils.getNestedMapData(
+                                                      Settings
+                                                          .agePreferenceMinAge
+                                                          .value,
+                                                      controller.settings!) /
+                                                  100,
+                                              Utils.getNestedMapData(
+                                                      Settings
+                                                          .agePreferenceMaxAge
+                                                          .value,
+                                                      controller.settings!) /
+                                                  100),
+                                          onChanged: (value) {
+                                            controller.updateAgePreferenceAge(
+                                                value.start, value.end);
+                                          },
+                                        )),
+                                  ),
+                                  Container(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Sadece bu aralıktaki kişileri göster",
+                                          style: TextStyle(
+                                              color: Color(0xFF7B8491),
+                                              fontSize: Dimensions.h16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        CupertinoSwitch(
+                                            value: Utils.getNestedMapData(
+                                                Settings
+                                                    .agePreferenceOnlyThisInterval
+                                                    .value,
+                                                controller.settings!),
+                                            onChanged: (value) {
+                                              controller
+                                                  .updateAgePreferenceOnlyThisInterval(
+                                                      value);
+                                            })
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SettingsDivider(),
+                            BasicInlineSwitch(
+                              settingName: "Küresel",
+                              switchState: controller.settings!["global"],
+                              actionFunction: controller.updateGlobal,
+                            )
+                          ],
+                        ),
+                      ),
+                      InfoErrorText(
+                          text:
+                              "Dünyaya açılmak, hem çevrendeki hem de dünyanın dört bir yanındaki insanları görmeni sağlar."),
+                      CurvyPlusRow(text: "KİMLERİ GÖREBİLDİĞİNİ KONTROL ET"),
+                      Container(
+                        width: double.maxFinite,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border(
+                                top: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1),
+                                bottom: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1))),
+                        child: Column(children: [
+                          CurvyPlusSelect(
+                            text: "Dengelenmiş Öneriler",
+                            selectState: controller.settings![
+                                    Settings.recommendationPreference.value] ==
+                                0,
+                            infoText:
+                                "Sana en uygun insanları gör ( varsayılan ayar )",
+                            value: 0,
+                            actionFunction:
+                                controller.updateRecommendationPreference,
+                          ),
+                          SettingsDivider(),
+                          CurvyPlusSelect(
+                            text: "Son Zamanda Aktif",
+                            selectState: controller.settings![
+                                    Settings.recommendationPreference.value] ==
+                                1,
+                            infoText:
+                                "En son aktif olan insanları en önce gör ",
+                            value: 1,
+                            actionFunction:
+                                controller.updateRecommendationPreference,
+                          )
+                        ]),
+                      ),
+                      CurvyPlusRow(text: "SENİ KİMLER GÖREBİLİR KONTROL ET"),
+                      Container(
+                        width: double.maxFinite,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border(
+                                top: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1),
+                                bottom: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1))),
+                        child: Column(children: [
+                          CurvyPlusSelect(
+                            text: "Dengelenmiş Öneriler",
+                            selectState: controller.settings![
+                                    Settings.viewerPreference.value] ==
+                                0,
+                            infoText:
+                                "Sana en uygun insanları gör ( varsayılan ayar )",
+                            value: 0,
+                            actionFunction: controller.updateViewerPreference,
+                          ),
+                          SettingsDivider(),
+                          CurvyPlusSelect(
+                            text: "Sadece Beğendiğim İnsanlar",
+                            selectState: controller.settings![
+                                    Settings.viewerPreference.value] ==
+                                1,
+                            infoText: "Sadece sağa kaydırdıklarım beni görsün",
+                            value: 1,
+                            actionFunction: controller.updateViewerPreference,
+                          )
+                        ]),
+                      ),
+                      SettingHeader(settingName: "CONNECTIONS"),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border(
+                                top: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1),
+                                bottom: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1))),
+                        child: Column(children: [
+                          BasicInlineButton(
+                            buttonText: "Kişileri Engelle",
+                            setTappedButton: controller.setTappedButton,
+                            buttonID: 3,
+                            tappedButton: controller.tappedButton,
+                            actionFunction: showBanPeopleDialog,
+                          )
+                        ]),
+                      ),
+                      InfoErrorText(
+                          text:
+                              "Curvy’de görmek veya görünmek istemediğin kişileri, kişiler listesinden seç."),
+                      SettingHeader(settingName: "LİSAN SEÇİMİ"),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border(
+                                top: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1),
+                                bottom: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1))),
+                        child: Column(
+                          children: [
+                            BasicInlineButton(
+                                buttonText:
+                                    "${Utils.getEnumValue(Enums.language, controller.settings![Settings.language.value])} Olarak Seçildi",
+                                valueText: "Değiştir",
+                                isValueTextBold: true,
+                                setTappedButton: controller.setTappedButton,
+                                buttonID: 4,
+                                tappedButton: controller.tappedButton,
+                                actionFunction: selectLanguageDialog)
+                          ],
+                        ),
+                      ),
+                      SettingHeader(settingName: "GÖRÜNÜRLÜK"),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border(
+                                top: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1),
+                                bottom: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1))),
+                        child: Column(children: [
+                          BasicInlineSwitch(
+                            settingName: "Beni VIP'de Gizle",
+                            switchState: Utils.getNestedMapData(
+                                Settings.visibilityHideMeOnVIP.value,
+                                controller.settings!),
+                            actionFunction: controller.updateHideMeOnVIP,
+                          ),
+                          SettingsDivider(
+                            isFull: true,
+                          ),
+                          BasicInlineSwitch(
+                            settingName: "Beni CurvyTURBO’da Önerme",
+                            switchState: Utils.getNestedMapData(
+                                Settings.visibilityRecommendMeOnTurbo.value,
+                                controller.settings!),
+                            actionFunction: controller.updateRecommendMeOnTurbo,
+                          ),
+                          SettingsDivider(
+                            isFull: true,
+                          ),
+                          BasicInlineSwitch(
+                            settingName: "Beni FreeStyle’da Gizle",
+                            switchState: Utils.getNestedMapData(
+                                Settings.visibilityHideMeOnFreestyle.value,
+                                controller.settings!),
+                            actionFunction: controller.updateHideMeOnFreestyle,
+                          ),
+                          SettingsDivider(
+                            isFull: true,
+                          ),
+                          ColumnSwitch(
+                            settingName: "Beni MatcherStyle’de Gizle",
+                            settingInfo:
+                                "Kapılıyken, kart destesinde gösterilmeyeceksin. Yine de beğenmiş olduğun kişiler profilini görebilir ve seninle eşleşebilir. Eşleşmelerini görmeye ve onlara sohbet etmeye devam edebilirsin.",
+                            switchState: Utils.getNestedMapData(
+                                Settings.visibilityHideMeOnMatcherstyle.value,
+                                controller.settings!),
+                            actionFunction:
+                                controller.updateHideMeOnMatcherStyle,
+                          )
+                        ]),
+                      ),
+                      SettingHeader(settingName: "OKUNMA BİLDİRİMLERİ"),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border(
+                                top: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1),
+                                bottom: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1))),
+                        child: Column(
+                          children: [
+                            ColumnSwitch(
+                              settingName: "Okunma Bildirimlerini Kapat",
+                              settingInfo:
+                                  "Bu ayar kapalı olduğunda, eşleşmelerin sohbetinizdeki okunma bildirimlerini etkinleştiremez.",
+                              switchState: controller.settings![
+                                  Settings.closeReadingNotifications.value],
+                              actionFunction:
+                                  controller.updateCloseReadingNotifications,
+                            )
+                          ],
+                        ),
+                      ),
+                      SettingHeader(settingName: "VERİ KULLANIMI"),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border(
+                                top: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1),
+                                bottom: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1))),
+                        child: Column(
+                          children: [
+                            BasicInlineSwitch(
+                              settingName: "Videoları Otomatik Oynat",
+                              switchState: controller.settings![
+                                  Settings.playVideosAutomatically.value],
+                              actionFunction:
+                                  controller.updatePlayVideosAutomatically,
+                            )
+                          ],
+                        ),
+                      ),
+                      SettingHeader(settingName: "ETKİNLİK DURUMU"),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border(
+                                top: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1),
+                                bottom: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1))),
+                        child: Column(
+                          children: [
+                            BasicInlineSwitch(
+                              settingName: "Şu An Çevrim İçi Durumunu Gizle",
+                              switchState: controller
+                                  .settings![Settings.hideOnlineStatus.value],
+                              actionFunction: controller.updateHideOnlineStatus,
+                            ),
+                            SettingsDivider(),
+                            BasicInlineSwitch(
+                              settingName: "En Son Aktif Olma Durumunu Gizle",
+                              switchState: controller.settings![
+                                  Settings.hideLastOnlineStatus.value],
+                              actionFunction:
+                                  controller.updateHideLastOnlineStatus,
                             ),
                           ],
                         ),
                       ),
-                      SettingsDivider(),
-                      BasicInlineButton(
-                        buttonText: "Bana Göster",
-                        valueText: Utils.getEnumValue(Enums.showme, controller.user!.show_me!),
-                        isValueTextBold: false,
-                         setTappedButton: controller.setTappedButton,
-                        buttonID: 2,
-                        tappedButton: controller.tappedButton,                        
-                      ),
-                      SettingsDivider(),
+                      SettingHeader(settingName: "WEB PROFİLİ"),
                       Container(
-                        width: double.maxFinite,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: Dimensions.w17),
-                        margin: EdgeInsets.only(bottom: Dimensions.h16),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border(
+                                top: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1),
+                                bottom: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1))),
+                        child: Column(
+                          children: [
+                            BasicInlineButton(
+                              valueText: "Hemen Al",
+                              buttonText: "Kullanıcı Adı",
+                              isValueTextBold: true,
+                              setTappedButton: controller.setTappedButton,
+                              buttonID: 5,
+                              tappedButton: controller.tappedButton,
+                              actionFunction: changeUsernameDialog,
+                            )
+                          ],
+                        ),
+                      ),
+                      InfoErrorText(
+                          text:
+                              "Herkese açık Kullanıcı Adı oluştur ve onu paylaş. Dünya genelinde insanların seni Curvy’de görmesini sağla."),
+                      SizedBox(
+                        height: Dimensions.h40,
+                      ),
+                      SettingHeader(settingName: "BİLDİRİMLER"),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border(
+                                top: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1),
+                                bottom: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1))),
+                        child: Column(
+                          children: [
+                            BasicInlineButton(
+                                valueText: "Ayarla",
+                                buttonText: "E-pasta Bildirimlerini Kapat",
+                                isValueTextBold: true,
+                                setTappedButton: controller.setTappedButton,
+                                buttonID: 6,
+                                tappedButton: controller.tappedButton,
+                                actionFunction: showEmailNotificationsModal),
+                            SettingsDivider(),
+                            BasicInlineButton(
+                              valueText: "Ayarla",
+                              buttonText: "Anlık Bildirimleri Kapat",
+                              isValueTextBold: true,
+                              setTappedButton: controller.setTappedButton,
+                              buttonID: 7,
+                              tappedButton: controller.tappedButton,
+                              actionFunction: showInstantNotificationsModal,
+                            ),
+                            SettingsDivider(),
+                            BasicInlineSwitch(
+                              settingName: "Curvy Team Tekliflerini Kapat",
+                              switchState: Utils.getNestedMapData(
+                                  Settings.closeCurvyTeamPromotions.value,
+                                  controller.settings!),
+                              actionFunction:
+                                  controller.updateCloseCurvyTeamPromotions,
+                            )
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: Dimensions.h40,
+                      ),
+                      SimpleButton(
+                        text: "Satın Alınanları Geri Yükle",
+                        gradient: LinearGradient(
+                            colors: [Color(0xFFD51CFF), Color(0xFF6198EF)]),
+                      ),
+                      SizedBox(
+                        height: Dimensions.h300 / 10,
+                      ),
+                      SimpleButton(
+                        text: "Curvy’i Paylaş ",
+                      ),
+                      SettingHeader(settingName: "BİZE ULAŞ"),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border(
+                                top: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1),
+                                bottom: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1))),
+                        child: Column(
+                          children: [
+                            BasicInlineButton(
+                              buttonText: "Yardım ve Destek",
+                              setTappedButton: controller.setTappedButton,
+                              buttonID: 8,
+                              tappedButton: controller.tappedButton,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SettingHeader(settingName: "TOPLULUK"),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border(
+                                top: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1),
+                                bottom: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1))),
+                        child: Column(
+                          children: [
+                            BasicInlineButton(
+                              buttonText: "Topluluk Kuralları",
+                              setTappedButton: controller.setTappedButton,
+                              buttonID: 9,
+                              tappedButton: controller.tappedButton,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SettingHeader(settingName: "GİZLİLİK"),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border(
+                                top: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1),
+                                bottom: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1))),
+                        child: Column(
+                          children: [
+                            BasicInlineButton(
+                              buttonText: "Çerez Politikası",
+                              setTappedButton: controller.setTappedButton,
+                              buttonID: 10,
+                              tappedButton: controller.tappedButton,
+                            ),
+                            SettingsDivider(),
+                            BasicInlineButton(
+                              buttonText: "Gizlilik Politikası",
+                              setTappedButton: controller.setTappedButton,
+                              buttonID: 11,
+                              tappedButton: controller.tappedButton,
+                            ),
+                            SettingsDivider(),
+                            BasicInlineButton(
+                              buttonText: "Gizlilik Tercihleri",
+                              valueText: "Ayarla",
+                              isValueTextBold: true,
+                              setTappedButton: controller.setTappedButton,
+                              buttonID: 12,
+                              tappedButton: controller.tappedButton,
+                              actionFunction: showPrivacyPreferencesModal,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SettingHeader(settingName: "YASAL"),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border(
+                                top: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1),
+                                bottom: BorderSide(
+                                    color: Color(0xFFC5C5C7), width: 1))),
                         child: Column(
                           children: [
                             Container(
-                              margin: EdgeInsets.only(
-                                  top: Dimensions.h21,
-                                  bottom: Dimensions.h100 / 10),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Yaş Tercihi",
+                              width: double.maxFinite,
+                              height: Dimensions.h50,
+                              child: Row(children: [
+                                Container(
+                                  margin: EdgeInsets.only(left: Dimensions.w17),
+                                  child: Text(
+                                    "Lisanslar",
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: Dimensions.h16,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  Text(
-                                    "${Utils.getNestedMapData(Settings.agePreferenceMinAge.value, controller.settings!)}-${Utils.getNestedMapData(Settings.agePreferenceMaxAge.value, controller.settings!)}+",
-                                    style: TextStyle(
-                                        color: Color(0xFF7B8491),
-                                        fontSize: Dimensions.h16,
-                                        fontWeight: FontWeight.bold),
-                                  )
-                                ],
-                              ),
+                                )
+                              ]),
                             ),
+                            SettingsDivider(),
                             Container(
-                              child: SliderTheme(
-                                  data: SliderThemeData(
-                                    inactiveTrackColor: Color(0xFFC5C5C7),
-                                    thumbColor: Colors.white,
-                                    rangeTrackShape:
-                                        GradientRectRangeSliderTrackShape(
-                                      gradient: LinearGradient(colors: [
-                                        Color(0xFFD51CFF),
-                                        Color(0xFF00FFE1)
-                                      ]),
-                                    ),
-                                  ),
-                                  child: RangeSlider(
-                                    min: 0.18,
-                                    max: 1,
-                                    values: RangeValues(
-                                      Utils.getNestedMapData(Settings.agePreferenceMinAge.value, controller.settings!)/100
-                                      , 
-                                      Utils.getNestedMapData(Settings.agePreferenceMaxAge.value, controller.settings!)/100
-                                    ),
-                                    onChanged: (value) {
-                                      controller.updateAgePreferenceAge(value.start, value.end);
-                                    },
-                                  )),
-                            ),
-                            Container(
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Sadece bu aralıktaki kişileri göster",
+                              width: double.maxFinite,
+                              height: Dimensions.h50,
+                              child: Row(children: [
+                                Container(
+                                  margin: EdgeInsets.only(left: Dimensions.w17),
+                                  child: Text(
+                                    "Hizmet Koşulları",
                                     style: TextStyle(
-                                        color: Color(0xFF7B8491),
+                                        color: Colors.black,
                                         fontSize: Dimensions.h16,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  CupertinoSwitch(
-                                      value: Utils.getNestedMapData(Settings.agePreferenceOnlyThisInterval.value, controller.settings!), 
-                                      onChanged: (value) {
-                                        controller.updateAgePreferenceOnlyThisInterval(value);
-                                      })
-                                ],
-                              ),
+                                )
+                              ]),
                             ),
                           ],
                         ),
                       ),
-                      SettingsDivider(),
-                      BasicInlineSwitch(
-                        settingName: "Küresel", 
-                        switchState: controller.settings!["global"],
-                        actionFunction: controller.updateGlobal,
-                      )
-                    ],
-                  ),
-                )
-                ,
-                InfoErrorText(text: "Dünyaya açılmak, hem çevrendeki hem de dünyanın dört bir yanındaki insanları görmeni sağlar."),
-                CurvyPlusRow(text: "KİMLERİ GÖREBİLDİĞİNİ KONTROL ET"),
-                Container(
-                  width: double.maxFinite,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border(
-                      top: BorderSide(color: Color(0xFFC5C5C7), width: 1),
-                      bottom: BorderSide(color: Color(0xFFC5C5C7), width: 1)
-                    )
-                  ),
-                  child: Column(
-                    children: [
-                      
-                      CurvyPlusSelect(
-                        text: "Dengelenmiş Öneriler", 
-                        selectState: controller.settings![Settings.recommendationPreference.value] == 0, 
-                        infoText: "Sana en uygun insanları gör ( varsayılan ayar )",
-                        value: 0,                        
-                        actionFunction: controller.updateRecommendationPreference,
+                      SizedBox(
+                        height: Dimensions.h40,
                       ),
-                      SettingsDivider(),
-                       CurvyPlusSelect(
-                        text: "Son Zamanda Aktif", 
-                        selectState: controller.settings![Settings.recommendationPreference.value] == 1, 
-                        infoText: "En son aktif olan insanları en önce gör ",
-                        value: 1,                        
-                        actionFunction: controller.updateRecommendationPreference,
-                      )
-
-                  ]
-                ),
-                ),
-                 CurvyPlusRow(text: "SENİ KİMLER GÖREBİLİR KONTROL ET"),
-                Container(
-                  width: double.maxFinite,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border(
-                      top: BorderSide(color: Color(0xFFC5C5C7), width: 1),
-                      bottom: BorderSide(color: Color(0xFFC5C5C7), width: 1)
-                    )
-                  ),
-                  child: Column(
-                    children: [
-                      
-                      CurvyPlusSelect(
-                        text: "Dengelenmiş Öneriler", 
-                        selectState: controller.settings![Settings.viewerPreference.value] == 0, 
-                        infoText: "Sana en uygun insanları gör ( varsayılan ayar )",
-                        value: 0,
-                        actionFunction: controller.updateViewerPreference,
-                      ),
-                      SettingsDivider(),
-                       CurvyPlusSelect(
-                        text: "Sadece Beğendiğim İnsanlar", 
-                        selectState: controller.settings![Settings.viewerPreference.value] == 1, 
-                        infoText: "Sadece sağa kaydırdıklarım beni görsün",
-                        value: 1,
-                        actionFunction: controller.updateViewerPreference,
-                      )
-
-                  ]
-                ),
-                )
-                ,
-                SettingHeader(settingName: "CONNECTIONS"),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border(
-                      top: BorderSide(color: Color(0xFFC5C5C7), width: 1),
-                      bottom: BorderSide(color: Color(0xFFC5C5C7), width: 1)
-                    )
-                  ),
-                  child: Column(
-                    children: [
-                      BasicInlineButton(
-                        buttonText: "Kişileri Engelle",
-                         setTappedButton: controller.setTappedButton,
-                        buttonID: 3,
-                        tappedButton: controller.tappedButton,
-                        actionFunction: showBanPeopleDialog,
-
-                      )
-                    ]
-                  ),
-                ),
-                InfoErrorText(text: "Curvy’de görmek veya görünmek istemediğin kişileri, kişiler listesinden seç."),
-                SettingHeader(settingName: "LİSAN SEÇİMİ"),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border(
-                      top: BorderSide(color: Color(0xFFC5C5C7), width: 1),
-                      bottom: BorderSide(color: Color(0xFFC5C5C7), width: 1)
-                    )
-                  ),
-                  child: Column(
-                    children: [
-                      BasicInlineButton(
-                        buttonText: "${Utils.getEnumValue(Enums.language, controller.settings![Settings.language.value])} Olarak Seçildi",
-                        valueText: "Değiştir",
-                        isValueTextBold: true,
-                         setTappedButton: controller.setTappedButton,
-                        buttonID: 4,
-                        tappedButton: controller.tappedButton,
-                        actionFunction: selectLanguageDialog
-                      )
-                    ],
-                  ),
-                ),
-                SettingHeader(settingName: "GÖRÜNÜRLÜK"),
-                 Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border(
-                      top: BorderSide(color: Color(0xFFC5C5C7), width: 1),
-                      bottom: BorderSide(color: Color(0xFFC5C5C7), width: 1)
-                    )
-                  ),
-                  child: Column(
-                    children: [
-                      BasicInlineSwitch(
-                        settingName: "Beni VIP'de Gizle", 
-                        switchState: Utils.getNestedMapData(Settings.visibilityHideMeOnVIP.value, controller.settings!),
-                        actionFunction: controller.updateHideMeOnVIP,
-                      ),
-                      SettingsDivider(isFull: true,),
-                        BasicInlineSwitch(
-                        settingName: "Beni CurvyTURBO’da Önerme", 
-                        switchState: Utils.getNestedMapData(Settings.visibilityRecommendMeOnTurbo.value, controller.settings!),
-                        actionFunction: controller.updateRecommendMeOnTurbo,
-                      ),
-                      SettingsDivider(isFull: true,),
-                       BasicInlineSwitch(
-                        settingName: "Beni FreeStyle’da Gizle", 
-                        switchState: Utils.getNestedMapData(Settings.visibilityHideMeOnFreestyle.value, controller.settings!),
-                        actionFunction: controller.updateHideMeOnFreestyle,
-                      ),
-                      SettingsDivider(isFull: true,),
-                      ColumnSwitch(
-                        settingName: "Beni MatcherStyle’de Gizle", 
-                        settingInfo: "Kapılıyken, kart destesinde gösterilmeyeceksin. Yine de beğenmiş olduğun kişiler profilini görebilir ve seninle eşleşebilir. Eşleşmelerini görmeye ve onlara sohbet etmeye devam edebilirsin.", 
-                        switchState: Utils.getNestedMapData(Settings.visibilityHideMeOnMatcherstyle.value, controller.settings!),    
-                        actionFunction: controller.updateHideMeOnMatcherStyle,                    
-                      )
-
-                    ]
-                  ),
-                ),
-                SettingHeader(settingName: "OKUNMA BİLDİRİMLERİ"),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border(
-                      top: BorderSide(color: Color(0xFFC5C5C7), width: 1),
-                      bottom: BorderSide(color: Color(0xFFC5C5C7), width: 1)
-                    )
-                  ),
-                  child: Column(
-                    children: [
-                      ColumnSwitch(
-                        settingName: "Okunma Bildirimlerini Kapat", 
-                        settingInfo: "Bu ayar kapalı olduğunda, eşleşmelerin sohbetinizdeki okunma bildirimlerini etkinleştiremez.", 
-                        switchState: controller.settings![Settings.closeReadingNotifications.value],
-                        actionFunction: controller.updateCloseReadingNotifications,
-                      )
-                    ],
-                  ),
-                ),
-                SettingHeader(settingName: "VERİ KULLANIMI"),
-                 Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border(
-                      top: BorderSide(color: Color(0xFFC5C5C7), width: 1),
-                      bottom: BorderSide(color: Color(0xFFC5C5C7), width: 1)
-                    )
-                  ),
-                  child: Column(
-                    children: [
-                     BasicInlineSwitch(
-                      settingName: "Videoları Otomatik Oynat", 
-                      switchState:  controller.settings![Settings.playVideosAutomatically.value],
-                      actionFunction: controller.updatePlayVideosAutomatically,
-                    )
-                    ],
-                  ),
-                ),
-                 SettingHeader(settingName: "ETKİNLİK DURUMU"),
-                  Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border(
-                      top: BorderSide(color: Color(0xFFC5C5C7), width: 1),
-                      bottom: BorderSide(color: Color(0xFFC5C5C7), width: 1)
-                    )
-                  ),
-                  child: Column(
-                    children: [
-                     BasicInlineSwitch(
-                      settingName: "Şu An Çevrim İçi Durumunu Gizle", 
-                      switchState:  controller.settings![Settings.hideOnlineStatus.value],
-                      actionFunction: controller.updateHideOnlineStatus,
-                    ),
-                    SettingsDivider(),
-                      BasicInlineSwitch(
-                      settingName: "En Son Aktif Olma Durumunu Gizle", 
-                      switchState: controller.settings![Settings.hideLastOnlineStatus.value],
-                      actionFunction: controller.updateHideLastOnlineStatus,
-                    ),
-                    ],
-                  ),
-                ),
-                SettingHeader(settingName: "WEB PROFİLİ"),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border(
-                      top: BorderSide(color: Color(0xFFC5C5C7), width: 1),
-                      bottom: BorderSide(color: Color(0xFFC5C5C7), width: 1)
-                    )
-                  ),
-                  child: Column(
-                    children: [
-                      BasicInlineButton(
-                        valueText: "Hemen Al",
-                        buttonText: "Kullanıcı Adı",
-                        isValueTextBold: true,
-                         setTappedButton: controller.setTappedButton,
-                        buttonID: 5,
-                        tappedButton: controller.tappedButton,
-                        actionFunction: changeUsernameDialog,
-                      )
-                    ],
-                  ),
-                ),
-                InfoErrorText(text: "Herkese açık Kullanıcı Adı oluştur ve onu paylaş. Dünya genelinde insanların seni Curvy’de görmesini sağla."),
-                SizedBox(height: Dimensions.h40,),
-                SettingHeader(settingName: "BİLDİRİMLER"),
-                  Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border(
-                      top: BorderSide(color: Color(0xFFC5C5C7), width: 1),
-                      bottom: BorderSide(color: Color(0xFFC5C5C7), width: 1)
-                    )
-                  ),
-                  child: Column(
-                    children: [
-                      BasicInlineButton(
-                        valueText: "Ayarla",
-                        buttonText: "E-pasta Bildirimlerini Kapat",
-                        isValueTextBold: true,
-                         setTappedButton: controller.setTappedButton,
-                        buttonID: 6,
-                        tappedButton: controller.tappedButton,
-                        actionFunction: showEmailNotificationsModal
-                      ),
-                      SettingsDivider(),
-                        BasicInlineButton(
-                        valueText: "Ayarla",
-                        buttonText: "Anlık Bildirimleri Kapat",
-                        isValueTextBold: true,
-                         setTappedButton: controller.setTappedButton,
-                        buttonID: 7,
-                        tappedButton: controller.tappedButton,
-                        actionFunction: showInstantNotificationsModal,
-                      ),
-                      SettingsDivider(),
-                      BasicInlineSwitch(
-                        settingName: "Curvy Team Tekliflerini Kapat", 
-                        switchState: Utils.getNestedMapData(Settings.closeCurvyTeamPromotions.value, controller.settings!),
-                        actionFunction: controller.updateCloseCurvyTeamPromotions,
-                        
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(height: Dimensions.h40,),
-                SimpleButton(
-                  text: "Satın Alınanları Geri Yükle",
-                  gradient: LinearGradient(
-                    colors: [
-                      Color(0xFFD51CFF),
-                      Color(0xFF6198EF)
-                    ]
-                  ),
-                ),
-                SizedBox(height: Dimensions.h300/10,),
-                 SimpleButton(
-                  text: "Curvy’i Paylaş ",
-             
-                ),
-                 SettingHeader(settingName: "BİZE ULAŞ"),
-                  Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border(
-                      top: BorderSide(color: Color(0xFFC5C5C7), width: 1),
-                      bottom: BorderSide(color: Color(0xFFC5C5C7), width: 1)
-                    )
-                  ),
-                  child: Column(
-                    children: [
-                      BasicInlineButton(                     
-                        buttonText: "Yardım ve Destek",   
-                         setTappedButton: controller.setTappedButton,
-                        buttonID: 8,                  
-                        tappedButton: controller.tappedButton,
-                      ),
-                     
-                    ],
-                  ),
-                ),
-                 SettingHeader(settingName: "TOPLULUK"),
-                  Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border(
-                      top: BorderSide(color: Color(0xFFC5C5C7), width: 1),
-                      bottom: BorderSide(color: Color(0xFFC5C5C7), width: 1)
-                    )
-                  ),
-                  child: Column(
-                    children: [
-                      BasicInlineButton(                     
-                        buttonText: "Topluluk Kuralları",         
-                         setTappedButton: controller.setTappedButton,
-                        buttonID: 9,            
-                        tappedButton: controller.tappedButton,
-                      ),
-                     
-                    ],
-                  ),
-                ),
-                   SettingHeader(settingName: "GİZLİLİK"),
-                  Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border(
-                      top: BorderSide(color: Color(0xFFC5C5C7), width: 1),
-                      bottom: BorderSide(color: Color(0xFFC5C5C7), width: 1)
-                    )
-                  ),
-                  child: Column(
-                    children: [
-                      BasicInlineButton(                     
-                        buttonText: "Çerez Politikası",      
-                         setTappedButton: controller.setTappedButton,
-                        buttonID: 10,         
-                        tappedButton: controller.tappedButton,      
-                      ),
-                      SettingsDivider(),
-                       BasicInlineButton(                     
-                        buttonText: "Gizlilik Politikası",    
-                         setTappedButton: controller.setTappedButton,
-                        buttonID: 11,                 
-                        tappedButton: controller.tappedButton,
-                      ),
-                      SettingsDivider(),
-                        BasicInlineButton(                     
-                        buttonText: "Gizlilik Tercihleri",                     
-                        valueText: "Ayarla",
-                        isValueTextBold: true,
-                         setTappedButton: controller.setTappedButton,
-                        buttonID: 12,
-                        tappedButton: controller.tappedButton,
-                        actionFunction: showPrivacyPreferencesModal,
-                      ),
-                     
-                    ],
-                  ),
-                ),
-                SettingHeader(settingName: "YASAL"),
-                 Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border(
-                      top: BorderSide(color: Color(0xFFC5C5C7), width: 1),
-                      bottom: BorderSide(color: Color(0xFFC5C5C7), width: 1)
-                    )
-                  ),
-                  child: Column(
-                    children: [
+                      SimpleButton(text: "Çıkış"),
                       Container(
-                        width: double.maxFinite,
-                        height: Dimensions.h50,                        
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(left: Dimensions.w17),
-                              child: Text(
-                              "Lisanslar",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: Dimensions.h16,
-                                fontWeight: FontWeight.bold
-                              ),
-                            ),
-                            )
-                          ]
+                        margin: EdgeInsets.only(top: Dimensions.h21),
+                        child: Image.asset("assets/images/settings_logo.png"),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(bottom: Dimensions.h21),
+                        child: Text(
+                          "Versiyon 09.03.0",
+                          style: TextStyle(color: Color(0xFFC5C5C7)),
                         ),
                       ),
-                      SettingsDivider(),
-                      Container(
-                        width: double.maxFinite,
-                        height: Dimensions.h50,                        
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(left: Dimensions.w17),
-                              child: Text(
-                              "Hizmet Koşulları",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: Dimensions.h16,
-                                fontWeight: FontWeight.bold
-                              ),
-                            ),
-                            )
-                          ]
-                        ),
-                      ),
-                     
+                      SimpleButton(text: "Hesabı Sil"),
+                      SizedBox(
+                        height: Dimensions.h140,
+                      )
                     ],
-                  ),
-                ),
-
-                SizedBox(height: Dimensions.h40,),
-                SimpleButton(text: "Çıkış"),
-                Container(
-                  margin: EdgeInsets.only(top: Dimensions.h21),
-                  child: Image.asset("assets/images/settings_logo.png"),
-                ),
-                Container(
-                  margin: EdgeInsets.only(bottom: Dimensions.h21),
-                  child: Text(
-                    "Versiyon 09.03.0",
-                    style: TextStyle(
-                      color: Color(0xFFC5C5C7)
-                    ),
-                  ),
-                ),
-                SimpleButton(text: "Hesabı Sil"),
-                SizedBox(height: Dimensions.h140,)
-
-
-                
-
-              ],
-            )),
-          ) : Container(
-            width: double.maxFinite,
-            height: double.maxFinite,
-            child: Center(
-              child: CircularProgressIndicator(
-                color: Color(0xFFD51CFF),
-              )
-            ),
-          )
-        );
+                  )),
+                )
+              : Container(
+                  width: double.maxFinite,
+                  height: double.maxFinite,
+                  child: Center(
+                      child: CircularProgressIndicator(
+                    color: Color(0xFFD51CFF),
+                  )),
+                ));
     });
   }
 }

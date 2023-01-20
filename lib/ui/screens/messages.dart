@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'dart:math' as math;
 
 class MessagesScreen extends StatelessWidget {
   MessagesScreen({super.key});
@@ -51,57 +52,128 @@ class MessagesScreen extends StatelessWidget {
                           ),
                         ),
                         GetBuilder<ChatController>(builder: (chatController) {
-                          return Container(
-                            width: Dimensions.w300,
-                            height: Dimensions.h8 * 10,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: chatController.newMatches != null
-                                  ? chatController.newMatches!.length
-                                  : 0,
-                              itemBuilder: (context, index) {
-                                return GetBuilder<UserOnlineController>(
-                                    init: Get.find<UserOnlineController>(
-                                        tag: chatController
-                                                    .newMatches![index].user1 ==
-                                                chatController.currentUserID
-                                            ? chatController
-                                                .newMatches![index].user2
-                                            : chatController
-                                                .newMatches![index].user2),
-                                    global: false,
-                                    builder: (userOnlineController) {
-                                      return GestureDetector(
-                                        onTap: () {
-                                          chatController
-                                              .startNewChatWithNewMatch(
-                                                  chatController
-                                                      .newMatches![index]
-                                                      .chatID!);
-                                        },
-                                        child: Container(
-                                          margin: EdgeInsets.only(
-                                              right: Dimensions.w8),
-                                          width: Dimensions.h8 * 10,
-                                          height: Dimensions.h8 * 10,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      Dimensions.h8 * 10 / 2),
-                                              image: userOnlineController
-                                                          .user !=
-                                                      null
-                                                  ? DecorationImage(
-                                                      image: NetworkImage(
-                                                          'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(userOnlineController.user!.images![0])}?alt=media'),
-                                                      fit: BoxFit.cover)
-                                                  : null),
+                          return chatController.newMatches != null
+                              ? Container(
+                                  width: Dimensions.w300,
+                                  height: Dimensions.h8 * 10,
+                                  child: chatController.newMatches!.isNotEmpty
+                                      ? ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                          itemCount:
+                                              chatController.newMatches != null
+                                                  ? chatController
+                                                      .newMatches!.length
+                                                  : 0,
+                                          itemBuilder: (context, index) {
+                                            return GetBuilder<
+                                                    UserOnlineController>(
+                                                init: Get.find<
+                                                        UserOnlineController>(
+                                                    tag: chatController
+                                                                .newMatches![
+                                                                    index]
+                                                                .user1 ==
+                                                            chatController
+                                                                .currentUserID
+                                                        ? chatController
+                                                            .newMatches![index]
+                                                            .user2
+                                                        : chatController
+                                                            .newMatches![index]
+                                                            .user2),
+                                                global: false,
+                                                builder:
+                                                    (userOnlineController) {
+                                                  return GestureDetector(
+                                                    onTap: () {
+                                                      chatController
+                                                          .startNewChatWithNewMatch(
+                                                              chatController
+                                                                  .newMatches![
+                                                                      index]
+                                                                  .chatID!);
+                                                    },
+                                                    child: Container(
+                                                      margin: EdgeInsets.only(
+                                                          right: Dimensions.w8),
+                                                      width: Dimensions.h8 * 10,
+                                                      height:
+                                                          Dimensions.h8 * 10,
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                  Dimensions
+                                                                          .h8 *
+                                                                      10 /
+                                                                      2),
+                                                          image: userOnlineController
+                                                                      .user !=
+                                                                  null
+                                                              ? DecorationImage(
+                                                                  image: NetworkImage(
+                                                                      'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(userOnlineController.user!.images![0])}?alt=media'),
+                                                                  fit: BoxFit
+                                                                      .cover)
+                                                              : null),
+                                                    ),
+                                                  );
+                                                });
+                                          },
+                                        )
+                                      : Container(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Container(
+                                                width: Dimensions.h8 * 10,
+                                                height: Dimensions.h8 * 10,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            (Dimensions.h8 *
+                                                                    10) /
+                                                                2)),
+                                              ),
+                                              Container(
+                                                width: Dimensions.h8 * 10,
+                                                height: Dimensions.h8 * 10,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            (Dimensions.h8 *
+                                                                    10) /
+                                                                2)),
+                                              ),
+                                              Container(
+                                                width: Dimensions.h8 * 10,
+                                                height: Dimensions.h8 * 10,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            (Dimensions.h8 *
+                                                                    10) /
+                                                                2)),
+                                              ),
+                                              Container(
+                                                width: Dimensions.h8 * 10,
+                                                height: Dimensions.h8 * 10,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            (Dimensions.h8 *
+                                                                    10) /
+                                                                2)),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      );
-                                    });
-                              },
-                            ),
-                          );
+                                )
+                              : Container();
                         })
                       ],
                     ),
@@ -190,17 +262,99 @@ class MessagesScreen extends StatelessWidget {
           ),
           body: GetBuilder<ChatController>(
             builder: (chatController) {
-              return chatController.currentChats != null ? 
-              SingleChildScrollView(
-                child: Column(
-                  children: chatController.tiles ?? []
-                ),
-              ) 
-              : Container();
+              return chatController.currentChats != null
+                  ? (chatController.currentChats!.isNotEmpty
+                      ? SingleChildScrollView(
+                          child: Column(children: chatController.tiles ?? []),
+                        )
+                      : Container(
+                        margin: EdgeInsets.only(top: Dimensions.h52),
+                          width: double.maxFinite,
+                          height: double.maxFinite,
+                          child: Column(
+                            children: [
+                              Stack(
+                                children: [
+                                  Positioned(
+                                      child: Container(
+                                    width: Dimensions.w180,
+                                    height: Dimensions.h230 + Dimensions.h12,
+                                    decoration: BoxDecoration(
+                                        color: Color(0xFFD0D0D0),
+                                        borderRadius: BorderRadius.circular(
+                                            Dimensions.h27)),
+                                  )),
+                                  Positioned(
+                                      child: Transform.rotate(
+                                    angle: math.pi / 20,
+                                    child: Container(
+                                        width: Dimensions.w180,
+                                        height:
+                                            Dimensions.h230 + Dimensions.h12,
+                                        decoration: BoxDecoration(
+                                            color: Color(0xFFE3E3E3),
+                                            borderRadius: BorderRadius.circular(
+                                                Dimensions.h27)),
+                                        child: Center(
+                                          child: Transform.rotate(
+                                              angle: -math.pi / 20,
+                                              child: Container(
+                                                width: Dimensions.w120,
+                                                child: ShaderMask(
+                                                  blendMode: BlendMode.srcIn,
+                                                  shaderCallback: (bounds) =>
+                                                      LinearGradient(colors: [
+                                                    Color(0xFFD51CFF),
+                                                    Color(0xFF00FFE1)
+                                                  ]).createShader(
+                                                    Rect.fromLTWH(
+                                                        0,
+                                                        0,
+                                                        bounds.width,
+                                                        bounds.height),
+                                                  ),
+                                                  child: Text(
+                                                      "Yeni Birilerine Şans Ver",
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          fontSize:
+                                                              Dimensions.h100 /
+                                                                  5,
+                                                          fontWeight:
+                                                              FontWeight.bold)),
+                                                ),
+                                              )),
+                                        )),
+                                  ))
+                                ],
+                              ),
+                              Container(
+                                 margin: EdgeInsets.only(top: Dimensions.h52),
+                                width: Dimensions.w254,
+                                child: Text(
+                                  "Henüz kimseyi beğenmedin gibi görünüyor. Birilerini sağa kardırarak başlaya bilirsin bizce",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Color(0xFF7B8491),
+                                    fontSize: Dimensions.h100/5,
+                                    fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                              )
+                            ],
+                          )))
+                  : Container(
+                      width: double.maxFinite,
+                      height: double.maxFinite,
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          color: Color(0xFFD51CFF),
+                        ),
+                      ),
+                    );
             },
-          )
-          
-        );
+          ));
     });
   }
 }

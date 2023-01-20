@@ -93,9 +93,8 @@ class FirestoreService extends GetxService {
   }
 
 
-  Future<UserModel> getUser(String userID) async {
-    print("saaaaa");
-    print(userID);
+  Future<UserModel> getUser(String userID) async {    
+    
     var userData = ((await getCollection('users').where('userID',isEqualTo: userID).get()).docs[0].data() as Map<String,dynamic>);
     var user = UserModel.fromJson(userData);
     return user;

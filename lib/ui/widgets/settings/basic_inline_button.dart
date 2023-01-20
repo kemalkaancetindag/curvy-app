@@ -38,6 +38,9 @@ class BasicInlineButton extends StatelessWidget {
       onPanCancel: (){
         setTappedButton(null);
       },
+      onPanEnd: (details){
+        setTappedButton(null);
+      },
       onTap: (){
         if(actionFunction != null){
           actionFunction!();  

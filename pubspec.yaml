@@ -210,6 +210,11 @@ flutter:
     - assets/images/curvy_chip_bestdeal.png
     - assets/images/curvy_chip_standart.png
     - assets/images/curvy_chip_popular.png
+    - assets/images/nav_archive_white.png
+    - assets/images/nav_hubs_white.png
+    - assets/images/nav_messages_white.png
+    - assets/images/nav_profile_white.png
+    - assets/images/nav_index_white.png
 
 
 

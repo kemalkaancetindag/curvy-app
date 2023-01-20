@@ -21,6 +21,9 @@ class SettingsController extends GetxController {
   int? _tappedButton;
   int? get tappedButton => _tappedButton;
 
+  bool _isUsernameTaken = false;
+  bool get isUserNameTaken => _isUsernameTaken;
+
   SettingsController({required this.firestoreService});
 
   @override
@@ -32,9 +35,7 @@ class SettingsController extends GetxController {
     if (user != null) {
       _user = UserModel.fromJson(user);
       _settings = user['settings'] as Map<String, dynamic>;
-      print(_user!.userID!);
-      print("INITTT");
-      print(_settings);
+   
       
     }
 
@@ -169,6 +170,82 @@ class SettingsController extends GetxController {
   }
   //CURVY PLUS SELECT
 
+  //LANGUAGE
+
+  void updateLanguage(int preference) {  
+    _settings![Settings.language.value] = preference;
+    update();
+  }
+  //LANGUAGE
+
+  //EMAIL NOTIFICATIONS
+  void updateEmailNotifications(String settingName, bool value) async {
+    var keys = settingName.split(".");
+    (_settings![keys[0]] as Map<String,dynamic>)[keys[1]]= value;
+    update();
+  }
+
+  void sendEmailNotifications() async {
+    String? userID = Get.find<SharedPreferenceService>().getUserID();
+    var updateData = Map<String,dynamic>();
+    updateData["settings"] = _settings;
+ 
+    if(userID != null) {
+      await firestoreService.updateUser(updateData, userID);
+      var mapUser = await firestoreService.getUserAsMap(userID);
+
+      if(mapUser != null) {
+        _settings = (mapUser["settings"] as Map<String,dynamic>);
+        _user = UserModel.fromJson(mapUser);
+      }
+    }
+    update();
+
+  }
+  //EMAIL NOTIFICATIONS
+
+  //INSTANT NOTIFICATIONS
+  void updateInstantNotifications(String settingName, dynamic value) {
+    var keys = settingName.split(".");
+    (_settings![keys[0]] as Map<String,dynamic>)[keys[1]] = value;
+    update();
+  }
+
+  void sendInstantNotifications() async {
+    String? userID = Get.find<SharedPreferenceService>().getUserID();    
+    var updateData = Map<String,dynamic>();
+
+    updateData['settings'] = _settings;
+
+    if(userID != null){
+      await firestoreService.updateUser(updateData, userID);
+      var mapUser = await firestoreService.getUserAsMap(userID);
+
+      if(mapUser != null) {
+        _settings = (mapUser['settings'] as Map<String,dynamic>);
+        _user = UserModel.fromJson(mapUser);
+      }
+
+    }
+
+    update();
+  }
+  //INSTANT NOTIFICATIONS
+
+  //PRIVACY PREFERENCES
+  void updatePrivacyPreferences(String settingName, bool value) {
+    var keys = settingName.split(".");
+
+    if(keys.length == 2) {
+      (_settings![keys[0]] as Map<String,dynamic>)[keys[1]] = value;
+    }
+    else if(keys.length == 3) {
+      ((_settings![keys[0]] as Map<String,dynamic>)[keys[1]] as Map<String,dynamic>)[keys[2]] = value;
+    }
+
+    update();
+  }
+  //PRIVACY PREFERENCES
 
   Future<void> updatePage() async {   
     
@@ -193,6 +270,8 @@ class SettingsController extends GetxController {
     _tappedButton = buttonID;
     update();
   }
+
+  
 
   void logout() async {
     await Get.find<SharedPreferenceService>().deleteUser();
