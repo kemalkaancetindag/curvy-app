@@ -2353,13 +2353,20 @@ class SettingsScreen extends StatelessWidget {
                       SimpleButton(
                         text: "Satın Alınanları Geri Yükle",
                         gradient: LinearGradient(
-                            colors: [Color(0xFFD51CFF), Color(0xFF6198EF)]),
+                            colors: [Color(0xFFD51CFF), Color(0xFF6198EF)],                        
+                        ),
+                        buttonID: 13,
+                        setTappedButton: controller.setTappedButton,
+                        isTapped: controller.tappedButton == 13,
                       ),
                       SizedBox(
                         height: Dimensions.h300 / 10,
                       ),
                       SimpleButton(
                         text: "Curvy’i Paylaş ",
+                        buttonID: 14,
+                        setTappedButton: controller.setTappedButton,
+                        isTapped: controller.tappedButton == 14,
                       ),
                       SettingHeader(settingName: "BİZE ULAŞ"),
                       Container(
@@ -2488,7 +2495,12 @@ class SettingsScreen extends StatelessWidget {
                       SizedBox(
                         height: Dimensions.h40,
                       ),
-                      SimpleButton(text: "Çıkış"),
+                      SimpleButton(
+                        text: "Çıkış",
+                        buttonID: 15,
+                        setTappedButton: controller.setTappedButton,
+                        isTapped: controller.tappedButton == 15,
+                      ),
                       Container(
                         margin: EdgeInsets.only(top: Dimensions.h21),
                         child: Image.asset("assets/images/settings_logo.png"),
@@ -2500,7 +2512,13 @@ class SettingsScreen extends StatelessWidget {
                           style: TextStyle(color: Color(0xFFC5C5C7)),
                         ),
                       ),
-                      SimpleButton(text: "Hesabı Sil"),
+                      SimpleButton(
+                        text: "Hesabı Sil",
+                        buttonID:16,
+                        setTappedButton: controller.setTappedButton,
+                        isTapped: controller.tappedButton == 16,
+                      ),
+
                       SizedBox(
                         height: Dimensions.h140,
                       )

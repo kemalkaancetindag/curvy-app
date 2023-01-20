@@ -164,9 +164,14 @@ class DeleteAccountWhyScreen extends StatelessWidget {
                   ],
                 )),
             Container(
-              child: Center(
-                child: Image.asset("assets/images/settings_logo.png"),
-              ),
+              width: Dimensions.w120,
+              height: Dimensions.h300/10,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/settings_logo.png"),
+                  fit:BoxFit.contain
+                )
+              ),             
             ),
           ],
         ),

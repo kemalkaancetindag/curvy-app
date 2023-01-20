@@ -54,11 +54,11 @@ class SliderController extends GetxController {
   }
 
   void decideHorizontalAction() async {
-    if (Get.width / 5 > decideLocationX!) {
+    if (Get.width / 3 > decideLocationX!) {
       bottom = -Get.height;
       top = Get.height;
-      left = Get.width;
-      right = -Get.width;
+      left = -Get.width;
+      right = Get.width;
       animationDuration = 250;
       String userID = Get.find<SharedPreferenceService>().getUserID()!;
       var currentUser = await Get.find<FirestoreService>().getUser(userID);
@@ -67,11 +67,11 @@ class SliderController extends GetxController {
       await Get.find<MatcherController>().updateUnLikedUsers(unLikedUsers);
 
       await Get.find<MatcherController>().controllCurrentUserIndex(true);
-    } else if ((Get.width - (Get.width / 5)) < decideLocationX!) {
+    } else if ((Get.width - (Get.width / 3)) < decideLocationX!) {
       bottom = -Get.height;
       top = Get.height;
-      left = -Get.width;
-      right = Get.width;
+      left = Get.width;
+      right = -Get.width;
       animationDuration = 250;
 
       await Get.find<MatcherController>().controllCurrentUserIndex(true);
@@ -724,10 +724,14 @@ class SliderController extends GetxController {
                                   await Get.find<MatcherController>().goBack();
                                 },
                                 child: Container(
-                                  child: Center(
-                                    child: Image.asset(
-                                        "assets/images/matcher_back.png"),
-                                  ),
+                                  width: Dimensions.h45,
+                                  height: Dimensions.h45,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: AssetImage("assets/images/matcher_back.png"),
+                                      fit: BoxFit.contain
+                                    )
+                                  ),                                 
                                 ),
                               ),
                               GestureDetector(
@@ -739,21 +743,31 @@ class SliderController extends GetxController {
                                   autoSlide(false);
                                 },
                                 child: Container(
-                                  child: Center(
-                                    child: Image.asset(
-                                        "assets/images/matcher_dislike.png"),
-                                  ),
+                                  width: Dimensions.h60,
+                                  height: Dimensions.h60,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: AssetImage("assets/images/matcher_dislike.png"),
+                                      fit: BoxFit.contain
+                                    )
+                                  ),                                 
                                 ),
                               ),
                               GestureDetector(
+                                
                                 onTap: () {
                                   showCurvyLikeDialog();
                                 },
                                 child: Container(
-                                  child: Center(
-                                    child: Image.asset(
-                                        "assets/images/matcher_superlike.png"),
-                                  ),
+                                  width: Dimensions.h52,
+                                  height: Dimensions.h52,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(Dimensions.h52/2),
+                                    image: DecorationImage(
+                                      image: AssetImage( "assets/images/matcher_superlike.png"),
+                                      fit: BoxFit.contain
+                                    )
+                                  ),                                 
                                 ),
                               ),
                               GestureDetector(
@@ -766,17 +780,27 @@ class SliderController extends GetxController {
                                   autoSlide(true);
                                 },
                                 child: Container(
-                                  child: Center(
-                                    child: Image.asset(
-                                        "assets/images/matcher_like.png"),
-                                  ),
+                                  width: Dimensions.h60,
+                                  height: Dimensions.h60,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(Dimensions.h60/2),
+                                    image: DecorationImage(
+                                      image: AssetImage("assets/images/matcher_like.png"),
+                                      fit: BoxFit.contain
+                                    )
+                                  ),                               
                                 ),
                               ),
                               Container(
-                                child: Center(
-                                  child: Image.asset(
-                                      "assets/images/matcher_turbo.png"),
-                                ),
+                                width: Dimensions.h45,
+                                height: Dimensions.h45,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(Dimensions.h45/2),
+                                  image: DecorationImage(
+                                    image: AssetImage("assets/images/matcher_turbo.png"),
+                                    fit: BoxFit.contain
+                                  )
+                                ),                                
                               )
                             ],
                           ))

@@ -17,11 +17,21 @@ class DeleteAccountReason extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.asset(icon),
+          Container(
+            width: Dimensions.h42,
+            height: Dimensions.h42,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(icon),
+                fit: BoxFit.contain
+              )
+            ),
+          ),
           Text(
             text,
             style: TextStyle(
               color: Color(0xFF7B8491),
+              fontSize: Dimensions.h14,
               fontWeight: FontWeight.bold
             ),
           )
