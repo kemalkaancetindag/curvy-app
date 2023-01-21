@@ -54,8 +54,8 @@ class ArchiveWhoLikedMeController extends GetxController {
     double screenCenterY = Get.height / 2;
 
     _tiles = [];
-
-    _tiles!.add(Positioned(
+    if(_usersWhoLikedMe!.isNotEmpty){
+       _tiles!.add(Positioned(
         top: screenCenterY - maxRadius,
         left: screenCenterX - maxRadius,
         child: GestureDetector(
@@ -80,6 +80,8 @@ class ArchiveWhoLikedMeController extends GetxController {
         )));
 
     _positions!.add([screenCenterX, screenCenterY, maxRadius.toDouble()]);
+    }
+   
 
     var random = math.Random();
 

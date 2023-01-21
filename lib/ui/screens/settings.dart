@@ -1137,7 +1137,7 @@ class SettingsScreen extends StatelessWidget {
                             SettingsModalSwitchRow(
                               title: "AppFlayer",
                               text: "Ayrıntıları Görüntüle",
-                              switchState: Utils.getNestedMapData(Settings.privacyPreferencesMarketingAppFlayer.value, controller.settings!),
+                              switchState:controller.settings!["privacy_preferences"]["marketing_permissions"]["app_flayer"],
                               switchOnChange: (bool state) {
                                 controller.updatePrivacyPreferences(Settings.privacyPreferencesMarketingAppFlayer.value, state);
                               },
@@ -1152,7 +1152,7 @@ class SettingsScreen extends StatelessWidget {
                             SettingsModalSwitchRow(
                               title: "Branch",
                               text: "Ayrıntıları Görüntüle",
-                              switchState: Utils.getNestedMapData(Settings.privacyPreferencesMarketingBranch.value, controller.settings!),
+                              switchState: controller.settings!["privacy_preferences"]["marketing_permissions"]["branch"],
                               switchOnChange: (bool state) {
                                  controller.updatePrivacyPreferences(Settings.privacyPreferencesMarketingBranch.value, state);
                               },
@@ -1169,7 +1169,7 @@ class SettingsScreen extends StatelessWidget {
                               text:
                                   "Yeni araçlar ekleyebiliriz. Bu ayar, bu yeni araçların varsayılan olarak etkin mi yoksa devre dışı mı olacağını belirler.",
                               isSwitch: true,
-                              switchState:  Utils.getNestedMapData(Settings.privacyPreferencesMarketingNewMarketingPermissions.value, controller.settings!),
+                              switchState:  controller.settings!["privacy_preferences"]["marketing_permissions"]["new_marketing_permissions"],
                               switchOnChanged: (bool state) {
                                  controller.updatePrivacyPreferences(Settings.privacyPreferencesMarketingNewMarketingPermissions.value, state);
                               },
@@ -1202,7 +1202,10 @@ class SettingsScreen extends StatelessWidget {
                                     ),
                                   ),
                                   GestureDetector(
-                                    onTap: () {},
+                                    onTap: () {
+                                      controller.sendPrivacypreferences();
+                                      Get.back();
+                                    },
                                     child: Container(
                                       child: Center(
                                         child: Image.asset(
@@ -1281,8 +1284,10 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Curvy Direct Ads",
                             text: "Ayrıntıları Görüntüle",
-                            switchState: Utils.getNestedMapData(Settings.privacyPreferencesAdvertisingCurvyDirectAds.value, controller.settings!),
-                            switchOnChange: (bool state) {},
+                            switchState: controller.settings!["privacy_preferences"]["advertising_permissions"]["curvy_direct_ads"],
+                            switchOnChange: (bool state) {
+                              controller.updatePrivacyPreferences(Settings.privacyPreferencesAdvertisingCurvyDirectAds.value, state);
+                            },
                           ),
                           SizedBox(
                             height: 2,
@@ -1294,8 +1299,10 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Google Ads",
                             text: "Ayrıntıları Görüntüle",
-                            switchState: true,
-                            switchOnChange: (bool state) {},
+                            switchState: controller.settings!["privacy_preferences"]["advertising_permissions"]["google_ads"],
+                            switchOnChange: (bool state) {
+                              controller.updatePrivacyPreferences(Settings.privacyPreferencesAdvertisingGoogleAds.value, state);
+                            },
                           ),
                           SizedBox(
                             height: 2,
@@ -1307,8 +1314,10 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Curvy Promotions",
                             text: "Ayrıntıları Görüntüle",
-                            switchState: true,
-                            switchOnChange: (bool state) {},
+                            switchState: controller.settings!["privacy_preferences"]["advertising_permissions"]["curvy_promotions"],
+                            switchOnChange: (bool state) {
+                              controller.updatePrivacyPreferences(Settings.privacyPreferencesAdvertisingCurvyPromotions.value, state);
+                            },
                           ),
                           SizedBox(
                             height: 2,
@@ -1320,8 +1329,10 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Facebook Ads",
                             text: "Ayrıntıları Görüntüle",
-                            switchState: true,
-                            switchOnChange: (bool state) {},
+                            switchState:  controller.settings!["privacy_preferences"]["advertising_permissions"]["facebook_ads"],
+                            switchOnChange: (bool state) {
+                              controller.updatePrivacyPreferences(Settings.privacyPreferencesAdvertisingFacebookAds.value, state);
+                            },
                           ),
                           SizedBox(
                             height: 2,
@@ -1335,8 +1346,10 @@ class SettingsScreen extends StatelessWidget {
                             text:
                                 "Yeni araçlar ekleyebiliriz. Bu ayar, bu yeni araçların varsayılan olarak etkin mi yoksa devre dışı mı olacağını belirler.",
                             isSwitch: true,
-                            switchState: true,
-                            switchOnChanged: (bool state) {},
+                            switchState:  controller.settings!["privacy_preferences"]["advertising_permissions"]["new_advertising_permissions"],
+                            switchOnChanged: (bool state) {
+                              controller.updatePrivacyPreferences(Settings.privacyPreferencesAdvertisingNewAdvertisingPermissions.value, state);
+                            },
                           ),
                           SizedBox(
                             height: 2,
@@ -1365,7 +1378,10 @@ class SettingsScreen extends StatelessWidget {
                                   ),
                                 ),
                                 GestureDetector(
-                                  onTap: () {},
+                                  onTap: () {
+                                    controller.sendPrivacypreferences();
+                                    Get.back();
+                                  },
                                   child: Container(
                                     child: Center(
                                       child: Image.asset(
@@ -1581,7 +1597,10 @@ class SettingsScreen extends StatelessWidget {
                                     ),
                                   ),
                                   GestureDetector(
-                                    onTap: () {},
+                                    onTap: () {
+                                      controller.sendPrivacypreferences();
+                                      Get.back();
+                                    },
                                     child: Container(
                                       child: Center(
                                           child: Image.asset(

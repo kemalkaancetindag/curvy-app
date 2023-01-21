@@ -39,15 +39,20 @@ class MatcherController extends GetxController {
   double? _userDistancePreference;
   double? get userDistancePreference => _userDistancePreference;
 
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+
+
   MatcherController(
       {required this.firestoreService, required this.goApiClient});
 
   @override
   Future<void> onInit() async {
     super.onInit();
-    String currentUserID = Get.find<SharedPreferenceService>().getUserID()!;    
+    String currentUserID = Get.find<SharedPreferenceService>().getUserID()!;
     _notFoundCurrentUser = await firestoreService.getUser(currentUserID);
-    _userDistancePreference = _notFoundCurrentUser!.settings!.distance_preference!.distance!;
+    _userDistancePreference =
+        _notFoundCurrentUser!.settings!.distance_preference!.distance!;
     if (_cards == null) {
       await getCards();
     }
@@ -73,8 +78,8 @@ class MatcherController extends GetxController {
     return (rad * c).toInt();
   }
 
-  Future<void> getCards() async {   
-
+  Future<void> getCards() async {
+    _isLoading = true;
     _users = [];
     _cards = [];
 
@@ -92,11 +97,11 @@ class MatcherController extends GetxController {
         await goApiClient.postData(recommendationPostData, "/recommendations");
     var matches = response.body;
 
-    
+    List<Future<dynamic>> lastCardImages = [];
 
     RxList<Widget> cardList = <Widget>[].obs;
-    print("MATCHES");
-    print(matches);
+
+
     for (int i = (matches as List<dynamic>).length - 1; i >= 0; i--) {
       if (matches[i] != null) {
         var user = UserModel.fromJson(matches[i] as Map<String, dynamic>);
@@ -115,11 +120,17 @@ class MatcherController extends GetxController {
             global: false,
             builder: (_) {
               return MatcherStyleUserCard(controllerTag: user.userID!);
-            }));
+            }));      
+       await Future.forEach( user.images!,(element) async {          
+            await precacheImage(NetworkImage('https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(element)}?alt=media'), Get.context!);
+      });
       }
     }
 
     _cards = cardList;
+
+    _isLoading = false;
+
     update();
   }
 
@@ -134,7 +145,6 @@ class MatcherController extends GetxController {
   }
 
   Future<void> continuousSliding(int slideCount) async {
-
     if (slideCount == 5) {
       List<Widget> newCards = [];
       Map<String, dynamic> recommendationPostData = Map<String, dynamic>();
@@ -211,8 +221,6 @@ class MatcherController extends GetxController {
   Future<void> goBack() async {
     String currentUserID = Get.find<SharedPreferenceService>().getUserID()!;
     var currentUser = await firestoreService.getCurrentUser(currentUserID);
-
-
 
     if (currentUser.remaining_daily_back_count! > 0) {
       if (currentUserIndex != 0) {
@@ -309,15 +317,13 @@ class MatcherController extends GetxController {
   }
 
   void setDistancePreference(double distance) {
-
     _userDistancePreference = distance;
     print(_userDistancePreference);
     update();
   }
 
   Future updateDistancePreference() async {
-    
-    var data = Map<String,dynamic>();
+    var data = Map<String, dynamic>();
     String userID = Get.find<SharedPreferenceService>().getUserID()!;
     print("sa");
     print(_userDistancePreference);

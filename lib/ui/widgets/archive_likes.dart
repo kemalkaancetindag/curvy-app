@@ -14,7 +14,7 @@ class ArchiveLikes extends StatelessWidget {
 
     return GetBuilder<ArchiveWhoLikedMeController>(
       builder: (controller) {
-        if (controller.usersWhoLikedMe == null) {
+        if (controller.usersWhoLikedMe == null || controller.usersWhoLikedMe!.isEmpty) {
           return Container(
             width: double.maxFinite,
             height: double.maxFinite,

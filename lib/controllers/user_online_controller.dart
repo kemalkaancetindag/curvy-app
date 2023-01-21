@@ -31,7 +31,10 @@ class UserOnlineController extends GetxController {
         .getCollection('users')
         .where("userID", isEqualTo: userID)
         .get();
-
+        
+    if(userSnapshot.docs.isEmpty){
+      print(userID);
+    }
     _user = UserModel.fromJson(
         (userSnapshot.docs[0].data() as Map<String, dynamic>));
 

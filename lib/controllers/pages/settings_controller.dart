@@ -245,6 +245,28 @@ class SettingsController extends GetxController {
 
     update();
   }
+
+  void sendPrivacypreferences() async {
+    String? userID = Get.find<SharedPreferenceService>().getUserID();
+    var updateData = Map<String,dynamic>();
+
+    updateData["settings"] = _settings;
+
+    if(userID != null){
+      await firestoreService.updateUser(updateData, userID);
+
+      var mapUser = await firestoreService.getUserAsMap(userID);
+
+      if(mapUser != null){
+        _user = UserModel.fromJson(mapUser);
+        _settings = mapUser["settings"] as Map<String,dynamic>;
+      }
+
+
+    }
+
+    update();    
+  }
   //PRIVACY PREFERENCES
 
   Future<void> updatePage() async {   
@@ -256,12 +278,9 @@ class SettingsController extends GetxController {
     if(user != null){
       _user = UserModel.fromJson(mapUser!);
           
-      _settings = mapUser['settings'] as Map<String,dynamic>;
+      _settings = mapUser['settings'] as Map<String,dynamic>;            
       
-      
-      
-    }
-    
+    }    
     
     Get.back();
   }

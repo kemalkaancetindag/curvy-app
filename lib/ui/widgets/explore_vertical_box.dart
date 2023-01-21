@@ -5,7 +5,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class ExploreVerticalBox extends StatelessWidget {
-  String image;
+  Image image;
   String title;
   String text;
   String actionText;
@@ -34,7 +34,7 @@ class ExploreVerticalBox extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(Dimensions.h16),
           image: DecorationImage(
-              image: NetworkImage('https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(image)}?alt=media'),
+              image: image.image,
               fit: BoxFit.cover)),
       child: Stack(
         children: [

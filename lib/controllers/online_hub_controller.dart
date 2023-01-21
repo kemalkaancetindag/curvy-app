@@ -258,11 +258,15 @@ class OnlineHubController extends GetxController {
                       child: Wrap(
                         children: [
                           Container(
-                            margin: EdgeInsets.only(right: Dimensions.w8),
-                            child: Center(
-                              child: Image.asset(
-                                  "assets/images/location_white.png"),
+                            width: Dimensions.h12,
+                            height: Dimensions.h12,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage("assets/images/location_white.png"),
+                                fit: BoxFit.cover
+                              )
                             ),
+                            margin: EdgeInsets.only(right: Dimensions.w8),                          
                           ),
                           Container(
                             child: Text(
@@ -279,7 +283,14 @@ class OnlineHubController extends GetxController {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Container(
-                      child: Image.asset("assets/images/expand_icon.png"),
+                      width: Dimensions.h27,
+                      height: Dimensions.h27,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("assets/images/expand_icon.png"),
+                          fit: BoxFit.cover
+                        )
+                      ),
                     )
                   ],
                 )
@@ -303,9 +314,14 @@ class OnlineHubController extends GetxController {
                     await Get.find<OnlineHubController>().goBack();
                   },
                   child:  Container(
-                  child: Center(
-                    child: Image.asset("assets/images/matcher_back.png"),
-                  ),
+                     width: Dimensions.h36,
+                  height: Dimensions.h36,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/matcher_back.png"),
+                      fit: BoxFit.cover
+                    )
+                  ),                 
                 ),
                 ),
                
@@ -314,30 +330,53 @@ class OnlineHubController extends GetxController {
                     Get.find<OnlineHubController>().dislikeUser();
                   },
                   child: Container(
-                    child: Center(
-                      child: Image.asset("assets/images/matcher_dislike.png"),
-                    ),
+                      width: Dimensions.h52,
+                    height: Dimensions.h52,   
+                      decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Dimensions.h52/2),
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/matcher_dislike.png"),
+                      fit: BoxFit.cover
+                    )     )                  
                   ),
                 ),
                 Container(
-                  child: Center(
-                    child: Image.asset("assets/images/matcher_superlike.png"),
-                  ),
+                  width: Dimensions.h45,
+                  height: Dimensions.h45,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/matcher_superlike.png"),
+                      fit: BoxFit.cover
+                    )
+                  ),                
                 ),
                 GestureDetector(
                   onTap: () {
                     Get.find<OnlineHubController>().likeUser();
                   },
                   child: Container(
-                    child: Center(
-                      child: Image.asset("assets/images/matcher_like.png"),
-                    ),
+                    width: Dimensions.h52,
+                    height: Dimensions.h52,                    
+                     decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Dimensions.h52/2),
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/matcher_like.png"),
+                      fit: BoxFit.cover
+                    )
+                  ),                                  
                   ),
                 ),
                 Container(
-                  child: Center(
-                    child: Image.asset("assets/images/matcher_turbo.png"),
-                  ),
+                  width: Dimensions.h36,
+                  height: Dimensions.h36,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.h36/2),
+                    image: DecorationImage(
+                      
+                      image: AssetImage("assets/images/matcher_turbo.png"),
+                      fit: BoxFit.cover
+                    )
+                  ),                
                 )
               ],
             ),

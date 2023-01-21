@@ -111,7 +111,7 @@ class EditProfileScreen extends StatelessWidget {
 
     void showZodiacSelectDialog() {
       showDialog(
-          barrierDismissible: false,
+          barrierDismissible: true,
           context: context,
           builder: (context) {
             return GetBuilder<EditProfileController>(builder: (controller) {
@@ -119,8 +119,8 @@ class EditProfileScreen extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
                 ),
-                child: Container(
-                  height: Dimensions.h520,
+                child: Container(    
+                  height: Dimensions.h520+Dimensions.h300/10,              
                   width: Dimensions.w300,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(Dimensions.h16),
@@ -691,7 +691,7 @@ class EditProfileScreen extends StatelessWidget {
                               },
                               child: Container(
                                   margin: EdgeInsets.only(
-                                      top: Dimensions.h300 / 10),
+                                      top: Dimensions.h300 / 10, bottom: Dimensions.h300/10),
                                   width: Dimensions.w120,
                                   height: Dimensions.h300 / 10,
                                   decoration: BoxDecoration(
@@ -1324,17 +1324,18 @@ class EditProfileScreen extends StatelessWidget {
 
     void showPetDialog() {
       showDialog(
-          barrierDismissible: false,
+          barrierDismissible: true,
           context: context,
           builder: (context) {
             return GetBuilder<EditProfileController>(builder: (controller) {
               return Dialog(
+                insetPadding: EdgeInsets.symmetric(horizontal: Dimensions.w42),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
                 ),
                 child: Container(
-                  height: Dimensions.h40 * 10 + Dimensions.h60,
-                  width: Dimensions.w300,
+                  height: (Dimensions.h40 * 10) + Dimensions.h148,   
+                  width: Get.width,               
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(Dimensions.h16),
                       gradient: LinearGradient(
@@ -1899,17 +1900,17 @@ class EditProfileScreen extends StatelessWidget {
 
     void showSmokePreferenceDialog() {
       showDialog(
-          barrierDismissible: false,
+          barrierDismissible: true,
           context: context,
           builder: (context) {
             return GetBuilder<EditProfileController>(builder: (controller) {
               return Dialog(
+                insetPadding: EdgeInsets.symmetric(horizontal: Dimensions.w2*10),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
                 ),
                 child: Container(
-                  height: Dimensions.h300,
-                  width: Dimensions.w300,
+                  height: Dimensions.h300 + Dimensions.h31,                  
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(Dimensions.h16),
                       gradient: LinearGradient(
@@ -2191,17 +2192,17 @@ class EditProfileScreen extends StatelessWidget {
 
     void showAlcoholPreferenceDialog() {
       showDialog(
-          barrierDismissible: false,
+          barrierDismissible: true,
           context: context,
           builder: (context) {
             return GetBuilder<EditProfileController>(builder: (controller) {
               return Dialog(
+                insetPadding: EdgeInsets.symmetric(horizontal: Dimensions.w31),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
                 ),
                 child: Container(
-                  height: Dimensions.h31 * 11.5,
-                  width: Dimensions.w300,
+                  height: Dimensions.h31 * 13,                  
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(Dimensions.h16),
                       gradient: LinearGradient(
@@ -2565,7 +2566,7 @@ class EditProfileScreen extends StatelessWidget {
 
     void showSexDialog() {
       showDialog(
-          barrierDismissible: false,
+          barrierDismissible: true,
           context: context,
           builder: (context) {
             return GetBuilder<EditProfileController>(builder: (controller) {
@@ -2574,7 +2575,7 @@ class EditProfileScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
                 ),
                 child: Container(
-                  height: Dimensions.h12 * 18,
+                  height: Dimensions.h12 * 20,
                   width: Dimensions.w300,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(Dimensions.h16),
@@ -2796,7 +2797,7 @@ class EditProfileScreen extends StatelessWidget {
 
     void showSexualPreferenceDialog() {
       showDialog(
-          barrierDismissible: false,
+          barrierDismissible: true,
           context: context,
           builder: (context) {
             return GetBuilder<EditProfileController>(builder: (controller) {

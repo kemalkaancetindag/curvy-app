@@ -184,32 +184,64 @@ class EditProfileController extends GetxController {
   }
 
   void setZodiac(int zodiac) {
-    _zodiac = zodiac;
+    if(_zodiac == zodiac){
+      _zodiac = null;
+    }
+    else{
+      _zodiac = zodiac;
+    }
+    
     update();
   }
 
   void setPersonality(int personality) {
-    _personality = personality;
+    if(_personality == personality){
+      _personality = null;
+    }
+    else{
+      _personality = personality;
+    }
+
+    
     update();
   }
 
   void setPet(int pet) {
-    _pet = pet;
+    if(_pet == pet){
+      _pet = null;
+    }
+    else{
+      _pet = pet;
+    }
+    
     update();
   }
 
   void setSmoke(int smoke) {
-    _smoke = smoke;
+    if(_smoke == smoke){
+      _smoke = null;
+    }
+    else{
+      _smoke = smoke;
+    }
+    
     update();
   }
 
   void setAlcohol(int alcohol) {
-    _alcohol = alcohol;
+    if(_alcohol == alcohol){
+      _alcohol = null;
+    }
+    else{
+      _alcohol = alcohol;
+    }
+    
     update();
   }
 
   void setSex(int sex) {
     _sex = sex;
+    
     update();
   }
 

@@ -36,7 +36,7 @@ class ExploreScreen extends StatelessWidget {
         ),
         body: GetBuilder<HubController>(
           builder: (controller) {
-            return Container(
+            return controller.storageHubs != null ? Container(
               width: double.maxFinite,
               height: double.maxFinite,
               padding:
@@ -71,7 +71,7 @@ class ExploreScreen extends StatelessWidget {
                               child:   ExploreVerticalBox(
                               title: controller.storageHubs![0].hub_title ?? "",
                               text: controller.storageHubs![0].hub_text ?? "",
-                              image: controller.storageHubs![0].hub_image ?? "",
+                              image:  Image.network( 'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(controller.storageHubs![0].hub_image!)}?alt=media'),
                               actionText: controller.storageHubs![0].hub_action_text ?? "",
                             ),
                             ),   
@@ -83,7 +83,7 @@ class ExploreScreen extends StatelessWidget {
                               child: ExploreVerticalBox(
                               title: controller.storageHubs![1].hub_title ?? "",
                               text: controller.storageHubs![1].hub_text ?? "",
-                              image: controller.storageHubs![1].hub_image ?? "",
+                              image: Image.network('https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(controller.storageHubs![1].hub_image!)}?alt=media'),
                               actionText: controller.storageHubs![1].hub_action_text ?? "",
                             ),
                             )                       
@@ -113,6 +113,14 @@ class ExploreScreen extends StatelessWidget {
 
                   
                   ],
+                ),
+              ),
+            ) : Container(
+              width: double.maxFinite,
+              height: double.maxFinite,
+              child: Center(
+                child: CircularProgressIndicator(
+                  color: Color(0xFFD51CFF),
                 ),
               ),
             );

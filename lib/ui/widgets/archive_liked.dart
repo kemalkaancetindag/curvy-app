@@ -18,9 +18,15 @@ class ArchiveLiked extends StatelessWidget {
         width: double.maxFinite,
         height: double.maxFinite,
         color: Colors.white,
-        child: SingleChildScrollView(
+        child: controller.usersILiked != null ? SingleChildScrollView(
           child: Wrap(
             children: controller.tiles ?? []
+          ),
+        ) : Container(
+          width: double.maxFinite,
+          height: double.maxFinite,
+          child: CircularProgressIndicator(
+            color: Color(0xFFD51CFF),
           ),
         )
       );

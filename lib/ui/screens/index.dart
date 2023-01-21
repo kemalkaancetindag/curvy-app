@@ -232,7 +232,9 @@ class IndexScreen extends StatelessWidget {
                                                                   .user !=
                                                               null
                                                           ? DecorationImage(
-                                                              image: NetworkImage(
+                                                            fit: BoxFit.cover,
+                                                              image:
+                                                               NetworkImage(
                                                                   'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(indexPageController.user!.images![0])}?alt=media'))
                                                           : null,
                                                       borderRadius:

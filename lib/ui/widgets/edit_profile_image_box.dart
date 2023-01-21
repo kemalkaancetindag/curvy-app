@@ -14,9 +14,11 @@ class EditPorfileImageBox extends StatelessWidget {
     return Container(
       width: Dimensions.w99,
       height: Dimensions.h137,
+
       decoration: BoxDecoration(
         image: image != null ? DecorationImage(
-          image:  NetworkImage('https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(image!)}?alt=media')
+          image:  NetworkImage('https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(image!)}?alt=media'),
+          fit: BoxFit.cover
         ) : null
       ),
       child: Stack(
@@ -24,9 +26,9 @@ class EditPorfileImageBox extends StatelessWidget {
         children: [
           Positioned(
             bottom: -Dimensions.h31/2,
-            right: -Dimensions.w31/2,
+            right: -Dimensions.h31/2,
             child:   Container(
-            width: Dimensions.w31,
+            width: Dimensions.h31,
             height:Dimensions.h31,
             decoration: BoxDecoration(
               

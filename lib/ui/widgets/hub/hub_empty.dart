@@ -226,7 +226,22 @@ class HubEmptyWidget extends StatelessWidget {
                 ) ),
           ],
         ),
-      ) : Container();
+      ) : Container(
+        width: double.maxFinite,
+        height: double.maxFinite,
+        decoration: BoxDecoration(
+          gradient:  LinearGradient(colors: [
+          Color(0xFF000000),
+          Color(0xFF2E2B2B),
+          Color(0xFF000000),
+        ])
+        ),
+        child: Center(
+          child: CircularProgressIndicator(
+            color: Color(0xFFD51CFF),
+          ),
+        ),
+      );
     });
   }
 }

@@ -18,11 +18,24 @@ class ArchiveVipProfiles extends StatelessWidget {
         width: double.maxFinite,
         height: double.maxFinite,
         color: Colors.white,
-        child: SingleChildScrollView(
-          child: Wrap(
+        child: controller.vipProfiles != null ? SingleChildScrollView(
+          child: Container(
+            width: Get.width,
+            height: double.maxFinite,
+            child:  Wrap(
             children: controller.tiles ?? []
           ),
-        ));
+          ) 
+        ) : Container(
+          width: double.maxFinite,
+          height: double.maxFinite,
+          child: Center(
+            child: CircularProgressIndicator(
+              color: Color(0xFFD51CFF),
+            ),
+          ),
+        )
+        );
       }
     );
   }

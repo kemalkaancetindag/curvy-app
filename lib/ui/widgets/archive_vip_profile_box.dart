@@ -157,13 +157,7 @@ class ArchiveVipProfileBox extends StatelessWidget {
                             ],
                           ))),
                 ],
-              )) : Container(
-                width: double.maxFinite,
-                height: double.maxFinite,
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
+              )) : Container();
         });
   }
 }

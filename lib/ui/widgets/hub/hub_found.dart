@@ -217,13 +217,39 @@ class HubFoundWidget extends StatelessWidget {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    
-                                    Image.asset('assets/images/chat_send.png'),
+                                    Container(
+                                      width: Dimensions.h21,
+                                      height: Dimensions.h21,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage('assets/images/chat_send.png'),
+                                          fit: BoxFit.cover
+                                        )
+                                      ),
+                                    ),
                                     SizedBox(height: Dimensions.h100/10,),
-                                    Image.asset('assets/images/chat_mic_white.png'),
+                                     Container(
+                                      width: Dimensions.h21,
+                                      height: Dimensions.h21,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage('assets/images/chat_mic_white.png'),
+                                          fit: BoxFit.cover
+                                        )
+                                      ),
+                                    ),
                                     SizedBox(height: Dimensions.h100/10,),
-                                    Image.asset('assets/images/chat_add_white.png'),
-
+                                     Container(
+                                      width: Dimensions.h21,
+                                      height: Dimensions.h21,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage('assets/images/chat_add_white.png'),
+                                          fit: BoxFit.cover
+                                        )
+                                      ),
+                                    )
+                                   
                                   ],
                                 ),
                               )
@@ -263,9 +289,15 @@ class HubFoundWidget extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        child: Center(
-                          child: Image.asset("assets/images/chat_send.png"),
+                        width: Dimensions.h21,
+                        height: Dimensions.h21,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/chat_send.png"),
+                            fit: BoxFit.cover
+                          )
                         ),
+                     
                       )
 
                     ],

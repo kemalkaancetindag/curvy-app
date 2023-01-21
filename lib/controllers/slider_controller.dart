@@ -1,4 +1,3 @@
-import 'package:curvy_app/api/services/archive_service.dart';
 import 'package:curvy_app/api/services/chat_service.dart';
 import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/match_service.dart';
@@ -6,10 +5,8 @@ import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/constants/routes.dart';
 import 'package:curvy_app/controllers/matcher_controller.dart';
-import 'package:curvy_app/controllers/pages/chat_controller.dart';
 import 'package:curvy_app/controllers/user_detail_controller.dart';
 import 'package:curvy_app/models/user.model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:math' as math;
@@ -87,9 +84,9 @@ class SliderController extends GetxController {
         context: Get.context!,
         builder: (context) {
           return Dialog(
+            insetPadding: EdgeInsets.symmetric(horizontal: Dimensions.w42),
             backgroundColor: Colors.transparent,
-            child: Container(
-              width: Dimensions.w35 * 10,
+            child: Container(              
               height: Dimensions.h22 * 10,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
@@ -207,23 +204,35 @@ class SliderController extends GetxController {
                                 autoSlide(true);
                               },
                               child: Container(
-                                child: Center(
-                                  child: Image.asset(
-                                      "assets/images/curvy_dialog_send_icon.png"),
-                                ),
+                                width: Dimensions.h22,
+                                height: Dimensions.h22,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage( "assets/images/curvy_dialog_send_icon.png"),
+                                    fit: BoxFit.cover
+                                  )
+                                ),                              
                               ),
                             ),
                             Container(
-                              child: Center(
-                                child: Image.asset(
-                                    "assets/images/curvy_dialog_mic_icon.png"),
-                              ),
+                              width: Dimensions.h22,
+                              height: Dimensions.h22,
+                               decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage(  "assets/images/curvy_dialog_mic_icon.png"),
+                                    fit: BoxFit.cover
+                                  )
+                                ),                                             
                             ),
                             Container(
-                              child: Center(
-                                child: Image.asset(
-                                    "assets/images/curvy_dialog_add_icon.png"),
-                              ),
+                                width: Dimensions.h22,
+                              height: Dimensions.h22,
+                               decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage( "assets/images/curvy_dialog_add_icon.png"),
+                                    fit: BoxFit.cover
+                                  )
+                                ),                                           
                             )
                           ],
                         )
@@ -242,9 +251,9 @@ class SliderController extends GetxController {
         context: Get.context!,
         builder: (context) {
           return Dialog(
+              insetPadding: EdgeInsets.symmetric(horizontal: Dimensions.w42),
             backgroundColor: Colors.transparent,
-            child: Container(
-              width: Dimensions.w35 * 10,
+            child: Container(              
               height: Dimensions.h22 * 10,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
@@ -361,24 +370,33 @@ class SliderController extends GetxController {
                                 autoSlide(true);
                               },
                               child: Container(
-                                child: Center(
-                                  child: Image.asset(
-                                      "assets/images/curvy_dialog_send_icon.png"),
-                                ),
+                                width: Dimensions.h22,
+                                height: Dimensions.h22,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage( "assets/images/curvy_dialog_send_icon.png")
+                                  )
+                                ),                               
                               ),
                             ),
                             Container(
-                              child: Center(
-                                child: Image.asset(
-                                    "assets/images/curvy_dialog_mic_icon.png"),
-                              ),
+                               width: Dimensions.h22,
+                                height: Dimensions.h22,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage("assets/images/curvy_dialog_mic_icon.png")
+                                  )
+                                ),                                         
                             ),
-                            Container(
-                              child: Center(
-                                child: Image.asset(
-                                    "assets/images/curvy_dialog_add_icon.png"),
-                              ),
-                            )
+                                Container(
+                               width: Dimensions.h22,
+                                height: Dimensions.h22,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage( "assets/images/curvy_dialog_add_icon.png")
+                                  )
+                                ),                                         
+                            ),                          
                           ],
                         )
                       ],

@@ -19,7 +19,7 @@ class MatcherStyle extends StatelessWidget {
       
       if (Get.find<ExpandedMatcherStyleController>().user == null) {        
 
-        return controller.cards != null
+        return !controller.isLoading ?( controller.cards != null
             ? (controller.cards!.isEmpty
                 ? Container(
                     width: double.maxFinite,
@@ -234,6 +234,14 @@ class MatcherStyle extends StatelessWidget {
                     children: controller.cards!,
                   ))
             : Container(
+                width: double.maxFinite,
+                height: double.maxFinite,
+                child: Center(
+                  child: CircularProgressIndicator(
+                    color: Color(0xFFD51CFF),
+                  ),
+                ),
+              ) ) : Container(
                 width: double.maxFinite,
                 height: double.maxFinite,
                 child: Center(
