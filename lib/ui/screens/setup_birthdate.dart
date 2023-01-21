@@ -5,6 +5,7 @@ import 'package:curvy_app/ui/screens/setup_sexual_preference.dart';
 import 'package:curvy_app/ui/widgets/black_bold_header.dart';
 import 'package:curvy_app/ui/widgets/gradient_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,7 @@ class SetupBirthdateScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -49,16 +51,22 @@ class SetupBirthdateScreen extends StatelessWidget {
                           children: [
                             Container(
                               width: Dimensions.w25,
-                              child: TextField(
+                              child: TextField(                
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(1),
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],              
+                                keyboardType: TextInputType.number,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: Dimensions.h27,
                                     fontWeight: FontWeight.w700),
                                 onChanged: (value) {
                                   controller.addToBirthdate(value, 0);
-                                  if (value.length == 1) {
+                                  if(value.length == 1){
                                     FocusScope.of(context).nextFocus();
                                   }
+                                  
                                 },
                                 cursorColor: Colors.black.withOpacity(0.4),
                                 decoration: InputDecoration(
@@ -74,6 +82,11 @@ class SetupBirthdateScreen extends StatelessWidget {
                             Container(
                               width: Dimensions.w25,
                               child: TextField(
+                                inputFormatters: [
+                                  LengthLimitingTextInputFormatter(1),
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],       
+                                keyboardType: TextInputType.number,
                                 style: TextStyle(
                                     fontSize: Dimensions.h27,
                                     fontWeight: FontWeight.w700),
@@ -102,6 +115,10 @@ class SetupBirthdateScreen extends StatelessWidget {
                             Container(
                               width: Dimensions.w25,
                               child: TextField(
+                              inputFormatters: [
+                                  LengthLimitingTextInputFormatter(1),
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],       
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: Dimensions.h27,
@@ -110,7 +127,7 @@ class SetupBirthdateScreen extends StatelessWidget {
                                   controller.addToBirthdate(value, 2);
                                   if (value.length == 1) {
                                     FocusScope.of(context).nextFocus();
-                                  }
+                                  } 
                                 },
                                 cursorColor: Colors.black.withOpacity(0.4),
                                 decoration: InputDecoration(
@@ -126,6 +143,11 @@ class SetupBirthdateScreen extends StatelessWidget {
                             Container(
                               width: Dimensions.w25,
                               child: TextField(
+                              inputFormatters: [
+                                  LengthLimitingTextInputFormatter(1),
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],       
+                                keyboardType: TextInputType.number,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: Dimensions.h27,
@@ -154,6 +176,11 @@ class SetupBirthdateScreen extends StatelessWidget {
                             Container(
                               width: Dimensions.w25,
                               child: TextField(
+                               inputFormatters: [
+                                  LengthLimitingTextInputFormatter(1),
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],       
+                                keyboardType: TextInputType.number,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: Dimensions.h27,
@@ -178,6 +205,11 @@ class SetupBirthdateScreen extends StatelessWidget {
                             Container(
                               width: Dimensions.w25,
                               child: TextField(
+                               inputFormatters: [
+                                  LengthLimitingTextInputFormatter(1),
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],       
+                                keyboardType: TextInputType.number,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: Dimensions.h27,
@@ -202,6 +234,11 @@ class SetupBirthdateScreen extends StatelessWidget {
                             Container(
                               width: Dimensions.w25,
                               child: TextField(
+                             inputFormatters: [
+                                  LengthLimitingTextInputFormatter(1),
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],       
+                                keyboardType: TextInputType.number,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: Dimensions.h27,
@@ -226,15 +263,20 @@ class SetupBirthdateScreen extends StatelessWidget {
                             Container(
                               width: Dimensions.w25,
                               child: TextField(
+                              inputFormatters: [
+                                  LengthLimitingTextInputFormatter(1),
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],       
+                                keyboardType: TextInputType.number,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: Dimensions.h27,
                                     fontWeight: FontWeight.w700),
                                 onChanged: (value) {
                                   controller.addToBirthdate(value, 7);
-                                   if(value.length == 1){
-                                FocusScope.of(context).unfocus();
-                            }
+                                  if (value.length == 1) {
+                                    FocusScope.of(context).unfocus();
+                                  }
                                 },
                                 cursorColor: Colors.black.withOpacity(0.4),
                                 decoration: InputDecoration(

@@ -7,6 +7,7 @@ import 'package:curvy_app/controllers/setup_controller.dart';
 import 'package:curvy_app/ui/screens/confirm_me.dart';
 import 'package:curvy_app/ui/screens/edit_profile.dart';
 import 'package:curvy_app/ui/screens/settings.dart';
+import 'package:curvy_app/ui/screens/validation_code.dart';
 import 'package:curvy_app/ui/widgets/bottom_nav_bar.dart';
 import 'package:curvy_app/ui/widgets/circle_progress.dart';
 import 'package:curvy_app/ui/widgets/main_action_button.dart';

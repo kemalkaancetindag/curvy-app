@@ -4,6 +4,7 @@ import 'package:curvy_app/ui/screens/validation_mail.dart';
 import 'package:curvy_app/ui/widgets/black_bold_header.dart';
 import 'package:curvy_app/ui/widgets/gradient_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
@@ -64,6 +65,11 @@ class ValidationCodeScreen extends StatelessWidget {
                                 Container(
                                   width: Dimensions.w35,
                                   child: TextField(
+                                    keyboardType: TextInputType.number,
+                                     inputFormatters: [
+                                  LengthLimitingTextInputFormatter(1),
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],       
                                     style: TextStyle(
                                         fontSize: Dimensions.h40,
                                         fontWeight: FontWeight.w700),
@@ -87,6 +93,11 @@ class ValidationCodeScreen extends StatelessWidget {
                                 Container(
                                   width: Dimensions.w35,
                                   child: TextField(
+                                      keyboardType: TextInputType.number,
+                                     inputFormatters: [
+                                  LengthLimitingTextInputFormatter(1),
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],       
                                     style: TextStyle(
                                         fontSize: Dimensions.h40,
                                         fontWeight: FontWeight.w700),
@@ -97,9 +108,6 @@ class ValidationCodeScreen extends StatelessWidget {
                                         FocusScope.of(context).nextFocus();
                                       }
 
-                                      if (value.length == 0) {
-                                        FocusScope.of(context).previousFocus();
-                                      }
                                     },
                                     cursorColor: Colors.black.withOpacity(0.4),
                                     decoration: InputDecoration(
@@ -115,6 +123,11 @@ class ValidationCodeScreen extends StatelessWidget {
                                 Container(
                                   width: Dimensions.w35,
                                   child: TextField(
+                                      keyboardType: TextInputType.number,
+                                     inputFormatters: [
+                                  LengthLimitingTextInputFormatter(1),
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],       
                                     style: TextStyle(
                                         fontSize: Dimensions.h40,
                                         fontWeight: FontWeight.w700),
@@ -124,9 +137,7 @@ class ValidationCodeScreen extends StatelessWidget {
                                         FocusScope.of(context).nextFocus();
                                       }
 
-                                      if (value.length == 0) {
-                                        FocusScope.of(context).previousFocus();
-                                      }
+                                    
                                     },
                                     cursorColor: Colors.black.withOpacity(0.4),
                                     decoration: InputDecoration(
@@ -142,6 +153,11 @@ class ValidationCodeScreen extends StatelessWidget {
                                 Container(
                                   width: Dimensions.w35,
                                   child: TextField(
+                                      keyboardType: TextInputType.number,
+                                     inputFormatters: [
+                                  LengthLimitingTextInputFormatter(1),
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],       
                                     style: TextStyle(
                                         fontSize: Dimensions.h40,
                                         fontWeight: FontWeight.w700),
@@ -151,9 +167,7 @@ class ValidationCodeScreen extends StatelessWidget {
                                         FocusScope.of(context).nextFocus();
                                       }
 
-                                      if (value.length == 0) {
-                                        FocusScope.of(context).previousFocus();
-                                      }
+                                  
                                     },
                                     cursorColor: Colors.black.withOpacity(0.4),
                                     decoration: InputDecoration(
@@ -169,6 +183,11 @@ class ValidationCodeScreen extends StatelessWidget {
                                 Container(
                                   width: Dimensions.w35,
                                   child: TextField(
+                                      keyboardType: TextInputType.number,
+                                     inputFormatters: [
+                                  LengthLimitingTextInputFormatter(1),
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],       
                                     style: TextStyle(
                                         fontSize: Dimensions.h40,
                                         fontWeight: FontWeight.w700),
@@ -178,9 +197,7 @@ class ValidationCodeScreen extends StatelessWidget {
                                         FocusScope.of(context).nextFocus();
                                       }
 
-                                      if (value.length == 0) {
-                                        FocusScope.of(context).previousFocus();
-                                      }
+                                   
                                     },
                                     cursorColor: Colors.black.withOpacity(0.4),
                                     decoration: InputDecoration(
@@ -196,16 +213,18 @@ class ValidationCodeScreen extends StatelessWidget {
                                 Container(
                                   width: Dimensions.w35,
                                   child: TextField(
+                                      keyboardType: TextInputType.number,
+                                     inputFormatters: [
+                                  LengthLimitingTextInputFormatter(1),
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],       
                                     onChanged: (value) {
                                       controller.addToValidationCode(value, 5);
                                       if (value.length == 1) {
                                         FocusScope.of(context).unfocus();
                                       }
 
-                                      if (value.length == 0) {
-                                        print("sa");
-                                        FocusScope.of(context).previousFocus();
-                                      }
+                               
                                     },
                                     style: TextStyle(
                                         fontSize: Dimensions.h40,
