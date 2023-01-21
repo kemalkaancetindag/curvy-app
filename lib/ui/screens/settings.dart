@@ -309,7 +309,8 @@ class SettingsScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Container(
-                        margin: EdgeInsets.only(top: Dimensions.h27),
+                        margin: EdgeInsets.only(
+                            top: Dimensions.h27, bottom: Dimensions.h100 / 10),
                         child: Center(
                           child: Text(
                             "KULLANICI ADINI SEÇ",
@@ -320,33 +321,35 @@ class SettingsScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Container(
-                          margin: EdgeInsets.only(top: Dimensions.h100 / 10),
+                      SizedBox(
                           width: Dimensions.w267,
                           height: Dimensions.h300 / 10,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.circular(Dimensions.h16)),
                           child: TextField(
+                            cursorColor: Colors.black,
+                            style: TextStyle(fontSize: Dimensions.h21),
                             maxLines: 1,
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsets.only(
-                                  top: 0, bottom: Dimensions.h9),
-                              prefixIcon: Container(
-                                width: Dimensions.h21,
-                                height: Dimensions.h21,
-                                child: Text(
-                                  "@",
-                                  style: TextStyle(
-                                      color: Color(0xFF7B8491),
-                                      fontWeight: FontWeight.bold),
+                              contentPadding: EdgeInsets.only(bottom: Dimensions.h100/20),
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                  width: 0,
+                                  style: BorderStyle.none,
                                 ),
                               ),
-                              focusedBorder: InputBorder.none,
-                              enabledBorder: InputBorder.none,
-                              disabledBorder: InputBorder.none,
-                              errorBorder: InputBorder.none,
+                              prefixIcon: Container(
+                                  width: Dimensions.h300 / 10,
+                                  height: Dimensions.h300 / 10,
+                                  child: Center(
+                                    child: Text(
+                                      "@",
+                                      style: TextStyle(
+                                          color: Color(0xFF7B8491),
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  )),
                             ),
                           )),
                       controller.isUserNameTaken
@@ -638,7 +641,7 @@ class SettingsScreen extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                           Utils.getNestedMapData(
+                                        Utils.getNestedMapData(
                                                     Settings
                                                         .instantNotificationsNewLikes
                                                         .value,
@@ -663,7 +666,7 @@ class SettingsScreen extends StatelessWidget {
                                   ),
                                 ),
                                 GestureDetector(
-                                  behavior: HitTestBehavior.translucent,
+                                    behavior: HitTestBehavior.translucent,
                                     onTap: () {
                                       controller.updateInstantNotifications(
                                           Settings.instantNotificationsNewLikes
@@ -691,17 +694,17 @@ class SettingsScreen extends StatelessWidget {
                                             ),
                                           ),
                                           Utils.getNestedMapData(
-                                                    Settings
-                                                        .instantNotificationsNewLikes
-                                                        .value,
-                                                    controller.settings!) ==
-                                                10
-                                            ? Container(
-                                                child: Center(
-                                                    child: Image.asset(
-                                                        "assets/images/settings_modal_check.png")),
-                                              )
-                                            : Container()
+                                                      Settings
+                                                          .instantNotificationsNewLikes
+                                                          .value,
+                                                      controller.settings!) ==
+                                                  10
+                                              ? Container(
+                                                  child: Center(
+                                                      child: Image.asset(
+                                                          "assets/images/settings_modal_check.png")),
+                                                )
+                                              : Container()
                                         ],
                                       ),
                                     )),
@@ -719,9 +722,13 @@ class SettingsScreen extends StatelessWidget {
                             title: "Titreşim",
                             text: "Uygulama içi titreşimleri aç",
                             switchOnChange: (bool state) {
-                              controller.updateInstantNotifications(Settings.instantNotificationsVibration.value, state);
+                              controller.updateInstantNotifications(
+                                  Settings.instantNotificationsVibration.value,
+                                  state);
                             },
-                            switchState: Utils.getNestedMapData(Settings.instantNotificationsVibration.value, controller.settings!),
+                            switchState: Utils.getNestedMapData(
+                                Settings.instantNotificationsVibration.value,
+                                controller.settings!),
                           ),
                           SizedBox(
                             height: 1,
@@ -733,9 +740,13 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Ses",
                             text: "Uygulama içi sesleri aç",
-                            switchState: Utils.getNestedMapData(Settings.instantNotificationsSound.value, controller.settings!),
+                            switchState: Utils.getNestedMapData(
+                                Settings.instantNotificationsSound.value,
+                                controller.settings!),
                             switchOnChange: (bool state) {
-                              controller.updateInstantNotifications(Settings.instantNotificationsSound.value, state);
+                              controller.updateInstantNotifications(
+                                  Settings.instantNotificationsSound.value,
+                                  state);
                             },
                           ),
                           SizedBox(
@@ -1137,9 +1148,15 @@ class SettingsScreen extends StatelessWidget {
                             SettingsModalSwitchRow(
                               title: "AppFlayer",
                               text: "Ayrıntıları Görüntüle",
-                              switchState:controller.settings!["privacy_preferences"]["marketing_permissions"]["app_flayer"],
+                              switchState:
+                                  controller.settings!["privacy_preferences"]
+                                      ["marketing_permissions"]["app_flayer"],
                               switchOnChange: (bool state) {
-                                controller.updatePrivacyPreferences(Settings.privacyPreferencesMarketingAppFlayer.value, state);
+                                controller.updatePrivacyPreferences(
+                                    Settings
+                                        .privacyPreferencesMarketingAppFlayer
+                                        .value,
+                                    state);
                               },
                             ),
                             SizedBox(
@@ -1152,9 +1169,14 @@ class SettingsScreen extends StatelessWidget {
                             SettingsModalSwitchRow(
                               title: "Branch",
                               text: "Ayrıntıları Görüntüle",
-                              switchState: controller.settings!["privacy_preferences"]["marketing_permissions"]["branch"],
+                              switchState:
+                                  controller.settings!["privacy_preferences"]
+                                      ["marketing_permissions"]["branch"],
                               switchOnChange: (bool state) {
-                                 controller.updatePrivacyPreferences(Settings.privacyPreferencesMarketingBranch.value, state);
+                                controller.updatePrivacyPreferences(
+                                    Settings.privacyPreferencesMarketingBranch
+                                        .value,
+                                    state);
                               },
                             ),
                             SizedBox(
@@ -1169,9 +1191,16 @@ class SettingsScreen extends StatelessWidget {
                               text:
                                   "Yeni araçlar ekleyebiliriz. Bu ayar, bu yeni araçların varsayılan olarak etkin mi yoksa devre dışı mı olacağını belirler.",
                               isSwitch: true,
-                              switchState:  controller.settings!["privacy_preferences"]["marketing_permissions"]["new_marketing_permissions"],
+                              switchState:
+                                  controller.settings!["privacy_preferences"]
+                                          ["marketing_permissions"]
+                                      ["new_marketing_permissions"],
                               switchOnChanged: (bool state) {
-                                 controller.updatePrivacyPreferences(Settings.privacyPreferencesMarketingNewMarketingPermissions.value, state);
+                                controller.updatePrivacyPreferences(
+                                    Settings
+                                        .privacyPreferencesMarketingNewMarketingPermissions
+                                        .value,
+                                    state);
                               },
                             ),
                             SizedBox(
@@ -1284,9 +1313,15 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Curvy Direct Ads",
                             text: "Ayrıntıları Görüntüle",
-                            switchState: controller.settings!["privacy_preferences"]["advertising_permissions"]["curvy_direct_ads"],
+                            switchState: controller
+                                    .settings!["privacy_preferences"]
+                                ["advertising_permissions"]["curvy_direct_ads"],
                             switchOnChange: (bool state) {
-                              controller.updatePrivacyPreferences(Settings.privacyPreferencesAdvertisingCurvyDirectAds.value, state);
+                              controller.updatePrivacyPreferences(
+                                  Settings
+                                      .privacyPreferencesAdvertisingCurvyDirectAds
+                                      .value,
+                                  state);
                             },
                           ),
                           SizedBox(
@@ -1299,9 +1334,15 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Google Ads",
                             text: "Ayrıntıları Görüntüle",
-                            switchState: controller.settings!["privacy_preferences"]["advertising_permissions"]["google_ads"],
+                            switchState:
+                                controller.settings!["privacy_preferences"]
+                                    ["advertising_permissions"]["google_ads"],
                             switchOnChange: (bool state) {
-                              controller.updatePrivacyPreferences(Settings.privacyPreferencesAdvertisingGoogleAds.value, state);
+                              controller.updatePrivacyPreferences(
+                                  Settings
+                                      .privacyPreferencesAdvertisingGoogleAds
+                                      .value,
+                                  state);
                             },
                           ),
                           SizedBox(
@@ -1314,9 +1355,15 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Curvy Promotions",
                             text: "Ayrıntıları Görüntüle",
-                            switchState: controller.settings!["privacy_preferences"]["advertising_permissions"]["curvy_promotions"],
+                            switchState: controller
+                                    .settings!["privacy_preferences"]
+                                ["advertising_permissions"]["curvy_promotions"],
                             switchOnChange: (bool state) {
-                              controller.updatePrivacyPreferences(Settings.privacyPreferencesAdvertisingCurvyPromotions.value, state);
+                              controller.updatePrivacyPreferences(
+                                  Settings
+                                      .privacyPreferencesAdvertisingCurvyPromotions
+                                      .value,
+                                  state);
                             },
                           ),
                           SizedBox(
@@ -1329,9 +1376,15 @@ class SettingsScreen extends StatelessWidget {
                           SettingsModalSwitchRow(
                             title: "Facebook Ads",
                             text: "Ayrıntıları Görüntüle",
-                            switchState:  controller.settings!["privacy_preferences"]["advertising_permissions"]["facebook_ads"],
+                            switchState:
+                                controller.settings!["privacy_preferences"]
+                                    ["advertising_permissions"]["facebook_ads"],
                             switchOnChange: (bool state) {
-                              controller.updatePrivacyPreferences(Settings.privacyPreferencesAdvertisingFacebookAds.value, state);
+                              controller.updatePrivacyPreferences(
+                                  Settings
+                                      .privacyPreferencesAdvertisingFacebookAds
+                                      .value,
+                                  state);
                             },
                           ),
                           SizedBox(
@@ -1346,9 +1399,16 @@ class SettingsScreen extends StatelessWidget {
                             text:
                                 "Yeni araçlar ekleyebiliriz. Bu ayar, bu yeni araçların varsayılan olarak etkin mi yoksa devre dışı mı olacağını belirler.",
                             isSwitch: true,
-                            switchState:  controller.settings!["privacy_preferences"]["advertising_permissions"]["new_advertising_permissions"],
+                            switchState:
+                                controller.settings!["privacy_preferences"]
+                                        ["advertising_permissions"]
+                                    ["new_advertising_permissions"],
                             switchOnChanged: (bool state) {
-                              controller.updatePrivacyPreferences(Settings.privacyPreferencesAdvertisingNewAdvertisingPermissions.value, state);
+                              controller.updatePrivacyPreferences(
+                                  Settings
+                                      .privacyPreferencesAdvertisingNewAdvertisingPermissions
+                                      .value,
+                                  state);
                             },
                           ),
                           SizedBox(
@@ -1458,9 +1518,15 @@ class SettingsScreen extends StatelessWidget {
                             title: "Pazarlama izinleri’ne izin ver",
                             text:
                                 "Şuan pazarlama izinleri’ne izin veriyorsun İstediğin zaman kapatabilirsin",
-                            switchState: Utils.getNestedMapData(Settings.privacyPreferencesEnableMarketing.value, controller.settings!),
+                            switchState: Utils.getNestedMapData(
+                                Settings
+                                    .privacyPreferencesEnableMarketing.value,
+                                controller.settings!),
                             switchOnChanged: (bool state) {
-                              controller.updatePrivacyPreferences(Settings.privacyPreferencesEnableMarketing.value, state);
+                              controller.updatePrivacyPreferences(
+                                  Settings
+                                      .privacyPreferencesEnableMarketing.value,
+                                  state);
                             },
                           ),
                           SizedBox(
@@ -1490,9 +1556,16 @@ class SettingsScreen extends StatelessWidget {
                             title: "Zorunlu İzinler",
                             text:
                                 "Bu izleyiciler uygulamanın çalışması için gereklidir ve bu yüzden kapatılamaz. Genellikle senin tarafından yapılan ve gizlilik tercihlerini belirleme, oturum açma veya form doldurma gibi hizmet taleplerine karşılık gelen eylemlere yanıt olarak ayarlanır. ( Ayrıntıları Görüntüle )",
-                            switchState: Utils.getNestedMapData(Settings.privacyPreferencesCompulsoryPermissions.value, controller.settings!),
+                            switchState: Utils.getNestedMapData(
+                                Settings.privacyPreferencesCompulsoryPermissions
+                                    .value,
+                                controller.settings!),
                             switchOnChanged: (bool state) {
-                              controller.updatePrivacyPreferences(Settings.privacyPreferencesCompulsoryPermissions.value, state);
+                              controller.updatePrivacyPreferences(
+                                  Settings
+                                      .privacyPreferencesCompulsoryPermissions
+                                      .value,
+                                  state);
                             },
                           ),
                           SizedBox(
@@ -1551,9 +1624,17 @@ class SettingsScreen extends StatelessWidget {
                                     ),
                                   ),
                                   CupertinoSwitch(
-                                      value: Utils.getNestedMapData(Settings.privacyPreferencesEnableAdvertising.value, controller.settings!), 
+                                      value: Utils.getNestedMapData(
+                                          Settings
+                                              .privacyPreferencesEnableAdvertising
+                                              .value,
+                                          controller.settings!),
                                       onChanged: (value) {
-                                        controller.updatePrivacyPreferences(Settings.privacyPreferencesEnableAdvertising.value, value);
+                                        controller.updatePrivacyPreferences(
+                                            Settings
+                                                .privacyPreferencesEnableAdvertising
+                                                .value,
+                                            value);
                                       })
                                 ]),
                           ),
@@ -2372,7 +2453,7 @@ class SettingsScreen extends StatelessWidget {
                       SimpleButton(
                         text: "Satın Alınanları Geri Yükle",
                         gradient: LinearGradient(
-                            colors: [Color(0xFFD51CFF), Color(0xFF6198EF)],                        
+                          colors: [Color(0xFFD51CFF), Color(0xFF6198EF)],
                         ),
                         buttonID: 13,
                         setTappedButton: controller.setTappedButton,
@@ -2533,11 +2614,10 @@ class SettingsScreen extends StatelessWidget {
                       ),
                       SimpleButton(
                         text: "Hesabı Sil",
-                        buttonID:16,
+                        buttonID: 16,
                         setTappedButton: controller.setTappedButton,
                         isTapped: controller.tappedButton == 16,
                       ),
-
                       SizedBox(
                         height: Dimensions.h140,
                       )
