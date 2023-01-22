@@ -2600,6 +2600,8 @@ class SettingsScreen extends StatelessWidget {
                         buttonID: 15,
                         setTappedButton: controller.setTappedButton,
                         isTapped: controller.tappedButton == 15,
+                        isQuit: true,
+                        actionFunction: controller.logout,
                       ),
                       Container(
                         margin: EdgeInsets.only(top: Dimensions.h21),

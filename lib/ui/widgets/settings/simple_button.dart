@@ -11,14 +11,18 @@ class SimpleButton extends StatelessWidget {
   LinearGradient? gradient;
   int buttonID;
   Function(int? buttonID) setTappedButton;
+  Function? actionFunction;
   bool isTapped;
+  bool? isQuit;
   SimpleButton({
     super.key,
     required this.text,
     this.gradient,
     required this.buttonID,
     required this.setTappedButton,
-    required this.isTapped
+    required this.isTapped,
+    this.isQuit,
+    this.actionFunction
     
   });
 
@@ -26,7 +30,11 @@ class SimpleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Get.toNamed(Routes.deleteAccountWhy);
+        if(isQuit != null){
+          actionFunction!();
+          return;
+        }
+        Get.toNamed(Routes.deleteAccountLastChance);
       },
       onPanDown: (details){
         setTappedButton(buttonID);

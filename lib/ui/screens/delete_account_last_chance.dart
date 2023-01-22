@@ -1,4 +1,5 @@
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/delete_account_controller.dart';
 import 'package:curvy_app/ui/screens/delete_account_why.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -99,6 +100,7 @@ class DeleteAccountLastChanceScreen extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
+                  Get.put(DeleteAccountController(firestoreService: Get.find()));
                   Get.to(() => DeleteAccountWhyScreen());
                 },
                 child:   Container(

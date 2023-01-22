@@ -1,4 +1,6 @@
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/delete_account_controller.dart';
+import 'package:curvy_app/enums/delete_account_types.dart';
 import 'package:curvy_app/ui/screens/send_feedback.dart';
 import 'package:curvy_app/ui/widgets/delete_account_reason.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +80,8 @@ class DeleteAccountWhyScreen extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Get.to(() => SendFeedbackScreen());
+                          Get.find<DeleteAccountController>().setDeleteType(DeleteAccount.problem.value);
+                          
                       },
                       child: DeleteAccountReason(
                         icon: "assets/images/delete_account_reason_1.png",

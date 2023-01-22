@@ -1,4 +1,5 @@
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/delete_account_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -24,7 +25,9 @@ class SendFeedbackScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Container(
+      body: GetBuilder<DeleteAccountController>(
+        builder: (controller) {
+          return Container(
         width: double.maxFinite,
         height: double.maxFinite,
         color: Color(0xFFF7F7F7),
@@ -73,7 +76,9 @@ class SendFeedbackScreen extends StatelessWidget {
               height: Dimensions.h209,
               color: Colors.white,
               child: TextField(
-                
+                onChanged: (value) {
+                  controller.setFeedBackText(value);
+                },
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.only(left: Dimensions.w31, top: Dimensions.h100/10, bottom:Dimensions.h100/10 ),
                   focusedBorder: InputBorder.none,
@@ -87,7 +92,11 @@ class SendFeedbackScreen extends StatelessWidget {
                 maxLines: 12,
               ),
             ),
-            Container(
+            GestureDetector(
+              onTap: (){
+                controller.deleteAccount();
+              },
+              child:  Container(
               margin: EdgeInsets.only(top: Dimensions.h22),
               child: Center(
                 child: Text(
@@ -98,10 +107,14 @@ class SendFeedbackScreen extends StatelessWidget {
                   ),
                 ),
               ),
+            ),
             )
+           
           ],
         ),
-      ),
+      );
+        },
+      ) 
     );
   }
 }
