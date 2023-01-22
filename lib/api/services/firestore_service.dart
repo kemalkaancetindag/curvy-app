@@ -5,6 +5,7 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curvy_app/models/chat.model.dart';
+import 'package:curvy_app/models/interest.model.dart';
 import 'package:curvy_app/models/user.model.dart';
 import 'package:curvy_app/ui/util/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -119,6 +120,27 @@ class FirestoreService extends GetxService {
      }
 
      return null;
+  }
+
+  Future<Interest> getUserInterest(int interestID) async {
+    var interests = ((await getCollection('app_storage').doc('LjrAgyjTlqUahB9JIdbe').get()).data() as Map<String,dynamic>)['interests'];
+    var interest = interests.where((interest) => interest['interest_type'] == interestID).toList()[0];
+    var interestModel = Interest.fromJson(interest);
+    return interestModel;
+    
+  }
+
+  Future<List<Interest>> getInterests() async {
+    List<Interest> interestModels = [];
+    var interests = ((await getCollection('app_storage').doc('LjrAgyjTlqUahB9JIdbe').get()).data() as Map<String,dynamic>)['interests'] as List<dynamic>;
+
+    interests.forEach((interest) {
+      interestModels.add(
+        Interest.fromJson(interest as Map<String,dynamic>)
+      );
+    });
+
+    return interestModels;
   }
 
 

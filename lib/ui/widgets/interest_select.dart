@@ -17,7 +17,8 @@ class InterestSelect extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Container(      
+      margin: EdgeInsets.only(left: Dimensions.w8, right: Dimensions.w8, top: Dimensions.h21),
       width: Dimensions.w155,
       height: Dimensions.h45,
       decoration: BoxDecoration(
@@ -37,7 +38,7 @@ class InterestSelect extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Image.asset(assetName),
+          Image.network(assetName),
           Text(
             text,
             style: TextStyle(

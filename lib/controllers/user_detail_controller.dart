@@ -31,6 +31,9 @@ class UserDetailController extends GetxController {
   List<Widget> _imageCarousel = [];
   List<Widget> get imageCarousel => _imageCarousel;
 
+  List<Widget> _interests = [];
+  List<Widget> get interests => _interests;
+
   String _curvyLikeMessageText = "";
 
   int? _distance;
@@ -50,13 +53,47 @@ class UserDetailController extends GetxController {
 
   Future<void> getInitialUser() async {
     _user = await firestoreService.getUser(userID);
-
+    await generateInterests(_user!.interests!);
     _distance = await calculateDistance(
       _user!.location!.latitude!,
       _user!.location!.longitude!,
     );
     createPage();
     update();
+  }
+
+  Future<void> generateInterests(List<dynamic> interests) async {
+    await Future.forEach(interests, (interest) async {
+      var currentInterest = await firestoreService.getUserInterest(interest);
+      _interests.add(Container(
+        margin: EdgeInsets.only(top: Dimensions.h100 / 5),
+        width: Dimensions.w155,
+        height: Dimensions.h9 * 5,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(Dimensions.h300 / 10),
+            border: Border.all(width: 1, color: Colors.black.withOpacity(0.4))),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              margin: EdgeInsets.only(right: Dimensions.w9),
+              child: Center(                                                                                     
+                child: Image.network('https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(currentInterest.un_selected_image!)}?alt=media'),
+              ),
+            ),
+            Container(
+              child: Center(
+                child: Text(
+                  currentInterest.text!,
+                  style:
+                      TextStyle(color: Colors.black, fontSize: Dimensions.h16),
+                ),
+              ),
+            )
+          ],
+        ),
+      ));
+    });
   }
 
   void listenUser(String userID) async {

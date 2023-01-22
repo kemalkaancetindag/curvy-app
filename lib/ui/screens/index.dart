@@ -224,7 +224,11 @@ class IndexScreen extends StatelessWidget {
                                               width: Dimensions.h300,
                                               height: Dimensions.h300,
                                               child: Center(
-                                                child: Container(
+                                                child: GestureDetector(
+                                                  onTap: (){
+                                                    Get.toNamed(Routes.setupInterests);
+                                                  },
+                                                  child: Container(
                                                   width: Dimensions.h140,
                                                   height: Dimensions.h140,
                                                   decoration: BoxDecoration(
@@ -242,6 +246,7 @@ class IndexScreen extends StatelessWidget {
                                                           BorderRadius.circular(
                                                               Dimensions.h140/ 2)),
                                                 ),
+                                                )
                                               ),
                                             ))),
                                     Positioned(

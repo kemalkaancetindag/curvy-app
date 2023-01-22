@@ -14,6 +14,7 @@ import 'package:curvy_app/ui/screens/setup_sex.dart';
 import 'package:curvy_app/ui/screens/validation_code.dart';
 import 'package:curvy_app/ui/screens/validation_mail.dart';
 import 'package:curvy_app/ui/screens/welcome_screen.dart';
+import 'package:curvy_app/ui/widgets/interest_select.dart';
 import 'package:dio/dio.dart' as dio_package;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http_parser/http_parser.dart';
 
 class SetupController extends GetxController {
+  //PRE DATAS
+  List<Widget> _interestWidgets = [];
+  List<Widget> get interestWidgets => _interestWidgets;
+
   //SERVICES
   User? _googleUser;
   String? _userPhoneId;
@@ -78,8 +83,29 @@ class SetupController extends GetxController {
   SetupController();
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
+    await getInterests();
+
+  
+  }
+
+  Future<void> getInterests() async {
+    var interests = await Get.find<FirestoreService>().getInterests();
+    interests.forEach((interest) {
+      _interestWidgets.add(GetBuilder<SetupController>(builder: (controller) {
+        return GestureDetector(
+          onTap: (() {
+            controller.controlInterests(interest.interest_type!);
+          }),
+          child: InterestSelect(
+              text: interest.text!,
+              isSelected: controller.interests.contains(interest.interest_type),
+              assetName:  controller.interests.contains(interest.interest_type) ?  'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(interest.selected_image!)}?alt=media' : 'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(interest.un_selected_image!)}?alt=media') ,
+        );
+      }));
+    });
+    update();
   }
 
   void setGoogleUser(User user) {
@@ -111,29 +137,25 @@ class SetupController extends GetxController {
     }
     _phoneNumber = '$_phoneNumberAppendix$phoneNumber';
 
-    var user = await Get.find<FirestoreService>().getUserByPhoneNumber(_phoneNumber!);
+    var user =
+        await Get.find<FirestoreService>().getUserByPhoneNumber(_phoneNumber!);
 
-    if(user != null) {
-      if(_loginMethod == LoginMethod.google.value){
-        Get.snackbar("Hata", "Bu numaraya kayıtlı bir hesap var lütfen telefon numarası ile giriş yapınız yada farklı bir telefon numarası deneyiniz.");      
+    if (user != null) {
+      if (_loginMethod == LoginMethod.google.value) {
+        Get.snackbar("Hata",
+            "Bu numaraya kayıtlı bir hesap var lütfen telefon numarası ile giriş yapınız yada farklı bir telefon numarası deneyiniz.");
         return;
       }
 
-      if(_loginMethod == LoginMethod.phone.value) {
+      if (_loginMethod == LoginMethod.phone.value) {
         Get.find<AuthService>().phoneAuth(_phoneNumber!, _setVerificationId);
         Get.toNamed(Routes.validationCode);
         return;
       }
-            
-    }
-    else {
+    } else {
       Get.find<AuthService>().phoneAuth(_phoneNumber!, _setVerificationId);
       Get.toNamed(Routes.validationCode);
     }
-
-    
-
-    
   }
 
   void addToValidationCode(String codePiece, int index) {
@@ -145,7 +167,6 @@ class SetupController extends GetxController {
   }
 
   void createValidationCode() async {
-    
     if (_validationCode.length != 6) {
       Get.snackbar("Hata", "Yanlış kod girdiniz.",
           backgroundColor: Color(0xFFD446F4), colorText: Colors.white);
@@ -162,13 +183,16 @@ class SetupController extends GetxController {
         await usersCollection.where('userID', isEqualTo: _userPhoneId).get();
 
     if (results.docs.isNotEmpty) {
-      await Get.find<SharedPreferenceService>().saveUser(results.docs[0].data() as Map<String,dynamic>);
+      await Get.find<SharedPreferenceService>()
+          .saveUser(results.docs[0].data() as Map<String, dynamic>);
       await Get.find<SharedPreferenceService>().setLastUserID(_userPhoneId!);
       Get.toNamed(Routes.index);
       return;
     }
 
-    if (_loginMethod == LoginMethod.google.value || _loginMethod == LoginMethod.apple.value || _loginMethod == LoginMethod.facebook.value) {
+    if (_loginMethod == LoginMethod.google.value ||
+        _loginMethod == LoginMethod.apple.value ||
+        _loginMethod == LoginMethod.facebook.value) {
       Get.toNamed(Routes.welcome);
       return;
     } else {
