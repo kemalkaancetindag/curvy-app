@@ -36,6 +36,7 @@ class Chat {
     lastMessage = json['lastMessage'];
     lastMessageDate = json['lastMessageDate'];
     isStarted = json['isStarted'];
+    startingType = json['startingType'];
   } 
 
   Map<String,dynamic> toJson() {

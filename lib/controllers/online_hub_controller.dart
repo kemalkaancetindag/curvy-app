@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:curvy_app/api/services/chat_service.dart';
 import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/hub_service.dart';
 import 'package:curvy_app/api/services/match_service.dart';
@@ -60,16 +61,18 @@ class OnlineHubController extends GetxController {
 
   OnlineHubController({required this.hubService, required this.hubId});
 
+  String _curvyLikeMessageText = "";
+  String curvyChipMessageText = "";
+
   @override
   Future<void> onInit() async {
     hubService.listenHub(hubId);
   }
 
-  Future<void> updateHubData(OnlineHub updatedData, HubStorageModel storedHub) async {
+  Future<void> updateHubData(
+      OnlineHub updatedData, HubStorageModel storedHub) async {
     String currentUserId = Get.find<SharedPreferenceService>().getUserID()!;
     _currentUser = await Get.find<FirestoreService>().getUser(currentUserId);
-    
-
 
     _hubData = updatedData;
     _hubStorageData = storedHub;
@@ -87,15 +90,12 @@ class OnlineHubController extends GetxController {
 
     if (onlineUserIDS.isEmpty) {
       _amIAlone = true;
-      if(_timer != null){
+      if (_timer != null) {
         _timer!.cancel();
-      }
-      else{
-        
-      }
+      } else {}
       Timer.periodic(Duration(seconds: 1), (timer) {
         _timer = timer;
-        
+
         if (stopTimer) {
           timer.cancel();
         }
@@ -113,7 +113,6 @@ class OnlineHubController extends GetxController {
         update();
       });
     } else {
-      
       _amIAlone = false;
       _onlineUsers = [];
       await Future.forEach(onlineUserIDS, (userID) async {
@@ -121,7 +120,7 @@ class OnlineHubController extends GetxController {
             await Get.find<FirestoreService>().getUser(userID);
         _onlineUsers!.add(onlineUserModel);
       });
-      
+
       generateFoundSlider();
       update();
     }
@@ -261,12 +260,11 @@ class OnlineHubController extends GetxController {
                             width: Dimensions.h12,
                             height: Dimensions.h12,
                             decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage("assets/images/location_white.png"),
-                                fit: BoxFit.cover
-                              )
-                            ),
-                            margin: EdgeInsets.only(right: Dimensions.w8),                          
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                        "assets/images/location_white.png"),
+                                    fit: BoxFit.cover)),
+                            margin: EdgeInsets.only(right: Dimensions.w8),
                           ),
                           Container(
                             child: Text(
@@ -286,11 +284,10 @@ class OnlineHubController extends GetxController {
                       width: Dimensions.h27,
                       height: Dimensions.h27,
                       decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage("assets/images/expand_icon.png"),
-                          fit: BoxFit.cover
-                        )
-                      ),
+                          image: DecorationImage(
+                              image:
+                                  AssetImage("assets/images/expand_icon.png"),
+                              fit: BoxFit.cover)),
                     )
                   ],
                 )
@@ -313,42 +310,43 @@ class OnlineHubController extends GetxController {
                   onTap: () async {
                     await Get.find<OnlineHubController>().goBack();
                   },
-                  child:  Container(
-                     width: Dimensions.h36,
-                  height: Dimensions.h36,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/images/matcher_back.png"),
-                      fit: BoxFit.cover
-                    )
-                  ),                 
+                  child: Container(
+                    width: Dimensions.h36,
+                    height: Dimensions.h36,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage("assets/images/matcher_back.png"),
+                            fit: BoxFit.cover)),
+                  ),
                 ),
-                ),
-               
                 GestureDetector(
                   onTap: () {
                     Get.find<OnlineHubController>().dislikeUser();
                   },
                   child: Container(
                       width: Dimensions.h52,
-                    height: Dimensions.h52,   
+                      height: Dimensions.h52,
                       decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimensions.h52/2),
-                    image: DecorationImage(
-                      image: AssetImage("assets/images/matcher_dislike.png"),
-                      fit: BoxFit.cover
-                    )     )                  
-                  ),
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.h52 / 2),
+                          image: DecorationImage(
+                              image: AssetImage(
+                                  "assets/images/matcher_dislike.png"),
+                              fit: BoxFit.cover))),
                 ),
-                Container(
-                  width: Dimensions.h45,
-                  height: Dimensions.h45,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/images/matcher_superlike.png"),
-                      fit: BoxFit.cover
-                    )
-                  ),                
+                GestureDetector(
+                  onTap: () {
+                    showCurvyLikeDialog();
+                  },
+                  child: Container(
+                    width: Dimensions.h45,
+                    height: Dimensions.h45,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage(
+                                "assets/images/matcher_superlike.png"),
+                            fit: BoxFit.cover)),
+                  ),
                 ),
                 GestureDetector(
                   onTap: () {
@@ -356,27 +354,22 @@ class OnlineHubController extends GetxController {
                   },
                   child: Container(
                     width: Dimensions.h52,
-                    height: Dimensions.h52,                    
-                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimensions.h52/2),
-                    image: DecorationImage(
-                      image: AssetImage("assets/images/matcher_like.png"),
-                      fit: BoxFit.cover
-                    )
-                  ),                                  
+                    height: Dimensions.h52,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(Dimensions.h52 / 2),
+                        image: DecorationImage(
+                            image: AssetImage("assets/images/matcher_like.png"),
+                            fit: BoxFit.cover)),
                   ),
                 ),
                 Container(
                   width: Dimensions.h36,
                   height: Dimensions.h36,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(Dimensions.h36/2),
-                    image: DecorationImage(
-                      
-                      image: AssetImage("assets/images/matcher_turbo.png"),
-                      fit: BoxFit.cover
-                    )
-                  ),                
+                      borderRadius: BorderRadius.circular(Dimensions.h36 / 2),
+                      image: DecorationImage(
+                          image: AssetImage("assets/images/matcher_turbo.png"),
+                          fit: BoxFit.cover)),
                 )
               ],
             ),
@@ -466,7 +459,6 @@ class OnlineHubController extends GetxController {
     _popUpBottomPosition = Dimensions.h14;
     _remainingTime = 10;
     stopTimer = true;
-    
 
     _onlineUsers = null;
     _currentUserIndex = 0;
@@ -478,7 +470,6 @@ class OnlineHubController extends GetxController {
   }
 
   Future<void> likeUser() async {
-
     await Get.find<MatchService>()
         .createMatch(_onlineUsers![_currentUserIndex].userID!);
     _currentUserIndex += 1;
@@ -523,8 +514,6 @@ class OnlineHubController extends GetxController {
             .docs;
 
         if (matches.isNotEmpty) {
-          
-
           var likedUser = await firestoreService
               .getUser(_onlineUsers![_currentUserIndex].userID!);
 
@@ -552,26 +541,218 @@ class OnlineHubController extends GetxController {
 
           var match = matches[0];
 
-          await firestoreService.getCollection('matches').doc(match.id).delete();
+          await firestoreService
+              .getCollection('matches')
+              .doc(match.id)
+              .delete();
 
           _currentUserIndex -= 1;
-        }
-        else {
-          var newUserUnlikedList = user.un_liked_users!.where((id) => id != _onlineUsers![_currentUserIndex].userID).toList();
+        } else {
+          var newUserUnlikedList = user.un_liked_users!
+              .where((id) => id != _onlineUsers![_currentUserIndex].userID)
+              .toList();
 
           var userData = Map<String, dynamic>();
           userData['un_liked_users'] = newUserUnlikedList;
-          userData['remaining_daily_back_count'] = user.remaining_daily_back_count! - 1;
+          userData['remaining_daily_back_count'] =
+              user.remaining_daily_back_count! - 1;
 
           await firestoreService.updateUser(userData, currentUser!.userID!);
 
           _currentUserIndex -= 1;
-
         }
       }
     }
     generateFoundSlider();
     update();
+  }
+
+  void sendCurvyChipMessage() async {
+    var result = await Get.find<ChatService>().startNewChat(
+        curvyChipMessageText, _onlineUsers![_currentUserIndex].userID!, 2);
+
+    if (result) {
+      await Get.find<MatchService>()
+          .createMatch(_onlineUsers![_currentUserIndex].userID!);
+      curvyChipMessageText = "";
+      _currentUserIndex += 1;
+      if (_currentUserIndex < _onlineUsers!.length) {
+        generateFoundSlider();
+      } else {
+        _amIAlone = true;
+      }
+
+      update();
+    }
+  }
+
+  void showCurvyLikeDialog() {
+    showDialog(
+        context: Get.context!,
+        builder: (context) {
+          return Dialog(
+            backgroundColor: Colors.transparent,
+            child: Container(
+              width: Dimensions.w35 * 10,
+              height: Dimensions.h22 * 10,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
+                  gradient: LinearGradient(
+                      colors: [Color(0xFFD51CFF), Color(0xFF6198EF)])),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(top: Dimensions.h12),
+                    height: Dimensions.h36,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(right: Dimensions.w8 / 2),
+                          child: Center(
+                            child: Image.asset(
+                                "assets/images/curvy_like_dialog.png"),
+                          ),
+                        ),
+                        Container(
+                          child: Center(
+                            child: Text(
+                              "CurvyLIKE",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: Dimensions.h21),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.red,
+                                      borderRadius: BorderRadius.circular(
+                                          Dimensions.h12 / 2)),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(Dimensions.w9 / 3),
+                                    child: Center(
+                                      child: Text(
+                                        "168",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: Dimensions.h9),
+                                      ),
+                                    ),
+                                  ))
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: Dimensions.h100 / 10),
+                    width: Dimensions.w320,
+                    height: Dimensions.h60,
+                    child: Text(
+                      "CurvyLIKE ile CurvyCHIP arasındaki fark CuvyLIKE ile gönderdiğiniz mesajın muhattabı sizinle sağa kaydırarak eşleşe bilir ve Premium hesabınızla sohbetinize devam edebilirsiniz CurvyCHIP ile yazdığınızda eşleşme şansınızı kaybedersiniz ve fakat muhatabınız sizi engellemediği sürece tüm mesajlarınız alıcısına ulaştırılır.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: Dimensions.h100 / 10,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Container(
+                    width: Dimensions.w325,
+                    height: Dimensions.h90,
+                    margin: EdgeInsets.only(top: Dimensions.h12),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          height: double.maxFinite,
+                          width: Dimensions.w270,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.h16)),
+                          child: TextField(
+                            onChanged: (value) {
+                              _curvyLikeMessageText = value;
+                            },
+                            cursorColor: Colors.black,
+                            style: TextStyle(color: Colors.black),
+                            maxLines: 10,
+                            decoration: InputDecoration(
+                                contentPadding: EdgeInsets.all(Dimensions.w9),
+                                hintText: "Bir mesaj yaz",
+                                hintStyle: TextStyle(color: Color(0xFFC5C5C7)),
+                                border: InputBorder.none,
+                                enabledBorder: InputBorder.none,
+                                disabledBorder: InputBorder.none),
+                          ),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            GestureDetector(
+                              onTap: () async {
+                                var result = await Get.find<ChatService>()
+                                    .startNewChat(
+                                        _curvyLikeMessageText,
+                                        _onlineUsers![_currentUserIndex]
+                                            .userID!,
+                                        1);
+                                if (result) {
+                                  _curvyLikeMessageText = "";
+                                  await Get.find<MatchService>().createMatch(
+                                      _onlineUsers![_currentUserIndex].userID!);
+
+                                  _currentUserIndex += 1;
+                                  if (_currentUserIndex <
+                                      _onlineUsers!.length) {
+                                    generateFoundSlider();
+                                  } else {
+                                    _amIAlone = true;
+                                  }
+
+                                  update();
+
+                                  Get.back();
+                                }
+                              },
+                              child: Container(
+                                child: Center(
+                                  child: Image.asset(
+                                      "assets/images/curvy_dialog_send_icon.png"),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              child: Center(
+                                child: Image.asset(
+                                    "assets/images/curvy_dialog_mic_icon.png"),
+                              ),
+                            ),
+                            Container(
+                              child: Center(
+                                child: Image.asset(
+                                    "assets/images/curvy_dialog_add_icon.png"),
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
+        });
   }
 
   void setHubID(String hubID) {

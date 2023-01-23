@@ -1,5 +1,3 @@
-
-
 import 'dart:io';
 import 'dart:math';
 
@@ -10,11 +8,11 @@ import 'package:curvy_app/models/user.model.dart';
 import 'package:curvy_app/ui/util/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class FirestoreService extends GetxService {
-  FirebaseFirestore _getDb(){
+  FirebaseFirestore _getDb() {
     FirebaseFirestore db = FirebaseFirestore.instance;
     return db;
   }
@@ -25,25 +23,24 @@ class FirestoreService extends GetxService {
     return collection;
   }
 
-
   Future<List<String>> uploadImages(List<String> images, String userID) async {
     Random random = Random();
     List<String> userImages = [];
-    
-    
-    for(var image in images){
-      String mimeType = Utils.getMimetype(image);      
+
+    for (var image in images) {
+      String mimeType = Utils.getMimetype(image);
       int randomInt = random.nextInt(9999999);
-      final userImageRefrence = FirebaseStorage.instance.ref('user-images/$userID/$randomInt.$mimeType');
+      final userImageRefrence = FirebaseStorage.instance
+          .ref('user-images/$userID/$randomInt.$mimeType');
       await userImageRefrence.putFile(File(image));
       userImages.add('user-images/$userID/$randomInt.$mimeType');
     }
 
-    return userImages;    
-  
+    return userImages;
   }
 
-  Future<String> addToCollection(Map<String, dynamic> jsonMap, String collectionName) async {
+  Future<String> addToCollection(
+      Map<String, dynamic> jsonMap, String collectionName) async {
     FirebaseFirestore db = _getDb();
     CollectionReference collection = db.collection(collectionName);
 
@@ -52,100 +49,140 @@ class FirestoreService extends GetxService {
   }
 
   Future<void> uploadImage(File image, String imageRef) async {
-      final userImageRefrence = FirebaseStorage.instance.ref(imageRef);
-      await userImageRefrence.putFile(image);
+    final userImageRefrence = FirebaseStorage.instance.ref(imageRef);
+    await userImageRefrence.putFile(image);
   }
 
-  Future<void> updateUser(Map<String,dynamic> data, String userID) async{
+  Future<void> updateUser(Map<String, dynamic> data, String userID) async {
     print("SEDDDDDD");
     print(data);
-    var userSnapshot = await  getCollection('users').where('userID', isEqualTo: userID).get();
-    if(userSnapshot.docs.isNotEmpty){
-      String documentId = userSnapshot.docs[0].reference.id;     
+    var userSnapshot =
+        await getCollection('users').where('userID', isEqualTo: userID).get();
+    if (userSnapshot.docs.isNotEmpty) {
+      String documentId = userSnapshot.docs[0].reference.id;
       await getCollection('users').doc(documentId).update(data);
     }
   }
 
   Future<void> checkInternet(String data) async {
     var db = _getDb();
-    var data = Map<String,dynamic>();
+    var data = Map<String, dynamic>();
     data['test'] = data;
     await db.collection('test').add(data);
   }
 
   Future<UserModel> getCurrentUser(String userID) async {
-    var userSnapshot = await  getCollection('users').where('userID', isEqualTo: userID).get();
-    var user = UserModel.fromJson(userSnapshot.docs[0].data() as Map<String,dynamic>);
+    var userSnapshot =
+        await getCollection('users').where('userID', isEqualTo: userID).get();
+    var user =
+        UserModel.fromJson(userSnapshot.docs[0].data() as Map<String, dynamic>);
     return user;
   }
 
   Future<Chat> getChat(String chatID) async {
     var chatSnapshot = await getCollection('chats').doc(chatID).get();
-    var chat =  Chat.fromJson(chatSnapshot.data() as Map<String,dynamic>);
+    var chat = Chat.fromJson(chatSnapshot.data() as Map<String, dynamic>);
     return chat;
-  } 
+  }
 
-  Future<void> sendMessageToChat(Map<String,dynamic> data, String chatID) async {
+  Future<void> sendMessageToChat(
+      Map<String, dynamic> data, String chatID) async {
     await getCollection('chats').doc(chatID).update(data);
   }
 
-   Future<void> updateChat(Map<String,dynamic> data, String chatID) async {
+  Future<void> updateChat(Map<String, dynamic> data, String chatID) async {
     await getCollection('chats').doc(chatID).update(data);
   }
 
-
-  Future<UserModel> getUser(String userID) async {    
-    
-    var userData = ((await getCollection('users').where('userID',isEqualTo: userID).get()).docs[0].data() as Map<String,dynamic>);
+  Future<UserModel> getUser(String userID) async {
+    var userData =
+        ((await getCollection('users').where('userID', isEqualTo: userID).get())
+            .docs[0]
+            .data() as Map<String, dynamic>);
     var user = UserModel.fromJson(userData);
     return user;
   }
 
-  Future<Map<String,dynamic>?> getUserByPhoneNumber(String phoneNumber) async {
-    var users = (await getCollection('users').where("phone_number", isEqualTo: phoneNumber).get()).docs;
+  Future<Map<String, dynamic>?> getUserByPhoneNumber(String phoneNumber) async {
+    var users = (await getCollection('users')
+            .where("phone_number", isEqualTo: phoneNumber)
+            .get())
+        .docs;
 
-    if(users.isEmpty){
+    if (users.isEmpty) {
       return null;
-    }
-    else {
-      return (users[0].data() as Map<String,dynamic>);
+    } else {
+      return (users[0].data() as Map<String, dynamic>);
     }
   }
 
-  Future<Map<String,dynamic>?> getUserAsMap(String userID) async {
-     var userDocs = (await getCollection('users').where("userID", isEqualTo: userID).get()).docs;
+  Future<Map<String, dynamic>?> getUserAsMap(String userID) async {
+    var userDocs =
+        (await getCollection('users').where("userID", isEqualTo: userID).get())
+            .docs;
 
-     if(userDocs.isNotEmpty){
-      return (userDocs[0].data() as Map<String,dynamic>);
-     }
+    if (userDocs.isNotEmpty) {
+      return (userDocs[0].data() as Map<String, dynamic>);
+    }
 
-     return null;
+    return null;
   }
 
   Future<Interest> getUserInterest(int interestID) async {
-    var interests = ((await getCollection('app_storage').doc('LjrAgyjTlqUahB9JIdbe').get()).data() as Map<String,dynamic>)['interests'];
-    var interest = interests.where((interest) => interest['interest_type'] == interestID).toList()[0];
+    var interests =
+        ((await getCollection('app_storage').doc('LjrAgyjTlqUahB9JIdbe').get())
+            .data() as Map<String, dynamic>)['interests'];
+    var interest = interests
+        .where((interest) => interest['interest_type'] == interestID)
+        .toList()[0];
     var interestModel = Interest.fromJson(interest);
     return interestModel;
-    
   }
 
   Future<List<Interest>> getInterests() async {
     List<Interest> interestModels = [];
-    var interests = ((await getCollection('app_storage').doc('LjrAgyjTlqUahB9JIdbe').get()).data() as Map<String,dynamic>)['interests'] as List<dynamic>;
+    var interests =
+        ((await getCollection('app_storage').doc('LjrAgyjTlqUahB9JIdbe').get())
+            .data() as Map<String, dynamic>)['interests'] as List<dynamic>;
 
     interests.forEach((interest) {
-      interestModels.add(
-        Interest.fromJson(interest as Map<String,dynamic>)
-      );
+      interestModels.add(Interest.fromJson(interest as Map<String, dynamic>));
     });
 
     return interestModels;
   }
 
+  Future<bool> spendCurvyChip(String userID, int amount) async {
+    UserModel user = await getUser(userID);
 
+    if (user.curvy_chip! < amount) {
+      Get.snackbar("Hata",
+          "Bu işlemi gerçekleştirmek için CurvyCHIP bakiyeniz yetersiz.",
+          colorText: Colors.white, backgroundColor: Color(0xFFD51CFF));
+      return false;
+    }
 
+    var updateData = Map<String, dynamic>();
+    updateData['curvy_chip'] = user.curvy_chip! - amount;
 
+    await updateUser(updateData, userID);
+    return true;
+  }
 
+  Future<bool> spendCurvyLike(String userID, int amount) async {
+    UserModel user = await getUser(userID);
+
+    if (user.curvy_like! < amount) {
+      Get.snackbar("Hata",
+          "Bu işlemi gerçekleştirmek için CurvyLIKE bakiyeniz yetersiz.",
+          colorText: Colors.white, backgroundColor: Color(0xFFD51CFF));
+      return false;
+    }
+
+    var updateData = Map<String, dynamic>();
+    updateData['curvy_like'] = user.curvy_like! - amount;
+
+    await updateUser(updateData, userID);
+    return true;
+  }
 }
-

@@ -86,7 +86,7 @@ class SliderController extends GetxController {
           return Dialog(
             insetPadding: EdgeInsets.symmetric(horizontal: Dimensions.w42),
             backgroundColor: Colors.transparent,
-            child: Container(              
+            child: Container(
               height: Dimensions.h22 * 10,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
@@ -193,46 +193,47 @@ class SliderController extends GetxController {
                           children: [
                             GestureDetector(
                               onTap: () async {
-                                await Get.find<ChatService>().startNewChat(
-                                    _curvyLikeMessageText, _user!.userID!, 1);
-                                await Get.find<MatchService>()
-                                    .createMatch(_user!.userID!);
-                                _curvyLikeMessageText = "";
-                                Get.find<MatcherController>()
-                                    .controllCurrentUserIndex(true);
-                                Get.back();
-                                autoSlide(true);
+                                var result = await Get.find<ChatService>()
+                                    .startNewChat(_curvyLikeMessageText,
+                                        _user!.userID!, 1);
+
+                                if (result) {
+                                  await Get.find<MatchService>()
+                                      .createMatch(_user!.userID!);
+                                  _curvyLikeMessageText = "";
+                                  Get.find<MatcherController>()
+                                      .controllCurrentUserIndex(true);
+                                  Get.back();
+                                  autoSlide(true);
+                                }
                               },
                               child: Container(
                                 width: Dimensions.h22,
                                 height: Dimensions.h22,
                                 decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage( "assets/images/curvy_dialog_send_icon.png"),
-                                    fit: BoxFit.cover
-                                  )
-                                ),                              
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            "assets/images/curvy_dialog_send_icon.png"),
+                                        fit: BoxFit.cover)),
                               ),
                             ),
                             Container(
                               width: Dimensions.h22,
                               height: Dimensions.h22,
-                               decoration: BoxDecoration(
+                              decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: AssetImage(  "assets/images/curvy_dialog_mic_icon.png"),
-                                    fit: BoxFit.cover
-                                  )
-                                ),                                             
+                                      image: AssetImage(
+                                          "assets/images/curvy_dialog_mic_icon.png"),
+                                      fit: BoxFit.cover)),
                             ),
                             Container(
-                                width: Dimensions.h22,
+                              width: Dimensions.h22,
                               height: Dimensions.h22,
-                               decoration: BoxDecoration(
+                              decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: AssetImage( "assets/images/curvy_dialog_add_icon.png"),
-                                    fit: BoxFit.cover
-                                  )
-                                ),                                           
+                                      image: AssetImage(
+                                          "assets/images/curvy_dialog_add_icon.png"),
+                                      fit: BoxFit.cover)),
                             )
                           ],
                         )
@@ -251,9 +252,9 @@ class SliderController extends GetxController {
         context: Get.context!,
         builder: (context) {
           return Dialog(
-              insetPadding: EdgeInsets.symmetric(horizontal: Dimensions.w42),
+            insetPadding: EdgeInsets.symmetric(horizontal: Dimensions.w42),
             backgroundColor: Colors.transparent,
-            child: Container(              
+            child: Container(
               height: Dimensions.h22 * 10,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Dimensions.h16 * 2),
@@ -353,7 +354,6 @@ class SliderController extends GetxController {
                                 border: InputBorder.none,
                                 enabledBorder: InputBorder.none,
                                 disabledBorder: InputBorder.none),
-                            
                           ),
                         ),
                         Column(
@@ -361,42 +361,43 @@ class SliderController extends GetxController {
                           children: [
                             GestureDetector(
                               onTap: () async {
-                                await Get.find<ChatService>().startNewChat(
-                                    _curvyChipMessageText, _user!.userID!, 2);
-                                await Get.find<MatchService>()
-                                    .createMatch(_user!.userID!);
-                                _curvyChipMessageText = "";
-                                Get.back();
-                                autoSlide(true);
+                                var result = await Get.find<ChatService>()
+                                    .startNewChat(_curvyChipMessageText,
+                                        _user!.userID!, 2);
+
+                                if (result) {
+                                  await Get.find<MatchService>()
+                                      .createMatch(_user!.userID!);
+                                  _curvyChipMessageText = "";
+                                  Get.back();
+                                  autoSlide(true);
+                                }
                               },
                               child: Container(
                                 width: Dimensions.h22,
                                 height: Dimensions.h22,
                                 decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage( "assets/images/curvy_dialog_send_icon.png")
-                                  )
-                                ),                               
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            "assets/images/curvy_dialog_send_icon.png"))),
                               ),
                             ),
                             Container(
-                               width: Dimensions.h22,
-                                height: Dimensions.h22,
-                                decoration: BoxDecoration(
+                              width: Dimensions.h22,
+                              height: Dimensions.h22,
+                              decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: AssetImage("assets/images/curvy_dialog_mic_icon.png")
-                                  )
-                                ),                                         
+                                      image: AssetImage(
+                                          "assets/images/curvy_dialog_mic_icon.png"))),
                             ),
-                                Container(
-                               width: Dimensions.h22,
-                                height: Dimensions.h22,
-                                decoration: BoxDecoration(
+                            Container(
+                              width: Dimensions.h22,
+                              height: Dimensions.h22,
+                              decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: AssetImage( "assets/images/curvy_dialog_add_icon.png")
-                                  )
-                                ),                                         
-                            ),                          
+                                      image: AssetImage(
+                                          "assets/images/curvy_dialog_add_icon.png"))),
+                            ),
                           ],
                         )
                       ],
@@ -745,11 +746,10 @@ class SliderController extends GetxController {
                                   width: Dimensions.h45,
                                   height: Dimensions.h45,
                                   decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage("assets/images/matcher_back.png"),
-                                      fit: BoxFit.contain
-                                    )
-                                  ),                                 
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              "assets/images/matcher_back.png"),
+                                          fit: BoxFit.contain)),
                                 ),
                               ),
                               GestureDetector(
@@ -764,15 +764,13 @@ class SliderController extends GetxController {
                                   width: Dimensions.h60,
                                   height: Dimensions.h60,
                                   decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage("assets/images/matcher_dislike.png"),
-                                      fit: BoxFit.contain
-                                    )
-                                  ),                                 
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              "assets/images/matcher_dislike.png"),
+                                          fit: BoxFit.contain)),
                                 ),
                               ),
                               GestureDetector(
-                                
                                 onTap: () {
                                   showCurvyLikeDialog();
                                 },
@@ -780,12 +778,12 @@ class SliderController extends GetxController {
                                   width: Dimensions.h52,
                                   height: Dimensions.h52,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(Dimensions.h52/2),
-                                    image: DecorationImage(
-                                      image: AssetImage( "assets/images/matcher_superlike.png"),
-                                      fit: BoxFit.contain
-                                    )
-                                  ),                                 
+                                      borderRadius: BorderRadius.circular(
+                                          Dimensions.h52 / 2),
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              "assets/images/matcher_superlike.png"),
+                                          fit: BoxFit.contain)),
                                 ),
                               ),
                               GestureDetector(
@@ -801,24 +799,24 @@ class SliderController extends GetxController {
                                   width: Dimensions.h60,
                                   height: Dimensions.h60,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(Dimensions.h60/2),
-                                    image: DecorationImage(
-                                      image: AssetImage("assets/images/matcher_like.png"),
-                                      fit: BoxFit.contain
-                                    )
-                                  ),                               
+                                      borderRadius: BorderRadius.circular(
+                                          Dimensions.h60 / 2),
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              "assets/images/matcher_like.png"),
+                                          fit: BoxFit.contain)),
                                 ),
                               ),
                               Container(
                                 width: Dimensions.h45,
                                 height: Dimensions.h45,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(Dimensions.h45/2),
-                                  image: DecorationImage(
-                                    image: AssetImage("assets/images/matcher_turbo.png"),
-                                    fit: BoxFit.contain
-                                  )
-                                ),                                
+                                    borderRadius: BorderRadius.circular(
+                                        Dimensions.h45 / 2),
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            "assets/images/matcher_turbo.png"),
+                                        fit: BoxFit.contain)),
                               )
                             ],
                           ))

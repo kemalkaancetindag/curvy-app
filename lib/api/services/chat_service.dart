@@ -4,9 +4,11 @@ import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/controllers/messages_controller.dart';
 import 'package:curvy_app/controllers/pages/chat_controller.dart';
 import 'package:curvy_app/controllers/user_online_controller.dart';
+import 'package:curvy_app/enums/chat_start_types.dart';
 import 'package:curvy_app/models/chat.model.dart';
 import 'package:curvy_app/models/user.model.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -103,8 +105,22 @@ class ChatService extends GetxService {
 
   Future sendMessageToChat(String chatID, String message) async {
     String userID = Get.find<SharedPreferenceService>().getUserID()!;
+    UserModel user = await firestoreService.getUser(userID);
     var currentDate = DateTime.now().millisecondsSinceEpoch;
     var chat = await firestoreService.getChat(chatID);
+    print("bas");
+    print(chat.chatID);
+    print(chat.startingType);
+    print(ChatStart.curvyChip.value);
+    if(chat.startingType == ChatStart.curvyChip.value){      
+      print("saq");
+      var result = await firestoreService.spendCurvyChip(userID, 1);
+
+      if(!result){
+        return;
+      }
+    } 
+    
 
     var messageData = Message(
         messageId: chat.messages!.length,
@@ -138,8 +154,31 @@ class ChatService extends GetxService {
     await firestoreService.updateChat(chatData, chatID);
   }
 
-  Future startNewChat(String message, String user2, int startingType) async {
-    var userID = Get.find<SharedPreferenceService>().getUserID();
+  Future<bool> startNewChat(String message, String user2, int startingType) async {
+    var userID = Get.find<SharedPreferenceService>().getUserID();    
+    
+    if(startingType == ChatStart.curvyLike.value) {
+      var result = await firestoreService.spendCurvyLike(userID!, 1);
+
+      if(!result) {
+        return false;
+      }
+    }
+
+    if(startingType == ChatStart.curvyChip.value) {      
+      var result = await firestoreService.spendCurvyChip(userID!, 1);
+    print("as");
+      if(!result){
+        print("sa");
+        return false;
+      }
+    }
+
+    
+
+
+
+
     List<Message> messages = [];
     var newMessage = Message(
         senderId: userID,
@@ -152,6 +191,8 @@ class ChatService extends GetxService {
     messages.add(newMessage);
 
     var documentRef = firestoreService.getCollection('chats').doc();
+    print("sa");
+    print(startingType);
 
     var newChat = Chat(
         isActive: true,
@@ -184,6 +225,8 @@ class ChatService extends GetxService {
     updateData["chat.active_chats"] = currentUserActiveChats;
 
     await firestoreService.updateUser(updateData, userID);
+
+    return true;
   }
 
   Future deactivateChat(String chatID) async {

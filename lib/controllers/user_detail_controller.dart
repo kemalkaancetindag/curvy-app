@@ -77,8 +77,9 @@ class UserDetailController extends GetxController {
           children: [
             Container(
               margin: EdgeInsets.only(right: Dimensions.w9),
-              child: Center(                                                                                     
-                child: Image.network('https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(currentInterest.un_selected_image!)}?alt=media'),
+              child: Center(
+                child: Image.network(
+                    'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(currentInterest.un_selected_image!)}?alt=media'),
               ),
             ),
             Container(
@@ -437,17 +438,21 @@ class UserDetailController extends GetxController {
                           children: [
                             GestureDetector(
                               onTap: () async {
-                                await Get.find<ChatService>().startNewChat(
-                                    _curvyLikeMessageText, _user!.userID!, 1);
-                                _curvyLikeMessageText = "";
-                                await Get.find<MatchService>()
-                                    .createMatch(_user!.userID!);
-                                Get.find<MatcherController>()
-                                    .controllCurrentUserIndex(true);
-                                Get.back();
-                                Get.back();
-                                Get.find<SliderController>(tag: _user!.userID!)
-                                    .autoSlide(true);
+                                var result = await Get.find<ChatService>()
+                                    .startNewChat(_curvyLikeMessageText,
+                                        _user!.userID!, 1);
+                                if (result) {
+                                  _curvyLikeMessageText = "";
+                                  await Get.find<MatchService>()
+                                      .createMatch(_user!.userID!);
+                                  Get.find<MatcherController>()
+                                      .controllCurrentUserIndex(true);
+                                  Get.back();
+                                  Get.back();
+                                  Get.find<SliderController>(
+                                          tag: _user!.userID!)
+                                      .autoSlide(true);
+                                }
                               },
                               child: Container(
                                 child: Center(

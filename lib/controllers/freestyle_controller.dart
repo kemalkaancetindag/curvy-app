@@ -516,6 +516,7 @@ class FreestyleController extends GetxController {
                                 await Get.find<ChatService>().startNewChat(
                                     _curvyLikeMessageText, selectedUser!.userID!, 1);
                                 _curvyLikeMessageText = "";
+
                                 Get.back();
                               },
                               child: Container(

@@ -1,3 +1,4 @@
+import 'package:curvy_app/api/services/chat_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/controllers/online_hub_controller.dart';
 import 'package:flutter/cupertino.dart';
@@ -199,11 +200,14 @@ class HubFoundWidget extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(Dimensions.h16)
                                 ),
                                 child: TextField(
+                                  onChanged: (value) {
+                                    controller.curvyChipMessageText = value;
+                                  },
                                   maxLines: 5,
                                   cursorColor: Colors.black,
                                   decoration: InputDecoration(
                                     contentPadding: EdgeInsets.symmetric(horizontal: Dimensions.w9, vertical: Dimensions.h8),
-                                    hintText: "Bir mesaj gönder",
+                                    hintText: "Bir mesaj yaz",
                                     hintStyle: TextStyle(
                                       color: Color(0xFFC5C5C7)
                                     ),
@@ -217,7 +221,10 @@ class HubFoundWidget extends StatelessWidget {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Container(
+                                    GestureDetector(onTap: () async {
+                                     controller.sendCurvyChipMessage();
+                                    },
+                                      child:      Container(
                                       width: Dimensions.h21,
                                       height: Dimensions.h21,
                                       decoration: BoxDecoration(
@@ -227,6 +234,8 @@ class HubFoundWidget extends StatelessWidget {
                                         )
                                       ),
                                     ),
+                                    ),
+                               
                                     SizedBox(height: Dimensions.h100/10,),
                                      Container(
                                       width: Dimensions.h21,
@@ -272,6 +281,9 @@ class HubFoundWidget extends StatelessWidget {
                           borderRadius: BorderRadius.circular(Dimensions.h16)
                         ),                                       
                         child: TextField(   
+                          onChanged: (value){
+                            controller.curvyChipMessageText = value;
+                          },
                           cursorColor: Colors.black,
                           maxLines: 5,                                                 
                           decoration: InputDecoration(
@@ -288,7 +300,11 @@ class HubFoundWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Container(
+                      GestureDetector(
+                        onTap: (){
+                          controller.sendCurvyChipMessage();
+                        },
+                        child:   Container(
                         width: Dimensions.h21,
                         height: Dimensions.h21,
                         decoration: BoxDecoration(
@@ -298,7 +314,9 @@ class HubFoundWidget extends StatelessWidget {
                           )
                         ),
                      
+                      ),
                       )
+                    
 
                     ],
                   ),
