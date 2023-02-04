@@ -33,6 +33,8 @@ class BasicInlineSwitch extends StatelessWidget {
             ),
           ),
           CupertinoSwitch(
+               thumbColor: Colors.white,
+            activeColor: Color(0xFFD51CFF),
             value: switchState, 
             onChanged: (value){
               actionFunction(value);

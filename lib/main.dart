@@ -1,3 +1,4 @@
+import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/general_app_state_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/pages.dart';
@@ -24,9 +25,14 @@ Future<void> main() async {
   await initServices();    
 
   var token = await FirebaseMessaging.instance.getToken();  
+  print(token);
   await initControllers();
+  var userID = Get.find<SharedPreferenceService>().getUserID()!;
+  var updateData = Map<String,dynamic>();
+  updateData['instance_token'] = token;
+
     
-  Get.find<SetupController>().setInstanceToken(token!);
+  Get.find<FirestoreService>().updateUser(updateData, userID);
   
   
   runApp(const MyApp());

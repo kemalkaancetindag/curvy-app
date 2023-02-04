@@ -43,6 +43,8 @@ class SettingsModalSwitchColumn extends StatelessWidget {
                   )
                 ),
                 isSwitch ? CupertinoSwitch(
+                     thumbColor: Colors.white,
+            activeColor: Color(0xFFD51CFF),
                   value: switchState ?? true, 
                   onChanged: (value){
                     if(switchOnChanged != null){

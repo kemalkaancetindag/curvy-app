@@ -37,6 +37,11 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isRegistered = Get.isRegistered<SettingsController>();
+    if (!isRegistered) {
+      Get.put(SettingsController(firestoreService: Get.find()));
+    }
+
     void showBanPeopleDialog() {
       showDialog(
           context: context,
@@ -329,7 +334,8 @@ class SettingsScreen extends StatelessWidget {
                             style: TextStyle(fontSize: Dimensions.h21),
                             maxLines: 1,
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsets.only(bottom: Dimensions.h100/20),
+                              contentPadding:
+                                  EdgeInsets.only(bottom: Dimensions.h100 / 20),
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
@@ -991,6 +997,8 @@ class SettingsScreen extends StatelessWidget {
                                         )),
                                       ),
                                       CupertinoSwitch(
+                                          thumbColor: Colors.white,
+                                          activeColor: Color(0xFFD51CFF),
                                           value: Utils.getNestedMapData(
                                               Settings
                                                   .emailNotificationOnMarketing
@@ -1624,6 +1632,8 @@ class SettingsScreen extends StatelessWidget {
                                     ),
                                   ),
                                   CupertinoSwitch(
+                                      thumbColor: Colors.white,
+                                      activeColor: Color(0xFFD51CFF),
                                       value: Utils.getNestedMapData(
                                           Settings
                                               .privacyPreferencesEnableAdvertising
@@ -2004,6 +2014,8 @@ class SettingsScreen extends StatelessWidget {
                                               fontWeight: FontWeight.bold),
                                         ),
                                         CupertinoSwitch(
+                                            thumbColor: Colors.white,
+                                            activeColor: Color(0xFFD51CFF),
                                             value: Utils.getNestedMapData(
                                                 Settings
                                                     .distancePreferenceOnlyThisInterval
@@ -2111,6 +2123,8 @@ class SettingsScreen extends StatelessWidget {
                                               fontWeight: FontWeight.bold),
                                         ),
                                         CupertinoSwitch(
+                                            thumbColor: Colors.white,
+                                            activeColor: Color(0xFFD51CFF),
                                             value: Utils.getNestedMapData(
                                                 Settings
                                                     .agePreferenceOnlyThisInterval

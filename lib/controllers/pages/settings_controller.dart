@@ -29,17 +29,22 @@ class SettingsController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
+    await init();
+
+    update();
+  }
+
+  Future init() async {
+        
     var userID = Get.find<SharedPreferenceService>().getUserID();
+    
     var user = await firestoreService.getUserAsMap(userID!);
+    
 
     if (user != null) {
       _user = UserModel.fromJson(user);
-      _settings = user['settings'] as Map<String, dynamic>;
-   
-      
+      _settings = user['settings'] as Map<String, dynamic>;         
     }
-
-    update();
   }
 
   //DISTANCE

@@ -15,7 +15,17 @@ class MessagesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(ChatController(chatService: Get.find()));
+    var isMessagesControllerRegistred = Get.isRegistered<MessagesController>();
+    var isChatControllerRegistred = Get.isRegistered<ChatController>();
+
+    if(!isMessagesControllerRegistred) {
+      Get.put(MessagesController());      
+    }
+
+    if(!isChatControllerRegistred) {
+      Get.put(ChatController(chatService: Get.find()));
+    }
+    
     return GetBuilder<MessagesController>(builder: (controller) {
       return Scaffold(
           appBar: PreferredSize(

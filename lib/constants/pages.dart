@@ -172,6 +172,7 @@ final pages = [
   GetPage(
     name: Routes.userDetail, 
     page: () => UserDetailScreen(),
+    transition: Transition.zoom,
     middlewares: [
       PageGuard()
     ]

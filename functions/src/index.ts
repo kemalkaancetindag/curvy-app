@@ -27,15 +27,16 @@ export const sendNotifications =
 
               const user2InstanceToken = user2Data.instance_token;
 
-
               if (!user1InstanceToken || !user2InstanceToken) {
                 return;
               }
+              console.log("BURDA1");
 
 
               if (!user1.liked || !user2.liked) {
                 return;
               }
+              console.log("BURDA2");
 
               const documentRefrence = db.collection("chats").doc();
 

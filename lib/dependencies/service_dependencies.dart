@@ -23,7 +23,7 @@ Future<void> initServices() async {
   Get.put(HubService(firestoreService: Get.find()));
   Get.put(GeneralAppStateService(sharedPreferenceService: Get.find(), firestoreService: Get.find()));
   Get.lazyPut(() => GeneralAppStateService(sharedPreferenceService: Get.find(), firestoreService: Get.find()));
-  Get.put(LifeCycleObserverService(firestoreService: Get.find()));
+  Get.put(LifeCycleObserverService(firestoreService: Get.find()));  
  
   
 }
