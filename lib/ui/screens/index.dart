@@ -226,7 +226,7 @@ class IndexScreen extends StatelessWidget {
                                               child: Center(
                                                 child: GestureDetector(
                                                   onTap: (){
-                                                    Get.toNamed(Routes.setupInterests);
+                                                    Get.toNamed(Routes.setupBirthdate);
                                                   },
                                                   child: Container(
                                                   width: Dimensions.h140,

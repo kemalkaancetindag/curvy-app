@@ -20,7 +20,9 @@ class SetupSexScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.back();
+          },
           icon: Icon(
             Icons.arrow_back_ios_new,
             color: Colors.black.withOpacity(0.3),
