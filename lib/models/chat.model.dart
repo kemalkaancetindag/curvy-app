@@ -8,6 +8,8 @@ class Chat {
   String? lastMessage;
   int? lastMessageDate;
   bool? isStarted;
+  bool? isUser1InChat;
+  bool? isUser2InChat;
 
   Chat({
     this.messages,
@@ -18,7 +20,9 @@ class Chat {
     this.chatID,
     this.lastMessage,
     this.lastMessageDate,
-    this.isStarted
+    this.isStarted,
+    this.isUser1InChat,
+    this.isUser2InChat
   });
 
 
@@ -37,6 +41,8 @@ class Chat {
     lastMessageDate = json['lastMessageDate'];
     isStarted = json['isStarted'];
     startingType = json['startingType'];
+    isUser1InChat = json['isUser1InChat'];
+    isUser2InChat = json['isUser2InChat'];
   } 
 
   Map<String,dynamic> toJson() {
@@ -60,6 +66,8 @@ class Chat {
     data['lastMessage'] = lastMessage;
     data['lastMessageDate'] = lastMessageDate;
     data['isStarted'] = isStarted;
+    data['isUser1InChat'] = isUser1InChat;
+    data['isUser2InChat'] = isUser2InChat;
     return data;
   }
 
@@ -93,6 +101,7 @@ class Message {
     senderId = json['senderId'];
     sendingDate = json['sendingDate'];
     isLiked = json['isLiked'];
+    isSeen = json['isSeen'];
   }
 
   Map<String,dynamic> toJson(){
