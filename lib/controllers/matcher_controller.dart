@@ -163,6 +163,7 @@ class MatcherController extends GetxController {
       var user = await firestoreService.getCurrentUser(userID);
       var unWantedUsers = user.un_liked_users;
       unWantedUsers!.addAll(user.users_i_liked!);
+      unWantedUsers.addAll(users!);
 
       recommendationPostData["un_liked_users"] = unWantedUsers;
 

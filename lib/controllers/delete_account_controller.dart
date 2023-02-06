@@ -1,6 +1,7 @@
 import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/routes.dart';
+import 'package:curvy_app/enums/login_method_enums.dart';
 import 'package:curvy_app/models/user.model.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,8 @@ class DeleteAccountController extends GetxController {
         );
         return; 
       }
-      else{
+      else if (user.login_method! == LoginMethod.google.value){
+        
         var data = Map<String,dynamic>();
         data["userID"] = userID;
         data["type"] = _deleteType;
