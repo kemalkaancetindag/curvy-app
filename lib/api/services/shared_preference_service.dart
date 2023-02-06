@@ -50,6 +50,7 @@ class SharedPreferenceService extends GetxService {
 
   Future<void> deleteUser() async {
     await sharedPreferences.remove('user');
+    await sharedPreferences.remove('last_user_id');
     
   }
 

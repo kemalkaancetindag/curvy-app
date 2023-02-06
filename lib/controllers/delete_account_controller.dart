@@ -34,7 +34,7 @@ class DeleteAccountController extends GetxController {
 
   void deleteAccount() async {
     String? userID = Get.find<SharedPreferenceService>().getUserID();
-    print(userID);
+    var sharedPreferenceService = Get.find<SharedPreferenceService>();
     
 
     if(userID != null) {
@@ -47,15 +47,20 @@ class DeleteAccountController extends GetxController {
           backgroundColor: Color(0xFFD51CFF),
           colorText: Colors.white
         );
+        
         return; 
       }
       else if (user.login_method! == LoginMethod.google.value){
-        
+
+        await sharedPreferenceService.deleteUser();
+
+        Get.toNamed(Routes.login);
+              
         var data = Map<String,dynamic>();
         data["userID"] = userID;
         data["type"] = _deleteType;
         data["text"] = _feedBackText;
-        await firestoreService.getCollection("delete_account_request").doc().set(data);      
+        await firestoreService.getCollection("delete_account_request").doc().set(data);
       }      
 
 
