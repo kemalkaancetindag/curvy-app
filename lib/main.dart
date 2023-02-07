@@ -3,6 +3,7 @@ import 'package:curvy_app/api/services/general_app_state_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/pages.dart';
 import 'package:curvy_app/constants/routes.dart';
+import 'package:curvy_app/controllers/current_user_online_controller.dart';
 import 'package:curvy_app/controllers/matcher_controller.dart';
 import 'package:curvy_app/controllers/setup_controller.dart';
 import 'package:curvy_app/dependencies/client_dependencies.dart';
@@ -27,12 +28,15 @@ Future<void> main() async {
   var token = await FirebaseMessaging.instance.getToken();  
   print(token);
   await initControllers();
-  var userID = Get.find<SharedPreferenceService>().getUserID()!;
+  var userID = Get.find<SharedPreferenceService>().getUserID();
   var updateData = Map<String,dynamic>();
   updateData['instance_token'] = token;
 
-    
-  Get.find<FirestoreService>().updateUser(updateData, userID);
+  if(userID != null) {
+    Get.find<FirestoreService>().updateUser(updateData, userID);
+    Get.put(CurrentUserOnlineController(firestoreService: Get.find()));
+  }
+  
   
   
   runApp(const MyApp());
