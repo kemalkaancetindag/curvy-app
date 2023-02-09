@@ -113,7 +113,7 @@ class BuyCurvyChipScreen extends StatelessWidget {
             children: [
               BuyBoostPackageCard(
                 title: "EN POPÜLER", 
-                mainImage: "assets/images/curvy_chip_popular.png", 
+                mainImage: controller.currentPage == 0 ? "assets/images/curvy_chip_bestdeal.png" : "assets/images/curvy_chip_bestdeal_deactive.png", 
                 amount: 3, 
                 packageName: "CurvyCHIP", 
                 cost: "19,99", 
@@ -125,7 +125,7 @@ class BuyCurvyChipScreen extends StatelessWidget {
               ),
                BuyBoostPackageCard(
                 title: "EN POPÜLER", 
-                mainImage: "assets/images/curvy_chip_popular.png", 
+                mainImage: controller.currentPage == 1 ? "assets/images/curvy_chip_popular.png" : "assets/images/curvy_chip_popular_deactive.png", 
                 amount: 3, 
                 packageName: "CurvyCHIP", 
                 cost: "19,99", 
@@ -136,7 +136,7 @@ class BuyCurvyChipScreen extends StatelessWidget {
                 borderWithImageColor: Color(0xFFCC9933)
               ), BuyBoostPackageCard(
                 title: "EN POPÜLER", 
-                mainImage: "assets/images/curvy_chip_popular.png", 
+                mainImage: controller.currentPage == 2 ? "assets/images/curvy_chip_standart.png" : "assets/images/curvy_chip_standart_deactive.png", 
                 amount: 3, 
                 packageName: "CurvyCHIP", 
                 cost: "19,99", 

@@ -112,8 +112,8 @@ class BuyCurvyLikeScreen extends StatelessWidget {
             },
             children: [
               BuyBoostPackageCard(
-                title: "EN POPÜLER", 
-                mainImage: "assets/images/curvy_like_popular.png", 
+                title: "EN İYİ FİYAT", 
+                mainImage: controller.currentPage == 0 ? "assets/images/curvy_like_bestdeal.png" : "assets/images/curvy_like_bestdeal_deactive.png", 
                 amount: 3, 
                 packageName: "CurvyLIKE", 
                 cost: "19,99", 
@@ -135,7 +135,7 @@ class BuyCurvyLikeScreen extends StatelessWidget {
               ),
                BuyBoostPackageCard(
                 title: "EN POPÜLER", 
-                mainImage: "assets/images/curvy_like_popular.png", 
+                mainImage: controller.currentPage == 1 ? "assets/images/curvy_like_popular.png" : "assets/images/curvy_like_popular_deactive.png", 
                 amount: 3, 
                 packageName: "CurvyLIKE", 
                 cost: "19,99", 
@@ -155,8 +155,8 @@ class BuyCurvyLikeScreen extends StatelessWidget {
                   ]
                 ),
               ), BuyBoostPackageCard(
-                title: "EN POPÜLER", 
-                mainImage: "assets/images/curvy_like_popular.png", 
+                title: "STANDART", 
+                mainImage: controller.currentPage == 2 ? "assets/images/curvy_like_standart.png" : "assets/images/curvy_like_standart_deactive.png", 
                 amount: 3, 
                 packageName: "CurvyLIKE", 
                 cost: "19,99", 
