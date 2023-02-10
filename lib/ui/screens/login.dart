@@ -72,6 +72,7 @@ class LoginScreen extends StatelessWidget {
               }
               else{
                 Get.find<SetupController>().setLoginMethod(LoginMethod.apple.value); 
+                await Get.find<AuthService>().appleAuth();
               }
                 
                

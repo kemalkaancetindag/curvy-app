@@ -30,6 +30,7 @@ class SetupController extends GetxController {
 
   //SERVICES
   User? _googleUser;
+  User? _appleUser;
   String? _userPhoneId;
   int? _loginMethod;
   String? _verificationId;
@@ -110,6 +111,10 @@ class SetupController extends GetxController {
 
   void setGoogleUser(User user) {
     _googleUser = user;
+  }
+
+  void setAppleUser(User user) {
+    _appleUser = user;
   }
 
   void setLoginMethod(int loginMethod) {
@@ -366,12 +371,10 @@ class SetupController extends GetxController {
       await Get.find<SharedPreferenceService>().saveUser(jsonUser);
     } else if (_loginMethod == LoginMethod.phone.value) {
       var userImages = await Get.find<FirestoreService>()
-          .uploadImages(_images, _userPhoneId!);
-      print("ÖNCE");
+          .uploadImages(_images, _userPhoneId!);      
       var isLocationEnabled = await GeolocatorPlatform.instance.checkPermission();
       
-      if(isLocationEnabled != LocationPermission.always) {
-        print("GİRDİ");
+      if(isLocationEnabled != LocationPermission.always) {        
          await Geolocator.requestPermission();
       }
      
@@ -393,6 +396,48 @@ class SetupController extends GetxController {
           show_sex: _showSex,
           show_sexual_preference: _showSexPreference,
           email_confirmation: false,
+          phone_confirmation: true,
+          sexual_preference: _sexPrefenrence,
+          interests: _interests,
+          location: UserLocation(
+              latitude: position.latitude, longitude: position.longitude),
+          instance_token: _instanceToken,
+          users_who_liked_me: [],
+          users_i_liked: []).toJson();
+
+      var userDocID =
+          await Get.find<FirestoreService>().addToCollection(jsonUser, 'users');
+
+      await Get.find<SharedPreferenceService>().saveUser(jsonUser);
+
+      await Get.find<SharedPreferenceService>().setLastUserID(userDocID);
+    } else if(_loginMethod == LoginMethod.apple.value) {
+            var userImages = await Get.find<FirestoreService>()
+          .uploadImages(_images, _userPhoneId!);      
+      var isLocationEnabled = await GeolocatorPlatform.instance.checkPermission();
+      
+      if(isLocationEnabled != LocationPermission.always) {        
+         await Geolocator.requestPermission();
+      }
+     
+      var position = await GeolocatorPlatform.instance.getCurrentPosition(
+          locationSettings: LocationSettings(accuracy: LocationAccuracy.high));
+      print("SONRA");
+
+      var jsonUser = UserModel(
+          userID: _appleUser!.uid,
+          phone_number: _phoneNumber,
+          phone_id: _userPhoneId,
+          login_method: _loginMethod,
+          sex: _sex,
+          name: _name,
+          birthdate: _birthdateString,
+          email: _appleUser!.email!,
+          images: userImages,
+          show_me: _showMe,
+          show_sex: _showSex,
+          show_sexual_preference: _showSexPreference,
+          email_confirmation: true,
           phone_confirmation: true,
           sexual_preference: _sexPrefenrence,
           interests: _interests,
