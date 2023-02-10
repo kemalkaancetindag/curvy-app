@@ -15,7 +15,18 @@ class ArchivesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(ArchiveService(firestoreService: Get.find()));
+    var isControllerRegistred = Get.isRegistered<ArchivesController>();
+    var isServiceRegistred = Get.isRegistered<ArchiveService>();
+
+    if(!isControllerRegistred){
+      Get.put(ArchivesController());
+    }
+
+    if(!isServiceRegistred) {
+       Get.put(ArchiveService(firestoreService: Get.find()));
+    }
+   
+
     return GetBuilder<ArchivesController>(builder: (controller) {
       
       return Scaffold(

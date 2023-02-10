@@ -56,6 +56,8 @@ class SettingsModalSwitchRow extends StatelessWidget {
           ),
           Container(
             child: CupertinoSwitch(
+                 thumbColor: Colors.white,
+            activeColor: Color(0xFFD51CFF),
               value: switchState,
               onChanged: (value) {
                 switchOnChange(value);

@@ -19,28 +19,14 @@ class NotificationService extends GetxService {
   Future<void> onInit() async {
     super.onInit();
     await _getPermission();
-    await _startListening();
+    _startListening();
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  }
-
-  Future<void> _getPermission() async {
-    NotificationSettings settings = await messaging.requestPermission(
-      alert: true,
-      announcement: false,
-      badge: true,
-      carPlay: false,
-      criticalAlert: false,
-      provisional: false,
-      sound: true,
-    );
-  }
-
-  Future<void> _startListening() async {
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print('Got a message whilst in the foreground!');
       print('Message data: ${message.data}');
-
+      print("SAAAAAAAAAAAAAAA");
       if (message.notification != null) {
+        print("sa");
         if(message.data["notificationType"] == "ON_MATCH") {
             print("GİRDİ");
             print(message.data);
@@ -213,6 +199,24 @@ class NotificationService extends GetxService {
        
       }
     });
+  }
+
+  Future<void> _getPermission() async {
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+  }
+
+  void _startListening() async {
+    print("BİLDİRİM");
+
+   
   }
 }
 

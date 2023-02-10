@@ -86,8 +86,6 @@ class SetupController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     await getInterests();
-
-  
   }
 
   Future<void> getInterests() async {
@@ -101,7 +99,9 @@ class SetupController extends GetxController {
           child: InterestSelect(
               text: interest.text!,
               isSelected: controller.interests.contains(interest.interest_type),
-              assetName:  controller.interests.contains(interest.interest_type) ?  'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(interest.selected_image!)}?alt=media' : 'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(interest.un_selected_image!)}?alt=media') ,
+              assetName: controller.interests.contains(interest.interest_type)
+                  ? 'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(interest.selected_image!)}?alt=media'
+                  : 'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(interest.un_selected_image!)}?alt=media'),
         );
       }));
     });
@@ -243,6 +243,15 @@ class SetupController extends GetxController {
 
     _birthdateString = _birthdateList.join();
     _birthdateList.removeWhere((element) => element == "/");
+    var userAge = DateTime.now().year -
+        int.parse(_birthdateList.sublist(4, _birthdateList.length).join());
+
+    if (userAge < 18) {
+      Get.snackbar(
+          "Hata", "Kayıt olabilmek için 18 yaşından büyük olmalısınız.",
+          backgroundColor: Color(0xFFD446F4), colorText: Colors.white);
+      return;
+    }
 
     Get.to(() => SetupSexScreen());
   }

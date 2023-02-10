@@ -20,7 +20,9 @@ class SetupSexScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.back();
+          },
           icon: Icon(
             Icons.arrow_back_ios_new,
             color: Colors.black.withOpacity(0.3),
@@ -74,6 +76,8 @@ class SetupSexScreen extends StatelessWidget {
                       ),
                       GetBuilder<SetupController>(builder: ((controller) {
                         return CupertinoSwitch(
+                          thumbColor: Colors.white,
+                          activeColor: Color(0xFFD51CFF),
                           value: controller.showSex,
                           onChanged: (value) {
                             controller.setShowSex(value);
@@ -87,12 +91,11 @@ class SetupSexScreen extends StatelessWidget {
                   onTap: () {
                     Get.to(() => SetupSexualPreferenceScreen());
                   },
-                  child:  GradientButton(
-                  text: "DEVAM ET",
-                  page: "setsexpref",
-                ) ,
+                  child: GradientButton(
+                    text: "DEVAM ET",
+                    page: "setsexpref",
+                  ),
                 )
-              
               ],
             )
           ],

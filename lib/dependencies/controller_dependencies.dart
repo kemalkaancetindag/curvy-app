@@ -23,14 +23,14 @@ import 'package:get/get.dart';
 
 Future<void> initControllers() async {
   
-  Get.put(NavController());
-  Get.put(ArchivesController());
-  Get.put(MessagesController());
-  Get.put(MatcherController(firestoreService: Get.find(), goApiClient: Get.find()));
+  Get.lazyPut(() => NavController());
+  Get.lazyPut(() => ArchivesController());
+  Get.lazyPut(() => MessagesController());
+  Get.lazyPut(() => MatcherController(firestoreService: Get.find(), goApiClient: Get.find()));
   Get.put(SetupController());
   Get.lazyPut(() => IndexPageController(userService: Get.find()));
   Get.lazyPut(() => EditProfileController(userService: Get.find(), firestoreService: Get.find()));
-  Get.put(SettingsController(firestoreService: Get.find()));
+  Get.lazyPut(() => SettingsController(firestoreService: Get.find()));
   Get.put(ExpandedMatcherStyleController());
   Get.lazyPut(() => ChatController(chatService: Get.find()));
   Get.lazyPut(() => ArchiveWhoLikedMeController(archiveService: Get.find()));

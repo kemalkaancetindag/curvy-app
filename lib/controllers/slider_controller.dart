@@ -418,7 +418,12 @@ class SliderController extends GetxController {
     }
   }
 
-  void next() {
+  void next() {    
+    print("****************************");
+    print(Get.find<MatcherController>().users!.length);
+    print(Get.find<MatcherController>().users!.indexOf(user!.userID!));    
+    print(user!.userID);
+    
     if (imagePositions.length - 1 > imageCurrentIndex) {
       imageCurrentIndex = imageCurrentIndex + 1;
       imageNextIndex = imageCurrentIndex + 1;
@@ -661,7 +666,9 @@ class SliderController extends GetxController {
                                           userID: user!.userID!,
                                           userIndex: userIndex));
 
-                                  Get.toNamed(Routes.userDetail);
+                                  Get.toNamed(
+                                    Routes.userDetail,                                    
+                                  );
                                 },
                                 child: Container(
                                   width: Dimensions.w300 / 10,

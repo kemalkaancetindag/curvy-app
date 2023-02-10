@@ -42,7 +42,6 @@ class MatcherController extends GetxController {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-
   MatcherController(
       {required this.firestoreService, required this.goApiClient});
 
@@ -101,10 +100,13 @@ class MatcherController extends GetxController {
 
     RxList<Widget> cardList = <Widget>[].obs;
 
-
     for (int i = (matches as List<dynamic>).length - 1; i >= 0; i--) {
       if (matches[i] != null) {
         var user = UserModel.fromJson(matches[i] as Map<String, dynamic>);
+        var isRegistred = Get.isRegistered(tag: user.userID);
+        if (isRegistred) {
+          continue;
+        }
         _users!.add(user.userID!);
         int distance = await calculateDistance(
             user.location!.latitude!, user.location!.longitude!);
@@ -118,12 +120,16 @@ class MatcherController extends GetxController {
         cardList.add(GetBuilder<SliderController>(
             init: Get.find<SliderController>(tag: user.userID),
             global: false,
+            key: Key(user.userID!),
             builder: (_) {
               return MatcherStyleUserCard(controllerTag: user.userID!);
-            }));      
-       await Future.forEach( user.images!,(element) async {          
-            await precacheImage(NetworkImage('https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(element)}?alt=media'), Get.context!);
-      });
+            }));
+        await Future.forEach(user.images!, (element) async {
+          await precacheImage(
+              NetworkImage(
+                  'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(element)}?alt=media'),
+              Get.context!);
+        });
       }
     }
 
@@ -145,8 +151,11 @@ class MatcherController extends GetxController {
   }
 
   Future<void> continuousSliding(int slideCount) async {
+    print("SLDFKSAJHDFLKAJSHDFLKJHSADSF");
     if (slideCount == 5) {
+      print("GELİYORRRR");
       List<Widget> newCards = [];
+      List<String> newUsers = [];
       Map<String, dynamic> recommendationPostData = Map<String, dynamic>();
 
       String userID = Get.find<SharedPreferenceService>().getUserID()!;
@@ -154,6 +163,7 @@ class MatcherController extends GetxController {
       var user = await firestoreService.getCurrentUser(userID);
       var unWantedUsers = user.un_liked_users;
       unWantedUsers!.addAll(user.users_i_liked!);
+      unWantedUsers.addAll(users!);
 
       recommendationPostData["un_liked_users"] = unWantedUsers;
 
@@ -164,6 +174,10 @@ class MatcherController extends GetxController {
       for (int i = (matches as List<dynamic>).length - 1; i >= 0; i--) {
         if (matches[i] != null) {
           var user = UserModel.fromJson(matches[i] as Map<String, dynamic>);
+          var isRegistred = Get.isRegistered(tag: user.userID);
+          if (isRegistred) {
+            continue;
+          }
           _users!.add(user.userID!);
           int distance = await calculateDistance(
               user.location!.latitude!, user.location!.longitude!);
@@ -177,14 +191,17 @@ class MatcherController extends GetxController {
 
           newCards.add(GetBuilder<SliderController>(
               init: Get.find<SliderController>(tag: user.userID),
+              key: Key(user.userID!),
               global: false,
               builder: (_) {
                 return MatcherStyleUserCard(controllerTag: user.userID!);
               }));
+          newUsers.add(user.userID!);
         }
       }
-
-      _cards!.addAll(newCards);
+      _cards = [...newCards, ..._cards!];
+      _users = [...newUsers, ...users!];
+      print(_cards!.length);
       currentUserIndex = 0;
     }
 

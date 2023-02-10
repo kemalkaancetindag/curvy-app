@@ -1,13 +1,15 @@
- import 'package:curvy_app/enums/enum_enum.dart';
+import 'package:curvy_app/enums/enum_enum.dart';
 import 'package:curvy_app/enums/settings_enum.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Utils {
   static String getMimetype(String fileName) {
     return fileName.split('/').last.split('.').last;
   }
 
-  static String getEnumValue(String enumType, int value){
+  static String getEnumValue(String enumType, int value) {
     List<String> zodiacs = [
       "Koç",
       "Boğa",
@@ -55,7 +57,7 @@ class Utils {
       "ENFJ-A",
       "ENFJ-T",
       "ENFP-A",
-      "ENFP-T",      
+      "ENFP-T",
     ];
 
     List<String> pets = [
@@ -91,12 +93,7 @@ class Utils {
       "Hafta sonları sosyalleşirken"
     ];
 
-    List<String> sex = [
-      "Erkek",
-      "Kadın",
-      "LGBTQ",
-      "Belirtmek istemiyorum"
-    ];
+    List<String> sex = ["Erkek", "Kadın", "LGBTQ", "Belirtmek istemiyorum"];
 
     List<String> sexualPreferences = [
       "Heteroseksüel",
@@ -111,11 +108,7 @@ class Utils {
       "Belirtmek istemiyorum"
     ];
 
-    List<String> showme = [
-      "Kadın",
-      "Erkek",
-      "Hepsi"
-    ];
+    List<String> showme = ["Kadın", "Erkek", "Hepsi"];
 
     List<String> language = [
       "Almanca",
@@ -129,8 +122,8 @@ class Utils {
       "Rusça",
       "Türkçe"
     ];
-    
-    switch(enumType){
+
+    switch (enumType) {
       case Enums.zodiac:
         return zodiacs[value];
       case Enums.personality:
@@ -149,54 +142,70 @@ class Utils {
         return showme[value];
       case Enums.language:
         return language[value];
-      
-        
-
     }
 
     return "";
   }
-  
-  static dynamic getNestedMapData(String keys, Map<String,dynamic> data) {
 
+  static dynamic getNestedMapData(String keys, Map<String, dynamic> data) {
     List<String> keyList = keys.split(".");
     String wantedKey = keyList.last;
-    keyList = keyList.sublist(0, keyList.length-1);
-     if(keys == Settings.privacyPreferencesMarketingAppFlayer.value) {      
-          print(keyList);
-          print(wantedKey);
-      }
-
-    dynamic wantedData;
-    
-    
-    
-
-    for(int i = 0; i < keyList.length; i++){
-   
-         if(keys == Settings.privacyPreferencesMarketingAppFlayer.value) {      
-          print(keyList[i]);
-          }
-     
-      var tempMap = (data[keyList[i]] as Map<String,dynamic>);
-      if(keys == Settings.privacyPreferencesMarketingAppFlayer.value) {       
-       print("AĞAĞAĞAĞAĞĞAĞAĞĞAĞAĞĞAĞAĞ");
-       print(i);
-      print(keyList[i]);    
-      print(tempMap);
-       print(tempMap["marketing_permissions"]);
+    keyList = keyList.sublist(0, keyList.length - 1);
+    if (keys == Settings.privacyPreferencesMarketingAppFlayer.value) {
+      print(keyList);
+      print(wantedKey);
     }
 
+    dynamic wantedData;
 
-      if(i == keyList.length-1){     
-        wantedData = tempMap[wantedKey];
+    for (int i = 0; i < keyList.length; i++) {
+      if (keys == Settings.privacyPreferencesMarketingAppFlayer.value) {
+        print(keyList[i]);
       }
 
+      var tempMap = (data[keyList[i]] as Map<String, dynamic>);
+      if (keys == Settings.privacyPreferencesMarketingAppFlayer.value) {}
+
+      if (i == keyList.length - 1) {
+        wantedData = tempMap[wantedKey];
+      }
     }
 
     return wantedData;
-
-    
   }
+
+  static Future handleError(Function func)  async {
+    try{      
+      await func();
+    }
+    catch(e) {
+      Get.snackbar(
+        "Hata", 
+        e.toString(),
+        colorText: Colors.white,
+        backgroundColor: Color(0xFFD51CFF)
+      );      
+    }
+  }
+
+  static Future handleNULL(dynamic result, String location) async {    
+    if(result == null) {
+       Get.snackbar(
+        location, 
+        "NULL",
+        colorText: Colors.white,
+        backgroundColor: Color(0xFFD51CFF)
+      );      
+    }
+    else{
+       Get.snackbar(
+        location, 
+        "NOT NULL",
+        colorText: Colors.white,
+        backgroundColor: Color(0xFFD51CFF)
+      );      
+    }
+  }
+
  
- }
+}

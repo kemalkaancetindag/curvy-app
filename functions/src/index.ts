@@ -27,15 +27,16 @@ export const sendNotifications =
 
               const user2InstanceToken = user2Data.instance_token;
 
-
               if (!user1InstanceToken || !user2InstanceToken) {
                 return;
               }
+              console.log("BURDA1");
 
 
               if (!user1.liked || !user2.liked) {
                 return;
               }
+              console.log("BURDA2");
 
               const documentRefrence = db.collection("chats").doc();
 
@@ -296,6 +297,48 @@ export const sendMessageLikeNotification = functions.firestore
               body: `${userToSendNotification.name} bir mesajınızı beğendi`,
             },
           });
+    });
+
+export const deleteUser = functions.firestore
+    .document("delete_account_request/{requestID}")
+    .onCreate(async (snapshot, context) => {
+      const deleteRequest = snapshot.data();
+      const userID = deleteRequest.userID;
+      const user = (await db.collection("users")
+          .where("userID", "==", userID).get())
+          .docs[0];
+      const userData = user.data();
+      console.log("USER DATA");
+      console.log(userData);
+
+      if (userData.login_method == 0) {
+        // GOOGLE
+        // PHONE & GMAIL
+        console.log("LOGIN METHOD GOOGLE");
+        const userPhone = userData.phone_number.split("TR")[1];
+        const emailUser = await admin.auth().getUserByEmail(userData.email);
+        const phoneUser = await admin.auth().getUserByPhoneNumber(userPhone);
+
+        console.log("USER PHONE");
+        console.log(userPhone);
+        console.log(phoneUser.uid);
+
+        console.log("USER EMAIL");
+        console.log(userData.email);
+        console.log(emailUser.uid);
+        await admin.auth().deleteUser(emailUser.uid);
+        await admin.auth().deleteUser(phoneUser.uid);
+        await db.collection("users").doc(user.id).delete();
+      } else if (userData.login_method == 3) {
+        // PHONE
+        // PHONE
+
+        const userPhone = userData.phone_number.split("TR")[1];
+        const phoneUser = await admin.auth().getUserByPhoneNumber(userPhone);
+
+        await admin.auth().deleteUser(phoneUser.uid);
+        await db.collection("users").doc(user.id).delete();
+      }
     });
 
 

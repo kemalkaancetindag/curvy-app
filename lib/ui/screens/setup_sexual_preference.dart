@@ -163,6 +163,8 @@ class SetupSexualPreferenceScreen extends StatelessWidget {
                       ),
                       GetBuilder<SetupController>(builder: (controller) {
                         return CupertinoSwitch(
+                          thumbColor: Colors.white,
+                          activeColor: Color(0xFFD51CFF),
                           value: controller.showSexPreference,
                           onChanged: (value) {
                             controller.setShowSexPreference(value);

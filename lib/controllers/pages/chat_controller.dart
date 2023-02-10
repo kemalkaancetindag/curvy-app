@@ -396,6 +396,7 @@ class ChatController extends GetxController {
 
   void setCurrentChat(String chatID) {
     chatService.listenCurrentChat(chatID);
+    chatService.setIsUserInChat(currentUserID, chatID, true);
 
     if (_isActiveMessages) {
       _currentChat =
@@ -404,6 +405,8 @@ class ChatController extends GetxController {
       _currentChat =
           _unActiveChats!.where((chat) => chat.chatID == chatID).toList()[0];
     }
+
+    chatService.setMessagesAsSeen(chatID);
     generateTiles();
     Get.toNamed(Routes.chat);
   }
@@ -447,7 +450,8 @@ class ChatController extends GetxController {
     update();
   }
 
-  void clearCurrentChat() {
+  void clearCurrentChat() {    
+    chatService.setIsUserInChat(currentUserID, _currentChat!.chatID!, false);
     _currentChat = null;
     update();
   }

@@ -78,6 +78,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/fonts/gilroy/
     - assets/images/logokalp.png
     - assets/images/apple_logo.png
     - assets/images/facebook_logo.png
@@ -202,15 +203,24 @@ flutter:
     - assets/images/curvy_like_active_image.png
     - assets/images/curvy_like_passive_image.png
     - assets/images/curvy_turbo_popular.png
+    - assets/images/curvy_turbo_popular_deactive.png
     - assets/images/curvy_turbo_standart.png
+    - assets/images/curvy_turbo_standart_deactive.png
     - assets/images/curvy_turbo_bestdeal.png
+    - assets/images/curvy_turbo_bestdeal_deactive.png
     - assets/images/curvy_like_popular.png
+    - assets/images/curvy_like_popular_deactive.png
     - assets/images/curvy_like_standart.png
+    - assets/images/curvy_like_standart_deactive.png
     - assets/images/curvy_like_bestdeal.png
+    - assets/images/curvy_like_bestdeal_deactive.png
     - assets/images/curvy_chip_border_image.png
     - assets/images/curvy_chip_bestdeal.png
+    - assets/images/curvy_chip_bestdeal_deactive.png
     - assets/images/curvy_chip_standart.png
+    - assets/images/curvy_chip_standart_deactive.png
     - assets/images/curvy_chip_popular.png
+    - assets/images/curvy_chip_popular_deactive.png
     - assets/images/nav_archive_white.png
     - assets/images/nav_hubs_white.png
     - assets/images/nav_messages_white.png

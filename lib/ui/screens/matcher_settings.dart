@@ -309,7 +309,7 @@ class MatcherSettingsScreen extends StatelessWidget {
                               decoration:
                                   BoxDecoration(color: Color(0xFFC5C5C7)),
                             )),
-                        Container(                          
+                        Container(
                           width: double.maxFinite,
                           padding: EdgeInsets.symmetric(
                               horizontal: Dimensions.h100 / 10),
@@ -366,6 +366,8 @@ class MatcherSettingsScreen extends StatelessWidget {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     CupertinoSwitch(
+                                        thumbColor: Colors.white,
+                                        activeColor: Color(0xFFD51CFF),
                                         value: controller
                                             .distanceOnlyThisInterval!,
                                         onChanged: (value) {
@@ -448,7 +450,7 @@ class MatcherSettingsScreen extends StatelessWidget {
                               decoration:
                                   BoxDecoration(color: Color(0xFFC5C5C7)),
                             )),
-                        Container(                          
+                        Container(
                           width: double.maxFinite,
                           padding: EdgeInsets.symmetric(
                               horizontal: Dimensions.h100 / 10),
@@ -518,6 +520,8 @@ class MatcherSettingsScreen extends StatelessWidget {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     CupertinoSwitch(
+                                        thumbColor: Colors.white,
+                                        activeColor: Color(0xFFD51CFF),
                                         value: controller.ageOnlyThisInterval!,
                                         onChanged: (value) {
                                           controller
@@ -552,6 +556,8 @@ class MatcherSettingsScreen extends StatelessWidget {
                                     fontWeight: FontWeight.bold),
                               ),
                               CupertinoSwitch(
+                                  thumbColor: Colors.white,
+                                  activeColor: Color(0xFFD51CFF),
                                   value: controller.globalPreference!,
                                   onChanged: (value) {
                                     controller.setGlobal(value);
@@ -582,6 +588,8 @@ class MatcherSettingsScreen extends StatelessWidget {
                                     fontWeight: FontWeight.bold),
                               ),
                               CupertinoSwitch(
+                                  thumbColor: Colors.white,
+                                  activeColor: Color(0xFFD51CFF),
                                   value: controller.onlyConfirmedProfiles!,
                                   onChanged: (value) {})
                             ],

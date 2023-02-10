@@ -28,11 +28,11 @@ class AddImageBox extends StatelessWidget {
             clipBehavior: Clip.none,
             children: [
               Positioned(
-                bottom: -10,
-                right: -10,
+                bottom: -Dimensions.h100/10,
+                right: -Dimensions.h100/10,
                 child: Container(
                   width: Dimensions.w31,
-                  height: Dimensions.h31,
+                  height: Dimensions.w31,
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
                           colors: [Color(0xFFD51CFF), Color(0xFF00FFE1)],

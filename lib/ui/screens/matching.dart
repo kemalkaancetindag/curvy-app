@@ -15,8 +15,13 @@ class MatchingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(MatcherController(
-        firestoreService: Get.find(), goApiClient: Get.find()));
+
+    var isMatcherControllerRegistred = Get.isRegistered<MatcherController>();
+
+    if(!isMatcherControllerRegistred) {
+      Get.put(MatcherController(firestoreService: Get.find(), goApiClient: Get.find()));      
+    }
+
     return GetBuilder<MatcherController>(builder: (controller) {
       return Scaffold(
         backgroundColor: Colors.white,
@@ -80,8 +85,7 @@ class MatchingScreen extends StatelessWidget {
                                         ),
                                         GestureDetector(
                                             onTap: () {
-                                              controller.setStyle(false);
-                                              controller.getCards();
+                                              controller.setStyle(false);                                              
                                             },
                                             child: Container(
                                               width: controller.isFreeStyle
