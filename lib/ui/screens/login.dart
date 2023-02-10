@@ -79,6 +79,7 @@ class LoginScreen extends StatelessWidget {
                 
             },),
             LoginButton(text: "FACEBOOK İLE KAYDOL", logo: "assets/images/facebook_logo.png",loginMethod: () async {
+              Get.find<SetupController>().setLoginMethod(LoginMethod.facebook.value);
               await Get.find<AuthService>().facebookAuth();
             },),
             LoginButton(text: "TELEFON NUMARASI İLE GİRİŞ YAP", logo: "assets/images/phone_icon.png",loginMethod: (){

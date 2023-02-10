@@ -55,15 +55,13 @@ class AuthService extends GetxService {
   }
 
   Future<void> facebookAuth() async {
-    
-    LoginResult result =  await FacebookAuth.instance.login();
-    print("MESAJ");
-    print(result.message);
-    
-    Map<String, dynamic> userData = await FacebookAuth.instance.getUserData();
-    print(userData);
-
-
+      LoginResult loginResult = await FacebookAuth.instance.login();
+      if(loginResult.status == LoginStatus.success) {
+        var facebookCred = FacebookAuthProvider.credential(loginResult.accessToken!.token);
+        var data = await FirebaseAuth.instance.signInWithCredential(facebookCred);
+        print(data.user!.email);
+      }
+      
   }
 
   Future<void> phoneAuth(String number, Function(String) callback) async {
