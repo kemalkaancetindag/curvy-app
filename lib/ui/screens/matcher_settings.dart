@@ -630,6 +630,7 @@ class GradientRectSliderTrackShape extends SliderTrackShape
     bool isDiscrete = false,
     bool isEnabled = false,
     double additionalActiveTrackHeight = 2,
+    Offset? secondaryOffset = null
   }) {
     assert(sliderTheme.disabledActiveTrackColor != null);
     assert(sliderTheme.disabledInactiveTrackColor != null);
@@ -637,6 +638,7 @@ class GradientRectSliderTrackShape extends SliderTrackShape
     assert(sliderTheme.inactiveTrackColor != null);
     assert(sliderTheme.thumbShape != null);
     assert(sliderTheme.trackHeight != null && sliderTheme.trackHeight! > 0);
+
 
     final Rect trackRect = getPreferredRect(
       parentBox: parentBox,

@@ -2665,6 +2665,7 @@ class GradientRectSliderTrackShape extends SliderTrackShape
     bool isDiscrete = false,
     bool isEnabled = false,
     double additionalActiveTrackHeight = 2,
+    Offset? secondaryOffset = null
   }) {
     assert(sliderTheme.disabledActiveTrackColor != null);
     assert(sliderTheme.disabledInactiveTrackColor != null);

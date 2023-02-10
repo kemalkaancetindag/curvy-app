@@ -12,6 +12,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'firebase_options.dart';
+
 
 Future<void> main() async {
   
@@ -19,7 +21,8 @@ Future<void> main() async {
   
   Get.put(SharedPreferenceService());
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await initClients();
   await initServices();    
 

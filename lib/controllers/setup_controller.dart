@@ -139,6 +139,7 @@ class SetupController extends GetxController {
 
     var user =
         await Get.find<FirestoreService>().getUserByPhoneNumber(_phoneNumber!);
+    print("BURDAAAA");
 
     if (user != null) {
       if (_loginMethod == LoginMethod.google.value) {
@@ -323,9 +324,11 @@ class SetupController extends GetxController {
     if (_loginMethod == LoginMethod.google.value) {
       var userImages = await Get.find<FirestoreService>()
           .uploadImages(_images, _googleUser!.uid);
+      print("ÖNCE");
       await Geolocator.requestPermission();
       var position = await GeolocatorPlatform.instance.getCurrentPosition(
           locationSettings: LocationSettings(accuracy: LocationAccuracy.high));
+      print("SONRA");
 
       var jsonUser = UserModel(
           userID: _googleUser!.uid,
@@ -355,10 +358,17 @@ class SetupController extends GetxController {
     } else if (_loginMethod == LoginMethod.phone.value) {
       var userImages = await Get.find<FirestoreService>()
           .uploadImages(_images, _userPhoneId!);
-
-      await Geolocator.requestPermission();
+      print("ÖNCE");
+      var isLocationEnabled = await GeolocatorPlatform.instance.checkPermission();
+      
+      if(isLocationEnabled != LocationPermission.always) {
+        print("GİRDİ");
+         await Geolocator.requestPermission();
+      }
+     
       var position = await GeolocatorPlatform.instance.getCurrentPosition(
           locationSettings: LocationSettings(accuracy: LocationAccuracy.high));
+      print("SONRA");
 
       var jsonUser = UserModel(
           userID: _userPhoneId,
