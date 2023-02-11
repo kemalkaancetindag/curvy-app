@@ -7,6 +7,7 @@ import 'package:curvy_app/api/services/hub_service.dart';
 import 'package:curvy_app/api/services/life_cycle_observer_service.dart';
 import 'package:curvy_app/api/services/match_service.dart';
 import 'package:curvy_app/api/services/notification_service.dart';
+import 'package:curvy_app/api/services/recommendation_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/api/services/user_service.dart';
 import 'package:get/get.dart';
@@ -23,7 +24,8 @@ Future<void> initServices() async {
   Get.put(HubService(firestoreService: Get.find()));
   Get.put(GeneralAppStateService(sharedPreferenceService: Get.find(), firestoreService: Get.find()));
   Get.lazyPut(() => GeneralAppStateService(sharedPreferenceService: Get.find(), firestoreService: Get.find()));
-  Get.put(LifeCycleObserverService(firestoreService: Get.find()));  
+  Get.put(LifeCycleObserverService(firestoreService: Get.find())); 
+  Get.put(RecommendationService(firestoreService: Get.find())); 
  
   
 }

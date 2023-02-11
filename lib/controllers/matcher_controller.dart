@@ -1,5 +1,6 @@
 import 'package:curvy_app/api/clients/go_api_client.dart';
 import 'package:curvy_app/api/services/firestore_service.dart';
+import 'package:curvy_app/api/services/recommendation_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/controllers/expanded_matcherstyle_controller.dart';
@@ -90,11 +91,8 @@ class MatcherController extends GetxController {
     var unWantedUsers = user.un_liked_users;
     unWantedUsers!.addAll(user.users_i_liked!);
 
-    recommendationPostData["un_liked_users"] = unWantedUsers;
-
-    var response =
-        await goApiClient.postData(recommendationPostData, "/recommendations");
-    var matches = response.body;
+    var matches = await Get.find<RecommendationService>().getRecommendations(unWantedUsers);
+    print("GELDİ");
 
     List<Future<dynamic>> lastCardImages = [];
 
@@ -124,6 +122,8 @@ class MatcherController extends GetxController {
             builder: (_) {
               return MatcherStyleUserCard(controllerTag: user.userID!);
             }));
+        
+
         await Future.forEach(user.images!, (element) async {
           await precacheImage(
               NetworkImage(
@@ -156,20 +156,17 @@ class MatcherController extends GetxController {
       print("GELİYORRRR");
       List<Widget> newCards = [];
       List<String> newUsers = [];
-      Map<String, dynamic> recommendationPostData = Map<String, dynamic>();
+
 
       String userID = Get.find<SharedPreferenceService>().getUserID()!;
-      recommendationPostData["userID"] = userID;
+
       var user = await firestoreService.getCurrentUser(userID);
       var unWantedUsers = user.un_liked_users;
       unWantedUsers!.addAll(user.users_i_liked!);
       unWantedUsers.addAll(users!);
 
-      recommendationPostData["un_liked_users"] = unWantedUsers;
 
-      var response = await goApiClient.postData(
-          recommendationPostData, "/recommendations");
-      var matches = response.body;
+      var matches = await Get.find<RecommendationService>().getRecommendations(unWantedUsers);
 
       for (int i = (matches as List<dynamic>).length - 1; i >= 0; i--) {
         if (matches[i] != null) {

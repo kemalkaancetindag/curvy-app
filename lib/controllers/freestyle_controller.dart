@@ -3,6 +3,7 @@ import 'package:curvy_app/api/services/chat_service.dart';
 import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/current_user_online_controller.dart';
 import 'package:curvy_app/models/user.model.dart';
 import 'package:curvy_app/ui/widgets/free_style_box.dart';
 import 'dart:math' as math;
@@ -176,7 +177,7 @@ class FreestyleController extends GetxController {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Dimensions.h16),
                   image: DecorationImage(
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
                     image:  NetworkImage(
                       'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(selectedUser!.images![i])}?alt=media')
                   )
@@ -197,7 +198,7 @@ class FreestyleController extends GetxController {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Dimensions.h16),
                   image: DecorationImage(
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
                     image:  NetworkImage(
                       'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(selectedUser!.images![i])}?alt=media')
                   )
@@ -450,14 +451,18 @@ class FreestyleController extends GetxController {
                                           Dimensions.h12 / 2)),
                                   child: Padding(
                                     padding: EdgeInsets.all(Dimensions.w9 / 3),
-                                    child: Center(
+                                    child: GetBuilder<CurrentUserOnlineController>(
+                                      builder: (cuoc) {
+                                        return Center(
                                       child: Text(
-                                        "168",
+                                        cuoc.userModel!.curvy_like!.toString(),
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: Dimensions.h9),
                                       ),
-                                    ),
+                                    );
+                                      },
+                                    )
                                   ))
                             ],
                           ),
@@ -602,14 +607,18 @@ class FreestyleController extends GetxController {
                                           Dimensions.h12 / 2)),
                                   child: Padding(
                                     padding: EdgeInsets.all(Dimensions.w9 / 3),
-                                    child: Center(
+                                    child: GetBuilder<CurrentUserOnlineController>(
+                                      builder: (cuoc) {
+                                        return Center(
                                       child: Text(
-                                        "168",
+                                        cuoc.userModel!.curvy_chip!.toString(),
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: Dimensions.h9),
                                       ),
-                                    ),
+                                    );
+                                      },
+                                    )
                                   ))
                             ],
                           ),

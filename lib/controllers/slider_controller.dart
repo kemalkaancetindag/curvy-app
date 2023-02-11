@@ -4,6 +4,7 @@ import 'package:curvy_app/api/services/match_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/constants/routes.dart';
+import 'package:curvy_app/controllers/current_user_online_controller.dart';
 import 'package:curvy_app/controllers/matcher_controller.dart';
 import 'package:curvy_app/controllers/user_detail_controller.dart';
 import 'package:curvy_app/models/user.model.dart';
@@ -130,14 +131,18 @@ class SliderController extends GetxController {
                                           Dimensions.h12 / 2)),
                                   child: Padding(
                                     padding: EdgeInsets.all(Dimensions.w9 / 3),
-                                    child: Center(
+                                    child: GetBuilder<CurrentUserOnlineController>(
+                                      builder: (cuoc) {
+                                        return Center(
                                       child: Text(
-                                        "168",
+                                        cuoc.userModel!.curvy_like!.toString(),
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: Dimensions.h9),
                                       ),
-                                    ),
+                                    );
+                                      },
+                                    )
                                   ))
                             ],
                           ),
@@ -189,7 +194,7 @@ class SliderController extends GetxController {
                           ),
                         ),
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             GestureDetector(
                               onTap: () async {
@@ -217,24 +222,7 @@ class SliderController extends GetxController {
                                         fit: BoxFit.cover)),
                               ),
                             ),
-                            Container(
-                              width: Dimensions.h22,
-                              height: Dimensions.h22,
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          "assets/images/curvy_dialog_mic_icon.png"),
-                                      fit: BoxFit.cover)),
-                            ),
-                            Container(
-                              width: Dimensions.h22,
-                              height: Dimensions.h22,
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          "assets/images/curvy_dialog_add_icon.png"),
-                                      fit: BoxFit.cover)),
-                            )
+                            
                           ],
                         )
                       ],
@@ -298,14 +286,18 @@ class SliderController extends GetxController {
                                           Dimensions.h12 / 2)),
                                   child: Padding(
                                     padding: EdgeInsets.all(Dimensions.w9 / 3),
-                                    child: Center(
+                                    child: GetBuilder<CurrentUserOnlineController>(
+                                      builder: (cuoc){
+                                        return  Center(
                                       child: Text(
-                                        "168",
+                                        cuoc.userModel!.curvy_chip!.toString(),
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: Dimensions.h9),
                                       ),
-                                    ),
+                                    );
+                                      },
+                                    )
                                   ))
                             ],
                           ),
@@ -381,23 +373,7 @@ class SliderController extends GetxController {
                                         image: AssetImage(
                                             "assets/images/curvy_dialog_send_icon.png"))),
                               ),
-                            ),
-                            Container(
-                              width: Dimensions.h22,
-                              height: Dimensions.h22,
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          "assets/images/curvy_dialog_mic_icon.png"))),
-                            ),
-                            Container(
-                              width: Dimensions.h22,
-                              height: Dimensions.h22,
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          "assets/images/curvy_dialog_add_icon.png"))),
-                            ),
+                            ),                           
                           ],
                         )
                       ],

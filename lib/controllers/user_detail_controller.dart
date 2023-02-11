@@ -4,6 +4,7 @@ import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/match_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/current_user_online_controller.dart';
 import 'package:curvy_app/controllers/matcher_controller.dart';
 import 'package:curvy_app/controllers/slider_controller.dart';
 import 'package:curvy_app/models/user.model.dart';
@@ -375,14 +376,18 @@ class UserDetailController extends GetxController {
                                           Dimensions.h12 / 2)),
                                   child: Padding(
                                     padding: EdgeInsets.all(Dimensions.w9 / 3),
-                                    child: Center(
+                                    child: GetBuilder<CurrentUserOnlineController>(
+                                      builder: (cuoc) {
+                                        return Center(
                                       child: Text(
-                                        "168",
+                                        cuoc.userModel!.curvy_like!.toString(),
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: Dimensions.h9),
                                       ),
-                                    ),
+                                    );
+                                      },
+                                    )
                                   ))
                             ],
                           ),

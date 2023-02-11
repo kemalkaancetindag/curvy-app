@@ -1,6 +1,7 @@
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/constants/routes.dart';
+import 'package:curvy_app/controllers/current_user_online_controller.dart';
 import 'package:curvy_app/controllers/pages/chat_controller.dart';
 import 'package:curvy_app/controllers/user_online_controller.dart';
 import 'package:flutter/material.dart';
@@ -186,9 +187,11 @@ class ChatScreen extends StatelessWidget {
                                               Container(
                                                 margin: EdgeInsets.only(
                                                     right: Dimensions.w2 * 10),
-                                                child: Center(
+                                                child: GetBuilder<CurrentUserOnlineController>(
+                                                  builder: (cuoc) {
+                                                    return Center(
                                                   child: Text(
-                                                    "${controller.currentUser!.curvy_chip}",
+                                                    cuoc.userModel!.curvy_chip!.toString(),
                                                     style: TextStyle(
                                                         color: Colors.white,
                                                         fontWeight:
@@ -196,7 +199,9 @@ class ChatScreen extends StatelessWidget {
                                                         fontSize:
                                                             Dimensions.h16),
                                                   ),
-                                                ),
+                                                );
+                                                  },
+                                                )
                                               )
                                             ],
                                           ),
@@ -458,7 +463,7 @@ class ChatScreen extends StatelessWidget {
                           child: Container(
                             child: Center(
                               child: Image.asset(
-                                  "assets/images/chat_add_white.png"),
+                                  "assets/images/chat_share_cp.png"),
                             ),
                           ),
                         ),
