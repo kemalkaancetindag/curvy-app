@@ -393,4 +393,36 @@ class ChatService extends GetxService {
       }
     }
   }
+
+  Future sendCurvyChip(String to, String from, int amount) async {
+    var fromUser = await firestoreService.getUser(from);
+    var toUser = await firestoreService.getUser(to);
+
+    if(fromUser.curvy_chip! < amount) {
+      Get.snackbar(
+        "Hata",
+        "Yeterli CurvyCHIP bakiyeniz bulunmamaktadır.",
+        colorText: Colors.white,
+        backgroundColor: Color(0xFFD51CFF) 
+      );
+      return;
+    }
+
+    var updatedFromUser = Map<String,dynamic>();
+    var updatedToUser = Map<String,dynamic>();
+
+    updatedFromUser["curvy_chip"] = fromUser.curvy_chip! - amount;
+    updatedToUser["curvy_chip"] = toUser.curvy_chip! + amount;
+
+    await firestoreService.updateUser(updatedFromUser, from);
+    await firestoreService.updateUser(updatedToUser, to);
+
+     Get.snackbar(
+        "Başarılı",
+        "${amount} CurvyCHIP gönderildi.",
+        colorText: Colors.white,
+        backgroundColor: Color(0xFFD51CFF) 
+      );
+
+  }
 }

@@ -52,12 +52,20 @@ class ChatController extends GetxController {
   List<Widget>? _tiles;
   List<Widget>? get tiles => _tiles;
 
+  bool _isShareCPOpen = false;
+  bool get isShareCPOpen => _isShareCPOpen;
+
   @override
   Future<void> onInit() async {
     super.onInit();
 
     await setCurrentUser();
     await chatService.listenChats();
+  }
+
+  void setIsShareCPOpen(bool state) {
+    _isShareCPOpen = state;
+    update();
   }
 
   void generateTiles() {
@@ -381,6 +389,7 @@ class ChatController extends GetxController {
 
   Future sendMessageToChat(String message) async {
     await chatService.sendMessageToChat(_currentChat!.chatID!, message);
+    _typedMessage = "";
     update();
   }
 
@@ -454,5 +463,13 @@ class ChatController extends GetxController {
     chatService.setIsUserInChat(currentUserID, _currentChat!.chatID!, false);
     _currentChat = null;
     update();
+  }
+
+  Future sendCurvyChip(int amount) async {
+    if(currentChat!.user1 == currentUserID) {
+      await chatService.sendCurvyChip(currentChat!.user2!, currentUserID, amount);
+    } else {
+      await chatService.sendCurvyChip(currentChat!.user1!, currentUserID, amount);
+    }    
   }
 }
