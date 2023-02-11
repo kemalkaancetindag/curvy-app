@@ -207,5 +207,49 @@ class Utils {
     }
   }
 
+  static String chars = "0123456789bcdefghjkmnpqrstuvwxyz";
+  static int BITS_PER_BASE32_CHAR = 5;
+
+
+static String encode(double longitude, double latitude, int precision) {
+  String geocode = "";
+  List<double> longitude_range = [-180, 180];
+  List<double> latitude_range = [-90, 90];
+
+  // go through each character for precision
+  for (int i = 0; i < precision; i++) {
+    int hash = 0;
+
+    // generate a base32 char
+    for (int j = 0; j < BITS_PER_BASE32_CHAR; j++) {
+      bool isEvenBit = ((i * BITS_PER_BASE32_CHAR) + j) % 2 == 0;
+      double val = isEvenBit ? longitude : latitude;
+      List<double> range = isEvenBit ? longitude_range : latitude_range;
+      double mid = (range[0] + range[1]) / 2;
+
+      if (val > mid) {
+        hash = (hash << 1) + 1;
+        range[0] = mid;
+      } else {
+        hash = hash << 1;
+        range[1] = mid;
+      }
+    }
+
+    geocode += base32Char(hash);
+  }
+
+  return geocode;
+}
+
+
+
+
+static  String base32Char(int value) {
+  return chars.substring(value, value + 1);
+}
+
+
+
  
 }

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/general_app_state_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
@@ -9,12 +10,17 @@ import 'package:curvy_app/controllers/setup_controller.dart';
 import 'package:curvy_app/dependencies/client_dependencies.dart';
 import 'package:curvy_app/dependencies/controller_dependencies.dart';
 import 'package:curvy_app/dependencies/service_dependencies.dart';
+import 'package:curvy_app/ui/util/utils.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'firebase_options.dart';
+
+
+
+
 
 
 Future<void> main() async {
@@ -34,10 +40,13 @@ Future<void> main() async {
   var userID = Get.find<SharedPreferenceService>().getUserID();
   var updateData = Map<String,dynamic>();
   updateData['instance_token'] = token;
+   
 
+  
   if(userID != null) {
     Get.find<FirestoreService>().updateUser(updateData, userID);
     Get.put(CurrentUserOnlineController(firestoreService: Get.find()));
+    Get.find<FirestoreService>().updateUsersGeoHash();
   }
   
   

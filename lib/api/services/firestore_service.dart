@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/models/chat.model.dart';
 import 'package:curvy_app/models/interest.model.dart';
 import 'package:curvy_app/models/user.model.dart';
@@ -9,6 +10,7 @@ import 'package:curvy_app/ui/util/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
 class FirestoreService extends GetxService {
@@ -185,4 +187,52 @@ class FirestoreService extends GetxService {
     await updateUser(updateData, userID);
     return true;
   }
+
+  Future updateUsersGeoHash() async {
+    var currentUserID = Get.find<SharedPreferenceService>().getUserID();
+    var locationData = Map<String,dynamic>();
+    var updateData = Map<String,dynamic>();    
+    var hashData = Map<String,dynamic>();
+    var position = await GeolocatorPlatform.instance.getCurrentPosition(
+          locationSettings: LocationSettings(accuracy: LocationAccuracy.high));
+
+    var lat = position.latitude;
+    var long = position.longitude;
+
+
+    
+
+    for(int i = 0; i < 4; i++ ) {
+
+        
+
+      switch(i) {
+        case 0:
+          var hash = Utils.encode(long, lat, 3);
+          hashData["100km"] = hash;
+          break;          
+        case 1:
+        var hash = Utils.encode(long, lat, 4);
+          hashData["40km"] = hash;
+          break;
+        case 2:
+          var hash = Utils.encode(long, lat, 5);
+          hashData["5km"] = hash;
+          break;
+        case 3:
+          var hash = Utils.encode(long, lat, 6);
+          hashData["2km"] = hash;
+          break;
+      }
+      
+    }    
+
+    locationData["latitude"] = lat;
+    locationData["longitude"] = long;
+    locationData["geohash"] = hashData;
+    updateData["location"] = locationData;
+
+    await updateUser(updateData, currentUserID!);
+  
+  } 
 }
