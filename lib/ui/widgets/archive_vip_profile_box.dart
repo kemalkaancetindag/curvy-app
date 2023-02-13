@@ -9,7 +9,8 @@ import 'package:get/get.dart';
 
 class ArchiveVipProfileBox extends StatelessWidget {
   String userID;
-  ArchiveVipProfileBox({super.key, required this.userID});
+  int selectionTime;
+  ArchiveVipProfileBox({super.key, required this.userID, required this.selectionTime});
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +118,7 @@ class ArchiveVipProfileBox extends StatelessWidget {
                                                 left: Dimensions.w8 / 2),
                                             child: Center(
                                               child: Text(
-                                                "13 saat sonra kaldirilacak",
+                                                "${(DateTime.fromMillisecondsSinceEpoch(selectionTime - DateTime.now().millisecondsSinceEpoch).hour).toString()} saat sonra kaldırılacak",
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontSize:

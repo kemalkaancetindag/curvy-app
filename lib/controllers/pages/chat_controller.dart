@@ -257,7 +257,7 @@ class ChatController extends GetxController {
                                                                             .h21,
                                                                     fontWeight:
                                                                         FontWeight
-                                                                            .bold),
+                                                                            .w800),
                                                               ),
                                                             ),
                                                             Container(

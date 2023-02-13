@@ -1,6 +1,7 @@
 import 'package:curvy_app/api/clients/go_api_client.dart';
 import 'package:curvy_app/api/services/chat_service.dart';
 import 'package:curvy_app/api/services/firestore_service.dart';
+import 'package:curvy_app/api/services/recommendation_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/controllers/current_user_online_controller.dart';
@@ -104,11 +105,15 @@ class FreestyleController extends GetxController {
     var data = Map<String, dynamic>();
     data["userID"] = userID;
     data["un_liked_users"] = currentUser.un_liked_users;
+     
+    var unWantedUsers = currentUser.un_liked_users;
+    unWantedUsers!.addAll(currentUser.users_i_liked!);
 
-    var response = await goApiClient.postData(data, "/recommendations");
-    selectedUser = UserModel.fromJson(response.body[0] as Map<String, dynamic>);
+    var matches = await Get.find<RecommendationService>().getRecommendations(unWantedUsers);
 
-    response.body.skip(0).forEach((element) {
+    selectedUser = UserModel.fromJson(matches.first as Map<String, dynamic>);
+
+    matches.skip(0).forEach((element) {
       var user = UserModel.fromJson(element as Map<String, dynamic>);
       tempRecommendedUsers.add(user);
     });

@@ -2,8 +2,10 @@ import 'package:curvy_app/api/services/archive_service.dart';
 import 'package:curvy_app/api/services/chat_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/constants/routes.dart';
+import 'package:curvy_app/controllers/current_user_online_controller.dart';
 import 'package:curvy_app/controllers/user_detail_controller.dart';
 import 'package:curvy_app/controllers/user_online_controller.dart';
+import 'package:curvy_app/models/vip_porfiles.model.dart';
 import 'package:curvy_app/ui/widgets/archive_vip_profile_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +14,8 @@ import 'package:get/get.dart';
 class ArchiveVipProfilesController extends GetxController {
   
   ArchiveService archiveService;
-  List<dynamic>? _vipProfiles;  
-  List<dynamic>? get vipProfiles => _vipProfiles;
+  List<VipProfiles>? _vipProfiles;  
+  List<VipProfiles>? get vipProfiles => _vipProfiles;
 
   List<Widget>? _tiles;
   List<Widget>? get tiles => _tiles;
@@ -32,15 +34,15 @@ class ArchiveVipProfilesController extends GetxController {
 
   void generateTiles() {
     _tiles = [];
-    _vipProfiles!.forEach((userID) { 
-      Get.put(UserOnlineController(firestoreService: Get.find(), userID: userID), permanent: true, tag: userID);
+    _vipProfiles!.forEach((profile) { 
+      Get.put(UserOnlineController(firestoreService: Get.find(), userID: profile.userID!), permanent: true, tag: profile.userID!);
       _tiles!.add(GestureDetector(
         onTap: () async {
-          var userDetailController = Get.put(UserDetailController(firestoreService: Get.find(), userID: userID));          
+          var userDetailController = Get.put(UserDetailController(firestoreService: Get.find(), userID: profile.userID!));          
                     
           Get.toNamed(Routes.userDetail);
         },
-        child: ArchiveVipProfileBox(userID: userID,),
+        child: ArchiveVipProfileBox(userID: profile.userID!, selectionTime: profile.time_selected!,),
       ));      
     });
   }
@@ -97,14 +99,18 @@ class ArchiveVipProfilesController extends GetxController {
                                           Dimensions.h12 / 2)),
                                   child: Padding(
                                     padding: EdgeInsets.all(Dimensions.w9 / 3),
-                                    child: Center(
+                                    child: GetBuilder<CurrentUserOnlineController>(
+                                      builder: (cuoc) {
+                                        return  Center(
                                       child: Text(
-                                        "168",
+                                        cuoc.userModel!.curvy_like!.toString(),
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: Dimensions.h9),
                                       ),
-                                    ),
+                                    );
+                                      },
+                                    )
                                   ))
                             ],
                           ),
@@ -171,19 +177,7 @@ class ArchiveVipProfilesController extends GetxController {
                                       "assets/images/curvy_dialog_send_icon.png"),
                                 ),
                               ),
-                            ),
-                            Container(
-                              child: Center(
-                                child: Image.asset(
-                                    "assets/images/curvy_dialog_mic_icon.png"),
-                              ),
-                            ),
-                            Container(
-                              child: Center(
-                                child: Image.asset(
-                                    "assets/images/curvy_dialog_add_icon.png"),
-                              ),
-                            )
+                            ),                        
                           ],
                         )
                       ],

@@ -1,6 +1,7 @@
 import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/models/user.model.dart';
+import 'package:curvy_app/models/vip_porfiles.model.dart';
 import 'package:get/get.dart';
 
 class ArchiveService extends GetxService {
@@ -46,15 +47,15 @@ class ArchiveService extends GetxService {
     return currentUser.users_i_liked!;
   }
 
-  Future<List<dynamic>> getVipProfiles() async {
+  Future<List<VipProfiles>> getVipProfiles() async {
     var currentUserID = Get.find<SharedPreferenceService>().getUserID();
-    List<dynamic> vipProfilesList = [];
+    List<VipProfiles> vipProfilesList = [];
 
     var vipProfiles = (await firestoreService.getCollection("vip_profiles").orderBy("like_count").get()).docs;
 
     vipProfiles.forEach((profile) { 
       if((profile.data() as Map<String,dynamic>)["userID"] != currentUserID){
-        vipProfilesList.add((profile.data() as Map<String,dynamic>)["userID"]);
+        vipProfilesList.add(VipProfiles.fromJson(profile.data() as Map<String,dynamic>));
       }      
       
     });

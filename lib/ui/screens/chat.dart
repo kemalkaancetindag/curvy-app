@@ -139,7 +139,7 @@ class ChatScreen extends StatelessWidget {
                                                                                 "${userOnlineController.user!.name!.split(" ").first},",
                                                                             style:
                                                                                 TextStyle(
-                                                                              fontWeight: FontWeight.bold,
+                                                                              fontWeight: FontWeight.w800,
                                                                             )),
                                                                         TextSpan(
                                                                             text:

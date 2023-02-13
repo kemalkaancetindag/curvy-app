@@ -139,65 +139,11 @@ export const incrementLikeCount = functions.firestore
       }
     });
 
-export const controlVipProfiles = functions.pubsub
-    .schedule("every 1800 minutes")
+export const vipProfiles = functions.pubsub
+    .schedule("every 2 minutes")
     .onRun(async (context) => {
-      const appState = (await db.collection("app_state")
-          .doc("92cGj96AJX07PtNIGqzN")
-          .get())
-          .data();
-
-      console.log(appState);
-
-      if (appState!.last_vip_profiles.length == 0) {
-        const mostLikedProfiles = (await db.collection("users")
-            .orderBy("like_count").limit(20).get()).docs;
-
-        const newLastVipProfiles = appState!.last_vip_profiles;
-        for (const profile of mostLikedProfiles) {
-          const currentPorifleData = profile.data();
-          const currentTime = Date.now();
-          await db.collection("vip_profiles").add({
-            userID: currentPorifleData.userID,
-            time_selected: currentTime,
-            like_count: currentPorifleData.users_who_liked_me.length,
-          });
-          newLastVipProfiles.push(currentPorifleData.userID);
-        }
-        await db.collection("app_state").doc("92cGj96AJX07PtNIGqzN").update({
-          last_vip_profiles: newLastVipProfiles,
-        });
-      } else {
-        const mostLikedProfiles = (await db.collection("users")
-            .orderBy("like_count").get()).docs;
-
-        const currentVipProfiles = (await db.collection("vip_profiles")
-            .get()).docs;
-
-        for (const profile of currentVipProfiles) {
-          await db.collection("vip_collections").doc(profile.id).delete();
-        }
-        for (const profile of mostLikedProfiles) {
-          const currentProfileData = profile.data();
-          const currentTime = Date.now();
-          if (!appState!.last_vip_profiles
-              .includes(currentProfileData.userID)) {
-            await db.collection("vip_profiles").add({
-              userID: currentProfileData.userID,
-              time_selected: currentTime,
-              like_count: currentProfileData.users_who_liked_me.length,
-            });
-            const newLastVipProfiles = appState!.last_vip_profiles;
-            newLastVipProfiles.push(currentProfileData.userID);
-            await db.collection("app_state").doc("92cGj96AJX07PtNIGqzN")
-                .update({
-                  last_vip_profiles: newLastVipProfiles,
-                });
-          }
-        }
-      }
+      
     });
-
 
 export const deleteUnUsedHubs = functions.firestore
     .document("online_hubs/{hubID}")

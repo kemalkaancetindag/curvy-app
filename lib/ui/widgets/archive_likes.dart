@@ -1,4 +1,5 @@
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/constants/routes.dart';
 import 'package:curvy_app/controllers/pages/archive_who_liked_me_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -72,7 +73,11 @@ class ArchiveLikes extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
+                GestureDetector(
+                  onTap: (){
+                    Get.toNamed(Routes.buyCurvyTurbo);
+                  },
+                  child:                 Container(
                   width: Dimensions.w314,
                   height: Dimensions.h60,
                   margin: EdgeInsets.only(top: Dimensions.h14),
@@ -102,6 +107,7 @@ class ArchiveLikes extends StatelessWidget {
                       )
                     ],
                   ),
+                ),
                 )
               ],
             ),

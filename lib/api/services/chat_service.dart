@@ -175,9 +175,31 @@ class ChatService extends GetxService {
     await firestoreService.updateChat(chatData, chatID);
   }
 
+  Future<String?> checkChatWithUserIDS(String currentUserID, String user2) async {
+    var e1Chats = await firestoreService.getCollection("chats").where("user1", isEqualTo: currentUserID).where("user2", isEqualTo: user2).get();
+    var e2Chats = await firestoreService.getCollection("chats").where("user1", isEqualTo: user2).where("user2", isEqualTo: currentUserID).get();
+
+    if(e1Chats.docs.isNotEmpty) {
+      return e1Chats.docs[0].id;
+    } else if(e2Chats.docs.isNotEmpty){
+      return e2Chats.docs[0].id;
+    }
+
+    return null;
+  }
+
   Future<bool> startNewChat(
       String message, String user2, int startingType) async {
     var userID = Get.find<SharedPreferenceService>().getUserID();
+
+    var existingChat = await checkChatWithUserIDS(userID!, user2);
+
+    if(existingChat != null) {
+      await sendMessageToChat(existingChat, message);
+      return true;
+    }
+
+
 
     if (startingType == ChatStart.curvyLike.value) {
       var result = await firestoreService.spendCurvyLike(userID!, 1);
@@ -208,8 +230,7 @@ class ChatService extends GetxService {
     messages.add(newMessage);
 
     var documentRef = firestoreService.getCollection('chats').doc();
-    print("sa");
-    print(startingType);
+
 
     var newChat = Chat(
         isActive: true,

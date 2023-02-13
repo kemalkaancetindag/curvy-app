@@ -13,7 +13,7 @@ class BlackBoldHeader extends StatelessWidget {
       text,
       style: TextStyle(
         fontSize: Dimensions.h40,        
-        fontWeight: FontWeight.w900
+        fontWeight: FontWeight.w800
       ),
     );
   }

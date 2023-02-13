@@ -270,7 +270,7 @@ class IndexScreen extends StatelessWidget {
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontWeight:
-                                                        FontWeight.bold),
+                                                        FontWeight.w700),
                                               ),
                                             )))
                                   ],
@@ -297,7 +297,7 @@ class IndexScreen extends StatelessWidget {
                                           : "",
                                       style: TextStyle(
                                           fontSize: Dimensions.h22,
-                                          fontWeight: FontWeight.bold),
+                                          fontWeight: FontWeight.w800),
                                     ),
                                   ),
                                   Container(
