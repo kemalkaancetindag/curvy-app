@@ -19,10 +19,16 @@ class IndexPageController extends GetxController {
     @override
   Future<void> onInit() async {    
     super.onInit();
+    var matcherControllerRegistered = Get.isRegistered<MatcherController>();
     _userID = Get.find<SharedPreferenceService>().getUserID();
-    await Get.find<GeneralAppStateService>().setUserStatusOnline();
-    Get.find<MatcherController>().onInit();
+    await Get.find<GeneralAppStateService>().setUserStatusOnline();    
+    
     await setUser();
+    if(matcherControllerRegistered) {
+          Get.find<MatcherController>().onInit();
+    } else {
+      Get.put(MatcherController(firestoreService: Get.find(), goApiClient: Get.find()));
+    }
     await Get.find<GeneralAppStateService>().updateLocation();
     await Get.find<GeneralAppStateService>().updateInstanceToken();
     

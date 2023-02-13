@@ -14,6 +14,7 @@ import 'package:curvy_app/ui/screens/setup_sex.dart';
 import 'package:curvy_app/ui/screens/validation_code.dart';
 import 'package:curvy_app/ui/screens/validation_mail.dart';
 import 'package:curvy_app/ui/screens/welcome_screen.dart';
+import 'package:curvy_app/ui/util/utils.dart';
 import 'package:curvy_app/ui/widgets/interest_select.dart';
 import 'package:dio/dio.dart' as dio_package;
 import 'package:firebase_auth/firebase_auth.dart';
@@ -56,6 +57,8 @@ class SetupController extends GetxController {
   List<String> _validationCode = <String>[];
   List<String> _birthdateList = <String>[];
   bool _isAfterSetup = false;
+  bool _isCreating = false;
+  bool get isCreating => _isCreating;
 
   String? get phoneNumberAppendix => _phoneNumberAppendix;
   String? get phoneNumber => _phoneNumber;
@@ -87,6 +90,11 @@ class SetupController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     await getInterests();
+  }
+
+  void setIsCreating(bool state) {
+    _isCreating = state;
+    update();
   }
 
   Future<void> getInterests() async {
@@ -326,6 +334,8 @@ class SetupController extends GetxController {
   }
 
   Future<void> createImageFiles() async {
+    _isCreating = true;
+    update();
     _images.removeWhere((element) => element == "");
     if (_images.length == 0) {
       Get.snackbar("Hata", "En az bir fotoğraf eklemelisiniz.",
@@ -338,11 +348,24 @@ class SetupController extends GetxController {
     if (_loginMethod == LoginMethod.google.value) {
       var userImages = await Get.find<FirestoreService>()
           .uploadImages(_images, _googleUser!.uid);
-      print("ÖNCE");
+
       await Geolocator.requestPermission();
       var position = await GeolocatorPlatform.instance.getCurrentPosition(
           locationSettings: LocationSettings(accuracy: LocationAccuracy.high));
-      print("SONRA");
+      var geohash = UserLocationGeoHashes();
+
+      for (int i = 3; i < 7; i++) {
+        if (i == 3) {
+          geohash.km100 =
+              Utils.encode(position.longitude, position.latitude, i);
+        } else if (i == 4) {
+          geohash.km40 = Utils.encode(position.longitude, position.latitude, i);
+        } else if (i == 5) {
+          geohash.km5 = Utils.encode(position.longitude, position.latitude, i);
+        } else if (i == 6) {
+          geohash.km2 = Utils.encode(position.longitude, position.latitude, i);
+        }
+      }
 
       var jsonUser = UserModel(
           userID: _googleUser!.uid,
@@ -362,7 +385,9 @@ class SetupController extends GetxController {
           sexual_preference: _sexPrefenrence,
           interests: _interests,
           location: UserLocation(
-              latitude: position.latitude, longitude: position.longitude),
+              latitude: position.latitude,
+              longitude: position.longitude,
+              geohash: geohash),
           instance_token: _instanceToken,
           users_who_liked_me: [],
           users_i_liked: []).toJson();
@@ -371,16 +396,30 @@ class SetupController extends GetxController {
       await Get.find<SharedPreferenceService>().saveUser(jsonUser);
     } else if (_loginMethod == LoginMethod.phone.value) {
       var userImages = await Get.find<FirestoreService>()
-          .uploadImages(_images, _userPhoneId!);      
-      var isLocationEnabled = await GeolocatorPlatform.instance.checkPermission();
-      
-      if(isLocationEnabled != LocationPermission.always) {        
-         await Geolocator.requestPermission();
+          .uploadImages(_images, _userPhoneId!);
+      var isLocationEnabled =
+          await GeolocatorPlatform.instance.checkPermission();
+
+      if (isLocationEnabled != LocationPermission.always) {
+        await Geolocator.requestPermission();
       }
-     
+
       var position = await GeolocatorPlatform.instance.getCurrentPosition(
           locationSettings: LocationSettings(accuracy: LocationAccuracy.high));
-      print("SONRA");
+      var geohash = UserLocationGeoHashes();
+
+      for (int i = 3; i < 7; i++) {
+        if (i == 3) {
+          geohash.km100 =
+              Utils.encode(position.longitude, position.latitude, i);
+        } else if (i == 4) {
+          geohash.km40 = Utils.encode(position.longitude, position.latitude, i);
+        } else if (i == 5) {
+          geohash.km5 = Utils.encode(position.longitude, position.latitude, i);
+        } else if (i == 6) {
+          geohash.km2 = Utils.encode(position.longitude, position.latitude, i);
+        }
+      }
 
       var jsonUser = UserModel(
           userID: _userPhoneId,
@@ -400,7 +439,9 @@ class SetupController extends GetxController {
           sexual_preference: _sexPrefenrence,
           interests: _interests,
           location: UserLocation(
-              latitude: position.latitude, longitude: position.longitude),
+              latitude: position.latitude,
+              longitude: position.longitude,
+              geohash: geohash),
           instance_token: _instanceToken,
           users_who_liked_me: [],
           users_i_liked: []).toJson();
@@ -411,18 +452,33 @@ class SetupController extends GetxController {
       await Get.find<SharedPreferenceService>().saveUser(jsonUser);
 
       await Get.find<SharedPreferenceService>().setLastUserID(userDocID);
-    } else if(_loginMethod == LoginMethod.apple.value) {
-            var userImages = await Get.find<FirestoreService>()
-          .uploadImages(_images, _userPhoneId!);      
-      var isLocationEnabled = await GeolocatorPlatform.instance.checkPermission();
-      
-      if(isLocationEnabled != LocationPermission.always) {        
-         await Geolocator.requestPermission();
+    } else if (_loginMethod == LoginMethod.apple.value) {
+      var userImages = await Get.find<FirestoreService>()
+          .uploadImages(_images, _userPhoneId!);
+      var isLocationEnabled =
+          await GeolocatorPlatform.instance.checkPermission();
+
+      if (isLocationEnabled != LocationPermission.always) {
+        await Geolocator.requestPermission();
       }
-     
+
       var position = await GeolocatorPlatform.instance.getCurrentPosition(
           locationSettings: LocationSettings(accuracy: LocationAccuracy.high));
-      print("SONRA");
+
+      var geohash = UserLocationGeoHashes();
+
+      for (int i = 3; i < 7; i++) {
+        if (i == 3) {
+          geohash.km100 =
+              Utils.encode(position.longitude, position.latitude, i);
+        } else if (i == 4) {
+          geohash.km40 = Utils.encode(position.longitude, position.latitude, i);
+        } else if (i == 5) {
+          geohash.km5 = Utils.encode(position.longitude, position.latitude, i);
+        } else if (i == 6) {
+          geohash.km2 = Utils.encode(position.longitude, position.latitude, i);
+        }
+      }
 
       var jsonUser = UserModel(
           userID: _appleUser!.uid,
@@ -442,7 +498,9 @@ class SetupController extends GetxController {
           sexual_preference: _sexPrefenrence,
           interests: _interests,
           location: UserLocation(
-              latitude: position.latitude, longitude: position.longitude),
+              latitude: position.latitude,
+              longitude: position.longitude,
+              geohash: geohash),
           instance_token: _instanceToken,
           users_who_liked_me: [],
           users_i_liked: []).toJson();
@@ -456,6 +514,7 @@ class SetupController extends GetxController {
     }
 
     Get.offAllNamed(Routes.index);
+    _isCreating = false;
   }
 
   void setAfterSetup(bool isAfterSetup) {

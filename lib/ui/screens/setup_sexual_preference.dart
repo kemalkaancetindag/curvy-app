@@ -132,7 +132,7 @@ class SetupSexualPreferenceScreen extends StatelessWidget {
                       controller.controlSexPreference(7);
                     },
                     child: SexualPreferenceSelect(
-                      text: "Heteroseksüel",
+                      text: "Homoseksüel",
                       isSelected: controller.sexPreference.contains(7),
                     ),
                   ),

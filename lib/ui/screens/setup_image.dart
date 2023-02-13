@@ -18,249 +18,260 @@ class SetupImageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: IconButton(
-          onPressed: () {
-            Get.back();
-          },
-          icon: Icon(
-            Icons.arrow_back_ios_new,
-            color: Colors.black.withOpacity(0.3),
-          ),
-        ),
-      ),
-      body: Container(
-        width: double.maxFinite,
-        height: double.maxFinite,
-        decoration: BoxDecoration(color: Colors.white),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Column(
-              children: [
-                BlackBoldHeader(text: "Fotoğraf ekle"),
-                Text(
-                  "Devam etmek için en az 2 fotoğraf ekle",
-                  style: TextStyle(
-                      color: Colors.black.withOpacity(0.4),
-                      fontSize: Dimensions.h16),
-                ),
-              ],
-            ),
-            GetBuilder<SetupController>(builder: ((controller) {
-              return Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(top: Dimensions.h17),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        GestureDetector(
-                            onTap: () async {
-                              var status = await Permission.camera.status;
-                              if (status.isGranted) {
-                                controller.setCurrentImageIndex(0);
-                                Get.to(() => SetupAddImageScreen());
-                              } else {
-                                await Permission.camera.request();
-                              }
-                            },
-                            child: DottedBorder(
-                                borderType: BorderType.RRect,
-                                //padding: EdgeInsets.all(Dimensions.h8/2),
-                                radius: Radius.circular(Dimensions.h8),
-                                color: Color(0xFFD2D3D5),
-                                child: ClipRRect(
-                                  clipBehavior: Clip.none,
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(Dimensions.h8)),
-                                  child: AddImageBox(
-                                    index: 0,
-                                  ),
-                                ))),
-                        GestureDetector(
-                            onTap: () {
-                              controller.setCurrentImageIndex(1);
-                              Get.to(() => SetupAddImageScreen());
-                            },
-                            child: DottedBorder(
-                                borderType: BorderType.RRect,
-                                //padding: EdgeInsets.all(Dimensions.h8/2),
-                                radius: Radius.circular(Dimensions.h8),
-                                color: Color(0xFFD2D3D5),
-                                child: ClipRRect(
-                                  clipBehavior: Clip.none,
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(Dimensions.h8)),
-                                  child: AddImageBox(
-                                    index: 1,
-                                  ),
-                                ))),
-                        GestureDetector(
-                            onTap: () {
-                              controller.setCurrentImageIndex(2);
-                              Get.to(() => SetupAddImageScreen());
-                            },
-                            child: DottedBorder(
-                                borderType: BorderType.RRect,
-                                //padding: EdgeInsets.all(Dimensions.h8/2),
-                                radius: Radius.circular(Dimensions.h8),
-                                color: Color(0xFFD2D3D5),
-                                child: ClipRRect(
-                                  clipBehavior: Clip.none,
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(Dimensions.h8)),
-                                  child: AddImageBox(
-                                    index: 2,
-                                  ),
-                                )))
-                      ],
-                    ),
+        appBar: AppBar(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            leading: GetBuilder<SetupController>(
+              builder: (controller) {
+                if (controller.isCreating) {
+                  return Container();
+                }
+                return IconButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  icon: Icon(
+                    Icons.arrow_back_ios_new,
+                    color: Colors.black.withOpacity(0.3),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: Dimensions.h17),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        GestureDetector(
-                            onTap: () {
-                              controller.setCurrentImageIndex(3);
-                              Get.to(() => SetupAddImageScreen());
-                            },
-                            child: DottedBorder(
-                                borderType: BorderType.RRect,
-                                //padding: EdgeInsets.all(Dimensions.h8/2),
-                                radius: Radius.circular(Dimensions.h8),
-                                color: Color(0xFFD2D3D5),
-                                child: ClipRRect(
-                                  clipBehavior: Clip.none,
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(Dimensions.h8)),
-                                  child: AddImageBox(
-                                    index: 3,
-                                  ),
-                                ))),
-                        GestureDetector(
-                            onTap: () {
-                              controller.setCurrentImageIndex(4);
-                              Get.to(() => SetupAddImageScreen());
-                            },
-                            child: DottedBorder(
-                                borderType: BorderType.RRect,
-                                //padding: EdgeInsets.all(Dimensions.h8/2),
-                                radius: Radius.circular(Dimensions.h8),
-                                color: Color(0xFFD2D3D5),
-                                child: ClipRRect(
-                                  clipBehavior: Clip.none,
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(Dimensions.h8)),
-                                  child: AddImageBox(
-                                    index: 4,
-                                  ),
-                                ))),
-                        GestureDetector(
-                            onTap: () {
-                              controller.setCurrentImageIndex(5);
-                              Get.to(() => SetupAddImageScreen());
-                            },
-                            child: DottedBorder(
-                                borderType: BorderType.RRect,
-                                //padding: EdgeInsets.all(Dimensions.h8/2),
-                                radius: Radius.circular(Dimensions.h8),
-                                color: Color(0xFFD2D3D5),
-                                child: ClipRRect(
-                                  clipBehavior: Clip.none,
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(Dimensions.h8)),
-                                  child: AddImageBox(
-                                    index: 5,
-                                  ),
-                                )))
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: Dimensions.h17),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            controller.setCurrentImageIndex(6);
-                            Get.to(() => SetupAddImageScreen());
-                          },
-                          child: DottedBorder(
-                              borderType: BorderType.RRect,
-                              //padding: EdgeInsets.all(Dimensions.h8/2),
-                              radius: Radius.circular(Dimensions.h8),
-                              color: Color(0xFFD2D3D5),
-                              child: ClipRRect(
-                                clipBehavior: Clip.none,
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(Dimensions.h8)),
-                                child: AddImageBox(
-                                  index: 6,
-                                ),
-                              )),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            controller.setCurrentImageIndex(7);
-                            Get.to(() => SetupAddImageScreen());
-                          },
-                          child: DottedBorder(
-                              borderType: BorderType.RRect,
-                              //padding: EdgeInsets.all(Dimensions.h8/2),
-                              radius: Radius.circular(Dimensions.h8),
-                              color: Color(0xFFD2D3D5),
-                              child: ClipRRect(
-                                clipBehavior: Clip.none,
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(Dimensions.h8)),
-                                child: AddImageBox(
-                                  index: 7,
-                                ),
-                              )),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            controller.setCurrentImageIndex(8);
-                            Get.to(() => SetupAddImageScreen());
-                          },
-                          child: DottedBorder(
-                              borderType: BorderType.RRect,
-                              //padding: EdgeInsets.all(Dimensions.h8/2),
-                              radius: Radius.circular(Dimensions.h8),
-                              color: Color(0xFFD2D3D5),
-                              child: ClipRRect(
-                                clipBehavior: Clip.none,
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(Dimensions.h8)),
-                                child: AddImageBox(
-                                  index: 8,
-                                ),
-                              )),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              );
-            })),
-            GestureDetector(
-              onTap: ()  {
-                Get.find<SetupController>().createImageFiles();
+                );
               },
-              child: GradientButton(text: "DEVAM ET"),
-            )
-          ],
-        ),
-      ),
-    );
+            )),
+        body: GetBuilder<SetupController>(
+          builder: (controller) {
+            return Container(
+              width: double.maxFinite,
+              height: double.maxFinite,
+              decoration: BoxDecoration(color: Colors.white),
+              child: controller.isCreating ? Center(
+                child: CircularProgressIndicator(
+                  color: Color(0xFFD51CFF),
+                ),
+              ) : Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Column(
+                    children: [
+                      BlackBoldHeader(text: "Fotoğraf ekle"),
+                      Text(
+                        "Devam etmek için en az 2 fotoğraf ekle",
+                        style: TextStyle(
+                            color: Colors.black.withOpacity(0.4),
+                            fontSize: Dimensions.h16),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: Dimensions.h17),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                                onTap: () async {
+                                  var status = await Permission.camera.status;
+                                  if (status.isGranted) {
+                                    controller.setCurrentImageIndex(0);
+                                    Get.to(() => SetupAddImageScreen());
+                                  } else {
+                                    await Permission.camera.request();
+                                  }
+                                },
+                                child: DottedBorder(
+                                    borderType: BorderType.RRect,
+                                    //padding: EdgeInsets.all(Dimensions.h8/2),
+                                    radius: Radius.circular(Dimensions.h8),
+                                    color: Color(0xFFD2D3D5),
+                                    child: ClipRRect(
+                                      clipBehavior: Clip.none,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(Dimensions.h8)),
+                                      child: AddImageBox(
+                                        index: 0,
+                                      ),
+                                    ))),
+                            GestureDetector(
+                                onTap: () {
+                                  controller.setCurrentImageIndex(1);
+                                  Get.to(() => SetupAddImageScreen());
+                                },
+                                child: DottedBorder(
+                                    borderType: BorderType.RRect,
+                                    //padding: EdgeInsets.all(Dimensions.h8/2),
+                                    radius: Radius.circular(Dimensions.h8),
+                                    color: Color(0xFFD2D3D5),
+                                    child: ClipRRect(
+                                      clipBehavior: Clip.none,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(Dimensions.h8)),
+                                      child: AddImageBox(
+                                        index: 1,
+                                      ),
+                                    ))),
+                            GestureDetector(
+                                onTap: () {
+                                  controller.setCurrentImageIndex(2);
+                                  Get.to(() => SetupAddImageScreen());
+                                },
+                                child: DottedBorder(
+                                    borderType: BorderType.RRect,
+                                    //padding: EdgeInsets.all(Dimensions.h8/2),
+                                    radius: Radius.circular(Dimensions.h8),
+                                    color: Color(0xFFD2D3D5),
+                                    child: ClipRRect(
+                                      clipBehavior: Clip.none,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(Dimensions.h8)),
+                                      child: AddImageBox(
+                                        index: 2,
+                                      ),
+                                    )))
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: Dimensions.h17),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                                onTap: () {
+                                  controller.setCurrentImageIndex(3);
+                                  Get.to(() => SetupAddImageScreen());
+                                },
+                                child: DottedBorder(
+                                    borderType: BorderType.RRect,
+                                    //padding: EdgeInsets.all(Dimensions.h8/2),
+                                    radius: Radius.circular(Dimensions.h8),
+                                    color: Color(0xFFD2D3D5),
+                                    child: ClipRRect(
+                                      clipBehavior: Clip.none,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(Dimensions.h8)),
+                                      child: AddImageBox(
+                                        index: 3,
+                                      ),
+                                    ))),
+                            GestureDetector(
+                                onTap: () {
+                                  controller.setCurrentImageIndex(4);
+                                  Get.to(() => SetupAddImageScreen());
+                                },
+                                child: DottedBorder(
+                                    borderType: BorderType.RRect,
+                                    //padding: EdgeInsets.all(Dimensions.h8/2),
+                                    radius: Radius.circular(Dimensions.h8),
+                                    color: Color(0xFFD2D3D5),
+                                    child: ClipRRect(
+                                      clipBehavior: Clip.none,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(Dimensions.h8)),
+                                      child: AddImageBox(
+                                        index: 4,
+                                      ),
+                                    ))),
+                            GestureDetector(
+                                onTap: () {
+                                  controller.setCurrentImageIndex(5);
+                                  Get.to(() => SetupAddImageScreen());
+                                },
+                                child: DottedBorder(
+                                    borderType: BorderType.RRect,
+                                    //padding: EdgeInsets.all(Dimensions.h8/2),
+                                    radius: Radius.circular(Dimensions.h8),
+                                    color: Color(0xFFD2D3D5),
+                                    child: ClipRRect(
+                                      clipBehavior: Clip.none,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(Dimensions.h8)),
+                                      child: AddImageBox(
+                                        index: 5,
+                                      ),
+                                    )))
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: Dimensions.h17),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                controller.setCurrentImageIndex(6);
+                                Get.to(() => SetupAddImageScreen());
+                              },
+                              child: DottedBorder(
+                                  borderType: BorderType.RRect,
+                                  //padding: EdgeInsets.all(Dimensions.h8/2),
+                                  radius: Radius.circular(Dimensions.h8),
+                                  color: Color(0xFFD2D3D5),
+                                  child: ClipRRect(
+                                    clipBehavior: Clip.none,
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(Dimensions.h8)),
+                                    child: AddImageBox(
+                                      index: 6,
+                                    ),
+                                  )),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                controller.setCurrentImageIndex(7);
+                                Get.to(() => SetupAddImageScreen());
+                              },
+                              child: DottedBorder(
+                                  borderType: BorderType.RRect,
+                                  //padding: EdgeInsets.all(Dimensions.h8/2),
+                                  radius: Radius.circular(Dimensions.h8),
+                                  color: Color(0xFFD2D3D5),
+                                  child: ClipRRect(
+                                    clipBehavior: Clip.none,
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(Dimensions.h8)),
+                                    child: AddImageBox(
+                                      index: 7,
+                                    ),
+                                  )),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                controller.setCurrentImageIndex(8);
+                                Get.to(() => SetupAddImageScreen());
+                              },
+                              child: DottedBorder(
+                                  borderType: BorderType.RRect,
+                                  //padding: EdgeInsets.all(Dimensions.h8/2),
+                                  radius: Radius.circular(Dimensions.h8),
+                                  color: Color(0xFFD2D3D5),
+                                  child: ClipRRect(
+                                    clipBehavior: Clip.none,
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(Dimensions.h8)),
+                                    child: AddImageBox(
+                                      index: 8,
+                                    ),
+                                  )),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Get.find<SetupController>().createImageFiles();
+                    },
+                    child: GradientButton(text: "DEVAM ET"),
+                  )
+                ],
+              ),
+            );
+          },
+        ));
   }
 }

@@ -296,24 +296,60 @@ class _Settings {
 
 class UserLocation {
   double? longitude;
-  double? latitude;
+  double? latitude;  
+  UserLocationGeoHashes? geohash;
 
   UserLocation({
     this.longitude,
-    this.latitude
+    this.latitude,
+    this.geohash
   });
 
   UserLocation.fromJson(Map<String, dynamic> json) {
     longitude = json['longitude'];
     latitude = json['latitude'];
+    geohash = UserLocationGeoHashes.fromJson(json['geohash']);
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['longitude'] = longitude;
     data['latitude'] = latitude;
+    data['geohash'] = geohash!.toJson();
     return data;
   }
+}
+
+class UserLocationGeoHashes {
+  String? km100;
+  String? km40;
+  String? km5;
+  String? km2;
+
+  UserLocationGeoHashes({
+    this.km100,
+    this.km40,
+    this.km5,
+    this.km2
+  });
+
+  UserLocationGeoHashes.fromJson(Map<String,dynamic> json) {
+    km100 = json['km100'];
+    km40 = json['km40'];
+    km5 = json['km5'];
+    km2 = json['km2'];
+  }
+
+
+  Map<String,dynamic> toJson() {
+     final Map<String, dynamic> data = new Map<String, dynamic>();
+     data['km100'] = km100;
+     data['km40'] = km40;
+     data['km5'] = km5;
+     data['km2'] = km2;
+     return data;
+  }
+
 }
 
 
