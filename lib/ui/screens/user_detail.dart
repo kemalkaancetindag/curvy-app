@@ -30,7 +30,7 @@ class UserDetailScreen extends StatelessWidget {
                   height: Dimensions.h520,
                   child: Stack(
                     clipBehavior: Clip.none,
-                    children: controller.imageCarousel ?? [],
+                    children: controller.imageCarousel,
                   ),
                 ),
                 ),
