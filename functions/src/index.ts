@@ -140,9 +140,54 @@ export const incrementLikeCount = functions.firestore
     });
 
 export const vipProfiles = functions.pubsub
-    .schedule("every 2 minutes")
+    .schedule("every 120 minutes")
     .onRun(async (context) => {
-      
+      const appState = (await db.collection("app_state")
+          .doc("92cGj96AJX07PtNIGqzN").get()).data();
+      const lastVipProfiles = appState != undefined ?
+        appState.last_vip_profiles : null;
+      const users = await db.collection("users").orderBy("like_count", "desc")
+          .limit(20).get();
+
+      const newLastVipProfiles = [];
+
+      if (lastVipProfiles != null) {
+        if (lastVipProfiles.length === 0) {
+          for (const user of users.docs) {
+            const userData = user.data();
+            newLastVipProfiles.push(userData.userID);
+            await db.collection("vip_profiles").add(
+                {
+                  userID: userData.userID,
+                  time_selected: Date.now(),
+                  like_count: userData.likeCount,
+                }
+            );
+          }
+        } else {
+          const profiles = await db.collection("vip_profiles").get();
+
+          for (const profile of profiles.docs) {
+            await db.collection("vip_profiles").doc(profile.id).delete();
+          }
+
+          for (const user of users.docs) {
+            const userData = user.data();
+            newLastVipProfiles.push(userData.userID);
+            await db.collection("vip_profiles").add(
+                {
+                  userID: userData.userID,
+                  time_selected: Date.now(),
+                  like_count: userData.like_count,
+                }
+            );
+          }
+        }
+      }
+
+      await db.collection("app_state").doc("92cGj96AJX07PtNIGqzN").update({
+        last_vip_profiles: newLastVipProfiles,
+      });
     });
 
 export const deleteUnUsedHubs = functions.firestore
