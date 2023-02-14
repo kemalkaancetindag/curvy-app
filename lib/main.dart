@@ -40,6 +40,11 @@ Future<void> main() async {
   var userID = Get.find<SharedPreferenceService>().getUserID();
   var updateData = Map<String,dynamic>();
   updateData['instance_token'] = token;
+
+  var locationPermission = await GeolocatorPlatform.instance.checkPermission();
+  if(locationPermission == LocationPermission.denied || locationPermission == LocationPermission.unableToDetermine || locationPermission == LocationPermission.deniedForever) {
+    await GeolocatorPlatform.instance.requestPermission();
+  }
    
 
   
