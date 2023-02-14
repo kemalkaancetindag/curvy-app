@@ -11,6 +11,14 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isNavControllerRegistred = Get.isRegistered<NavController>();
+
+    print("NAV REG");
+    print(isNavControllerRegistred);
+
+    if(!isNavControllerRegistred) {
+      Get.put(NavController());
+    }
     return GetBuilder<NavController>(builder: (controller) {
       return Scaffold(
         body: controller.mainPages[controller.currentIndex],

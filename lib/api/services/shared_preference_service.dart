@@ -48,9 +48,12 @@ class SharedPreferenceService extends GetxService {
     sharedPreferences.setString("last_user_id", userID);
   }
 
-  Future<void> deleteUser() async {
+  Future<void> deleteUser(bool isDeleting) async {
     await sharedPreferences.remove('user');
-    await sharedPreferences.remove('last_user_id');
+    if(isDeleting) {
+      await sharedPreferences.remove('last_user_id');
+    }
+    
     
   }
 

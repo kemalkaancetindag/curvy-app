@@ -52,7 +52,7 @@ class DeleteAccountController extends GetxController {
       }
       else if (user.login_method! == LoginMethod.google.value){
 
-        await sharedPreferenceService.deleteUser();
+        await sharedPreferenceService.deleteUser(true);
 
         Get.toNamed(Routes.login);
               

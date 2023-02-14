@@ -392,8 +392,12 @@ class SetupController extends GetxController {
           users_who_liked_me: [],
           users_i_liked: []).toJson();
 
+      var userDocID =
+          await Get.find<FirestoreService>().addToCollection(jsonUser, 'users');
+
       await Get.find<FirestoreService>().addToCollection(jsonUser, 'users');
       await Get.find<SharedPreferenceService>().saveUser(jsonUser);
+      await Get.find<SharedPreferenceService>().setLastUserID(userDocID);
     } else if (_loginMethod == LoginMethod.phone.value) {
       var userImages = await Get.find<FirestoreService>()
           .uploadImages(_images, _userPhoneId!);

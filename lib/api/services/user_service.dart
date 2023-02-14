@@ -12,7 +12,7 @@ class UserService extends GetxService {
   @override
   Future<void> onInit() async {
     super.onInit();
-    getUser('SHmcTGDSV1f0HmPV7QBPOGEixcW2');
+   
   }
 
 

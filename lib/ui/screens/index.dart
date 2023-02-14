@@ -22,7 +22,14 @@ class IndexScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(IndexPageController(userService: Get.find()));
+    var isIndexPageControllerRegistred = Get.isRegistered<IndexPageController>();
+    print("REGGGGGGGG");
+    print(isIndexPageControllerRegistred);
+
+    if(!isIndexPageControllerRegistred) {
+      Get.put(IndexPageController(userService: Get.find()));
+    }
+    
     if (Get.find<SetupController>().isAfterSetup) {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
         showGeneralDialog(
@@ -160,6 +167,8 @@ class IndexScreen extends StatelessWidget {
             });
       });
     }
+
+    
 
     return Scaffold(body: GetBuilder<IndexPageController>(
       builder: (indexPageController) {
