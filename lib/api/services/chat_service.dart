@@ -202,7 +202,7 @@ class ChatService extends GetxService {
 
 
     if (startingType == ChatStart.curvyLike.value) {
-      var result = await firestoreService.spendCurvyLike(userID!, 1);
+      var result = await firestoreService.spendCurvyLike(userID, 1);
 
       if (!result) {
         return false;
@@ -210,7 +210,7 @@ class ChatService extends GetxService {
     }
 
     if (startingType == ChatStart.curvyChip.value) {
-      var result = await firestoreService.spendCurvyChip(userID!, 1);
+      var result = await firestoreService.spendCurvyChip(userID, 1);
       print("as");
       if (!result) {
         print("sa");
@@ -247,7 +247,7 @@ class ChatService extends GetxService {
 
     var updateData = Map<String, dynamic>();
 
-    var currentUser = await firestoreService.getCurrentUser(userID!);
+    var currentUser = await firestoreService.getCurrentUser(userID);
     var currentUserActiveChats = currentUser.chat!.active_chats!;
 
     currentUserActiveChats.add(documentRef.id);

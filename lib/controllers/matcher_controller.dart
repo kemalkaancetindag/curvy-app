@@ -123,12 +123,17 @@ class MatcherController extends GetxController {
               return MatcherStyleUserCard(controllerTag: user.userID!);
             }));
         
-
+        int imageCounter = 0;
         await Future.forEach(user.images!, (element) async {
           await precacheImage(
               NetworkImage(
                   'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(element)}?alt=media'),
               Get.context!);
+          imageCounter += 1;
+
+          if(imageCounter > 4) {
+            update();
+          }
         });
       }
     }
