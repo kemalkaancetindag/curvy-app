@@ -1,6 +1,7 @@
 import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/controllers/current_user_online_controller.dart';
 import 'package:curvy_app/controllers/nav_controller.dart';
+import 'package:curvy_app/controllers/user_online_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -11,6 +12,13 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isCurrentUserOnlineControllerRegistred = Get.isRegistered<CurrentUserOnlineController>();
+    print("REGGGGGGGG");
+    print(isCurrentUserOnlineControllerRegistred);
+    if(!isCurrentUserOnlineControllerRegistred) {
+        Get.put(CurrentUserOnlineController(firestoreService: Get.find()));
+    }
+
     return Container(
       width: double.maxFinite,
       height: Dimensions.h87 - 4,
@@ -90,8 +98,6 @@ class BottomNavBar extends StatelessWidget {
             },
             child: GetBuilder<CurrentUserOnlineController>(
               builder: (userOnlineController) {
-                print("BURDAAAAAAAA");
-                print(userOnlineController.unAnsweredMessages);
                 return Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.h60/2),
@@ -142,6 +148,7 @@ class BottomNavBar extends StatelessWidget {
               },
             )
           ),
+         
           GestureDetector(
              onTap: () {
               
