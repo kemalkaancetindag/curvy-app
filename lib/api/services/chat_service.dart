@@ -165,6 +165,7 @@ class ChatService extends GetxService {
     var chat = await firestoreService.getChat(chatID);
     chat.messages![messageId].isLiked = !chat.messages![messageId].isLiked!;
     var chatData = chat.toJson();
+    print(chatData);
     await firestoreService.sendMessageToChat(chatData, chatID);
   }
 

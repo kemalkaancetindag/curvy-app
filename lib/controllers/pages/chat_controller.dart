@@ -388,6 +388,9 @@ class ChatController extends GetxController {
   }
 
   Future sendMessageToChat(String message) async {
+    if(message.length == 0) {
+      return;
+    }
     await chatService.sendMessageToChat(_currentChat!.chatID!, message);
     _typedMessage = "";
     update();
@@ -430,6 +433,14 @@ class ChatController extends GetxController {
   }
 
   Future likeMessage(int messageId) async {
+    var messageWantedToLike = _currentChat!.messages!.where((message) => message.messageId == messageId).toList()[0];
+    var currentUserID = Get.find<SharedPreferenceService>().getUserID()!;
+
+    if(messageWantedToLike.senderId == currentUserID) {
+      print("BENİM");
+      return;
+    }
+
     await chatService.likeMessage(_currentChat!.chatID!, messageId);
     update();
   }

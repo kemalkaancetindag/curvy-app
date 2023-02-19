@@ -226,8 +226,8 @@ class SetupController extends GetxController {
   }
 
   void addName(String name) {
-    if (name == "") {
-      Get.snackbar("Hata", "İsim alanı boş olamaz.",
+    if (name.length < 2) {
+      Get.snackbar("Hata", "İsim alanı iki karakterden az olamaz.",
           backgroundColor: Color(0xFFD446F4), colorText: Colors.white);
       return;
     }
@@ -337,8 +337,8 @@ class SetupController extends GetxController {
     _isCreating = true;
     update();
     _images.removeWhere((element) => element == "");
-    if (_images.length == 0) {
-      Get.snackbar("Hata", "En az bir fotoğraf eklemelisiniz.",
+    if (_images.length < 2) {
+      Get.snackbar("Hata", "En az iki fotoğraf eklemelisiniz.",
           backgroundColor: Color(0xFFD446F4), colorText: Colors.white);
       _images = <String>["", "", "", "", "", "", "", "", ""];
       return;

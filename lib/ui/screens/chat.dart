@@ -368,13 +368,10 @@ class ChatScreen extends StatelessWidget {
                                         right: Dimensions.w8,
                                         left: Dimensions.w8),
                                     width: Dimensions.w200,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                            Dimensions.h16),
-                                        gradient: LinearGradient(colors: [
-                                          Color(0xFFD51CFF),
-                                          Color(0xFF6198EF)
-                                        ])),
+                                   decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                              Dimensions.h16),
+                                          color: Color(0xFFE4E4E4)),
                                     child: Center(
                                       child: Text(
                                         controller.currentChat!.messages![index]
@@ -382,7 +379,7 @@ class ChatScreen extends StatelessWidget {
                                         textAlign: TextAlign.end,
                                         style: TextStyle(
                                             fontSize: Dimensions.h16,
-                                            color: Colors.white),
+                                            ),
                                       ),
                                     ),
                                   ),
@@ -395,35 +392,39 @@ class ChatScreen extends StatelessWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      controller.likeMessage(controller
-                                          .currentChat!
-                                          .messages![index]
-                                          .messageId!);
-                                    },
-                                    child: Container(
+                                 Container(
                                       padding: EdgeInsets.only(
                                           top: Dimensions.h8,
                                           bottom: Dimensions.h8,
                                           right: Dimensions.w8,
                                           left: Dimensions.w8),
                                       width: Dimensions.w200,
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(
-                                              Dimensions.h16),
-                                          color: Color(0xFFE4E4E4)),
+                                       decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(
+                                            Dimensions.h16),
+                                        gradient: LinearGradient(colors: [
+                                          Color(0xFFD51CFF),
+                                          Color(0xFF6198EF)
+                                        ])),
+                                    
                                       child: Center(
                                         child: Text(
                                           controller.currentChat!
                                               .messages![index].content,
                                           style: TextStyle(
-                                              fontSize: Dimensions.h16),
+                                              fontSize: Dimensions.h16,
+                                              color: Colors.white),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  Container(
+                                  GestureDetector(
+                                     onTap: () {
+                                      controller.likeMessage(controller
+                                          .currentChat!
+                                          .messages![index]
+                                          .messageId!);
+                                    },
+                                    child:   Container(
                                     margin:
                                         EdgeInsets.only(left: Dimensions.w11),
                                     child: Center(
@@ -434,7 +435,9 @@ class ChatScreen extends StatelessWidget {
                                           : Image.asset(
                                               "assets/images/chat_unliked.png"),
                                     ),
+                                  ),
                                   )
+                                
                                 ],
                               ));
                         }
