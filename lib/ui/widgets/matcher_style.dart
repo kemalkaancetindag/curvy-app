@@ -174,6 +174,7 @@ class MatcherStyle extends StatelessWidget {
                         GestureDetector(
                           onTap: (){
                             controller.updateDistancePreference();
+                            controller.getCards();
                           },
                           child:    Container(
                           margin: EdgeInsets.only(top: Dimensions.h27),

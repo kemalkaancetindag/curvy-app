@@ -79,7 +79,16 @@ class MatcherController extends GetxController {
   }
 
   Future<void> getCards() async {
+
+    if(_cards != null) {
+      if(_cards!.isNotEmpty) {
+        return;
+      }
+    }
+
+
     _isLoading = true;
+    update();
     _users = [];
     _cards = [];
 
@@ -93,6 +102,7 @@ class MatcherController extends GetxController {
 
     var matches = await Get.find<RecommendationService>().getRecommendations(unWantedUsers);
     print("GELDİ");
+    print(matches);
 
     List<Future<dynamic>> lastCardImages = [];
 
@@ -137,6 +147,7 @@ class MatcherController extends GetxController {
     _cards = cardList;
 
     _isLoading = false;
+    print("BİTTİ");
 
     update();
   }
@@ -345,7 +356,7 @@ class MatcherController extends GetxController {
     print(userID);
     data['settings.distance_preference.distance'] = _userDistancePreference;
     await firestoreService.updateUser(data, userID);
-    await onInit();
+    await onInit();  
     update();
   }
 }

@@ -209,19 +209,19 @@ class FirestoreService extends GetxService {
       switch(i) {
         case 0:
           var hash = Utils.encode(long, lat, 3);
-          hashData["100km"] = hash;
+          hashData["km100"] = hash;
           break;          
         case 1:
         var hash = Utils.encode(long, lat, 4);
-          hashData["40km"] = hash;
+          hashData["km40"] = hash;
           break;
         case 2:
           var hash = Utils.encode(long, lat, 5);
-          hashData["5km"] = hash;
+          hashData["km5"] = hash;
           break;
         case 3:
           var hash = Utils.encode(long, lat, 6);
-          hashData["2km"] = hash;
+          hashData["km2"] = hash;
           break;
       }
       
