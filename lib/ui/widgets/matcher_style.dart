@@ -1,8 +1,9 @@
 import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/constants/routes.dart';
 import 'package:curvy_app/controllers/expanded_matcherstyle_controller.dart';
-import 'package:curvy_app/controllers/matcher_controller.dart';
-import 'package:curvy_app/ui/widgets/matcher_style_user_card.dart';
+import 'package:curvy_app/controllers/pages/new_matcher_controller.dart';
+
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,12 +16,12 @@ class MatcherStyle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<MatcherController>(builder: (controller) {
+    return GetBuilder<NewMatcherController>(builder: (controller) {
       
       if (Get.find<ExpandedMatcherStyleController>().user == null) {        
 
-        return !controller.isLoading ?( controller.cards != null
-            ? (controller.cards!.isEmpty
+        return true ?( null != null
+            ? (true
                 ? Container(
                     width: double.maxFinite,
                     height: double.maxFinite,
@@ -44,7 +45,7 @@ class MatcherStyle extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(Dimensions.h100/2),
                                       image: DecorationImage(
                                         image: NetworkImage(
-                                                                  'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(controller.notFoundCurrentUser!.images![0])}?alt=media'),
+                                                                  'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent("")}?alt=media'),
                                         fit: BoxFit.cover
                                       )
                                     ),
@@ -139,7 +140,7 @@ class MatcherStyle extends StatelessWidget {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  "${controller.userDistancePreference!.toInt()}km",
+                                  "${12}km",
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontSize: Dimensions.h21,
@@ -163,18 +164,16 @@ class MatcherStyle extends StatelessWidget {
                                   child: Slider(
                                     min: 0,
                                     max: 100,
-                                    value: controller.userDistancePreference!,
+                                    value: 10,
                                     onChanged: (double value) {
-                                      controller.setDistancePreference(value);
+                                     
                                     },
                                   )),
                             ),
                           ]),
                         ),
                         GestureDetector(
-                          onTap: (){
-                            controller.updateDistancePreference();
-                            controller.getCards();
+                          onTap: (){                            
                           },
                           child:    Container(
                           margin: EdgeInsets.only(top: Dimensions.h27),
@@ -232,7 +231,7 @@ class MatcherStyle extends StatelessWidget {
                     ),
                   )
                 : Stack(
-                    children: controller.cards!,
+                    children: [],
                   ))
             : Container(
                 width: double.maxFinite,

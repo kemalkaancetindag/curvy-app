@@ -99,7 +99,7 @@ class NotificationService extends GetxService {
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
                                           image: NetworkImage(
-                                              'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(message.data["user1Image"])}?alt=media'),
+                                              'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(message.data["user2Image"])}?alt=media'),
                                           fit: BoxFit.fill),
                                       borderRadius: BorderRadius.circular(
                                           Dimensions.h16 * 10 / 2)),

@@ -1,7 +1,7 @@
 import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
-import 'package:curvy_app/controllers/matcher_controller.dart';
+
 import 'package:curvy_app/models/user.model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -172,7 +172,7 @@ class ExpandedMatcherStyleController extends GetxController {
         right: Dimensions.h50/2,
         child: GestureDetector(
           onTap: () {
-            Get.find<MatcherController>().shrinkUser();
+            
           },
           child: Container(
             width: Dimensions.h50,

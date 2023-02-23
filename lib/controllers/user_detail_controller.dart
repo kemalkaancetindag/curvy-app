@@ -5,8 +5,6 @@ import 'package:curvy_app/api/services/match_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/controllers/current_user_online_controller.dart';
-import 'package:curvy_app/controllers/matcher_controller.dart';
-import 'package:curvy_app/controllers/slider_controller.dart';
 import 'package:curvy_app/models/user.model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -295,8 +293,7 @@ class UserDetailController extends GetxController {
   Future<void> likeUser() async {
     await Get.find<MatchService>().createMatch(_user!.userID!);
     if (userIndex != null) {
-      Get.find<MatcherController>().controllCurrentUserIndex(true);
-      Get.find<SliderController>(tag: _user!.userID!).autoSlide(true);
+
     }
     Get.back();
   }
@@ -304,24 +301,13 @@ class UserDetailController extends GetxController {
   Future<void> dislikeUser() async {
     await Get.find<MatchService>().dislikeUser(_user!.userID!);
     if (userIndex != null) {
-      Get.find<MatcherController>().controllCurrentUserIndex(true);
-      Get.find<SliderController>(tag: _user!.userID!).autoSlide(false);
+
     }
     Get.back();
   }
 
   Future<void> removeAction() async {
-    var matcherController = Get.find<MatcherController>();
-    await Get.find<MatchService>().removeLastAction(
-        matcherController.users![matcherController.users!.length - userIndex!]);
-    if (userIndex != null && userIndex! != 0) {
-      matcherController.controllCurrentUserIndex(false);
-
-      Get.find<SliderController>(
-              tag: matcherController
-                  .users![matcherController.users!.length - userIndex!])
-          .returnBack();
-    }
+    
     Get.back();
   }
 
@@ -450,13 +436,7 @@ class UserDetailController extends GetxController {
                                   _curvyLikeMessageText = "";
                                   await Get.find<MatchService>()
                                       .createMatch(_user!.userID!);
-                                  Get.find<MatcherController>()
-                                      .controllCurrentUserIndex(true);
-                                  Get.back();
-                                  Get.back();
-                                  Get.find<SliderController>(
-                                          tag: _user!.userID!)
-                                      .autoSlide(true);
+                              
                                 }
                               },
                               child: Container(

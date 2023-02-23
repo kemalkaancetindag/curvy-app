@@ -1,5 +1,4 @@
 import 'package:curvy_app/constants/dimensions.dart';
-import 'package:curvy_app/controllers/matcher_controller.dart';
 import 'package:curvy_app/controllers/pages/matcher_settings_controller.dart';
 import 'package:curvy_app/enums/showme_enum.dart';
 import 'package:flutter/cupertino.dart';

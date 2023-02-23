@@ -1,6 +1,6 @@
 import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
-import 'package:curvy_app/controllers/matcher_controller.dart';
+
 import 'package:get/get.dart';
 
 class MatcherSettingsController extends GetxController {
@@ -119,7 +119,7 @@ class MatcherSettingsController extends GetxController {
     data['settings.global'] = _globalPreference;
 
     await firestoreService.updateUser(data, userID);
-    Get.find<MatcherController>().getCards();
+    
 
     
     Get.back();

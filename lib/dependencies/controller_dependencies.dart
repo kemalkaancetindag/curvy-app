@@ -5,7 +5,7 @@ import 'package:curvy_app/controllers/buy_curvy_chip_controller.dart';
 import 'package:curvy_app/controllers/buy_curvy_like_controller.dart';
 import 'package:curvy_app/controllers/buy_curvy_turbo_controller.dart';
 import 'package:curvy_app/controllers/expanded_matcherstyle_controller.dart';
-import 'package:curvy_app/controllers/matcher_controller.dart';
+
 import 'package:curvy_app/controllers/messages_controller.dart';
 import 'package:curvy_app/controllers/nav_controller.dart';
 import 'package:curvy_app/controllers/pages/archive_i_liked_controller.dart';
@@ -26,7 +26,7 @@ Future<void> initControllers() async {
   Get.lazyPut(() => NavController());
   Get.lazyPut(() => ArchivesController());
   Get.lazyPut(() => MessagesController());
-  Get.lazyPut(() => MatcherController(firestoreService: Get.find(), goApiClient: Get.find()));
+  
   Get.put(SetupController());
   Get.lazyPut(() => IndexPageController(userService: Get.find()));
   Get.lazyPut(() => EditProfileController(userService: Get.find(), firestoreService: Get.find()));

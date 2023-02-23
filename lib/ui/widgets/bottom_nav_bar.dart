@@ -22,7 +22,10 @@ class BottomNavBar extends StatelessWidget {
     return Container(
       width: double.maxFinite,
       height: Dimensions.h87 - 4,
-      decoration: BoxDecoration(),
+      
+      decoration: BoxDecoration(
+        color: Colors.white,
+      ),
       child: GetBuilder<NavController>(
         builder: (controller){
           return Row(

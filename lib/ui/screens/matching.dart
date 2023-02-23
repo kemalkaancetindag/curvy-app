@@ -1,10 +1,11 @@
 import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/constants/routes.dart';
 import 'package:curvy_app/controllers/expanded_matcherstyle_controller.dart';
-import 'package:curvy_app/controllers/matcher_controller.dart';
+import 'package:curvy_app/controllers/pages/new_matcher_controller.dart';
 import 'package:curvy_app/ui/widgets/bottom_nav_bar.dart';
 import 'package:curvy_app/ui/widgets/free_style.dart';
 import 'package:curvy_app/ui/widgets/matcher_style.dart';
+import 'package:curvy_app/ui/widgets/matching/new_matcher_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -15,14 +16,11 @@ class MatchingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(NewMatcherController(recommendationService: Get.find(), matchService: Get.find(), sharedPreferenceService: Get.find(), firestoreService: Get.find()));
+    
 
-    var isMatcherControllerRegistred = Get.isRegistered<MatcherController>();
 
-    if(!isMatcherControllerRegistred) {
-      Get.put(MatcherController(firestoreService: Get.find(), goApiClient: Get.find()));      
-    }
-
-    return GetBuilder<MatcherController>(builder: (controller) {
+    return GetBuilder<NewMatcherController>(builder: (controller) {
       return Scaffold(
         backgroundColor: Colors.white,
         appBar: Get.find<ExpandedMatcherStyleController>().user != null
@@ -42,7 +40,7 @@ class MatchingScreen extends StatelessWidget {
                             height: Dimensions.h50,
                             child: CustomPaint(
                                 painter: StyleChangerContainer(),
-                                child: GetBuilder<MatcherController>(
+                                child: GetBuilder<NewMatcherController>(
                                   builder: (controller) {
                                     return Row(
                                       crossAxisAlignment:
@@ -52,24 +50,24 @@ class MatchingScreen extends StatelessWidget {
                                       children: [
                                         GestureDetector(
                                           onTap: () {
-                                            controller.setStyle(true);
+                                            controller.setIsMatcherStyle(false);
                                           },
                                           child: Container(
-                                            width: controller.isFreeStyle
-                                                ? controller.selectedWidth
-                                                : controller.unSelectedWidth,
+                                            width: controller.isMatcherStyle
+                                                ? Dimensions.w11*10
+                                                : Dimensions.w180,
                                             height: Dimensions.h36,
                                             decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(
                                                         Dimensions.h27),
-                                                gradient: controller.isFreeStyle
+                                                gradient: !controller.isMatcherStyle
                                                     ? LinearGradient(colors: [
                                                         Color(0xFFD51CFF),
                                                         Color(0xFF00FFE1)
                                                       ])
                                                     : null,
-                                                color: controller.isFreeStyle
+                                                color: !controller.isMatcherStyle
                                                     ? null
                                                     : Color(0xFFC5C5C7)),
                                             child: Center(
@@ -85,25 +83,25 @@ class MatchingScreen extends StatelessWidget {
                                         ),
                                         GestureDetector(
                                             onTap: () {
-                                              controller.setStyle(false);                                              
+                                               controller.setIsMatcherStyle(true);                                         
                                             },
                                             child: Container(
-                                              width: controller.isFreeStyle
-                                                  ? controller.unSelectedWidth
-                                                  : controller.selectedWidth,
+                                              width: controller.isMatcherStyle
+                                                  ? Dimensions.w180
+                                                  : Dimensions.w11*10,
                                               height: Dimensions.h36,
                                               decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           Dimensions.h27),
-                                                  gradient: !controller
-                                                          .isFreeStyle
+                                                  gradient: controller
+                                                          .isMatcherStyle
                                                       ? LinearGradient(colors: [
                                                           Color(0xFFD51CFF),
                                                           Color(0xFF00FFE1)
                                                         ])
                                                       : null,
-                                                  color: !controller.isFreeStyle
+                                                  color: controller.isMatcherStyle
                                                       ? null
                                                       : Color(0xFFC5C5C7)),
                                               child: Center(
@@ -133,13 +131,14 @@ class MatchingScreen extends StatelessWidget {
                         )
                       ],
                     ))),
-        body: GetBuilder<MatcherController>(
+        body: GetBuilder<NewMatcherController>(
           builder: (controller) {
-            if (controller.isFreeStyle) {
-              return FreeStyle();
+            if (controller.isMatcherStyle) {
+              return NewMatcherStyle();  
             }
+            return FreeStyle();
 
-            return MatcherStyle();
+            
           },
         ),
       );

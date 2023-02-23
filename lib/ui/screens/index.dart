@@ -12,6 +12,7 @@ import 'package:curvy_app/ui/widgets/bottom_nav_bar.dart';
 import 'package:curvy_app/ui/widgets/circle_progress.dart';
 import 'package:curvy_app/ui/widgets/main_action_button.dart';
 import 'package:curvy_app/ui/widgets/main_boost_button.dart';
+import 'package:curvy_app/ui/widgets/matching/new_matcher_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -235,7 +236,7 @@ class IndexScreen extends StatelessWidget {
                                               child: Center(
                                                 child: GestureDetector(
                                                   onTap: (){
-                                                    Get.toNamed(Routes.setupImage);
+                                                    Get.to(NewMatcherStyle());
                                                   },
                                                   child: Container(
                                                   width: Dimensions.h140,

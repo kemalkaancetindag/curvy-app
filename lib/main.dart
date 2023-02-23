@@ -5,7 +5,6 @@ import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/pages.dart';
 import 'package:curvy_app/constants/routes.dart';
 import 'package:curvy_app/controllers/current_user_online_controller.dart';
-import 'package:curvy_app/controllers/matcher_controller.dart';
 import 'package:curvy_app/controllers/setup_controller.dart';
 import 'package:curvy_app/dependencies/client_dependencies.dart';
 import 'package:curvy_app/dependencies/controller_dependencies.dart';
