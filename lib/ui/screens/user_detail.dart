@@ -1,4 +1,5 @@
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/constants/routes.dart';
 import 'package:curvy_app/controllers/user_detail_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -306,7 +307,11 @@ class UserDetailScreen extends StatelessWidget {
                       ),
                       ),
                      
-                      Container(
+                     GestureDetector(
+                      onTap: (){
+                        Get.toNamed(Routes.buyCurvyTurbo);
+                      },
+                      child:  Container(
                         width: Dimensions.h52,
                         height: Dimensions.h52,
                         decoration: BoxDecoration(
@@ -322,6 +327,7 @@ class UserDetailScreen extends StatelessWidget {
                           child: Image.asset("assets/images/matcher_turbo.png"),
                         ),
                       ),
+                     )
                     ],
                   ),
                 )

@@ -58,7 +58,7 @@ class UserChatController extends GetxController {
         _chatCurrentPosition![0] = _chatCurrentPosition![0] + xChange;
         _chatCurrentPosition![1] = _chatCurrentPosition![1] - xChange;
       }
-    }
+    } else {}
 
     update();
   }
@@ -89,5 +89,26 @@ class UserChatController extends GetxController {
         await chatService.activateChat(chatID);
       }
     }
+  }
+
+  Future deleteChat(String chatID) async {
+    var chatController = Get.find<ChatController>();
+    var chatService = Get.find<ChatService>();
+    if (chatController.isActiveMessages) {
+      await chatService.deactivateChat(chatID);
+    } else {
+      await chatService.deleteChat(chatID);
+    }
+
+    update();
+  }
+
+  Future activateOrReportChat(String chatID) async {
+        var chatController = Get.find<ChatController>();
+    var chatService = Get.find<ChatService>();
+     if (chatController.isActiveMessages) {
+      } else {
+        await chatService.activateChat(chatID);
+      }
   }
 }

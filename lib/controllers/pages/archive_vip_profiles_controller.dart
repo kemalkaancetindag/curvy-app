@@ -38,7 +38,7 @@ class ArchiveVipProfilesController extends GetxController {
       Get.put(UserOnlineController(firestoreService: Get.find(), userID: profile.userID!), permanent: true, tag: profile.userID!);
       _tiles!.add(GestureDetector(
         onTap: () async {
-          var userDetailController = Get.put(UserDetailController(firestoreService: Get.find(), userID: profile.userID!));          
+          var userDetailController = Get.lazyPut(() => UserDetailController(firestoreService: Get.find(), userID: profile.userID!,matchService: Get.find()));          
                     
           Get.toNamed(Routes.userDetail);
         },

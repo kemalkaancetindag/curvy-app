@@ -5,6 +5,7 @@ import 'package:curvy_app/api/services/match_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/controllers/current_user_online_controller.dart';
+import 'package:curvy_app/controllers/pages/new_matcher_controller.dart';
 import 'package:curvy_app/models/user.model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,8 @@ import 'dart:math' as math;
 
 class UserDetailController extends GetxController {
   FirestoreService firestoreService;
+  NewMatcherController? newMatcherController;
+  MatchService matchService;
 
   UserModel? _user;
   UserModel? get user => _user;
@@ -42,7 +45,13 @@ class UserDetailController extends GetxController {
   int? userIndex;
 
   UserDetailController(
-      {required this.firestoreService, required this.userID, this.userIndex});
+      {
+        required this.firestoreService, 
+        required this.userID, 
+        this.userIndex,
+        this.newMatcherController,
+        required this.matchService
+      });
 
   @override
   Future<void> onInit() async {
@@ -291,22 +300,29 @@ class UserDetailController extends GetxController {
   }
 
   Future<void> likeUser() async {
-    await Get.find<MatchService>().createMatch(_user!.userID!);
-    if (userIndex != null) {
-
+    if(newMatcherController != null) {
+      newMatcherController!.likeUser(false);      
+    } else {
+      await Get.find<MatchService>().createMatch(_user!.userID!);
     }
     Get.back();
   }
 
   Future<void> dislikeUser() async {
-    await Get.find<MatchService>().dislikeUser(_user!.userID!);
-    if (userIndex != null) {
-
-    }
+    if(newMatcherController != null) {
+      newMatcherController!.dislikeUser(false);
+    } else {
+      await Get.find<MatchService>().dislikeUser(_user!.userID!);
+    }   
     Get.back();
   }
 
   Future<void> removeAction() async {
+    if(newMatcherController != null) {
+      newMatcherController!.previousUser();
+    } else {
+      matchService.removeLastAction(userID);
+    }
     
     Get.back();
   }
@@ -445,19 +461,7 @@ class UserDetailController extends GetxController {
                                       "assets/images/curvy_dialog_send_icon.png"),
                                 ),
                               ),
-                            ),
-                            Container(
-                              child: Center(
-                                child: Image.asset(
-                                    "assets/images/curvy_dialog_mic_icon.png"),
-                              ),
-                            ),
-                            Container(
-                              child: Center(
-                                child: Image.asset(
-                                    "assets/images/curvy_dialog_add_icon.png"),
-                              ),
-                            )
+                            ),                         
                           ],
                         )
                       ],

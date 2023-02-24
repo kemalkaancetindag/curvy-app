@@ -89,25 +89,11 @@ class ChatController extends GetxController {
         builder: (controller) {
           return controller.user != null
               ? GestureDetector(
-                  onPanDown: (details) {
-                    controller.setBackgroundColor(true);
-                  },
-                  onPanEnd: (details) {
-                    controller.setBackgroundColor(false);
-                  },
                   onHorizontalDragUpdate: (details) {
-                    controller.slideTile(details.delta.dx, _currentChats![i].chatID!);
+                    controller.slideTile(
+                        details.delta.dx, _currentChats![i].chatID!);
                   },
-                  onHorizontalDragEnd: (details) {
-                    controller.decideSlideAction(_currentChats![i].chatID!);
-                    controller.resetPosition();
-                  },
-                  onPanCancel: () {
-                    controller.setBackgroundColor(false);
-                  },
-                  onTap: (){
-                    setCurrentChat(_currentChats![i].chatID!);
-                  },
+                  onHorizontalDragEnd: (details) {},
                   child: Container(
                     width: Get.width,
                     height: Dimensions.h100,
@@ -126,214 +112,253 @@ class ChatController extends GetxController {
                                         left: 0,
                                         top: 0,
                                         bottom: 0,
-                                        child: Container(
-                                            height: double.maxFinite,
-                                            width: Dimensions.w11 * 10,
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.only(
-                                                    topRight: Radius.circular(
-                                                        Dimensions.w42),
-                                                    bottomRight:
-                                                        Radius.circular(
-                                                            Dimensions.w42)),
-                                                gradient: LinearGradient(
-                                                    colors: [
-                                                      Color(0xFF1FE9BB),
-                                                      Color(0xFF0D92E3)
-                                                    ])),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                Image.asset(
-                                                    "assets/images/messages_report.png"),
-                                                Container(
-                                                  width: Dimensions.w50,
-                                                  child: Text(
-                                                    isActiveMessages
-                                                        ? "Profili Bildir"
-                                                        : "Bir Şans Daha",
-                                                    textAlign: TextAlign.start,
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize:
-                                                            Dimensions.h14,
-                                                        fontWeight:
-                                                            FontWeight.bold),
+                                        child: GestureDetector(
+                                          child: Container(
+                                              height: double.maxFinite,
+                                              width: Dimensions.w11 * 10,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  Dimensions
+                                                                      .w42),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  Dimensions
+                                                                      .w42)),
+                                                  gradient: LinearGradient(
+                                                      colors: [
+                                                        Color(0xFF1FE9BB),
+                                                        Color(0xFF0D92E3)
+                                                      ])),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
+                                                children: [
+                                                  Image.asset(
+                                                      "assets/images/messages_report.png"),
+                                                  Container(
+                                                    width: Dimensions.w50,
+                                                    child: Text(
+                                                      isActiveMessages
+                                                          ? "Profili Bildir"
+                                                          : "Bir Şans Daha",
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize:
+                                                              Dimensions.h14,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
                                                   ),
-                                                ),
-                                              ],
-                                            ))),
+                                                ],
+                                              )),
+                                        )),
                                     Positioned(
-                                        child: Container(
-                                      margin: EdgeInsets.only(
-                                          left: Dimensions.w11 * 10,
-                                          right: Dimensions.w11 * 10),
-                                      width: double.maxFinite,
-                                      height: double.maxFinite,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                                left: Dimensions.w16),
-                                            width: Dimensions.h8 * 10,
-                                            height: Dimensions.h8 * 10,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        Dimensions.h8 / 2 * 10),
-                                                image: DecorationImage(
-                                                    image: NetworkImage(
-                                                        'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(controller.user!.images![0])}?alt=media'),
-                                                    fit: BoxFit.cover)),
-                                          ),
-                                          Container(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: Dimensions.w2 * 10),
-                                            margin: EdgeInsets.only(
-                                                right: Dimensions.w16),
-                                            width: Get.width -
-                                                Dimensions.h8 * 10 -
-                                                (Dimensions.w16 * 2),
-                                            height: double.maxFinite,
-                                            decoration: BoxDecoration(
-                                                border: Border(
-                                              top: BorderSide(
-                                                  width: 1,
-                                                  color: Color(0xFFC5C5C7)),
-                                              bottom: BorderSide(
-                                                  width: 1,
-                                                  color: Color(0xFFC5C5C7)),
-                                            )),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                    margin: EdgeInsets.only(
-                                                        top: Dimensions.h7),
-                                                    child: Row(
-                                                      children: [
-                                                        Row(
-                                                          children: [
-                                                            Container(
-                                                              margin: EdgeInsets.only(
-                                                                  right: Dimensions
-                                                                          .w8 /
-                                                                      2),
-                                                              width: Dimensions
-                                                                      .h60 /
-                                                                  10,
-                                                              height: Dimensions
-                                                                      .h60 /
-                                                                  10,
-                                                              decoration: BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius.circular(
-                                                                          (Dimensions.h60 / 10) /
-                                                                              2),
-                                                                  color: controller
-                                                                          .user!
-                                                                          .online_status!
-                                                                      ? Color(
-                                                                          0xFF05ED00)
-                                                                      : Color(
-                                                                          0xFFFF0000)),
-                                                            ),
-                                                            Container(
-                                                              margin: EdgeInsets.only(
-                                                                  right: Dimensions
-                                                                          .w8 /
-                                                                      2),
-                                                              child: Text(
-                                                                "${controller.user!.name}, ${DateTime.now().year - int.parse(controller.user!.birthdate!.split("/").last)}",
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontSize:
-                                                                        Dimensions
-                                                                            .h21,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w800),
-                                                              ),
-                                                            ),
-                                                            Container(
-                                                              child: Center(
-                                                                child: Image.asset(
-                                                                    "assets/images/confirm_small.png"),
-                                                              ),
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    )),
-                                                Container(
-                                                  margin: EdgeInsets.only(
-                                                      top: Dimensions.h60 / 20),
-                                                  width: double.maxFinite,
-                                                  child: Text(
-                                                    _currentChats![i]
-                                                            .lastMessage ??
-                                                        "",
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                        color:
-                                                            Color(0xFF7B8491),
-                                                        fontSize:
-                                                            Dimensions.h14),
-                                                  ),
-                                                )
-                                              ],
+                                        child: GestureDetector(
+                                     
+                                      onPanDown: (details) {
+                                        controller.setBackgroundColor(true);
+                                      },
+                                      onPanEnd: (details) {
+                                        controller.setBackgroundColor(false);
+                                      },
+                                      onTap: () {
+                                        setCurrentChat(
+                                            _currentChats![i].chatID!);
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.only(
+                                            left: Dimensions.w11 * 10,
+                                            right: Dimensions.w11 * 10),
+                                        width: double.maxFinite,
+                                        height: double.maxFinite,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                  left: Dimensions.w16),
+                                              width: Dimensions.h8 * 10,
+                                              height: Dimensions.h8 * 10,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          Dimensions.h8 /
+                                                              2 *
+                                                              10),
+                                                  image: DecorationImage(
+                                                      image: NetworkImage(
+                                                          'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(controller.user!.images![0])}?alt=media'),
+                                                      fit: BoxFit.cover)),
                                             ),
-                                          )
-                                        ],
+                                            Container(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal:
+                                                      Dimensions.w2 * 10),
+                                              margin: EdgeInsets.only(
+                                                  right: Dimensions.w16),
+                                              width: Get.width -
+                                                  Dimensions.h8 * 10 -
+                                                  (Dimensions.w16 * 2),
+                                              height: double.maxFinite,
+                                              decoration: BoxDecoration(
+                                                  border: Border(
+                                                top: BorderSide(
+                                                    width: 1,
+                                                    color: Color(0xFFC5C5C7)),
+                                                bottom: BorderSide(
+                                                    width: 1,
+                                                    color: Color(0xFFC5C5C7)),
+                                              )),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                      margin: EdgeInsets.only(
+                                                          top: Dimensions.h7),
+                                                      child: Row(
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              Container(
+                                                                margin: EdgeInsets.only(
+                                                                    right: Dimensions
+                                                                            .w8 /
+                                                                        2),
+                                                                width: Dimensions
+                                                                        .h60 /
+                                                                    10,
+                                                                height: Dimensions
+                                                                        .h60 /
+                                                                    10,
+                                                                decoration: BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            (Dimensions.h60 / 10) /
+                                                                                2),
+                                                                    color: controller
+                                                                            .user!
+                                                                            .online_status!
+                                                                        ? Color(
+                                                                            0xFF05ED00)
+                                                                        : Color(
+                                                                            0xFFFF0000)),
+                                                              ),
+                                                              Container(
+                                                                margin: EdgeInsets.only(
+                                                                    right: Dimensions
+                                                                            .w8 /
+                                                                        2),
+                                                                child: Text(
+                                                                  "${controller.user!.name}, ${DateTime.now().year - int.parse(controller.user!.birthdate!.split("/").last)}",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          Dimensions
+                                                                              .h21,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w800),
+                                                                ),
+                                                              ),
+                                                              Container(
+                                                                child: Center(
+                                                                  child: Image
+                                                                      .asset(
+                                                                          "assets/images/confirm_small.png"),
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      )),
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        top: Dimensions.h60 /
+                                                            20),
+                                                    width: double.maxFinite,
+                                                    child: Text(
+                                                      _currentChats![i]
+                                                              .lastMessage ??
+                                                          "",
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: TextStyle(
+                                                          color:
+                                                              Color(0xFF7B8491),
+                                                          fontSize:
+                                                              Dimensions.h14),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     )),
                                     Positioned(
                                         right: 0,
                                         top: 0,
                                         bottom: 0,
-                                        child: Container(
-                                            height: double.maxFinite,
-                                            width: Dimensions.w11 * 10,
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft: Radius.circular(
-                                                        Dimensions.w42),
-                                                    bottomLeft: Radius.circular(
-                                                        Dimensions.w42)),
-                                                gradient: LinearGradient(
-                                                    colors: [
-                                                      Color(0xFFFF0000),
-                                                      Color(0xFFFFB800)
-                                                    ])),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                Container(
-                                                  width: Dimensions.w50,
-                                                  child: Text(
-                                                    isActiveMessages
-                                                        ? "İlişkiyi Çöpe At"
-                                                        : "Eşleşmeyi Bitir",
-                                                    textAlign: TextAlign.end,
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize:
-                                                            Dimensions.h14,
-                                                        fontWeight:
-                                                            FontWeight.bold),
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            print("sa");
+                                            controller.deleteChat(
+                                                _currentChats![i].chatID!);
+                                          },
+                                          child: Container(
+                                              height: double.maxFinite,
+                                              width: Dimensions.w11 * 10,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  Dimensions
+                                                                      .w42),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  Dimensions
+                                                                      .w42)),
+                                                  gradient: LinearGradient(
+                                                      colors: [
+                                                        Color(0xFFFF0000),
+                                                        Color(0xFFFFB800)
+                                                      ])),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
+                                                children: [
+                                                  Container(
+                                                    width: Dimensions.w50,
+                                                    child: Text(
+                                                      isActiveMessages
+                                                          ? "İlişkiyi Çöpe At"
+                                                          : "Eşleşmeyi Bitir",
+                                                      textAlign: TextAlign.end,
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize:
+                                                              Dimensions.h14,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
                                                   ),
-                                                ),
-                                                Image.asset(
-                                                    "assets/images/messages_delete.png"),
-                                              ],
-                                            ))),
+                                                  Image.asset(
+                                                      "assets/images/messages_delete.png"),
+                                                ],
+                                              )),
+                                        )),
                                   ],
                                 ))),
                       ],
@@ -344,7 +369,7 @@ class ChatController extends GetxController {
         },
       ));
     }
-    
+
     update();
   }
 
@@ -388,7 +413,7 @@ class ChatController extends GetxController {
   }
 
   Future sendMessageToChat(String message) async {
-    if(message.length == 0) {
+    if (message.length == 0) {
       return;
     }
     await chatService.sendMessageToChat(_currentChat!.chatID!, message);
@@ -433,10 +458,12 @@ class ChatController extends GetxController {
   }
 
   Future likeMessage(int messageId) async {
-    var messageWantedToLike = _currentChat!.messages!.where((message) => message.messageId == messageId).toList()[0];
+    var messageWantedToLike = _currentChat!.messages!
+        .where((message) => message.messageId == messageId)
+        .toList()[0];
     var currentUserID = Get.find<SharedPreferenceService>().getUserID()!;
 
-    if(messageWantedToLike.senderId == currentUserID) {
+    if (messageWantedToLike.senderId == currentUserID) {
       print("BENİM");
       return;
     }
@@ -470,17 +497,19 @@ class ChatController extends GetxController {
     update();
   }
 
-  void clearCurrentChat() {    
+  void clearCurrentChat() {
     chatService.setIsUserInChat(currentUserID, _currentChat!.chatID!, false);
     _currentChat = null;
     update();
   }
 
   Future sendCurvyChip(int amount) async {
-    if(currentChat!.user1 == currentUserID) {
-      await chatService.sendCurvyChip(currentChat!.user2!, currentUserID, amount);
+    if (currentChat!.user1 == currentUserID) {
+      await chatService.sendCurvyChip(
+          currentChat!.user2!, currentUserID, amount);
     } else {
-      await chatService.sendCurvyChip(currentChat!.user1!, currentUserID, amount);
-    }    
+      await chatService.sendCurvyChip(
+          currentChat!.user1!, currentUserID, amount);
+    }
   }
 }

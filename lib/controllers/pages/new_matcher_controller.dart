@@ -58,6 +58,9 @@ class NewMatcherController extends GetxController
   List<Interest> _currentRecommendedUsersInterests = [];
   List<Interest> get currentRecommendedUsersInterests => _currentRecommendedUsersInterests;
 
+  int? _currentRecommendedUserDistance;
+  int? get currentRecommendedUserDistance => _currentRecommendedUserDistance;
+
   NewMatcherController(
       {required this.recommendationService,
       required this.matchService,
@@ -87,6 +90,8 @@ class NewMatcherController extends GetxController
       _recommendedUsers!.add(userModel);
     });
 
+    _currentRecommendedUserDistance = await calculateDistance(_recommendedUsers!.last.location!.latitude!, _recommendedUsers!.last.location!.latitude!);
+
     await getCurrentRecommendedUsersInterests();
 
     await precacheBatchImage(_recommendedUsers!
@@ -105,6 +110,7 @@ class NewMatcherController extends GetxController
           if (_animationDirection != null) {            
             removeListItem();
             getCurrentRecommendedUsersInterests();
+            setSwipe(Swipe.none);
             _animationController.reset();
           }
         }
@@ -192,6 +198,7 @@ class NewMatcherController extends GetxController
       await matchService.createMatch(_recommendedUsers!.last.userID!);
     }
     setCurrentUserImageIndex(0);
+    _currentRecommendedUserDistance = await calculateDistance(_recommendedUsers!.last.location!.latitude!, _recommendedUsers!.last.location!.latitude!);
     await continuosSlide();
   }
 
@@ -207,12 +214,14 @@ class NewMatcherController extends GetxController
       await matchService.dislikeUser(_recommendedUsers!.last.userID!);
     }
     setCurrentUserImageIndex(0);
+    _currentRecommendedUserDistance = await calculateDistance(_recommendedUsers!.last.location!.latitude!, _recommendedUsers!.last.location!.latitude!);
     await continuosSlide();
   }
 
   Future<void> previousUser() async {
     addListItem();
     await getCurrentRecommendedUsersInterests();
+    _currentRecommendedUserDistance = await calculateDistance(_recommendedUsers!.last.location!.latitude!, _recommendedUsers!.last.location!.latitude!);
     await matchService.removeLastAction(recommendedUsers!.last.userID!);
   }
 
@@ -227,11 +236,13 @@ class NewMatcherController extends GetxController
         _recommendedUsers!.insert(0, userModel);
       });
 
-      await precacheBatchImage(_recommendedUsers!
-          .sublist(_currentUserIndex - 2, _currentUserIndex + 1));
+      
 
       _swipeCount = 0;
     }
+
+    await precacheBatchImage(_recommendedUsers!
+          .sublist(_currentUserIndex - 2, _currentUserIndex + 1));
 
     update();
   }

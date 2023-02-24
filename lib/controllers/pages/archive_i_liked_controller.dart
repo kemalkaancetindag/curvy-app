@@ -35,7 +35,7 @@ class ArchiveILikedController extends GetxController {
       _tiles!.add(
         GestureDetector(
           onTap: (){
-            var userDetailController = Get.put(UserDetailController(firestoreService: Get.find(), userID: user));          
+            var userDetailController = Get.lazyPut(() => UserDetailController(firestoreService: Get.find(), userID: user,matchService: Get.find()));          
             
                     
             Get.toNamed(Routes.userDetail);

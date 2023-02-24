@@ -61,7 +61,8 @@ class ArchiveWhoLikedMeController extends GetxController {
         child: GestureDetector(
           onTap: () {
             
-            var userDetailController = Get.put(UserDetailController(
+            var userDetailController = Get.lazyPut(() =>  UserDetailController(
+              matchService: Get.find(),
                 firestoreService: Get.find(),
                 userID: _usersWhoLikedMe![0].userID!));
 
@@ -133,6 +134,8 @@ class ArchiveWhoLikedMeController extends GetxController {
                   
                   var userDetailController = Get.put(UserDetailController(
                       firestoreService: Get.find(),
+                      matchService: Get.find(),
+                      
                       userID: _usersWhoLikedMe![0].userID!));
 
                   Get.toNamed(Routes.userDetail);

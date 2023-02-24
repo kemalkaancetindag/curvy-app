@@ -31,33 +31,42 @@ class SwipeDraggable extends StatelessWidget {
           if (((-1 * dragUpdateDetails.delta.dx) <
                   (-1 * dragUpdateDetails.delta.dy)) ||
               dragUpdateDetails.delta.dx == 0) {
+                print("NONE");
                 controller.setSwipe(Swipe.none);
               }
           if (dragUpdateDetails.delta.dx > 0 &&
               dragUpdateDetails.globalPosition.dx >
                   MediaQuery.of(context).size.width / 2) {
-                    controller.setSwipe(Swipe.left);
+                    controller.setSwipe(Swipe.right);
+                    print("LEFT");
                   }
           // When Draggable widget is dragged left
           if (dragUpdateDetails.delta.dx < 0 &&
               dragUpdateDetails.globalPosition.dx <
                   MediaQuery.of(context).size.width / 2) {
-                    controller.setSwipe(Swipe.right);
+                    controller.setSwipe(Swipe.left);
+                    print("RİGHT");
                   }
         },
         onDragEnd: (drag) {
-          
+          controller.setSwipe(Swipe.none);
         },
         child: SwipePofileCard(          
           pageController: pageController,
           user: controller.recommendedUsers![userIndex],          
         ),
-        feedback: Material(
-            color: Colors.transparent,
+        feedback: GetBuilder<NewMatcherController>(
+          builder: (innerController) {
+            return  Material(
+            color: Color.fromRGBO(0, 0, 0, 0),
             child: RotationTransition(
-              turns: controller.swipe == Swipe.none 
-              ? AlwaysStoppedAnimation(0) 
-              : controller.swipe == Swipe.left ?  AlwaysStoppedAnimation(-15/360) :  AlwaysStoppedAnimation(15/360), 
+              turns: controller.swipe != Swipe.none
+                                        ? controller.swipe == Swipe.left
+                                            ? const AlwaysStoppedAnimation(
+                                                -15 / 360)
+                                            : const AlwaysStoppedAnimation(
+                                                15 / 360)
+                                        : const AlwaysStoppedAnimation(0), 
               child: SizedBox(
                 width: constraints.maxWidth,
                 height: constraints.maxHeight,
@@ -68,7 +77,9 @@ class SwipeDraggable extends StatelessWidget {
                                       
                 ),
               ),
-            )),
+            ));
+          },
+        ),
         childWhenDragging: Container(
           color: Colors.transparent,
         )

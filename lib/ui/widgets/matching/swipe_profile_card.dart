@@ -9,6 +9,7 @@ import 'package:curvy_app/enums/swipe.dart';
 import 'package:curvy_app/models/user.model.dart';
 import 'package:curvy_app/ui/util/modals.dart';
 import 'package:curvy_app/ui/widgets/matching/swipe_profile_card_info_pill.dart';
+import 'package:curvy_app/ui/widgets/matching/tag_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -17,7 +18,7 @@ import 'package:get/get.dart';
 class SwipePofileCard extends StatelessWidget {
   int? swipingImageIndex;
   PageController? pageController;
-  UserModel user;
+  UserModel user;  
 
   SwipePofileCard(
       {super.key,
@@ -204,7 +205,7 @@ class SwipePofileCard extends StatelessWidget {
                                                     fit: BoxFit.contain)),
                                           ),
                                           Text(
-                                            "3 km uzaklıkta",
+                                            pageController != null ? "${controller.currentRecommendedUserDistance} km uzakta" : "- km uzakta",
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontSize: Dimensions.h21,
@@ -245,7 +246,7 @@ class SwipePofileCard extends StatelessWidget {
                                                     fit: BoxFit.contain)),
                                           ),
                                           Text(
-                                            "3 km uzaklıkta",
+                                            "${controller.currentRecommendedUserDistance} km uzaklıkta",
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontSize: Dimensions.h21,
@@ -297,10 +298,12 @@ class SwipePofileCard extends StatelessWidget {
                               ),
                               GestureDetector(
                                   onTap: () {
-                                    Get.put(UserDetailController(
+                                    Get.lazyPut(() => UserDetailController(
                                       firestoreService: Get.find(),
                                       userID: controller
                                           .recommendedUsers!.last.userID!,
+                                      newMatcherController: controller,
+                                      matchService: Get.find()
                                     ));
                                     Get.toNamed(Routes.userDetail);
                                   },
@@ -378,6 +381,9 @@ class SwipePofileCard extends StatelessWidget {
                                   ),
                                 ),
                                 GestureDetector(
+                                  onTap: () {
+                                    Get.toNamed(Routes.buyCurvyTurbo);
+                                  },
                                   child: Container(
                                     width: Dimensions.w42,
                                     height: Dimensions.w42,
@@ -418,7 +424,24 @@ class SwipePofileCard extends StatelessWidget {
                         )
                       ],
                     ),
-                  )
+                  ),
+                  controller.swipe == Swipe.none || pageController == null ?
+                  Container() :
+                  controller.swipe == Swipe.left ?
+                  Positioned(
+                    top: Dimensions.h137,
+                    right: Dimensions.w25,
+                    child: TagWidget(
+                      text: "HAYIR",                      
+                    )
+                  ) : Positioned(
+                    top: Dimensions.h137,
+                    left: Dimensions.w25,
+                    child: TagWidget(
+                      text: "EVET",                      
+                    )
+                  ),
+                  
                 ],
               ))
           : Container();
