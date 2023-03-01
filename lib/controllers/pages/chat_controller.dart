@@ -55,12 +55,15 @@ class ChatController extends GetxController {
   bool _isShareCPOpen = false;
   bool get isShareCPOpen => _isShareCPOpen;
 
+  ScrollController scrollController = ScrollController();
+
   @override
   Future<void> onInit() async {
     super.onInit();
 
     await setCurrentUser();
     await chatService.listenChats();
+    super.onInit();
   }
 
   void setIsShareCPOpen(bool state) {
@@ -90,10 +93,33 @@ class ChatController extends GetxController {
           return controller.user != null
               ? GestureDetector(
                   onHorizontalDragUpdate: (details) {
+                    controller.setBackgroundColor(true);
                     controller.slideTile(
                         details.delta.dx, _currentChats![i].chatID!);
                   },
-                  onHorizontalDragEnd: (details) {},
+                  onHorizontalDragEnd: (details) {
+                    controller.setBackgroundColor(false);
+                    if ((controller.chatCurrentPosition![0] < -218) ||
+                        controller.chatCurrentPosition![0] > -2) {
+                      return;
+                    }
+                    controller.resetPosition();
+                  },
+                  onPanDown: (details) {
+                    print("DOWWWN");
+                    controller.setBackgroundColor(true);
+                  },
+                  onPanEnd: (details) {
+                    print("UPPP");
+                    controller.setBackgroundColor(false);
+                  },
+                  onPanCancel: () {
+                    print("CANCEL");
+                    controller.setBackgroundColor(false);
+                  },
+                  onTap: () {
+                    setCurrentChat(_currentChats![i].chatID!);
+                  },
                   child: Container(
                     width: Get.width,
                     height: Dimensions.h100,
@@ -160,7 +186,6 @@ class ChatController extends GetxController {
                                         )),
                                     Positioned(
                                         child: GestureDetector(
-                                     
                                       onPanDown: (details) {
                                         controller.setBackgroundColor(true);
                                       },
@@ -418,6 +443,12 @@ class ChatController extends GetxController {
     }
     await chatService.sendMessageToChat(_currentChat!.chatID!, message);
     _typedMessage = "";
+    print(scrollController.position.maxScrollExtent);
+    scrollController.animateTo(
+      scrollController.position.maxScrollExtent + Dimensions.h100,
+      duration: Duration(milliseconds: 500),
+      curve: Curves.fastOutSlowIn,
+    );
     update();
   }
 
@@ -434,6 +465,7 @@ class ChatController extends GetxController {
   void setCurrentChat(String chatID) {
     chatService.listenCurrentChat(chatID);
     chatService.setIsUserInChat(currentUserID, chatID, true);
+    
 
     if (_isActiveMessages) {
       _currentChat =
@@ -446,6 +478,7 @@ class ChatController extends GetxController {
     chatService.setMessagesAsSeen(chatID);
     generateTiles();
     Get.toNamed(Routes.chat);
+      
   }
 
   void updateCurrentChat(Chat updatedChat) {

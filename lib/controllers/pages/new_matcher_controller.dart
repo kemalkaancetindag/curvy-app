@@ -124,8 +124,7 @@ class NewMatcherController extends GetxController
   void updateCurrentUserIndex(bool increase) {
     if (increase) {
       _currentUserIndex -= 1;
-      precacheBatchImage(
-          _recommendedUsers!.sublist(_currentUserIndex - 2, _currentUserIndex));
+
     } else {
       _currentUserIndex -= 1;
     }
@@ -241,8 +240,6 @@ class NewMatcherController extends GetxController
       _swipeCount = 0;
     }
 
-    await precacheBatchImage(_recommendedUsers!
-          .sublist(_currentUserIndex - 2, _currentUserIndex + 1));
 
     update();
   }

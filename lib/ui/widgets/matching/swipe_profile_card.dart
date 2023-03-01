@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/match_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
@@ -18,7 +19,7 @@ import 'package:get/get.dart';
 class SwipePofileCard extends StatelessWidget {
   int? swipingImageIndex;
   PageController? pageController;
-  UserModel user;  
+  UserModel user;
 
   SwipePofileCard(
       {super.key,
@@ -66,16 +67,57 @@ class SwipePofileCard extends StatelessWidget {
                               child: Container(
                                 width: double.maxFinite,
                                 height: double.maxFinite,
+                                child: CachedNetworkImage(
+                                  fadeInDuration: Duration(seconds: 0),
+                                  fadeOutDuration: Duration(seconds: 0),
+                                  width: double.maxFinite,
+                                  height: double.maxFinite,
+                                  fit: BoxFit.cover,
+                                  imageUrl: swipingImageIndex != null
+                                      ? 'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(user.images![controller.currentUserImageIndex])}?alt=media'
+                                      : 'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(user.images![pageController != null ? index : 0])}?alt=media',
+
+                                  placeholder: (context, url){
+                                    return  Container(
+                                        width: double.maxFinite,
+                                        height: double.maxFinite,
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              margin: EdgeInsets.only(bottom: Dimensions.h100/10),
+                                              width: Dimensions.h60*2,
+                                              height: Dimensions.h60*2,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(Dimensions.h60),
+                                                color: Color(0XFFE3E3E3)
+                                              ),
+                                            ),
+                                            Container(
+                                              
+                                              width: Dimensions.h60*2,
+                                              height: Dimensions.h60*3,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(Dimensions.h60/2),
+                                                  topRight: Radius.circular(Dimensions.h60/2)
+                                                ),
+                                                color: Color(0XFFE3E3E3)
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        decoration: BoxDecoration(
+                                            color: Color(0xFfD0D0D0),
+                                            
+                                        ),
+                                      );
+                                  },
+                                ) ,
                                 decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.circular(Dimensions.h16),
-                                    image: DecorationImage(
-                                        image: swipingImageIndex != null
-                                            ? NetworkImage(
-                                                'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(user.images![controller.currentUserImageIndex])}?alt=media')
-                                            : NetworkImage(
-                                                'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(user.images![pageController != null ? index : 0])}?alt=media'),
-                                        fit: BoxFit.cover)),
+                                  borderRadius:
+                                      BorderRadius.circular(Dimensions.h16),
+                                ),
                               ),
                             );
                           })),
@@ -205,7 +247,9 @@ class SwipePofileCard extends StatelessWidget {
                                                     fit: BoxFit.contain)),
                                           ),
                                           Text(
-                                            pageController != null ? "${controller.currentRecommendedUserDistance} km uzakta" : "- km uzakta",
+                                            pageController != null
+                                                ? "${controller.currentRecommendedUserDistance} km uzakta"
+                                                : "- km uzakta",
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontSize: Dimensions.h21,
@@ -220,7 +264,8 @@ class SwipePofileCard extends StatelessWidget {
                                               .recommendedUsers!.last.about !=
                                           null) {
                                         return Container(
-                                          margin: EdgeInsets.only(left: Dimensions.w11),
+                                          margin: EdgeInsets.only(
+                                              left: Dimensions.w11),
                                           width: Dimensions.w270,
                                           child: Text(
                                             controller
@@ -231,7 +276,7 @@ class SwipePofileCard extends StatelessWidget {
                                           ),
                                         );
                                       }
-                                      return  Row(
+                                      return Row(
                                         children: [
                                           Container(
                                             margin: EdgeInsets.only(
@@ -260,13 +305,23 @@ class SwipePofileCard extends StatelessWidget {
                                       return Container(
                                         width: Dimensions.w270,
                                         child: Wrap(
-                                          children: List.generate(controller.currentRecommendedUsersInterests.length, (index){
-                                            return SwipeProfileCardInfoPill(
-                                              isSame: controller.currentUser!.interests!.contains(controller.currentRecommendedUsersInterests[index].interest_type),
-                                              text:  controller.currentRecommendedUsersInterests[index].text!,
-                                            );
-                                          }) 
-                                        ),
+                                            children: List.generate(
+                                                controller
+                                                    .currentRecommendedUsersInterests
+                                                    .length, (index) {
+                                          return SwipeProfileCardInfoPill(
+                                            isSame: controller
+                                                .currentUser!.interests!
+                                                .contains(controller
+                                                    .currentRecommendedUsersInterests[
+                                                        index]
+                                                    .interest_type),
+                                            text: controller
+                                                .currentRecommendedUsersInterests[
+                                                    index]
+                                                .text!,
+                                          );
+                                        })),
                                       );
                                     } else {
                                       return Row(
@@ -299,12 +354,11 @@ class SwipePofileCard extends StatelessWidget {
                               GestureDetector(
                                   onTap: () {
                                     Get.lazyPut(() => UserDetailController(
-                                      firestoreService: Get.find(),
-                                      userID: controller
-                                          .recommendedUsers!.last.userID!,
-                                      newMatcherController: controller,
-                                      matchService: Get.find()
-                                    ));
+                                        firestoreService: Get.find(),
+                                        userID: controller
+                                            .recommendedUsers!.last.userID!,
+                                        newMatcherController: controller,
+                                        matchService: Get.find()));
                                     Get.toNamed(Routes.userDetail);
                                   },
                                   child: Container(
@@ -425,23 +479,21 @@ class SwipePofileCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  controller.swipe == Swipe.none || pageController == null ?
-                  Container() :
-                  controller.swipe == Swipe.left ?
-                  Positioned(
-                    top: Dimensions.h137,
-                    right: Dimensions.w25,
-                    child: TagWidget(
-                      text: "HAYIR",                      
-                    )
-                  ) : Positioned(
-                    top: Dimensions.h137,
-                    left: Dimensions.w25,
-                    child: TagWidget(
-                      text: "EVET",                      
-                    )
-                  ),
-                  
+                  controller.swipe == Swipe.none || pageController == null
+                      ? Container()
+                      : controller.swipe == Swipe.left
+                          ? Positioned(
+                              top: Dimensions.h137,
+                              right: Dimensions.w25,
+                              child: TagWidget(
+                                text: "HAYIR",
+                              ))
+                          : Positioned(
+                              top: Dimensions.h137,
+                              left: Dimensions.w25,
+                              child: TagWidget(
+                                text: "EVET",
+                              )),
                 ],
               ))
           : Container();

@@ -30,14 +30,10 @@ giriş methodu google ise telefon doğrulama ekranında kayıtlı kullanıcı ch
 telefon numarası ile girişte kayıtlı kullanıcı varsa kod gönder indexe at yoksa kayıda devam et
 
 
-Fotorğrafları 2 yle sınırla +
-Inputların hepsin kontrol karakter +
-Arama ayarlalrı apiden çıkar +
-Kendi mesajını beğenme -- Karşı Mesajı bepğenme +
-Controller hataları....... - Slider controller null *** 
-Kalpler eklenecek
-Hub uzaktan yakına sıralam
-
+Mesajda aşşağı sürüklenecek en son mesaja inilecek +++
+Kırmızı muhabbeti
+Bildirim artı bildirim sesi ekle
+Ana ekranda yüklenmeyen fotoğraf arkaplanı
 
 
 

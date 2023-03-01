@@ -328,7 +328,8 @@ class ChatScreen extends StatelessWidget {
                     height: double.maxFinite,
                     padding: EdgeInsets.only(
                         left: Dimensions.w8 * 2, right: Dimensions.w8 * 2),
-                    child: ListView.builder(
+                    child: ListView.builder(  
+                      controller: controller.scrollController,                    
                       itemCount: controller.currentChat != null
                           ? controller.currentChat!.messages!.length
                           : 0,
@@ -337,7 +338,7 @@ class ChatScreen extends StatelessWidget {
                             controller.currentUserID) {
                           return Container(
                               width: double.maxFinite,
-                              margin: EdgeInsets.only(top: Dimensions.h16),
+                              margin: EdgeInsets.only(top: Dimensions.h16, bottom: index == controller.currentChat!.messages!.length - 1 ? Dimensions.h100 : 0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
@@ -388,11 +389,12 @@ class ChatScreen extends StatelessWidget {
                         } else {
                           return Container(
                               width: double.maxFinite,
-                              margin: EdgeInsets.only(top: Dimensions.h16),
+                              margin: EdgeInsets.only(top: Dimensions.h16, bottom: index == controller.currentChat!.messages!.length - 1 ? Dimensions.h100 : 0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                  Container(
+                                  
                                       padding: EdgeInsets.only(
                                           top: Dimensions.h8,
                                           bottom: Dimensions.h8,
@@ -449,7 +451,7 @@ class ChatScreen extends StatelessWidget {
                   right: 0,
                   child: Container(
                     width: double.maxFinite,
-                    height: Dimensions.h8 * 10,
+                    height: Dimensions.h8 * 10,                    
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(Dimensions.h16),
