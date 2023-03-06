@@ -85,6 +85,24 @@ class SettingsController extends GetxController {
 
   //AGE
 
+  //SHOWME
+  void updateShowMePreference(int showMe) async {
+    print(showMe);
+    String currentUserID = Get.find<SharedPreferenceService>().getUserID()!;
+    var user = await firestoreService.getUserAsMap(currentUserID);
+    user!['show_me'] = showMe;    
+    _user = UserModel.fromJson(user);
+    update();    
+  }
+
+  void updateShowme() async {    
+    Map<String,dynamic> updateData = Map<String,dynamic>();
+    updateData['show_me'] = _user!.show_me;
+    await firestoreService.updateUser(updateData, _user!.userID!);
+    Get.back();
+  }
+  //SHOWME
+
   // INLINE SWITCHES
   void updateGlobal(bool state) {
     var key = Settings.global.value;

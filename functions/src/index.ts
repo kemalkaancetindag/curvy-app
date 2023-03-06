@@ -86,6 +86,7 @@ export const sendNotifications =
                   },
                   notification: {
                     title: "Yeni bir eşleşmeniz var",
+                    sound: "c_n_sound.mp3",
                   },
                 });
               } catch (e:any) {
@@ -109,6 +110,7 @@ export const sendNotifications =
                   },
                   notification: {
                     title: "Yeni bir eşleşmeniz var",
+                    sound: "c_n_sound.mp3",
                   },
                 });
               } catch (e:any) {
@@ -240,6 +242,7 @@ export const sendMessageNotififaction = functions.firestore
               notification: {
                 title: "Yeni bir mesajınız var",
                 body: lastMessage.content,
+                sound: "c_n_sound.mp3",
               },
             });
       }
@@ -286,6 +289,7 @@ export const sendMessageLikeNotification = functions.firestore
             notification: {
               title: "Bir mesajınız beğenildi",
               body: `${userToSendNotification.name} bir mesajınızı beğendi`,
+              sound: "c_n_sound.mp3",
             },
           });
     });

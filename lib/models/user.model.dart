@@ -180,10 +180,10 @@ class UserModel {
     data['email_confirmation'] = email_confirmation ?? false;
     data['phone_confirmation'] = phone_confirmation ?? false;
     data['is_paused'] = is_paused ?? false;
-    data['chat'] = chat ?? _Chat().toJson();
+    data['chat'] = chat!.toJson();
     data['likes'] = likes ?? [];
     data['likeds'] = likeds ?? [];
-    data['settings'] = settings ?? _Settings().toJson();
+    data['settings'] = settings!.toJson();
     data['instance_token'] = instance_token;
     data['location'] = location!.toJson();
     data['un_liked_users'] = un_liked_users ?? [];
@@ -275,20 +275,20 @@ class _Settings {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['connected_accounts'] = connected_accounts ?? [];    
-    data['distance_preference'] = distance_preference ?? __DistancePreference().toJson();
+    data['distance_preference'] = distance_preference!.toJson();
     data['global'] = global ?? true;
     data['recommendation_preference'] = recommendation_preference ?? 0;
     data['viewer_preference'] = viewer_preference ?? 0;
     data['language'] = language ?? 0;
-    data['visibility'] = visibility ?? __Visibility().toJson();
+    data['visibility'] = visibility!.toJson();
     data['close_reading_notifications'] = close_reading_notifications ?? false;
     data['play_videos_automatically'] = play_videos_automatically ?? true;
     data['hide_last_online_status'] = hide_last_online_status ?? false;
-    data['email_notifications'] = email_notifications ?? __EmailNotifications().toJson();
-    data['instant_notifications'] = instant_notifications ?? __InstantNotifications().toJson();
-    data['privacy_preferences'] = privacy_preferences ?? __PrivacyPreferences().toJson();
+    data['email_notifications'] = email_notifications!.toJson();
+    data['instant_notifications'] = instant_notifications!.toJson();
+    data['privacy_preferences'] = privacy_preferences!.toJson();
     data['hide_online_status'] = hide_online_status ?? false;
-    data['age_preference'] = age_preference ?? __AgePreference().toJson();
+    data['age_preference'] = age_preference!.toJson();
 
     return data;
   }
@@ -532,9 +532,9 @@ class __PrivacyPreferences {
     data['curvy_team_promotions'] = curvy_team_promotions ?? true;
     data['enable_advertising'] = enable_advertising ?? true;
     data['enable_marketing'] = enable_marketing ?? true;
-    data['marketing_permissions'] = marketing_permissions ?? ____MarketingPermissions().toJson();
-    data['social_media_permissions'] = social_media_permissions ?? ____SocialMediaPermissions().toJson();
-    data['advertising_permissions'] = advertising_permissions ?? ____AdvertisingPermissions().toJson();
+    data['marketing_permissions'] = marketing_permissions!.toJson();
+    data['social_media_permissions'] = social_media_permissions!.toJson();
+    data['advertising_permissions'] = advertising_permissions!.toJson();
 
     return data;
   }

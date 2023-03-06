@@ -1,5 +1,6 @@
 import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
+import 'package:curvy_app/enums/showme_enum.dart';
 import 'package:curvy_app/models/user.model.dart';
 import 'package:get/get.dart';
 import 'dart:math' as math;
@@ -39,8 +40,13 @@ class RecommendationService extends GetxService {
 
     for(var recommendedUser in users){
        var user = UserModel.fromJson(recommendedUser.data() as Map<String,dynamic>);       
-      if(currentUser.sexual_preference!.contains(user.sex) && !unWantedUsers.contains(user.userID)) {                  
+       
+      if((currentUser.show_me! == user.sex && !unWantedUsers.contains(user.userID))) {                  
           recommendedUsers.add(recommendedUser.data());
+      }
+
+      if(currentUser.show_me == Showme.all.value && !unWantedUsers.contains(user.userID)) {
+        recommendedUsers.add(recommendedUser.data());
       }
 
       if(recommendedUsers.length == 10) {      

@@ -57,6 +57,8 @@ class ChatController extends GetxController {
 
   ScrollController scrollController = ScrollController();
 
+  final messageFieldController = TextEditingController();
+
   @override
   Future<void> onInit() async {
     super.onInit();
@@ -99,8 +101,8 @@ class ChatController extends GetxController {
                   },
                   onHorizontalDragEnd: (details) {
                     controller.setBackgroundColor(false);
-                    if ((controller.chatCurrentPosition![0] < -218) ||
-                        controller.chatCurrentPosition![0] > -2) {
+                    if ((controller.chatCurrentPosition![0] < -Dimensions.w200) ||
+                        controller.chatCurrentPosition![0] > -Dimensions.w2) {
                       return;
                     }
                     controller.resetPosition();
@@ -443,12 +445,14 @@ class ChatController extends GetxController {
     }
     await chatService.sendMessageToChat(_currentChat!.chatID!, message);
     _typedMessage = "";
+    messageFieldController.text = "";
     print(scrollController.position.maxScrollExtent);
     scrollController.animateTo(
       scrollController.position.maxScrollExtent + Dimensions.h100,
       duration: Duration(milliseconds: 500),
       curve: Curves.fastOutSlowIn,
     );
+
     update();
   }
 

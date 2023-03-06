@@ -30,10 +30,16 @@ giriş methodu google ise telefon doğrulama ekranında kayıtlı kullanıcı ch
 telefon numarası ile girişte kayıtlı kullanıcı varsa kod gönder indexe at yoksa kayıda devam et
 
 
-Mesajda aşşağı sürüklenecek en son mesaja inilecek +++
-Kırmızı muhabbeti
-Bildirim artı bildirim sesi ekle
-Ana ekranda yüklenmeyen fotoğraf arkaplanı
+
+Keşfet ayarları 18 yaş sınırı ++
+ayarlar sayfasına bana göster seçimi ++
+alanlar küçülecek ++ 
+Yazı silineceke & klaveye göndermesi ++ ++
+Hardcoded ekran genişliği ayarlanacak ++
+Sonsuz kaydırma ?
+Beğenme id kontrol et ++
+
+
 
 
 

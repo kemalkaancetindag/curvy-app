@@ -9,6 +9,10 @@ import 'package:get/get.dart';
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  if(message.notification != null) {
+    print(message.notification!.android!.sound!);
+  }
+  
   print("Handling a background message: ${message.messageId}");
 }
 

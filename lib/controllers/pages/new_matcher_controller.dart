@@ -61,6 +61,10 @@ class NewMatcherController extends GetxController
   int? _currentRecommendedUserDistance;
   int? get currentRecommendedUserDistance => _currentRecommendedUserDistance;
 
+  double? _currentUserDistancePreference;
+  double? get currentUserDistancePreference =>  _currentUserDistancePreference;
+
+
   NewMatcherController(
       {required this.recommendationService,
       required this.matchService,
@@ -74,6 +78,7 @@ class NewMatcherController extends GetxController
     String currentUserID = sharedPreferenceService.getUserID()!;
     UserModel currentUser = await firestoreService.getUser(currentUserID);
     _currentUser = currentUser;
+    _currentUserDistancePreference = currentUser.settings!.distance_preference!.distance;
     
 
     _unWantedUsers.addAll(currentUser.users_i_liked!);
@@ -83,6 +88,12 @@ class NewMatcherController extends GetxController
 
     var recommendations =
         await recommendationService.getRecommendations(_unWantedUsers);
+
+    if(recommendations.isEmpty){
+      _isLoading = false;
+      update();
+      return;      
+    }
 
     await Future.forEach(recommendations, (user) async {
       var userModel = UserModel.fromJson(user);
@@ -145,6 +156,12 @@ class NewMatcherController extends GetxController
     });
   }
 
+
+  void setCurrentUserDistancePreference(double distance) {
+    _currentUserDistancePreference = distance;
+    update();
+  }
+
   void setCurrentUserImageIndex(int index) {
     _currentUserImageIndex = index;
     update();
@@ -185,6 +202,7 @@ class NewMatcherController extends GetxController
 
   Future<void> likeUser(bool isButtonUsed) async {
     _swipeCount += 1;
+    print(_recommendedUsers!.last.userID!);
 
     if (isButtonUsed) {
       animate(true, Swipe.right);
@@ -202,6 +220,7 @@ class NewMatcherController extends GetxController
   }
 
   Future<void> dislikeUser(bool isButtonUsed) async {
+    print(_recommendedUsers!.last.userID!);
     _swipeCount += 1;
     if (isButtonUsed) {
       animate(true, Swipe.left);
@@ -242,6 +261,20 @@ class NewMatcherController extends GetxController
 
 
     update();
+  }
+
+  Future<void> changeDistanceAndReload() async {
+    
+    Map<String,dynamic> updateData = Map<String,dynamic>();
+
+    updateData['settings.distance_preference.distance'] = _currentUserDistancePreference!;
+
+    await firestoreService.updateUser(updateData, _currentUser!.userID!);
+
+    await onInit();
+
+
+    
   }
 
   

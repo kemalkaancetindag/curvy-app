@@ -42,6 +42,178 @@ class SettingsScreen extends StatelessWidget {
       Get.put(SettingsController(firestoreService: Get.find()));
     }
 
+    
+    showShowmeDialog() {
+      showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (context) {
+            return Dialog(
+                backgroundColor: Colors.transparent,
+                child: GetBuilder<SettingsController>(
+                  builder: (controller) {
+                    return Container(
+                      width: Dimensions.w300,
+                      height: Dimensions.h300,
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.h300 / 10),
+                          gradient: LinearGradient(
+                              colors: [Color(0xFFD51CFF), Color(0xFF6198EF)])),
+                      child: Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(top: Dimensions.h16),
+                            child: Text(
+                              "Bana Göster",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: Dimensions.h22,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              controller.updateShowMePreference(Showme.women.value);
+                              
+                            },
+                            child: Container(
+                              margin: EdgeInsets.only(top: Dimensions.h22),
+                              width: Dimensions.w111,
+                              height: Dimensions.h300 / 10,
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.circular(Dimensions.h16),
+                                  gradient: controller.user!.show_me ==
+                                          Showme.women.value
+                                      ? LinearGradient(
+                                          begin: Alignment.topCenter,
+                                          end: Alignment.bottomCenter,
+                                          colors: [
+                                              Colors.white,
+                                              Colors.transparent,
+                                              Colors.transparent,
+                                              Colors.white
+                                            ])
+                                      : null),
+                              child: Center(
+                                child: Text(
+                                  "Kadın",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: Dimensions.h16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              controller.updateShowMePreference(Showme.men.value);
+                            },
+                            child: Container(
+                              margin: EdgeInsets.only(top: Dimensions.h16),
+                              width: Dimensions.w111,
+                              height: Dimensions.h300 / 10,
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.circular(Dimensions.h16),
+                                  gradient: controller.user!.show_me ==
+                                          Showme.men.value
+                                      ? LinearGradient(
+                                          begin: Alignment.topCenter,
+                                          end: Alignment.bottomCenter,
+                                          colors: [
+                                              Colors.white,
+                                              Colors.transparent,
+                                              Colors.transparent,
+                                              Colors.white
+                                            ])
+                                      : null),
+                              child: Center(
+                                child: Text(
+                                  "Erkek",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: Dimensions.h16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              controller.updateShowMePreference(Showme.all.value);
+                            },
+                            child: Container(
+                              margin: EdgeInsets.only(top: Dimensions.h16),
+                              width: Dimensions.w111,
+                              height: Dimensions.h300 / 10,
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.circular(Dimensions.h16),
+                                  gradient: controller.user!.show_me ==
+                                          Showme.all.value
+                                      ? LinearGradient(
+                                          begin: Alignment.topCenter,
+                                          end: Alignment.bottomCenter,
+                                          colors: [
+                                              Colors.white,
+                                              Colors.transparent,
+                                              Colors.transparent,
+                                              Colors.white
+                                            ])
+                                      : null),
+                              child: Center(
+                                child: Text(
+                                  "Hepsi",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: Dimensions.h16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: Dimensions.h40),
+                            width: double.maxFinite,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.back();
+                                  },
+                                  child: Container(
+                                    margin:
+                                        EdgeInsets.only(right: Dimensions.h8),
+                                    child: Image.asset(
+                                        "assets/images/settings_modal_cancel.png"),
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    controller.updateShowme();
+                                  },
+                                  child: Container(
+                                    margin:
+                                        EdgeInsets.only(left: Dimensions.h8),
+                                    child: Image.asset(
+                                        "assets/images/settings_modal_check.png"),
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                ));
+          });
+    }
+
     void showBanPeopleDialog() {
       showDialog(
           context: context,
@@ -2041,6 +2213,7 @@ class SettingsScreen extends StatelessWidget {
                               setTappedButton: controller.setTappedButton,
                               buttonID: 2,
                               tappedButton: controller.tappedButton,
+                              actionFunction: showShowmeDialog,
                             ),
                             SettingsDivider(),
                             Container(

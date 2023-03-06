@@ -423,6 +423,7 @@ class SwipePofileCard extends StatelessWidget {
                                 ),
                                 GestureDetector(
                                   onTap: () async {
+
                                     controller.likeUser(true);
                                   },
                                   child: Container(

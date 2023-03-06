@@ -37,15 +37,13 @@ class SwipeDraggable extends StatelessWidget {
           if (dragUpdateDetails.delta.dx > 0 &&
               dragUpdateDetails.globalPosition.dx >
                   MediaQuery.of(context).size.width / 2) {
-                    controller.setSwipe(Swipe.right);
-                    print("LEFT");
+                    controller.setSwipe(Swipe.right);                    
                   }
           // When Draggable widget is dragged left
           if (dragUpdateDetails.delta.dx < 0 &&
               dragUpdateDetails.globalPosition.dx <
                   MediaQuery.of(context).size.width / 2) {
-                    controller.setSwipe(Swipe.left);
-                    print("RİGHT");
+                    controller.setSwipe(Swipe.left);                    
                   }
         },
         onDragEnd: (drag) {

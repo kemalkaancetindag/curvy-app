@@ -13,7 +13,7 @@ import 'package:get/get.dart';
 class ChatScreen extends StatelessWidget {
   ChatScreen({super.key});
 
-  final messageFieldController = TextEditingController();
+  
 
   @override
   Widget build(BuildContext context) {
@@ -323,7 +323,8 @@ class ChatScreen extends StatelessWidget {
           builder: (controller) {
             return Stack(
               children: [
-                Container(
+                GestureDetector(
+                  child:  Container(
                     width: double.maxFinite,
                     height: double.maxFinite,
                     padding: EdgeInsets.only(
@@ -445,6 +446,11 @@ class ChatScreen extends StatelessWidget {
                         }
                       },
                     )),
+                    onTap: (){
+                      FocusScope.of(context).unfocus();
+                    },
+                ),
+               
                 Positioned(
                   bottom: 0,
                   left: 0,
@@ -486,7 +492,7 @@ class ChatScreen extends StatelessWidget {
                                 margin: EdgeInsets.only(
                                     left: Dimensions.w8, right: Dimensions.w8),
                                 child: TextField(
-                                  controller: messageFieldController,
+                                  controller: controller.messageFieldController,
                                   onChanged: (val) {
                                     controller.setTypedMessage(val);
                                   },
@@ -503,7 +509,7 @@ class ChatScreen extends StatelessWidget {
                         GestureDetector(
                           onTap: () async {
                             await controller
-                                .sendMessageToChat(messageFieldController.text);
+                                .sendMessageToChat(controller.messageFieldController.text);
                           },
                           child: Container(
                             child: Center(

@@ -1,6 +1,8 @@
 import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/controllers/pages/matcher_settings_controller.dart';
+import 'package:curvy_app/enums/enum_enum.dart';
 import 'package:curvy_app/enums/showme_enum.dart';
+import 'package:curvy_app/ui/util/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -424,7 +426,7 @@ class MatcherSettingsScreen extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                      "Kadın",
+                                      Utils.getEnumValue(Enums.showme, controller.showmePreference!),
                                       style: TextStyle(
                                           color: Color(0xFF7B8491),
                                           fontSize: Dimensions.h16,
@@ -495,7 +497,7 @@ class MatcherSettingsScreen extends StatelessWidget {
                                       ),
                                     ),
                                     child: RangeSlider(
-                                      min: 0,
+                                      min: 0.18,
                                       max: 1,
                                       values: RangeValues(
                                           controller.minAgePreference! / 100,
