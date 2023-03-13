@@ -23,6 +23,7 @@ class NotificationService extends GetxService {
   Future<void> onInit() async {
     super.onInit();
     await _getPermission();
+    print("IZIN");
     _startListening();
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
      FirebaseMessaging.onMessage.listen((RemoteMessage message) {

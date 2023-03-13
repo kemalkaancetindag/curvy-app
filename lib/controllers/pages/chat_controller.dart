@@ -402,11 +402,12 @@ class ChatController extends GetxController {
 
   void setAllChats(List<Chat> allChats) {
     _allChats = allChats;
+    update();
   }
 
   void setCurrentChats() {
     _currentChats =
-        _allChats!.where((chat) => chat.isActive! == isActiveMessages).toList();
+        _allChats!.where((chat) => chat.isActive! == isActiveMessages && chat.isStarted!).toList();
     generateTiles();
 
     update();
