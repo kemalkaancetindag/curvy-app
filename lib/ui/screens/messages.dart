@@ -75,6 +75,7 @@ class MessagesScreen extends StatelessWidget {
                                                       .newMatches!.length
                                                   : 0,
                                           itemBuilder: (context, index) {
+                                            
                                             return GetBuilder<
                                                     UserOnlineController>(
                                                 init: Get.find<
@@ -134,7 +135,7 @@ class MessagesScreen extends StatelessWidget {
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceAround,
-                                            children: [
+                                            children:  [                                            
                                               Container(
                                                 width: Dimensions.h8 * 10,
                                                 height: Dimensions.h8 * 10,
@@ -146,7 +147,7 @@ class MessagesScreen extends StatelessWidget {
                                                                     10) /
                                                                 2)),
                                               ),
-                                              Container(
+                                             Container(
                                                 width: Dimensions.h8 * 10,
                                                 height: Dimensions.h8 * 10,
                                                 decoration: BoxDecoration(

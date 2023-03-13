@@ -88,6 +88,9 @@ class NewMatcherController extends GetxController
 
     var recommendations =
         await recommendationService.getRecommendations(_unWantedUsers);
+    
+    print("GELDİ");
+    print(recommendations.length);
 
     if(recommendations.isEmpty){
       _isLoading = false;
@@ -101,7 +104,9 @@ class NewMatcherController extends GetxController
       _recommendedUsers!.add(userModel);
     });
 
-    _currentRecommendedUserDistance = await calculateDistance(_recommendedUsers!.last.location!.latitude!, _recommendedUsers!.last.location!.latitude!);
+    _currentRecommendedUserDistance = await calculateDistance(_recommendedUsers!.last.location!.latitude!, _recommendedUsers!.last.location!.longitude!);
+
+    
 
     await getCurrentRecommendedUsersInterests();
 
@@ -215,7 +220,7 @@ class NewMatcherController extends GetxController
       await matchService.createMatch(_recommendedUsers!.last.userID!);
     }
     setCurrentUserImageIndex(0);
-    _currentRecommendedUserDistance = await calculateDistance(_recommendedUsers!.last.location!.latitude!, _recommendedUsers!.last.location!.latitude!);
+    _currentRecommendedUserDistance = await calculateDistance(_recommendedUsers!.last.location!.latitude!, _recommendedUsers!.last.location!.longitude!);
     await continuosSlide();
   }
 
@@ -232,7 +237,7 @@ class NewMatcherController extends GetxController
       await matchService.dislikeUser(_recommendedUsers!.last.userID!);
     }
     setCurrentUserImageIndex(0);
-    _currentRecommendedUserDistance = await calculateDistance(_recommendedUsers!.last.location!.latitude!, _recommendedUsers!.last.location!.latitude!);
+    _currentRecommendedUserDistance = await calculateDistance(_recommendedUsers!.last.location!.latitude!, _recommendedUsers!.last.location!.longitude!);
     await continuosSlide();
   }
 
@@ -253,6 +258,7 @@ class NewMatcherController extends GetxController
         _unWantedUsers.add(userModel.userID!);
         _recommendedUsers!.insert(0, userModel);
       });
+      print("SAAAA");
 
       
 
@@ -281,6 +287,9 @@ class NewMatcherController extends GetxController
   Future<int> calculateDistance(double lat2, double lon2) async {
     String userID = Get.find<SharedPreferenceService>().getUserID()!;
     var currentUser = await Get.find<FirestoreService>().getCurrentUser(userID);
+    print("MATCHER");
+    print(_recommendedUsers!.last.location!.latitude);
+    print(_recommendedUsers!.last.location!.longitude);
     var lat1 = currentUser.location!.latitude!;
     var lon1 = currentUser.location!.longitude!;
     var dLat = (lat2 - lat1) * math.pi / 180.0;
