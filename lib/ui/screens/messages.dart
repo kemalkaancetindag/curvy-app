@@ -62,7 +62,7 @@ class MessagesScreen extends StatelessWidget {
                           ),
                         ),
                         GetBuilder<ChatController>(builder: (chatController) {
-                          return chatController.newMatches != null
+                          return chatController.newMatches != null 
                               ? Container(
                                   width: Dimensions.w300,
                                   height: Dimensions.h8 * 10,
@@ -72,11 +72,13 @@ class MessagesScreen extends StatelessWidget {
                                           itemCount:
                                               chatController.newMatches != null
                                                   ? chatController
+                                                      .newMatches!.length < 4 ? 4 : chatController
                                                       .newMatches!.length
                                                   : 0,
                                           itemBuilder: (context, index) {
-                                            
-                                            return GetBuilder<
+
+                                            if(index < chatController.newMatches!.length) {
+                                               return GetBuilder<
                                                     UserOnlineController>(
                                                 init: Get.find<
                                                         UserOnlineController>(
@@ -129,6 +131,22 @@ class MessagesScreen extends StatelessWidget {
                                                     ),
                                                   );
                                                 });
+                                            } else {
+                                              return  Container(
+                                                margin: EdgeInsets.only(left: Dimensions.h100/20),
+                                                width: Dimensions.h8 * 10,
+                                                height: Dimensions.h8 * 10,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            (Dimensions.h8 *
+                                                                    10) /
+                                                                2)),
+                                              );
+                                            }
+
+                                           
                                           },
                                         )
                                       : Container(
