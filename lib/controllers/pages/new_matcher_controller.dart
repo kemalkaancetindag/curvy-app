@@ -64,6 +64,9 @@ class NewMatcherController extends GetxController
   double? _currentUserDistancePreference;
   double? get currentUserDistancePreference =>  _currentUserDistancePreference;
 
+  bool _isSuperLike = false;
+  bool get isSuperLike  => _isSuperLike;
+
 
   NewMatcherController(
       {required this.recommendationService,
@@ -174,6 +177,11 @@ class NewMatcherController extends GetxController
 
   void setSwipe(Swipe swipe) {
     _swipe = swipe;
+    update();
+  }
+
+  void setSuperlike(bool isSuperLike) {
+    _isSuperLike = isSuperLike;
     update();
   }
 

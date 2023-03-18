@@ -496,7 +496,7 @@ class SwipePofileCard extends StatelessWidget {
                               child: TagWidget(
                                 text: "EVET",
                               )),
-                  controller.swipe == Swipe.up  && pageController != null ?
+                  controller.isSuperLike  && pageController != null ?
                    Positioned(
                     top: Dimensions.h52,
                     left: (MediaQuery.of(context).size.width/2) - (Dimensions.h87/2),

@@ -74,6 +74,7 @@ class ChatController extends GetxController {
   }
 
   void generateTiles() {
+    print("MESAJ ÇAĞIRDI");
     _tiles = [];
 
     for (int i = 0; i < _currentChats!.length; i++) {
@@ -94,34 +95,7 @@ class ChatController extends GetxController {
         builder: (controller) {
           return controller.user != null
               ? GestureDetector(
-                  onHorizontalDragUpdate: (details) {
-                    controller.setBackgroundColor(true);
-                    controller.slideTile(
-                        details.delta.dx, _currentChats![i].chatID!);
-                  },
-                  onHorizontalDragEnd: (details) {
-                    controller.setBackgroundColor(false);
-                    if ((controller.chatCurrentPosition![0] < -Dimensions.w200) ||
-                        controller.chatCurrentPosition![0] > -Dimensions.w2) {
-                      return;
-                    }
-                    controller.resetPosition();
-                  },
-                  onPanDown: (details) {
-                    print("DOWWWN");
-                    controller.setBackgroundColor(true);
-                  },
-                  onPanEnd: (details) {
-                    print("UPPP");
-                    controller.setBackgroundColor(false);
-                  },
-                  onPanCancel: () {
-                    print("CANCEL");
-                    controller.setBackgroundColor(false);
-                  },
-                  onTap: () {
-                    setCurrentChat(_currentChats![i].chatID!);
-                  },
+
                   child: Container(
                     width: Get.width,
                     height: Dimensions.h100,
@@ -188,11 +162,28 @@ class ChatController extends GetxController {
                                         )),
                                     Positioned(
                                         child: GestureDetector(
-                                      onPanDown: (details) {
-                                        controller.setBackgroundColor(true);
+                                          onHorizontalDragStart: (details) {
+                                            controller.setBackgroundColor(true);
+                                          },
+                                      onHorizontalDragUpdate: (details) {     
+                                        print("UPDATE");
+                                        controller.slideTile(details.delta.dx,
+                                            _currentChats![i].chatID!);
                                       },
-                                      onPanEnd: (details) {
+                                      onHorizontalDragEnd: (details) {
                                         controller.setBackgroundColor(false);
+                                        if ((controller
+                                                    .chatCurrentPosition![0] <
+                                                -Dimensions.w200) ||
+                                            controller.chatCurrentPosition![0] >
+                                                -Dimensions.w2) {
+                                          return;
+                                        }
+                                        controller.resetPosition();
+                                      },  
+                                      onPanCancel: () {
+                                        print("CANCEL");
+                                        controller.resetPosition();
                                       },
                                       onTap: () {
                                         setCurrentChat(
@@ -402,12 +393,31 @@ class ChatController extends GetxController {
 
   void setAllChats(List<Chat> allChats) {
     _allChats = allChats;
+
     update();
   }
 
-  void setCurrentChats() {
-    _currentChats =
-        _allChats!.where((chat) => chat.isActive! == isActiveMessages && chat.isStarted!).toList();
+  void setCurrentChats() {  
+    var chatsWithMessageDates =
+        _allChats!.where((chat) => chat.lastMessageDate != null).toList();
+    print("W LAST");
+    print(chatsWithMessageDates.length);
+    var chatsWithoutMessageDates =
+        _allChats!.where((chat) => chat.lastMessageDate == null).toList();
+    print("WO LAST");
+    print(chatsWithoutMessageDates.length);
+    chatsWithMessageDates
+        .sort((b, a) => a.lastMessageDate!.compareTo(b.lastMessageDate!));
+    chatsWithMessageDates.addAll(chatsWithoutMessageDates);
+
+    _currentChats = chatsWithMessageDates
+        .where((chat) => chat.isActive! == isActiveMessages && chat.isStarted!)
+        .toList();
+
+
+    print("AFTER");
+    print(_currentChats!.length);
+
     generateTiles();
 
     update();
@@ -470,7 +480,6 @@ class ChatController extends GetxController {
   void setCurrentChat(String chatID) {
     chatService.listenCurrentChat(chatID);
     chatService.setIsUserInChat(currentUserID, chatID, true);
-    
 
     if (_isActiveMessages) {
       _currentChat =
@@ -483,7 +492,6 @@ class ChatController extends GetxController {
     chatService.setMessagesAsSeen(chatID);
     generateTiles();
     Get.toNamed(Routes.chat);
-      
   }
 
   void updateCurrentChat(Chat updatedChat) {

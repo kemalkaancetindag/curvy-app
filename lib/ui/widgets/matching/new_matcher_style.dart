@@ -111,7 +111,8 @@ class NewMatcherStyle extends StatelessWidget {
                     builder: (context, candidateData, rejectedData) {
                       return IgnorePointer(
                         child: Container(
-                          width: Dimensions.w8*10,
+                          
+                          width: Get.width/3,
                         ),
                       );
                     },
@@ -128,7 +129,9 @@ class NewMatcherStyle extends StatelessWidget {
                     builder: (context, candidateData, rejectedData) {
                       return IgnorePointer(
                         child: Container(
-                          width: Dimensions.w8 * 10,
+                          
+                          width: Get.width/3,
+
                         ),
                       );
                     },

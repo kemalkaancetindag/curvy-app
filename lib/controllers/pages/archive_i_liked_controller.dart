@@ -29,21 +29,23 @@ class ArchiveILikedController extends GetxController {
     _tiles = [];
     List<Widget> tempRow = [];
     int counter = 0;
+    print(_usersILiked!.length);
 
-    _usersILiked!.forEach((user) {
-      Get.put(UserOnlineController(firestoreService: Get.find(), userID: user), tag: user, permanent: true);
+    for(int i = _usersILiked!.length-1; i >= 0; i--) {
+         Get.put(UserOnlineController(firestoreService: Get.find(), userID: _usersILiked![i]), tag: _usersILiked![i], permanent: true);
       _tiles!.add(
         GestureDetector(
           onTap: (){
-            var userDetailController = Get.lazyPut(() => UserDetailController(firestoreService: Get.find(), userID: user,matchService: Get.find()));          
+            var userDetailController = Get.lazyPut(() => UserDetailController(firestoreService: Get.find(), userID: _usersILiked![i],matchService: Get.find()));          
             
                     
             Get.toNamed(Routes.userDetail);
           },
-          child: ArchiveLikedBox(userID: user),
+          child: ArchiveLikedBox(userID: _usersILiked![i]),
         )
       );    
-    });
+    }
+
     
   }
 }

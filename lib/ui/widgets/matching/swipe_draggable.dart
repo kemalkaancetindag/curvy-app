@@ -30,28 +30,36 @@ class SwipeDraggable extends StatelessWidget {
         onDragUpdate: (DragUpdateDetails dragUpdateDetails) {
           if (((-1 * dragUpdateDetails.delta.dx) <
                   (-1 * dragUpdateDetails.delta.dy)) ||
-              dragUpdateDetails.delta.dx == 0) {
-                print("NONE");
+              dragUpdateDetails.delta.dx == 0) {        
+                controller.setSuperlike(false);
                 controller.setSwipe(Swipe.none);
               }
           if (dragUpdateDetails.delta.dx > 0 &&
               dragUpdateDetails.globalPosition.dx >
-                  MediaQuery.of(context).size.width / 2) {
+                  MediaQuery.of(context).size.width / 1.5) {
+                    print("SAĞĞĞĞ");
+                    controller.setSuperlike(false);
                     controller.setSwipe(Swipe.right);                    
                   }
           // When Draggable widget is dragged left
           if (dragUpdateDetails.delta.dx < 0 &&
               dragUpdateDetails.globalPosition.dx <
-                  MediaQuery.of(context).size.width / 2) {
+                  MediaQuery.of(context).size.width / 1.5) {
+                    controller.setSuperlike(false);
                     controller.setSwipe(Swipe.left);                    
                   }
-          if(dragUpdateDetails.delta.dy < 0 && dragUpdateDetails.delta.dy < MediaQuery.of(context).size.width / 2){
+          if(dragUpdateDetails.delta.dy < 0 && dragUpdateDetails.globalPosition.dy < MediaQuery.of(context).size.height/2){
             
-            controller.setSwipe(Swipe.up);
+            print("SUPERLIKKEEE");
+            print(dragUpdateDetails.delta.dy);
+            controller.setSwipe(Swipe.none);
+            controller.setSuperlike(true);
           }
         },
         onDragEnd: (drag) {
+          print("DURDU");
           controller.setSwipe(Swipe.none);
+          controller.setSuperlike(false);
         },
         child: SwipePofileCard(          
           pageController: pageController,

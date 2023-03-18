@@ -30,6 +30,7 @@ giriş methodu google ise telefon doğrulama ekranında kayıtlı kullanıcı ch
 telefon numarası ile girişte kayıtlı kullanıcı varsa kod gönder indexe at yoksa kayıda devam et
 
 
+--------------------------------------------------
 
 Keşfet ayarları 18 yaş sınırı ++
 ayarlar sayfasına bana göster seçimi ++
@@ -39,9 +40,21 @@ Hardcoded ekran genişliği ayarlanacak ++
 Sonsuz kaydırma ?
 Beğenme id kontrol et ++
 
+-----------------------------------------------------------
+
 UZAKLIK HESABI Kontroll Et ++
-ÇEMBERLERİ KOY 
+ÇEMBERLERİ KOY ++
 CHATLERİ BAŞLATMADAN EŞLEŞTİR ++
+
+-------------------------------------------------------------
+
+Son Mesaj Tarihine Göre Sırala ++
+En son beğenileni üste al ++ 
+Chat silme ve bildirme butonlarını düzelt
+Yan yatmayı kapat - android ++ - ios ?
+Girişe geri dönülmeyecek ++
+Ana ekranda akıcılık sağlanack ++
+
 
 
 

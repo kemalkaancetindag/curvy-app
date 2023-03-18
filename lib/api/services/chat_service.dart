@@ -94,6 +94,9 @@ class ChatService extends GetxService {
           }
         });
 
+
+
+
         messagesController.generatePositions(activeChats.length, true);
         messagesController.generatePositions(unActiveChats.length, false);
 

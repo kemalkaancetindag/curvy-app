@@ -71,6 +71,7 @@ class UserChatController extends GetxController {
   void resetPosition() {
     _chatCurrentPosition![0] = -Dimensions.w11 * 10;
     _chatCurrentPosition![1] = -Dimensions.w11 * 10;
+    _isTapping = false;
     update();
   }
 
