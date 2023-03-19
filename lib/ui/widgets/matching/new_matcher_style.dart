@@ -160,7 +160,7 @@ class NewMatcherStyle extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(Dimensions.h100/2),
                                       image: DecorationImage(
                                         image: NetworkImage(
-                                                                  'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent("")}?alt=media'),
+                                                                  'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(controller.currentUser!.images!.first)}?alt=media'),
                                         fit: BoxFit.cover
                                       )
                                     ),

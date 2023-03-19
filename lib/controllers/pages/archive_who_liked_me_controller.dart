@@ -1,6 +1,8 @@
 import 'dart:math' as math;
 
 import 'package:curvy_app/api/services/archive_service.dart';
+import 'package:curvy_app/api/services/firestore_service.dart';
+import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/constants/routes.dart';
 import 'package:curvy_app/controllers/user_detail_controller.dart';
@@ -20,14 +22,25 @@ class ArchiveWhoLikedMeController extends GetxController {
   List<Widget>? _tiles;
   List<Widget>? get tiles => _tiles;
 
+  bool _isLoading = true;
+  bool get isLoading => _isLoading;
+
+  UserModel? _currentUser;
+  UserModel? get currentUser => _currentUser; 
+
   ArchiveWhoLikedMeController({required this.archiveService});
 
   @override
   Future<void> onInit() async {
     super.onInit();
+
+    _isLoading = true;
+    String currentUserID = Get.find<SharedPreferenceService>().getUserID()!;
+    _currentUser = await Get.find<FirestoreService>().getCurrentUser(currentUserID);
+    update();
     _usersWhoLikedMe = await archiveService.getUsersWhoLikedMe();
     _generateTiles();
-
+    _isLoading = false;
     update();
   }
 

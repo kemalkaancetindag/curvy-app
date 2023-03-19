@@ -15,6 +15,13 @@ class ArchiveLikes extends StatelessWidget {
 
     return GetBuilder<ArchiveWhoLikedMeController>(
       builder: (controller) {
+        if(controller.isLoading) {
+          return Center(
+            child: CircularProgressIndicator(
+              color: Color(0xFFD51CFF),
+            ),
+          );
+        }
         if (controller.usersWhoLikedMe == null || controller.usersWhoLikedMe!.isEmpty) {
           return Container(
             width: double.maxFinite,
@@ -35,16 +42,17 @@ class ArchiveLikes extends StatelessWidget {
                     ),
                   ),
                 ),
+                controller.currentUser != null ?
                 Container(
                   width: Dimensions.h120,
                   height: Dimensions.h120,
                   margin: EdgeInsets.only(top: Dimensions.h100),
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage("assets/images/women.png"),
+                          image: NetworkImage('https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(controller.currentUser!.images!.first)}?alt=media'),
                           fit: BoxFit.cover),
                       borderRadius: BorderRadius.circular(Dimensions.h120 / 2)),
-                ),
+                ) : Container(),
                 Container(
                   width: Dimensions.w209,
                   margin: EdgeInsets.only(top: Dimensions.h120 + Dimensions.h8),
