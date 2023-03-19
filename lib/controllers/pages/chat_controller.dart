@@ -115,6 +115,9 @@ class ChatController extends GetxController {
                                         top: 0,
                                         bottom: 0,
                                         child: GestureDetector(
+                                          onTap: (){
+                                            controller.activateOrReportChat(_currentChats![i].chatID!);
+                                          },
                                           child: Container(
                                               height: double.maxFinite,
                                               width: Dimensions.w11 * 10,
@@ -162,15 +165,14 @@ class ChatController extends GetxController {
                                         )),
                                     Positioned(
                                         child: GestureDetector(
-                                          onHorizontalDragStart: (details) {
-                                            controller.setBackgroundColor(true);
-                                          },
+                                        
                                       onHorizontalDragUpdate: (details) {     
                                         print("UPDATE");
                                         controller.slideTile(details.delta.dx,
                                             _currentChats![i].chatID!);
                                       },
                                       onHorizontalDragEnd: (details) {
+                                        print("BİTTİ");
                                         controller.setBackgroundColor(false);
                                         if ((controller
                                                     .chatCurrentPosition![0] <
@@ -183,6 +185,7 @@ class ChatController extends GetxController {
                                       },  
                                       onPanCancel: () {
                                         print("CANCEL");
+                                        controller.setBackgroundColor(false);
                                         controller.resetPosition();
                                       },
                                       onTap: () {
@@ -400,12 +403,12 @@ class ChatController extends GetxController {
   void setCurrentChats() {  
     var chatsWithMessageDates =
         _allChats!.where((chat) => chat.lastMessageDate != null).toList();
-    print("W LAST");
-    print(chatsWithMessageDates.length);
+    
+    
     var chatsWithoutMessageDates =
         _allChats!.where((chat) => chat.lastMessageDate == null).toList();
-    print("WO LAST");
-    print(chatsWithoutMessageDates.length);
+    
+    
     chatsWithMessageDates
         .sort((b, a) => a.lastMessageDate!.compareTo(b.lastMessageDate!));
     chatsWithMessageDates.addAll(chatsWithoutMessageDates);
@@ -413,10 +416,6 @@ class ChatController extends GetxController {
     _currentChats = chatsWithMessageDates
         .where((chat) => chat.isActive! == isActiveMessages && chat.isStarted!)
         .toList();
-
-
-    print("AFTER");
-    print(_currentChats!.length);
 
     generateTiles();
 
@@ -529,10 +528,22 @@ class ChatController extends GetxController {
   }
 
   void setIsActiveMessages(bool state) async {
-    _isActiveMessages = state;
-    deleteLastControllers();
-    _currentChats =
-        _allChats!.where((chat) => chat.isActive! == state).toList();
+    _isActiveMessages = state;    
+    var chatsWithMessageDates =
+        _allChats!.where((chat) => chat.lastMessageDate != null).toList();
+    
+    
+    var chatsWithoutMessageDates =
+        _allChats!.where((chat) => chat.lastMessageDate == null).toList();
+    
+    
+    chatsWithMessageDates
+        .sort((b, a) => a.lastMessageDate!.compareTo(b.lastMessageDate!));
+    chatsWithMessageDates.addAll(chatsWithoutMessageDates);
+
+    _currentChats = chatsWithMessageDates
+        .where((chat) => chat.isActive! == isActiveMessages && chat.isStarted!)
+        .toList();
     generateTiles();
     update();
   }

@@ -90,7 +90,7 @@ class LoginScreen extends StatelessWidget {
             },),
             GestureDetector(
               onTap: () async {
-                await Get.find<FirestoreService>().checkInternet("data");
+                
               },
               child:   Container(
               width: Dimensions.w254,

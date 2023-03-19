@@ -10,7 +10,7 @@
         <provider android:authorities="com.facebook.orca.provider.PlatformProvider" /> <!-- allows sharing to Messenger app -->
     </queries>
    <application        
-        android:label="curvy_app"
+        android:label="Curvy"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

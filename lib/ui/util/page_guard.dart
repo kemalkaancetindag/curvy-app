@@ -11,14 +11,14 @@ class PageGuard extends GetMiddleware {
         Get.find<SharedPreferenceService>().checkIsUserLoggedIn();
 
     if (route == Routes.login && isUserLoggedIn) {
-      return const RouteSettings(name: Routes.index);
+      
+      return const RouteSettings(name: Routes.index,);
     } else if (route != Routes.login && isUserLoggedIn) {
       return null;
     } else if (Routes.login == route && !isUserLoggedIn) {
       var sharedPreferenceService = Get.find<SharedPreferenceService>();
       var lastUserId = sharedPreferenceService.getLastUserID();
-      print("LAST USERRR");
-      print(lastUserId);
+    
       if (lastUserId != null) {
         return const RouteSettings(name: Routes.secondLogin);
       }

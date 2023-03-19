@@ -46,7 +46,7 @@ class AuthService extends GetxService {
       await Get.find<SharedPreferenceService>().saveUser(result.docs[0].data() as Map<String,dynamic>);
       await Get.find<SharedPreferenceService>().setLastUserID(result.docs[0].id);
     
-      Get.toNamed(Routes.index);     
+      Get.offAllNamed(Routes.index);     
     }
     else{
       print(user);
