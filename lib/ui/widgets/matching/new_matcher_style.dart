@@ -140,6 +140,7 @@ class NewMatcherStyle extends StatelessWidget {
           ) : Container(
                     width: double.maxFinite,
                     height: double.maxFinite,
+                    color: Colors.white,
                     child: Column(
                       children: [
                         Container(

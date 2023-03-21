@@ -95,9 +95,8 @@ class NewMatcherController extends GetxController
     print("GELDİ");
     print(recommendations.length);
 
-    //recommendations.isEmpty
-    if(true){
-      _recommendedUsers = [];
+    
+    if(recommendations.isEmpty){      
       _isLoading = false;
       update();
       return;      

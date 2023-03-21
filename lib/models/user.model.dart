@@ -1,3 +1,5 @@
+import 'package:curvy_app/models/chat.model.dart';
+
 class UserModel {
   String? userID;
   String? instance_token;
@@ -180,10 +182,10 @@ class UserModel {
     data['email_confirmation'] = email_confirmation ?? false;
     data['phone_confirmation'] = phone_confirmation ?? false;
     data['is_paused'] = is_paused ?? false;
-    data['chat'] = chat!.toJson();
+    data['chat'] = chat == null ? _Chat().toJson() : chat!.toJson();
     data['likes'] = likes ?? [];
     data['likeds'] = likeds ?? [];
-    data['settings'] = settings!.toJson();
+    data['settings'] = settings != null ? settings!.toJson() : _Settings().toJson();
     data['instance_token'] = instance_token;
     data['location'] = location!.toJson();
     data['un_liked_users'] = un_liked_users ?? [];
@@ -275,20 +277,20 @@ class _Settings {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['connected_accounts'] = connected_accounts ?? [];    
-    data['distance_preference'] = distance_preference!.toJson();
+    data['distance_preference'] = distance_preference != null ? distance_preference!.toJson() : __DistancePreference().toJson();
     data['global'] = global ?? true;
     data['recommendation_preference'] = recommendation_preference ?? 0;
     data['viewer_preference'] = viewer_preference ?? 0;
     data['language'] = language ?? 0;
-    data['visibility'] = visibility!.toJson();
+    data['visibility'] = visibility != null ? visibility!.toJson() : __Visibility().toJson();
     data['close_reading_notifications'] = close_reading_notifications ?? false;
     data['play_videos_automatically'] = play_videos_automatically ?? true;
     data['hide_last_online_status'] = hide_last_online_status ?? false;
-    data['email_notifications'] = email_notifications!.toJson();
-    data['instant_notifications'] = instant_notifications!.toJson();
-    data['privacy_preferences'] = privacy_preferences!.toJson();
+    data['email_notifications'] = email_notifications != null ? email_notifications!.toJson() : __EmailNotifications().toJson();
+    data['instant_notifications'] = instant_notifications != null ? instant_notifications!.toJson() : __InstantNotifications().toJson();
+    data['privacy_preferences'] = privacy_preferences != null ?  privacy_preferences!.toJson() : __PrivacyPreferences().toJson();
     data['hide_online_status'] = hide_online_status ?? false;
-    data['age_preference'] = age_preference!.toJson();
+    data['age_preference'] = age_preference != null ? age_preference!.toJson() : __AgePreference().toJson();
 
     return data;
   }
@@ -532,9 +534,9 @@ class __PrivacyPreferences {
     data['curvy_team_promotions'] = curvy_team_promotions ?? true;
     data['enable_advertising'] = enable_advertising ?? true;
     data['enable_marketing'] = enable_marketing ?? true;
-    data['marketing_permissions'] = marketing_permissions!.toJson();
-    data['social_media_permissions'] = social_media_permissions!.toJson();
-    data['advertising_permissions'] = advertising_permissions!.toJson();
+    data['marketing_permissions'] = marketing_permissions != null ? marketing_permissions!.toJson() : ____MarketingPermissions().toJson();
+    data['social_media_permissions'] = social_media_permissions != null ? social_media_permissions!.toJson() : ____SocialMediaPermissions().toJson();
+    data['advertising_permissions'] = advertising_permissions != null ? advertising_permissions!.toJson() : ____AdvertisingPermissions().toJson();
 
     return data;
   }
