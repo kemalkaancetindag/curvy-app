@@ -115,6 +115,7 @@ class SetupBirthdateScreen extends StatelessWidget {
                             Container(
                               width: Dimensions.w25,
                               child: TextField(
+                                keyboardType: TextInputType.number,
                               inputFormatters: [
                                   LengthLimitingTextInputFormatter(1),
                                   FilteringTextInputFormatter.digitsOnly

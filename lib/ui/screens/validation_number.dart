@@ -77,7 +77,7 @@ class ValidationNumberScreen extends StatelessWidget {
                                     height: Dimensions.h50,
                                     child: Center(
                                       child: TextField(
-                                          
+                                          keyboardType: TextInputType.number,
                                           controller:
                                               _phoneNumberFieldController,
                                           cursorColor:
