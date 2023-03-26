@@ -22,6 +22,13 @@ class MatchService extends GetxService {
     .where('user2.liked', isEqualTo: null)
     .get();
 
+      var matchCheckSnapshotReverse = await firestoreService.getCollection('matches')
+    .where('user2.id', isEqualTo: currentUserID)
+    .where('user1.id', isEqualTo: likedUserID)
+    .where('user2.liked', isEqualTo: true)    
+    .where('user1.liked', isEqualTo: null)
+    .get();
+
 
     if(matchCheckSnapshot.docs.isEmpty) {
 

@@ -108,7 +108,7 @@ class NewMatcherController extends GetxController
       _recommendedUsers!.add(userModel);
     });
 
-    _currentRecommendedUserDistance = await calculateDistance(_recommendedUsers!.last.location!.latitude!, _recommendedUsers!.last.location!.longitude!);
+    
 
     
 
@@ -231,7 +231,7 @@ class NewMatcherController extends GetxController
       await matchService.createMatch(_recommendedUsers!.last.userID!);
     }
     setCurrentUserImageIndex(0);
-    _currentRecommendedUserDistance = await calculateDistance(_recommendedUsers!.last.location!.latitude!, _recommendedUsers!.last.location!.longitude!);
+    
     await continuosSlide();
   }
 
@@ -248,14 +248,14 @@ class NewMatcherController extends GetxController
       await matchService.dislikeUser(_recommendedUsers!.last.userID!);
     }
     setCurrentUserImageIndex(0);
-    _currentRecommendedUserDistance = await calculateDistance(_recommendedUsers!.last.location!.latitude!, _recommendedUsers!.last.location!.longitude!);
+    
     await continuosSlide();
   }
 
   Future<void> previousUser() async {
     addListItem();
     await getCurrentRecommendedUsersInterests();
-    _currentRecommendedUserDistance = await calculateDistance(_recommendedUsers!.last.location!.latitude!, _recommendedUsers!.last.location!.latitude!);
+    
     await matchService.removeLastAction(recommendedUsers!.last.userID!);
   }
 
@@ -295,28 +295,6 @@ class NewMatcherController extends GetxController
   }
 
   
-  Future<int> calculateDistance(double lat2, double lon2) async {
-    String userID = Get.find<SharedPreferenceService>().getUserID()!;
-    var currentUser = await Get.find<FirestoreService>().getCurrentUser(userID);
-    print("MATCHER");
-    print(_recommendedUsers!.last.location!.latitude);
-    print(_recommendedUsers!.last.location!.longitude);
-    var lat1 = currentUser.location!.latitude!;
-    var lon1 = currentUser.location!.longitude!;
-    var dLat = (lat2 - lat1) * math.pi / 180.0;
-    var dLon = (lon2 - lon1) * math.pi / 180.0;
-    var latTimesPi1 = (lat1) * math.pi / 180.0;
-    var latTimesPi2 = (lat2) * math.pi / 180.0;
-
-    var a = (math.pow(math.sin(dLat / 2), 2) +
-        math.pow(math.sin(dLon / 2), 2) *
-            math.cos(latTimesPi1) *
-            math.cos(latTimesPi2));
-    var rad = 6371;
-    var c = 2 * math.asin(math.sqrt(a));
-
-    return (rad * c).toInt();
-  }
 
   Future<void> getCurrentRecommendedUsersInterests() async {
     _currentRecommendedUsersInterests = [];
@@ -359,7 +337,7 @@ class NewMatcherController extends GetxController
       _recommendedUsers!.add(userModel);
     });
 
-    _currentRecommendedUserDistance = await calculateDistance(_recommendedUsers!.last.location!.latitude!, _recommendedUsers!.last.location!.longitude!);
+    
 
     
 

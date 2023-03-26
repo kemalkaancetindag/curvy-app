@@ -48,6 +48,8 @@ class UserModel {
   int? like_count;
   int? remaining_daily_back_count;
   bool? show_freestyle_pop_up;
+  int? bot;
+  int? current_distance;
 
   UserModel(
       {this.userID,
@@ -96,7 +98,8 @@ class UserModel {
       this.users_i_liked,
       this.like_count,
       this.remaining_daily_back_count,
-      this.show_freestyle_pop_up});
+      this.show_freestyle_pop_up,
+      this.bot});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     userID = json['userID'];
@@ -145,6 +148,8 @@ class UserModel {
     like_count = json['like_count'];
     remaining_daily_back_count = json['remaining_daily_back_count'];
     show_freestyle_pop_up = json['show_freestyle_pop_up'];
+    bot = json['bot'];
+    current_distance = json['current_distance'];
   }
 
   Map<String, dynamic> toJson() {
@@ -195,6 +200,7 @@ class UserModel {
     data['like_count'] = like_count ?? 0;
     data['remaining_daily_back_count'] = remaining_daily_back_count ?? 1;
     data['show_freestyle_pop_up'] = show_freestyle_pop_up ?? true;
+    data['bot'] = bot == null ? 0 : 1;
     return data;
   }
 }

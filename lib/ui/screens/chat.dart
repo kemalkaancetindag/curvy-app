@@ -46,12 +46,14 @@ class ChatScreen extends StatelessWidget {
                                     controller.clearCurrentChat();
                                   },
                                   child: Container(
+                                    width: Dimensions.w300/13,
+                                    height: Dimensions.w300/10,
                                     margin: EdgeInsets.only(
-                                        right: Dimensions.w11,
-                                        left: Dimensions.w8 / 2),
+                                        right: Dimensions.w8,
+                                        ),
                                     child: Center(
                                       child: Image.asset(
-                                          "assets/images/chevron_left_white.png"),
+                                          "assets/images/chevron_left_white.png", fit: BoxFit.cover,),
                                     ),
                                   )),
                               Container(

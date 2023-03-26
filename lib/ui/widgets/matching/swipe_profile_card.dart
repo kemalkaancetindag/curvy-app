@@ -248,7 +248,7 @@ class SwipePofileCard extends StatelessWidget {
                                           ),
                                           Text(
                                             pageController != null
-                                                ? "${controller.currentRecommendedUserDistance} km uzakta"
+                                                ? "${user.current_distance} km uzakta"
                                                 : "- km uzakta",
                                             style: TextStyle(
                                               color: Colors.white,
