@@ -117,7 +117,8 @@ class NewMatcherController extends GetxController
     await precacheBatchImage(_recommendedUsers!
         .sublist(_currentUserIndex - 2, _currentUserIndex + 1));
 
-    _animationController = AnimationController(
+
+     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(
         milliseconds: 250,
@@ -136,6 +137,7 @@ class NewMatcherController extends GetxController
         }
       },
     );
+    
     _isLoading = false;
     update();
     super.onInit();
@@ -324,5 +326,51 @@ class NewMatcherController extends GetxController
       _currentRecommendedUsersInterests.add(interest);
     });
     
+  }
+
+  Future<void> updatePageBySexPreference() async {
+     _isLoading = true;
+    
+    update();    
+    
+    
+    _currentUserDistancePreference = _currentUser!.settings!.distance_preference!.distance;
+    
+
+    _unWantedUsers.addAll(_currentUser!.users_i_liked!);
+    _unWantedUsers.addAll(_currentUser!.un_liked_users!);
+
+    _recommendedUsers = [];
+
+    var recommendations =
+        await recommendationService.getRecommendations(_unWantedUsers);
+    
+
+    
+    if(recommendations.isEmpty){      
+      _isLoading = false;
+      update();
+      return;      
+    }
+
+    await Future.forEach(recommendations, (user) async {
+      var userModel = UserModel.fromJson(user);
+      _unWantedUsers.add(userModel.userID!);
+      _recommendedUsers!.add(userModel);
+    });
+
+    _currentRecommendedUserDistance = await calculateDistance(_recommendedUsers!.last.location!.latitude!, _recommendedUsers!.last.location!.longitude!);
+
+    
+
+    await getCurrentRecommendedUsersInterests();
+
+    await precacheBatchImage(_recommendedUsers!
+        .sublist(_currentUserIndex - 2, _currentUserIndex + 1));
+       
+    
+    _isLoading = false;
+    update();
+    super.onInit();
   }
 }

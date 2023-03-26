@@ -1,5 +1,6 @@
 import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
+import 'package:curvy_app/controllers/pages/new_matcher_controller.dart';
 
 import 'package:get/get.dart';
 
@@ -132,8 +133,9 @@ class MatcherSettingsController extends GetxController {
     data['show_me']  = _showmePreference;
 
     await firestoreService.updateUser(data, userID);
-
     Get.back();
+    Get.find<NewMatcherController>().updatePageBySexPreference();
+    
   }
 
 

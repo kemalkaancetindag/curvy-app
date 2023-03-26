@@ -110,6 +110,7 @@ class FreestyleController extends GetxController {
     unWantedUsers!.addAll(currentUser.users_i_liked!);
 
     var matches = await Get.find<RecommendationService>().getRecommendations(unWantedUsers);
+    
 
     selectedUser = UserModel.fromJson(matches.first as Map<String, dynamic>);
 
