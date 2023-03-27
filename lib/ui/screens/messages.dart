@@ -93,7 +93,7 @@ class MessagesScreen extends StatelessWidget {
                                                             .user2
                                                         : chatController
                                                             .newMatches![index]
-                                                            .user2),
+                                                            .user1),
                                                 global: false,
                                                 builder:
                                                     (userOnlineController) {

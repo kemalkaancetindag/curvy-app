@@ -235,4 +235,12 @@ class FirestoreService extends GetxService {
     await updateUser(updateData, currentUserID!);
   
   } 
+
+  Future<void> updateMatch(String user1ID, String user2ID) async {
+    var matchDoc = (await getCollection("matches").where("user1.id", isEqualTo: user1ID).where("user2.id", isEqualTo: user2ID).get()).docs.first;
+    var newMatchDoc = (matchDoc.data() as Map<String,dynamic>);
+    newMatchDoc["user1"]["liked"] = true;
+    newMatchDoc["user2"]["liked"] = true;
+    await getCollection("matches").doc(matchDoc.id).update(newMatchDoc);
+  }
 }

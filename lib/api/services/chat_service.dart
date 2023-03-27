@@ -68,12 +68,16 @@ class ChatService extends GetxService {
               Chat.fromJson(chatDoc.data() as Map<String, dynamic>);
 
           if (currentChat.user1! == userID) {
+            print("SA1");
             Get.put(
                 UserOnlineController(
                     firestoreService: firestoreService,
                     userID: currentChat.user2!),
                 tag: currentChat.user2!);
+                print(currentChat.user2);
           } else {
+            print("SA2");
+            print(currentChat.user1);
             Get.put(
                 UserOnlineController(
                     firestoreService: firestoreService,

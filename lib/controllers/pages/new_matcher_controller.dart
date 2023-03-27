@@ -92,9 +92,6 @@ class NewMatcherController extends GetxController
     var recommendations =
         await recommendationService.getRecommendations(_unWantedUsers);
     
-    print("GELDİ");
-    print(recommendations.length);
-
     
     if(recommendations.isEmpty){      
       _isLoading = false;
@@ -104,9 +101,12 @@ class NewMatcherController extends GetxController
 
     await Future.forEach(recommendations, (user) async {
       var userModel = UserModel.fromJson(user);
+
       _unWantedUsers.add(userModel.userID!);
       _recommendedUsers!.add(userModel);
     });
+    print("İLK");
+    print(_recommendedUsers!.last.userID);
 
     
 
