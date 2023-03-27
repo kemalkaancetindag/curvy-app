@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 
 class NavController extends GetxController {
 
-  int _currentIndex = 4; 
+  int _currentIndex = 2; 
   List<Widget> mainPages = [ExploreScreen(),ArchivesScreen(),MatchingScreen(),MessagesScreen(),IndexScreen()];
   
   
