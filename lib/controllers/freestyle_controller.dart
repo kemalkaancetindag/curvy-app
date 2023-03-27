@@ -36,6 +36,12 @@ class FreestyleController extends GetxController {
 
   String _curvyChipMessageText = "";
   String _curvyLikeMessageText = "";
+
+
+  bool _isLoadingNewUsers = false;
+  bool get isLoadingNewUsers => _isLoadingNewUsers;
+
+  List<dynamic> _currentUsers = [];
   
 
   FreestyleController({required this.goApiClient});
@@ -87,12 +93,75 @@ class FreestyleController extends GetxController {
     var currentUserID = Get.find<SharedPreferenceService>().getUserID();
     _user = await Get.find<FirestoreService>().getUser(currentUserID!);
     _isPopupOn = _user!.show_freestyle_pop_up!;
+
+    scrollController.addListener(() async { 
+      if (scrollController.position.atEdge) {
+      bool isTop = scrollController.position.pixels == 0;
+      if (isTop) {
+        
+      } else {
+        //BOTTOM
+        if(_isLoadingNewUsers == false) {
+          await loadContinousUsers();
+        }
+        
+
+      }
+    }
+    });
     
     await generatePopup();
   }
 
   void setIsPopUpOn(bool state) {
     _isPopupOn = state;
+    update();
+  }
+
+  Future<void> loadContinousUsers() async {
+    _isLoadingNewUsers = true;
+    update();
+
+     List<UserModel> tempRecommendedUsers = [];
+
+    String userID = Get.find<SharedPreferenceService>().getUserID()!;
+    var currentUser = await Get.find<FirestoreService>().getCurrentUser(userID);
+
+    var data = Map<String, dynamic>();
+    data["userID"] = userID;
+    data["un_liked_users"] = currentUser.un_liked_users;
+     
+    var unWantedUsers = currentUser.un_liked_users;
+    unWantedUsers!.addAll(currentUser.users_i_liked!);
+    unWantedUsers!.addAll(_currentUsers);
+    
+
+    var matches = await Get.find<RecommendationService>().getRecommendations(unWantedUsers);
+    print("HAM");
+    print(matches.length);
+    
+
+    
+
+    matches.forEach((element) {
+      var user = UserModel.fromJson(element as Map<String, dynamic>);
+      tempRecommendedUsers.add(user);
+    });
+
+    List<Widget> tempRecommendedUsersWidgets = [];
+
+    tempRecommendedUsers.forEach((element) async {
+      int rDistance = await calculateDistance(element.location!.latitude!, element.location!.longitude!);
+      recommendedUsersWidget!.add(FreeStyleBox(user: element, distance: rDistance,));
+      _currentUsers.add(element.userID);
+    });
+    print("TEMP");
+    print(tempRecommendedUsers.length);
+
+    //recommendedUsersWidget!.addAll(tempRecommendedUsersWidgets);
+    print("WİDGET");
+    print(recommendedUsersWidget!.length);
+    _isLoadingNewUsers = false;
     update();
   }
 
@@ -110,12 +179,14 @@ class FreestyleController extends GetxController {
     unWantedUsers!.addAll(currentUser.users_i_liked!);
 
     var matches = await Get.find<RecommendationService>().getRecommendations(unWantedUsers);
-    
-
+    print("POP");
+    print(matches.first["userID"]);
+    _currentUsers.add(matches.first["userID"]);
     selectedUser = UserModel.fromJson(matches.first as Map<String, dynamic>);
 
-    matches.skip(0).forEach((element) {
+    matches.skip(1).forEach((element) {
       var user = UserModel.fromJson(element as Map<String, dynamic>);
+      _currentUsers.add(user.userID);
       tempRecommendedUsers.add(user);
     });
 
