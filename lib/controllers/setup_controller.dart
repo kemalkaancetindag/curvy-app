@@ -393,9 +393,9 @@ class SetupController extends GetxController {
           users_i_liked: []).toJson();
 
       var userDocID =
-          await Get.find<FirestoreService>().addToCollection(jsonUser, 'users');
+          await Get.find<FirestoreService>().addToCollection(jsonUser, 'users', "GOOGLE");
 
-      await Get.find<FirestoreService>().addToCollection(jsonUser, 'users');
+      
       await Get.find<SharedPreferenceService>().saveUser(jsonUser);
       await Get.find<SharedPreferenceService>().setLastUserID(userDocID);
     } else if (_loginMethod == LoginMethod.phone.value) {
@@ -451,7 +451,7 @@ class SetupController extends GetxController {
           users_i_liked: []).toJson();
 
       var userDocID =
-          await Get.find<FirestoreService>().addToCollection(jsonUser, 'users');
+          await Get.find<FirestoreService>().addToCollection(jsonUser, 'users', "PHONE");
 
       await Get.find<SharedPreferenceService>().saveUser(jsonUser);
 
@@ -510,7 +510,7 @@ class SetupController extends GetxController {
           users_i_liked: []).toJson();
 
       var userDocID =
-          await Get.find<FirestoreService>().addToCollection(jsonUser, 'users');
+          await Get.find<FirestoreService>().addToCollection(jsonUser, 'users', "APPLE");
 
       await Get.find<SharedPreferenceService>().saveUser(jsonUser);
 

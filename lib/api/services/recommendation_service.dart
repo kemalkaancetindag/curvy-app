@@ -35,9 +35,9 @@ class RecommendationService extends GetxService {
           .docs;
 
       nonBotUsers = users.where(
-          (element) => (element.data() as Map<String, dynamic>)["bot"] == 0);
+          (element) => (element.data() as Map<String, dynamic>)["bot"] == 0).toList();
       if (nonBotUsers.length >= 4) {
-        nonBotUsers = nonBotUsers.slice(0, 3);
+        nonBotUsers = nonBotUsers.sublist(0, 4);
       }
     } else if (currentUserDistancePref <= 40 && currentUserDistancePref > 5) {
       users = (await firestoreService
@@ -48,9 +48,9 @@ class RecommendationService extends GetxService {
               .get())
           .docs;
       nonBotUsers = users.where(
-          (element) => (element.data() as Map<String, dynamic>)["bot"] == 0);
+          (element) => (element.data() as Map<String, dynamic>)["bot"] == 0).toList();
       if (nonBotUsers.length >= 4) {
-        nonBotUsers = nonBotUsers.slice(0, 3);
+        nonBotUsers = nonBotUsers.sublist(0, 4);
       }
       print(nonBotUsers.length);
     } else if (currentUserDistancePref <= 5 && currentUserDistancePref > 2) {
@@ -62,7 +62,7 @@ class RecommendationService extends GetxService {
               .get())
           .docs;
       nonBotUsers = users.where(
-          (element) => (element.data() as Map<String, dynamic>)["bot"] == 0);
+          (element) => (element.data() as Map<String, dynamic>)["bot"] == 0).toList();
       print(nonBotUsers.length);
     } else if (currentUserDistancePref <= 2) {
       users = (await firestoreService
@@ -73,9 +73,9 @@ class RecommendationService extends GetxService {
               .get())
           .docs;
       nonBotUsers = users.where(
-          (element) => (element.data() as Map<String, dynamic>)["bot"] == 0);
+          (element) => (element.data() as Map<String, dynamic>)["bot"] == 0).toList();
       if (nonBotUsers.length >= 4) {
-        nonBotUsers = nonBotUsers.slice(0, 3);
+        nonBotUsers = nonBotUsers.sublist(0, 4);
       }
       print(nonBotUsers.length);
     }

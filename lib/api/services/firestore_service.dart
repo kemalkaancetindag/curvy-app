@@ -42,7 +42,8 @@ class FirestoreService extends GetxService {
   }
 
   Future<String> addToCollection(
-      Map<String, dynamic> jsonMap, String collectionName) async {
+      Map<String, dynamic> jsonMap, String collectionName, String loginMethod) async {
+        print(loginMethod);
     FirebaseFirestore db = _getDb();
     CollectionReference collection = db.collection(collectionName);
 

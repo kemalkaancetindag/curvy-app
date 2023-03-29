@@ -291,7 +291,7 @@ class SwipePofileCard extends StatelessWidget {
                                                     fit: BoxFit.contain)),
                                           ),
                                           Text(
-                                            "${controller.currentRecommendedUserDistance} km uzaklıkta",
+                                            "${user.current_distance} km uzaklıkta",
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontSize: Dimensions.h21,
