@@ -18,6 +18,7 @@ import 'package:curvy_app/ui/util/utils.dart';
 import 'package:curvy_app/ui/widgets/interest_select.dart';
 import 'package:dio/dio.dart' as dio_package;
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -366,6 +367,10 @@ class SetupController extends GetxController {
           geohash.km2 = Utils.encode(position.longitude, position.latitude, i);
         }
       }
+      
+    var token = await FirebaseMessaging.instance.getToken(); 
+
+
 
       var jsonUser = UserModel(
           userID: _googleUser!.uid,
@@ -388,7 +393,7 @@ class SetupController extends GetxController {
               latitude: position.latitude,
               longitude: position.longitude,
               geohash: geohash),
-          instance_token: _instanceToken,
+          instance_token: token,
           users_who_liked_me: [],
           users_i_liked: []).toJson();
 
@@ -425,6 +430,8 @@ class SetupController extends GetxController {
         }
       }
 
+      var token = await FirebaseMessaging.instance.getToken(); 
+
       var jsonUser = UserModel(
           userID: _userPhoneId,
           phone_number: _phoneNumber,
@@ -446,7 +453,7 @@ class SetupController extends GetxController {
               latitude: position.latitude,
               longitude: position.longitude,
               geohash: geohash),
-          instance_token: _instanceToken,
+          instance_token: token,
           users_who_liked_me: [],
           users_i_liked: []).toJson();
 
@@ -484,6 +491,8 @@ class SetupController extends GetxController {
         }
       }
 
+      var token = await FirebaseMessaging.instance.getToken(); 
+
       var jsonUser = UserModel(
           userID: _appleUser!.uid,
           phone_number: _phoneNumber,
@@ -505,7 +514,7 @@ class SetupController extends GetxController {
               latitude: position.latitude,
               longitude: position.longitude,
               geohash: geohash),
-          instance_token: _instanceToken,
+          instance_token: token,
           users_who_liked_me: [],
           users_i_liked: []).toJson();
 

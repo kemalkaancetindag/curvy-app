@@ -33,12 +33,14 @@ Future<void> main() async {
   await initClients();
   await initServices();    
 
-  var token = await FirebaseMessaging.instance.getToken();  
+  var token = await FirebaseMessaging.instance.getToken(); 
+  print("TOKENNNNNNNNN");
   print(token);
   await initControllers();
   var userID = Get.find<SharedPreferenceService>().getUserID();
   var updateData = Map<String,dynamic>();
   updateData['instance_token'] = token;
+  
 
   var locationPermission = await GeolocatorPlatform.instance.checkPermission();
   if(locationPermission == LocationPermission.denied || locationPermission == LocationPermission.unableToDetermine || locationPermission == LocationPermission.deniedForever) {

@@ -27,6 +27,11 @@ export const sendNotifications =
 
               const user2InstanceToken = user2Data.instance_token;
 
+              console.log("1 TOKEN");
+              console.log(user1InstanceToken);
+              console.log("2 TOKEN");
+              console.log(user2InstanceToken);
+
               if (!user1InstanceToken || !user2InstanceToken) {
                 return;
               }
