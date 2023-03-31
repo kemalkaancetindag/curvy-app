@@ -24,6 +24,7 @@ class RecommendationService extends GetxService {
         currentUser.settings!.distance_preference!.distance!;
     var users;
     var nonBotUsers;
+    var nonBotUserIDS = [];
 
     if (currentUserDistancePref <= 100 && currentUserDistancePref > 40) {
       users = (await firestoreService
@@ -95,11 +96,13 @@ class RecommendationService extends GetxService {
       if ((currentUser.show_me! == user.sex &&
           !unWantedUsers.contains(user.userID))) {
         recommendedNonBotUsers.add(newJsonData);
+        nonBotUserIDS.add(newJsonData["userID"]);
       }
 
       if (currentUser.show_me == Showme.all.value &&
           !unWantedUsers.contains(user.userID)) {
         recommendedNonBotUsers.add(newJsonData);
+        nonBotUserIDS.add(newJsonData["userID"]);
       }
     }
 
@@ -115,12 +118,12 @@ class RecommendationService extends GetxService {
       var user = UserModel.fromJson(newJsonData);
 
       if ((currentUser.show_me! == user.sex &&
-          !unWantedUsers.contains(user.userID))) {
+          !unWantedUsers.contains(user.userID) && !nonBotUserIDS.contains(user.userID))) {
         recommendedUsers.add(newJsonData);
       }
 
       if (currentUser.show_me == Showme.all.value &&
-          !unWantedUsers.contains(user.userID)) {
+          !unWantedUsers.contains(user.userID) && !nonBotUserIDS.contains(user.userID)) {
         recommendedUsers.add(newJsonData);
       }
 

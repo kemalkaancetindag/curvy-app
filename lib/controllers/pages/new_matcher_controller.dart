@@ -114,8 +114,7 @@ class NewMatcherController extends GetxController
 
     await getCurrentRecommendedUsersInterests();
 
-    await precacheBatchImage(_recommendedUsers!
-        .sublist(_currentUserIndex - 2, _currentUserIndex + 1));
+
 
 
      _animationController = AnimationController(
@@ -130,7 +129,9 @@ class NewMatcherController extends GetxController
         if (AnimationStatus.completed == status) {
           if (_animationDirection != null) {            
             removeListItem();
-            getCurrentRecommendedUsersInterests();
+            if(_recommendedUsers!.isNotEmpty) {
+              getCurrentRecommendedUsersInterests();
+            }            
             setSwipe(Swipe.none);
             _animationController.reset();
           }

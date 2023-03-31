@@ -40,6 +40,7 @@ Future<void> main() async {
   var userID = Get.find<SharedPreferenceService>().getUserID();
   var updateData = Map<String,dynamic>();
   updateData['instance_token'] = token;
+  updateData['online_status'] = true;
   
 
   var locationPermission = await GeolocatorPlatform.instance.checkPermission();
