@@ -1,5 +1,6 @@
 import 'package:curvy_app/api/services/archive_service.dart';
 import 'package:curvy_app/api/services/auth_service.dart';
+import 'package:curvy_app/api/services/bot_controll_service.dart';
 import 'package:curvy_app/api/services/chat_service.dart';
 import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/general_app_state_service.dart';
@@ -26,6 +27,7 @@ Future<void> initServices() async {
   Get.lazyPut(() => GeneralAppStateService(sharedPreferenceService: Get.find(), firestoreService: Get.find()));
   Get.put(LifeCycleObserverService(firestoreService: Get.find())); 
   Get.put(RecommendationService(firestoreService: Get.find())); 
+  Get.put(BotControllService(firestoreService: Get.find()));
  
   
 }

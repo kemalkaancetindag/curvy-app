@@ -341,4 +341,33 @@ export const deleteUser = functions.firestore
       }
     });
 
+export const checkForUnStableMatches = functions.firestore
+    .document("matches/{matchID}")
+    .onCreate(async (snapshot, context) => {
+      const matchData = snapshot.data();
+
+      const existingMatches = await db.collection("matches")
+          .where("user1.id", "==", matchData.user2.id)
+          .where("user2.id", "==", matchData.user1.id).get();
+
+      if (existingMatches.docs.length != 0 &&
+          (!existingMatches.docs[0].data().user1.liked ||
+          !existingMatches.docs[0].data().user2.liked )) {
+            
+        matchData["user1"]["liked"] = true;
+        matchData["user2"]["liked"] = true;
+    
+        await db.collection("matches").doc(context.params.matchID)
+                .update(matchData);
+        const existingMatch = existingMatches.docs[0];
+        await db.collection("matches").doc(existingMatch.id).delete();
+        console.log(matchData);
+
+
+      } else {
+        console.log("not found");
+        return;
+      }
+    });
+
 

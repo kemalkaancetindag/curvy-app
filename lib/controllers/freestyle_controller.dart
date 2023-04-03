@@ -89,7 +89,7 @@ class FreestyleController extends GetxController {
   @override
   Future<void> onInit() async {
     await getRecommendedUsers();
-    distance = await calculateDistance(selectedUser!.location!.latitude!, selectedUser!.location!.longitude!);
+    
     var currentUserID = Get.find<SharedPreferenceService>().getUserID();
     _user = await Get.find<FirestoreService>().getUser(currentUserID!);
     _isPopupOn = _user!.show_freestyle_pop_up!;
@@ -152,7 +152,7 @@ class FreestyleController extends GetxController {
 
     tempRecommendedUsers.forEach((element) async {
       int rDistance = await calculateDistance(element.location!.latitude!, element.location!.longitude!);
-      recommendedUsersWidget!.add(FreeStyleBox(user: element, distance: rDistance,));
+      recommendedUsersWidget!.add(FreeStyleBox(user: element,));
       _currentUsers.add(element.userID);
     });
     print("TEMP");
@@ -371,7 +371,7 @@ class FreestyleController extends GetxController {
                           Container(
                             child: Center(
                               child: Text(
-                                "$distance km uzaklıkta",
+                                "${selectedUser!.current_distance} km uzaklıkta",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
@@ -454,7 +454,7 @@ class FreestyleController extends GetxController {
     List<Widget> tempRecommendedUsersWidgets = [];
     recommendedUsers.forEach((element) async {
       int rDistance = await calculateDistance(element.location!.latitude!, element.location!.longitude!);
-      tempRecommendedUsersWidgets.add(FreeStyleBox(user: element, distance: rDistance,));
+      tempRecommendedUsersWidgets.add(FreeStyleBox(user: element));
     });
 
     recommendedUsersWidget = tempRecommendedUsersWidgets;

@@ -9,8 +9,8 @@ import 'package:get/get.dart';
 
 class FreeStyleBox extends StatelessWidget {
   UserModel user;
-  int distance;
-  FreeStyleBox({super.key, required this.user, required this.distance});
+  
+  FreeStyleBox({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +98,7 @@ class FreeStyleBox extends StatelessWidget {
                           width: double.maxFinite,
                           child: Center(
                             child: Text(
-                              "Antalya konumundan, ${distance}km uzakta, şuan online.",
+                              "Antalya konumundan, ${user.current_distance}km uzakta, şuan online.",
                               style: TextStyle(
                                   fontSize: Dimensions.h14 / 2,
                                   color: Colors.white,

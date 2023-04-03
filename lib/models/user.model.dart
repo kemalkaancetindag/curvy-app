@@ -1,3 +1,4 @@
+import 'package:curvy_app/models/bot_info_model.dart';
 import 'package:curvy_app/models/chat.model.dart';
 
 class UserModel {
@@ -50,6 +51,7 @@ class UserModel {
   bool? show_freestyle_pop_up;
   int? bot;
   int? current_distance;
+  List<dynamic>? bot_info_list;
 
   UserModel(
       {this.userID,
@@ -99,7 +101,8 @@ class UserModel {
       this.like_count,
       this.remaining_daily_back_count,
       this.show_freestyle_pop_up,
-      this.bot});
+      this.bot,
+      this.bot_info_list});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     userID = json['userID'];
@@ -150,6 +153,15 @@ class UserModel {
     show_freestyle_pop_up = json['show_freestyle_pop_up'];
     bot = json['bot'];
     current_distance = json['current_distance'];
+    List<dynamic> botInfo = [];
+    print(json["bot_info_list"]);
+    if(json['bot_info_list'] != null) {
+          json['bot_info_list'].forEach((element) => {
+      botInfo.add(BotInfoModel.fromJson(element))
+    });
+    }
+
+    bot_info_list = botInfo;
   }
 
   Map<String, dynamic> toJson() {
@@ -201,6 +213,15 @@ class UserModel {
     data['remaining_daily_back_count'] = remaining_daily_back_count ?? 1;
     data['show_freestyle_pop_up'] = show_freestyle_pop_up ?? true;
     data['bot'] = bot == null ? 0 : 1;
+    
+    List<Map<String,dynamic>> newBotInfoList = [];
+    if(bot_info_list != null) {
+          bot_info_list!.forEach((element) { 
+      newBotInfoList.add(element.toJson());
+    });
+    }
+
+    data['bot_info_list'] = newBotInfoList;
     return data;
   }
 }
