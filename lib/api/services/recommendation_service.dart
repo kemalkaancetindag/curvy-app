@@ -55,7 +55,6 @@ class RecommendationService extends GetxService {
       if (nonBotUsers.length >= 4) {
         nonBotUsers = nonBotUsers.sublist(0, 4);
       }
-      
     } else if (currentUserDistancePref <= 5 && currentUserDistancePref > 2) {
       nonBotUsers = (await firestoreService
               .getCollection("users")
@@ -65,8 +64,6 @@ class RecommendationService extends GetxService {
               .where("bot", isEqualTo: 0)
               .get())
           .docs;
-
-      
     } else if (currentUserDistancePref <= 2) {
       nonBotUsers = (await firestoreService
               .getCollection("users")
@@ -80,7 +77,6 @@ class RecommendationService extends GetxService {
       if (nonBotUsers.length >= 4) {
         nonBotUsers = nonBotUsers.sublist(0, 4);
       }
-      
     }
 
     List<dynamic> recommendedUsers = [];
@@ -109,22 +105,16 @@ class RecommendationService extends GetxService {
     }
 
     math.Random random = new math.Random();
-    List<Map<String,dynamic>> newBotInfoData = [];
+    List<Map<String, dynamic>> newBotInfoData = [];
+    List<String> changedBotInfoData = [];
 
     for (var recommendedUser in botUsers) {
       int currentDistance;
       var newJsonData = (recommendedUser.data() as Map<String, dynamic>);
-      
 
       var existingBotInfo = currentUser.bot_info_list!
-          .where((botInfo) =>
-              (botInfo.users_last_latitude == currentUser.location!.latitude!) &&
-              (botInfo.users_last_longitude ==
-                  currentUser.location!.longitude!) &&
-              (newJsonData["userID"] == botInfo.id))
+          .where((botInfo) => newJsonData["userID"] == botInfo.id)
           .toList();
-
-
 
       if (existingBotInfo.isEmpty) {
         int randomDistance = random.nextInt(
@@ -137,13 +127,35 @@ class RecommendationService extends GetxService {
             0);
         currentDistance =
             calculateDistance(newDistanceArray[0], newDistanceArray[1]);
-        
-        
-        
       } else {
         
-        currentDistance = existingBotInfo[0].distance;
+        var exitsingBot = existingBotInfo.first;
 
+        if (exitsingBot.users_last_latitude == currentUser.location!.latitude &&
+            exitsingBot.users_last_longitude ==
+                currentUser.location!.longitude) {
+          changedBotInfoData.add(exitsingBot.id);                  
+          currentDistance = existingBotInfo[0].distance;
+        } else {
+          
+          int randomDistance = random.nextInt(currentUser
+                  .settings!.distance_preference!.distance!
+                  .toInt()) +
+              2; // from 0 to 9 included
+          List<double> newDistanceArray = calculateNewCoordinates(
+              currentUser.location!.latitude!,
+              currentUser.location!.longitude!,
+              randomDistance.toDouble(),
+              0);
+          currentDistance =
+              calculateDistance(newDistanceArray[0], newDistanceArray[1]);
+          
+          var newCurrentUserBotInfoList = currentUser.bot_info_list!.where((element) => element.id != exitsingBot.id).toList();
+          newCurrentUserBotInfoList.add(BotInfoModel(distance: currentDistance, id: exitsingBot.id, users_last_latitude: currentUser.location!.latitude, users_last_longitude: currentUser.location!.longitude, ));
+          currentUser.bot_info_list = newCurrentUserBotInfoList;
+          changedBotInfoData.add(exitsingBot.id);
+          
+        }
       }
 
       newJsonData["current_distance"] = currentDistance;
@@ -154,28 +166,39 @@ class RecommendationService extends GetxService {
           !unWantedUsers.contains(user.userID) &&
           !nonBotUserIDS.contains(user.userID))) {
         recommendedUsers.add(newJsonData);
-        newBotInfoData.add(BotInfoModel(distance: currentDistance, id: newJsonData["userID"], users_last_latitude: currentUser.location!.latitude, users_last_longitude: currentUser.location!.longitude).toJson());
-        
+        if(!changedBotInfoData.contains(newJsonData["userID"])) {
+                  newBotInfoData.add(BotInfoModel(
+                distance: currentDistance,
+                id: newJsonData["userID"],
+                users_last_latitude: currentUser.location!.latitude,
+                users_last_longitude: currentUser.location!.longitude)
+            .toJson());
+        }
+
       }
 
       if (currentUser.show_me == Showme.all.value &&
           !unWantedUsers.contains(user.userID) &&
           !nonBotUserIDS.contains(user.userID)) {
         recommendedUsers.add(newJsonData);
-        newBotInfoData.add(BotInfoModel(distance: currentDistance, id: newJsonData["userID"], users_last_latitude: currentUser.location!.latitude, users_last_longitude: currentUser.location!.longitude).toJson());
+        if(!changedBotInfoData.contains(newJsonData["userID"])) {
+                  newBotInfoData.add(BotInfoModel(
+                distance: currentDistance,
+                id: newJsonData["userID"],
+                users_last_latitude: currentUser.location!.latitude,
+                users_last_longitude: currentUser.location!.longitude)
+            .toJson());
+        }
       }
-      
-      
-    
-      
 
       if (recommendedUsers.length == 20 - recommendedNonBotUsers.length) {
         break;
       }
     }
 
-      newBotInfoData.addAll(currentUser.toJson()["bot_info_list"]);
-      await Get.find<BotControllService>().saveNewBotInfos(newBotInfoData, currentUser.userID!);
+    newBotInfoData.addAll(currentUser.toJson()["bot_info_list"]);
+    await Get.find<BotControllService>()
+        .saveNewBotInfos(newBotInfoData, currentUser.userID!);
 
     recommendedUsers.addAll(recommendedNonBotUsers);
     recommendedUsers.shuffle();
@@ -220,8 +243,6 @@ class RecommendationService extends GetxService {
 
     double newLatRadians =
         latRadians + (offsetRadians * math.cos(bearing * math.pi / 180));
-
-
 
     double newLonRadians = lonRadians +
         (offsetRadians *
