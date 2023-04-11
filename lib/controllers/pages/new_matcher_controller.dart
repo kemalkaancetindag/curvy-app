@@ -317,7 +317,82 @@ class NewMatcherController extends GetxController
   }
 
   Future<void> dislikeUser(bool isButtonUsed) async {
-    print(_recommendedUsers!.last.userID!);
+    
+    int swipeResult = await SwipeUtils.checkCanSwipe(firestoreService, currentUser!.userID!);
+
+    if(swipeResult == SwipeControlAction.ad.value) {
+      showDialog(                    
+        context: Get.context!, 
+        builder: (context) {
+          return Container(              
+              child: Center(
+                child: Material(
+                  child: Text(
+                  "REKLAM",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: Dimensions.h300/10,
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
+                color: Colors.transparent,
+                ),
+              ),
+            );
+        }
+      );
+      return;
+    }
+
+     if(swipeResult == SwipeControlAction.noSwipesLeft.value) {
+     showDialog(                    
+        context: Get.context!, 
+        builder: (context) {
+          return Container(              
+              child: Center(
+                child: Material(
+                  child: Text(
+                  "HAK KALMADI",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: Dimensions.h300/10,
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
+                color: Colors.transparent,
+                ),
+              ),
+            );
+        }
+      );
+
+      return;
+    }
+
+     if(swipeResult == SwipeControlAction.premiumReminder.value) {
+     showDialog(                    
+        context: Get.context!, 
+        builder: (context) {
+          return Container(              
+              child: Center(
+                child: Material(
+                  child: Text(
+                  "PREMIUM HATIRLATICI",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: Dimensions.h300/10,
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
+                color: Colors.transparent,
+                ),
+              ),
+            );
+        }
+      );
+      return;
+    }
+    
     _swipeCount += 1;
     if (isButtonUsed) {
       animate(true, Swipe.left);

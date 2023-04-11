@@ -225,7 +225,7 @@ class UserModel {
     data['remaining_daily_back_count'] = remaining_daily_back_count ?? 1;
     data['show_freestyle_pop_up'] = show_freestyle_pop_up ?? true;
     data['bot'] = bot == null ? 0 : 1;
-    data['package_control'] = package_control == null ? PackageControlModel() : package_control;
+    data['package_control'] = package_control == null ? PackageControlModel().toJson() : package_control!.toJson();
     
     List<Map<String,dynamic>> newBotInfoList = [];
     if(bot_info_list != null) {
