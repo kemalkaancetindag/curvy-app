@@ -1,6 +1,11 @@
+import 'package:curvy_app/api/services/firestore_service.dart';
+import 'package:curvy_app/api/services/shared_preference_service.dart';
+import 'package:curvy_app/enums/package_type_enum.dart';
+import 'package:curvy_app/models/package_control_model.dart';
 import 'package:curvy_app/ui/widgets/buy_plus_premium_package.dart';
 import 'package:curvy_app/ui/widgets/buy_premium_plus_info_page.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BuyPlusPremiumController extends GetxController {
@@ -123,9 +128,28 @@ class BuyPlusPremiumController extends GetxController {
                   )
                 ];
 
+
+  
+
+  
+
   BuyPlusPremiumController({
     required this.isPlus
   });
+
+
+  List<PackageInfo> plusPackages = [
+    PackageInfo(subscription_time: 12, price: 269.99),
+    PackageInfo(subscription_time: 6, price: 199.99),
+    PackageInfo(subscription_time: 1, price: 66.99)
+  ];
+
+
+  List<PackageInfo> platiniumPackages = [
+    PackageInfo(subscription_time: 12, price: 649.99),
+    PackageInfo(subscription_time: 6, price: 469.99),
+    PackageInfo(subscription_time: 1, price: 134.99)
+  ];
 
 
   void setCurrentPage(int currentPage) {
@@ -139,5 +163,52 @@ class BuyPlusPremiumController extends GetxController {
   }
 
 
+  Future<void> buyPackage() async {
+
+    String userID = Get.find<SharedPreferenceService>().getUserID()!;
+
+    PackageInfo package;
+    if(isPlus!) {
+      package = plusPackages[_currentPage!];
+    } else {
+      package = platiniumPackages[_currentPage!];      
+    }
+    Map<String,dynamic> updateData = Map<String,dynamic>();
+    int startDate = DateTime.now().millisecondsSinceEpoch;
+    int endDate = DateTime.fromMillisecondsSinceEpoch(startDate).add(Duration(days: package.subscription_time * 30)).toUtc().millisecondsSinceEpoch;
+    var data = PackageControlModel(
+      package_type: isPlus! ? PackageType.plus.value :  PackageType.platinium.value,
+      package_start_date: startDate,
+      package_end_date: endDate,
+      swipes_left_to_ad: 14,
+      allowed_swipe_count: 50,
+      daily_back_count: 1,
+      last_update_date: startDate
+    ).toJson();
+
+
+    updateData['package_control'] = data;
+
+    await Get.find<FirestoreService>().updateUser(updateData, userID);
+
+    Get.snackbar("Tebrikler!","Paketiniz ${isPlus! ? "CurvyPLUS " : "CurvyPLATINIUM "} olarak güncelenmiştir!", backgroundColor: Color(0xFFD51CFF), colorText: Colors.white);
+
+
+
+  }
+
+
+
+}
+
+
+class PackageInfo {
+  int subscription_time;
+  double price;
+
+  PackageInfo({
+    required this.subscription_time,
+    required this.price
+  });
 
 }

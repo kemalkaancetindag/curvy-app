@@ -383,7 +383,11 @@ class BuyPlusPremiumScreen extends StatelessWidget {
 
               ),
             ),
-            Container(
+            GestureDetector(
+              onTap: () {
+                controller.buyPackage();
+              },
+              child:    Container(
               margin: EdgeInsets.only(top: Dimensions.h100/10),
               width: Dimensions.w270,
               height: Dimensions.h50,
@@ -410,6 +414,7 @@ class BuyPlusPremiumScreen extends StatelessWidget {
                   ),
                 ),
               ),
+            ),
             )
           ],
         ),

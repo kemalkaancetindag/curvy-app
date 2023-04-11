@@ -6,7 +6,8 @@ class PackageControlModel {
   int? last_update_date;
   int? swipes_left_to_ad;
   int? daily_back_count;
-  int? last_package_renewal_date;
+  int? package_start_date;
+  int? package_end_date;
 
   PackageControlModel({
     this.package_type,
@@ -14,7 +15,8 @@ class PackageControlModel {
     this.last_update_date,
     this.swipes_left_to_ad,
     this.daily_back_count,
-    this.last_package_renewal_date
+    this.package_start_date,
+    this.package_end_date
 
   });
 
@@ -26,7 +28,8 @@ class PackageControlModel {
     last_update_date = json['last_update_date'];
     swipes_left_to_ad = json['swipes_left_to_ad'] == null ? 14 : json['swipes_left_to_ad'];
     daily_back_count = json['daily_back_count'] == null ? 1 : json['daily_back_count'];
-    last_package_renewal_date = json['last_package_renewal_date'] == null ? DateTime.now().millisecondsSinceEpoch : json['last_package_renewal_date'];
+    package_start_date = json['package_start_date'] == null ? 0 : json['package_start_date'];
+    package_end_date = json['package_end_date'] == null ? 0 : json['package_end_date'];
   }
 
   Map<String,dynamic> toJson(){
@@ -36,7 +39,8 @@ class PackageControlModel {
     data['last_update_date'] = last_update_date;
     data['swipes_left_to_ad'] = swipes_left_to_ad == null ? 14 : swipes_left_to_ad;
     data['daily_back_count'] = daily_back_count == null ? 1 : daily_back_count;
-    data['last_package_renewal_date'] = last_package_renewal_date == null ? DateTime.now().millisecond : last_package_renewal_date;
+    data['package_start_date'] = package_start_date == null ? 0 : package_start_date;
+    data['package_end_date'] = package_end_date == null ? 0 : package_end_date;
     return data;
   }
 

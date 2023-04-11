@@ -28,7 +28,7 @@ class ArchiveWhoLikedMeController extends GetxController {
   bool get isLoading => _isLoading;
 
   UserModel? _currentUser;
-  UserModel? get currentUser => _currentUser; 
+  UserModel? get currentUser => _currentUser;
 
   ArchiveWhoLikedMeController({required this.archiveService});
 
@@ -38,7 +38,8 @@ class ArchiveWhoLikedMeController extends GetxController {
 
     _isLoading = true;
     String currentUserID = Get.find<SharedPreferenceService>().getUserID()!;
-    _currentUser = await Get.find<FirestoreService>().getCurrentUser(currentUserID);
+    _currentUser =
+        await Get.find<FirestoreService>().getCurrentUser(currentUserID);
     update();
     _usersWhoLikedMe = await archiveService.getUsersWhoLikedMe();
     _generateTiles(_currentUser!.package_control!);
@@ -53,7 +54,7 @@ class ArchiveWhoLikedMeController extends GetxController {
     return distance;
   }
 
-  void _generateTiles(PackageControlModel userPackageInfo)  {
+  void _generateTiles(PackageControlModel userPackageInfo) {
     _positions = [];
 
     int currentUserIndex = 1;
@@ -68,74 +69,62 @@ class ArchiveWhoLikedMeController extends GetxController {
     double screenCenterX = Get.width / 2;
     double screenCenterY = Get.height / 2;
 
-    
-
     _tiles = [];
-    if(_usersWhoLikedMe!.isNotEmpty){
+    if (_usersWhoLikedMe!.isNotEmpty) {
+      if (userPackageInfo!.package_type! == PackageType.plus.value ||
+          userPackageInfo.package_type! == PackageType.platinium.value) {
+        _tiles!.add(Positioned(
+            top: screenCenterY - maxRadius,
+            left: screenCenterX - maxRadius,
+            child: GestureDetector(
+              onTap: () {
+                var userDetailController = Get.lazyPut(() =>
+                    UserDetailController(
+                        matchService: Get.find(),
+                        firestoreService: Get.find(),
+                        userID: _usersWhoLikedMe![0].userID!));
 
-        if(userPackageInfo!.package_type! == PackageType.plus.value || userPackageInfo.package_type! == PackageType.platinium.value ) {
-           _tiles!.add(Positioned(
-        top: screenCenterY - maxRadius,
-        left: screenCenterX - maxRadius,
-        child: GestureDetector(
-          onTap: () {
-            
-            var userDetailController = Get.lazyPut(() =>  UserDetailController(
-              matchService: Get.find(),
-                firestoreService: Get.find(),
-                userID: _usersWhoLikedMe![0].userID!));
+                Get.toNamed(Routes.userDetail);
+              },
+              child: Container(
+                width: maxRadius * 2,
+                height: maxRadius * 2,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(
+                            'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(_usersWhoLikedMe![0].images![0])}?alt=media'),
+                        fit: BoxFit.fill),
+                    borderRadius: BorderRadius.circular(maxRadius.toDouble())),
+              ),
+            )));
+      } else {
+        _tiles!.add(Positioned(
+            top: screenCenterY - maxRadius,
+            left: screenCenterX - maxRadius,
+            child: GestureDetector(
+              onTap: () {},
+              child: Container(
+                width: maxRadius * 2,
+                height: maxRadius * 2,
+                child: new BackdropFilter(
+                  filter: new ui.ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                  child: new Container(
+                    decoration:
+                        new BoxDecoration(color: Colors.white.withOpacity(0.0)),
+                  ),
+                ),
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(
+                            'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(_usersWhoLikedMe![0].images![0])}?alt=media'),
+                        fit: BoxFit.fill),
+                    borderRadius: BorderRadius.circular(maxRadius.toDouble())),
+              ),
+            )));
+      }
 
-            Get.toNamed(Routes.userDetail);
-          },
-          child: Container(
-            width: maxRadius * 2,
-            height: maxRadius * 2,           
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(
-                        'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(_usersWhoLikedMe![0].images![0])}?alt=media'),
-                    fit: BoxFit.fill),
-                borderRadius: BorderRadius.circular(maxRadius.toDouble())),
-          ),
-        )));
-        } else {
-           _tiles!.add(Positioned(
-        top: screenCenterY - maxRadius,
-        left: screenCenterX - maxRadius,
-        child: GestureDetector(
-          onTap: () {
-            
-            var userDetailController = Get.lazyPut(() =>  UserDetailController(
-              matchService: Get.find(),
-                firestoreService: Get.find(),
-                userID: _usersWhoLikedMe![0].userID!));
-
-            Get.toNamed(Routes.userDetail);
-          },
-          child: Container(
-            width: maxRadius * 2,
-            height: maxRadius * 2,
-            child: new BackdropFilter(
-          filter: new ui.ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-          child: new Container(
-            decoration: new BoxDecoration(color: Colors.white.withOpacity(0.0)),
-          ),
-        ),
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(
-                        'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(_usersWhoLikedMe![0].images![0])}?alt=media'),
-                    fit: BoxFit.fill),
-                borderRadius: BorderRadius.circular(maxRadius.toDouble())),
-          ),
-        )));
-        }
-
-      
-
-    _positions!.add([screenCenterX, screenCenterY, maxRadius.toDouble()]);
+      _positions!.add([screenCenterX, screenCenterY, maxRadius.toDouble()]);
     }
-   
 
     var random = math.Random();
 
@@ -178,74 +167,63 @@ class ArchiveWhoLikedMeController extends GetxController {
       }
 
       if (!overlapping) {
-        
-        if(userPackageInfo!.package_type == PackageType.platinium.value || userPackageInfo.package_type == PackageType.plus.value) {
-              _tiles!.add(
-          Positioned(
-              top: randomCenterY - randomRadius,
-              left: randomCenterX - randomRadius,
-              child: GestureDetector(
-                onTap: () {
-                  
-                  var userDetailController = Get.put(UserDetailController(
-                      firestoreService: Get.find(),
-                      matchService: Get.find(),
-                      
-                      userID: _usersWhoLikedMe![0].userID!));
+        if (userPackageInfo!.package_type == PackageType.platinium.value ||
+            userPackageInfo.package_type == PackageType.plus.value) {
+          _tiles!.add(
+            Positioned(
+                top: randomCenterY - randomRadius,
+                left: randomCenterX - randomRadius,
+                child: GestureDetector(
+                  onTap: () {
+                    var userDetailController = Get.put(UserDetailController(
+                        firestoreService: Get.find(),
+                        matchService: Get.find(),
+                        userID: _usersWhoLikedMe![0].userID!));
 
-                  Get.toNamed(Routes.userDetail);
-                },
-                child: Container(
-                  width: randomRadius * 2,
-                  height: randomRadius * 2,                 
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(
-                              'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(_usersWhoLikedMe![currentUserIndex].images![0])}?alt=media'),
-                          fit: BoxFit.fill),
-                      borderRadius:
-                          BorderRadius.circular(randomRadius.toDouble())),
-                ),
-              )),
-        );
+                    Get.toNamed(Routes.userDetail);
+                  },
+                  child: Container(
+                    width: randomRadius * 2,
+                    height: randomRadius * 2,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(_usersWhoLikedMe![currentUserIndex].images![0])}?alt=media'),
+                            fit: BoxFit.fill),
+                        borderRadius:
+                            BorderRadius.circular(randomRadius.toDouble())),
+                  ),
+                )),
+          );
         } else {
-              _tiles!.add(
-          Positioned(
-              top: randomCenterY - randomRadius,
-              left: randomCenterX - randomRadius,
-              child: GestureDetector(
-                onTap: () {
-                  
-                  var userDetailController = Get.put(UserDetailController(
-                      firestoreService: Get.find(),
-                      matchService: Get.find(),
-                      
-                      userID: _usersWhoLikedMe![0].userID!));
-
-                  Get.toNamed(Routes.userDetail);
-                },
-                child: Container(
-                  width: randomRadius * 2,
-                  height: randomRadius * 2,
+          _tiles!.add(
+            Positioned(
+                top: randomCenterY - randomRadius,
+                left: randomCenterX - randomRadius,
+                child: GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    width: randomRadius * 2,
+                    height: randomRadius * 2,
                     child: new BackdropFilter(
-          filter: new ui.ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-          child: new Container(
-            decoration: new BoxDecoration(color: Colors.white.withOpacity(0.0)),
-          ),
-        ),
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(
-                              'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(_usersWhoLikedMe![currentUserIndex].images![0])}?alt=media'),
-                          fit: BoxFit.fill),
-                      borderRadius:
-                          BorderRadius.circular(randomRadius.toDouble())),
-                ),
-              )),
-        );
+                      filter:
+                          new ui.ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                      child: new Container(
+                        decoration: new BoxDecoration(
+                            color: Colors.white.withOpacity(0.0)),
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(_usersWhoLikedMe![currentUserIndex].images![0])}?alt=media'),
+                            fit: BoxFit.fill),
+                        borderRadius:
+                            BorderRadius.circular(randomRadius.toDouble())),
+                  ),
+                )),
+          );
         }
-
-    
 
         totalCircleArea += math.pi * math.pow(randomRadius, 2);
         _positions!
