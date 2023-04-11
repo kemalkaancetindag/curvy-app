@@ -6,6 +6,8 @@ import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/constants/routes.dart';
 import 'package:curvy_app/controllers/user_detail_controller.dart';
+import 'package:curvy_app/enums/package_type_enum.dart';
+import 'package:curvy_app/models/package_control_model.dart';
 import 'package:curvy_app/models/user.model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +41,7 @@ class ArchiveWhoLikedMeController extends GetxController {
     _currentUser = await Get.find<FirestoreService>().getCurrentUser(currentUserID);
     update();
     _usersWhoLikedMe = await archiveService.getUsersWhoLikedMe();
-    _generateTiles();
+    _generateTiles(_currentUser!.package_control!);
     _isLoading = false;
     update();
   }
@@ -51,7 +53,7 @@ class ArchiveWhoLikedMeController extends GetxController {
     return distance;
   }
 
-  void _generateTiles() {
+  void _generateTiles(PackageControlModel userPackageInfo)  {
     _positions = [];
 
     int currentUserIndex = 1;
@@ -66,9 +68,38 @@ class ArchiveWhoLikedMeController extends GetxController {
     double screenCenterX = Get.width / 2;
     double screenCenterY = Get.height / 2;
 
+    
+
     _tiles = [];
     if(_usersWhoLikedMe!.isNotEmpty){
-       _tiles!.add(Positioned(
+
+        if(userPackageInfo!.package_type! == PackageType.plus.value || userPackageInfo.package_type! == PackageType.platinium.value ) {
+           _tiles!.add(Positioned(
+        top: screenCenterY - maxRadius,
+        left: screenCenterX - maxRadius,
+        child: GestureDetector(
+          onTap: () {
+            
+            var userDetailController = Get.lazyPut(() =>  UserDetailController(
+              matchService: Get.find(),
+                firestoreService: Get.find(),
+                userID: _usersWhoLikedMe![0].userID!));
+
+            Get.toNamed(Routes.userDetail);
+          },
+          child: Container(
+            width: maxRadius * 2,
+            height: maxRadius * 2,           
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: NetworkImage(
+                        'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(_usersWhoLikedMe![0].images![0])}?alt=media'),
+                    fit: BoxFit.fill),
+                borderRadius: BorderRadius.circular(maxRadius.toDouble())),
+          ),
+        )));
+        } else {
+           _tiles!.add(Positioned(
         top: screenCenterY - maxRadius,
         left: screenCenterX - maxRadius,
         child: GestureDetector(
@@ -84,6 +115,12 @@ class ArchiveWhoLikedMeController extends GetxController {
           child: Container(
             width: maxRadius * 2,
             height: maxRadius * 2,
+            child: new BackdropFilter(
+          filter: new ui.ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+          child: new Container(
+            decoration: new BoxDecoration(color: Colors.white.withOpacity(0.0)),
+          ),
+        ),
             decoration: BoxDecoration(
                 image: DecorationImage(
                     image: NetworkImage(
@@ -92,6 +129,9 @@ class ArchiveWhoLikedMeController extends GetxController {
                 borderRadius: BorderRadius.circular(maxRadius.toDouble())),
           ),
         )));
+        }
+
+      
 
     _positions!.add([screenCenterX, screenCenterY, maxRadius.toDouble()]);
     }
@@ -138,7 +178,38 @@ class ArchiveWhoLikedMeController extends GetxController {
       }
 
       if (!overlapping) {
-        _tiles!.add(
+        
+        if(userPackageInfo!.package_type == PackageType.platinium.value || userPackageInfo.package_type == PackageType.plus.value) {
+              _tiles!.add(
+          Positioned(
+              top: randomCenterY - randomRadius,
+              left: randomCenterX - randomRadius,
+              child: GestureDetector(
+                onTap: () {
+                  
+                  var userDetailController = Get.put(UserDetailController(
+                      firestoreService: Get.find(),
+                      matchService: Get.find(),
+                      
+                      userID: _usersWhoLikedMe![0].userID!));
+
+                  Get.toNamed(Routes.userDetail);
+                },
+                child: Container(
+                  width: randomRadius * 2,
+                  height: randomRadius * 2,                 
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage(
+                              'https://firebasestorage.googleapis.com/v0/b/curvy-4e1ae.appspot.com/o/${Uri.encodeComponent(_usersWhoLikedMe![currentUserIndex].images![0])}?alt=media'),
+                          fit: BoxFit.fill),
+                      borderRadius:
+                          BorderRadius.circular(randomRadius.toDouble())),
+                ),
+              )),
+        );
+        } else {
+              _tiles!.add(
           Positioned(
               top: randomCenterY - randomRadius,
               left: randomCenterX - randomRadius,
@@ -156,6 +227,12 @@ class ArchiveWhoLikedMeController extends GetxController {
                 child: Container(
                   width: randomRadius * 2,
                   height: randomRadius * 2,
+                    child: new BackdropFilter(
+          filter: new ui.ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+          child: new Container(
+            decoration: new BoxDecoration(color: Colors.white.withOpacity(0.0)),
+          ),
+        ),
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: NetworkImage(
@@ -166,6 +243,9 @@ class ArchiveWhoLikedMeController extends GetxController {
                 ),
               )),
         );
+        }
+
+    
 
         totalCircleArea += math.pi * math.pow(randomRadius, 2);
         _positions!

@@ -3,6 +3,7 @@ import 'package:curvy_app/api/services/shared_preference_service.dart';
 import 'package:curvy_app/api/services/user_service.dart';
 import 'package:curvy_app/constants/routes.dart';
 import 'package:curvy_app/enums/login_method_enums.dart';
+import 'package:curvy_app/enums/package_type_enum.dart';
 import 'package:curvy_app/enums/settings_enum.dart';
 import 'package:curvy_app/models/user.model.dart';
 import 'package:curvy_app/ui/util/utils.dart';
@@ -176,16 +177,21 @@ class SettingsController extends GetxController {
   //COLUMN SWITCHES
 
   //CURVY PLUS SELECT
-  void updateRecommendationPreference(int preference) {
-    if (_user!.plus_member! || _user!.platinum_member!) {
+  void updateRecommendationPreference(int preference) async {
+    print("GELDİ");
+    var usersPackageInfo = (await firestoreService.getCurrentUser(_user!.userID!)).package_control;
+
+    if (usersPackageInfo!.package_type == PackageType.plus.value || usersPackageInfo.package_type == PackageType.platinium.value) {
       var key = Settings.recommendationPreference.value;
       _settings![key] = preference;
       update();
     }
   }
 
-  void updateViewerPreference(int preference) {
-    if (_user!.plus_member! || _user!.platinum_member!) {
+  void updateViewerPreference(int preference) async {
+     var usersPackageInfo = (await firestoreService.getCurrentUser(_user!.userID!)).package_control;
+
+    if (usersPackageInfo!.package_type == PackageType.plus.value || usersPackageInfo.package_type == PackageType.platinium.value) {
       var key = Settings.viewerPreference.value;
       _settings![key] = preference;
       update();
