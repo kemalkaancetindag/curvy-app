@@ -1,5 +1,6 @@
 import 'package:curvy_app/models/bot_info_model.dart';
 import 'package:curvy_app/models/chat.model.dart';
+import 'package:curvy_app/models/package_control_model.dart';
 
 class UserModel {
   String? userID;
@@ -52,6 +53,7 @@ class UserModel {
   int? bot;
   int? current_distance;
   List<dynamic>? bot_info_list;
+  PackageControlModel? package_control;
 
   UserModel(
       {this.userID,
@@ -102,7 +104,8 @@ class UserModel {
       this.remaining_daily_back_count,
       this.show_freestyle_pop_up,
       this.bot,
-      this.bot_info_list});
+      this.bot_info_list,
+      this.package_control});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     userID = json['userID'];
@@ -154,12 +157,21 @@ class UserModel {
     bot = json['bot'];
     current_distance = json['current_distance'];
     List<dynamic> botInfo = [];
-    print(json["bot_info_list"]);
+    
     if(json['bot_info_list'] != null) {
           json['bot_info_list'].forEach((element) => {
       botInfo.add(BotInfoModel.fromJson(element))
     });
     }
+
+    if(json['bot'] == 0) {
+      print("BURDAAA");
+      print(json['package_control']);
+      package_control = PackageControlModel.fromJson(json['package_control']);
+    }
+
+    
+
 
     bot_info_list = botInfo;
   }
@@ -213,6 +225,7 @@ class UserModel {
     data['remaining_daily_back_count'] = remaining_daily_back_count ?? 1;
     data['show_freestyle_pop_up'] = show_freestyle_pop_up ?? true;
     data['bot'] = bot == null ? 0 : 1;
+    data['package_control'] = package_control == null ? PackageControlModel() : package_control;
     
     List<Map<String,dynamic>> newBotInfoList = [];
     if(bot_info_list != null) {

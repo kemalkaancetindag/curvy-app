@@ -2,10 +2,14 @@ import 'package:curvy_app/api/services/firestore_service.dart';
 import 'package:curvy_app/api/services/match_service.dart';
 import 'package:curvy_app/api/services/recommendation_service.dart';
 import 'package:curvy_app/api/services/shared_preference_service.dart';
+import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/enums/swipe.dart';
+import 'package:curvy_app/enums/swipe_control_action_enums.dart';
 import 'package:curvy_app/models/interest.model.dart';
 import 'package:curvy_app/models/user.model.dart';
+import 'package:curvy_app/ui/util/swipe_utils.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:math' as math;
 
@@ -218,8 +222,84 @@ class NewMatcherController extends GetxController
   }
 
   Future<void> likeUser(bool isButtonUsed) async {
+    
+    int swipeResult = await SwipeUtils.checkCanSwipe(firestoreService, currentUser!.userID!);
+
+    if(swipeResult == SwipeControlAction.ad.value) {
+      showDialog(                    
+        context: Get.context!, 
+        builder: (context) {
+          return Container(              
+              child: Center(
+                child: Material(
+                  child: Text(
+                  "REKLAM",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: Dimensions.h300/10,
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
+                color: Colors.transparent,
+                ),
+              ),
+            );
+        }
+      );
+      return;
+    }
+
+     if(swipeResult == SwipeControlAction.noSwipesLeft.value) {
+     showDialog(                    
+        context: Get.context!, 
+        builder: (context) {
+          return Container(              
+              child: Center(
+                child: Material(
+                  child: Text(
+                  "HAK KALMADI",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: Dimensions.h300/10,
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
+                color: Colors.transparent,
+                ),
+              ),
+            );
+        }
+      );
+
+      return;
+    }
+
+     if(swipeResult == SwipeControlAction.premiumReminder.value) {
+     showDialog(                    
+        context: Get.context!, 
+        builder: (context) {
+          return Container(              
+              child: Center(
+                child: Material(
+                  child: Text(
+                  "PREMIUM HATIRLATICI",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: Dimensions.h300/10,
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
+                color: Colors.transparent,
+                ),
+              ),
+            );
+        }
+      );
+      return;
+    }
+
     _swipeCount += 1;
-    print(_recommendedUsers!.last.userID!);
+    
 
     if (isButtonUsed) {
       animate(true, Swipe.right);
@@ -254,6 +334,32 @@ class NewMatcherController extends GetxController
   }
 
   Future<void> previousUser() async {
+    var goBackResult = await SwipeUtils.checkCanGoBack(firestoreService, currentUser!.userID!);
+
+    if(goBackResult == 0) {
+            showDialog(                    
+        context: Get.context!, 
+        builder: (context) {
+          return Container(              
+              child: Center(
+                child: Material(
+                  child: Text(
+                  "GERİ GİTME HAKKI KALMADI",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: Dimensions.h300/10,
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
+                color: Colors.transparent,
+                ),
+              ),
+            );
+        }
+      );
+      return;
+    }
+
     addListItem();
     await getCurrentRecommendedUsersInterests();
     
