@@ -370,4 +370,10 @@ export const checkForUnStableMatches = functions.firestore
       }
     });
 
+export const checkForEndedPackages = functions.pubsub
+    .schedule("every 120 minutes")
+    .onRun(async (context) => {
+
+    });
+
 

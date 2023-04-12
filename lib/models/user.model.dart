@@ -54,6 +54,7 @@ class UserModel {
   int? current_distance;
   List<dynamic>? bot_info_list;
   PackageControlModel? package_control;
+  String? last_seen_on_hub;
 
   UserModel(
       {this.userID,
@@ -105,7 +106,8 @@ class UserModel {
       this.show_freestyle_pop_up,
       this.bot,
       this.bot_info_list,
-      this.package_control});
+      this.package_control,
+      this.last_seen_on_hub});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     userID = json['userID'];
@@ -156,6 +158,7 @@ class UserModel {
     show_freestyle_pop_up = json['show_freestyle_pop_up'];
     bot = json['bot'];
     current_distance = json['current_distance'];
+    last_seen_on_hub = json['last_seen_on_hub'];
     List<dynamic> botInfo = [];
     
     if(json['bot_info_list'] != null) {
@@ -225,6 +228,7 @@ class UserModel {
     data['remaining_daily_back_count'] = remaining_daily_back_count ?? 1;
     data['show_freestyle_pop_up'] = show_freestyle_pop_up ?? true;
     data['bot'] = bot == null ? 0 : 1;
+    data['last_seen_on_hub'] = last_seen_on_hub != null ? last_seen_on_hub : null;
     data['package_control'] = package_control == null ? PackageControlModel().toJson() : package_control!.toJson();
     
     List<Map<String,dynamic>> newBotInfoList = [];

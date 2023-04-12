@@ -3,12 +3,14 @@ class OnlineHub {
   OnlineHubLocation? hub_location;  
   int? hub_type;
   String? hub_id;
+  Map<String,dynamic>? each_users_users; 
 
   OnlineHub({
     this.users,
     this.hub_location,    
     this.hub_type,
-    this.hub_id
+    this.hub_id,
+    this.each_users_users
   });
 
 
@@ -17,6 +19,7 @@ class OnlineHub {
     hub_location = OnlineHubLocation.fromJson(json['hub_location']);    
     hub_type = json['hub_type'];
     hub_id = json['hub_id'];
+    each_users_users = json['each_users_users'];
   }
 
 
@@ -26,6 +29,7 @@ class OnlineHub {
     data['hub_location'] = hub_location!.toJson();  
     data['hub_type'] = hub_type;
     data['hub_id'] = hub_id;
+    data['each_users_users'] = each_users_users;
     return data;
   }
   

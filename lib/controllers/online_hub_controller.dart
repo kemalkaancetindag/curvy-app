@@ -77,16 +77,8 @@ class OnlineHubController extends GetxController {
     _hubData = updatedData;
     _hubStorageData = storedHub;
 
-    var onlineUserIDS =
-        updatedData.users!.where((id) => id != currentUserId).toList();
 
-    onlineUserIDS = onlineUserIDS
-        .where((id) => !_currentUser!.users_i_liked!.contains(id))
-        .toList();
-
-    onlineUserIDS = onlineUserIDS
-        .where((id) => !_currentUser!.un_liked_users!.contains(id))
-        .toList();
+    var onlineUserIDS = updatedData.each_users_users![currentUserId];
 
     if (onlineUserIDS.isEmpty) {
       _amIAlone = true;
@@ -117,7 +109,7 @@ class OnlineHubController extends GetxController {
       _onlineUsers = [];
       await Future.forEach(onlineUserIDS, (userID) async {
         var onlineUserModel =
-            await Get.find<FirestoreService>().getUser(userID);
+            await Get.find<FirestoreService>().getUser(userID! as String);
         _onlineUsers!.add(onlineUserModel);
       });
 
@@ -453,7 +445,16 @@ class OnlineHubController extends GetxController {
   }
 
   Future<void> leftHub() async {
-    _timer!.cancel();
+    if(_timer != null) {
+      _timer!.cancel();
+    }
+    
+    if(_onlineUsers!.last.bot == 1) {
+      var updateData = Map<String,dynamic>();
+      updateData['last_seen_on_hub'] = _onlineUsers!.last.userID!;
+      await Get.find<FirestoreService>().updateUser(updateData, currentUser!.userID!);
+    }
+    
     await hubService.stopListeningHub();
     _hubStorageData = null;
     _popUpBottomPosition = Dimensions.h14;
