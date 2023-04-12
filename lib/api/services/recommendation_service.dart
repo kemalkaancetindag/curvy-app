@@ -90,15 +90,21 @@ class RecommendationService extends GetxService {
       newJsonData["current_distance"] = currentDistance;
 
       var user = UserModel.fromJson(newJsonData);
+      var userAge =
+          DateTime.now().year - int.parse(user.birthdate!.split("/").last);
 
       if ((currentUser.show_me! == user.sex &&
-          !unWantedUsers.contains(user.userID))) {
+          !unWantedUsers.contains(user.userID) &&
+          userAge >= currentUser.settings!.age_preference!.min_age! &&
+          userAge <= currentUser.settings!.age_preference!.max_age!)) {
         recommendedNonBotUsers.add(newJsonData);
         nonBotUserIDS.add(newJsonData["userID"]);
       }
 
       if (currentUser.show_me == Showme.all.value &&
-          !unWantedUsers.contains(user.userID)) {
+          !unWantedUsers.contains(user.userID) &&
+          userAge >= currentUser.settings!.age_preference!.min_age! &&
+          userAge <= currentUser.settings!.age_preference!.max_age!) {
         recommendedNonBotUsers.add(newJsonData);
         nonBotUserIDS.add(newJsonData["userID"]);
       }
@@ -128,16 +134,14 @@ class RecommendationService extends GetxService {
         currentDistance =
             calculateDistance(newDistanceArray[0], newDistanceArray[1]);
       } else {
-        
         var exitsingBot = existingBotInfo.first;
 
         if (exitsingBot.users_last_latitude == currentUser.location!.latitude &&
             exitsingBot.users_last_longitude ==
                 currentUser.location!.longitude) {
-          changedBotInfoData.add(exitsingBot.id);                  
+          changedBotInfoData.add(exitsingBot.id);
           currentDistance = existingBotInfo[0].distance;
         } else {
-          
           int randomDistance = random.nextInt(currentUser
                   .settings!.distance_preference!.distance!
                   .toInt()) +
@@ -149,45 +153,56 @@ class RecommendationService extends GetxService {
               0);
           currentDistance =
               calculateDistance(newDistanceArray[0], newDistanceArray[1]);
-          
-          var newCurrentUserBotInfoList = currentUser.bot_info_list!.where((element) => element.id != exitsingBot.id).toList();
-          newCurrentUserBotInfoList.add(BotInfoModel(distance: currentDistance, id: exitsingBot.id, users_last_latitude: currentUser.location!.latitude, users_last_longitude: currentUser.location!.longitude, ));
+
+          var newCurrentUserBotInfoList = currentUser.bot_info_list!
+              .where((element) => element.id != exitsingBot.id)
+              .toList();
+          newCurrentUserBotInfoList.add(BotInfoModel(
+            distance: currentDistance,
+            id: exitsingBot.id,
+            users_last_latitude: currentUser.location!.latitude,
+            users_last_longitude: currentUser.location!.longitude,
+          ));
           currentUser.bot_info_list = newCurrentUserBotInfoList;
           changedBotInfoData.add(exitsingBot.id);
-          
         }
       }
 
       newJsonData["current_distance"] = currentDistance;
 
       var user = UserModel.fromJson(newJsonData);
+      int botUserAge =
+          DateTime.now().year - int.parse(user.birthdate!.split("/").last);
 
       if ((currentUser.show_me! == user.sex &&
           !unWantedUsers.contains(user.userID) &&
-          !nonBotUserIDS.contains(user.userID))) {
+          !nonBotUserIDS.contains(user.userID) &&
+          botUserAge >= currentUser.settings!.age_preference!.min_age! &&
+          botUserAge <= currentUser.settings!.age_preference!.max_age!)) {
         recommendedUsers.add(newJsonData);
-        if(!changedBotInfoData.contains(newJsonData["userID"])) {
-                  newBotInfoData.add(BotInfoModel(
-                distance: currentDistance,
-                id: newJsonData["userID"],
-                users_last_latitude: currentUser.location!.latitude,
-                users_last_longitude: currentUser.location!.longitude)
-            .toJson());
+        if (!changedBotInfoData.contains(newJsonData["userID"])) {
+          newBotInfoData.add(BotInfoModel(
+                  distance: currentDistance,
+                  id: newJsonData["userID"],
+                  users_last_latitude: currentUser.location!.latitude,
+                  users_last_longitude: currentUser.location!.longitude)
+              .toJson());
         }
-
       }
 
       if (currentUser.show_me == Showme.all.value &&
           !unWantedUsers.contains(user.userID) &&
-          !nonBotUserIDS.contains(user.userID)) {
+          !nonBotUserIDS.contains(user.userID) &&
+          botUserAge >= currentUser.settings!.age_preference!.min_age! &&
+          botUserAge <= currentUser.settings!.age_preference!.max_age!) {
         recommendedUsers.add(newJsonData);
-        if(!changedBotInfoData.contains(newJsonData["userID"])) {
-                  newBotInfoData.add(BotInfoModel(
-                distance: currentDistance,
-                id: newJsonData["userID"],
-                users_last_latitude: currentUser.location!.latitude,
-                users_last_longitude: currentUser.location!.longitude)
-            .toJson());
+        if (!changedBotInfoData.contains(newJsonData["userID"])) {
+          newBotInfoData.add(BotInfoModel(
+                  distance: currentDistance,
+                  id: newJsonData["userID"],
+                  users_last_latitude: currentUser.location!.latitude,
+                  users_last_longitude: currentUser.location!.longitude)
+              .toJson());
         }
       }
 
