@@ -16,8 +16,8 @@ class CircleProgress extends CustomPainter {
       ..color = Color(0xFFD9D9D9)
       ..style = PaintingStyle.stroke;
 
-    
-    double angle = 2 * pi * (Get.find<IndexPageController>().compilation! / 100);
+    //Get.find<IndexPageController>().compilation!
+    double angle = 2 * pi * ( 30 / 100);
     print(angle);
     Offset center = Offset(size.width / 2, size.height / 2);
     double radius = Dimensions.h9*10;
