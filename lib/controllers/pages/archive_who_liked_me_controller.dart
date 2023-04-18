@@ -54,6 +54,30 @@ class ArchiveWhoLikedMeController extends GetxController {
     return distance;
   }
 
+
+  void showPremiumReminder() {
+     showDialog(                    
+        context: Get.context!, 
+        builder: (context) {
+          return Container(              
+              child: Center(
+                child: Material(
+                  child: Text(
+                  "PREMIUM HATIRLATICI",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: Dimensions.h300/10,
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
+                color: Colors.transparent,
+                ),
+              ),
+            );
+        }
+      );
+  }
+
   void _generateTiles(PackageControlModel userPackageInfo) {
     _positions = [];
 
@@ -102,7 +126,9 @@ class ArchiveWhoLikedMeController extends GetxController {
             top: screenCenterY - maxRadius,
             left: screenCenterX - maxRadius,
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                showPremiumReminder();
+              },
               child: Container(
                 width: maxRadius * 2,
                 height: maxRadius * 2,
@@ -201,7 +227,9 @@ class ArchiveWhoLikedMeController extends GetxController {
                 top: randomCenterY - randomRadius,
                 left: randomCenterX - randomRadius,
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    showPremiumReminder();
+                  },
                   child: Container(
                     width: randomRadius * 2,
                     height: randomRadius * 2,

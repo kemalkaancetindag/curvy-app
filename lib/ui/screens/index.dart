@@ -24,8 +24,6 @@ class IndexScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var isIndexPageControllerRegistred = Get.isRegistered<IndexPageController>();
-    print("REGGGGGGGG");
-    print(isIndexPageControllerRegistred);
 
     if(!isIndexPageControllerRegistred) {
       Get.put(IndexPageController(userService: Get.find()));
@@ -276,7 +274,7 @@ class IndexScreen extends StatelessWidget {
                                                     ])),
                                             child: Center(
                                               child: Text(
-                                                "%65 Tamamlandı",
+                                                "%${indexPageController.compilation} Tamamlandı",
                                                 style: TextStyle(
                                                     color: Colors.white,
                                                     fontWeight:
