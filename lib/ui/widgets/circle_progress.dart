@@ -1,25 +1,32 @@
 import 'dart:math';
 import 'dart:ui' as ui;
 import 'package:curvy_app/constants/dimensions.dart';
+import 'package:curvy_app/controllers/pages/index_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CircleProgress extends CustomPainter {
+  
   @override
   void paint(Canvas canvas, Size size) {
+    
     Paint circle = Paint()
       ..strokeWidth = 5
       ..color = Color(0xFFD9D9D9)
       ..style = PaintingStyle.stroke;
 
     
-    double angle = (2 * pi) * (30/ 100);
+    double angle = 2 * pi * (Get.find<IndexPageController>().compilation! / 100);
     print(angle);
+    Offset center = Offset(size.width / 2, size.height / 2);
+    double radius = Dimensions.h9*10;
 
-    final rect =  Rect.fromLTWH(0.0, 0.0, size.width, size.height);
+    final rect =  Rect.fromCircle(center: center, radius: radius);
+    
     final gradient =  SweepGradient(
       startAngle: pi/2,
-      endAngle: 2*pi,
+      endAngle: angle,
       tileMode: TileMode.decal,
       colors: [Color(0xFFD51CFF),Color(0xFF00FFE1)],
     );
@@ -28,16 +35,15 @@ class CircleProgress extends CustomPainter {
       ..strokeWidth = 6
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
-      ..shader = gradient.createShader(rect);
+      ..color = Color(0xFF00FFE1);
 
-    Offset center = Offset(size.width / 2, size.height / 2);
-    double radius = Dimensions.h9*10;
+  
 
     canvas.drawCircle(center, radius, circle);
 
 
     canvas.drawArc(Rect.fromCircle(center: center, radius: radius), pi/2,
-        2*pi, false, animationArc);
+        angle, false, animationArc);
   }
 
   @override

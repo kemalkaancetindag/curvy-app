@@ -234,7 +234,7 @@ class IndexScreen extends StatelessWidget {
                                               child: Center(
                                                 child: GestureDetector(
                                                   onTap: (){
-                                                    Get.to(NewMatcherStyle());
+                                                    
                                                   },
                                                   child: Container(
                                                   width: Dimensions.h140,
