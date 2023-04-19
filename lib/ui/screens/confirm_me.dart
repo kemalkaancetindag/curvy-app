@@ -87,7 +87,11 @@ class ConfirmMePage extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
+            GestureDetector(
+              onTap: (){
+                controller.createConfirmRequest();
+              },
+              child:   Container(
               margin: EdgeInsets.only(top: Dimensions.h31),
               width: Dimensions.w320,
               height: Dimensions.h50,
@@ -111,6 +115,8 @@ class ConfirmMePage extends StatelessWidget {
                 ),
               ),
             ),
+            ),
+          
             Container(
               margin: EdgeInsets.only(top: Dimensions.h17),
               width: Dimensions.w120 + Dimensions.w11,
