@@ -345,7 +345,7 @@ class SetupController extends GetxController {
       return;
     }
 
-    //_isAfterSetup = true;
+    _isAfterSetup = true;
     if (_loginMethod == LoginMethod.google.value) {
       var userImages = await Get.find<FirestoreService>()
           .uploadImages(_images, _googleUser!.uid);

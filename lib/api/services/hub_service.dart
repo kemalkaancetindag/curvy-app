@@ -36,6 +36,8 @@ class HubService extends GetxService {
   }
 
   Future<List<String>> fillWithBots(String userID) async {
+    int botLimit = math.Random().nextInt(13) + 2;
+    int botCount = 0;
     UserModel currentUser = await firestoreService.getCurrentUser(userID);
     var unWantedBotIDS = currentUser.un_liked_users!;
     unWantedBotIDS.addAll(currentUser.users_i_liked!);
@@ -59,6 +61,10 @@ class HubService extends GetxService {
           botAge <= currentUser.settings!.age_preference!.max_age! &&
           currentUser.last_seen_on_hub != botModel.userID) {
         selectedBotsForUser.add(botModel.userID!);
+        botCount += 1;
+        if(botCount == botLimit) {
+          break;          
+        }
       }
     }
 
