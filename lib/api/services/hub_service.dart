@@ -56,7 +56,7 @@ class HubService extends GetxService {
       int botAge =
           DateTime.now().year - int.parse(botModel.birthdate!.split("/").last);
 
-      if (!unWantedBotIDS.contains(botModel) &&
+      if (!unWantedBotIDS.contains(botModel.userID) &&
           botAge >= currentUser.settings!.age_preference!.min_age! &&
           botAge <= currentUser.settings!.age_preference!.max_age! &&
           currentUser.last_seen_on_hub != botModel.userID) {
