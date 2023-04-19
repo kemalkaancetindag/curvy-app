@@ -86,6 +86,41 @@ class ConfirmMePage extends StatelessWidget {
                   fontWeight: FontWeight.bold
                 ),
               ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: Dimensions.h31),
+              width: Dimensions.w320,
+              height: Dimensions.h50,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimensions.h50/2),
+                gradient: LinearGradient(
+                  colors: [
+                    Color(0xFFD51CFF),
+                    Color(0xFF00FFE1)
+                  ]
+                )
+              ),
+              child: Center(
+                child: Text(
+                  "HAZIRIM",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: Dimensions.h21,
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: Dimensions.h17),
+              width: Dimensions.w120 + Dimensions.w11,
+              height: Dimensions.h42,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/images/confirm_me_curvy_logo.png"),
+                  fit: BoxFit.cover
+                )
+              ),
             )
            
           ],
