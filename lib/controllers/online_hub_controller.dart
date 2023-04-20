@@ -445,6 +445,7 @@ class OnlineHubController extends GetxController {
   }
 
   Future<void> leftHub() async {
+    print("GERİ");
     if(_timer != null) {
       _timer!.cancel();
     }

@@ -29,6 +29,7 @@ class HubScreen  extends StatelessWidget {
     ), 
       onWillPop: () async {
         await Get.find<OnlineHubController>().leftHub();
+         Get.delete<OnlineHubController>();
         
         
         return true;
