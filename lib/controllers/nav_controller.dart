@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 class NavController extends GetxController {
 
   int _currentIndex = 2; 
+  int? tappedButton;
   List<Widget> mainPages = [ExploreScreen(),ArchivesScreen(),MatchingScreen(),MessagesScreen(),IndexScreen()];
   
   
@@ -25,6 +26,13 @@ class NavController extends GetxController {
     _currentIndex = index;
     update();
 
+  }
+
+  void buttonTapAnimation(int? id) {
+    print("ID");
+    print(id);
+    tappedButton = id;
+    update();
   }
 
 

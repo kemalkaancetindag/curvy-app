@@ -13,8 +13,7 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var isCurrentUserOnlineControllerRegistred = Get.isRegistered<CurrentUserOnlineController>();
-    print("REGGGGGGGG");
-    print(isCurrentUserOnlineControllerRegistred);
+ 
     if(!isCurrentUserOnlineControllerRegistred) {
         Get.put(CurrentUserOnlineController(firestoreService: Get.find()));
     }
@@ -32,12 +31,12 @@ class BottomNavBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           GestureDetector(
-         
+        
             onTap: () {              
               controller.setCurrentIndex(0);           
             },
             child: Container(
-                width: Dimensions.h60,
+                width:   Dimensions.h60,
                 height: Dimensions.h60,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Dimensions.h60/2),
@@ -49,14 +48,16 @@ class BottomNavBar extends StatelessWidget {
                   ) : null
                 ),
                 child: Center(
-                  child: controller.currentIndex == 0 ? Image.asset("assets/images/nav_hubs_white.png") : Image.asset("assets/images/nav_first.png"),
+                  child: controller.currentIndex == 0 ? Image.asset("assets/images/nav_hubs_white.png", fit: BoxFit.contain) : Image.asset("assets/images/nav_first.png", fit: BoxFit.contain),
                 )),
           ),
           GestureDetector(
+          
              onTap: () {
               
                controller.setCurrentIndex(1);                
             },
+                        
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.h60/2),
@@ -67,10 +68,10 @@ class BottomNavBar extends StatelessWidget {
                     ]
                   ) : null
                 ),
-                width: Dimensions.h60,
-                height: Dimensions.h60,
+                width:   Dimensions.h60,
+                height:   Dimensions.h60,
                 child: Center(
-                  child: controller.currentIndex == 1 ? Image.asset("assets/images/nav_archive_white.png") : Image.asset("assets/images/nav_second.png"),
+                  child: controller.currentIndex == 1 ? Image.asset("assets/images/nav_archive_white.png", fit: BoxFit.contain,) : Image.asset("assets/images/nav_second.png", fit: BoxFit.contain),
                 )),
           ),
           GestureDetector(
@@ -91,7 +92,7 @@ class BottomNavBar extends StatelessWidget {
                 width: Dimensions.h60,
                 height: Dimensions.h60,
                 child: Center(
-                  child: controller.currentIndex == 2 ? Image.asset("assets/images/nav_index_white.png") : Image.asset("assets/images/nav_middle.png"),
+                  child: controller.currentIndex == 2 ? Image.asset("assets/images/nav_index_white.png", fit: BoxFit.contain) : Image.asset("assets/images/nav_middle.png", fit: BoxFit.contain),
                 )),
           ),
           GestureDetector(
@@ -121,7 +122,7 @@ class BottomNavBar extends StatelessWidget {
                         right: 0,
                         top: 0,
                         bottom: 0,
-                        child:  controller.currentIndex == 3 ? Image.asset("assets/images/nav_messages_white.png") : Image.asset("assets/images/nav_fourth.png"),
+                        child:  controller.currentIndex == 3 ? Image.asset("assets/images/nav_messages_white.png",) : Image.asset("assets/images/nav_fourth.png",),
                       ),
                       userOnlineController.unAnsweredMessages != 0 ?
                       Positioned(       
@@ -170,7 +171,7 @@ class BottomNavBar extends StatelessWidget {
                 width: Dimensions.h60,
                 height: Dimensions.h60,
                 child: Center(
-                  child: controller.currentIndex == 4 ? Image.asset("assets/images/nav_profile_white.png") : Image.asset("assets/images/nav_last.png"),
+                  child: controller.currentIndex == 4 ? Image.asset("assets/images/nav_profile_white.png", fit: BoxFit.contain) : Image.asset("assets/images/nav_last.png", fit: BoxFit.contain),
                 )),
           )
         ],

@@ -34,10 +34,10 @@ class MainBoostButton extends StatelessWidget {
           child: Stack(
         children: [
           Positioned(
-            top: 18,
-            right: 20,
+            top: Dimensions.h17,
+            right: Dimensions.w2*10,
             child:Container(
-              width: Dimensions.w9,
+              width: Dimensions.w9*2,
               height: Dimensions.h9,
               child: Center(
                 child: Text(
@@ -64,7 +64,11 @@ class MainBoostButton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset(icon),
+               Container(
+                height: Dimensions.h40,
+                width: Dimensions.h40,
+                child:  Image.asset(icon, fit: BoxFit.contain,),
+               ),
                 RichText(
                     text: TextSpan(
                         text: "Curvy", children: [TextSpan(text: text)])),

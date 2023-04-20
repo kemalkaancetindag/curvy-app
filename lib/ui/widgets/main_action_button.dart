@@ -7,14 +7,17 @@ import 'package:flutter/src/widgets/framework.dart';
 class MainActionButton extends StatelessWidget {
   final String text;
   final String icon;
-  MainActionButton({super.key, required this.text, required this.icon});
+  int? id;
+  int? currentButton;
+  MainActionButton({super.key, required this.text, required this.icon, this.id, this.currentButton});
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      
       width: Dimensions.w155,
       height: Dimensions.h8 * 10,
-      margin: EdgeInsets.only(bottom: Dimensions.h100 / 10),
+      margin: EdgeInsets.only(bottom: Dimensions.h100 / 10, left:currentButton == id ? Dimensions.w2*10 : 0),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(Dimensions.h90),

@@ -22,6 +22,8 @@ class IndexPageController extends GetxController {
     int? _compilation;
     int? get compilation => _compilation;
 
+    int? tappedButton;
+
     IndexPageController({
       required this.userService
     });
@@ -42,6 +44,11 @@ class IndexPageController extends GetxController {
     
     
     
+  }
+
+  void buttonAnimation(int? id) {
+    tappedButton = id;
+    update();
   }
 
   void showConfirmationDialog() {

@@ -208,11 +208,17 @@ class IndexScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             GestureDetector(
+                              onPanDown: ((details) {
+                                indexPageController.buttonAnimation(0);
+                              }),
+                              onPanCancel: (() {
+                                indexPageController.buttonAnimation(null);
+                              }),
                               onTap: (){
                                 Get.toNamed(Routes.buyCurvyTurbo);
                               },
                               child:    MainBoostButton(
-                                width: Dimensions.w226,
+                                width: indexPageController.tappedButton == 0 ? Dimensions.w226 / 1.2 : Dimensions.w226,
                                 icon: "assets/images/turbo_icon.png",
                                 text: "TURBO",
                                 count: indexPageController.user != null
@@ -230,8 +236,14 @@ class IndexScreen extends StatelessWidget {
                               onTap: () {
                                 Get.toNamed(Routes.buyCurvyLike);
                               },
+                                onPanDown: ((details) {
+                                indexPageController.buttonAnimation(1);
+                              }),
+                              onPanCancel: (() {
+                                indexPageController.buttonAnimation(null);
+                              }),
                               child:   MainBoostButton(
-                                width: Dimensions.w209,
+                                width: indexPageController.tappedButton == 1 ? Dimensions.w209/1.2 : Dimensions.w209,
                                 icon: "assets/images/like_icon.png",
                                 text: "LIKE",
                                 count: indexPageController.user != null
@@ -248,11 +260,17 @@ class IndexScreen extends StatelessWidget {
                          
                           
                             GestureDetector(
+                                 onPanDown: ((details) {
+                                indexPageController.buttonAnimation(2);
+                              }),
+                              onPanCancel: (() {
+                                indexPageController.buttonAnimation(null);
+                              }),
                               onTap: (){
                                 Get.toNamed(Routes.buyCurvyChip);
                               },
                               child:                             MainBoostButton(
-                                width: Dimensions.w226,
+                                width:  indexPageController.tappedButton == 2 ?  Dimensions.w226/1.2 : Dimensions.w226,
                                 icon: "assets/images/chip_icon.png",
                                 text: "CHIP",
                                 count: indexPageController.user != null
@@ -272,17 +290,33 @@ class IndexScreen extends StatelessWidget {
                         Column(
                           children: [
                             GestureDetector(
+                                   onPanDown: ((details) {
+                                indexPageController.buttonAnimation(3);
+                              }),
+                              onPanCancel: (() {
+                                indexPageController.buttonAnimation(null);
+                              }),
                               onTap: () {
                                 Get.to(() => SettingsScreen());
                               },
                               child: MainActionButton(
+                                id: 3,
+                                currentButton: indexPageController.tappedButton,
                                 text: "AYARLAR",
                                 icon: "assets/images/settings_icon.png",
                               ),
                             ),
                             GestureDetector(
+                                   onPanDown: ((details) {
+                                indexPageController.buttonAnimation(4);
+                              }),
+                              onPanCancel: (() {
+                                indexPageController.buttonAnimation(null);
+                              }),
                               onTap: () => {Get.to(() => EditProfileScreen())},
                               child: MainActionButton(
+                                id: 4,
+                                currentButton: indexPageController.tappedButton,
                                   text: "PROFİL DÜZENLE",
                                   icon: "assets/images/edit_icon.png"),
                             )
