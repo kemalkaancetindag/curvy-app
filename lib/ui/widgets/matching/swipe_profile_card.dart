@@ -352,6 +352,12 @@ class SwipePofileCard extends StatelessWidget {
                                 ],
                               ),
                               GestureDetector(
+                                onPanDown: (details) {
+                                  controller.tappedButtonAnimation(5);
+                                },
+                                onPanCancel: () {
+                                  controller.tappedButtonAnimation(null);
+                                },
                                   onTap: () {
                                     Get.lazyPut(() => UserDetailController(
                                         firestoreService: Get.find(),
@@ -364,8 +370,8 @@ class SwipePofileCard extends StatelessWidget {
                                   child: Container(
                                     margin:
                                         EdgeInsets.only(right: Dimensions.w42),
-                                    width: Dimensions.h36,
-                                    height: Dimensions.h36,
+                                    width: controller.tappedButton == 5 ? Dimensions.h36/1.2 : Dimensions.h36,
+                                    height: controller.tappedButton == 5 ? Dimensions.h36/1.2 : Dimensions.h36,
                                     decoration: BoxDecoration(
                                         image: DecorationImage(
                                             image: AssetImage(
@@ -382,12 +388,18 @@ class SwipePofileCard extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 GestureDetector(
+                                  onPanDown: (details) {
+                                    controller.tappedButtonAnimation(0);
+                                  },
+                                  onPanCancel: () {
+                                    controller.tappedButtonAnimation(null);
+                                  },
                                   onTap: () {
                                     controller.previousUser();
                                   },
                                   child: Container(
-                                    width: Dimensions.w42,
-                                    height: Dimensions.w42,
+                                    width: controller.tappedButton == 0 ? Dimensions.w42/1.2 : Dimensions.w42,
+                                    height: controller.tappedButton == 0 ? Dimensions.w42/1.2 : Dimensions.w42,
                                     child: Image.asset(
                                       "assets/images/matcher_back.png",
                                       fit: BoxFit.contain,
@@ -398,9 +410,15 @@ class SwipePofileCard extends StatelessWidget {
                                   onTap: () async {
                                     controller.dislikeUser(true);
                                   },
+                                   onPanDown: (details) {
+                                    controller.tappedButtonAnimation(1);
+                                  },
+                                  onPanCancel: () {
+                                    controller.tappedButtonAnimation(null);
+                                  },
                                   child: Container(
-                                    width: Dimensions.h58,
-                                    height: Dimensions.h58,
+                                     width: controller.tappedButton == 1 ? Dimensions.h58/1.2 : Dimensions.h58,
+                                    height: controller.tappedButton == 1 ? Dimensions.h58/1.2 : Dimensions.h58,                                   
                                     child: Image.asset(
                                       "assets/images/matcher_dislike.png",
                                       fit: BoxFit.contain,
@@ -412,9 +430,15 @@ class SwipePofileCard extends StatelessWidget {
                                     Modals().curvyLikeModal(controller
                                         .recommendedUsers!.last.userID!);
                                   },
+                                    onPanDown: (details) {
+                                    controller.tappedButtonAnimation(2);
+                                  },
+                                  onPanCancel: () {
+                                    controller.tappedButtonAnimation(null);
+                                  },
                                   child: Container(
-                                    width: Dimensions.h45,
-                                    height: Dimensions.h45,
+                                      width: controller.tappedButton == 2 ? Dimensions.h45/1.2 : Dimensions.h45,
+                                    height: controller.tappedButton == 2 ? Dimensions.h45/1.2 : Dimensions.h45,                                    
                                     child: Image.asset(
                                       "assets/images/matcher_superlike.png",
                                       fit: BoxFit.contain,
@@ -422,13 +446,19 @@ class SwipePofileCard extends StatelessWidget {
                                   ),
                                 ),
                                 GestureDetector(
+                                   onPanDown: (details) {
+                                    controller.tappedButtonAnimation(3);
+                                  },
+                                  onPanCancel: () {
+                                    controller.tappedButtonAnimation(null);
+                                  },
                                   onTap: () async {
 
                                     controller.likeUser(true);
                                   },
                                   child: Container(
-                                    width: Dimensions.h58,
-                                    height: Dimensions.h58,
+                                        width: controller.tappedButton == 3 ? Dimensions.h58/1.2 : Dimensions.h58,
+                                    height: controller.tappedButton == 3 ? Dimensions.h58/1.2 : Dimensions.h58, 
                                     child: Image.asset(
                                       "assets/images/matcher_like.png",
                                       fit: BoxFit.contain,
@@ -436,12 +466,18 @@ class SwipePofileCard extends StatelessWidget {
                                   ),
                                 ),
                                 GestureDetector(
+                                    onPanDown: (details) {
+                                    controller.tappedButtonAnimation(4);
+                                  },
+                                  onPanCancel: () {
+                                    controller.tappedButtonAnimation(null);
+                                  },
                                   onTap: () {
                                     Get.toNamed(Routes.buyCurvyTurbo);
                                   },
                                   child: Container(
-                                    width: Dimensions.w42,
-                                    height: Dimensions.w42,
+                                  width: controller.tappedButton == 4 ? Dimensions.w42/1.2 : Dimensions.w42,
+                                    height: controller.tappedButton == 4 ? Dimensions.w42/1.2 : Dimensions.w42,
                                     child: Image.asset(
                                       "assets/images/matcher_turbo.png",
                                       fit: BoxFit.contain,

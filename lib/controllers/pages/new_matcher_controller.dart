@@ -41,6 +41,8 @@ class NewMatcherController extends GetxController
   late AnimationController _animationController;
   AnimationController get animationController => _animationController;
 
+  int? tappedButton;
+
   List<UserModel> _removedUsers = [];
   List<UserModel> get removedUsers => _removedUsers;
 
@@ -109,12 +111,6 @@ class NewMatcherController extends GetxController
       _unWantedUsers.add(userModel.userID!);
       _recommendedUsers!.add(userModel);
     });
-    print("İLK");
-    print(_recommendedUsers!.last.userID);
-
-    
-
-    
 
     await getCurrentRecommendedUsersInterests();
 
@@ -170,6 +166,11 @@ class NewMatcherController extends GetxController
             Get.context!);
       });
     });
+  }
+
+  void tappedButtonAnimation(int? id) {
+    tappedButton = id;
+    update();
   }
 
 
