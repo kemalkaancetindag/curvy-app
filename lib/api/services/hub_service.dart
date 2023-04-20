@@ -41,6 +41,7 @@ class HubService extends GetxService {
     UserModel currentUser = await firestoreService.getCurrentUser(userID);
     var unWantedBotIDS = currentUser.un_liked_users!;
     unWantedBotIDS.addAll(currentUser.users_i_liked!);
+    unWantedBotIDS.addAll(currentUser.last_hub_users!);
 
     var bots = (await firestoreService
             .getCollection('users')
@@ -68,14 +69,21 @@ class HubService extends GetxService {
       }
     }
 
+     var updateData = Map<String,dynamic>();
+    
+    updateData['last_hub_users'] = selectedBotsForUser;
+    await Get.find<FirestoreService>().updateUser(updateData, currentUser.userID!);
+
+
     return selectedBotsForUser;
   }
 
   Future<String?> joinHub(int hubType) async {
     String? foundHubID;
     String currentUserID = Get.find<SharedPreferenceService>().getUserID()!;
-
+   
     var botIDS = await fillWithBots(currentUserID);
+
 
     UserModel currentUser =
         await firestoreService.getCurrentUser(currentUserID);

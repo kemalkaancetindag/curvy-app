@@ -451,7 +451,7 @@ class OnlineHubController extends GetxController {
     
     if(_onlineUsers!.last.bot == 1) {
       var updateData = Map<String,dynamic>();
-      updateData['last_seen_on_hub'] = _onlineUsers!.last.userID!;
+      updateData['last_seen_on_hub'] = _onlineUsers!.last.userID!;      
       await Get.find<FirestoreService>().updateUser(updateData, currentUser!.userID!);
     }
     
