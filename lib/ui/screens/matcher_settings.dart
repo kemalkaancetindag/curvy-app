@@ -322,6 +322,7 @@ class MatcherSettingsScreen extends StatelessWidget {
                                     top: Dimensions.h21,
                                     bottom: Dimensions.h100 / 10),
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       "Mesafe Tercihi",
@@ -329,7 +330,15 @@ class MatcherSettingsScreen extends StatelessWidget {
                                           color: Colors.black,
                                           fontSize: Dimensions.h16,
                                           fontWeight: FontWeight.bold),
-                                    )
+                                    ),
+                                      Text(
+                                      "${controller.distancePreference!.toInt()}km",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: Dimensions.h16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+
                                   ],
                                 ),
                               ),

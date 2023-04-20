@@ -2133,9 +2133,21 @@ class SettingsScreen extends StatelessWidget {
                                         top: Dimensions.h21,
                                         bottom: Dimensions.h100 / 10),
                                     child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
                                           "Mesafe Tercihi",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: Dimensions.h16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                         Text(
+                                          "${ Utils.getNestedMapData(
+                                                  Settings
+                                                      .distancePreferenceDistance
+                                                      .value,
+                                                  controller.settings!).toInt()}km",
                                           style: TextStyle(
                                               color: Colors.black,
                                               fontSize: Dimensions.h16,

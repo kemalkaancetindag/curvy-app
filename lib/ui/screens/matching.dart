@@ -119,13 +119,21 @@ class MatchingScreen extends StatelessWidget {
                                   },
                                 ))),
                         GestureDetector(
+                          onPanDown: (details) {
+                            controller.tappedButtonAnimation(6);
+                          },
+                          onPanCancel: () {
+                            controller.tappedButtonAnimation(null);
+                          },
                           onTap: () {
                             Get.toNamed(Routes.matcherSettings);
                           },
-                          child: Container(
+                          child: Container(                            
+                            width: controller.tappedButton == 6 ? Dimensions.h31/1.2 : Dimensions.h31,
+                            height: controller.tappedButton == 6 ? Dimensions.h31/1.2 : Dimensions.h31,                           
                             child: Center(
                               child: Image.asset(
-                                  "assets/images/matcher_settings_icon.png"),
+                                  "assets/images/matcher_settings_icon.png", fit:  BoxFit.contain,),
                             ),
                           ),
                         )
