@@ -59,6 +59,8 @@ class ChatController extends GetxController {
 
   final messageFieldController = TextEditingController();
 
+  int? tappedNewMatch;
+
   @override
   Future<void> onInit() async {
     super.onInit();
@@ -66,6 +68,11 @@ class ChatController extends GetxController {
     await setCurrentUser();
     await chatService.listenChats();
     super.onInit();
+  }
+
+  void newMatchAnimation(int? id) {
+    tappedNewMatch = id;
+    update();
   }
 
   void setIsShareCPOpen(bool state) {

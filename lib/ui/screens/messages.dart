@@ -98,6 +98,12 @@ class MessagesScreen extends StatelessWidget {
                                                 builder:
                                                     (userOnlineController) {
                                                   return GestureDetector(
+                                                    onPanDown: (details) {
+                                                      chatController.newMatchAnimation(index);
+                                                    },
+                                                    onPanCancel: () {
+                                                      chatController.newMatchAnimation(null);
+                                                    },
                                                     onTap: () {
                                                       chatController
                                                           .startNewChatWithNewMatch(
@@ -109,16 +115,13 @@ class MessagesScreen extends StatelessWidget {
                                                     child: Container(
                                                       margin: EdgeInsets.only(
                                                           right: Dimensions.w8),
-                                                      width: Dimensions.h8 * 10,
+                                                      width: chatController.tappedNewMatch == index ? (Dimensions.h8 * 10)/1.2 : Dimensions.h8 * 10,
                                                       height:
-                                                          Dimensions.h8 * 10,
+                                                          chatController.tappedNewMatch == index ? (Dimensions.h8 * 10)/1.2 : Dimensions.h8 * 10,
                                                       decoration: BoxDecoration(
                                                           borderRadius:
                                                               BorderRadius.circular(
-                                                                  Dimensions
-                                                                          .h8 *
-                                                                      10 /
-                                                                      2),
+                                                                chatController.tappedNewMatch == index ? ((Dimensions.h8 * 10)/1.2)/2 : (Dimensions.h8 * 10)/2),
                                                           image: userOnlineController
                                                                       .user !=
                                                                   null
