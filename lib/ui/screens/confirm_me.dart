@@ -9,6 +9,8 @@ import 'package:get/get.dart';
 class ConfirmMePage extends StatelessWidget {
   final List<CameraDescription> cameras;
 
+ 
+
   ConfirmMePage({super.key, required this.cameras});
 
   
@@ -16,7 +18,7 @@ class ConfirmMePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    
+        
     
     
     return Scaffold(
@@ -24,8 +26,7 @@ class ConfirmMePage extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          onPressed: () async {
-            await Get.find<ConfirmMeController>().cameraController.dispose();
+          onPressed: () async {            
             Get.back();
           },
           icon: Icon(
@@ -36,6 +37,84 @@ class ConfirmMePage extends StatelessWidget {
       ),
       body:GetBuilder<ConfirmMeController>(
         builder: (controller) {
+
+          if(controller.processing){
+            return Container(
+              color:  Colors.white,
+              width: double.maxFinite,
+              height: double.maxFinite,
+              child: Center(
+                child: CircularProgressIndicator(
+                color: Color(0xFFD51CFF),
+              ),
+              )
+            );
+          }
+
+          if(controller.confrimed == true && controller.processing == false) {
+            return Container(
+
+              color: Colors.white,
+              width: double.maxFinite,
+              height: double.maxFinite,
+              child: Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(top: Dimensions.h27*10),
+                    width: Dimensions.w140,
+                    height: Dimensions.w140,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Dimensions.w140/2),
+                      gradient: LinearGradient(
+                        colors: [
+                    Color(0xFFD51CFF),
+                    Color(0xFF00FFE1)
+                  ]
+                      )
+                    ),
+                    child: Center(
+                      child: Container(
+                        width: Dimensions.w140/2,
+                        height: Dimensions.w140/2,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/confirm_tick_me.png"),
+                            fit: BoxFit.contain
+                          )
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: Dimensions.h17),
+                    width: Dimensions.w120 + Dimensions.w11/2,
+                    child: Text(
+                      "Doğrulama Başarılı",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xFF7B8491),
+                        fontSize: Dimensions.h230/10,
+                        fontWeight: FontWeight.bold,
+                        
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: Dimensions.h209),
+                    width: Dimensions.w120 + Dimensions.w11,
+                    height: Dimensions.h42,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("assets/images/confirm_me_curvy_logo.png",),
+                        fit:  BoxFit.contain
+                      )
+                    ),
+                  )
+                ],
+              ),
+            );
+          }
+          
           return  Container(
         width: double.maxFinite,
         height: double.maxFinite,
@@ -88,13 +167,19 @@ class ConfirmMePage extends StatelessWidget {
               ),
             ),
             GestureDetector(
+              onPanDown: (details){
+                controller.buttonAnimation(0);
+              },
+              onPanCancel: (){
+                controller.buttonAnimation(null);
+              },
               onTap: (){
                 controller.createConfirmRequest();
               },
               child:   Container(
               margin: EdgeInsets.only(top: Dimensions.h31),
-              width: Dimensions.w320,
-              height: Dimensions.h50,
+              width: controller.tappedButton == 0 ? Dimensions.w320/1.2 : Dimensions.w320,
+              height: controller.tappedButton == 0 ? Dimensions.h50/1.2 : Dimensions.h50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.h50/2),
                 gradient: LinearGradient(
