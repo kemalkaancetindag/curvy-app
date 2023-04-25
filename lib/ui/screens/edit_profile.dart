@@ -17,6 +17,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class EditProfileScreen extends StatelessWidget {
@@ -62,7 +63,7 @@ class EditProfileScreen extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Image.asset("assets/images/camera_icon.png"),
+                               SvgPicture.asset("assets/svg/setup/camera.svg"),
                                 Text(
                                   "Kameranla Çek",
                                   style: TextStyle(
@@ -89,7 +90,7 @@ class EditProfileScreen extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Image.asset("assets/images/gallery_icon.png"),
+                               SvgPicture.asset("assets/svg/setup/galery.svg"),
                                 Text(
                                   "Galerinden Seç",
                                   style: TextStyle(
@@ -177,8 +178,7 @@ class EditProfileScreen extends StatelessWidget {
                                         margin: EdgeInsets.only(
                                             right: Dimensions.w8),
                                         child: Center(
-                                          child: Image.asset(
-                                              "assets/images/zodiac_1.png"),
+                                          child: SvgPicture.asset("assets/svg/edit/zodiacs/z1.svg"),
                                         ),
                                       ),
                                       Container(
@@ -227,8 +227,7 @@ class EditProfileScreen extends StatelessWidget {
                                         margin: EdgeInsets.only(
                                             right: Dimensions.w8),
                                         child: Center(
-                                          child: Image.asset(
-                                              "assets/images/zodiac_2.png"),
+                                          child: SvgPicture.asset("assets/svg/edit/zodiacs/z2.svg"),
                                         ),
                                       ),
                                       Container(
@@ -285,8 +284,7 @@ class EditProfileScreen extends StatelessWidget {
                                         margin: EdgeInsets.only(
                                             right: Dimensions.w8),
                                         child: Center(
-                                          child: Image.asset(
-                                              "assets/images/zodiac_3.png"),
+                                          child: SvgPicture.asset("assets/svg/edit/zodiacs/z3.svg"),
                                         ),
                                       ),
                                       Container(
@@ -335,8 +333,7 @@ class EditProfileScreen extends StatelessWidget {
                                         margin: EdgeInsets.only(
                                             right: Dimensions.w8),
                                         child: Center(
-                                          child: Image.asset(
-                                              "assets/images/zodiac_4.png"),
+                                          child: SvgPicture.asset("assets/svg/edit/zodiacs/z4.svg"),
                                         ),
                                       ),
                                       Container(
@@ -393,8 +390,7 @@ class EditProfileScreen extends StatelessWidget {
                                         margin: EdgeInsets.only(
                                             right: Dimensions.w8),
                                         child: Center(
-                                          child: Image.asset(
-                                              "assets/images/zodiac_5.png"),
+                                          child:SvgPicture.asset("assets/svg/edit/zodiacs/z5.svg"),
                                         ),
                                       ),
                                       Container(
@@ -443,8 +439,7 @@ class EditProfileScreen extends StatelessWidget {
                                         margin: EdgeInsets.only(
                                             right: Dimensions.w8),
                                         child: Center(
-                                          child: Image.asset(
-                                              "assets/images/zodiac_6.png"),
+                                          child: SvgPicture.asset("assets/svg/edit/zodiacs/z6.svg"),
                                         ),
                                       ),
                                       Container(
@@ -501,8 +496,7 @@ class EditProfileScreen extends StatelessWidget {
                                         margin: EdgeInsets.only(
                                             right: Dimensions.w8),
                                         child: Center(
-                                          child: Image.asset(
-                                              "assets/images/zodiac_7.png"),
+                                          child: SvgPicture.asset("assets/svg/edit/zodiacs/z7.svg"),
                                         ),
                                       ),
                                       Container(
@@ -551,8 +545,7 @@ class EditProfileScreen extends StatelessWidget {
                                         margin: EdgeInsets.only(
                                             right: Dimensions.w8),
                                         child: Center(
-                                          child: Image.asset(
-                                              "assets/images/zodiac_8.png"),
+                                          child: SvgPicture.asset("assets/svg/edit/zodiacs/z8.svg"),
                                         ),
                                       ),
                                       Container(
@@ -610,8 +603,7 @@ class EditProfileScreen extends StatelessWidget {
                                           margin: EdgeInsets.only(
                                               right: Dimensions.w8),
                                           child: Center(
-                                            child: Image.asset(
-                                                "assets/images/zodiac_9.png"),
+                                            child: SvgPicture.asset("assets/svg/edit/zodiacs/z9.svg"),
                                           ),
                                         ),
                                         Container(
@@ -659,8 +651,7 @@ class EditProfileScreen extends StatelessWidget {
                                         margin: EdgeInsets.only(
                                             right: Dimensions.w8),
                                         child: Center(
-                                          child: Image.asset(
-                                              "assets/images/zodiac_10.png"),
+                                          child: SvgPicture.asset("assets/svg/edit/zodiacs/z10.svg"),
                                         ),
                                       ),
                                       Container(
@@ -717,8 +708,7 @@ class EditProfileScreen extends StatelessWidget {
                                         margin: EdgeInsets.only(
                                             right: Dimensions.w8),
                                         child: Center(
-                                          child: Image.asset(
-                                              "assets/images/zodiac_11.png"),
+                                          child: SvgPicture.asset("assets/svg/edit/zodiacs/z11.svg"),
                                         ),
                                       ),
                                       Container(
@@ -767,8 +757,7 @@ class EditProfileScreen extends StatelessWidget {
                                         margin: EdgeInsets.only(
                                             right: Dimensions.w8),
                                         child: Center(
-                                          child: Image.asset(
-                                              "assets/images/zodiac_12.png"),
+                                          child: SvgPicture.asset("assets/svg/edit/zodiacs/z12.svg"),
                                         ),
                                       ),
                                       Container(
@@ -810,8 +799,7 @@ class EditProfileScreen extends StatelessWidget {
                               },
                               child: Container(
                                 child: Center(
-                                  child: Image.asset(
-                                      "assets/images/settings_modal_cancel.png"),
+                                  child: SvgPicture.asset("assets/svg/settings/modals/cancel.svg"),
                                 ),
                               ),
                             ),
@@ -824,8 +812,7 @@ class EditProfileScreen extends StatelessWidget {
                               },
                               child: Container(
                                 child: Center(
-                                  child: Image.asset(
-                                      "assets/images/settings_modal_check.png"),
+                                  child: SvgPicture.asset("assets/svg/settings/modals/save.svg"),
                                 ),
                               ),
                             )
@@ -1293,8 +1280,7 @@ class EditProfileScreen extends StatelessWidget {
                                   },
                                   child: Container(
                                     child: Center(
-                                      child: Image.asset(
-                                          "assets/images/settings_modal_cancel.png"),
+                                      child: SvgPicture.asset("assets/svg/settings/modals/cancel.svg"),
                                     ),
                                   ),
                                 ),
@@ -1307,8 +1293,7 @@ class EditProfileScreen extends StatelessWidget {
                                     },
                                     child: Container(
                                       child: Center(
-                                        child: Image.asset(
-                                            "assets/images/settings_modal_check.png"),
+                                        child: SvgPicture.asset("assets/svg/settings/modals/save.svg"),
                                       ),
                                     )),
                               ],
@@ -1868,8 +1853,7 @@ class EditProfileScreen extends StatelessWidget {
                               },
                               child: Container(
                                 child: Center(
-                                  child: Image.asset(
-                                      "assets/images/settings_modal_cancel.png"),
+                                  child:SvgPicture.asset("assets/svg/settings/modals/cancel.svg"),
                                 ),
                               ),
                             ),
@@ -1882,8 +1866,7 @@ class EditProfileScreen extends StatelessWidget {
                               },
                               child: Container(
                                 child: Center(
-                                  child: Image.asset(
-                                      "assets/images/settings_modal_check.png"),
+                                  child: SvgPicture.asset("assets/svg/settings/modals/save.svg"),
                                 ),
                               ),
                             )
@@ -2160,8 +2143,7 @@ class EditProfileScreen extends StatelessWidget {
                               },
                               child: Container(
                                 child: Center(
-                                  child: Image.asset(
-                                      "assets/images/settings_modal_cancel.png"),
+                                  child: SvgPicture.asset("assets/svg/settings/modals/cancel.svg"),
                                 ),
                               ),
                             ),
@@ -2174,8 +2156,7 @@ class EditProfileScreen extends StatelessWidget {
                               },
                               child: Container(
                                 child: Center(
-                                  child: Image.asset(
-                                      "assets/images/settings_modal_check.png"),
+                                  child: SvgPicture.asset("assets/svg/settings/modals/save.svg"),
                                 ),
                               ),
                             ),
@@ -2534,8 +2515,7 @@ class EditProfileScreen extends StatelessWidget {
                               },
                               child: Container(
                                 child: Center(
-                                  child: Image.asset(
-                                      "assets/images/settings_modal_cancel.png"),
+                                  child: SvgPicture.asset("assets/svg/settings/modals/cancel.svg"),
                                 ),
                               ),
                             ),
@@ -2548,8 +2528,7 @@ class EditProfileScreen extends StatelessWidget {
                               },
                               child: Container(
                                 child: Center(
-                                  child: Image.asset(
-                                      "assets/images/settings_modal_check.png"),
+                                  child: SvgPicture.asset("assets/svg/settings/modals/save.svg"),
                                 ),
                               ),
                             ),
@@ -2766,8 +2745,7 @@ class EditProfileScreen extends StatelessWidget {
                               },
                               child: Container(
                                 child: Center(
-                                  child: Image.asset(
-                                      "assets/images/settings_modal_cancel.png"),
+                                  child: SvgPicture.asset("assets/svg/settings/modals/cancel.svg"),
                                 ),
                               ),
                             ),
@@ -2780,8 +2758,7 @@ class EditProfileScreen extends StatelessWidget {
                                 },
                                 child: Container(
                                   child: Center(
-                                    child: Image.asset(
-                                        "assets/images/settings_modal_check.png"),
+                                    child:SvgPicture.asset("assets/svg/settings/modals/save.svg"),
                                   ),
                                 ))
                           ],
@@ -3208,8 +3185,7 @@ class EditProfileScreen extends StatelessWidget {
                                   },
                                   child: Container(
                                     child: Center(
-                                      child: Image.asset(
-                                          "assets/images/settings_modal_cancel.png"),
+                                      child: SvgPicture.asset("assets/svg/settings/modals/cancel.svg"),
                                     ),
                                   ),
                                 ),
@@ -3223,8 +3199,7 @@ class EditProfileScreen extends StatelessWidget {
                                     },
                                     child: Container(
                                       child: Center(
-                                        child: Image.asset(
-                                            "assets/images/settings_modal_check.png"),
+                                        child: SvgPicture.asset("assets/svg/settings/modals/save.svg"),
                                       ),
                                     ))
                               ],
@@ -4187,8 +4162,7 @@ class EditProfileScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Image.asset(
-                                  "assets/images/edit_profile_logo.png"),
+                              SvgPicture.asset("assets/svg/edit/curvy_plus.svg"),
                               Text(
                                 "CurvyPLUS",
                                 style: TextStyle(

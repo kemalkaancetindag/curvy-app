@@ -4,6 +4,7 @@ import 'package:curvy_app/constants/dimensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class EditPorfileImageBox extends StatelessWidget {
   String? image;
@@ -36,7 +37,7 @@ class EditPorfileImageBox extends StatelessWidget {
               borderRadius: BorderRadius.circular(Dimensions.h31/2)
             ),
             child: Center(
-              child: Image.asset("assets/images/add_icon.png"),
+              child: SvgPicture.asset("assets/svg/setup/plus.svg"),
             ),
           )
           )
