@@ -28,6 +28,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:curvy_app/controllers/pages/settings_controller.dart';
 import 'dart:math' as math;
@@ -188,8 +189,7 @@ class SettingsScreen extends StatelessWidget {
                                   child: Container(
                                     margin:
                                         EdgeInsets.only(right: Dimensions.h8),
-                                    child: Image.asset(
-                                        "assets/images/settings_modal_cancel.png"),
+                                    child: SvgPicture.asset("assets/svg/settings/modals/cancel.svg"),
                                   ),
                                 ),
                                 GestureDetector(
@@ -199,8 +199,7 @@ class SettingsScreen extends StatelessWidget {
                                   child: Container(
                                     margin:
                                         EdgeInsets.only(left: Dimensions.h8),
-                                    child: Image.asset(
-                                        "assets/images/settings_modal_check.png"),
+                                    child: SvgPicture.asset("assets/svg/settings/modals/save.svg"),
                                   ),
                                 )
                               ],
@@ -442,8 +441,7 @@ class SettingsScreen extends StatelessWidget {
                                         },
                                         child: Container(
                                           child: Center(
-                                            child: Image.asset(
-                                                "assets/images/settings_modal_cancel.png"),
+                                            child:SvgPicture.asset("assets/svg/settings/modals/cancel.svg"),
                                           ),
                                         ),
                                       ),
@@ -451,8 +449,7 @@ class SettingsScreen extends StatelessWidget {
                                         onTap: () {},
                                         child: Container(
                                           child: Center(
-                                            child: Image.asset(
-                                                "assets/images/settings_modal_check.png"),
+                                            child: SvgPicture.asset("assets/svg/settings/modals/save.svg"),
                                           ),
                                         ),
                                       )
@@ -556,8 +553,7 @@ class SettingsScreen extends StatelessWidget {
                               },
                               child: Container(
                                 child: Center(
-                                  child: Image.asset(
-                                      "assets/images/settings_modal_cancel.png"),
+                                  child: SvgPicture.asset("assets/svg/settings/modals/cancel.svg"),
                                 ),
                               ),
                             ),
@@ -565,8 +561,7 @@ class SettingsScreen extends StatelessWidget {
                               onTap: () {},
                               child: Container(
                                 child: Center(
-                                  child: Image.asset(
-                                      "assets/images/settings_modal_check.png"),
+                                  child: SvgPicture.asset("assets/svg/settings/modals/save.svg"),
                                 ),
                               ),
                             )
@@ -775,8 +770,7 @@ class SettingsScreen extends StatelessWidget {
                                                 1
                                             ? Container(
                                                 child: Center(
-                                                    child: Image.asset(
-                                                        "assets/images/settings_modal_check.png")),
+                                                    child: SvgPicture.asset("assets/svg/settings/modals/save.svg")),
                                               )
                                             : Container()
                                       ],
@@ -827,8 +821,7 @@ class SettingsScreen extends StatelessWidget {
                                                 3
                                             ? Container(
                                                 child: Center(
-                                                    child: Image.asset(
-                                                        "assets/images/settings_modal_check.png")),
+                                                    child: SvgPicture.asset("assets/svg/settings/modals/save.svg")),
                                               )
                                             : Container()
                                       ],
@@ -879,8 +872,7 @@ class SettingsScreen extends StatelessWidget {
                                                   10
                                               ? Container(
                                                   child: Center(
-                                                      child: Image.asset(
-                                                          "assets/images/settings_modal_check.png")),
+                                                      child: SvgPicture.asset("assets/svg/settings/modals/save.svg")),
                                                 )
                                               : Container()
                                         ],
@@ -947,8 +939,7 @@ class SettingsScreen extends StatelessWidget {
                                   },
                                   child: Container(
                                     child: Center(
-                                      child: Image.asset(
-                                          "assets/images/settings_modal_cancel.png"),
+                                      child: SvgPicture.asset("assets/svg/settings/modals/cancel.svg"),
                                     ),
                                   ),
                                 ),
@@ -958,8 +949,7 @@ class SettingsScreen extends StatelessWidget {
                                   },
                                   child: Container(
                                     child: Center(
-                                      child: Image.asset(
-                                          "assets/images/settings_modal_check.png"),
+                                      child: SvgPicture.asset("assets/svg/settings/modals/save.svg"),
                                     ),
                                   ),
                                 )
@@ -1243,8 +1233,7 @@ class SettingsScreen extends StatelessWidget {
                                   },
                                   child: Container(
                                       child: Center(
-                                    child: Image.asset(
-                                        "assets/images/settings_modal_cancel.png"),
+                                    child: SvgPicture.asset("assets/svg/settings/modals/cancel.svg"),
                                   )),
                                 ),
                                 GestureDetector(
@@ -1253,8 +1242,7 @@ class SettingsScreen extends StatelessWidget {
                                   },
                                   child: Container(
                                       child: Center(
-                                    child: Image.asset(
-                                        "assets/images/settings_modal_check.png"),
+                                    child: SvgPicture.asset("assets/svg/settings/modals/save.svg"),
                                   )),
                                 )
                               ],
@@ -1405,8 +1393,7 @@ class SettingsScreen extends StatelessWidget {
                                     },
                                     child: Container(
                                       child: Center(
-                                        child: Image.asset(
-                                            "assets/images/settings_modal_cancel.png"),
+                                        child: SvgPicture.asset("assets/svg/settings/modals/cancel.svg"),
                                       ),
                                     ),
                                   ),
@@ -1417,8 +1404,7 @@ class SettingsScreen extends StatelessWidget {
                                     },
                                     child: Container(
                                       child: Center(
-                                        child: Image.asset(
-                                            "assets/images/settings_modal_check.png"),
+                                        child: SvgPicture.asset("assets/svg/settings/modals/save.svg"),
                                       ),
                                     ),
                                   )
@@ -1612,8 +1598,7 @@ class SettingsScreen extends StatelessWidget {
                                   },
                                   child: Container(
                                     child: Center(
-                                      child: Image.asset(
-                                          "assets/images/settings_modal_cancel.png"),
+                                      child:SvgPicture.asset("assets/svg/settings/modals/cancel.svg"),
                                     ),
                                   ),
                                 ),
@@ -1624,8 +1609,7 @@ class SettingsScreen extends StatelessWidget {
                                   },
                                   child: Container(
                                     child: Center(
-                                      child: Image.asset(
-                                          "assets/images/settings_modal_check.png"),
+                                      child: SvgPicture.asset("assets/svg/settings/modals/save.svg"),
                                     ),
                                   ),
                                 )
@@ -1855,8 +1839,7 @@ class SettingsScreen extends StatelessWidget {
                                     },
                                     child: Container(
                                       child: Center(
-                                          child: Image.asset(
-                                              "assets/images/settings_modal_cancel.png")),
+                                          child: SvgPicture.asset("assets/svg/settings/modals/cancel.svg")),
                                     ),
                                   ),
                                   GestureDetector(
@@ -1866,8 +1849,7 @@ class SettingsScreen extends StatelessWidget {
                                     },
                                     child: Container(
                                       child: Center(
-                                          child: Image.asset(
-                                              "assets/images/settings_modal_check.png")),
+                                          child: SvgPicture.asset("assets/svg/settings/modals/save.svg")),
                                     ),
                                   )
                                 ]),
@@ -2804,7 +2786,7 @@ class SettingsScreen extends StatelessWidget {
                       ),
                       Container(
                         margin: EdgeInsets.only(top: Dimensions.h21),
-                        child: Image.asset("assets/images/settings_logo.png"),
+                        child: SvgPicture.asset("assets/svg/settings/curvy_logo.svg"),
                       ),
                       Container(
                         margin: EdgeInsets.only(bottom: Dimensions.h21),

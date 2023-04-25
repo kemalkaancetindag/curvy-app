@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CurvyPlusSelect extends StatelessWidget {
   bool selectState;
@@ -62,7 +63,7 @@ class CurvyPlusSelect extends StatelessWidget {
             selectState
                 ? Container(
                     margin: EdgeInsets.only(right: Dimensions.w17),
-                    child: Image.asset("assets/images/settings_tick_icon.png"),
+                    child: SvgPicture.asset("assets/svg/settings/purple_check.svg"),
                   )
                 : Container()
           ],

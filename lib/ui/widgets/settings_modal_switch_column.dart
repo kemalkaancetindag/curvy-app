@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SettingsModalSwitchColumn extends StatelessWidget {
   final void Function()? function;
@@ -55,7 +56,7 @@ class SettingsModalSwitchColumn extends StatelessWidget {
                   ) : 
                   Container(
                   child: Center(
-                    child: Image.asset("assets/images/settings_modal_chevron_right.png"),
+                    child: SvgPicture.asset("assets/svg/settings/chevron_right.svg"),
                   ),
                 )
               ],
