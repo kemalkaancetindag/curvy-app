@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'dart:io';
 class AddImageBox extends StatelessWidget {
@@ -41,11 +42,7 @@ class AddImageBox extends StatelessWidget {
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(Dimensions.w31 / 2)),
                   child: Center(
-                    child: Image.asset(
-                      "assets/images/add_icon.png",
-                      width: Dimensions.w17,
-                      height: Dimensions.h17,
-                    ),
+                    child: SvgPicture.asset("assets/svg/setup/plus.svg"),
                   ),
                 ),
               ),

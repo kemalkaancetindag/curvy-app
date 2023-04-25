@@ -5,6 +5,7 @@ import 'package:curvy_app/ui/widgets/welcome_screen_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -39,11 +40,7 @@ class WelcomeScreen extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(top: Dimensions.h40),
                         child: Center(
-                          child: Image.asset(
-                            "assets/images/logokalp_wotext.png",
-                            width: Dimensions.w111,
-                            height: Dimensions.h100,
-                          ),
+                          child: SvgPicture.asset("assets/svg/setup/welcome_logo.svg"),
                         ),
                       ),
                       Container(

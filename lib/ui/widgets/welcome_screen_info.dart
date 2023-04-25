@@ -2,6 +2,7 @@ import 'package:curvy_app/constants/dimensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class WelcomeScreenInfo extends StatelessWidget {
   final String title;
@@ -20,7 +21,7 @@ class WelcomeScreenInfo extends StatelessWidget {
         children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
-            children: [Image.asset("assets/images/tick_icon.png", width: Dimensions.w22, height: Dimensions.w22,)],
+            children: [SvgPicture.asset("assets/svg/setup/welcome_tick.svg")],
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

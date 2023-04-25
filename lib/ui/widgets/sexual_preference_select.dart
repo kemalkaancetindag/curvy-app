@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SexualPreferenceSelect extends StatelessWidget {
   final String text;
@@ -22,7 +23,7 @@ class SexualPreferenceSelect extends StatelessWidget {
             height: Dimensions.h22,
             margin: EdgeInsets.only(right: Dimensions.w11),
             child: Center(
-              child: Image.asset("assets/images/tick_icon.png"),
+              child: SvgPicture.asset("assets/svg/setup/welcome_tick.svg"),
             ),
           ) :  Container(
             width: Dimensions.w22,

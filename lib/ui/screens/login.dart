@@ -9,6 +9,7 @@ import 'package:curvy_app/ui/widgets/login_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'dart:io';
 
@@ -42,7 +43,7 @@ class LoginScreen extends StatelessWidget {
               width: Dimensions.w200,
               height: Dimensions.h230,
               child: Center(
-                child: Image.asset('assets/images/logokalp.png') 
+                child: SvgPicture.asset("assets/svg/setup/curvy_logo.svg") 
                 ),
             ),
             Container(
@@ -64,7 +65,7 @@ class LoginScreen extends StatelessWidget {
                 )
               )
             ),
-            LoginButton(text: Platform.isIOS ? "APPLE İLE GİRİŞ YAP" : "GOOGLE İLE GİRİŞ YAP", logo: !Platform.isAndroid ? "assets/images/apple_logo.png" : "assets/images/google_icon.png",
+            LoginButton(text: Platform.isIOS ? "APPLE İLE GİRİŞ YAP" : "GOOGLE İLE GİRİŞ YAP", logo: !Platform.isAndroid ? "assets/svg/setup/apple.svg" : "assets/svg/setup/google.svg",
             loginMethod: () async {
               if(Platform.isAndroid){
                 Get.find<SetupController>().setLoginMethod(LoginMethod.google.value); 
@@ -79,11 +80,11 @@ class LoginScreen extends StatelessWidget {
                 
                 
             },),
-            LoginButton(text: "FACEBOOK İLE KAYDOL", logo: "assets/images/facebook_logo.png",loginMethod: () async {
+            LoginButton(text: "FACEBOOK İLE KAYDOL", logo: "assets/svg/setup/facebook.svg",loginMethod: () async {
               Get.find<SetupController>().setLoginMethod(LoginMethod.facebook.value);
               await Get.find<AuthService>().facebookAuth();
             },),
-            LoginButton(text: "TELEFON NUMARASI İLE GİRİŞ YAP", logo: "assets/images/phone_icon.png",loginMethod: (){
+            LoginButton(text: "TELEFON NUMARASI İLE GİRİŞ YAP", logo: "assets/svg/setup/phone.svg",loginMethod: (){
 
               Get.find<SetupController>().setLoginMethod(LoginMethod.phone.value);
               Get.toNamed(Routes.validationNumber);

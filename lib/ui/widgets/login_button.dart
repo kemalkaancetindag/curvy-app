@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class LoginButton extends StatelessWidget {
@@ -37,7 +38,7 @@ class LoginButton extends StatelessWidget {
               height: Dimensions.h22,
               margin:  EdgeInsets.only(left: Dimensions.w16),
               child: Center(
-                child: Image.asset(logo),
+                child: SvgPicture.asset(logo),
               ),
             ),            
             Container(

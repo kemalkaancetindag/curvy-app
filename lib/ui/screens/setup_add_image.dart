@@ -5,6 +5,7 @@ import 'package:curvy_app/ui/widgets/gradient_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class SetupAddImageScreen extends StatelessWidget {
@@ -50,7 +51,7 @@ class SetupAddImageScreen extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset("assets/images/camera_icon.png"),
+                          SvgPicture.asset("assets/svg/setup/camera.svg"),
                           Container(
                               margin: EdgeInsets.only(top: Dimensions.h7),
                               width: Dimensions.w50,
@@ -82,7 +83,7 @@ class SetupAddImageScreen extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset("assets/images/gallery_icon.png"),
+                         SvgPicture.asset("assets/svg/setup/galery.svg"),
                           Container(
                               margin: EdgeInsets.only(top: Dimensions.h7),
                               width: Dimensions.w50,
