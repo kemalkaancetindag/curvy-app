@@ -55,6 +55,7 @@ dependencies:
   cached_network_image: ^3.2.3
   sign_in_with_apple: ^4.3.0
   crypto: ^3.0.2
+  flutter_svg: 1.1.6
 
 dev_dependencies:
   flutter_test:
@@ -80,6 +81,13 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/svg/matcher/
+    - assets/svg/matcher/freestyle/
+    - assets/svg/matcher/card/
+    - assets/svg/archive/vip/
+    - assets/svg/archive/likes/
+    - assets/svg/index/
+    - assets/svg/nav-bar/
     - assets/fonts/gilroy/
     - assets/images/logokalp.png
     - assets/images/apple_logo.png

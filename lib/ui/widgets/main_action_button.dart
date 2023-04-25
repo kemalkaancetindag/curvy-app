@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class MainActionButton extends StatelessWidget {
   final String text;
@@ -36,7 +37,7 @@ class MainActionButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(Dimensions.h42 / 2),
                 color: Color(0xFFF7F7F7)),
             child: Center(
-              child: Image.asset(icon),
+              child: SvgPicture.asset(icon),
             ),
           ),
           Container(

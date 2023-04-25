@@ -4,6 +4,7 @@ import 'package:curvy_app/controllers/pages/archive_who_liked_me_controller.dart
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class ArchiveLikes extends StatelessWidget {
@@ -101,7 +102,7 @@ class ArchiveLikes extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(right: Dimensions.w8),
                         child: Center(
-                          child: Image.asset("assets/images/turbo_icon.png"),
+                          child: SvgPicture.asset("assets/svg/archive/likes/curvy_turbo.svg"),
                         ),
                       ),
                       Container(

@@ -16,6 +16,7 @@ import 'package:curvy_app/ui/widgets/matching/new_matcher_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class IndexScreen extends StatelessWidget {
@@ -35,6 +36,8 @@ class IndexScreen extends StatelessWidget {
         Get.find<IndexPageController>().showConfirmationDialog();
       });
     }
+
+    
 
     
 
@@ -85,8 +88,7 @@ class IndexScreen extends StatelessWidget {
                                 margin: EdgeInsets.only(
                                     top: Dimensions.h58, bottom: Dimensions.h8),
                                 child: Center(
-                                  child: Image.asset(
-                                      "assets/images/main_logo.png"),
+                                  child: SvgPicture.asset("assets/svg/index/curvy_logo.svg"),
                                 ),
                               ),
                               Container(
@@ -186,8 +188,7 @@ class IndexScreen extends StatelessWidget {
                                     margin: EdgeInsets.only(
                                         left: Dimensions.w8 / 2),
                                     child: Center(
-                                      child: Image.asset(
-                                          "assets/images/confirm_icon.png", fit: BoxFit.contain,),
+                                      child: SvgPicture.asset("assets/svg/index/confirmed.svg"),
                                     ),
                                   )
                                   ),
@@ -219,7 +220,7 @@ class IndexScreen extends StatelessWidget {
                               },
                               child:    MainBoostButton(
                                 width: indexPageController.tappedButton == 0 ? Dimensions.w226 / 1.2 : Dimensions.w226,
-                                icon: "assets/images/turbo_icon.png",
+                                icon: "assets/svg/index/curvy_turbo.svg",
                                 text: "TURBO",
                                 count: indexPageController.user != null
                                     ? indexPageController.user!.curvy_turbo!
@@ -244,7 +245,7 @@ class IndexScreen extends StatelessWidget {
                               }),
                               child:   MainBoostButton(
                                 width: indexPageController.tappedButton == 1 ? Dimensions.w209/1.2 : Dimensions.w209,
-                                icon: "assets/images/like_icon.png",
+                                icon: "assets/svg/index/curvy_like.svg",
                                 text: "LIKE",
                                 count: indexPageController.user != null
                                     ? indexPageController.user!.curvy_like!
@@ -271,7 +272,7 @@ class IndexScreen extends StatelessWidget {
                               },
                               child:                             MainBoostButton(
                                 width:  indexPageController.tappedButton == 2 ?  Dimensions.w226/1.2 : Dimensions.w226,
-                                icon: "assets/images/chip_icon.png",
+                                icon:"assets/svg/index/curvy_chip.svg",
                                 text: "CHIP",
                                 count: indexPageController.user != null
                                     ? indexPageController.user!.curvy_chip!
@@ -303,7 +304,7 @@ class IndexScreen extends StatelessWidget {
                                 id: 3,
                                 currentButton: indexPageController.tappedButton,
                                 text: "AYARLAR",
-                                icon: "assets/images/settings_icon.png",
+                                icon: "assets/svg/index/settings.svg",
                               ),
                             ),
                             GestureDetector(
@@ -318,7 +319,7 @@ class IndexScreen extends StatelessWidget {
                                 id: 4,
                                 currentButton: indexPageController.tappedButton,
                                   text: "PROFİL DÜZENLE",
-                                  icon: "assets/images/edit_icon.png"),
+                                  icon: "assets/svg/index/edit_profile.svg"),
                             )
                           ],
                         )
@@ -366,8 +367,7 @@ class IndexScreen extends StatelessWidget {
                                     margin: EdgeInsets.only(
                                         right: Dimensions.w50 / 10),
                                     child: Center(
-                                      child: Image.asset(
-                                          "assets/images/turbo_icon.png"),
+                                      child: SvgPicture.asset("assets/svg/index/curvy_turbo.svg"),
                                     ),
                                   ),
                                   RichText(
@@ -430,8 +430,7 @@ class IndexScreen extends StatelessWidget {
                                     margin: EdgeInsets.only(
                                         right: Dimensions.w50 / 10),
                                     child: Center(
-                                      child: Image.asset(
-                                          "assets/images/platinium_logo.png"),
+                                      child: SvgPicture.asset("assets/svg/index/curvy_platinium.svg"),
                                     ),
                                   ),
                                   RichText(

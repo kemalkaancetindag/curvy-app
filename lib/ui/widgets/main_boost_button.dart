@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class MainBoostButton extends StatelessWidget {
   final double width;
@@ -67,7 +68,7 @@ class MainBoostButton extends StatelessWidget {
                Container(
                 height: Dimensions.h40,
                 width: Dimensions.h40,
-                child:  Image.asset(icon, fit: BoxFit.contain,),
+                child: SvgPicture.asset(icon),
                ),
                 RichText(
                     text: TextSpan(

@@ -5,6 +5,7 @@ import 'package:curvy_app/controllers/user_online_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class BottomNavBar extends StatelessWidget {
@@ -48,7 +49,7 @@ class BottomNavBar extends StatelessWidget {
                   ) : null
                 ),
                 child: Center(
-                  child: controller.currentIndex == 0 ? Image.asset("assets/images/nav_hubs_white.png", fit: BoxFit.contain) : Image.asset("assets/images/nav_first.png", fit: BoxFit.contain),
+                  child: controller.currentIndex == 0 ?  SvgPicture.asset("assets/svg/nav-bar/hub_a.svg") : SvgPicture.asset("assets/svg/nav-bar/hub_ua.svg"),
                 )),
           ),
           GestureDetector(
@@ -71,7 +72,7 @@ class BottomNavBar extends StatelessWidget {
                 width:   Dimensions.h60,
                 height:   Dimensions.h60,
                 child: Center(
-                  child: controller.currentIndex == 1 ? Image.asset("assets/images/nav_archive_white.png", fit: BoxFit.contain,) : Image.asset("assets/images/nav_second.png", fit: BoxFit.contain),
+                  child: controller.currentIndex == 1 ? SvgPicture.asset("assets/svg/nav-bar/archive_a.svg") : SvgPicture.asset("assets/svg/nav-bar/archive_ua.svg"),
                 )),
           ),
           GestureDetector(
@@ -92,7 +93,7 @@ class BottomNavBar extends StatelessWidget {
                 width: Dimensions.h60,
                 height: Dimensions.h60,
                 child: Center(
-                  child: controller.currentIndex == 2 ? Image.asset("assets/images/nav_index_white.png", fit: BoxFit.contain) : Image.asset("assets/images/nav_middle.png", fit: BoxFit.contain),
+                  child: controller.currentIndex == 2 ? SvgPicture.asset("assets/svg/nav-bar/matcher_a.svg"): SvgPicture.asset("assets/svg/nav-bar/matcher_ua.svg"),
                 )),
           ),
           GestureDetector(
@@ -118,11 +119,11 @@ class BottomNavBar extends StatelessWidget {
                     clipBehavior: Clip.none,
                     children: [
                       Positioned(
-                        left: 0,
-                        right: 0,
+                        left: Dimensions.w11,
+                        right: Dimensions.w11,
                         top: 0,
                         bottom: 0,
-                        child:  controller.currentIndex == 3 ? Image.asset("assets/images/nav_messages_white.png",) : Image.asset("assets/images/nav_fourth.png",),
+                        child:  controller.currentIndex == 3 ?  SvgPicture.asset("assets/svg/nav-bar/messages_a.svg"): SvgPicture.asset("assets/svg/nav-bar/messages_ua.svg")
                       ),
                       userOnlineController.unAnsweredMessages != 0 ?
                       Positioned(       
@@ -171,7 +172,7 @@ class BottomNavBar extends StatelessWidget {
                 width: Dimensions.h60,
                 height: Dimensions.h60,
                 child: Center(
-                  child: controller.currentIndex == 4 ? Image.asset("assets/images/nav_profile_white.png", fit: BoxFit.contain) : Image.asset("assets/images/nav_last.png", fit: BoxFit.contain),
+                  child: controller.currentIndex == 4 ? SvgPicture.asset("assets/svg/nav-bar/profile_a.svg") : SvgPicture.asset("assets/svg/nav-bar/profile_ua.svg"),
                 )),
           )
         ],

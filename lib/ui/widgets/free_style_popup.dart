@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class FreeStylePopup extends StatelessWidget {
@@ -114,7 +115,7 @@ class FreeStylePopup extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  Image.asset("assets/images/close_small.png")
+                                  SvgPicture.asset("assets/svg/matcher/freestyle/close.svg")
                                 ],
                               ),
                             ),
@@ -126,8 +127,7 @@ class FreeStylePopup extends StatelessWidget {
                               child:  Container(
                               margin: EdgeInsets.only(right: Dimensions.w16),
                               child: Center(
-                                child: Image.asset(
-                                    "assets/images/chevron_up_white.png"),
+                                child:  SvgPicture.asset("assets/svg/matcher/freestyle/chevron_up.svg"),
                               ),
                             ),
                             )

@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class ArchiveLikedBox extends StatelessWidget {
@@ -84,8 +85,7 @@ class ArchiveLikedBox extends StatelessWidget {
                           ),
                           Container(
                             child: Center(
-                              child: Image.asset(
-                                  "assets/images/confirm_small.png"),
+                              child: SvgPicture.asset("assets/svg/archive/vip/confirmed_small.svg"),
                             ),
                           )
                         ],

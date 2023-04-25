@@ -9,6 +9,7 @@ import 'package:curvy_app/ui/widgets/matching/new_matcher_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class MatchingScreen extends StatelessWidget {
@@ -132,8 +133,7 @@ class MatchingScreen extends StatelessWidget {
                             width: controller.tappedButton == 6 ? Dimensions.h31/1.2 : Dimensions.h31,
                             height: controller.tappedButton == 6 ? Dimensions.h31/1.2 : Dimensions.h31,                           
                             child: Center(
-                              child: Image.asset(
-                                  "assets/images/matcher_settings_icon.png", fit:  BoxFit.contain,),
+                              child: SvgPicture.asset("assets/svg/matcher/matcher_settings.svg"),
                             ),
                           ),
                         )

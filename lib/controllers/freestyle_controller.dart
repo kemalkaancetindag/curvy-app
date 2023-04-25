@@ -9,6 +9,7 @@ import 'package:curvy_app/models/user.model.dart';
 import 'package:curvy_app/ui/widgets/free_style_box.dart';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class FreestyleController extends GetxController {
@@ -307,8 +308,8 @@ class FreestyleController extends GetxController {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset("assets/images/report.png"),
-                Image.asset("assets/images/share.png")
+               SvgPicture.asset("assets/svg/matcher/card/report.svg"),
+                SvgPicture.asset("assets/svg/matcher/card/share.svg"),
               ],
             ),
           )));
@@ -364,8 +365,7 @@ class FreestyleController extends GetxController {
                           Container(
                             margin: EdgeInsets.only(right: Dimensions.w9),
                             child: Center(
-                              child: Image.asset(
-                                  "assets/images/location_white.png"),
+                              child: SvgPicture.asset("assets/svg/matcher/card/location.svg"),
                             ),
                           ),
                           Container(
@@ -396,8 +396,7 @@ class FreestyleController extends GetxController {
                                 BorderRadius.circular(Dimensions.h60 / 2),
                             color: Colors.black.withOpacity(0.67)),
                         child: Center(
-                          child: Image.asset(
-                              "assets/images/matcher_superlike.png"),
+                          child: SvgPicture.asset("assets/svg/matcher/freestyle/super_like.svg"),
                         ),
                       ),
                       ),
@@ -406,6 +405,7 @@ class FreestyleController extends GetxController {
                           showCurvyChipDialog();
                         },
                         child:   Container(
+                          margin: EdgeInsets.only(left: Dimensions.w11),
                         width: Dimensions.h60,
                         height: Dimensions.h60,
                         decoration: BoxDecoration(
@@ -413,7 +413,7 @@ class FreestyleController extends GetxController {
                                 BorderRadius.circular(Dimensions.h60 / 2),
                             color: Colors.black.withOpacity(0.67)),
                         child: Center(
-                          child: Image.asset("assets/images/matcher_chip.png"),
+                          child: SvgPicture.asset("assets/svg/matcher/freestyle/curvy_chip.svg"),
                         ),
                       ),
                       ),

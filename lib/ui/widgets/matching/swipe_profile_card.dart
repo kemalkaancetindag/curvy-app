@@ -14,6 +14,7 @@ import 'package:curvy_app/ui/widgets/matching/tag_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class SwipePofileCard extends StatelessWidget {
@@ -332,11 +333,7 @@ class SwipePofileCard extends StatelessWidget {
                                                 right: Dimensions.w8),
                                             width: Dimensions.h12,
                                             height: Dimensions.h12,
-                                            decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                    image: AssetImage(
-                                                        "assets/images/location_white.png"),
-                                                    fit: BoxFit.contain)),
+                                            child: SvgPicture.asset("assets/svg/matcher/card/location.svg"),
                                           ),
                                           Text(
                                             "3 km uzaklıkta",
@@ -372,11 +369,7 @@ class SwipePofileCard extends StatelessWidget {
                                         EdgeInsets.only(right: Dimensions.w42),
                                     width: controller.tappedButton == 5 ? Dimensions.h36/1.2 : Dimensions.h36,
                                     height: controller.tappedButton == 5 ? Dimensions.h36/1.2 : Dimensions.h36,
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image: AssetImage(
-                                                "assets/images/expand_icon.png"),
-                                            fit: BoxFit.contain)),
+                                    child: SvgPicture.asset("assets/svg/matcher/card/expand.svg"),
                                   )),
                             ],
                           ),
@@ -400,10 +393,7 @@ class SwipePofileCard extends StatelessWidget {
                                   child: Container(
                                     width: controller.tappedButton == 0 ? Dimensions.w42/1.2 : Dimensions.w42,
                                     height: controller.tappedButton == 0 ? Dimensions.w42/1.2 : Dimensions.w42,
-                                    child: Image.asset(
-                                      "assets/images/matcher_back.png",
-                                      fit: BoxFit.contain,
-                                    ),
+                                    child: SvgPicture.asset("assets/svg/matcher/card/back.svg"),
                                   ),
                                 ),
                                 GestureDetector(
@@ -419,10 +409,7 @@ class SwipePofileCard extends StatelessWidget {
                                   child: Container(
                                      width: controller.tappedButton == 1 ? Dimensions.h58/1.2 : Dimensions.h58,
                                     height: controller.tappedButton == 1 ? Dimensions.h58/1.2 : Dimensions.h58,                                   
-                                    child: Image.asset(
-                                      "assets/images/matcher_dislike.png",
-                                      fit: BoxFit.contain,
-                                    ),
+                                    child: SvgPicture.asset("assets/svg/matcher/card/un_like.svg"),
                                   ),
                                 ),
                                 GestureDetector(
@@ -439,10 +426,7 @@ class SwipePofileCard extends StatelessWidget {
                                   child: Container(
                                       width: controller.tappedButton == 2 ? Dimensions.h45/1.2 : Dimensions.h45,
                                     height: controller.tappedButton == 2 ? Dimensions.h45/1.2 : Dimensions.h45,                                    
-                                    child: Image.asset(
-                                      "assets/images/matcher_superlike.png",
-                                      fit: BoxFit.contain,
-                                    ),
+                                    child: SvgPicture.asset("assets/svg/matcher/card/super_like.svg"),
                                   ),
                                 ),
                                 GestureDetector(
@@ -459,10 +443,7 @@ class SwipePofileCard extends StatelessWidget {
                                   child: Container(
                                         width: controller.tappedButton == 3 ? Dimensions.h58/1.2 : Dimensions.h58,
                                     height: controller.tappedButton == 3 ? Dimensions.h58/1.2 : Dimensions.h58, 
-                                    child: Image.asset(
-                                      "assets/images/matcher_like.png",
-                                      fit: BoxFit.contain,
-                                    ),
+                                    child:SvgPicture.asset("assets/svg/matcher/card/like.svg"),
                                   ),
                                 ),
                                 GestureDetector(
@@ -478,10 +459,7 @@ class SwipePofileCard extends StatelessWidget {
                                   child: Container(
                                   width: controller.tappedButton == 4 ? Dimensions.w42/1.2 : Dimensions.w42,
                                     height: controller.tappedButton == 4 ? Dimensions.w42/1.2 : Dimensions.w42,
-                                    child: Image.asset(
-                                      "assets/images/matcher_turbo.png",
-                                      fit: BoxFit.contain,
-                                    ),
+                                    child: SvgPicture.asset("assets/svg/matcher/card/turbo.svg"),
                                   ),
                                 ),
                               ],
@@ -500,18 +478,12 @@ class SwipePofileCard extends StatelessWidget {
                           margin: EdgeInsets.only(bottom: Dimensions.h16),
                           width: Dimensions.h27,
                           height: Dimensions.h27,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage("assets/images/report.png"),
-                                  fit: BoxFit.contain)),
+                        child:  SvgPicture.asset("assets/svg/matcher/card/report.svg"),
                         ),
                         Container(
                           width: Dimensions.h27,
                           height: Dimensions.h27,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage("assets/images/share.png"),
-                                  fit: BoxFit.contain)),
+                          child:  SvgPicture.asset("assets/svg/matcher/card/share.svg"),
                         )
                       ],
                     ),
