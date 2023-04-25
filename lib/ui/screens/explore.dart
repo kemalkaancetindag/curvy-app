@@ -8,6 +8,7 @@ import 'package:curvy_app/ui/widgets/explore_vertical_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class ExploreScreen extends StatelessWidget {
@@ -27,7 +28,7 @@ class ExploreScreen extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(top: Dimensions.h100 / 10),
                   child: Center(
-                    child: Image.asset("assets/images/archives_logo.png"),
+                    child: SvgPicture.asset("assets/svg/index/curvy_logo.svg"),
                   ),
                 )
               ],

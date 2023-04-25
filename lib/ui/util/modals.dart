@@ -4,6 +4,7 @@ import 'package:curvy_app/constants/dimensions.dart';
 import 'package:curvy_app/controllers/current_user_online_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class Modals {
@@ -35,8 +36,7 @@ class Modals {
                         Container(
                           margin: EdgeInsets.only(right: Dimensions.w8 / 2),
                           child: Center(
-                            child: Image.asset(
-                                "assets/images/curvy_like_dialog.png"),
+                            child: SvgPicture.asset("assets/svg/modals/curvy_like.svg"),
                           ),
                         ),
                         Container(
@@ -142,11 +142,7 @@ class Modals {
                               child: Container(
                                 width: Dimensions.h22,
                                 height: Dimensions.h22,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            "assets/images/curvy_dialog_send_icon.png"),
-                                        fit: BoxFit.cover)),
+                                child: SvgPicture.asset("assets/svg/hub/send.svg"),
                               ),
                             ),
                             
@@ -187,8 +183,7 @@ class Modals {
                         Container(
                           margin: EdgeInsets.only(right: Dimensions.w8 / 2),
                           child: Center(
-                            child: Image.asset(
-                                "assets/images/curvy_chip_dialog.png"),
+                            child: SvgPicture.asset("assets/svg/modals/curvy_chip.svg"),
                           ),
                         ),
                         Container(
@@ -296,10 +291,7 @@ class Modals {
                               child: Container(
                                 width: Dimensions.h22,
                                 height: Dimensions.h22,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            "assets/images/curvy_dialog_send_icon.png"))),
+                               child: SvgPicture.asset("assets/svg/hub/send.svg"),
                               ),
                             ),                           
                           ],

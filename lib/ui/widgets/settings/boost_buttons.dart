@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class BoostButtons extends StatelessWidget {
@@ -49,12 +50,7 @@ class BoostButtons extends StatelessWidget {
             width: Dimensions.h50,
             height: Dimensions.h50,
             margin: EdgeInsets.only(right: Dimensions.w11),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(packageIcon),
-                fit: BoxFit.contain
-              )
-            ),
+            child: SvgPicture.asset(packageIcon),
           ),
           Text(
             packageName,

@@ -9,6 +9,7 @@ import 'package:curvy_app/controllers/pages/new_matcher_controller.dart';
 import 'package:curvy_app/models/user.model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'dart:math' as math;
 
@@ -201,11 +202,11 @@ class UserDetailController extends GetxController {
               children: [
                 Container(
                   margin: EdgeInsets.only(bottom: Dimensions.h8),
-                  child: Image.asset("assets/images/report.png"),
+                  child: SvgPicture.asset("assets/svg/matcher/card/report.svg"),
                 ),
                 Container(
                     margin: EdgeInsets.only(top: Dimensions.h8),
-                    child: Image.asset("assets/images/share.png"))
+                    child: SvgPicture.asset("assets/svg/matcher/card/share.svg"))
               ],
             ),
           )),
@@ -228,7 +229,7 @@ class UserDetailController extends GetxController {
                 gradient: LinearGradient(
                     colors: [Color(0xFFD51CFF), Color(0xFF6198EF)])),
             child: Center(
-              child: Image.asset("assets/images/expand_icon.png"),
+              child: SvgPicture.asset("assets/svg/detail/expand.svg"),
             ),
           ),
         )));

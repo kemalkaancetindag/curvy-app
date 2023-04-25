@@ -1926,7 +1926,7 @@ class SettingsScreen extends StatelessWidget {
                               Colors.black
                             ]),
                             packageName: "CurvyPLATINUM",
-                            packageIcon: "assets/images/platinium_logo.png",
+                            packageIcon: "assets/svg/settings/platinium.svg",
                             marginTop: Dimensions.h16,
                             route: Routes.buyPlusPremium,
                             isPlus: false,
@@ -1935,7 +1935,7 @@ class SettingsScreen extends StatelessWidget {
                             backgroundGradient: LinearGradient(
                                 colors: [Color(0xFFD51CFF), Color(0xFF6198EF)]),
                             packageName: "CurvyPLUS",
-                            packageIcon: "assets/images/platinium_logo.png",
+                            packageIcon: "assets/svg/settings/plus.svg",
                             marginTop: Dimensions.h9,
                             route: Routes.buyPlusPremium,
                             isPlus: true,
@@ -1944,7 +1944,7 @@ class SettingsScreen extends StatelessWidget {
                             backgroundGradient: LinearGradient(
                                 colors: [Color(0xFFFF0000), Color(0xFF0047FF)]),
                             packageName: "CurvyTURBO",
-                            packageIcon: "assets/images/turbo_icon.png",
+                            packageIcon:"assets/svg/settings/turbo.svg",
                             marginTop: Dimensions.h9,
                             route: Routes.buyCurvyTurbo,
                           ),
@@ -1952,7 +1952,7 @@ class SettingsScreen extends StatelessWidget {
                             backgroundGradient: LinearGradient(
                                 colors: [Color(0xFF0095EC), Color(0xFF47C1B3)]),
                             packageName: "CurvyLIKE",
-                            packageIcon: "assets/images/like_icon.png",
+                            packageIcon: "assets/svg/settings/curvy_like.svg",
                             marginTop: Dimensions.h9,
                             route: Routes.buyCurvyLike,
                           ),
@@ -1962,7 +1962,7 @@ class SettingsScreen extends StatelessWidget {
                                 Color(0xFFD99000)
                               ]),
                               packageName: "CurvyCHIP",
-                              packageIcon: "assets/images/chip_icon.png",
+                              packageIcon: "assets/svg/settings/curvy_chip.svg",
                               marginTop: Dimensions.h9,
                               route: Routes.buyCurvyChip)
                         ],

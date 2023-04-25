@@ -4,6 +4,7 @@ import 'package:curvy_app/ui/widgets/buy_boost_package_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class BuyCurvyTurboScreen extends StatelessWidget {
@@ -49,7 +50,7 @@ class BuyCurvyTurboScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           Container(
-                            child: Image.asset("assets/images/chevron_left_white.png"),
+                            child: SvgPicture.asset("assets/svg/boosts/chevron_left.svg"),
                           )
                         ],
                     ),
@@ -66,7 +67,7 @@ class BuyCurvyTurboScreen extends StatelessWidget {
                           children: [
                             Container(
                               margin: EdgeInsets.only(right: Dimensions.w2*10),
-                              child: Image.asset("assets/images/turbo_buy_icon.png"),
+                              child: SvgPicture.asset("assets/svg/boosts/turbo.svg"),
                             ),
                             Container(
                               child: Text(

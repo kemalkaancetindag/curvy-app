@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class HubFoundWidget extends StatelessWidget {
@@ -63,7 +64,7 @@ class HubFoundWidget extends StatelessWidget {
                         },
                         child:   Container(
                         margin: EdgeInsets.only(right: Dimensions.w300 / 10),
-                        child: Image.asset("assets/images/hub_close_icon.png"),
+                        child: SvgPicture.asset("assets/svg/hub/close.svg"),
                       ),
                       ),
                     
@@ -95,18 +96,18 @@ class HubFoundWidget extends StatelessWidget {
                      Container(
                       width: double.maxFinite,
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
                             
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.end,
+                              
                               children: [
                                 Container(
                                   height: Dimensions.h27,
                                   child: Center(
-                                    child: Image.asset("assets/images/curvy_chip_dialog.png"),
+                                    child: SvgPicture.asset("assets/svg/hub/curvy_chip.svg"),
                                   ),
                                 ),
                                 Container(
@@ -150,17 +151,7 @@ class HubFoundWidget extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                GestureDetector(
-                                  onTap: (){
-                                    controller.expandMessageArea();
-                                  },
-                                  child: Container(
-                                  margin: EdgeInsets.only(right: Dimensions.w200/10),
-                                  child: Center(
-                                    child: controller.isMessageAreaExpanded ? Image.asset("assets/images/hub_close_icon.png") : Image.asset("assets/images/chevron_bottom.png")
-                                  ),
-                                ),
-                                )
+                              
                                 
                               ],
                             ),
@@ -227,12 +218,7 @@ class HubFoundWidget extends StatelessWidget {
                                       child:      Container(
                                       width: Dimensions.h21,
                                       height: Dimensions.h21,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: AssetImage('assets/images/chat_send.png'),
-                                          fit: BoxFit.cover
-                                        )
-                                      ),
+                                      child:SvgPicture.asset("assets/svg/hub/send.svg"),
                                     ),
                                     ),
                                
@@ -307,12 +293,7 @@ class HubFoundWidget extends StatelessWidget {
                         child:   Container(
                         width: Dimensions.h21,
                         height: Dimensions.h21,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage("assets/images/chat_send.png"),
-                            fit: BoxFit.cover
-                          )
-                        ),
+                        child: SvgPicture.asset("assets/svg/hub/send.svg"),
                      
                       ),
                       )

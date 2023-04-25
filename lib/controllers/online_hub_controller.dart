@@ -14,6 +14,7 @@ import 'package:curvy_app/ui/screens/hub.dart';
 import 'package:curvy_app/ui/widgets/matcher_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class OnlineHubController extends GetxController {
@@ -251,11 +252,7 @@ class OnlineHubController extends GetxController {
                           Container(
                             width: Dimensions.h12,
                             height: Dimensions.h12,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(
-                                        "assets/images/location_white.png"),
-                                    fit: BoxFit.cover)),
+                           child: SvgPicture.asset("assets/svg/matcher/card/location.svg"),
                             margin: EdgeInsets.only(right: Dimensions.w8),
                           ),
                           Container(
@@ -305,10 +302,7 @@ class OnlineHubController extends GetxController {
                   child: Container(
                     width: Dimensions.h36,
                     height: Dimensions.h36,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage("assets/images/matcher_back.png"),
-                            fit: BoxFit.cover)),
+                   child: SvgPicture.asset("assets/svg/matcher/card/back.svg"),
                   ),
                 ),
                 GestureDetector(
@@ -318,13 +312,8 @@ class OnlineHubController extends GetxController {
                   child: Container(
                       width: Dimensions.h52,
                       height: Dimensions.h52,
-                      decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.circular(Dimensions.h52 / 2),
-                          image: DecorationImage(
-                              image: AssetImage(
-                                  "assets/images/matcher_dislike.png"),
-                              fit: BoxFit.cover))),
+                      child: SvgPicture.asset("assets/svg/matcher/card/un_like.svg"),
+                      ),
                 ),
                 GestureDetector(
                   onTap: () {
@@ -333,11 +322,7 @@ class OnlineHubController extends GetxController {
                   child: Container(
                     width: Dimensions.h45,
                     height: Dimensions.h45,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage(
-                                "assets/images/matcher_superlike.png"),
-                            fit: BoxFit.cover)),
+                   child: SvgPicture.asset("assets/svg/matcher/card/super_like.svg"),
                   ),
                 ),
                 GestureDetector(
@@ -347,21 +332,13 @@ class OnlineHubController extends GetxController {
                   child: Container(
                     width: Dimensions.h52,
                     height: Dimensions.h52,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(Dimensions.h52 / 2),
-                        image: DecorationImage(
-                            image: AssetImage("assets/images/matcher_like.png"),
-                            fit: BoxFit.cover)),
+                    child: SvgPicture.asset("assets/svg/matcher/card/like.svg"),
                   ),
                 ),
                 Container(
                   width: Dimensions.h36,
                   height: Dimensions.h36,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimensions.h36 / 2),
-                      image: DecorationImage(
-                          image: AssetImage("assets/images/matcher_turbo.png"),
-                          fit: BoxFit.cover)),
+                 child: SvgPicture.asset("assets/svg/matcher/card/turbo.svg"),
                 )
               ],
             ),

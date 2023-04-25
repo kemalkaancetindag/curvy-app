@@ -4,6 +4,7 @@ import 'package:curvy_app/controllers/user_detail_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class UserDetailScreen extends StatelessWidget {
@@ -66,7 +67,7 @@ class UserDetailScreen extends StatelessWidget {
                       ),
                       Container(
                         child: Center(
-                          child: Image.asset("assets/images/confirm_icon.png"),
+                          child: SvgPicture.asset("assets/svg/index/confirmed.svg"),
                         ),
                       )
                     ],
@@ -80,7 +81,7 @@ class UserDetailScreen extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(right: Dimensions.w50 / 10),
                         child: Center(
-                          child: Image.asset("assets/images/home_icon.png"),
+                          child: SvgPicture.asset("assets/svg/detail/home.svg"),
                         ),
                       ),
                       Container(
@@ -105,7 +106,7 @@ class UserDetailScreen extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.only(right: Dimensions.w50 / 10),
                         child: Center(
-                          child: Image.asset("assets/images/location_icon.png"),
+                          child:  SvgPicture.asset("assets/svg/detail/location.svg"),
                         ),
                       ),
                       Container(
@@ -235,7 +236,7 @@ class UserDetailScreen extends StatelessWidget {
                                   blurRadius: 2)
                             ]),
                         child: Center(
-                          child: Image.asset("assets/images/matcher_back.png"),
+                          child:  SvgPicture.asset("assets/svg/matcher/card/back.svg"),
                         ),
                       ),
                       ),
@@ -258,7 +259,7 @@ class UserDetailScreen extends StatelessWidget {
                             ]),
                         child: Center(
                           child:
-                              Image.asset("assets/images/matcher_dislike.png"),
+                              SvgPicture.asset("assets/svg/matcher/card/un_like.svg"),
                         ),
                       ),
                       ),
@@ -279,8 +280,7 @@ class UserDetailScreen extends StatelessWidget {
                                   blurRadius: 2)
                             ]),
                         child: Center(
-                          child: Image.asset(
-                              "assets/images/matcher_superlike.png"),
+                          child: SvgPicture.asset("assets/svg/matcher/card/super_like.svg"),
                         ),
                       ),
                       ),
@@ -302,7 +302,7 @@ class UserDetailScreen extends StatelessWidget {
                                   blurRadius: 2)
                             ]),
                         child: Center(
-                          child: Image.asset("assets/images/matcher_like.png"),
+                          child: SvgPicture.asset("assets/svg/matcher/card/like.svg"),
                         ),
                       ),
                       ),
@@ -324,7 +324,7 @@ class UserDetailScreen extends StatelessWidget {
                                   blurRadius: 2)
                             ]),
                         child: Center(
-                          child: Image.asset("assets/images/matcher_turbo.png"),
+                          child: SvgPicture.asset("assets/svg/matcher/card/turbo.svg"),
                         ),
                       ),
                      )
